@@ -1,0 +1,98 @@
+// placeholder: will decide on a custom font later
+$font-family-sans-serif: 'Times';
+
+// Color
+$primary: #cc005f;
+$secondary: #990047;
+$dark: #000;
+$light: #f4f4f4;
+
+// Buttons
+$button-radius: 0;
+$button-padding-x: 30px;
+$button-padding-y: 12px;
+
+$btn-border-radius: $button-radius;
+$btn-border-radius-sm: $button-radius;
+$btn-border-radius-lg: $button-radius;
+$btn-padding-y: $button-padding-y;
+$btn-padding-y-lg: $button-padding-y;
+$btn-padding-y-sm: $button-padding-y;
+$btn-padding-x: $button-padding-x;
+$btn-padding-x-lg: $button-padding-x;
+$btn-padding-x-sm: $button-padding-x;
+
+$navbar-toggler-border-radius: 5px;
+
+// Spacing
+$spacer: 1rem !default;
+$spacers: (
+  0: 0,
+  1: $spacer * 0.25,
+  2: $spacer * 0.5,
+  3: $spacer,
+  4: $spacer * 1.5,
+  5: $spacer * 3,
+  6: $spacer * 6,
+  7: $spacer * 8,
+  8: $spacer * 12,
+) !default;
+
+// Container
+$container-max-widths: (
+  sm: 540px,
+  md: 720px,
+  lg: 960px,
+  xl: 980px,
+  xxl: 1000px,
+) !default;
+
+
+@import '../node_modules/bootstrap/scss/bootstrap.scss';
+
+
+// Standard Bootstrap color variables
+// Text Color Classes
+// .text-primary
+// .text-secondary
+// .text-success
+// .text-danger
+// .text-warning
+// .text-info
+// .text-light
+// .text-dark
+// .text-body
+// .text-muted
+// .text-white
+// .text-black-50
+// .text-white-50
+// Background Color Classes
+// .bg-primary
+// .bg-secondary
+// .bg-success
+// .bg-danger
+// .bg-warning
+// .bg-info
+// .bg-light
+// .bg-dark
+// .bg-white
+// .bg-transparent
+// Border Color Classes
+// .border-primary
+// .border-secondary
+// .border-success
+// .border-danger
+// .border-warning
+// .border-info
+// .border-light
+// .border-dark
+// .border-white
+// Link Color Classes
+// .link-primary
+// .link-secondary
+// .link-success
+// .link-danger
+// .link-warning
+// .link-info
+// .link-light
+// .link-dark
