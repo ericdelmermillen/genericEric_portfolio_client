@@ -1,6 +1,27 @@
-import './Header.scss'
+import { useState } from 'react';
+import './Header.scss';
+import { useEffect } from 'react';
+
+const iAmText = 'I am Eric Millen';
+const typingDelayInterval = 150;
 
 const Header = () => {
+  const [ typingText, setTypingText ] = useState('');
+
+  useEffect(() => {
+    if(typingText.length < iAmText.length) {
+      
+      const typing = setInterval(() => {
+        const nextLetterIdx = typingText.length;
+        const nextLetter = iAmText[nextLetterIdx]
+        setTypingText((c) => c+= nextLetter)
+      }, typingDelayInterval)
+      
+      return () => clearInterval(typing)
+    }
+  }, [iAmText, typingText])
+
+
   return (
     <>
       <header className="header vh-100 text-center position-relative">
@@ -11,7 +32,7 @@ const Header = () => {
             Hello World
           </h5>
           <h1 id="typing-text" className="header__introduction display-1 fw-bold">
-            I am Eric Millen
+            {typingText}
           </h1>
           <p className="header__roles roles text-uppercase fs-4">
             <span>Full Stack Web Developer</span>
@@ -28,24 +49,12 @@ const Header = () => {
           </a>
 
             <div className="header__socials social d-flex gap-3 position-absolute">
-              <a href="#">
-                <i className="fab fa-twitter"></i>
-              </a>
-              <a href="#">
-                <i className="fab fa-instagram "></i>
-              </a>
-              <a href="#">
-                <i className="fab fa-linkedin "></i>
-              </a>
-              <a href="#">
-                <i className="fab fa-facebook "></i>
-              </a>
-              <a href="#">
-                <i className="fab fa-youtube "></i>
-              </a>
-              <a href="#">
-                <i className="fab fa-github "></i>
-              </a>
+              <a href="#"><i className="fab fa-twitter"></i></a>
+              <a href="#"><i className="fab fa-instagram "></i></a>
+              <a href="#"><i className="fab fa-linkedin "></i></a>
+              <a href="#"><i className="fab fa-facebook "></i></a>
+              <a href="#"><i className="fab fa-youtube "></i></a>
+              <a href="#"><i className="fab fa-github "></i></a>
           </div>
         </div>
       </header>
