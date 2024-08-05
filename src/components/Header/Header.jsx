@@ -1,14 +1,7 @@
-import { useState } from 'react';
 import './Header.scss';
-import { useEffect } from 'react';
 import TypingText from '../TypingText/TypingText';
 
-const iAmText = 'I am Eric Millen';
-const typingDelayInterval = 150;
-
 const Header = () => {
-
-
 
   return (
     <>
