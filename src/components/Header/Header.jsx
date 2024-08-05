@@ -1,19 +1,33 @@
-import './Header.scss'
+import { useState } from 'react';
+import './Header.scss';
+import { useEffect } from 'react';
+import TypingText from '../TypingText/TypingText';
+
+const iAmText = 'I am Eric Millen';
+const typingDelayInterval = 150;
 
 const Header = () => {
+
+
+
   return (
     <>
       <header className="header vh-100 text-center position-relative">
         <div 
-          className="text-container position-relative d-flex flex-column justify-content-center align-items-center h-100"
+          className="header__text-container text-container position-relative d-flex flex-column justify-content-center align-items-center h-100 text-white"
         >
-          <h5 className="text-primary fs-3 fw-bold text-uppercase">
+          <h5 className="header__headline text-primary fs-3 fw-bold text-uppercase">
             Hello World
           </h5>
-          <h1 id="typing-text" className="display-1 fw-bold">
-            I am Eric Millen
-          </h1>
-          <p className="roles text-uppercase fs-4">
+      
+          <TypingText 
+            textToType={'I Am Eric Millen'}
+            typingDelayInterval={200}
+            classNames={"header__introduction display-1 fw-bold"}
+            elementType={'h1'} 
+          />
+
+          <p className="header__roles roles text-uppercase fs-4">
             <span>Full Stack Web Developer</span>
           </p>
           <a href="#about" className="btn btn-outline-light btn-lg mt-3">
@@ -27,25 +41,13 @@ const Header = () => {
             </div>
           </a>
 
-            <div className="social d-flex gap-3 position-absolute">
-              <a href="#">
-                <i className="fab fa-twitter fa-3x "></i>
-              </a>
-              <a href="#">
-                <i className="fab fa-instagram fa-3x "></i>
-              </a>
-              <a href="#">
-                <i className="fab fa-linkedin fa-3x "></i>
-              </a>
-              <a href="#">
-                <i className="fab fa-facebook fa-3x "></i>
-              </a>
-              <a href="#">
-                <i className="fab fa-youtube fa-3x "></i>
-              </a>
-              <a href="#">
-                <i className="fab fa-github fa-3x "></i>
-              </a>
+            <div className="header__socials social d-flex gap-3 position-absolute">
+              <a href="#"><i className="fab fa-twitter"></i></a>
+              <a href="#"><i className="fab fa-instagram "></i></a>
+              <a href="#"><i className="fab fa-linkedin "></i></a>
+              <a href="#"><i className="fab fa-facebook "></i></a>
+              <a href="#"><i className="fab fa-youtube "></i></a>
+              <a href="#"><i className="fab fa-github "></i></a>
           </div>
         </div>
       </header>
