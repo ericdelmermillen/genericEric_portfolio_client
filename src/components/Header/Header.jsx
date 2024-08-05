@@ -1,25 +1,13 @@
 import { useState } from 'react';
 import './Header.scss';
 import { useEffect } from 'react';
+import TypingText from '../TypingText/TypingText';
 
 const iAmText = 'I am Eric Millen';
 const typingDelayInterval = 150;
 
 const Header = () => {
-  const [ typingText, setTypingText ] = useState('');
 
-  useEffect(() => {
-    if(typingText.length < iAmText.length) {
-      
-      const typing = setInterval(() => {
-        const nextLetterIdx = typingText.length;
-        const nextLetter = iAmText[nextLetterIdx]
-        setTypingText((c) => c+= nextLetter)
-      }, typingDelayInterval)
-      
-      return () => clearInterval(typing)
-    }
-  }, [iAmText, typingText])
 
 
   return (
@@ -31,9 +19,14 @@ const Header = () => {
           <h5 className="header__headline text-primary fs-3 fw-bold text-uppercase">
             Hello World
           </h5>
-          <h1 id="typing-text" className="header__introduction display-1 fw-bold">
-            {typingText}
-          </h1>
+      
+          <TypingText 
+            textToType={'I Am Eric Millen'}
+            typingDelayInterval={200}
+            classNames={"header__introduction display-1 fw-bold"}
+            elementType={'h1'} 
+          />
+
           <p className="header__roles roles text-uppercase fs-4">
             <span>Full Stack Web Developer</span>
           </p>
