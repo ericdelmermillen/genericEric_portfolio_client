@@ -8,7 +8,7 @@ function App() {
 
   return (
     <>
-    <Header />
+      <Header />
       <div className="app">
         <h2 className='text-primary'>Primary</h2>
         <h2 className='text-secondary'>Secondary</h2>
