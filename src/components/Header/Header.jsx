@@ -14,7 +14,7 @@ const Header = () => {
           </h5>
       
           <TypingText 
-            textToType={'I Am Eric Millen'}
+            textToType={'I\'m Eric Millen'}
             typingDelayInterval={200}
             classNames={"header__introduction display-1 fw-bold"}
             elementType={'h1'} 
