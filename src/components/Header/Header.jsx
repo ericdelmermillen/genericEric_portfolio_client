@@ -14,7 +14,7 @@ const Header = () => {
           </h5>
       
           <TypingText 
-            textToType={'I Am Eric Millen'}
+            textToType={'I\'m Eric Millen'}
             typingDelayInterval={200}
             classNames={"header__introduction display-1 fw-bold"}
             elementType={'h1'} 
@@ -36,7 +36,6 @@ const Header = () => {
 
             <div className="header__socials social d-flex gap-3 position-absolute">
               <a href="#"><i className="fab fa-twitter"></i></a>
-              <a href="#"><i className="fab fa-instagram "></i></a>
               <a href="#"><i className="fab fa-linkedin "></i></a>
               <a href="#"><i className="fab fa-facebook "></i></a>
               <a href="#"><i className="fab fa-youtube "></i></a>
