@@ -3,6 +3,7 @@ import Header from './components/Header/Header';
 import './App.scss';
 import './bootstrap.scss';
 import './font-awesome.scss'
+import Profile from './components/Profile/Profile';
 
 function App() {
 
@@ -11,7 +12,9 @@ function App() {
       <div className="app">
         <Header />
         <About />
+        <Profile />
       </div>
+
     </>
   )};
 
