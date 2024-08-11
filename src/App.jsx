@@ -7,6 +7,7 @@ import Profile from './components/Profile/Profile';
 import Portfolio from './components/Portfolio/Portfolio';
 import Services from './components/Services/Services';
 import Stats from './components/Stats/Stats';
+import Footer from './components/Footer/Footer';
 
 const App = () => {
 
@@ -47,6 +48,68 @@ const App = () => {
         <Services />
 
         <Stats />
+
+        
+		{/* <!-- Contact --> */}
+		<section className="contact text-bg-dark bg-gradient py-5">
+			<div className="container">
+				<div className="row">
+					<div className="col-md-8 offset-md-2">
+						<div className="text-center mb-5">
+							<h4 className="text-uppercase fw-bold text-primary">Contact</h4>
+							<hr className="w-25 mx-auto" />
+							<h2 className="mb-4">I'd love to hear from you.</h2>
+							<p className="lead">
+								If you have any questions or would like to work together, please
+								contact me with the form below.
+							</p>
+						</div>
+
+						{/* <!-- Form --> */}
+						<form
+							name="contact"
+							// netlify
+						>
+							<div className="mb-5">
+								<input
+									type="text"
+									className="form-control bg-transparent border-top-0 border-start-0 border-end-0 rounded-0 border-muted text-white"
+									name="name"
+									placeholder="Name"
+								/>
+							</div>
+							<div className="mb-5">
+								<input
+									type="email"
+									className="form-control bg-transparent border-top-0 border-start-0 border-end-0 rounded-0 border-muted text-white"
+									name="email"
+									placeholder="Email"
+								/>
+							</div>
+							<div className="mb-5">
+								<textarea
+									className="form-control bg-transparent border-top-0 border-start-0 border-end-0 rounded-0 border-muted text-white"
+									name="message"
+									placeholder="Message"
+								></textarea>
+							</div>
+							<div className="mb-5 d-grid">
+								<button
+									type="submit"
+									className="btn btn-primary"
+								>
+									Submit
+								</button>
+							</div>
+						</form>
+					</div>
+				</div>
+	
+
+        <Footer/>
+  
+			</div>
+		</section>
 
 
 

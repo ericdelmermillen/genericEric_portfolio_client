@@ -36,10 +36,10 @@ const Header = () => {
 
             <div className="header__socials social d-flex gap-3 position-absolute">
               <a href="#"><i className="fab fa-twitter"></i></a>
-              <a href="#"><i className="fab fa-linkedin "></i></a>
-              <a href="#"><i className="fab fa-facebook "></i></a>
-              <a href="#"><i className="fab fa-youtube "></i></a>
-              <a href="#"><i className="fab fa-github "></i></a>
+              <a href="#"><i className="fab fa-linkedin"></i></a>
+              <a href="#"><i className="fab fa-facebook"></i></a>
+              <a href="#"><i className="fab fa-youtube"></i></a>
+              <a href="#"><i className="fab fa-github"></i></a>
           </div>
         </div>
       </header>
