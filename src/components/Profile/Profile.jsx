@@ -70,11 +70,12 @@ const Profile = () => {
               </p>
 
               {skills.length 
-                ? skills.map(skill =>
+                ? skills.map((skill, idx) =>
                     <ProgressBar 
                       barLabel={skill.skill}
                       classNames={"profile__skill--progress progress mb-4"}
                       currentValue={skill.skillLevel}
+                      key={idx}
                     />
                   )
                 : null}
