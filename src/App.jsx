@@ -8,6 +8,8 @@ import Portfolio from './components/Portfolio/Portfolio';
 import Services from './components/Services/Services';
 import Stats from './components/Stats/Stats';
 import Footer from './components/Footer/Footer';
+import StyleShout from './components/StyleShout/StyleShout';
+import ContactForm from './components/ContactForm/ContactForm';
 
 const App = () => {
 
@@ -18,104 +20,13 @@ const App = () => {
         <About />
         <Profile />
         <Portfolio />
-
-        {/*  */}
-
-        <section 
-          className="styleshout text-bg-dark bg-gradient p-6 text-center"
-        >
-          <div className="container">
-            <div className="row">
-              <div className="col-12">
-                <h1>Shoutout to StyleShout</h1>
-                <hr className="w-25 mx-auto" />
-                  <p className="lead mb-5">
-                    Styleshout is a place for Free HTML5 Templates and Free Wordpress. This design was inspired by one of their templates. Check them out for templates to use and get inspiration from.
-                  </p>
-                  <a
-                    href="https://styleshout.com"
-                    target="_blank"
-                    className="btn btn-primary btn-lg text-uppercase px-5 mx-3 my-2"
-                  >
-                    Visit StyleShout
-                  </a>
-                </div>
-              </div>
-              </div>
-          </section>
-          {/*  */}
-
+        <StyleShout />
         <Services />
-
+        <ContactForm />
         <Stats />
 
-        
-		{/* <!-- Contact --> */}
-		<section className="contact text-bg-dark bg-gradient py-5">
-			<div className="container">
-				<div className="row">
-					<div className="col-md-8 offset-md-2">
-						<div className="text-center mb-5">
-							<h4 className="text-uppercase fw-bold text-primary">Contact</h4>
-							<hr className="w-25 mx-auto" />
-							<h2 className="mb-4">I'd love to hear from you.</h2>
-							<p className="lead">
-								If you have any questions or would like to work together, please
-								contact me with the form below.
-							</p>
-						</div>
-
-						{/* <!-- Form --> */}
-						<form
-							name="contact"
-							// netlify
-						>
-							<div className="mb-5">
-								<input
-									type="text"
-									className="form-control bg-transparent border-top-0 border-start-0 border-end-0 rounded-0 border-muted text-white"
-									name="name"
-									placeholder="Name"
-								/>
-							</div>
-							<div className="mb-5">
-								<input
-									type="email"
-									className="form-control bg-transparent border-top-0 border-start-0 border-end-0 rounded-0 border-muted text-white"
-									name="email"
-									placeholder="Email"
-								/>
-							</div>
-							<div className="mb-5">
-								<textarea
-									className="form-control bg-transparent border-top-0 border-start-0 border-end-0 rounded-0 border-muted text-white"
-									name="message"
-									placeholder="Message"
-								></textarea>
-							</div>
-							<div className="mb-5 d-grid">
-								<button
-									type="submit"
-									className="btn btn-primary"
-								>
-									Submit
-								</button>
-							</div>
-						</form>
-					</div>
-				</div>
-	
-
         <Footer/>
-  
-			</div>
-		</section>
-
-
-
-
-        </div>
-
+      </div>
     </>
   )};
 
