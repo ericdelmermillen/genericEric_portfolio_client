@@ -14,13 +14,11 @@ const socials = [
 const Footer = () => {
   return (
     <>
-      <footer 
-        className="footer"
-      >
-        <p className="footer__copyright flex-grow-1">
+      <footer className="footer bg-dark">
+        <p className="footer__copyright text-light">
           Copyright &copy; {new Date().getFullYear()} | Design By StyleShout
         </p>
-        <div className="hstack gap-3 d-flex justify-content-center">
+        <div className="footer__socials hstack gap-3 d-flex">
 
           {socials.map((social, idx) => 
             <SocialLink 

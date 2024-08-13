@@ -5,7 +5,7 @@ const stats = [
   {faClasses: "fas fa-project-diagram", howMany: "700+", thingName: "projects"},
   {faClasses: "fas fa-clock", howMany: "16+", thingName: "years"},
   {faClasses: "fas fa-book", howMany: "25", thingName: "subscribers"},
-  {faClasses: "fas fa-youtube", howMany: "2.06M", thingName: "subscribers"},
+  {faClasses: "fab fa-youtube", howMany: "2.06M", thingName: "subscribers"},
   {faClasses: "fas fa-graduation-cap", howMany: "1M+", thingName: "students"}
 ];
 
