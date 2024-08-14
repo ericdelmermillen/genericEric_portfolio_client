@@ -1,8 +1,7 @@
+import { useState } from 'react';
 import About from './components/About/About';
 import Header from './components/Header/Header';
 import './App.scss';
-import './bootstrap.scss';
-import './font-awesome.scss'
 import Profile from './components/Profile/Profile';
 import Portfolio from './components/Portfolio/Portfolio';
 import Services from './components/Services/Services';
@@ -10,12 +9,29 @@ import Stats from './components/Stats/Stats';
 import Footer from './components/Footer/Footer';
 import StyleShout from './components/StyleShout/StyleShout';
 import ContactForm from './components/ContactForm/ContactForm';
+import './bootstrap.scss';
+import './font-awesome.scss'
 
 const App = () => {
+  const [ colorMode, setColorMode ] = useState(localStorage.getItem('colorMode') || "light");
+  // console.log(colorMode)
+
+  const handleToggleColorMode = () => {
+    const currentMode = colorMode === 'light' 
+      ? 'dark' 
+      : 'light';
+    setColorMode(currentMode);
+  };
 
   return (
     <>
-      <div className="app">
+      <div className="app" data-color-mode={colorMode}>
+        <button
+          onClick={handleToggleColorMode}
+        >
+          Toggle Color Mode
+        </button>
+
         <Header />
         <About />
         <Profile />
@@ -24,7 +40,6 @@ const App = () => {
         <Services />
         <ContactForm />
         <Stats />
-
         <Footer/>
       </div>
     </>
