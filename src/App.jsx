@@ -11,26 +11,45 @@ import StyleShout from './components/StyleShout/StyleShout';
 import ContactForm from './components/ContactForm/ContactForm';
 import './bootstrap.scss';
 import './font-awesome.scss'
+import { useAppContext } from './Pages/contexts/AppContext';
 
 const App = () => {
-  const [ colorMode, setColorMode ] = useState(localStorage.getItem('colorMode') || "light");
-  // console.log(colorMode)
 
-  const handleToggleColorMode = () => {
-    const currentMode = colorMode === 'light' 
-      ? 'dark' 
-      : 'light';
-    setColorMode(currentMode);
-  };
+  const { 
+    colorMode,
+    toggleColorMode,
+    isLoading,
+    isLoggedIn,
+    loginUser,
+    logoutUser
+   } = useAppContext();
+
+  // console.log(`colorMode: ${colorMode}`)
+  // console.log(`isLoading: ${isLoading}`)
+  // console.log(`isLoggedIn: ${isLoggedIn}`)
 
   return (
     <>
       <div className="app" data-color-mode={colorMode}>
         <button
-          onClick={handleToggleColorMode}
+          onClick={toggleColorMode}
         >
-          Toggle Color Mode
+          Color Mode: {colorMode}
         </button>
+        <button
+          onClick={() => loginUser(
+            "ericdelmermillen@gmail.com", 
+            "12345678"
+          )}
+        >
+          LogIn
+        </button>
+        <button
+          onClick={logoutUser}
+        >
+          LogOut
+        </button>
+        <h1>Logged In: {isLoggedIn ? "true" : "false"}</h1>
 
         <Header />
         <About />
