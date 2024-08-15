@@ -6,7 +6,7 @@
 // dark mode color palet
 
 
-.app {
+.appLayout {
   // general styling variables
   // --borderRadius: 8px;
 
@@ -15,7 +15,8 @@
   
   // light mode custom variables
   &[data-color-mode='light'] {
-    // --text-color: #333333;
+    --text-color: #333333;
+    --text-color: red;
     // --navAndFooterBG: #F3F3F3;
     // --background-color: #F3F3F3;
     // --button-color: var(--background-color);
@@ -34,6 +35,7 @@
   // dark mode custom variables
   &[data-color-mode='dark'] {
     // --text-color: #F3F3F3;
+    --text-color: green;
     // --navAndFooterBG: #181717;
     // --background-color: #4b4a4a;
     // --button-color: var(--text-color);

@@ -1,0 +1,9 @@
+@import "../../partials/mixins";
+@import "../../partials/variables";
+
+.appLayout {
+
+  h1 {
+    color: var(--text-color);
+  }
+}

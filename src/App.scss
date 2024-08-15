@@ -1,7 +1,8 @@
-// .app {
+@import "./partials/mixins.scss";
 
-//   &__h1 {
-//     color: red;
+// .appLayout {
+
+//   h1 {
+//     color: var(--text-color);
 //   }
-
 // }

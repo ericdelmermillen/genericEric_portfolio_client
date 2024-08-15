@@ -1,66 +1,88 @@
-import { useState } from 'react';
-import About from './components/About/About';
-import Header from './components/Header/Header';
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import AppLayout from "./ui/AppLayout/AppLayout.jsx";
+import Blog from "./Pages/Blog/Blog.jsx";
+import Contact from "./Pages/Contact/Contact.jsx";
+import Home from "./Pages/Home/Home.jsx";
+import Projects from "./Pages/Projects/Projects.jsx";
 import './App.scss';
-import Profile from './components/Profile/Profile';
-import Portfolio from './components/Portfolio/Portfolio';
-import Services from './components/Services/Services';
-import Stats from './components/Stats/Stats';
-import Footer from './components/Footer/Footer';
-import StyleShout from './components/StyleShout/StyleShout';
-import ContactForm from './components/ContactForm/ContactForm';
 import './bootstrap.scss';
 import './font-awesome.scss'
-import { useAppContext } from './Pages/contexts/AppContext';
+import ProjectDetails from "./Pages/ProjectDetails/ProjectDetails.jsx";
+import BlogPost from "./Pages/BlogPost/BlogPost.jsx";
+
+const router = createBrowserRouter([
+  {
+    element: <AppLayout />,
+    // errorElement: <Error />,
+    children: [
+      { 
+        path: '/', 
+        element: <Home />
+      },
+      { 
+        path: '/home', 
+        element: <Home />
+      },
+      { 
+        path: '/projects', 
+        element: <Projects />
+      },
+      { 
+        path: '/project/:projectID', 
+        element: <ProjectDetails />
+      },
+      { 
+        path: '/blog', 
+        element: <Blog />
+      },
+      { 
+        path: '/blog/post/:postID', 
+        element: <BlogPost />
+      },
+      { 
+        path: '/contact', 
+        element: <Contact />
+      },
+      // { 
+      //   path: '/menu', 
+      //   element: <Menu />,
+      //   // loader function to be fetched on navigation
+      //   loader: menuLoader,
+      //   // errorElement placed here since this is the only route that fetches data
+      //   errorElement: <Error />,
+      // },
+      // { 
+      //   path: '/cart', 
+      //   element: <Cart /> 
+      // },
+      // { 
+      //   path: '/order', 
+      //   element: <Order /> 
+      // },
+      // { 
+      //   path: '/order/new', 
+      //   element: <CreateOrder />,
+      //   // action is the request to be made when the route fires
+      //   action: createOrderAction,
+      //   errorElement: <Error />,
+      // },
+      // { 
+      //   path: '/order/:orderID', 
+      //   loader: orderLoader,
+      //   // loader function in Order has access to params via BrowserRouter without passing them in
+      //   element: <Order />,
+      //   errorElement: <Error />,
+      // }
+    ]
+  },
+]);
+
 
 const App = () => {
 
-  const { 
-    colorMode,
-    toggleColorMode,
-    isLoading,
-    isLoggedIn,
-    loginUser,
-    logoutUser
-   } = useAppContext();
-
-  // console.log(`colorMode: ${colorMode}`)
-  // console.log(`isLoading: ${isLoading}`)
-  // console.log(`isLoggedIn: ${isLoggedIn}`)
-
   return (
     <>
-      <div className="app" data-color-mode={colorMode}>
-        <button
-          onClick={toggleColorMode}
-        >
-          Color Mode: {colorMode}
-        </button>
-        <button
-          onClick={() => loginUser(
-            "ericdelmermillen@gmail.com", 
-            "12345678"
-          )}
-        >
-          LogIn
-        </button>
-        <button
-          onClick={logoutUser}
-        >
-          LogOut
-        </button>
-        <h1>Logged In: {isLoggedIn ? "true" : "false"}</h1>
-
-        <Header />
-        <About />
-        <Profile />
-        <Portfolio />
-        <StyleShout />
-        <Services />
-        <ContactForm />
-        <Stats />
-        <Footer/>
-      </div>
+      <RouterProvider router={router} />
     </>
   )};
 

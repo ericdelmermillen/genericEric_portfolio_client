@@ -1,4 +1,4 @@
-import SocialLink from "../SocialLink/SocialLink";
+import SocialLink from "../../components/SocialLink/SocialLink.jsx";
 import "./Footer.scss"
 
 const socials = [
@@ -9,7 +9,6 @@ const socials = [
   {socialLink: "https://www.youtube.com/@EricMillen", faClasses: "fab fa-youtube"},
   {socialLink: "https://github.com/ericdelmermillen", faClasses: "fab fa-github"}
 ];
-
 
 const Footer = () => {
   return (
