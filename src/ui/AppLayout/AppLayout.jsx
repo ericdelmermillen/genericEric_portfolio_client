@@ -1,6 +1,7 @@
 import { Outlet, useNavigation } from "react-router-dom";
 import { useAppContext } from "../../contexts/AppContext.jsx";
 import Footer from "./Footer/Footer.jsx";
+import Nav from "./Nav/Nav.jsx";
 import "./AppLayout.scss";
 
 const AppLayout = () => {
@@ -16,7 +17,7 @@ const AppLayout = () => {
   return (
     <>
       <div className="appLayout" data-color-mode={colorMode}>
-        
+        <Nav />
         <div className="appLayout__inner">
           <h1 className="appLayout__h1">App Layout/Nav</h1>
 

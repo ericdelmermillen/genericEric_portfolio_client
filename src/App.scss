@@ -1,9 +1,10 @@
 @import "./partials/mixins.scss";
 @import "./partials/variables.scss";
 
-// .appLayout {
-
-//   h1 {
-//     color: var(--text-color);
-//   }
-// }
+*,
+*::before, 
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
