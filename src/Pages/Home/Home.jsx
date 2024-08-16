@@ -16,7 +16,7 @@ const Home = () => {
       <About />
       <Profile />
       <Portfolio />
-      {/* <Services /> */}
+      <Services />
       <ContactForm />
       <Stats />
     </>
