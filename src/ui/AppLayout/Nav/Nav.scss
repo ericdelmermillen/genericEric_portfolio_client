@@ -1,0 +1,28 @@
+@import "../../../partials/mixins";
+@import "../../../partials/variables";
+
+.nav {
+  border: 2px solid blue;
+  padding-inline: 2rem;
+  display: none;
+  width: 100%;
+
+  @media(min-width: $tablet) {
+    display: block;
+  }
+
+  &__logo {
+    height: 3rem;
+    width: 5rem;
+    border: 2px solid red;
+    text-align: center;
+  }
+
+  &__links {
+    display: flex;
+    margin-inline-start: auto;
+    align-items: center;
+    gap: 2rem;
+    height: 100%;
+  }
+}
