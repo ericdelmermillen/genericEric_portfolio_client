@@ -1,0 +1,35 @@
+@import "../../../partials/mixins";
+@import "../../../partials/variables";
+
+.footer {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  flex-direction: column-reverse;
+  gap: 0.75rem;
+
+  
+  @media(min-width: 768px) {
+    flex-direction: row;
+    gap: 2rem;
+  }
+  
+  &__socials  {
+    margin-inline: auto;
+    padding-block: 1rem;
+    
+    @media(min-width: 768px) {
+      margin-inline-end: max(2rem, 15%);
+      margin-inline-start: auto;
+    }
+  }
+  
+  &__copyright  {
+    margin-block: auto;
+    
+    @media(min-width: 768px) {
+      margin-inline-start: max(2rem, 15%);
+      margin-inline-end: auto;
+    }
+  }
+}

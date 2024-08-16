@@ -75,24 +75,48 @@
 //   }
 // }
 
-// @mixin inner {
-//   align-items: center;
-//   display: flex;
-//   flex-direction: column;
-//   justify-content: center;
-//   margin-inline: auto;
-//   padding-block: 4rem;
-//   padding-top: 0rem;
+@mixin appLayout {
+  align-items: center;
+  background: var(--background-color);
+  box-shadow: var(--box-shadow);
+  color: var(--text-color);
+  display: flex;
+  flex-direction: column;
+  margin-inline: auto;
+  max-width: 1920px;
+  min-height: calc(100vh - 10rem + 1px);
+  padding-block: 4rem;
+  padding-top: 0rem;
+  width: 100%;
+
+  @media(min-width: $tablet) {
+    margin-top: 4rem;
+  }
   
-//   @media(min-width: $tablet) {
-//     padding-top: 2rem;
-//     margin-top: 4rem;
-//   }
+  @media(min-width: 768px) {
+    margin-top: 0;
+  }
+}
+
+@mixin inner {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-inline: auto;
+  padding-block: 4rem;
+  padding-top: 0rem;
+  width: 100%;
   
-//   @media(min-width: 768px) {
-//     margin-top: 0;
-//   }
-// }
+  @media(min-width: $tablet) {
+    padding-top: 2rem;
+    margin-top: 4rem;
+  }
+  
+  @media(min-width: 768px) {
+    margin-top: 0;
+  }
+}
 
 // @mixin button {
 //   align-items: center;

@@ -1,0 +1,18 @@
+@import "../../../partials/mixins";
+@import "../../../partials/variables";
+
+.profile {
+
+  &__skill {
+
+    &--progress { 
+      padding: 0;
+      width: 100%;
+      
+    }
+  
+    &--progress-fill {
+      margin-inline: 0;
+    }
+  }
+}

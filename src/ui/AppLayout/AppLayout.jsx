@@ -1,6 +1,6 @@
 import { Outlet, useNavigation } from "react-router-dom";
 import { useAppContext } from "../../contexts/AppContext.jsx";
-import Footer from "../Footer/Footer.jsx";
+import Footer from "./Footer/Footer.jsx";
 import "./AppLayout.scss";
 
 const AppLayout = () => {
@@ -17,7 +17,7 @@ const AppLayout = () => {
     <>
       <div className="appLayout" data-color-mode={colorMode}>
         
-        <div className="">
+        <div className="appLayout__inner">
           <h1 className="appLayout__h1">App Layout/Nav</h1>
 
           <button
@@ -42,13 +42,11 @@ const AppLayout = () => {
           </button>
 
           <h2>Logged In: {isLoggedIn ? "true" : "false"}</h2>
+        
+          <Outlet />
+
+          <Footer/> 
         </div>
-
-        <Outlet />
-
-
-
-        <Footer/> 
       </div>
     </>
   )};
