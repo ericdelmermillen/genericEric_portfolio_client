@@ -1,0 +1,22 @@
+@import "../../../partials/mixins";
+@import "../../../partials/variables";
+
+.services {
+  background: url("../../assets/images/bg.jpg") no-repeat center center;
+  background-attachment: fixed;
+  background-size: cover;
+  
+  &::after {
+    background: rgba(0, 0, 0, 0.7);
+    content: "";
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+  }
+  
+  & .container {
+    z-index: 10;
+  }
+}

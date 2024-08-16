@@ -1,0 +1,17 @@
+@import '../../../partials/mixins';
+@import '../../../partials/variables';
+
+.about {
+
+  &__content {
+    flex-direction: column;
+    
+    @media(min-width: $md) {
+      flex-direction: row;
+    }
+  }
+
+  &__img {
+    width: 12.25rem;
+  }
+}

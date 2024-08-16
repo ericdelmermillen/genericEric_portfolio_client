@@ -1,0 +1,41 @@
+@import "../../../partials/mixins";
+@import "../../../partials/variables";
+
+.contactForm {
+
+  // &__container {
+  //   border: 2px solid green;
+  // }
+  
+  // &__heading {
+  //   border: 2px solid red;
+  // }
+  
+  // &__lead {
+  //   border: 2px solid blue;
+  // }
+
+  // &__name {
+  //   border: 2px solid pink;
+
+  //   &::placeholder {
+  //     color: yellow;
+  //   }
+  // }
+
+  &__email {
+    border: 2px solid pink;
+
+    &::placeholder {
+      color: yellow;
+    }
+  }
+
+  &__message {
+    border: 2px solid pink;
+
+    &::placeholder {
+      color: yellow;
+    }
+  }
+}

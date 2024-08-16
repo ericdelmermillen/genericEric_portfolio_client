@@ -1,14 +1,14 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import AppLayout from "./ui/AppLayout/AppLayout.jsx";
-import Blog from "./Pages/Blog/Blog.jsx";
-import Contact from "./Pages/Contact/Contact.jsx";
-import Home from "./Pages/Home/Home.jsx";
-import Projects from "./Pages/Projects/Projects.jsx";
+import Blog from "./pages/Blog/Blog.jsx";
+import BlogPost from "./pages/BlogPost/BlogPost.jsx";
+import Contact from "./pages/Contact/Contact.jsx";
+import Home from "./pages/Home/Home.jsx";
+import Projects from "./pages/Projects/Projects.jsx";
+import ProjectDetails from "./pages/ProjectDetails/ProjectDetails.jsx";
 import './App.scss';
 import './bootstrap.scss';
 import './font-awesome.scss'
-import ProjectDetails from "./Pages/ProjectDetails/ProjectDetails.jsx";
-import BlogPost from "./Pages/BlogPost/BlogPost.jsx";
 
 const router = createBrowserRouter([
   {
