@@ -15,54 +15,54 @@ const Profile = () => {
 
   return (
     <>
-      <section className="profile my-6">
-        <div className="profile__container container">
-          <div className="row">
-            <div className="col-12 col-md-6">
-              <h3 className="profile__header text-uppercase fw-bold">
+      <section className="profile">
+        <div className="profile__container">
+          <div className="">
+            <div className="">
+              <h3 className="">
                 Profile
               </h3>
               <p>
                 Lorem, ipsum dolor sit amet consectetur adipisicing elit. Tenetur eaque repudiandae natus atque consequatur vitae iusto, obcaecati, asperiores optio, quam esse sed rerum voluptas molestiae?
               </p>
-              <ul className="profile__items list-group list-group-flush">
-                <li className="profile__item list-group-item mb-3">
-                  <h5 className="profile__item text-transform-">
-                    <i className="profile__icon fas fa-user text-primary me-2"></i>Name:
+              <ul className="profile__items">
+                <li className="profile__item">
+                  <h5 className="profile__item">
+                    <i className="profile__icon"></i>Name:
                   </h5>
                   <p>
                     Eric Delmer Millen
                   </p>
                 </li>
-                <li className="profile__item list-group-item mb-3">
-                  <h5 className="text-transform-">
-                    <i className="profile__icon fas fa-calendar text-primary me-2"></i>Birthdate:
+                <li className="profile__item">
+                  <h5 className="">
+                    <i className="profile__icon fas fa-calendar"></i>Birthdate:
                   </h5>
                   <p>None of your business</p>
                 </li>
-                <li className="profile__item list-group-item mb-3">
-                  <h5 className="text-transform-">
-                    <i className="profile__icon fas fa-building text-primary me-2"></i>Current Position:
+                <li className="profile__item">
+                  <h5 className="">
+                    <i className="profile__icon fas fa-building"></i>Current Position:
                   </h5>
                   <p>Owner at Zidgy Road Labs Inc</p>
                 </li>
-                <li className="profile__item list-group-item mb-3">
-                  <h5 className="text-transform-">
-                    <i className="profile__icon fas fa-home text-primary me-2"></i>Website:
+                <li className="profile__item">
+                  <h5 className="">
+                    <i className="profile__icon"></i>Website:
                   </h5>
                   <p>zidgyroadlabs.com</p>
                 </li>
-                <li className="profile__item list-group-item mb-3">
-                  <h5 className="text-transform-">
-                    <i className="profile__icon fas fa-envelope text-primary me-2"></i>Email:
+                <li className="profile__item">
+                  <h5 className="">
+                    <i className="profile__icon fas fa-envelope"></i>Email:
                   </h5>
                   <p>ericdelmermillen@gmail.com</p>
                 </li>
               </ul>
             </div>
 
-            <div className="col-12 col-md-6">
-              <h3 className="text-uppercase fw-bold">
+            <div className="">
+              <h3 className="">
                 Skills:
               </h3>
               <p>
@@ -84,16 +84,16 @@ const Profile = () => {
 
           </div>
 
-          <div className="row mt-5 text-ceter">
-            <div className="col-12">
+          <div className="">
+            <div className="">
               <a 
-                className="btn btn-outline-dark btn-lg text-uppercase px-5 mx-3 my-2"
+                className=""
               >
                 Hire Me Now
                 {/* open contact form? */}
               </a>
               <a 
-                className="btn btn-dark btn-lg text-uppercase px-5 mx-3 my-2"
+                className=""
               >
                 Download CV
                 {/* make download CV in pdf format */}

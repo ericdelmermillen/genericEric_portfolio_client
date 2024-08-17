@@ -3,26 +3,29 @@
 
 .nav {
   border: 2px solid blue;
-  padding-inline: 2rem;
   display: none;
+  padding-inline: 2rem;
+  position: fixed;
+  top: 0;
   width: 100%;
-
+  
   @media(min-width: $tablet) {
-    display: block;
+    align-items: center;
+    display: flex;
+    height: $navHeight;
   }
-
+  
   &__logo {
-    height: 3rem;
-    width: 5rem;
-    border: 2px solid red;
+    // border: 2px solid red;
     text-align: center;
+    width: 5rem;
   }
 
   &__links {
-    display: flex;
-    margin-inline-start: auto;
     align-items: center;
+    display: flex;
     gap: 2rem;
     height: 100%;
+    margin-inline-start: auto;
   }
 }

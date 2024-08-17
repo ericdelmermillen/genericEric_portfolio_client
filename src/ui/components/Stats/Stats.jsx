@@ -13,9 +13,9 @@ const stats = [
 const Stats = () => {
   return (
     <>  
-      <section className="stats py-5 text-bg-secondary">
-        <div className="container">
-          <div className="row g-0">
+      <section className="stats">
+        <div className="">
+          <div className="">
 
             {stats.map((stat, idx) => 
               <Stat 

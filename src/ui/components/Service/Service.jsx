@@ -4,13 +4,13 @@ const Service = ({ faClasses, serviceName, serviceDesc }) => {
   return (
     <>
       <div 
-        className="col-md-4 text-center"
+        className=""
       >
-        <i className={`${faClasses} fa-3x text-primary mb-3`}></i>
+        <i className={`${faClasses} fa-3x`}></i>
         <h3 className="fs-3">
           {serviceName}
         </h3>
-        <hr className="w-25 mx-auto" />
+        <hr className="" />
         <p className="fs-5">
           {serviceDesc}
         </p>

@@ -19,35 +19,11 @@ const AppLayout = () => {
       <div className="appLayout" data-color-mode={colorMode}>
         <Nav />
         <div className="appLayout__inner">
-          <h1 className="appLayout__h1">App Layout/Nav</h1>
-
-          <button
-            onClick={toggleColorMode}
-            >
-            Color Mode: {colorMode}
-          </button>
-
-          <button
-            onClick={() => loginUser(
-              "ericdelmermillen@gmail.com", 
-              "12345678"
-            )}
-            >
-            LogIn
-          </button>
-
-          <button
-            onClick={logoutUser}
-            >
-            LogOut
-          </button>
-
-          <h2>Logged In: {isLoggedIn ? "true" : "false"}</h2>
         
           <Outlet />
 
-          <Footer/> 
         </div>
+        <Footer/> 
       </div>
     </>
   )};
