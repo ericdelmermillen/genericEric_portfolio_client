@@ -2,7 +2,7 @@
 @import "../../partials/variables";
 
 .appLayout {
-  border: 2px solid red;
+  border: 2px solid #ff0000;
   @include appLayout;
 
   h1 {

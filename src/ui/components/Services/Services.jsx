@@ -19,20 +19,20 @@ const services = [
 const Services = () => {
   return (
     <>  
-      <section className="services text-bg-dark py-5 position-relative">
-        <div className="container position-relative">
+      <section className="services">
+        <div className="">
 
-          <div className="text-center mb-5">
-            <h4 className="text-uppercase fw-bold text-primary">Services</h4>
-            <hr className="w-25 mx-auto" />
-            <h2 className="mb-4">What Can I Do For You?</h2>
-            <p className="lead">
+          <div className="">
+            <h4 className="">Services</h4>
+            <hr className="" />
+            <h2 className="">What Can I Do For You?</h2>
+            <p className="">
               Here are some of the services that I offer when it comes to web
               development and business.
             </p>
           </div>
 
-          <div className="row">
+          <div className="">
 
             {services.map((service, idx) =>
             

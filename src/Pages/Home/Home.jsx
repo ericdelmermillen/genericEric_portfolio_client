@@ -11,14 +11,17 @@ const Home = () => {
 
   return (
     <>
-      <h1 className="home">From Home</h1>
-      <Header />
-      <About />
-      <Profile />
-      <Portfolio />
-      <Services />
-      <ContactForm />
-      <Stats />
+      <div className="home">
+        <div className="home__inner">
+          {/* <Header /> */}
+          {/* <About />
+          <Profile />
+          <Portfolio />
+          <Services />
+          <ContactForm />
+          <Stats /> */}
+        </div>
+      </div>
     </>
   )};
 

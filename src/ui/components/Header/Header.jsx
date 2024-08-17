@@ -5,22 +5,22 @@ const Header = () => {
 
   return (
     <>
-      <header className="header vh-100 text-center position-relative">
+      <header className="header">
         <div 
-          className="header__text-container text-container position-relative d-flex flex-column justify-content-center align-items-center h-100 text-white"
+          className="header__text-container"
         >
-          <h5 className="header__headline text-primary fs-3 fw-bold text-uppercase">
+          <h5 className="header__headline">
             Hello World
           </h5>
       
           <TypingText 
             textToType={'I\'m Eric Millen'}
             typingDelayInterval={200}
-            classNames={"header__introduction display-1 fw-bold"}
+            classNames={"header__introduction"}
             elementType={'h1'} 
           />
 
-          <p className="header__roles roles text-uppercase fs-4">
+          <p className="header__roles">
             <span>Full Stack Web Developer</span>
           </p>
           <a href="#about" className="btn btn-outline-light btn-lg mt-3">
