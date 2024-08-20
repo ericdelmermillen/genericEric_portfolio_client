@@ -1,0 +1,7 @@
+@import "../../partials/mixins";
+@import "../../partials/variables";
+
+.notFound {
+  @include page;
+  border: 2px solid blue
+}
