@@ -1,18 +1,25 @@
+import { useAppContext } from "../../../contexts/AppContext";
 import { Link } from "react-router-dom";
 import "./Nav.scss";
-import { useAppContext } from "../../../contexts/AppContext";
 
 const Nav = () => {
   const { 
     colorMode,
     toggleColorMode,
+    scrollYPos,
+    prevScrollYPos,
     isLoading,
     isLoggedIn,
     loginUser,
     logoutUser
    } = useAppContext();
+   
   return (
-    <nav className="nav">
+    <nav 
+      className={`nav ${prevScrollYPos < scrollYPos && scrollYPos > 50
+        ? "hide"
+        : ""}`
+    }>
       <div className="nav__content">
 
         <div className="nav__logo">

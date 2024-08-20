@@ -10,9 +10,15 @@
     display: flex;
     height: $navHeight;
     position: fixed;
-    top: 0;
+    transition: all 600ms ease;
     width: 100%;
     z-index: 3;
+    top: 0;
+    
+    &.hide {
+      margin-top: -5rem;
+      // transition: all 600ms ease;
+    }
   }
 
   &__content {
