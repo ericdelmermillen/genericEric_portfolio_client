@@ -2,12 +2,19 @@
 @import "../../partials/variables";
 
 .appLayout {
-  // border: 2px solid red;
   @include appLayout;
 
-  h1 {
-    color: var(--text-color);
+  &__mobileLogo {
+    position: fixed;
+    top: 1rem;
+    z-index: 10;
+    
+    @media(min-width: $tablet) {
+      display: none;
+    }
   }
+
+
 
   &__inner {
     // border: 2px solid forestgreen;
