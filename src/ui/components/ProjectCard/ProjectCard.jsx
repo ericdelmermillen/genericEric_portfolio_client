@@ -5,11 +5,11 @@ const ProjectCard = ({ imgSrc, projectTitle }) => {
 
   return (
     <>
-      <div className="projectCard col-md-6 mb-4">
-				<div className="projectCard__inner project shadow-lg rounded-5">
+      <div className="projectCard">
+				<div className="projectCard__inner">
 					<a href="images/project1.jpg">
 						<img 
-							className="projectCard__img img-fluid rounded-3"
+							className="projectCard__img"
               src={imgSrc}
             	alt={`Card Image for ${projectTitle} Project`}
 						/>

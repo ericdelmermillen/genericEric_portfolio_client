@@ -1,47 +1,113 @@
-import "./Header.scss";
+import DownIcon from "../../../assets/svgs/DownIcon.jsx";
+import Facebook from "../../../assets/svgs/Facebook.jsx";
+import Github from "../../../assets/svgs/Github.jsx";
+import Instagram from "../../../assets/svgs/Instagram.jsx";
+import LinkedIn from "../../../assets/svgs/LInkedIn.jsx";
+import Twitter from "../../../assets/svgs/Twitter.jsx";
+import Youtube from "../../../assets/svgs/Youtube.jsx";
+import { useAppContext } from "../../../contexts/AppContext.jsx";
 import TypingText from "../TypingText/TypingText.jsx";
+import "./Header.scss";
 
 const Header = () => {
+  const { colorMode } = useAppContext();
 
   return (
     <>
-      <header className="header vh-100 text-center position-relative">
-        <div 
-          className="header__text-container text-container position-relative d-flex flex-column justify-content-center align-items-center h-100 text-white"
-        >
-          <h5 className="header__headline text-primary fs-3 fw-bold text-uppercase">
-            Hello World
-          </h5>
-      
-          <TypingText 
-            textToType={'I\'m Eric Millen'}
-            typingDelayInterval={200}
-            classNames={"header__introduction display-1 fw-bold"}
-            elementType={'h1'} 
-          />
+      <header className="header">
+        <div className="header__hero">
 
-          <p className="header__roles roles text-uppercase fs-4">
-            <span>Full Stack Web Developer</span>
-          </p>
-          <a href="#about" className="btn btn-outline-light btn-lg mt-3">
-            <div className="d-flex">
-              <div className="me-3">
-                <div className="fas fa-chevron-down"></div>
-              </div>
-              <div className="text-start">
-                <span>More About Me</span>
-              </div>
-            </div>
-          </a>
-
-            <div className="header__socials social d-flex gap-3 position-absolute">
-              <a href="#"><i className="fab fa-twitter"></i></a>
-              <a href="#"><i className="fab fa-linkedin"></i></a>
-              <a href="#"><i className="fab fa-facebook"></i></a>
-              <a href="#"><i className="fab fa-youtube"></i></a>
-              <a href="#"><i className="fab fa-github"></i></a>
+          <div className={`header__dayImg ${colorMode === 'light' ? "top" : ""}`}></div>
+          <div className={`header__nightImg ${colorMode === 'dark' ? "top" : ""}`}>
           </div>
+          <div className="header__overlay"></div>
+
+          <div className="header__content">
+            <h5 className="header__headline">
+              Hello, World.
+            </h5>
+
+            <TypingText 
+              textToType={'I\'m Eric Millen'}
+              typingDelayInterval={200}
+              classNames={"header__introduction"}
+              elementType={'h1'} 
+            />
+            <h4 className="header__description">
+              Full Stack Developer
+            </h4>
+
+            {/* Make Link Button */}
+            <div className="header__button">
+              <a 
+                className="header__button-link"
+                href="#about"
+                >
+                <DownIcon className={"header__button-down"}/>
+                <span
+                  className="header__button-text"
+                >
+                  More About Me
+                </span>
+              </a>
+            </div>
+
+          </div>
+
+          <div className="header__socials">
+
+            <a 
+              href="https://x.com/EricDelmer"
+              target="_blank"
+            >
+              <Twitter
+                className="header__social"
+              />
+            </a>
+
+            <a 
+              href="https://www.facebook.com/ericdelmermillen"
+              target="_blank"
+            >
+              <Facebook 
+                className="header__social"
+              />
+            </a>
+
+            <a 
+              href="https://www.instagram.com/ericdelmermillen/"
+              target="_blank"
+            >
+              <Instagram className="header__social"/>
+            </a>
+
+            <a 
+              href="https://github.com/ericdelmermillen"
+              target="_blank"
+            >
+              <Github 
+                className="header__social"
+              />
+            </a>
+
+            <a 
+              href="https://www.linkedin.com/in/eric-delmer-millen/"
+              target="_blank"
+            >
+              <LinkedIn className="header__social"/>
+            </a>
+
+            <a 
+              href="https://www.youtube.com/@EricMillen"
+              target="_blank"
+            >
+              <Youtube className="header__social"/>
+            </a>
+
+          </div>
+
         </div>
+
       </header>
     </>
   )};

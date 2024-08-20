@@ -7,7 +7,6 @@ import Home from "./pages/Home/Home.jsx";
 import Projects from "./pages/Projects/Projects.jsx";
 import ProjectDetails from "./pages/ProjectDetails/ProjectDetails.jsx";
 import './App.scss';
-import './bootstrap.scss';
 import './font-awesome.scss'
 
 const router = createBrowserRouter([
