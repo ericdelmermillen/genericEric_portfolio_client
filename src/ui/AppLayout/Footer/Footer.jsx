@@ -13,23 +13,25 @@ const socials = [
 const Footer = () => {
   return (
     <>
-      <footer className="footer bg-dark">
-        <p className="footer__copyright text-light">
-          Copyright &copy; {new Date().getFullYear()} | Design By StyleShout
-        </p>
-        <div className="footer__socials hstack gap-3 d-flex">
+      <footer className="footer">
+        <div className="footer__content">
 
-          {socials.map((social, idx) => 
-            <SocialLink 
-              key={idx}
-              socialLink={social.socialLink}
-              faClasses={social.faClasses}
-            />
-          )}
+          <p className="footer__copyright">
+            Copyright Eric Delmer Millen &copy; {new Date().getFullYear()} 
+          </p>
+          <div className="footer__socials">
 
+            {socials.map((social, idx) => 
+              <SocialLink 
+                key={idx}
+                socialLink={social.socialLink}
+                faClasses={social.faClasses}
+              />
+            )}
+
+          </div>
 				</div>
       </footer>
-      
     </>
   )};
 
