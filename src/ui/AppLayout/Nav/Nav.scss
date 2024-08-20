@@ -2,17 +2,28 @@
 @import "../../../partials/variables";
 
 .nav {
-  border: 2px solid blue;
+  background: yellow;;
   display: none;
-  padding-inline: 2rem;
-  position: fixed;
-  top: 0;
-  width: 100%;
   
   @media(min-width: $tablet) {
     align-items: center;
     display: flex;
     height: $navHeight;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 3;
+  }
+
+  &__content {
+    align-items: center;
+    display: flex;
+    height: 100%;
+    margin-inline: auto;
+    max-width: $ultraWide;
+    padding-inline: 2rem;
+    width: 100%;
+    border: 2px solid green;
   }
   
   &__logo {

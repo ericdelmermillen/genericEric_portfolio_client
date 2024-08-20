@@ -14,22 +14,24 @@ const Footer = () => {
   return (
     <>
       <footer className="footer">
-        <p className="footer__copyright">
-          Copyright Eric Delmer Millen &copy; {new Date().getFullYear()} 
-        </p>
-        <div className="footer__socials">
+        <div className="footer__content">
 
-          {socials.map((social, idx) => 
-            <SocialLink 
-              key={idx}
-              socialLink={social.socialLink}
-              faClasses={social.faClasses}
-            />
-          )}
+          <p className="footer__copyright">
+            Copyright Eric Delmer Millen &copy; {new Date().getFullYear()} 
+          </p>
+          <div className="footer__socials">
 
+            {socials.map((social, idx) => 
+              <SocialLink 
+                key={idx}
+                socialLink={social.socialLink}
+                faClasses={social.faClasses}
+              />
+            )}
+
+          </div>
 				</div>
       </footer>
-      
     </>
   )};
 
