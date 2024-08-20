@@ -9,6 +9,8 @@ const initialState = {
   isLoggedIn: false,
   isLoading: false,
   colorMode: localStorage.getItem('colorMode') || "light",
+  scrollYPos: window.scrollY,
+  prevScrollYPos: window.scrollY,
   error: ""
 };
 
@@ -17,6 +19,13 @@ const reducer = (state, action) => {
 
     case "app/loading":
       return {...state, isLoading: true};
+
+    case "app/scrollY":
+      return {
+        ...state, 
+        prevScrollYPos: state.scrollYPos,
+        scrollYPos: action.payload
+      };
 
     case "user/login":
       const { email, password } = action.payload;
@@ -53,9 +62,9 @@ const reducer = (state, action) => {
 
 
 const AppContextProvider = ({ children }) => {
-  // const [ state, dispatch ] = useReducer(reducer, initialState);
-  const [ {isLoading, isLoggedIn, colorMode} = state, dispatch ] = useReducer(reducer, initialState);
-  // const { isLoading, isLoggedIn, colorMode } = state;
+  const [ { 
+    isLoading, isLoggedIn, colorMode, scrollYPos, prevScrollYPos
+  } = state, dispatch ] = useReducer(reducer, initialState);
 
   const toggleColorMode = () => {
     dispatch({ type: "colorMode/toggle"});
@@ -78,7 +87,9 @@ const AppContextProvider = ({ children }) => {
     loginUser,
     logoutUser,
     colorMode,
-    toggleColorMode
+    toggleColorMode,
+    scrollYPos,
+    prevScrollYPos
   };
 
 
@@ -86,6 +97,26 @@ const AppContextProvider = ({ children }) => {
   useEffect(() => {
     localStorage.setItem('colorMode', colorMode);
   }, [colorMode]);
+
+  // handle scroll position for show hide of menu
+  useEffect(() => {
+    const handleScrollY = () => {
+      const newScrollYPos = window.scrollY;
+      
+      if(scrollYPos !== undefined && newScrollYPos !== scrollYPos) {
+        dispatch({ type: "app/scrollY", payload: newScrollYPos});
+      }
+
+    };
+
+    handleScrollY();
+
+    window.addEventListener("scroll", handleScrollY);
+
+    return () => {
+      window.removeEventListener("scroll", handleScrollY);
+    };
+  }, [scrollYPos]);
 
 
   return (
