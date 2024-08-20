@@ -3,22 +3,20 @@
 
 .nav {
   background: yellow;;
-  display: none;
+  display: flex;
+  height: $navHeight;
+  width: 100%;
+  position: fixed;
+  transition: all 600ms ease;
+  align-items: center;
+  z-index: 3;
+  top: 0;
   
-  @media(min-width: $tablet) {
-    align-items: center;
-    display: flex;
-    height: $navHeight;
-    position: fixed;
-    transition: all 600ms ease;
-    width: 100%;
-    z-index: 3;
-    top: 0;
+  &.hide {
+    margin-top: -5rem;
+  }
+    @media(min-width: $tablet) {
     
-    &.hide {
-      margin-top: -5rem;
-      // transition: all 600ms ease;
-    }
   }
 
   &__content {
@@ -33,20 +31,33 @@
   }
   
   &__logo {
-    // border: 2px solid red;
-    text-align: center;
-    width: 5rem;
+    margin-inline: 0;
+    margin-inline: auto;
+    
+    
+    @media(min-width: $tablet) {
+      margin-inline-start: 0;
+      margin-inline-end: auto;
+      border: 2px solid red;
+      text-align: center;
+      width: 5rem;
+    }
   }
 
   &__links {
-    align-items: center;
-    display: flex;
-    gap: 2rem;
-    height: 100%;
-    margin-inline-start: auto;
-    color: var(--text-color);
+    display: none;
+    
+    @media(min-width: $tablet) {
+      align-items: center;
+      display: flex;
+      gap: 2rem;
+      height: 100%;
+      margin-inline-start: auto;
+      color: var(--text-color);
+    }
   }
 
-  &__link {
-  }
+  // &__link {
+
+  // }
 }
