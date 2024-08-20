@@ -2,7 +2,7 @@
 @import "../../partials/variables";
 
 .appLayout {
-  border: 2px solid #ff0000;
+  // border: 2px solid red;
   @include appLayout;
 
   h1 {
@@ -10,7 +10,7 @@
   }
 
   &__inner {
-    border: 2px solid forestgreen;
+    // border: 2px solid forestgreen;
     @include inner;
   }
 }

@@ -19,9 +19,7 @@ const AppLayout = () => {
       <div className="appLayout" data-color-mode={colorMode}>
         <Nav />
         <div className="appLayout__inner">
-        
           <Outlet />
-
         </div>
         <Footer/> 
       </div>
