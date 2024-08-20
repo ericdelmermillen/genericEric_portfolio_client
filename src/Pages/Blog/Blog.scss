@@ -2,5 +2,6 @@
 @import "../../partials/variables";
 
 .blog {
-
+  @include page;
+  border: 2px solid blue;
 }

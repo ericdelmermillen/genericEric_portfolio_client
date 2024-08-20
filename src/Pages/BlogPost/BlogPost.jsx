@@ -5,7 +5,9 @@ const BlogPost = () => {
   const { postID } = useParams();
   return (
     <>
+    <div className="blogPost">
       <h1>Blog Post: {postID}</h1>
+    </div>
     </>
   )};
 

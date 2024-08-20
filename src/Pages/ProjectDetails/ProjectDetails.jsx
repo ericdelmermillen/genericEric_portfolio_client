@@ -6,7 +6,9 @@ const ProjectDetails = () => {
 
   return (
     <>
+    <div className="projectDetails">
       <h1>Project Details: Project {projectID}</h1>
+    </div>
     </>
   )};
 

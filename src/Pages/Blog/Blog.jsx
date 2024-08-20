@@ -3,7 +3,9 @@ import "./Blog.scss";
 const Blog = () => {
   return (
     <>
-      <h1 className="blog">From Blog</h1>
+      <h1 className="blog">
+        From Blog
+      </h1>
     </>
   )};
 
