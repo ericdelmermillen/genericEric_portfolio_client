@@ -19,16 +19,6 @@ const AppLayout = () => {
       <div className="appLayout" data-color-mode={colorMode}>
         <Nav />
 
-        <div
-          className="appLayout__mobileLogo"
-        >
-          <Link
-            to="/"
-          >
-            mobileLogo
-          </Link>
-        </div>
-
         <div className="appLayout__inner">
           <Outlet />
         </div>
