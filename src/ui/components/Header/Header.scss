@@ -20,7 +20,7 @@
 
   &__dayImg {
     @include heroImg;
-    background: #151515 url("../../../assets/images/day.jpg") center bottom;
+    background: url("../../../assets/images/day.jpg") center bottom;
 
     &.top {
       @include heroImgTop;
@@ -29,7 +29,7 @@
   
   &__nightImg {
     @include heroImg;
-    background: #151515 url("../../../assets/images/night.jpg") center bottom;
+    background: url("../../../assets/images/night.jpg") center bottom;
     
     &.top {
       @include heroImgTop;

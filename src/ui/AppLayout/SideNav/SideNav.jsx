@@ -11,8 +11,6 @@ const SideNav = ({ handleLogOut }) => {
     toggleSideNav
    } = useAppContext();
 
-   console.log(showSideNav)
-
   const location = useLocation();
   const navigate = useNavigate();
   
