@@ -61,13 +61,6 @@ const SideNav = ({ handleLogOut, children }) => {
 
         : null
       }
-
-      <div     
-        className="sideNav__open-button"
-        onClick={toggleSideNav}
-      >
-        Open
-      </div>
       
       <div 
         className={`sideNav ${showSideNav 

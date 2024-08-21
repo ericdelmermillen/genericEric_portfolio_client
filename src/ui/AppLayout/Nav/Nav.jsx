@@ -9,6 +9,7 @@ const Nav = () => {
     toggleColorMode,
     scrollYPos,
     prevScrollYPos,
+    toggleSideNav,
     isLoading,
     isLoggedIn,
     loginUser,
@@ -74,6 +75,13 @@ const Nav = () => {
           <ColorModeToggle
             inputId={"nav__colorModeToggler"}
           />
+        </div>
+
+        <div     
+          className="nav__open-button"
+          onClick={toggleSideNav}
+        >
+          Open
         </div>
       </div>
     </nav>

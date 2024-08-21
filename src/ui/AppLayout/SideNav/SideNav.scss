@@ -49,19 +49,6 @@
     z-index: 5;
   }
 
-  &__open-button {
-    color: var(--text-color);
-    cursor: pointer;
-    position: fixed;
-    right: 2rem;
-    top: 1rem;
-    z-index: 3;
-
-    @media(min-width: $tablet) {
-      display: none;
-    }
-  }
-
   &__close-button {
     cursor: pointer;
     height: 2rem;

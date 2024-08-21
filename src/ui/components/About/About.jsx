@@ -4,8 +4,11 @@ import './About.scss';
 const About = () => {
   return (
     <>
-      <section id="about" className="about bg-light py-5">
-        <div className="about__container container">
+      <section
+        id="about" 
+        className="about"
+      >
+        {/* <div className="about__container container">
           <div className="about__text text-center">
             <h4 className="about__heading text-uppercase fw-bold text-primary">
               About Me
@@ -24,7 +27,7 @@ const About = () => {
               Illo eos ipsum non expedita ipsa explicabo aspernatur, velit error, quae omnis iusto, est repellendus blanditiis deserunt officia voluptatem at natus? Incidunt non, at eius quos molestias blanditiis.
             </p>
           </div>
-        </div>
+        </div> */}
       </section>
     </>
   )};

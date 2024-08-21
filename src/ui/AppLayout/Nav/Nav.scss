@@ -28,6 +28,7 @@
     max-width: $ultraWide;
     padding-inline: 2rem;
     width: 100%;
+    border: 2px solid blue;
   }
   
   &__logo {
@@ -61,6 +62,19 @@
     @media(min-width: $tablet) {
       display: block;
       margin-inline-start: 1rem;;
+    }
+  }
+
+  &__open-button {
+    color: var(--text-color);
+    cursor: pointer;
+    position: absolute;
+    right: 2rem;
+    top: 1rem;
+    z-index: 3;
+
+    @media(min-width: $tablet) {
+      display: none;
     }
   }
 

@@ -15,13 +15,15 @@ const Home = () => {
         <div className="home__inner">
           
           <Header />
+{/* 
           <div 
             id="about"
             className="home__testDiv"
           >
             About
-          </div>
-          {/* <About />
+          </div> */}
+          <About />
+          {/* 
           <Profile />
           <Portfolio />
           <Services />

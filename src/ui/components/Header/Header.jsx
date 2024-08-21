@@ -19,7 +19,7 @@ const Header = () => {
       <header className="header">
         <div className="header__hero">
 
-          {scrollYPos < viewportHeight 
+          {scrollYPos < viewportHeight * 2
 
             ? ( 
                 <>
