@@ -1,5 +1,6 @@
 import { useAppContext } from "../../../contexts/AppContext";
 import { Link } from "react-router-dom";
+import ColorModeToggle from "../ColorModeToggle/ColorModeToggle";
 import "./Nav.scss";
 
 const Nav = () => {
@@ -60,14 +61,20 @@ const Nav = () => {
             </Link>
           </li>
 
-          <li 
+          {/* <li 
             className="nav__link"
             onClick={toggleColorMode}
           >
             {colorMode}
-          </li>
+          </li> */}
 
         </ul>
+
+        <div className="nav__colorModeToggle">
+          <ColorModeToggle
+            inputId={"nav__colorModeToggler"}
+          />
+        </div>
       </div>
     </nav>
   )};
