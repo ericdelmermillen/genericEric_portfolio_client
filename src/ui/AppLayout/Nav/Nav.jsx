@@ -37,28 +37,28 @@ const Nav = () => {
             <Link
               to={"/home"}
             >
-              Home
+              HOME
             </Link>
           </li>
           <li className="nav__link">
             <Link
               to={"/projects"}
             >
-              Projects
+              PROJECTS
             </Link>
           </li>
           <li className="nav__link">
             <Link
               to={"/blog"}
             >
-              Blog
+              BLOG
             </Link>
           </li>
           <li className="nav__link">
             <Link
               to={"/contact"}
             >
-              Contact
+              CONTACT
             </Link>
           </li>
 

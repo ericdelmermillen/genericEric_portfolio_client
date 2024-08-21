@@ -8,26 +8,33 @@ const About = () => {
         id="about" 
         className="about"
       >
-        {/* <div className="about__container container">
-          <div className="about__text text-center">
-            <h4 className="about__heading text-uppercase fw-bold text-primary">
-              About Me
+        <div className="about__inner">
+          <header className="about__header">
+            <h4 className="about__heading">
+              ABOUT ME
             </h4>
-            <hr className="w-25 mx-auto" />
-            <h2 className="about__introduction mb-4">Let me introduce myself.</h2>
-          </div>
-          <div className="about__content d-flex gap-5 align-items-center h-100">
+            <h2 
+              className="about__introduction"
+            >
+              Let me introduce myself.
+            </h2>
+          </header>
+
+          <div className="about__summary">
             <img
               src={me}
               alt=""
-              className="about__img img-fluid rounded-circle"
+              className="about__img"
             />
-            <p className="about__blurb lead">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam placeat aliquid quis, eos et architecto at minima expedita debitis reiciendis aperiam tempora. 
-              Illo eos ipsum non expedita ipsa explicabo aspernatur, velit error, quae omnis iusto, est repellendus blanditiis deserunt officia voluptatem at natus? Incidunt non, at eius quos molestias blanditiis.
-            </p>
+            <div className="about__content">
+            
+              <p className="about__blurb">
+                I am a full stack web developer from Boston MA. I started writing code about 16 years ago. I started with Java and then moved to web technologies like HTML, CSS, JavaScript and PHP. I have worked for companies as well as ran my own. In 2016 I started creating content full-time. I love helping people learn to code and better their lives.
+              </p>
+            </div>
           </div>
-        </div> */}
+
+        </div> 
       </section>
     </>
   )};

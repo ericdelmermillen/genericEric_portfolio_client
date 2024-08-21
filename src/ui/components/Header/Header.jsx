@@ -19,7 +19,8 @@ const Header = () => {
       <header className="header">
         <div className="header__hero">
 
-          {scrollYPos < viewportHeight * 2
+          {/* {scrollYPos < viewportHeight * 2 */}
+          {scrollYPos < viewportHeight
 
             ? ( 
                 <>
@@ -36,7 +37,7 @@ const Header = () => {
 
                   <div className="header__content">
                     <h5 className="header__headline">
-                      Hello, World.
+                      HELLO, WORLD.
                     </h5>
 
                     <TypingText 

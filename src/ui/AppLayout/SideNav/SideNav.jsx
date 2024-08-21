@@ -82,27 +82,26 @@ const SideNav = ({ handleLogOut, children }) => {
                 className='sideNav__link'
                 // onClick={handleNavLinkBio}
               >
-                Home
+                HOME
               </li>
               <li 
                 className='sideNav__link'
                 // onClick={handleNavLinkBio}
               >
-                Projects
+                PROJECTS
               </li>
               <li 
                 className='sideNav__link'
                 // onClick={handleNavLinkContact}
               >
-                Blog
+                BLOG
               </li>
-                <li 
-                  className='sideNav__link'
-                  // onClick={() => setShowSideNav(false)}
-                  >
-                    Contact
-                </li>
-
+              <li 
+                className='sideNav__link'
+                // onClick={() => setShowSideNav(false)}
+                >
+                  CONTACT
+              </li>
 
             </ul>
 
