@@ -10,12 +10,28 @@ import TypingText from "../TypingText/TypingText.jsx";
 import "./Header.scss";
 
 const Header = () => {
-  const { colorMode } = useAppContext();
+  const { colorMode, scrollYPos } = useAppContext();
+  // const viewportHeight = window.innerHeight;
 
   return (
     <>
       <header className="header">
         <div className="header__hero">
+
+          {/*  May need to conditionally render the header if it shows below the Footer on mobile due to bounce on overscroll*/}
+
+          {/* {scrollY < viewportHeight 
+
+          ? ( 
+              <>
+                <div className={`header__dayImg ${colorMode === 'light' ? "top" : ""}`}></div>
+                <div className={`header__nightImg ${colorMode === 'dark' ? "top" : ""}`}>
+                </div>
+                <div className="header__overlay"></div>
+              </>
+            )
+
+          : null} */}
 
           <div className={`header__dayImg ${colorMode === 'light' ? "top" : ""}`}></div>
           <div className={`header__nightImg ${colorMode === 'dark' ? "top" : ""}`}>
