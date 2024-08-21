@@ -3,6 +3,7 @@ import { useAppContext } from "../../contexts/AppContext.jsx";
 import Footer from "./Footer/Footer.jsx";
 import Nav from "./Nav/Nav.jsx";
 import "./AppLayout.scss";
+import SideNav from "./SideNav/SideNav.jsx"
 
 const AppLayout = () => {
   const { 
@@ -18,16 +19,8 @@ const AppLayout = () => {
     <>
       <div className="appLayout" data-color-mode={colorMode}>
         <Nav />
-
-        <div
-          className="appLayout__mobileLogo"
-        >
-          <Link
-            to="/"
-          >
-            mobileLogo
-          </Link>
-        </div>
+        {/* refactor sideNav to accept children for color Mode Toggle and logoutButton */}
+        <SideNav />
 
         <div className="appLayout__inner">
           <Outlet />

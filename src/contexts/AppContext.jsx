@@ -9,6 +9,9 @@ const initialState = {
   isLoggedIn: false,
   isLoading: false,
   colorMode: localStorage.getItem('colorMode') || "light",
+  scrollYPos: window.scrollY,
+  prevScrollYPos: window.scrollY,
+  showSideNav: false,
   error: ""
 };
 
@@ -17,6 +20,16 @@ const reducer = (state, action) => {
 
     case "app/loading":
       return {...state, isLoading: true};
+
+    case "app/scrollY":
+      return {
+        ...state, 
+        prevScrollYPos: state.scrollYPos,
+        scrollYPos: action.payload
+      };
+
+    case "app/toggleSideNav":
+      return {...state, showSideNav: !state.showSideNav}
 
     case "user/login":
       const { email, password } = action.payload;
@@ -53,9 +66,9 @@ const reducer = (state, action) => {
 
 
 const AppContextProvider = ({ children }) => {
-  // const [ state, dispatch ] = useReducer(reducer, initialState);
-  const [ {isLoading, isLoggedIn, colorMode} = state, dispatch ] = useReducer(reducer, initialState);
-  // const { isLoading, isLoggedIn, colorMode } = state;
+  const [ { 
+    isLoading, isLoggedIn, colorMode, scrollYPos, prevScrollYPos, showSideNav
+  } = state, dispatch ] = useReducer(reducer, initialState);
 
   const toggleColorMode = () => {
     dispatch({ type: "colorMode/toggle"});
@@ -72,13 +85,21 @@ const AppContextProvider = ({ children }) => {
     dispatch({ type: "user/logout" });
   };
 
+  const toggleSideNav = () => {
+    dispatch({ type: "app/toggleSideNav"})
+  }
+
   const contextValues = {
     isLoading,
     isLoggedIn,
     loginUser,
     logoutUser,
     colorMode,
-    toggleColorMode
+    toggleColorMode,
+    scrollYPos,
+    prevScrollYPos,
+    showSideNav,
+    toggleSideNav
   };
 
 
@@ -86,6 +107,26 @@ const AppContextProvider = ({ children }) => {
   useEffect(() => {
     localStorage.setItem('colorMode', colorMode);
   }, [colorMode]);
+
+  // handle scroll position for show hide of menu
+  useEffect(() => {
+    const handleScrollY = () => {
+      const newScrollYPos = window.scrollY;
+      
+      if(scrollYPos !== undefined && newScrollYPos !== scrollYPos) {
+        dispatch({ type: "app/scrollY", payload: newScrollYPos});
+      }
+
+    };
+
+    handleScrollY();
+
+    window.addEventListener("scroll", handleScrollY);
+
+    return () => {
+      window.removeEventListener("scroll", handleScrollY);
+    };
+  }, [scrollYPos]);
 
 
   return (
