@@ -2,8 +2,9 @@ import { Link, Outlet, useNavigation } from "react-router-dom";
 import { useAppContext } from "../../contexts/AppContext.jsx";
 import Footer from "./Footer/Footer.jsx";
 import Nav from "./Nav/Nav.jsx";
-import "./AppLayout.scss";
 import SideNav from "./SideNav/SideNav.jsx"
+import ColorModeToggle from "./ColorModeToggle/ColorModeToggle.jsx";
+import "./AppLayout.scss";
 
 const AppLayout = () => {
   const { 
@@ -18,9 +19,19 @@ const AppLayout = () => {
   return (
     <>
       <div className="appLayout" data-color-mode={colorMode}>
+
         <Nav />
-        {/* refactor sideNav to accept children for color Mode Toggle and logoutButton */}
-        <SideNav />
+
+        <SideNav>
+          <div className="appLayout__sideNav-children">
+            {/* logout button if user logged in*/}
+            {isLoggedIn
+              ? <h1>Logout</h1>
+              : null
+            }
+            <ColorModeToggle inputId={"sideNavColorModeToggle"} />
+          </div>
+        </SideNav>
 
         <div className="appLayout__inner">
           <Outlet />

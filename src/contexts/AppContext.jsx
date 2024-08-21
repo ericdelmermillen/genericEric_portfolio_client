@@ -6,7 +6,7 @@ const AppContext = createContext();
 const user = { email: "ericdelmermillen@gmail.com", password: "12345678"};
 
 const initialState = {
-  isLoggedIn: false,
+  isLoggedIn: !false,
   isLoading: false,
   colorMode: localStorage.getItem('colorMode') || "light",
   scrollYPos: window.scrollY,

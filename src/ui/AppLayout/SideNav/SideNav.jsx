@@ -1,12 +1,10 @@
 import { useAppContext } from '../../../contexts/AppContext.jsx'; 
 import { useLocation, useNavigate } from 'react-router-dom';
 // import { toast } from 'react-toastify';
-import ColorModeToggle from '../ColorModeToggle/ColorModeToggle.jsx';
 import './SideNav.scss';
 
-const SideNav = ({ handleLogOut }) => {
+const SideNav = ({ handleLogOut, children }) => {
   const { 
-    isLoggedIn, 
     showSideNav,
     toggleSideNav
    } = useAppContext();
@@ -111,22 +109,13 @@ const SideNav = ({ handleLogOut }) => {
                   >
                     Contact
                 </li>
-              {isLoggedIn &&
-                <li className="sideNav__link">
-                  <h4 
-                    className='sideNav__logout'
-                    onClick={handleSideNavLogout}
-                  >
-                    Logout
-                  </h4>
-                </li>
-              }
-              <li className="sideNav__colorModeToggler">
-                <ColorModeToggle inputId={"sideNavColorModeToggle"} />
-              </li>
+
+
             </ul>
 
           </div>
+
+          {children}
 
         </div>
       </div>

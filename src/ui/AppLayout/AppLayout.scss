@@ -7,4 +7,15 @@
   &__inner {
     @include inner;
   }
+
+  &__sideNav-children {
+    align-items: center;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: 2rem;
+    justify-content: end;
+    padding-top: 1rem;
+    width: 100%;
+  }
 }
