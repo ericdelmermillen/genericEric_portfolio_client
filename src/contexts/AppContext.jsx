@@ -11,6 +11,7 @@ const initialState = {
   colorMode: localStorage.getItem('colorMode') || "light",
   scrollYPos: window.scrollY,
   prevScrollYPos: window.scrollY,
+  showSideNav: false,
   error: ""
 };
 
@@ -26,6 +27,9 @@ const reducer = (state, action) => {
         prevScrollYPos: state.scrollYPos,
         scrollYPos: action.payload
       };
+
+    case "app/toggleSideNav":
+      return {...state, showSideNav: !state.showSideNav}
 
     case "user/login":
       const { email, password } = action.payload;
@@ -63,7 +67,7 @@ const reducer = (state, action) => {
 
 const AppContextProvider = ({ children }) => {
   const [ { 
-    isLoading, isLoggedIn, colorMode, scrollYPos, prevScrollYPos
+    isLoading, isLoggedIn, colorMode, scrollYPos, prevScrollYPos, showSideNav
   } = state, dispatch ] = useReducer(reducer, initialState);
 
   const toggleColorMode = () => {
@@ -81,6 +85,10 @@ const AppContextProvider = ({ children }) => {
     dispatch({ type: "user/logout" });
   };
 
+  const toggleSideNav = () => {
+    dispatch({ type: "app/toggleSideNav"})
+  }
+
   const contextValues = {
     isLoading,
     isLoggedIn,
@@ -89,7 +97,9 @@ const AppContextProvider = ({ children }) => {
     colorMode,
     toggleColorMode,
     scrollYPos,
-    prevScrollYPos
+    prevScrollYPos,
+    showSideNav,
+    toggleSideNav
   };
 
 
