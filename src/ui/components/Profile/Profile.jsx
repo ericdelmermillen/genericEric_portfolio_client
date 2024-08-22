@@ -16,52 +16,81 @@ const Profile = () => {
   return (
     <>
       <section className="profile">
-        <div className="profile__container">
-          <div className="">
-            <div className="">
-              <h3 className="">
+        <div className="profile__inner">
+          <main className="profile__main">
+            
+            <div className="profile__info">
+              
+              <h3 className="profile__heading">
                 Profile
               </h3>
-              <p>
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Tenetur eaque repudiandae natus atque consequatur vitae iusto, obcaecati, asperiores optio, quam esse sed rerum voluptas molestiae?
+
+              <p className="profile__lead">
+                Here is some more info about myself to help you get to know me better.
               </p>
+
               <ul className="profile__items">
+
                 <li className="profile__item">
-                  <h5 className="profile__item">
-                    <i className="profile__icon"></i>Name:
-                  </h5>
-                  <p>
+
+                  <div className="profile__item-header">
+                    <i className="profile__item-icon">X</i>
+                    <h5 className="profile__item-label">
+                      Name:
+                    </h5>
+                  </div>
+
+                  <p className="profile__item-value">
                     Eric Delmer Millen
                   </p>
                 </li>
+
                 <li className="profile__item">
-                  <h5 className="">
-                    <i className="profile__icon fas fa-calendar"></i>Birthdate:
-                  </h5>
-                  <p>None of your business</p>
+
+                  <div className="profile__item-header">
+                    <i className="profile__item-icon">X</i>
+                    <h5 className="profile__item-label">
+                      Current Position:
+                    </h5>
+                  </div>
+
+                  <p className="profile__item-value">
+                    Owner at Zidgy Road Labs Inc
+                  </p>
                 </li>
+
                 <li className="profile__item">
-                  <h5 className="">
-                    <i className="profile__icon fas fa-building"></i>Current Position:
-                  </h5>
-                  <p>Owner at Zidgy Road Labs Inc</p>
+
+                  <div className="profile__item-header">
+                    <i className="profile__item-icon">X</i>
+                    <h5 className="profile__item-label">
+                      Website:
+                    </h5>
+                  </div>
+
+                  <p className="profile__item-value">
+                    zidgyroadlabs.com
+                  </p>
                 </li>
+
                 <li className="profile__item">
-                  <h5 className="">
-                    <i className="profile__icon"></i>Website:
-                  </h5>
-                  <p>zidgyroadlabs.com</p>
+
+                  <div className="profile__item-header">
+                    <i className="profile__item-icon">X</i>
+                    <h5 className="profile__item-label">
+                      Email
+                    </h5>
+                  </div>
+
+                  <p className="profile__item-value">
+                    ericdelmermillen@gmail.com
+                  </p>
                 </li>
-                <li className="profile__item">
-                  <h5 className="">
-                    <i className="profile__icon fas fa-envelope"></i>Email:
-                  </h5>
-                  <p>ericdelmermillen@gmail.com</p>
-                </li>
+
               </ul>
             </div>
-
-            <div className="">
+            
+            <div className="profile__skills">
               <h3 className="">
                 Skills:
               </h3>
@@ -69,40 +98,29 @@ const Profile = () => {
                 Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cum molestias est itaque explicabo eos quo.
               </p>
 
-              {/* {skills.length 
-                ? skills.map((skill, idx) =>
-                    <ProgressBar 
-                      barLabel={skill.skill}
-                      classNames={"profile__skill--progress progress mb-4"}
-                      currentValue={skill.skillLevel}
-                      key={idx}
-                    />
-                  )
-                : null} */}
-
             </div>
 
-          </div>
+          </main>
 
-          <div className="">
-            <div className="">
+          <div className="profile__cta">
+            <div className="profile__buttons">
               <a 
-                className=""
+                className="profile__button"
               >
                 Hire Me Now
                 {/* open contact form? */}
               </a>
               <a 
-                className=""
+                className="profile__button"
               >
                 Download CV
                 {/* make download CV in pdf format */}
               </a>
             </div>
           </div>
-
-          
+  
         </div>
+
       </section>
     </>
   )};

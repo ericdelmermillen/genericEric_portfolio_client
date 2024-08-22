@@ -13,18 +13,18 @@ const Home = () => {
     <>
       <div className="home">
         <div className="home__inner">
+
+
           
           <Header />
-{/* 
-          <div 
-            id="about"
-            className="home__testDiv"
+          <main 
+            className="home__main"
           >
-            About
-          </div> */}
-          <About />
+            <About />
+            <Profile />
+          </main>
+
           {/* 
-          <Profile />
           <Portfolio />
           <Services />
           <ContactForm />

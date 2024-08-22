@@ -3,6 +3,7 @@
 
 .home {
   @include page;
+  background: yellow;
   // margin-top: 100vh;
   // z-index: 10;
   // border: 2px solid red;
@@ -16,4 +17,10 @@
   //   // max-width: $ultraWide;
   //   // max-width: 100%;
   // }
+
+  &__main {
+    background: pink;
+    margin-top: calc(100vh - $navHeight);
+    position: relative;
+  }
 }

@@ -2,17 +2,101 @@
 @import "../../../partials/variables";
 
 .profile {
+  background: blue;
 
-  &__skill {
+  &__inner {
+    max-width: $largeTablet;
+    margin-inline: auto;
+    padding-block: 4em;
+    padding-inline: 2rem;
+  }
 
-    &--progress { 
-      padding: 0;
-      width: 100%;
-      
+  &__main {
+    border: 2px solid #fff;
+    display: flex;
+    flex-direction: column;
+    
+    @media(min-width: $tablet) {
+      flex-direction: row;
     }
+  }
+
+  &__info {
+    width: 100%;
+  }
   
-    &--progress-fill {
-      margin-inline: 0;
+  &__heading {
+    font-size: 1.5rem;
+    line-height: 2;
+  }
+  
+  &__lead {
+    line-height: 1.25;
+    font-size: 1.125rem;
+  }
+
+  &__items {
+    background: orange;
+    padding: 0.75rem 0.5rem;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    margin-top: 1rem;
+  }
+
+  &__item {
+    // border: 2px dashed #333;
+    position: relative;
+
+    &::after {
+      content: "";
+      // border: 2px solid blue;
+      position: absolute;
+      bottom: -1rem;
+      width: 100%;
+      background: blue;;
+      height: 2px;
     }
+  }
+
+  &__item-header {
+    // border: 2px dashed #fff;
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    margin-bottom: 0.5rem;
+  }
+
+  // &__item-icon {
+  //   // border: 2px solid green;
+  // }
+
+  &__item-value {
+    // border: 2px solid purple;
+    margin-inline-start: 0.5rem;
+  }
+  
+  &__skills {
+    border: 2px solid yellow;
+    width: 100%;
+  }
+
+  &__cta {
+    border: 2px solid red;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__buttons {
+    margin-inline: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  &__button {
+    border: 2px solid green;
+    padding: 1rem 2rem;
   }
 }
