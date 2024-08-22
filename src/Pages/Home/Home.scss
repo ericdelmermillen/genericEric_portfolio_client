@@ -3,20 +3,7 @@
 
 .home {
   @include page;
-  background: yellow;
-  // margin-top: 100vh;
-  // z-index: 10;
-  // border: 2px solid red;
-  // padding-top: 0;
-  // border: 4px solid blue;
-  // max-width: $ultraWide;
-  // margin-inline: auto;;
-  
-  // &__inner {
-  //   // @include inner;
-  //   // max-width: $ultraWide;
-  //   // max-width: 100%;
-  // }
+  background: green;
 
   &__main {
     background: pink;
