@@ -4,7 +4,6 @@ import Instagram from "../../../assets/svgs/Instagram";
 import LinkedIn from "../../../assets/svgs/LInkedIn";
 import Twitter from "../../../assets/svgs/Twitter";
 import Youtube from "../../../assets/svgs/Youtube";
-import SocialLink from "../../components/SocialLink/SocialLink";
 import "./Footer.scss"
 
 const Footer = () => {

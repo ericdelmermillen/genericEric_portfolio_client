@@ -6,7 +6,7 @@ const AppContext = createContext();
 const user = { email: "ericdelmermillen@gmail.com", password: "12345678"};
 
 const initialState = {
-  isLoggedIn: !false,
+  isLoggedIn: false,
   isLoading: false,
   colorMode: localStorage.getItem('colorMode') || "light",
   scrollYPos: window.scrollY,
@@ -32,6 +32,8 @@ const reducer = (state, action) => {
       return {...state, showSideNav: !state.showSideNav}
 
     case "user/login":
+      // api call wil be made either in Login
+      // initial mount will check for token in local storage so no need to check email and password here
       const { email, password } = action.payload;
 
       if(!email || !password) {
@@ -101,6 +103,10 @@ const AppContextProvider = ({ children }) => {
     showSideNav,
     toggleSideNav
   };
+
+  
+  
+  // useEffect to check for token for isLoggedIn status
 
 
   // Update local storage when color mode state changes

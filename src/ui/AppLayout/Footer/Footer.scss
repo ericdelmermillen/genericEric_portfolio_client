@@ -11,12 +11,14 @@
   &__content {
     display: flex;
     flex-direction: column-reverse;
-    border: 2px solid green;
     max-width: $ultraWide;
     margin-inline: auto;
-
+    padding-bottom: 1rem;
+    border: 2px solid green;
+    
     @media(min-width: $tablet) {
       flex-direction: row;
+      padding-bottom: 0;
     }
   }
   

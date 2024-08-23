@@ -39,7 +39,7 @@
     // --text-color: #F3F3F3;
     --text-color: green;
 
-    --overlay: rgba(0, 0, 0, 0.25)
+    --overlay: rgba(0, 0, 0, 0.25);
     
     
     // --navAndFooterBG: #181717;
@@ -84,7 +84,7 @@
 
 @mixin page {
   max-width: $ultraWide;
-  // min-height: 100vh;
+  min-height: 100vh;
   width: 100%;
 //   align-items: center;
 //   background: var(--background-color);

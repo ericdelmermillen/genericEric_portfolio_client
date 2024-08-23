@@ -18,8 +18,8 @@
   }
 
   &__lead {
-    line-height: 1.25;
     font-size: 1.15rem;
+    line-height: 1.25;
   }
 
   &__content {
@@ -27,7 +27,7 @@
   }
 
   &__items {
-    background: orange;
+    // background: orange;
     display: flex;
     flex-direction: column;
     gap: 2rem;

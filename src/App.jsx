@@ -9,6 +9,7 @@ import ProjectDetails from "./pages/ProjectDetails/ProjectDetails.jsx";
 import './App.scss';
 import './font-awesome.scss'
 import NotFound from "./pages/NotFound/NotFound.jsx";
+import Login from "./pages/Login/Login.jsx";
 
 const router = createBrowserRouter([
   {
@@ -42,6 +43,10 @@ const router = createBrowserRouter([
       { 
         path: '/contact', 
         element: <Contact />
+      },
+      { 
+        path: '/login', 
+        element: <Login />
       },
       { 
         path: '/*', 

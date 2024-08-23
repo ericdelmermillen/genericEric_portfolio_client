@@ -17,20 +17,20 @@ const Summary = () => {
 
           </article>
 
-          {/* <div className="profile__cta">
-            <div className="profile__buttons">
+          <div className="summary__cta">
+            <div className="summary__buttons">
               <a 
-                className="profile__button"
-              >
+                className="summary__button"
+                >
                 Hire Me Now
               </a>
               <a 
-                className="profile__button"
+                className="summary__button"
               >
                 Download CV
               </a>
             </div>
-          </div> */}
+          </div> 
   
         </div>
 

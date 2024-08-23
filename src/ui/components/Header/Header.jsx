@@ -19,22 +19,21 @@ const Header = () => {
       <header className="header">
         <div className="header__hero">
 
-          {/* {scrollYPos < viewportHeight * 2 */}
-          {/* {scrollYPos < viewportHeight */}
-          {scrollYPos < viewportHeight
+          {scrollYPos < (viewportHeight * 1.5)
 
             ? ( 
                 <>
-                  <div className={`header__dayImg ${colorMode === 'light' ? "top" : ""}`}></div>
-                  <div className={`header__nightImg ${colorMode === 'dark' ? "top" : ""}`}>
-                  </div>
                   <div className="header__overlay"></div>
-                
-
-                  <div className={`header__dayImg ${colorMode === 'light' ? "top" : ""}`}></div>
-                  <div className={`header__nightImg ${colorMode === 'dark' ? "top" : ""}`}>
-                  </div>
-                  <div className="header__overlay"></div>
+                  <div 
+                    className={`header__dayImg ${colorMode === 'light' 
+                      ? "top" 
+                      : ""}`}
+                  ></div>
+                  <div 
+                    className={`header__nightImg ${colorMode === 'dark' 
+                      ? "top" 
+                      : ""}`}
+                  ></div>
 
                   <div className="header__content">
                     <h5 className="header__headline">
@@ -51,16 +50,13 @@ const Header = () => {
                       Full Stack Developer
                     </h4>
 
-                    {/* Make Link Button */}
                     <div className="header__button">
                       <a 
                         className="header__button-link"
                         href="#about"
                         >
                         <DownIcon className={"header__button-down"}/>
-                        <span
-                          className="header__button-text"
-                        >
+                        <span className="header__button-text">
                           More About Me
                         </span>
                       </a>

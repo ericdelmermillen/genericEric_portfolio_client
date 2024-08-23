@@ -1,7 +1,7 @@
 @import "../../partials/mixins";
 @import "../../partials/variables";
 
-.contact {
+.login {
   @include page;
-  border: 2px solid green;
+  border: 2px solid red;
 }

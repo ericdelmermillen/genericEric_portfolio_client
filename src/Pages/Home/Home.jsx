@@ -1,6 +1,9 @@
+import { useEffect } from "react";
+import { scrollToTop } from "../../../utils/utils.js";
 import About from "../../ui/components/About/About.jsx";
-import ContactForm from "../../ui/components/ContactForm/ContactForm.jsx";
 import Header from "../../ui/components/Header/Header.jsx";
+
+import ContactForm from "../../ui/components/ContactForm/ContactForm.jsx";
 import Portfolio from "../../ui/components/Portfolio/Portfolio.jsx";
 import SumProfile from "../../ui/components/Summary/Summary.jsx"
 import Services from "../../ui/components/Services/Services.jsx";
@@ -9,6 +12,11 @@ import "./Home.scss";
 import Summary from "../../ui/components/Summary/Summary.jsx";
 
 const Home = () => {
+
+  // scroll to top on mount
+  useEffect(() => {
+    scrollToTop();
+  }, []);
 
   return (
     <>
@@ -20,8 +28,6 @@ const Home = () => {
             className="home__main"
           >
             <About />
-            {/* <Profile /> */}
-            {/* <SumProfile /> */}
             <Summary />
           </main>
 
@@ -30,7 +36,7 @@ const Home = () => {
           <Services />
           <ContactForm />
           <Stats /> */}
-          {/* <div className="home__testDiv"></div> */}
+
         </div>
       </div>
     </>

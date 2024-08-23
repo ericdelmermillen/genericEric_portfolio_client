@@ -1,35 +1,72 @@
-import { Link, Outlet, useNavigation } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import { useAppContext } from "../../contexts/AppContext.jsx";
+import ColorModeToggle from "./ColorModeToggle/ColorModeToggle.jsx";
 import Footer from "./Footer/Footer.jsx";
 import Nav from "./Nav/Nav.jsx";
 import SideNav from "./SideNav/SideNav.jsx"
-import ColorModeToggle from "./ColorModeToggle/ColorModeToggle.jsx";
 import "./AppLayout.scss";
 
 const AppLayout = () => {
   const { 
     colorMode,
     toggleColorMode,
+    toggleSideNav,
     isLoading,
     isLoggedIn,
     loginUser,
     logoutUser
    } = useAppContext();
+
+   const navigate = useNavigate();
+
+   const handleLogoutNav = () => {
+    logoutUser();
+    navigate("/");
+   };
+
+   const handleLogoutSideNav = () => {
+    handleLogoutNav();
+    toggleSideNav();
+   };
   
   return (
     <>
       <div className="appLayout" data-color-mode={colorMode}>
 
-        <Nav />
+        <Nav>
+          {isLoggedIn
+            ? 
+              (
+                <button
+                  className="appLayout__logout--nav"
+                  onClick={handleLogoutNav}
+                >
+                  Logout
+                </button>
+              )
+            : null
+          }
+        </Nav>
 
         <SideNav>
           <div className="appLayout__sideNav-children">
-            {/* logout button if user logged in*/}
+
             {isLoggedIn
-              ? <h1>Logout</h1>
+              ? 
+                (
+                  <button
+                    className="appLayout__logout--sideNav"
+                    onClick={handleLogoutSideNav}
+                  >
+                    Logout
+                  </button>
+                )
               : null
             }
-            <ColorModeToggle inputId={"sideNavColorModeToggle"} />
+
+            <ColorModeToggle 
+              inputId={"sideNavColorModeToggle"} 
+            />
           </div>
         </SideNav>
 

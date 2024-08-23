@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import ColorModeToggle from "../ColorModeToggle/ColorModeToggle";
 import "./Nav.scss";
 
-const Nav = () => {
+const Nav = ({ children }) => {
   const { 
     colorMode,
     toggleColorMode,
@@ -25,49 +25,32 @@ const Nav = () => {
       <div className="nav__content">
 
         <div className="nav__logo">
-          <Link
-            to={"/"}
-            >
+          <Link to={"/"}>
             Logo
           </Link>
         </div>
       
         <ul className="nav__links">
           <li className="nav__link">
-            <Link
-              to={"/home"}
-            >
+            <Link to={"/home"}>
               HOME
             </Link>
           </li>
           <li className="nav__link">
-            <Link
-              to={"/projects"}
-            >
+            <Link to={"/projects"}>
               PROJECTS
             </Link>
           </li>
           <li className="nav__link">
-            <Link
-              to={"/blog"}
-            >
+            <Link to={"/blog"}>
               BLOG
             </Link>
           </li>
           <li className="nav__link">
-            <Link
-              to={"/contact"}
-            >
+            <Link to={"/contact"}>
               CONTACT
             </Link>
           </li>
-
-          {/* <li 
-            className="nav__link"
-            onClick={toggleColorMode}
-          >
-            {colorMode}
-          </li> */}
 
         </ul>
 
@@ -83,6 +66,8 @@ const Nav = () => {
         >
           Open
         </div>
+        
+        {children}
       </div>
     </nav>
   )};

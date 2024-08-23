@@ -1,13 +1,16 @@
 import { useAppContext } from '../../../contexts/AppContext.jsx'; 
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 // import { toast } from 'react-toastify';
 import './SideNav.scss';
 
-const SideNav = ({ handleLogOut, children }) => {
+const SideNav = ({ children }) => {
   const { 
     showSideNav,
-    toggleSideNav
+    toggleSideNav,
+    isLoggedIn, 
+    logoutUser
    } = useAppContext();
+
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -47,19 +50,24 @@ const SideNav = ({ handleLogOut, children }) => {
   //   setShowSideNav(false);
   // };
 
+  const handleSideNavClick = () => {
+    toggleSideNav()
+  };
+
   return (
     <>
 
-     {showSideNav 
+      {showSideNav 
      
-      ? (
-          <div 
-            className="sideNav__touchOff-div"
-            onClick={toggleSideNav}
-          ></div>
-        )
+        ? 
+          (
+            <div 
+              className="sideNav__touchOff-div"
+              onClick={toggleSideNav}
+            ></div>
+          )
 
-        : null
+          : null
       }
       
       <div 
@@ -80,29 +88,36 @@ const SideNav = ({ handleLogOut, children }) => {
             <ul className='sideNav__links'>
               <li 
                 className='sideNav__link'
-                // onClick={handleNavLinkBio}
+                onClick={handleSideNavClick}
               >
-                HOME
+                <Link to="/">
+                  HOME
+                </Link>
               </li>
               <li 
                 className='sideNav__link'
-                // onClick={handleNavLinkBio}
+                onClick={handleSideNavClick}
               >
-                PROJECTS
+                <Link to="/projects">
+                  PROJECTS
+                </Link>
               </li>
               <li 
                 className='sideNav__link'
-                // onClick={handleNavLinkContact}
+                onClick={handleSideNavClick}
               >
-                BLOG
+                <Link to="/blog">
+                  BLOG
+                </Link>
               </li>
               <li 
                 className='sideNav__link'
-                // onClick={() => setShowSideNav(false)}
-                >
+                onClick={handleSideNavClick}
+              >
+                <Link to="/contact">
                   CONTACT
+                </Link>
               </li>
-
             </ul>
 
           </div>

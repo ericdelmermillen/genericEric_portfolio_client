@@ -4,13 +4,7 @@ import moon from '../../../assets/svgs/crescent_moon.svg';
 import './ColorModeToggle.scss';
 
 const ColorModeToggle = ({ inputId }) => {
-  const { 
-    toggleColorMode,
-  } = useAppContext();
-
-  const handleToggleColorMode = () => {
-    toggleColorMode();
-  };
+  const { toggleColorMode } = useAppContext();
 
   return (
     <>
@@ -19,7 +13,7 @@ const ColorModeToggle = ({ inputId }) => {
           className="colorModeToggle__checkbox" 
           type="checkbox" 
           id={inputId} 
-          onClick={handleToggleColorMode}
+          onClick={toggleColorMode}
         />
         <label 
           className="colorModeToggle__checkbox-label"

@@ -16,10 +16,6 @@
     margin-top: -5rem;
   }
 
-    // @media(min-width: $tablet) {
-    
-    // }
-
   &__content {
     align-items: center;
     display: flex;
@@ -75,6 +71,14 @@
 
     @media(min-width: $tablet) {
       display: none;
+    }
+  }
+
+  &__logout {
+    display: none;
+    
+    @media(min-width: $tablet) {
+      display: block;
     }
   }
 

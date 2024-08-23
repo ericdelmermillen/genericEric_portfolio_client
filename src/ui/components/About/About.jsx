@@ -23,7 +23,7 @@ const About = () => {
           <div className="about__summary">
             <img
               src={me}
-              alt=""
+              alt="Avatar image of me, Eric Millen"
               className="about__img"
             />
             <div className="about__content">

@@ -19,7 +19,6 @@ const Profile = () => {
           <ul className="profile__items">
 
             <li className="profile__item">
-
               <div className="profile__item-header">
                 <i className="profile__item-icon">X</i>
                 <h5 className="profile__item-label">
@@ -33,7 +32,6 @@ const Profile = () => {
             </li>
 
             <li className="profile__item">
-
               <div className="profile__item-header">
                 <i className="profile__item-icon">X</i>
                 <h5 className="profile__item-label">
@@ -47,7 +45,6 @@ const Profile = () => {
             </li>
 
             <li className="profile__item">
-
               <div className="profile__item-header">
                 <i className="profile__item-icon">X</i>
                 <h5 className="profile__item-label">
@@ -61,7 +58,6 @@ const Profile = () => {
             </li>
 
             <li className="profile__item">
-
               <div className="profile__item-header">
                 <i className="profile__item-icon">X</i>
                 <h5 className="profile__item-label">
@@ -75,7 +71,6 @@ const Profile = () => {
             </li>
 
             <li className="profile__item">
-
               <div className="profile__item-header">
                 <i className="profile__item-icon">X</i>
                 <h5 className="profile__item-label">
