@@ -7,13 +7,11 @@ const ProjectCard = ({ imgSrc, projectTitle }) => {
     <>
       <div className="projectCard">
 				<div className="projectCard__inner">
-					<a href="images/project1.jpg">
-						<img 
-							className="projectCard__img"
-              src={imgSrc}
-            	alt={`Card Image for ${projectTitle} Project`}
-						/>
-					</a>
+          <img 
+            className="projectCard__img"
+            src={imgSrc}
+            alt={`Card Image for ${projectTitle} Project`}
+          />
 				</div>
 			</div>
     </>

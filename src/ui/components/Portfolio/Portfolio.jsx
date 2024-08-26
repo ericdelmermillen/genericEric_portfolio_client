@@ -21,20 +21,21 @@ const Portfolio = () => {
 
   return (
     <>
-      <section className="portfolio py-5 bg-light">
-        <div className="portfolio__container container">
-          <div className="text-center mb-5">
-            <h4 className="portfolio__heading text-uppercase fw-bold text-primary">
-              Portfolio
+      <section className="portfolio">
+        <div className="portfolio__container">
+          <div className="text-center">
+            <h4 className="portfolio__heading">
+              PORTFOLIO
             </h4>
-            <hr className="w-25 mx-auto" />
-            <h2 className="mb-4">
+            <h2 className="portfolio__sub-heading">
               Check Out My Work
             </h2>
-            <p className="lead">Here is a small smaple of my projects:</p>
+            <p className="portfolio__lead">
+              Here is a small smaple of my projects:
+            </p>
           </div>
 
-          <div className="projects row">
+          <div className="portfolio__projects">
 
             {projects.map(project => 
               <ProjectCard 

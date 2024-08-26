@@ -1,3 +1,4 @@
+import { useAppContext } from "../../../contexts/AppContext";
 import Service from "../Service/Service";
 import "./Services.scss";
 
@@ -16,34 +17,61 @@ const services = [
   },
 ];
 
+// services-bg-day
+// services-bg-night
+
 const Services = () => {
+  const { 
+    colorMode,
+    toggleColorMode,
+    scrollYPos,
+    prevScrollYPos,
+    toggleSideNav,
+    isLoading,
+    isLoggedIn,
+    loginUser,
+    logoutUser
+   } = useAppContext();
+  
+  
   return (
     <>  
       <section className="services">
-        <div className="">
+        <div className="services__inner">
+        <div className={`services__bg--light ${colorMode === "light" ? "show" : ""}`}></div>
+        <div className={`services__bg--dark ${colorMode === "dark" ? "show" : ""}`}></div>
+        <div className="services__overlay"></div>
 
-          <div className="">
-            <h4 className="">Services</h4>
-            <hr className="" />
-            <h2 className="">What Can I Do For You?</h2>
-            <p className="">
+          <div className="services__content">
+            <h4 className="services__heading">
+              Services
+            </h4>
+            <h2 className="services__sub-heading">
+              What Can I Do For You?
+            </h2>
+            <p className="services__lead">
               Here are some of the services that I offer when it comes to web
               development and business.
             </p>
-          </div>
 
-          <div className="">
+            <div className="services__services-list">
 
-            {services.map((service, idx) =>
-            
-              <Service 
-                key={idx}
-                faClasses={service.faClasses}
-                serviceName={service.serviceName}
-                serviceDesc={service.serviceDesc}
-              />
-            )}
+              {services.map((service, idx) =>
 
+                <div 
+                  key={idx}
+                  className="services__service"
+                >
+                  <Service 
+                    key={idx}
+                    faClasses={service.faClasses}
+                    serviceName={service.serviceName}
+                    serviceDesc={service.serviceDesc}
+                  />
+                </div>
+              )}
+
+            </div>
           </div>
         </div>
       </section>

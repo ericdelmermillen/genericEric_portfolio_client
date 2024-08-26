@@ -2,10 +2,15 @@
 @import "../../../partials/variables";
 
 .projectCard {
+  display: grid;
 
   &:hover {
     transform: scale(1.05);
     transition: all 0.5 s ease-in-out;
     opacity: 0.8;
+  }
+
+  &__img {
+    max-width: 100%;
   }
 }

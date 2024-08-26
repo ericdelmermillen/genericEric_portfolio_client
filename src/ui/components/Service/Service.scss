@@ -2,5 +2,33 @@
 @import "../../../partials/variables";
 
 .service {
-  
+  // border: 2px solid #fff;
+  text-align: center;
+
+  &__icon {
+    margin-block: 1.5rem;
+  }
+
+  &__name {
+    margin-bottom: 3rem;
+    position: relative;
+    display: inline-block;
+    font-size: 1.5rem;
+
+
+    &::after {
+      background: var(--text-color);
+      bottom: -1rem;
+      content: "";
+      height: 2px;
+      left: 0;
+      position: absolute;
+      width: 100%;
+    }
+  }
+
+  &__description {
+    font-size: 1.25rem;
+    line-height: 1.25;
+  }
 }

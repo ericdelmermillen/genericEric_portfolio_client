@@ -3,15 +3,14 @@ import "./Service.scss";
 const Service = ({ faClasses, serviceName, serviceDesc }) => {
   return (
     <>
-      <div 
-        className=""
-      >
-        <i className={`${faClasses} fa-3x`}></i>
-        <h3 className="fs-3">
+      <div className="service">
+        <div className="service__icon">
+          <i className={`${faClasses} fa-3x`}></i>
+        </div>
+        <h3 className="service__name">
           {serviceName}
         </h3>
-        <hr className="" />
-        <p className="fs-5">
+        <p className="service__description">
           {serviceDesc}
         </p>
       </div>

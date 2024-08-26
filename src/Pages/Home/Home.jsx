@@ -29,11 +29,11 @@ const Home = () => {
           >
             <About />
             <Summary />
+            <Portfolio />
+            <Services />
           </main>
 
           {/* 
-          <Portfolio />
-          <Services />
           <ContactForm />
           <Stats /> */}
 

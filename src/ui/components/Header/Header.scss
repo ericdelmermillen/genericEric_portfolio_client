@@ -71,7 +71,7 @@
   }
 
   &__button {
-    // @include button;
+    @include button;
     margin-inline: auto;
     margin-top: auto;
     max-width: 14rem;

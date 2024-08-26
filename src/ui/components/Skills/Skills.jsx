@@ -26,6 +26,7 @@ const Skills = () => {
             <h4>Adobe</h4>
             <h4>Figma</h4>
             <h4>UI/UX Design</h4>
+            <h4>SQL</h4>
           </div>
 
         </div>

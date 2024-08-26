@@ -32,7 +32,7 @@
 
     &::after {
       content: "";
-      background: yellow; 
+      background: var(--text-color); 
       bottom: -1rem; 
       height: 2px; 
       left: 0;
