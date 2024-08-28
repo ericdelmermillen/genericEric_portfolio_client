@@ -7,6 +7,7 @@ import LinkedIn from "../../../assets/svgs/LInkedIn.jsx";
 import Twitter from "../../../assets/svgs/Twitter.jsx";
 import Youtube from "../../../assets/svgs/Youtube.jsx";
 import TypingText from "../TypingText/TypingText.jsx";
+
 import "./Header.scss";
 
 const viewportHeight = window.innerHeight;
@@ -34,7 +35,8 @@ const Header = () => {
                       ? "top" 
                       : ""}`}
                   ></div>
-
+                  
+                  {/* */}
                   <div className="header__content">
                     <h5 className="header__headline">
                       HELLO, WORLD.
@@ -70,42 +72,66 @@ const Header = () => {
                       href="https://x.com/EricDelmer"
                       target="_blank"
                     >
-                      <Twitter className="header__social"/>
+                      <Twitter 
+                        className="header__social"
+                        // height={40}
+                        // width={40}
+                      />
                     </a>
 
                     <a 
                       href="https://www.facebook.com/ericdelmermillen"
                       target="_blank"
                     >
-                      <Facebook className="header__social"/>
+                      <Facebook 
+                        // height={40}
+                        // width={40}
+                        className="header__social"
+                      />
                     </a>
 
                     <a 
                       href="https://www.instagram.com/ericdelmermillen/"
                       target="_blank"
                     >
-                      <Instagram className="header__social"/>
+                      <Instagram 
+                        // height={40}
+                        // width={40}
+                        className="header__social"
+                      />
                     </a>
 
                     <a 
                       href="https://github.com/ericdelmermillen"
                       target="_blank"
                     >
-                      <Github className="header__social"/>
+                      <Github 
+                        // height={40}
+                        // width={40}
+                        className="header__social"
+                      />
                     </a>
 
                     <a 
                       href="https://www.linkedin.com/in/eric-delmer-millen/"
                       target="_blank"
                     >
-                      <LinkedIn className="header__social"/>
+                      <LinkedIn 
+                        // height={40}
+                        // width={40}
+                        className="header__social"
+                      />
                     </a>
 
                     <a 
                       href="https://www.youtube.com/@EricMillen"
                       target="_blank"
                     >
-                      <Youtube className="header__social"/>
+                      <Youtube 
+                        // height={40}
+                        // width={40}
+                        className="header__social"
+                      />
                     </a>
                   </div>
 

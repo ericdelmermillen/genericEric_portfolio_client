@@ -20,7 +20,16 @@
 
   &__dayImg {
     @include heroImg;
-    background: url("../../../assets/images/day.jpg") center bottom;
+    
+    background: url("../../../assets/images/day-top-4.jpg") center top;
+
+    // background: url("../../../assets/images/day-top-8.jpg") center top;
+
+    // background: url("../../../assets/images/day-top-8 a.jpg") center top;
+  
+
+    background-repeat: no-repeat;
+    background-size: cover;
 
     &.top {
       @include heroImgTop;
@@ -29,7 +38,14 @@
   
   &__nightImg {
     @include heroImg;
-    background: url("../../../assets/images/night.jpg") center bottom;
+    background: url("../../../assets/images/night-top-1.jpg") center center;
+    background: url("../../../assets/images/night-top-2.jpg") center center;
+    // background: url("../../../assets/images/night-top-3.jpg") center center;
+    // background: url("../../../assets/images/night-top-4.jpg") center center;
+    // background: url("../../../assets/images/night-top-5.jpg") center bottom;
+    // background: url("../../../assets/images/night-top-6.jpg") center top;
+    // background: url("../../../assets/images/night-top-7.jpg") center center;
+    // background: url("../../../assets/images/night-top-8.jpg") center top;
     
     &.top {
       @include heroImgTop;
@@ -37,7 +53,8 @@
   }
 
   &__overlay {
-    background: var(--overlay);
+    // background: rgba(0, 0, 0, 0.2);
+    // background: rgba(0, 0, 0, 0.05);
     height: 100%;
     left: 0;
     position: absolute;
@@ -52,29 +69,37 @@
     gap: 1.5rem;
     height: 17rem;
     z-index: 2;
+    // text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
   }
 
   &__headline {
     font-size: 1.75rem;
     text-align: center;
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.7);
   }
 
   &__introduction {
     font-size: 3.5rem;
     height: 3.5rem;
     text-align: center;
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.7);
   }
 
   &__description {
-    font-size: 1.75rem;
+    font-size: 1.8rem;
     text-align: center;
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.7);
+    letter-spacing: 0.5px;
   }
 
   &__button {
     @include button;
     margin-inline: auto;
     margin-top: auto;
-    max-width: 14rem;
+    max-width: 16rem;
+    box-shadow: var(--box-shadow);
+    
+    // background: #fff;
   }
 
   &__button-link {
@@ -87,8 +112,10 @@
 
   &__button-text {
     color: var(--text-color);
-    font-size: 1.25rem;
+    font-size: 1.5rem;
     font-weight: bold;
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.7);
+    // letter-spacing: 0.2px;
   }
 
   &__button-down {
@@ -99,15 +126,21 @@
     align-items: center;
     bottom: 2rem;
     display: flex;
-    gap: 1rem;
+    gap: 1.5rem;
     height: 4rem;
     justify-content: center;
     position: absolute;
     width: 20rem;
-    z-index: 1;
+    z-index: 2;
+    // filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.8));
+    // filter: drop-shadow(3px 3px 6px rgba(0, 0, 0, 0.8));
   }
 
   &__social {
+    // filter: drop-shadow(3px 3px 60px rgba(0, 0, 0, 0.8));
+    filter: drop-shadow(5px 5px 6px rgba(0, 0, 0, 0.8));
     fill: var(--text-color);
+    fill: #fff;
+    width: 2.75rem;
   }
 }

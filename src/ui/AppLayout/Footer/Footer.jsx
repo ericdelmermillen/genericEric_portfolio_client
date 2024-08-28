@@ -28,35 +28,35 @@ const Footer = () => {
               href="https://www.facebook.com/ericdelmermillen"
               target="_blank"
             >
-              <Facebook className="header__social"/>
+              <Facebook className="footer__social"/>
             </a>
 
             <a 
               href="https://www.instagram.com/ericdelmermillen/"
               target="_blank"
             >
-              <Instagram className="header__social"/>
+              <Instagram className="footer__social"/>
             </a>
 
             <a 
               href="https://github.com/ericdelmermillen"
               target="_blank"
             >
-              <Github className="header__social"/>
+              <Github className="footer__social"/>
             </a>
 
             <a 
               href="https://www.linkedin.com/in/eric-delmer-millen/"
               target="_blank"
             >
-              <LinkedIn className="header__social"/>
+              <LinkedIn className="footer__social"/>
             </a>
 
             <a 
               href="https://www.youtube.com/@EricMillen"
               target="_blank"
             >
-              <Youtube className="header__social"/>
+              <Youtube className="footer__social"/>
             </a>
 
           </div>

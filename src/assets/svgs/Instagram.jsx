@@ -8,8 +8,8 @@ const Instagram = ({
     <>    
       <svg 
         className={className}
-        height={height}
-        width={width}
+        // height={height}
+        // width={width}
         viewBox="0 0 24 24"
       >
         <path 

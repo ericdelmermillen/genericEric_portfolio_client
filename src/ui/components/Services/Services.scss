@@ -13,6 +13,18 @@
 
   &__bg--light.show{
     background: url("../../../assets/images/bg.jpg") no-repeat center center;
+    background: url("../../../assets/images/day-bottom-1.jpg") no-repeat center center;
+    background: url("../../../assets/images/day-bottom-2.jpg") no-repeat center center;
+    background: url("../../../assets/images/day-bottom-3.jpg") no-repeat center center;
+    background: url("../../../assets/images/day-bottom-4.jpg") no-repeat center center;
+    background: url("../../../assets/images/day-bottom-5.jpg") no-repeat center center;
+    background: url("../../../assets/images/day-bottom-6.jpg") no-repeat center center;
+    background: url("../../../assets/images/day-bottom-7.jpg") no-repeat center center;
+    background: url("../../../assets/images/day-bottom-8.jpg") no-repeat center center;
+    background: url("../../../assets/images/day-bottom-9.jpg") no-repeat center center;
+    background: url("../../../assets/images/day-bottom-10.jpg") no-repeat center center;
+    background: url("../../../assets/images/day-bottom-11.jpg") no-repeat center center;
+    background: url("../../../assets/images/day-bottom-12.jpg") no-repeat center center;
     background-attachment: fixed;
     background-size: cover;
     height: 100%;
@@ -23,6 +35,11 @@
 
   &__bg--dark.show {
     background: green;
+    background: url("../../../assets/images/night-bottom-1.jpg") no-repeat center center;
+    background: url("../../../assets/images/night-bottom-2.jpg") no-repeat center center;
+    background: url("../../../assets/images/night-bottom-3.jpg") no-repeat center center;
+    background: url("../../../assets/images/night-bottom-4.jpg") no-repeat center center;
+    // background: url("../../../assets/images/night-bottom-5.jpg") no-repeat center center;
     height: 100%;
     position: absolute;
     width: 100%;

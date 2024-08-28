@@ -7,8 +7,8 @@ const Youtube = ({
     <>
       <svg 
         className={className}
-        height={width}
-        width={height}
+        // height={width}
+        // width={height}
         viewBox="0 0 32 32" 
       >
         <path 
