@@ -1,14 +1,8 @@
-const Twitter = ({ 
-  className,
-  height = "30",
-  width = "30" 
- }) => {
+const Twitter = ({ className }) => {
   return (
     <>
       <svg 
         className={className}
-        // height={height}
-        // width={width}
         viewBox="0 0 24 24"
       >
         <path 

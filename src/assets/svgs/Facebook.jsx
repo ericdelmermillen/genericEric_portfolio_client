@@ -1,16 +1,9 @@
 
-const Facebook = ({ 
-  className,
-  height = "33px",
-  width = "33px",
-
- }) => {
+const Facebook = ({ className }) => {
   return (
     <>
       <svg 
         className={className}
-        // height={height}
-        // width={width}
         viewBox="0 0 24 24" 
       >
         <path 

@@ -22,6 +22,7 @@
     @include heroImg;
     
     background: url("../../../assets/images/day-top-4.jpg") center top;
+    background: url("../../../assets/images/day-top-4\ a.jpg") center top;
 
     // background: url("../../../assets/images/day-top-8.jpg") center top;
 
@@ -55,6 +56,8 @@
   &__overlay {
     // background: rgba(0, 0, 0, 0.2);
     // background: rgba(0, 0, 0, 0.05);
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.25), rgba(255, 255, 255, 0.125));
+  
     height: 100%;
     left: 0;
     position: absolute;
@@ -98,6 +101,7 @@
     margin-top: auto;
     max-width: 16rem;
     box-shadow: var(--box-shadow);
+    --box-shadow: 4px 4px 6px rgba(0, 0, 0, 0.8);
     
     // background: #fff;
   }
@@ -120,6 +124,8 @@
 
   &__button-down {
     stroke: var(--text-color);
+    height: 24px;
+    width: 24px;
   }
 
   &__socials {

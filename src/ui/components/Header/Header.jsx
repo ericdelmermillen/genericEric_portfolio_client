@@ -20,129 +20,98 @@ const Header = () => {
       <header className="header">
         <div className="header__hero">
 
+          <div className="header__overlay"></div>
+          <div 
+            className={`header__dayImg ${colorMode === 'light' 
+              ? "top" 
+              : ""}`}
+          ></div>
+          <div 
+            className={`header__nightImg ${colorMode === 'dark' 
+              ? "top" 
+              : ""}`}
+          ></div>
+                  
+          <div className="header__content">
+            <h5 className="header__headline">
+              HELLO, WORLD.
+            </h5>
+
+            <TypingText 
+              classNames={"header__introduction"}
+              textToType={'I\'m Eric Millen'}
+              typingDelayInterval={200}
+              elementType={'h1'} 
+            />
+            <h4 className="header__description">
+              Full Stack Developer
+            </h4>
+
+            <div className="header__button">
+              <a 
+                className="header__button-link"
+                href="#about"
+                >
+                <DownIcon className={"header__button-down"}/>
+                <span className="header__button-text">
+                  More About Me
+                </span>
+              </a>
+            </div>
+
+          </div>
+
           {scrollYPos < (viewportHeight * 1.5)
 
-            ? ( 
-                <>
-                  <div className="header__overlay"></div>
-                  <div 
-                    className={`header__dayImg ${colorMode === 'light' 
-                      ? "top" 
-                      : ""}`}
-                  ></div>
-                  <div 
-                    className={`header__nightImg ${colorMode === 'dark' 
-                      ? "top" 
-                      : ""}`}
-                  ></div>
-                  
-                  {/* */}
-                  <div className="header__content">
-                    <h5 className="header__headline">
-                      HELLO, WORLD.
-                    </h5>
+            ? ( <div className="header__socials">
 
-                    <TypingText 
-                      textToType={'I\'m Eric Millen'}
-                      typingDelayInterval={200}
-                      classNames={"header__introduction"}
-                      elementType={'h1'} 
-                    />
-                    <h4 className="header__description">
-                      Full Stack Developer
-                    </h4>
+                  <a 
+                    href="https://x.com/EricDelmer"
+                    target="_blank"
+                  >
+                    <Twitter className="header__social" />
+                  </a>
 
-                    <div className="header__button">
-                      <a 
-                        className="header__button-link"
-                        href="#about"
-                        >
-                        <DownIcon className={"header__button-down"}/>
-                        <span className="header__button-text">
-                          More About Me
-                        </span>
-                      </a>
-                    </div>
+                  <a 
+                    href="https://www.facebook.com/ericdelmermillen"
+                    target="_blank"
+                  >
+                    <Facebook className="header__social" />
+                  </a>
 
-                  </div>
+                  <a 
+                    href="https://www.instagram.com/ericdelmermillen/"
+                    target="_blank"
+                  >
+                    <Instagram className="header__social" />
+                  </a>
 
-                  <div className="header__socials">
+                  <a 
+                    href="https://github.com/ericdelmermillen"
+                    target="_blank"
+                  >
+                    <Github className="header__social" />
+                  </a>
 
-                    <a 
-                      href="https://x.com/EricDelmer"
-                      target="_blank"
-                    >
-                      <Twitter 
-                        className="header__social"
-                        // height={40}
-                        // width={40}
-                      />
-                    </a>
+                  <a 
+                    href="https://www.linkedin.com/in/eric-delmer-millen/"
+                    target="_blank"
+                  >
+                    <LinkedIn className="header__social" />
+                  </a>
 
-                    <a 
-                      href="https://www.facebook.com/ericdelmermillen"
-                      target="_blank"
-                    >
-                      <Facebook 
-                        // height={40}
-                        // width={40}
-                        className="header__social"
-                      />
-                    </a>
-
-                    <a 
-                      href="https://www.instagram.com/ericdelmermillen/"
-                      target="_blank"
-                    >
-                      <Instagram 
-                        // height={40}
-                        // width={40}
-                        className="header__social"
-                      />
-                    </a>
-
-                    <a 
-                      href="https://github.com/ericdelmermillen"
-                      target="_blank"
-                    >
-                      <Github 
-                        // height={40}
-                        // width={40}
-                        className="header__social"
-                      />
-                    </a>
-
-                    <a 
-                      href="https://www.linkedin.com/in/eric-delmer-millen/"
-                      target="_blank"
-                    >
-                      <LinkedIn 
-                        // height={40}
-                        // width={40}
-                        className="header__social"
-                      />
-                    </a>
-
-                    <a 
-                      href="https://www.youtube.com/@EricMillen"
-                      target="_blank"
-                    >
-                      <Youtube 
-                        // height={40}
-                        // width={40}
-                        className="header__social"
-                      />
-                    </a>
-                  </div>
-
-                </>
-              )
+                  <a 
+                    href="https://www.youtube.com/@EricMillen"
+                    target="_blank"
+                  >
+                    <Youtube className="header__social" />
+                  </a>
+                </div>)
 
             : null
           }
 
         </div>
-
       </header>
     </>
   )};

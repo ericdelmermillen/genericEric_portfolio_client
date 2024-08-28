@@ -1,15 +1,9 @@
 
-const Instagram = ({ 
-  className,
-  height = "28", 
-  width = "28" 
-}) => {
+const Instagram = ({ className }) => {
   return (
     <>    
       <svg 
         className={className}
-        // height={height}
-        // width={width}
         viewBox="0 0 24 24"
       >
         <path 

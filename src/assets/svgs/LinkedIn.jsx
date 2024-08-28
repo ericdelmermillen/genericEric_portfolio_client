@@ -1,14 +1,8 @@
-const LinkedIn = ({ 
-  className,
-  height= "28",
-  width= "28" 
- }) => {
+const LinkedIn = ({ className }) => {
   return (
     <>
       <svg 
         className={className}
-        // height={height}
-        // width={width}
         viewBox="0 0 24 24"
       >
         <path 

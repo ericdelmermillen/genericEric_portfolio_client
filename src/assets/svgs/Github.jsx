@@ -1,13 +1,7 @@
-const Github = ({ 
-  className,
-  height = "30",
-  width = "30" 
- }) => {
+const Github = ({ className }) => {
   return (
     <>
       <svg 
-        // height={height}
-        // width={width}
         viewBox="0 0 1024 1024" 
         className={className}
       >

@@ -1,14 +1,8 @@
-const Youtube = ({ 
-  className,
-  height = "38px", 
-  width = "38px" 
- }) => {
+const Youtube = ({ className }) => {
   return (
     <>
       <svg 
         className={className}
-        // height={width}
-        // width={height}
         viewBox="0 0 32 32" 
       >
         <path 
