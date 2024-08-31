@@ -37,5 +37,11 @@
   &__button {
     border: 2px solid green;
     padding: 1rem 2rem;
+    cursor: pointer;
+    
+    &:hover {
+      @include hoverClickGrow;
+
+    }
   }
 }

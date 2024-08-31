@@ -3,10 +3,9 @@
 
 .projectCard {
   display: grid;
-
+  
   &:hover {
-    transform: scale(1.05);
-    transition: all 0.5 s ease-in-out;
+    @include hoverClickGrow;
     opacity: 0.8;
   }
 

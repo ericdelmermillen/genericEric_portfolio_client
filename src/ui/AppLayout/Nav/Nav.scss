@@ -2,15 +2,16 @@
 @import "../../../partials/variables";
 
 .nav {
-  background: yellow;;
+  align-items: center;
+  background: var(--background-nav-footer);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
   display: flex;
   height: $navHeight;
-  width: 100%;
   position: fixed;
-  transition: all 600ms ease;
-  align-items: center;
-  z-index: 3;
+  transition: all 500ms ease-in-out;
   top: 0;
+  width: 100%;
+  z-index: 1;
   
   &.hide {
     margin-top: -5rem;
@@ -24,13 +25,16 @@
     max-width: $ultraWide;
     padding-inline: 2rem;
     width: 100%;
-    // border: 2px solid blue;
   }
   
   &__logo {
-    margin-inline: 0;
     margin-inline: auto;
     
+    // remove after adding svg logo
+    & a {
+      color: var(--text-color-bright);
+    }
+
     @media(min-width: $tablet) {
       margin-inline-start: 0;
       margin-inline-end: auto;
@@ -49,6 +53,41 @@
       gap: 2rem;
       height: 100%;
       margin-inline-start: auto;
+    }
+  }
+
+  &__link {
+    color: var(--text-color-bright);
+    position: relative;
+    letter-spacing: 1.5px;;
+
+    &:hover {
+      
+      &::after {
+        // bottom: -1rem; 
+        bottom: -0.75rem; 
+        bottom: -0.6rem; 
+        background: var(--nav-link-active); 
+        content: "";
+        height: 2.5px; 
+        left: 0;
+        position: absolute;
+        right: 0;
+      }
+    }
+  }
+
+  &__link.active {
+    position: relative;
+
+    &::after {
+      content: "";
+      background: var(--nav-link-active); 
+      bottom: -0.6rem; 
+      height: 2.5px; 
+      left: 0;
+      position: absolute;
+      right: 0;
     }
   }
 
@@ -81,8 +120,4 @@
       display: block;
     }
   }
-
-  // &__link {
-
-  // }
 }

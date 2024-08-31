@@ -21,6 +21,14 @@ const Header = () => {
         <div className="header__hero">
 
           <div className="header__overlay"></div>
+          
+          {scrollYPos > viewportHeight * 1.5
+            ? <div className="header__bg-layer"></div>
+            : null
+          }
+
+          {/* need accessibility for conditionally shown background images */}
+          
           <div 
             className={`header__dayImg ${colorMode === 'light' 
               ? "top" 
@@ -65,47 +73,60 @@ const Header = () => {
 
             ? ( <div className="header__socials">
 
-                  <a 
-                    href="https://x.com/EricDelmer"
-                    target="_blank"
-                  >
-                    <Twitter className="header__social" />
-                  </a>
+                  <div className="header__social">
+                    <a 
+                      href="https://x.com/EricDelmer"
+                      target="_blank"
+                    >
+                      <Twitter className="header__social-icon" />
+                    </a>
+                  </div>
+                  
+                  <div className="header__social">
+                    <a 
+                      href="https://www.facebook.com/ericdelmermillen"
+                      target="_blank"
+                    >
+                      <Facebook className="header__social-icon" />
+                    </a>
+                  </div>
 
-                  <a 
-                    href="https://www.facebook.com/ericdelmermillen"
-                    target="_blank"
-                  >
-                    <Facebook className="header__social" />
-                  </a>
+                  <div className="header__social">
+                    <a 
+                      href="https://www.instagram.com/ericdelmermillen/"
+                      target="_blank"
+                    >
+                      <Instagram className="header__social-icon" />
+                    </a>
+                  </div>
 
-                  <a 
-                    href="https://www.instagram.com/ericdelmermillen/"
-                    target="_blank"
-                  >
-                    <Instagram className="header__social" />
-                  </a>
+                  <div className="header__social">
+                    <a 
+                      href="https://github.com/ericdelmermillen"
+                      target="_blank"
+                    >
+                      <Github className="header__social-icon" />
+                    </a>
 
-                  <a 
-                    href="https://github.com/ericdelmermillen"
-                    target="_blank"
-                  >
-                    <Github className="header__social" />
-                  </a>
+                  </div>
 
-                  <a 
-                    href="https://www.linkedin.com/in/eric-delmer-millen/"
-                    target="_blank"
-                  >
-                    <LinkedIn className="header__social" />
-                  </a>
+                  <div className="header__social">
+                    <a
+                      href="https://www.linkedin.com/in/eric-delmer-millen/"
+                      target="_blank"
+                    >
+                      <LinkedIn className="header__social-icon" />
+                    </a>
+                  </div>
 
-                  <a 
-                    href="https://www.youtube.com/@EricMillen"
-                    target="_blank"
-                  >
-                    <Youtube className="header__social" />
-                  </a>
+                  <div className="header__social">
+                    <a
+                      href="https://www.youtube.com/@EricMillen"
+                      target="_blank"
+                    >
+                      <Youtube className="header__social-icon" />
+                    </a>
+                  </div>
                 </div>)
 
             : null

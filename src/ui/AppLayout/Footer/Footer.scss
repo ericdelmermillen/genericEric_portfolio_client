@@ -2,10 +2,10 @@
 @import "../../../partials/variables";
 
 .footer {
+  background: var(--background-nav-footer);
+  color: var(--text-color-bright);
   margin-top: auto;
   width: 100%;
-  // border: 2px dashed #333;
-  background: yellow;
   z-index: 0;
   
   &__content {
@@ -14,7 +14,6 @@
     max-width: $ultraWide;
     margin-inline: auto;
     padding-bottom: 1rem;
-    border: 2px solid green;
     
     @media(min-width: $tablet) {
       flex-direction: row;
@@ -36,7 +35,14 @@
   }
 
   &__social {
-    fill: var(--text-color);
+    
+    &:hover {
+      @include hoverClickGrowIcon;
+    }
+  }
+
+  &__social-icon {
+    fill: var(--text-color-bright);
     width: 2rem;
   }
   
@@ -47,7 +53,6 @@
     text-align: center;
     
     @media(min-width: 768px) {
-      // border: 2px solid blue;
       width: 100%;
     }
   }

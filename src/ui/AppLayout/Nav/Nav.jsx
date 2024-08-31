@@ -1,5 +1,5 @@
 import { useAppContext } from "../../../contexts/AppContext";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import ColorModeToggle from "../ColorModeToggle/ColorModeToggle";
 import "./Nav.scss";
 
@@ -31,34 +31,46 @@ const Nav = ({ children }) => {
         </div>
       
         <ul className="nav__links">
-          <li className="nav__link">
-            <Link to={"/home"}>
+          <li className="nav__item">
+            <NavLink 
+              className="nav__link" 
+              to={"/home"}
+            >
               HOME
-            </Link>
+            </NavLink>
           </li>
-          <li className="nav__link">
-            <Link to={"/projects"}>
+          <li className="nav__item">
+            <NavLink 
+              className="nav__link"
+              to={"/projects"}
+            >
               PROJECTS
-            </Link>
+            </NavLink>
           </li>
-          <li className="nav__link">
-            <Link to={"/blog"}>
+          <li className="nav__item">
+            <NavLink 
+              className="nav__link" 
+              to={"/blog"}
+            >
               BLOG
-            </Link>
+            </NavLink>
           </li>
-          <li className="nav__link">
-            <Link to={"/contact"}>
+          <li className="nav__item">
+            <NavLink 
+              className="nav__link" 
+              to={"/contact"}
+            >
               CONTACT
-            </Link>
+            </NavLink>
           </li>
 
         </ul>
 
-        <div className="nav__colorModeToggle">
+        {/* <div className="nav__colorModeToggle">
           <ColorModeToggle
             inputId={"nav__colorModeToggler"}
           />
-        </div>
+        </div> */}
 
         <div     
           className="nav__open-button"

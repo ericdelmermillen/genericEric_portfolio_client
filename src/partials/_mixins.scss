@@ -4,10 +4,57 @@
 // light mode color palet
 // dark mode color palet
 
+// #7FA6BE
+// #D6DADD
+// #162328
+// #1A7697
+// #20484E
+// #4F6C77
+// #B3D4DC
+// #BC6C66
+
+
+// 1. Primary Color:
+// #1A7697 (Deep Blue)
+// Use this for buttons, links, and key interactive elements.
+
+// 2. Secondary Color:
+// #BC6C66 (Muted Red)
+// This can be used for highlights, secondary buttons, or accent elements that need emphasis.
+
+// 3. Neutral Colors:
+// #D6DADD (Light Gray)
+
+// Use this for backgrounds, card backgrounds, or light text.
+// #162328 (Dark Gray)
+// Use this for main text, headers, or dark backgrounds.
+
+
+// 4. Accent Colors:
+// #7FA6BE (Soft Blue)
+// Use this sparingly for elements like icons, borders, or to provide subtle emphasis.
+
+// #B3D4DC (Pale Blue)
+// Great for hover states, subtle backgrounds, or to add some lightness to your design.
+
+
+// 5. Background Color:
+// #4F6C77 (Muted Blue-Gray)
+// Use this as the main background color for your app or sections within your app.
+
 
 .appLayout {
   // general styling variables
   --borderRadius: 8px;
+
+  --accent-color: #BC6C66;
+  --accent-color: #ac645e;
+  --accent-color: #ac7c5e;
+  --accent-color: #ac955e;
+  --accent-color: #c3be68;
+  --nav-link-active: #BC6C66;
+  --nav-link-active: #bc9a66;
+  --nav-link-active: #bcb066;
 
   // colors
   // --modalOverlayBg: rgba(0, 0, 0, 0.5);
@@ -16,15 +63,32 @@
   &[data-color-mode='light'] {
     // --text-color: #333333;
     --text-color: red;
-    --text-color: #fff;
+    --text-color: #162328;
+
+    --gradient-overlay: linear-gradient(to top, rgba(0, 0, 0, 0.25), rgba(255, 255, 255, 0.125));
+    --text-shadow-bright: 3px 3px 6px rgba(0, 0, 0, 0.7);
+    // --text-color: #fff;
+    // --text-color: #f6f6f6;
+    // --text-color: #f7f7f7;
+    // --text-color: #f8f8f8;
+    // --text-color: #f8f8f8;
+    // --text-color-header:#f8f8f8;
+    --text-color-bright:#f8f8f8;
 
     --overlay: rgba(0, 0, 0, 0.125);
+
+    --hover-emphasis: #B3D4DC;
     
     // --navAndFooterBG: #F3F3F3;
-    // --background-color: #F3F3F3;
+    --background-nav-footer: #4F6C77;
+    --background-nav-footer: #132e38;
+    --background-nav-footer: #152f39;
+    --background-color: #D6DADD;
     // --button-color: var(--background-color);
+    --button-color: #1A7697;
     // --button-background: #888676;
-    // --button-link: #888676;
+    --button-link: #1A7697;
+    --link: #1A7697;
     --box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
     // --box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.8);
     // --nav-boxShadow: 0 4px 8px rgba(0, 0, 0, 0.25);
@@ -117,8 +181,7 @@
   justify-content: center;
   margin-inline: auto;
   margin-top: $navHeight;
-  // padding-block: 4rem;
-  // padding-top: 0rem;
+  min-height: calc(100vh + 1px);
   width: 100%;
   
   @media(min-width: $tablet) {
@@ -148,9 +211,26 @@
   z-index: 1;
 }
 
+@mixin hoverClickGrow {
+  transform: scale(1.025);
+  transition: all 0.25s ease-in-out;
+}
+
+@mixin hoverClickGrowIcon {
+  @include hoverClickGrow;
+  transform: scale(1.15);
+}
+
+@mixin hoverClickShrink {
+  transform: scale(0.99);
+  transition: all 0.25s ease-in;
+}
+
 @mixin button {
   align-items: center;
-  background: var(--button-background);
+  // background: var(--button-background);
+  // background: var(--button-background);
+  // background: var(--button-background);
   border: 2px solid var(--text-color);
   color: var(--button-color);
   cursor: pointer;
@@ -159,21 +239,23 @@
   font-weight: 500;
   justify-content: center;
   padding: 0.125rem 1.25rem;
-  transition: background-color 0.3s ease;
+  // transition: background-color 0.3s ease;
+  transition: all 250 ease-in-out;
 
   &:hover, 
   &:focus {
-    background: var(--button-color);
-    color: var(--button-background);
-    outline: 2px solid var(--button-background);
-    transition: all 0.3s ease;
+    // background: var(--button-color);
+    // color: var(--button-background);
+    // outline: 2px solid var(--button-background);
+    // transition: all 0.3s ease;
+    @include hoverClickGrow;
   }
 
   &:active {
-    transform: scale(0.98);
-    transition: all 0.3s ease;
+    @include hoverClickShrink;
   }
 }
+
 
 // @mixin buttonRounded {
 //   @include button;

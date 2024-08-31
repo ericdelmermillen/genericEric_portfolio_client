@@ -1,4 +1,4 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, RouterProvider, Navigate } from "react-router-dom";
 import AppLayout from "./ui/AppLayout/AppLayout.jsx";
 import Blog from "./pages/Blog/Blog.jsx";
 import BlogPost from "./pages/BlogPost/BlogPost.jsx";
@@ -11,6 +11,10 @@ import './font-awesome.scss'
 import NotFound from "./pages/NotFound/NotFound.jsx";
 import Login from "./pages/Login/Login.jsx";
 
+
+// replace @import with @use throughout
+
+
 const router = createBrowserRouter([
   {
     element: <AppLayout />,
@@ -19,6 +23,7 @@ const router = createBrowserRouter([
       { 
         path: '/', 
         element: <Home />
+        // element: <Navigate to="/home" replace/>
       },
       { 
         path: '/home', 
