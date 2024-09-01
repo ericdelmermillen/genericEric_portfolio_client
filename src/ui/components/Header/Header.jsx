@@ -7,7 +7,7 @@ import LinkedIn from "../../../assets/svgs/LInkedIn.jsx";
 import Twitter from "../../../assets/svgs/Twitter.jsx";
 import Youtube from "../../../assets/svgs/Youtube.jsx";
 import TypingText from "../TypingText/TypingText.jsx";
-
+ 
 import "./Header.scss";
 
 const viewportHeight = window.innerHeight;
