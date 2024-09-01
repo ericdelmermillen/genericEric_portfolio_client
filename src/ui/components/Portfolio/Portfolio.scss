@@ -20,6 +20,7 @@
   }
 
   &__heading {
+    @include headingGeneral;
     align-items: center;
     display: inline-block;
     justify-content: center;

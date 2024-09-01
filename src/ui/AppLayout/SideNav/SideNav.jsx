@@ -1,5 +1,5 @@
 import { useAppContext } from '../../../contexts/AppContext.jsx'; 
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
 // import { toast } from 'react-toastify';
 import './SideNav.scss';
 
@@ -87,34 +87,46 @@ const SideNav = ({ children }) => {
           <div className="sideNav__menu">
             <ul className='sideNav__links'>
               <li 
-                className='sideNav__link'
+                className='sideNav__item'
                 onClick={handleSideNavClick}
               >
-                <Link to="/">
+                <NavLink 
+                  className='sideNav__link'
+                  to="/"
+                >
                   HOME
-                </Link>
+                </NavLink>
               </li>
               <li 
-                className='sideNav__link'
+                className='sideNav__item'
                 onClick={handleSideNavClick}
               >
-                <Link to="/projects">
+                <Link 
+                  className='sideNav__link'
+                  to="/projects"
+                >
                   PROJECTS
                 </Link>
               </li>
               <li 
-                className='sideNav__link'
+                className='sideNav__item'
                 onClick={handleSideNavClick}
               >
-                <Link to="/blog">
+                <Link 
+                  className='sideNav__link'
+                  to="/blog"
+                >
                   BLOG
                 </Link>
               </li>
               <li 
-                className='sideNav__link'
+                className='sideNav__item'
                 onClick={handleSideNavClick}
               >
-                <Link to="/contact">
+                <Link 
+                  className='sideNav__link'
+                  to="/contact"
+                >
                   CONTACT
                 </Link>
               </li>

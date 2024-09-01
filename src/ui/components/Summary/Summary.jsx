@@ -8,7 +8,6 @@ const Summary = () => {
     <>
       <section className="summary">
         <div className="summary__inner">
-          <h1>From Summary</h1>
           <article className="summary__main">
 
             <Profile />

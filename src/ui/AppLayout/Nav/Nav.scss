@@ -57,22 +57,12 @@
   }
 
   &__link {
-    color: var(--text-color-bright);
-    position: relative;
-    letter-spacing: 1.5px;;
+    @include navLink;
 
     &:hover {
       
       &::after {
-        // bottom: -1rem; 
-        bottom: -0.75rem; 
-        bottom: -0.6rem; 
-        background: var(--nav-link-active); 
-        content: "";
-        height: 2.5px; 
-        left: 0;
-        position: absolute;
-        right: 0;
+        @include navLinkActive;
       }
     }
   }

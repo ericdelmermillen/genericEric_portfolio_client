@@ -25,8 +25,10 @@
   }
 
   &__heading {
+    @include headingGeneral;
     color: var(--text-color);
     display: inline-block; 
+    font-size: 1.5rem;;
     margin-inline: auto;
     position: relative;
 

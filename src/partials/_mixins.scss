@@ -13,6 +13,10 @@
 // #B3D4DC
 // #BC6C66
 
+// "Arial Black"
+// "Verdana"
+// "Arial"
+// "Tahoma"
 
 // 1. Primary Color:
 // #1A7697 (Deep Blue)
@@ -42,9 +46,13 @@
 // #4F6C77 (Muted Blue-Gray)
 // Use this as the main background color for your app or sections within your app.
 
-
 .appLayout {
   // general styling variables
+  --heading-font: "Verdana";
+  --heading-font: "Tahoma";
+  --body-font: "Arial";
+  // --body-font: "Tahoma";
+
   --borderRadius: 8px;
 
   --accent-color: #BC6C66;
@@ -56,6 +64,8 @@
   --nav-link-active: #bc9a66;
   --nav-link-active: #bcb066;
 
+  font-family: var(--body-font);
+
   // colors
   // --modalOverlayBg: rgba(0, 0, 0, 0.5);
   
@@ -66,6 +76,7 @@
     --text-color: #162328;
 
     --gradient-overlay: linear-gradient(to top, rgba(0, 0, 0, 0.25), rgba(255, 255, 255, 0.125));
+    --gradient-overlay: linear-gradient(to top, rgba(0, 0, 0, 0.28), rgba(255, 255, 255, 0.2));
     --text-shadow-bright: 3px 3px 6px rgba(0, 0, 0, 0.7);
     // --text-color: #fff;
     // --text-color: #f6f6f6;
@@ -181,6 +192,7 @@
   justify-content: center;
   margin-inline: auto;
   margin-top: $navHeight;
+  max-width: $ultraWide;
   min-height: calc(100vh + 1px);
   width: 100%;
   
@@ -203,6 +215,33 @@
   top: 0;
   width: 100%;
   z-index: 0;
+}
+
+@mixin navLink {
+  letter-spacing: 2.5px;
+  color: var(--text-color-bright);
+  letter-spacing: 4px;
+  font-weight: 500;
+  font-family: var(--heading-font);
+  position: relative;
+}
+
+@mixin navLinkActive {
+  bottom: -0.75rem; 
+  bottom: -0.6rem; 
+  background: var(--nav-link-active); 
+  content: "";
+  height: 2.5px; 
+  left: 0;
+  position: absolute;
+  right: 0;
+}
+
+@mixin headingGeneral {
+  font-family: var(--heading-font);
+  letter-spacing: 2px;
+  font-size: 1.25rem;
+  font-weight: 600;
 }
 
 @mixin heroImgTop {
@@ -228,17 +267,16 @@
 
 @mixin button {
   align-items: center;
-  // background: var(--button-background);
-  // background: var(--button-background);
-  // background: var(--button-background);
   border: 2px solid var(--text-color);
   color: var(--button-color);
   cursor: pointer;
   display: inline-flex;
   font-size: 1rem;
-  font-weight: 500;
+  font-family: var(--body-font);
+  // font-weight: 500;
   justify-content: center;
   padding: 0.125rem 1.25rem;
+  font-weight: 200;
   // transition: background-color 0.3s ease;
   transition: all 250 ease-in-out;
 

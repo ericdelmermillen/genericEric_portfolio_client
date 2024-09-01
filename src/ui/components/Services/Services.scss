@@ -80,12 +80,12 @@
   }
 
   &__heading {
+    @include headingGeneral;
     font-size: 2rem;
     margin-bottom: 3rem;
     position: relative;
     letter-spacing: 1.5px;
-    text-shadow: var(--text-shadow-bright);
-    // display: none;
+    text-shadow: 5px 5px 6px rgba(0, 0, 0, 0.7);
 
     &::after {
       background: var(--text-color-bright);
@@ -102,7 +102,9 @@
   
   &__sub-heading {
     margin-bottom: 2rem;
-    text-shadow: var(--text-shadow-bright);
+    text-shadow: 5px 5px 6px rgba(0, 0, 0, 0.7);
+    text-shadow: 5px 5px 6px rgba(0, 0, 0, 0.7);
+    font-size: 2rem;;
     // display: none;
   }
   
@@ -111,7 +113,7 @@
     line-height: 1.25;
     margin-bottom: 2rem;
     text-align: center;
-    text-shadow: var(--text-shadow-bright);
+    text-shadow: 5px 5px 6px rgba(0, 0, 0, 0.7);
     // display: none;
   }
 

@@ -51,6 +51,9 @@
     display: flex;
     justify-content: center;
     text-align: center;
+    font-family: var(--body-font);
+    letter-spacing: 01px;
+    font-size: 1.25rem;
     
     @media(min-width: 768px) {
       width: 100%;
