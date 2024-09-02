@@ -8,7 +8,7 @@ const Summary = () => {
     <>
       <section className="summary">
         <div className="summary__inner">
-          <article className="summary__main">
+          <article className="summary__article">
 
             <Profile />
 
@@ -25,6 +25,8 @@ const Summary = () => {
               </a>
               <a 
                 className="summary__button"
+                href="/Ericsume.pdf"
+                download="Eric_Millen_Resume.pdf" 
               >
                 Download CV
               </a>

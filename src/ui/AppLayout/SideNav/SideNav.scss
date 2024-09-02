@@ -4,6 +4,9 @@
 .sideNav {
   // background-color: var(--background-color);
   background-color: #fff;
+  background-color: #f4f4f4;
+  // background-color: var(--neutral-gray-1);
+  // background-color: var(--neutral-gray-2);
   bottom: 0;
   // box-shadow: var(--box-shadow);
   height: 100vh;
@@ -81,7 +84,6 @@
 
       &:after {
         @include navLinkActive;
-
       }
     }
   }

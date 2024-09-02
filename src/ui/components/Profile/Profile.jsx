@@ -1,4 +1,9 @@
+import { FaUser } from "react-icons/fa";
+import { FaBuilding, FaHouse } from "react-icons/fa6";
+import { MdEmail } from "react-icons/md";
 import "./Profile.scss";
+
+// make profile item its own component if it can accept the icon as props
 
 const Profile = () => {
   return (
@@ -20,10 +25,8 @@ const Profile = () => {
 
             <li className="profile__item">
               <div className="profile__item-header">
-                <i className="profile__item-icon">X</i>
-                <h5 className="profile__item-label">
-                  Name:
-                </h5>
+                <FaUser className="profile__item-icon"/>
+                <label className="profile__item-label">Name:</label>
               </div>
 
               <p className="profile__item-value">
@@ -33,10 +36,8 @@ const Profile = () => {
 
             <li className="profile__item">
               <div className="profile__item-header">
-                <i className="profile__item-icon">X</i>
-                <h5 className="profile__item-label">
-                  Current Position:
-                </h5>
+                <FaBuilding className="profile__item-icon"/>
+                <label className="profile__item-label">Current Position:</label>
               </div>
 
               <p className="profile__item-value">
@@ -46,40 +47,35 @@ const Profile = () => {
 
             <li className="profile__item">
               <div className="profile__item-header">
-                <i className="profile__item-icon">X</i>
-                <h5 className="profile__item-label">
+                <FaHouse className="profile__item-icon"/>
+                <label className="profile__item-label">
                   Website:
-                </h5>
+                </label>
               </div>
 
               <p className="profile__item-value">
-                zidgyroadlabs.com
+                <a 
+                  href="https://www.genericEric.dev"
+                  target="_blank"
+                >
+                  https://www.genericEric.dev
+                </a>
               </p>
             </li>
 
             <li className="profile__item">
               <div className="profile__item-header">
-                <i className="profile__item-icon">X</i>
-                <h5 className="profile__item-label">
-                  Email:
-                </h5>
+                <MdEmail className="profile__item-icon"/>
+                <label className="profile__item-label">Email:</label>
               </div>
 
               <p className="profile__item-value">
-                ericdelmermillen@gmail.com
-              </p>
-            </li>
-
-            <li className="profile__item">
-              <div className="profile__item-header">
-                <i className="profile__item-icon">X</i>
-                <h5 className="profile__item-label">
-                  Email:
-                </h5>
-              </div>
-
-              <p className="profile__item-value">
-                ericdelmermillen@gmail.com
+                <a 
+                  href="mailto:ericdelmermillen@gmail.com?subject=Contact%20from%20genericEric.dev"
+                  className="profile__email-link"
+                >
+                  ericdelmermillen@gmail.com
+                </a>
               </p>
             </li>
 

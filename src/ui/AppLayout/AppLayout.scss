@@ -3,6 +3,7 @@
 
 .appLayout {
   @include appLayout;
+  color: var(--text-color);
 
   &__inner {
     @include inner;

@@ -1,5 +1,4 @@
 import "./TypingText.scss";
-
 import { useState, useEffect, createElement } from 'react';
 
 const TypingText = ({ 
@@ -15,12 +14,11 @@ const TypingText = ({
       const typing = setInterval(() => {
         const nextLetterIdx = typingText.length;
         const nextLetter = textToType[nextLetterIdx]
-        setTypingText((c) => c+= nextLetter)
+        setTypingText((c) => c+= nextLetter);
       }, typingDelayInterval)
-      return () => clearInterval(typing)
+      return () => clearInterval(typing);
     }
-  }, [textToType, typingText])
-  
+  }, [textToType, typingText]);
   
   return (
     <div>

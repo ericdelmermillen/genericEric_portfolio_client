@@ -7,4 +7,4 @@ const scrollToTop = () => {
 
 export {
   scrollToTop
-}
+};

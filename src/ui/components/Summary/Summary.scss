@@ -2,46 +2,63 @@
 @import "../../../partials/variables";
 
 .summary {
-  background: blue;
+  background: var(--neutral-gray-1);
 
   &__inner {
     margin-inline: auto;
     max-width: $largeTablet;
     padding-block: 4em;
     padding-inline: 1rem;
-  }
-
-  &__main {
-    display: flex;
-    flex-direction: column;
     
     @media(min-width: $tablet) {
+      padding-inline: 2rem;
+    }
+    
+    @media(min-width: $largeTablet) {
+      padding-inline: 1rem;
+    }
+  }
+  
+  &__article {
+    display: flex;
+    flex-direction: column;
+    padding-inline: 2rem;
+    
+    @media(min-width: $largeTablet) {
       flex-direction: row;
+      gap: 0;
     }
   }
 
   &__cta {
-    border: 2px solid red;
     display: flex;
     flex-direction: column;
+    margin-top: 2rem;
   }
 
   &__buttons {
-    margin-inline: auto;
     display: flex;
     flex-direction: column;
     gap: 1rem;
+    margin-inline: auto;
     padding-block: 2rem;;
+    
+    @media(min-width: $tablet) {
+      flex-direction: row;
+    }
+
   }
   
   &__button {
-    border: 2px solid green;
+    @include button;
+    border: 2px solid var(--text-color);
+    color: var(--text-color);
+    font-weight: bold;
     padding: 1rem 2rem;
     cursor: pointer;
     
     &:hover {
       @include hoverClickGrow;
-
     }
   }
 }

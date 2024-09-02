@@ -1,4 +1,4 @@
-import { createBrowserRouter, RouterProvider, Navigate } from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import AppLayout from "./ui/AppLayout/AppLayout.jsx";
 import Blog from "./pages/Blog/Blog.jsx";
 import BlogPost from "./pages/BlogPost/BlogPost.jsx";
@@ -7,13 +7,8 @@ import Home from "./pages/Home/Home.jsx";
 import Projects from "./pages/Projects/Projects.jsx";
 import ProjectDetails from "./pages/ProjectDetails/ProjectDetails.jsx";
 import './App.scss';
-import './font-awesome.scss'
-import NotFound from "./pages/NotFound/NotFound.jsx";
 import Login from "./pages/Login/Login.jsx";
-
-
-// replace @import with @use throughout
-
+import NotFound from "./pages/NotFound/NotFound.jsx";
 
 const router = createBrowserRouter([
   {
@@ -117,8 +112,6 @@ export default App;
 // --ability to make comments
 // captcha to prevent spam
 
-// --social icons in footer? Fixed position at bottom?
-// --copyright where?
+
 // contact me floating button?: captcha to prevent spam
 // lightbox alt for images
-// fonts via google fonts in scss

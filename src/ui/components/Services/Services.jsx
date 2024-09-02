@@ -1,19 +1,30 @@
 import { useAppContext } from "../../../contexts/AppContext";
-import Service from "../Service/Service";
+import { FaGlobe, FaCode, FaCartShopping } from "react-icons/fa6";
 import "./Services.scss";
 
+// make the Service component if it can take the icon as props
+
 const services = [
-  { faClasses: "fas fa-globe",
-    serviceName: "Web Design",
-    serviceDesc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum quis autem quam, illo quisquam eligendi illum delectus nam amet porro!"
-  },
-  { faClasses: "fas fa-code",
-    serviceName: "Web Development",
-    serviceDesc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum quis autem quam, illo quisquam eligendi illum delectus nam amet porro!"
-  },
-  { faClasses: "fas fa-shopping-cart",
-    serviceName: "Advetising & SEO",
-    serviceDesc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum quis autem quam, illo quisquam eligendi illum delectus nam amet porro!"
+  {
+    name: "Web Development",
+    description:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum quis autem quam, illo quisquam eligendi illum delectus nam amet porro!",
+      icon: FaGlobe,
+      iconClass: "services__service-icon" 
+    },
+    {
+      name: "Web Design",
+      description:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum quis autem quam, illo quisquam eligendi illum delectus nam amet porro!",
+      icon: FaCode,
+      iconClass: "services__service-icon services__service-icon--small" 
+    },
+  {
+    name: "Advertising & SEO",
+    description:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum quis autem quam, illo quisquam eligendi illum delectus nam amet porro!",
+    icon: FaCartShopping,
+    iconClass: "services__service-icon services__service-icon--small"
   },
 ];
 
@@ -56,20 +67,19 @@ const Services = () => {
 
             <div className="services__services-list">
 
-              {services.map((service, idx) =>
-
-                <div 
-                  key={idx}
-                  className="services__service"
-                >
-                  <Service 
-                    key={idx}
-                    faClasses={service.faClasses}
-                    serviceName={service.serviceName}
-                    serviceDesc={service.serviceDesc}
-                  />
+              {services.map((service, index) => (
+                <div key={index} className="services__service">
+                  <div className="services__item">
+                    <service.icon className={service.iconClass} />
+                    <h3 className="services__service-name">
+                      {service.name}
+                    </h3>
+                    <p className="services__service-description">
+                      {service.description}
+                    </p>
+                  </div>
                 </div>
-              )}
+              ))}
 
             </div>
           </div>

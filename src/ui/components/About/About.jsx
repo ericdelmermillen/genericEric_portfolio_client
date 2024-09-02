@@ -13,9 +13,7 @@ const About = () => {
             <h4 className="about__heading">
               ABOUT ME
             </h4>
-            <h2 
-              className="about__introduction"
-            >
+            <h2 className="about__introduction">
               Let me introduce myself.
             </h2>
           </header>
@@ -29,7 +27,7 @@ const About = () => {
             <div className="about__content">
             
               <p className="about__blurb">
-                I am a full stack web developer from Boston MA. I started writing code about 16 years ago. I started with Java and then moved to web technologies like HTML, CSS, JavaScript and PHP. I have worked for companies as well as ran my own. In 2016 I started creating content full-time. I love helping people learn to code and better their lives.
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nihil amet repellendus dolore cumque error porro reprehenderit, accusamus esse aspernatur. Iste cum quod nam atque tempora magnam, consequuntur at dolorum quis consectetur, unde aut, laboriosam dolor ab nihil iure? Accusantium, in!
               </p>
             </div>
           </div>

@@ -2,24 +2,64 @@
 @import "../../../partials/variables";
 
 .skills {
+  padding-inline: 1rem;
   width: 100%;
-  border: 2px dashed #fff;
-  // min-height: 30rem;
+
+  // @media(min-width: $smallTablet) {
+  //   outline: 2px solid blue;
+  // }
+
+  // @media(min-width: $tablet) {
+  //   outline: 2px solid green;
+  // }
 
   &__info {
-    border: 2px dashed #333;
     min-height: 8rem;
   }
 
   &__heading {
-    color: yellow;
-    font-size: 1.5rem;
-    line-height: 2;
     @include headingGeneral;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
   }
 
   &__lead {
-    line-height: 1.25;
     font-size: 1.15rem;
+    line-height: var(--line-height-general);
+    margin-bottom: 2.5rem
+  }
+
+  &__items {
+    align-items: center;
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(4, 1fr);
+    justify-content: center;
+    padding-inline: 1rem;;
+  }
+
+  &__item {
+    align-items: center;
+    border: 2px solid var(--accent-color);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    height: 5.5rem;
+    padding-block: 0.25rem;
+    width: 5.5rem;
+
+    &--small {
+      gap: 0;
+    }
+  }
+
+  &__icon {
+    height: 2.75rem;
+    width: 2.75rem;
+    
+    &--small {
+      height: 4rem;
+      width: 4rem;
+    }
   }
 }

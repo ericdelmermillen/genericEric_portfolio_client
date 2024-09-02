@@ -1,4 +1,5 @@
 import { useAppContext } from "../../../contexts/AppContext.jsx";
+import { useEffect, useState } from "react";
 import DownIcon from "../../../assets/svgs/DownIcon.jsx";
 import Facebook from "../../../assets/svgs/Facebook.jsx";
 import Github from "../../../assets/svgs/Github.jsx";
@@ -10,10 +11,13 @@ import TypingText from "../TypingText/TypingText.jsx";
  
 import "./Header.scss";
 
-const viewportHeight = window.innerHeight;
-
 const Header = () => {
   const { colorMode, scrollYPos } = useAppContext();
+  const [ documentHeight, setDocumentHeight ] = useState(Infinity);
+
+  useEffect(() => {
+    setDocumentHeight(document.documentElement.scrollHeight)
+  }, [documentHeight]);
 
   return (
     <>
@@ -22,7 +26,7 @@ const Header = () => {
 
           <div className="header__overlay"></div>
           
-          {scrollYPos > viewportHeight * 1.5
+          {scrollYPos > (documentHeight * 0.8)
             ? <div className="header__bg-layer"></div>
             : null
           }
@@ -69,7 +73,7 @@ const Header = () => {
 
           </div>
 
-          {scrollYPos < (viewportHeight * 1.5)
+          {scrollYPos < (documentHeight * 0.8)
 
             ? ( <div className="header__socials">
 
