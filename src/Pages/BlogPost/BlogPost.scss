@@ -3,5 +3,9 @@
 
 .blogPost {
   @include page;
-  border: 2px solid red;
+  border: 2px solid orange;
+
+  &__heading {
+    color: orange;
+  }
 }

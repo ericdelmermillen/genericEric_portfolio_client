@@ -3,6 +3,7 @@
 
 .footer {
   background: var(--background-nav-footer);
+  box-shadow: var(--navFooterBoxShadow);
   color: var(--text-color-bright);
   margin-top: auto;
   width: 100%;
@@ -11,8 +12,8 @@
   &__content {
     display: flex;
     flex-direction: column-reverse;
-    max-width: $ultraWide;
     margin-inline: auto;
+    max-width: $ultraWide;
     padding-bottom: 1rem;
     
     @media(min-width: $tablet) {
@@ -26,7 +27,7 @@
     display: flex;
     justify-content: center;
     gap: 1rem;
-    padding-block: 1rem;
+    padding-block: 1.25rem;
     width: 100%;
     
     @media(min-width: 768px) {

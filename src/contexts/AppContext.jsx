@@ -68,9 +68,8 @@ const reducer = (state, action) => {
 
 
 const AppContextProvider = ({ children }) => {
-  const [ { 
-    isLoading, isLoggedIn, colorMode, scrollYPos, prevScrollYPos, showSideNav
-  } = state, dispatch ] = useReducer(reducer, initialState);
+  const [ state, dispatch ] = useReducer(reducer, initialState);
+  const { isLoading, isLoggedIn, colorMode, scrollYPos, prevScrollYPos, showSideNav} = state;
 
   const toggleColorMode = () => {
     dispatch({ type: "colorMode/toggle"});
@@ -104,7 +103,6 @@ const AppContextProvider = ({ children }) => {
     toggleSideNav
   };
 
-  
   
   // useEffect to check for token for isLoggedIn status
 

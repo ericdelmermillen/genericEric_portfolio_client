@@ -4,4 +4,8 @@
 .contact {
   @include page;
   border: 2px solid green;
+
+  &__heading {
+    color: green;
+  }
 }

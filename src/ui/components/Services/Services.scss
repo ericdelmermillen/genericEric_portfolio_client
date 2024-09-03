@@ -3,6 +3,7 @@
 
 .services {
   color: var(--text-color-bright);
+  // text-align: center;
   
   &__inner {
     left: 0;
@@ -12,13 +13,6 @@
   }
 
   &__bg--light.show{
-
-    // strong
-    // background: url("../../../assets/images/day-bottom-7.jpg") no-repeat center center;
-
-    // background: url("../../../assets/images/day-bottom-8.jpg") no-repeat center center;
-
-    // 11
     background: url("../../../assets/images/day-bottom-11.jpg") no-repeat center center;
     background: url("../../../assets/images/day-bottom-11a.jpg") no-repeat center center;
     background: url("../../../assets/images/day-bottom-11b.jpg") no-repeat center center;
@@ -31,8 +25,6 @@
     // background: url("../../../assets/images/day-bottom-11h.jpg") no-repeat center center;
     // background: url("../../../assets/images/day-bottom-11i.jpg") no-repeat center center;
     // background: url("../../../assets/images/day-bottom-11k.jpg") no-repeat center center;
-
-      
 
     background-attachment: fixed;
     background-size: cover;
@@ -48,7 +40,9 @@
     // background: url("../../../assets/images/night-bottom-2.jpg") no-repeat center center;
     // background: url("../../../assets/images/night-bottom-3.jpg") no-repeat center center;
     // background: url("../../../assets/images/night-bottom-4.jpg") no-repeat center center;
-    // background: url("../../../assets/images/night-bottom-5.jpg") no-repeat center center;
+    
+    background-attachment: fixed;
+    background-size: cover;
     height: 100%;
     position: absolute;
     width: 100%;
@@ -71,7 +65,6 @@
     justify-content: center;
     margin-inline: auto;
     max-width: $largeTablet;
-    min-height: 75vh;
     padding-block: 3rem;
     padding-inline: 1rem;
     position: relative;
@@ -87,14 +80,9 @@
     text-shadow: var(--text-shadow-bright);
 
     &::after {
+      @include afterAccent;
       background: var(--text-color-bright);
       bottom: -1rem;
-      box-shadow: var(--box-shadow);
-      content: "";
-      height: 2px;
-      left: 0;
-      position: absolute;
-      width: 100%;
     }
   }
   
@@ -102,7 +90,7 @@
     font-size: 2rem;
     margin-bottom: 2rem;
     text-align: center;
-    text-shadow: 5px 5px 6px rgba(0, 0, 0, 0.7);
+    text-shadow: var(--text-shadow-bright);
     
     @media(min-width: $tablet) {
       text-align: start;
@@ -114,7 +102,7 @@
     line-height: 1.25;
     margin-bottom: 2rem;
     text-align: center;
-    text-shadow: 5px 5px 6px rgba(0, 0, 0, 0.7);
+    text-shadow: var(--text-shadow-bright);
   }
 
   &__services-list {
@@ -129,10 +117,6 @@
       gap: 1.25rem;
       grid-template-columns: repeat(3, 1fr);
     }
-  }
-
-  &__service {
-    text-align: center;
   }
 
   &__item {
@@ -161,19 +145,15 @@
     position: relative;
 
     &::after {
+      @include afterAccent;
       background: var(--text-color-bright);
       bottom: -1rem;
-      content: "";
-      height: 2px;
-      left: 0;
-      position: absolute;
-      width: 100%;
     }
   }
 
   &__service-description {
     font-size: 1.25rem;
     line-height: var(--line-height-medium);
-    text-shadow: 5px 5px 6px rgba(0, 0, 0, 0.7);
+    text-shadow: var(--text-shadow-bright);
   }
 }

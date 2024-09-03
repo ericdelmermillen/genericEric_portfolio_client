@@ -3,10 +3,9 @@
 
 .home {
   @include page;
-  background: green;
+  background: var(--background-color);
 
   &__main {
-    background: pink;
     margin-top: calc(100vh - $navHeight);
     position: relative;
   }

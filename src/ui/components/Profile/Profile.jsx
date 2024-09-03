@@ -5,7 +5,15 @@ import "./Profile.scss";
 
 // make profile item its own component if it can accept the icon as props
 
+const profileItems = [
+  { itemIcon: FaUser, itemLabel: "Name:", itemValue: "Eric Delmer Millen" },
+  { itemIcon: FaBuilding, itemLabel: "Current Position:", itemValue: "Owner at Zidgy Road Labs Inc" },
+  { itemIcon: FaHouse, itemLabel: "Website:", itemValue: "https://www.genericEric.dev" },
+  { itemIcon: MdEmail, itemLabel: "Email:", itemValue: "ericdelmermillen@gmail.com" , itemHref: "mailto:ericdelmermillen@gmail.com?subject=Contact%20from%20genericEric.dev"}
+];
+
 const Profile = () => {
+
   return (
     <>
       <div className="profile">
@@ -23,61 +31,29 @@ const Profile = () => {
         
           <ul className="profile__items">
 
-            <li className="profile__item">
-              <div className="profile__item-header">
-                <FaUser className="profile__item-icon"/>
-                <label className="profile__item-label">Name:</label>
-              </div>
+            {profileItems.map((item, idx) => (
 
-              <p className="profile__item-value">
-                Eric Delmer Millen
-              </p>
-            </li>
+              <li key={idx} className="profile__item">
 
-            <li className="profile__item">
-              <div className="profile__item-header">
-                <FaBuilding className="profile__item-icon"/>
-                <label className="profile__item-label">Current Position:</label>
-              </div>
+                <div className="profile__item-header">
+                  <item.itemIcon className="profile__item-icon"/>
+                  <label className="profile__item-label">{item.itemLabel}</label>
+                </div>
 
-              <p className="profile__item-value">
-                Owner at Zidgy Road Labs Inc
-              </p>
-            </li>
+                {item.itemHref
 
-            <li className="profile__item">
-              <div className="profile__item-header">
-                <FaHouse className="profile__item-icon"/>
-                <label className="profile__item-label">
-                  Website:
-                </label>
-              </div>
+                  ? (
+                      <a href={item.itemHref} className="profile__email-link">
+                        <p className="profile__item-value">{item.itemValue}</p>
+                      </a>
+                    )
+                  
+                  : <p className="profile__item-value">{item.itemValue}</p>
+                
+                }
+              </li>
 
-              <p className="profile__item-value">
-                <a 
-                  href="https://www.genericEric.dev"
-                  target="_blank"
-                >
-                  https://www.genericEric.dev
-                </a>
-              </p>
-            </li>
-
-            <li className="profile__item">
-              <div className="profile__item-header">
-                <MdEmail className="profile__item-icon"/>
-                <label className="profile__item-label">Email:</label>
-              </div>
-
-              <p className="profile__item-value">
-                <a 
-                  href="mailto:ericdelmermillen@gmail.com?subject=Contact%20from%20genericEric.dev"
-                  className="profile__email-link"
-                >
-                  ericdelmermillen@gmail.com
-                </a>
-              </p>
-            </li>
+            ))}
 
           </ul>
         </div>

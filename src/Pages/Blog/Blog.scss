@@ -4,4 +4,8 @@
 .blog {
   @include page;
   border: 2px solid blue;
+
+  &__heading {
+    color: blue;
+  }
 }

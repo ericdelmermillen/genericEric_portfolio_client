@@ -12,7 +12,7 @@ const Projects = () => {
   return (
     <>
       <div className="projects">
-        <h1 className="projects">
+        <h1 className="projects__heading">
           From Projects
         </h1> 
       </div>

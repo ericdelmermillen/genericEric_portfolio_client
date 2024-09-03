@@ -1,15 +1,12 @@
 import { useEffect } from "react";
 import { scrollToTop } from "../../../utils/utils.js";
 import About from "../../ui/components/About/About.jsx";
-import Header from "../../ui/components/Header/Header.jsx";
-
 import ContactForm from "../../ui/components/ContactForm/ContactForm.jsx";
+import Header from "../../ui/components/Header/Header.jsx";
 import Portfolio from "../../ui/components/Portfolio/Portfolio.jsx";
-import SumProfile from "../../ui/components/Summary/Summary.jsx"
 import Services from "../../ui/components/Services/Services.jsx";
-import Stats from "../../ui/components/Stats/Stats.jsx";
-import "./Home.scss";
 import Summary from "../../ui/components/Summary/Summary.jsx";
+import "./Home.scss";
 
 const Home = () => {
 
@@ -22,20 +19,16 @@ const Home = () => {
     <>
       <div className="home">
         <div className="home__inner">
+
           <Header />
           
-          <main 
-            className="home__main"
-          >
+          <main className="home__main">
             <About />
             <Summary />
             <Portfolio />
             <Services />
+            <ContactForm />
           </main>
-
-          {/* 
-          <ContactForm />
-          <Stats /> */}
 
         </div>
       </div>

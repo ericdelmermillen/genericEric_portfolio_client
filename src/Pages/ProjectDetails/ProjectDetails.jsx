@@ -16,7 +16,7 @@ const ProjectDetails = () => {
   return (
     <>
     <div className="projectDetails">
-      <h1>Project Details: Project {projectID}</h1>
+      <h1 className="projectDetails__heading">Project Details: Project {projectID}</h1>
 
       <button
         onClick={() => navigate(-1)}

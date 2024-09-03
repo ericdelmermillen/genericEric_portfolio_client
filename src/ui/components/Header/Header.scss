@@ -1,7 +1,5 @@
 @import '../../../partials/mixins';
 @import '../../../partials/variables';
-// @use '../../../partials/mixins';
-// @use '../../../partials/variables';
 
 .header {
   color: var(--text-color-bright);
@@ -23,11 +21,6 @@
 
   &__dayImg {
     @include heroImg;
-    background: url("../../../assets/images/bg-day-top-a.jpg") center top;
-    background: url("../../../assets/images/bg-day-top-b.jpg") center top;
-    background: url("../../../assets/images/bg-day-top-c.jpg") center top;
-    background: url("../../../assets/images/bg-day-top-d.jpg") center top;
-    background: url("../../../assets/images/bg-day-top-e.jpg") center top;
     background: url("../../../assets/images/bg-day-top-f.jpg") center top;
     // background: url("../../../assets/images/bg-day-top-g.jpg") center top;
     // background: url("../../../assets/images/bg-day-top-h.jpg") center top;
@@ -84,105 +77,75 @@
 
   &__headline {
     font-family: var(--heading-font);
-    font-size: 1.75rem;
+    font-size: 1.5rem;
     letter-spacing: 3.5px;
     margin-bottom: 1.5rem;
     text-align: center;
     text-shadow: var(--text-shadow-bright);
-    // outline: 2px solid red;
     
     @media(min-width: $smallTablet) {
-      font-size: 1.75rem;
       font-size: 2rem;
       margin-bottom: 1.75rem;
-      // outline: 2px solid blue;
     }
     
     @media(min-width: $tablet) {
-      font-size: 2rem;
       margin-bottom: 2rem;
-      // outline: 2px solid green;
     }
 
     @media(min-width: $largeTablet) {
       font-size: 2.5rem;
-      margin-bottom: 2rem;
-      // outline: 2px solid green;
     }
-    
-    // @media(min-width: $desktop) {
-    //   outline: 2px solid purple;
-    // }
   }
 
   &__introduction {
-    font-size: 2.875rem;
+    font-size: 2.5rem;
     font-weight: 500;
     height: 3rem;
     letter-spacing: 1px;
     margin-bottom: 1.25rem;
     text-align: center;
     text-shadow: var(--text-shadow-bright);
-    // outline: 2px solid red;
     
     @media(min-width: $smallTablet) {
       font-size: 2.75rem;
       height: 3.25rem;
       margin-bottom: 1.5rem;
-      // outline: 2px solid blue;
     }
     
     @media(min-width: $tablet) {
       font-size: 4rem;
       height: 4.25rem;
       margin-bottom: 2.5rem;
-      // outline: 2px solid green;
     }
     
     @media(min-width: $largeTablet) {
       font-size: 4.5rem;
       height: 4.5rem;
       margin-bottom: 3rem;
-      // outline: 2px solid green;
     }
-
-    // @media(min-width: $desktop) {
-    //   outline: 2px solid purple;
-    // }
   }
 
   &__description {
     font-size: 1.5rem;
     font-weight: 300;
-    letter-spacing: 2.5px;
     letter-spacing: 1.5px;
     margin-bottom: 1.75rem;
     text-align: center;
     text-shadow: var(--text-shadow-bright);
-    // outline: 2px solid red;
 
     @media(min-width: $smallTablet) {
-      font-size: 1.5rem;
       margin-bottom: 1.5rem;
-      // outline: 2px solid blue;
     }
     
     @media(min-width: $tablet) {
       font-size: 1.8rem;
       margin-bottom: 2rem;
-      // outline: 2px solid green;
     }
     
     @media(min-width: $largeTablet) {
-      font-size: 1.8rem;
       font-size: 2rem;
       margin-bottom: 2rem;
-      // outline: 2px solid green;
     }
-
-    // @media(min-width: $desktop) {
-    //   outline: 2px solid purple;
-    // }
   }
 
   &__button {
@@ -193,28 +156,17 @@
     margin-top: auto;
     max-width: 13.5rem;
     transition: all 250 ease-in-out;
-    // outline: 2px solid red;
     
     @media(min-width: $smallTablet) {
       font-size: 1.5rem;
       margin-bottom: 1.5rem;
       max-width: 14rem;
-      // outline: 2px solid blue;
     }
 
     @media(min-width: $tablet) {
       max-width: 16rem;
-      // outline: 2px solid green;
     }
 
-    @media(min-width: $largeTablet) {
-      // outline: 2px solid green;
-    }
-
-    // @media(min-width: $desktop) {
-    //   outline: 2px solid purple;
-    // }
-    
     &:hover {
       background: none;
     }
@@ -250,11 +202,6 @@
     height: 20px;
     stroke: var(--text-color-bright);
     width: 20px;
-    
-    // @media(min-width: $tablet) {
-    //   height: 24px;
-    //   width: 24px;
-    // }
   }
 
   &__socials {
@@ -262,32 +209,16 @@
     bottom: 2rem;
     display: flex;
     gap: 1.125rem;
-    // gap: 1.2rem;
     height: 4rem;
     justify-content: center;
     position: absolute;
     width: 20rem;
     z-index: 2;
-    // outline: 2px solid red;
     
     @media(min-width: $smallTablet) {
       font-size: 1.5rem;
       gap: 1.5rem;
-      // outline: 2px solid blue;
-      // margin-bottom: 1.5rem;
     }
-
-    // @media(min-width: $tablet) {
-    //   outline: 2px solid green;
-    // }
-
-    // @media(min-width: $largeTablet) {
-    //   outline: 2px solid green;
-    // }
-
-    // @media(min-width: $desktop) {
-    //   outline: 2px solid purple;
-    // }
   }
 
   &__social {
@@ -300,32 +231,20 @@
   &__social-icon {
     fill: var(--text-color-bright);
     filter: drop-shadow(6px 6px 6px rgba(0, 0, 0, 0.8));
-    width: 1.75rem;
-    width: 1.8rem;
     width: 1.85rem;
-    width: 1.9rem;
-    width: 2rem;
-    // outline: 2px solid red;
     
     @media(min-width: $smallTablet) {
       width: 2.25rem;
-      // outline: 2px solid blue;
     }
     
     @media(min-width: $tablet) {
       font-size: 1.5rem;
       width: 2.5rem;
-      // outline: 2px solid green;
     }
 
     @media(min-width: $largeTablet) {
       font-size: 1.5rem;
       width: 2.75rem;
-      // outline: 2px solid green;
     }
-
-    // @media(min-width: $desktop) {
-    //   outline: 2px solid purple;
-    // }
   }
 }

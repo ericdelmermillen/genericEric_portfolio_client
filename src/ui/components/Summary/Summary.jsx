@@ -18,11 +18,12 @@ const Summary = () => {
 
           <div className="summary__cta">
             <div className="summary__buttons">
-              <a 
+              <button 
                 className="summary__button"
-                >
+                onClick={() => console.log("Hire me now")}
+              >
                 Hire Me Now
-              </a>
+              </button>
               <a 
                 className="summary__button"
                 href="/Ericsume.pdf"

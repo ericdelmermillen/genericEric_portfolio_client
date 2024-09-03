@@ -16,7 +16,9 @@ const BlogPost = () => {
   return (
     <>
     <div className="blogPost">
-      <h1>
+      <h1
+        className="blogPost__heading"
+      >
         Blog Post: {postID}
       </h1>
       

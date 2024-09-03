@@ -3,5 +3,9 @@
 
 .projects {
   @include page;
-  border: 2px solid red;
+  border: 2px solid yellow;
+
+  &__heading {
+    color: yellow;
+  }
 }

@@ -12,7 +12,7 @@ const NotFound = () => {
   return (
     <>
       <div className="notFound">
-        <h1>Not Found</h1>
+        <h1 className="notFound__heading">Not Found</h1>
       </div>
     </>
   )};

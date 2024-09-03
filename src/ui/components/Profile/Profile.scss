@@ -15,16 +15,17 @@
     @include headingGeneral;
     font-size: 1.5rem;
     margin-bottom: 1rem;
+    text-align: center;
+
+    @media(min-width: $largeTablet) {
+      text-align: start;
+    }
   }
 
   &__lead {
     font-size: 1.15rem;
     line-height: var(--line-height-general);
   }
-
-  // &__content {
-  //   border: 2px solid green;
-  // }
 
   &__items {
     display: flex;
@@ -37,12 +38,7 @@
     position: relative;
 
     &::after {
-      content: "";
-      background: var(--accent-color);
-      bottom: -1.5rem;
-      height: 2px;
-      position: absolute;
-      width: 100%;
+      @include afterAccent;
     }
 
     &:last-child::after {

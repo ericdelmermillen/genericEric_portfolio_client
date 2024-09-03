@@ -28,9 +28,6 @@ const services = [
   },
 ];
 
-// services-bg-day
-// services-bg-night
-
 const Services = () => {
   const { 
     colorMode,
@@ -44,7 +41,6 @@ const Services = () => {
     logoutUser
    } = useAppContext();
   
-  
   return (
     <>  
       <section className="services">
@@ -54,34 +50,28 @@ const Services = () => {
         <div className="services__overlay"></div>
 
           <div className="services__content">
-            <h4 className="services__heading">
-              Services
-            </h4>
-            <h2 className="services__sub-heading">
-              What Can I Do For You?
-            </h2>
+            <h4 className="services__heading">Services</h4>
+            <h2 className="services__sub-heading">What Can I Do For You?</h2>
             <p className="services__lead">
               Here are some of the services that I offer when it comes to web
               development and business.
             </p>
 
-            <div className="services__services-list">
+            <ul className="services__services-list">
 
               {services.map((service, index) => (
-                <div key={index} className="services__service">
+
+                <li key={index} className="services__service">
                   <div className="services__item">
                     <service.icon className={service.iconClass} />
-                    <h3 className="services__service-name">
-                      {service.name}
-                    </h3>
-                    <p className="services__service-description">
-                      {service.description}
-                    </p>
+                    <h3 className="services__service-name">{service.name}</h3>
+                    <p className="services__service-description">{service.description}</p>
                   </div>
-                </div>
+                </li>
+
               ))}
 
-            </div>
+            </ul>
           </div>
         </div>
       </section>

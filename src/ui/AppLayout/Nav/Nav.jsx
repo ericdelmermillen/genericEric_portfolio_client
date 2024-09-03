@@ -17,11 +17,7 @@ const Nav = ({ children }) => {
    } = useAppContext();
    
   return (
-    <nav 
-      className={`nav ${prevScrollYPos < scrollYPos && scrollYPos > 50
-        ? "hide"
-        : ""}`
-    }>
+    <nav className={`nav ${prevScrollYPos < scrollYPos && scrollYPos > 50 ? "hide" : ""}`}>
       <div className="nav__content">
 
         <div className="nav__logo">
@@ -32,34 +28,22 @@ const Nav = ({ children }) => {
       
         <ul className="nav__links">
           <li className="nav__item">
-            <NavLink 
-              className="nav__link" 
-              to={"/home"}
-            >
+            <NavLink className="nav__link" to={"/home"}>
               HOME
             </NavLink>
           </li>
           <li className="nav__item">
-            <NavLink 
-              className="nav__link"
-              to={"/projects"}
-            >
+            <NavLink className="nav__link" to={"/projects"}>
               PROJECTS
             </NavLink>
           </li>
           <li className="nav__item">
-            <NavLink 
-              className="nav__link" 
-              to={"/blog"}
-            >
+            <NavLink className="nav__link" to={"/blog"}>
               BLOG
             </NavLink>
           </li>
           <li className="nav__item">
-            <NavLink 
-              className="nav__link" 
-              to={"/contact"}
-            >
+            <NavLink className="nav__link" to={"/contact"}>
               CONTACT
             </NavLink>
           </li>
@@ -74,7 +58,7 @@ const Nav = ({ children }) => {
         </div> 
         */}
 
-        <div     
+        <div 
           className="nav__open-button"
           onClick={toggleSideNav}
         >

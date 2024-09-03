@@ -4,7 +4,16 @@ import Instagram from "../../../assets/svgs/Instagram";
 import LinkedIn from "../../../assets/svgs/LInkedIn";
 import Twitter from "../../../assets/svgs/Twitter";
 import Youtube from "../../../assets/svgs/Youtube";
-import "./Footer.scss"
+import "./Footer.scss";
+
+const footerSocials = [
+  { socialLink: "https://x.com/EricDelmer", socialIcon: Twitter },
+  { socialLink: "https://www.facebook.com/ericdelmermillen", socialIcon: Facebook },
+  { socialLink: "https://www.instagram.com/ericdelmermillen/", socialIcon: Instagram },
+  { socialLink: "https://github.com/ericdelmermillen", socialIcon: Github },
+  { socialLink: "https://www.linkedin.com/in/eric-delmer-millen/", socialIcon: LinkedIn },
+  { socialLink: "https://www.youtube.com/@EricMillen", socialIcon: Youtube }
+];
 
 const Footer = () => {
   return (
@@ -15,63 +24,19 @@ const Footer = () => {
           <p className="footer__copyright">
             Copyright Eric Delmer Millen &copy; {new Date().getFullYear()} 
           </p>
-          <div className="footer__socials">
+          <ul className="footer__socials">
 
-            <div className="footer__social">
-              <a
-                href="https://x.com/EricDelmer"
-                target="_blank"
-              >
-                <Twitter className="footer__social-icon"/>
-              </a>
-            </div>
+            {footerSocials.map((social, idx) => (
 
-            <div className="footer__social">
-              <a
-                href="https://www.facebook.com/ericdelmermillen"
-                target="_blank"
-              >
-                <Facebook className="footer__social-icon"/>
-              </a>
-            </div>
+              <li key={idx} className="footer__social">
+                <a href={social.socialLink} target="_blank">
+                <social.socialIcon className="footer__social-icon"/>
+                </a>
+              </li>
 
-            <div className="footer__social">
-              <a
-                href="https://www.instagram.com/ericdelmermillen/"
-                target="_blank"
-              >
-                <Instagram className="footer__social-icon"/>
-              </a>
-            </div>
+            ))}
 
-            <div className="footer__social">
-              <a
-                href="https://github.com/ericdelmermillen"
-                target="_blank"
-              >
-                <Github className="footer__social-icon"/>
-              </a>
-            </div>
-
-            <div className="footer__social">
-              <a
-                href="https://www.linkedin.com/in/eric-delmer-millen/"
-                target="_blank"
-              >
-                <LinkedIn className="footer__social-icon"/>
-              </a>
-            </div>
-
-            <div className="footer__social">
-              <a
-                href="https://www.youtube.com/@EricMillen"
-                target="_blank"
-              >
-                <Youtube className="footer__social-icon"/>
-              </a>
-            </div>
-
-          </div>
+          </ul>
 				</div>
       </footer>
     </>

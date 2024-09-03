@@ -2,20 +2,16 @@
 @import '../../../partials/variables';
 
 .sideNav {
-  // background-color: var(--background-color);
-  background-color: #fff;
-  background-color: #f4f4f4;
-  // background-color: var(--neutral-gray-1);
-  // background-color: var(--neutral-gray-2);
+  background-color: var(--sideNavBG);
   bottom: 0;
-  // box-shadow: var(--box-shadow);
+  box-shadow: var(--box-shadow);
   height: 100vh;
   left: 200vw;
   position: fixed;
   top: 0;
   transition: all 0.5s ease-in-out;
   width: 80vw;
-  z-index: 5;
+  z-index: 3;
   
   @media(min-width: 525px) {
     width: 50vw;
@@ -35,14 +31,10 @@
     display: flex;
     flex-direction: column;
     height: 100%;
+    overflow-y: scroll;
     padding-bottom: min(4rem, 10%);
     position: relative;
-    overflow: scroll;
   }
-
-  // &__menu {
-
-  // }
 
   &__touchOff-div {
     height: 100%;
@@ -62,28 +54,21 @@
   }
 
   &__links {
-    // display: flex;
-    // flex-direction: column;
-    // gap: 2rem;
-    // text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
     margin-top: 8rem;
-    // width: 15rem;
   }
 
-  &__item {
-    @include navLink;
-    margin-bottom: 3rem;
-  }
-  
   &__link {
-    // align-items: center;
-    // display: flex;
-    // height: 3rem;
-
+    @include navLink;
+    color: var(--text-color);
+    
     &.active {
-
+      
       &:after {
-        @include navLinkActive;
+        @include afterAccent;
+        bottom: -2rem;
       }
     }
   }
@@ -106,13 +91,11 @@
   }
 
   &__logout {
-    // @include buttonRounded;
     margin-inline: auto;
   }
 
   &__colorModeToggler {
     align-items: center;
-    margin-inline: auto;
     display: flex;
     justify-content: center;
     left: 50%;

@@ -3,5 +3,9 @@
 
 .login {
   @include page;
-  border: 2px solid red;
+  border: 2px solid pink;
+
+  &__heading {
+    color: pink;
+  }
 }

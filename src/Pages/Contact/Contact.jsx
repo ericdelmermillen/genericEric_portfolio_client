@@ -12,7 +12,7 @@ const Contact = () => {
   return (
     <>
     <div className="contact">
-      <h1 className="contact">
+      <h1 className="contact__heading">
         From Contact
       </h1>
     </div>

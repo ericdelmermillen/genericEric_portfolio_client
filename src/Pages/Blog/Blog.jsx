@@ -11,9 +11,11 @@ const Blog = () => {
 
   return (
     <>
-      <h1 className="blog">
-        From Blog
-      </h1>
+      <div className="blog">
+        <h1 className="blog--heading">
+          From Blog
+        </h1>
+      </div>
     </>
   )};
 

@@ -6,9 +6,9 @@ import Contact from "./pages/Contact/Contact.jsx";
 import Home from "./pages/Home/Home.jsx";
 import Projects from "./pages/Projects/Projects.jsx";
 import ProjectDetails from "./pages/ProjectDetails/ProjectDetails.jsx";
-import './App.scss';
 import Login from "./pages/Login/Login.jsx";
 import NotFound from "./pages/NotFound/NotFound.jsx";
+import './App.scss';
 
 const router = createBrowserRouter([
   {
@@ -18,7 +18,6 @@ const router = createBrowserRouter([
       { 
         path: '/', 
         element: <Home />
-        // element: <Navigate to="/home" replace/>
       },
       { 
         path: '/home', 

@@ -46,11 +46,11 @@
     @media(min-width: $tablet) {
       flex-direction: row;
     }
-
   }
   
   &__button {
     @include button;
+    background: none;
     border: 2px solid var(--text-color);
     color: var(--text-color);
     font-weight: bold;

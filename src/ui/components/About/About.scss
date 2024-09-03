@@ -26,26 +26,15 @@
 
   &__heading {
     @include headingGeneral;
-    color: var(--text-color);
     display: inline-block; 
     font-size: 1.5rem;;
     margin-inline: auto;
     position: relative;
 
     &::after {
-      content: "";
-      background: var(--accent-color); 
-      bottom: -1rem; 
-      height: 2px; 
-      left: 0;
-      position: absolute;
-      right: 0;
+      @include afterAccent;
     }
   }
-    
-  // &__introduction {
-  //   border: 2px solid red;
-  // }
 
   &__summary {
     display: flex;

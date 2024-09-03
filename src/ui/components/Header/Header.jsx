@@ -8,8 +8,16 @@ import LinkedIn from "../../../assets/svgs/LInkedIn.jsx";
 import Twitter from "../../../assets/svgs/Twitter.jsx";
 import Youtube from "../../../assets/svgs/Youtube.jsx";
 import TypingText from "../TypingText/TypingText.jsx";
- 
 import "./Header.scss";
+
+const headerSocials = [
+  { socialLink: "https://x.com/EricDelmer", socialIcon: Twitter },
+  { socialLink: "https://www.facebook.com/ericdelmermillen", socialIcon: Facebook },
+  { socialLink: "https://www.instagram.com/ericdelmermillen/", socialIcon: Instagram },
+  { socialLink: "https://github.com/ericdelmermillen", socialIcon: Github },
+  { socialLink: "https://www.linkedin.com/in/eric-delmer-millen/", socialIcon: LinkedIn },
+  { socialLink: "https://www.youtube.com/@EricMillen", socialIcon: Youtube }
+];
 
 const Header = () => {
   const { colorMode, scrollYPos } = useAppContext();
@@ -37,11 +45,13 @@ const Header = () => {
             className={`header__dayImg ${colorMode === 'light' 
               ? "top" 
               : ""}`}
+            aria-label="Daytime background showing a the sun in the sky above the ocean."
           ></div>
           <div 
             className={`header__nightImg ${colorMode === 'dark' 
               ? "top" 
               : ""}`}
+            aria-label="Nighttime background showing a the sun in the sky above the ocean."
           ></div>
                   
           <div className="header__content">
@@ -75,63 +85,18 @@ const Header = () => {
 
           {scrollYPos < (documentHeight * 0.8)
 
-            ? ( <div className="header__socials">
+            ? <ul className="header__socials">
 
-                  <div className="header__social">
-                    <a 
-                      href="https://x.com/EricDelmer"
-                      target="_blank"
-                    >
-                      <Twitter className="header__social-icon" />
-                    </a>
-                  </div>
-                  
-                  <div className="header__social">
-                    <a 
-                      href="https://www.facebook.com/ericdelmermillen"
-                      target="_blank"
-                    >
-                      <Facebook className="header__social-icon" />
-                    </a>
-                  </div>
+                {headerSocials.map((social, idx) => (
 
-                  <div className="header__social">
-                    <a 
-                      href="https://www.instagram.com/ericdelmermillen/"
-                      target="_blank"
-                    >
-                      <Instagram className="header__social-icon" />
-                    </a>
-                  </div>
+                    <li key={idx} className="header__social">
+                      <a href={social.socialLink} target="_blank">
+                        <social.socialIcon className="header__social-icon" />
+                      </a>
+                    </li>
+                ))}
 
-                  <div className="header__social">
-                    <a 
-                      href="https://github.com/ericdelmermillen"
-                      target="_blank"
-                    >
-                      <Github className="header__social-icon" />
-                    </a>
-
-                  </div>
-
-                  <div className="header__social">
-                    <a
-                      href="https://www.linkedin.com/in/eric-delmer-millen/"
-                      target="_blank"
-                    >
-                      <LinkedIn className="header__social-icon" />
-                    </a>
-                  </div>
-
-                  <div className="header__social">
-                    <a
-                      href="https://www.youtube.com/@EricMillen"
-                      target="_blank"
-                    >
-                      <Youtube className="header__social-icon" />
-                    </a>
-                  </div>
-                </div>)
+              </ul>
 
             : null
           }

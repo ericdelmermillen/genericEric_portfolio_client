@@ -56,7 +56,6 @@ const SideNav = ({ children }) => {
 
   return (
     <>
-
       {showSideNav 
      
         ? 
@@ -90,10 +89,7 @@ const SideNav = ({ children }) => {
                 className='sideNav__item'
                 onClick={handleSideNavClick}
               >
-                <NavLink 
-                  className='sideNav__link'
-                  to="/"
-                >
+                <NavLink className='sideNav__link' to="/">
                   HOME
                 </NavLink>
               </li>
@@ -101,34 +97,25 @@ const SideNav = ({ children }) => {
                 className='sideNav__item'
                 onClick={handleSideNavClick}
               >
-                <Link 
-                  className='sideNav__link'
-                  to="/projects"
-                >
+                <NavLink className='sideNav__link' to="/projects">
                   PROJECTS
-                </Link>
+                </NavLink>
               </li>
               <li 
                 className='sideNav__item'
                 onClick={handleSideNavClick}
               >
-                <Link 
-                  className='sideNav__link'
-                  to="/blog"
-                >
+                <NavLink className='sideNav__link' to="/blog">
                   BLOG
-                </Link>
+                </NavLink>
               </li>
               <li 
                 className='sideNav__item'
                 onClick={handleSideNavClick}
               >
-                <Link 
-                  className='sideNav__link'
-                  to="/contact"
-                >
+                <NavLink className='sideNav__link' to="/contact">
                   CONTACT
-                </Link>
+                </NavLink>
               </li>
             </ul>
 
