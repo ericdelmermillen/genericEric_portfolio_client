@@ -38,8 +38,6 @@ const Header = () => {
             ? <div className="header__bg-layer"></div>
             : null
           }
-
-          {/* need accessibility for conditionally shown background images */}
           
           <div 
             className={`header__dayImg ${colorMode === 'light' 
@@ -69,17 +67,14 @@ const Header = () => {
               Full Stack Developer
             </h4>
 
-            <div className="header__button">
-              <a 
-                className="header__button-link"
-                href="#about"
-                >
-                <DownIcon className={"header__button-down"}/>
-                <span className="header__button-text">
-                  More About Me
+              <a className="header__button-link" href="#about">
+                <div className="header__button">
+                  <DownIcon className={"header__button-down"}/>
+                  <span className="header__button-text">
+                    More About Me
                 </span>
+                </div>
               </a>
-            </div>
 
           </div>
 

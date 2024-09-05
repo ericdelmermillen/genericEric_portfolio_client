@@ -2,13 +2,9 @@
 @import '../../../partials/variables';
 
 .about {
-  align-items: center;
-  display: flex;
-  justify-content: center;
-  position: relative;
+  background: var(--neutral-gray-2);
 
   &__inner {
-    background: var(--neutral-gray-2);
     display: flex;
     flex-direction: column;
     gap: 2rem;

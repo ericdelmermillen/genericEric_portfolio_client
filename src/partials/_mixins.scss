@@ -1,90 +1,27 @@
 @import './_variables.scss';
 
-// font parings
-// light mode color palet
-// dark mode color palet
-
-// #7FA6BE
-// #D6DADD
-// #162328
-// #1A7697
-// #20484E
-// #4F6C77
-// #B3D4DC
-// #BC6C66
-
-// "Arial Black"
-// "Verdana"
-// "Arial"
-// "Tahoma"
-
-// 1. Primary Color:
-// #1A7697 (Deep Blue)
-// Use this for buttons, links, and key interactive elements.
-
-// 2. Secondary Color:
-// #BC6C66 (Muted Red)
-// This can be used for highlights, secondary buttons, or accent elements that need emphasis.
-
-// 3. Neutral Colors:
-// #D6DADD (Light Gray)
-
-// Use this for backgrounds, card backgrounds, or light text.
-// #162328 (Dark Gray)
-// Use this for main text, headers, or dark backgrounds.
-
-
-// 4. Accent Colors:
-// #7FA6BE (Soft Blue)
-// Use this sparingly for elements like icons, borders, or to provide subtle emphasis.
-
-// #B3D4DC (Pale Blue)
-// Great for hover states, subtle backgrounds, or to add some lightness to your design.
-
-
-// 5. Background Color:
-// #4F6C77 (Muted Blue-Gray)
-// Use this as the main background color for your app or sections within your app.
-
 .appLayout {
-  // general styling variables
-  --heading-font: "Tahoma";
   --body-font: "Arial";
-
-  --light-gray: #D6DADD;
-  --neutral-gray-1: #cdd3d8;
-  --neutral-gray-2: #c3c9d0;
-
-  // --dark-gray: #162328;
-
-  --borderRadius: 8px;
-  --accent-color: #c3be68;
-  --nav-link-active: #bcb066;
-  
-  --sideNavBG: #f8f8f8;
-
-  font-family: var(--body-font);
-
+  // --borderRadius: 8px;
+  --heading-font: "Tahoma";
   --line-height-general: 1.4;
   --line-height-medium: 1.75;
-
   --navBoxShadow: 0 4px 6px rgba(0, 0, 0, 0.25), 0 1px 3px rgba(0, 0, 0, 0.25);
-  // colors
-  // --modalOverlayBg: rgba(0, 0, 0, 0.5);
-  
+
+
+
   // light mode custom variables
   &[data-color-mode='light'] {
-    // --text-color: #333333;
     --text-color: #21343c;
+    --neutral-gray-1: #cdd3d8;
+    --neutral-gray-2: #c3c9d0;
+    // --accent-color: #c3be68;
+    --accent-color: #bcb066;
+
+    --sideNavBG: #f8f8f8;
 
     --gradient-overlay: linear-gradient(to top, rgba(0, 0, 0, 0.28), rgba(255, 255, 255, 0.2));
     --text-shadow-bright: 5px 5px 6px rgba(0, 0, 0, 0.7);
-    // --text-color: #fff;
-    // --text-color: #f6f6f6;
-    // --text-color: #f7f7f7;
-    // --text-color: #f8f8f8;
-    // --text-color: #f8f8f8;
-    // --text-color-header:#f8f8f8;
     --text-color-bright:#f8f8f8;
 
     --overlay: rgba(0, 0, 0, 0.125);
@@ -113,25 +50,40 @@
   
   // dark mode custom variables
   &[data-color-mode='dark'] {
-    // --text-color: #F3F3F3;
-    --text-color: green;
+    --text-color: #21343c;
+    --neutral-gray-1: #cdd3d8;
+    --neutral-gray-2: #c3c9d0;
+    --accent-color: #c3be68;
+    // --accent-color: #bcb066;
+    --nav-link-active: #bcb066;
 
-    --overlay: rgba(0, 0, 0, 0.25);
+    --sideNavBG: #f8f8f8;
+
+    --gradient-overlay: linear-gradient(to top, rgba(0, 0, 0, 0.28), rgba(255, 255, 255, 0.2));
+    --text-shadow-bright: 5px 5px 6px rgba(0, 0, 0, 0.7);
+    --text-color-bright:#f8f8f8;
+
+    --overlay: rgba(0, 0, 0, 0.125);
+
+    // --hover-emphasis: #B3D4DC;
     
+    // --navAndFooterBG: #F3F3F3;
     
-    // --navAndFooterBG: #181717;
-    // --background-color: #4b4a4a;
-    // --button-color: var(--text-color);
+    --background-nav-footer: #152f39;
+    --background-color: #D6DADD;
+    // --button-color: var(--background-color);
+    --button-color: #1A7697;
     // --button-background: #888676;
-    // --button-link: #c2c0ac;
-    // --box-shadow: 0 4px 8px rgba(37, 31, 31, 0.6);
-    // --nav-boxShadow: 0 4px 8px rgba(37, 31, 31, 0.6);
-    // --footer-boxShadow: 0 -4px 8px rgba(37, 31, 31, 0.6);
-    // --toggle-sky: #5da8f8;
+    --button-link: #1A7697;
+    --link: #1A7697;
+    --box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+    // --nav-boxShadow: 0 4px 8px rgba(0, 0, 0, 0.25);
+    // --footer-boxShadow: 0 -4px 8px rgba(0, 0, 0, 0.25);
+    // --toggle-sky: #47478d;
     // --toggle-ball: #F3F3F3;
     // --error-color: #FF0000;
-    // --hover-color: #CCCCCC;
-    // --placeholder-color: #929296;
+    // --hover-color: #747171;
+    // --placeholder-color: #adafaf;
   }
 }
 
@@ -143,11 +95,6 @@
   display: flex;
   flex-direction: column;
   margin-inline: auto;
-  // max-width: 1920px;
-  // min-height: calc(100vh + 1px);
-  // min-height: 150vh;
-  // padding-block: 4rem;
-  // padding-top: 0rem;
   width: 100%;
 
   @media(min-width: $tablet) {
@@ -227,9 +174,8 @@
 }
 
 @mixin navLinkActive {
-  bottom: -0.75rem; 
   bottom: -0.6rem; 
-  background: var(--nav-link-active); 
+  background: var(--accent-color); 
   content: "";
   height: 2.5px; 
   left: 0;
@@ -239,7 +185,7 @@
 
 @mixin afterAccent {
   content: "";
-  background: var(--nav-link-active); 
+  background: var(--accent-color); 
   bottom: -0.6rem; 
   height: 2.5px; 
   left: 0;
@@ -277,27 +223,36 @@
 
 @mixin button {
   align-items: center;
+  background: none;
   border: 2px solid var(--text-color);
-  color: var(--button-color);
+  color: var(--text-color);
   cursor: pointer;
   display: inline-flex;
-  font-size: 1rem;
+  font-size: 1.25rem;
   font-family: var(--body-font);
-  // font-weight: 500;
-  justify-content: center;
-  padding: 0.125rem 1.25rem;
+  font-weight: bold;
+  gap: 0.75rem;
   font-weight: 200;
-  // transition: background-color 0.3s ease;
+  justify-content: center;
+  letter-spacing: 3px;
+  padding: 0.75rem 1.25rem;
+  padding: 1rem 1.25rem;
   transition: all 250 ease-in-out;
+
+  @media(min-width: $smallTablet) {
+    font-size: 1.5rem;
+  }
 
   &:hover, 
   &:focus {
-    // background: var(--button-color);
-    // color: var(--button-background);
-    // outline: 2px solid var(--button-background);
-    // transition: all 0.3s ease;
     @include hoverClickGrow;
+    font-weight: 500;
   }
+  
+  &:focus {
+    outline: 1.5px solid var(--text-color);
+  }
+
 
   &:active {
     @include hoverClickShrink;

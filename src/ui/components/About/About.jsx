@@ -11,7 +11,7 @@ const About = () => {
               ABOUT ME
             </h4>
             <h2 className="about__introduction">
-              Let me introduce myself.
+              Let me introduce myself
             </h2>
           </header>
 

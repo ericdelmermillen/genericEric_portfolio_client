@@ -50,15 +50,5 @@
   
   &__button {
     @include button;
-    background: none;
-    border: 2px solid var(--text-color);
-    color: var(--text-color);
-    font-weight: bold;
-    padding: 1rem 2rem;
-    cursor: pointer;
-    
-    &:hover {
-      @include hoverClickGrow;
-    }
   }
 }

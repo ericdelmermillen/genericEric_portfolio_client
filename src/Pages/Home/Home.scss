@@ -10,3 +10,48 @@
     position: relative;
   }
 }
+
+
+
+.latestBlogPost {
+  background: var(--neutral-gray-1);
+  // min-height: 100vh;
+  
+  &__inner {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding-block: 4rem;
+    width: 100%;
+    border: 2px solid red;
+  }
+
+  &__header {
+    display: flex;
+    flex-direction: column;
+    font-size: 1.25rem;
+    gap: 2rem;
+    text-align: center;
+  }
+
+  &__heading {
+    @include headingGeneral;
+    display: inline-block; 
+    font-size: 1.5rem;;
+    margin-inline: auto;
+    position: relative;
+
+    &::after {
+      @include afterAccent;
+    }
+  }
+
+  &__video-text {
+    border: 2px solid blue;
+  }
+
+  &__button {
+    @include button;
+    margin-inline: auto;
+  }
+}

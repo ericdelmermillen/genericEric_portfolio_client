@@ -1,7 +1,8 @@
 import { useAppContext } from '../../../contexts/AppContext.jsx'; 
-import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
+import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 // import { toast } from 'react-toastify';
 import './SideNav.scss';
+import { useEffect } from 'react';
 
 const SideNav = ({ children }) => {
   const { 
@@ -14,6 +15,8 @@ const SideNav = ({ children }) => {
 
   const location = useLocation();
   const navigate = useNavigate();
+
+  const isOnHome = location.pathname === "/" || location.pathname === "/home";
   
   // const handleNavLinkBio = () => {
   //   handleNavLinkClick();
@@ -89,7 +92,7 @@ const SideNav = ({ children }) => {
                 className='sideNav__item'
                 onClick={handleSideNavClick}
               >
-                <NavLink className='sideNav__link' to="/">
+                <NavLink className={`sideNav__link ${isOnHome ? "active" : ""}`} to="/">
                   HOME
                 </NavLink>
               </li>
