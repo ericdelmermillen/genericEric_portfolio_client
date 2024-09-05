@@ -3,9 +3,63 @@
 
 .blog {
   @include page;
-  border: 2px solid blue;
-
+  display: flex;
+  height: 300vh;
+  overflow: hidden;
+  
+  &__inner {
+    box-shadow: var(--box-shadow);
+    display: flex;
+    margin-inline: auto;
+    max-width: $largeTablet;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+  
+}
   &__heading {
     color: blue;
+    display: none;
+    margin-inline: auto;
   }
+
+  &__wallpaper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5rem;
+    gap: 10%;
+    gap: 10vw;
+    // gap: 12.5%;
+    height: 100%;
+    left: -5vw;
+    padding-block: 2rem;
+    padding-inline: 2rem;
+    position: absolute;
+    right: 5vw;
+    width: 120%;
+    width: 125%;
+  }
+}
+
+.wallpaper {
+
+  &__item {
+    align-items: center;
+    display: flex;
+    height: 15rem;
+    height: 10%;
+    justify-content: center;
+    opacity: 0.25;
+    opacity: 0.125;
+    width: 10rem;
+    width: 15%;
+  }
+
+  &__icon {
+    color: var(--accent-color);
+    // filter: drop-shadow(6px 6px 6px rgba(0, 0, 0, 0.8));
+    height: 100%;
+    width: 100%;
+  }
+
 }
