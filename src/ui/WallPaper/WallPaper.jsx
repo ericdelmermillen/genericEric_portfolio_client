@@ -39,7 +39,28 @@ const getRandomIcon = () => {
 };
 
 const WallPaperRow = ({ className }) => {
-  const [itemsPerRow] = useState(5);
+  // const [itemsPerRow] = useState(5);
+  const windowWidth = window.innerWidth;
+  const itemsPerRow = windowWidth < 320 
+    ? 4
+    : windowWidth <= 400
+    ? 5
+    // : windowWidth <= 450
+    : windowWidth <= 500
+    ? 6
+    : windowWidth <= 600
+    ? 7
+    : windowWidth <= 700
+    ? 8
+    : windowWidth <= 800
+    ? 9
+    : windowWidth <= 900
+    ? 10
+    : windowWidth <= 1000
+    ? 11
+    : 12;
+
+    // console.log(itemsPerRow)
 
   return (
     <div className={className}>
@@ -56,10 +77,11 @@ const WallPaperRow = ({ className }) => {
   );
 };
 
-const numberOfRows = 10;
 
 const WallPaper = () => {
-  const [rerenderTrigger, setRerenderTrigger] = useState(0); 
+  const [ rerenderTrigger, setRerenderTrigger ] = useState(0); 
+
+  const numberOfRows = 15;
 
   useEffect(() => {
     const interval = setInterval(() => {

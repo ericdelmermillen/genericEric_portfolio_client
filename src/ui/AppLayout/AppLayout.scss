@@ -4,10 +4,10 @@
 .appLayout {
   @include appLayout;
   color: var(--text-color);
-
+  
   &__inner {
     @include inner;
-    // box-shadow: var(--box-shadow);
+    box-shadow: var(--box-shadow);
   }
 
   &__sideNav-children {
