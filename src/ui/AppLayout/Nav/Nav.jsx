@@ -1,5 +1,5 @@
 import { useAppContext } from "../../../contexts/AppContext";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import ColorModeToggle from "../ColorModeToggle/ColorModeToggle";
 import "./Nav.scss";
 
@@ -16,6 +16,8 @@ const Nav = ({ children }) => {
     logoutUser
    } = useAppContext();
    
+  const { pathname } = useLocation();
+
   return (
     <nav className={`nav ${prevScrollYPos < scrollYPos && scrollYPos > 50 ? "hide" : ""}`}>
       <div className="nav__content">
@@ -28,9 +30,14 @@ const Nav = ({ children }) => {
       
         <ul className="nav__links">
           <li className="nav__item">
-            <NavLink className="nav__link" to={"/home"}>
+            <Link className={`nav__link ${
+              pathname === "/" || pathname === "/home" 
+                ? "active" 
+                : ""}`} 
+              to={"/home"}
+            >
               HOME
-            </NavLink>
+            </Link>
           </li>
           <li className="nav__item">
             <NavLink className="nav__link" to={"/projects"}>

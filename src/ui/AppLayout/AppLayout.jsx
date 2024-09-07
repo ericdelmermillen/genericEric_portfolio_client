@@ -33,6 +33,8 @@ const AppLayout = () => {
     <>
       <div className="appLayout" data-color-mode={colorMode}>
 
+        <div className="appLayout__inner">
+
         <Nav>
           {isLoggedIn
             ? 
@@ -74,6 +76,7 @@ const AppLayout = () => {
           <Outlet />
         </div>
         <Footer/> 
+      </div>
       </div>
     </>
   )};

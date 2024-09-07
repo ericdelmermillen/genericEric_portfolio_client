@@ -3,9 +3,22 @@
 
 .projects {
   @include page;
-  border: 2px solid yellow;
 
-  &__heading {
-    color: yellow;
-  }
+  &__inner {
+    // align-items: center;
+    // box-shadow: var(--box-shadow);
+    display: flex;
+    justify-content: center;
+    margin-inline: auto;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+}
+
+&__heading {
+  font-size: 3rem;
+  margin-block: 50vh;
+  position: relative;
+  z-index: 1;
+}
 }

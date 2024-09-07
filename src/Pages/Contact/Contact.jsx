@@ -1,8 +1,9 @@
 import { useEffect } from "react";
 import { scrollToTop } from "../../../utils/utils";
+import TypingText from "../../ui/components/TypingText/TypingText";
 import "./Contact.scss";
 
-const Contact = () => {
+const Contact = ({ children }) => {
 
   // scroll to top on mount
   useEffect(() => {
@@ -12,9 +13,13 @@ const Contact = () => {
   return (
     <>
     <div className="contact">
-      <h1 className="contact__heading">
-        From Contact
-      </h1>
+      <div className="contact__inner">
+        {children}
+        <TypingText 
+          classNames={"contact__heading"}
+          textToType = 'Contact Page'
+        />
+      </div>
     </div>
     </>
   )};

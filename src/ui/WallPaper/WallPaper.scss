@@ -1,0 +1,63 @@
+@import "../../partials/mixins";
+@import "../../partials/variables";
+
+// at ultrawide or bigger: 
+// itemsPerRow: 5
+// inlineRowOffset: 10vw
+// itemWidth: 20vw
+// itemPadding: 6.5vw
+
+
+.wallpaper {
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  position: absolute;
+  position: fixed;
+  text-align: center;;
+  top: 0;
+  top: 0rem;
+  width: 120%;
+  z-index: 01;
+
+  &__inner {
+    border: 2px solid red;
+    overflow-x: hidden;
+    max-width: $ultraWide;
+    margin-inline: auto;
+  }
+  
+  &__row {
+        
+    &--odd {
+      // background: rgba(255, 0, 0, 0.5);
+      margin-inline-start: -10vw;
+      margin-inline-start: -8vw;
+    }
+
+    &--even {
+      // background: rgba(0, 0, 255, 0.5);
+      margin-inline-start: 10vw;
+      margin-inline-start: 8vw;
+    }
+  }
+
+  &__item {
+    align-items: center;
+    aspect-ratio: 1/1;
+    display: inline-flex;
+    justify-content: center;
+    padding: 5vw;
+    padding: 6.5vw;
+    opacity: 50%;
+    // opacity: 25%;
+    width: 18vw;
+    width: 20vw;
+  }
+
+  &__icon {
+    color: var(--accent-color);
+    height: 100%;
+    width: 100%;
+  }
+}

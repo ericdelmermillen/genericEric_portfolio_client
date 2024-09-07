@@ -3,7 +3,7 @@ import { useState, useEffect, createElement } from 'react';
 
 const TypingText = ({ 
   textToType = 'text to type', 
-  typingDelayInterval = '500',
+  typingDelayInterval = '200',
   classNames, 
   elementType = 'h1', 
 }) => {

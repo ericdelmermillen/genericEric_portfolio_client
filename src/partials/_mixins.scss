@@ -138,10 +138,11 @@
   flex-direction: column;
   justify-content: center;
   margin-inline: auto;
-  margin-top: $navHeight;
+  // margin-top: $navHeight;
   max-width: $ultraWide;
   min-height: calc(100vh + 1px);
   width: 100%;
+  box-shadow: var(--box-shadow);
   
   @media(min-width: $tablet) {
     // padding-top: 2rem;

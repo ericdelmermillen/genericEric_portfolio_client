@@ -7,15 +7,14 @@
 
   &__main {
     margin-top: calc(100vh - $navHeight);
+    margin-top: 100vh;
     position: relative;
   }
 }
 
 
-
 .latestBlogPost {
   background: var(--neutral-gray-1);
-  // min-height: 100vh;
   
   &__inner {
     display: flex;
@@ -24,6 +23,7 @@
     padding-block: 4rem;
     width: 100%;
     border: 2px solid red;
+    min-height: 100vh;
   }
 
   &__header {

@@ -28,7 +28,7 @@ const Portfolio = () => {
               PORTFOLIO
             </h4>
             <h2 className="portfolio__sub-heading">
-              Check Out My Wor
+              Check Out My Work
             </h2>
             <p className="portfolio__lead">
               Here is a small smaple of my projects:

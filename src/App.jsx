@@ -1,6 +1,7 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import AppLayout from "./ui/AppLayout/AppLayout.jsx";
-import Blog from "./pages/Blog/Blog.jsx";
+import Blog from "./Pages/Blog/Blog.jsx";
+
 import BlogPost from "./pages/BlogPost/BlogPost.jsx";
 import Contact from "./pages/Contact/Contact.jsx";
 import Home from "./pages/Home/Home.jsx";
@@ -9,6 +10,7 @@ import ProjectDetails from "./pages/ProjectDetails/ProjectDetails.jsx";
 import Login from "./pages/Login/Login.jsx";
 import NotFound from "./pages/NotFound/NotFound.jsx";
 import './App.scss';
+import WallPaper from "./ui/WallPaper/WallPaper.jsx";
 
 const router = createBrowserRouter([
   {
@@ -25,7 +27,12 @@ const router = createBrowserRouter([
       },
       { 
         path: '/projects', 
-        element: <Projects />
+        // element: <Projects />
+        element: (
+          <Projects>
+            <WallPaper />
+            </Projects>
+          )
       },
       { 
         path: '/projects/project/:projectID', 
@@ -33,7 +40,12 @@ const router = createBrowserRouter([
       },
       { 
         path: '/blog', 
-        element: <Blog />
+        element: 
+          (
+            <Blog>
+              <WallPaper />
+            </Blog>
+          )
       },
       { 
         path: '/blog/post/:postID', 
@@ -41,7 +53,11 @@ const router = createBrowserRouter([
       },
       { 
         path: '/contact', 
-        element: <Contact />
+        element: (
+            <Contact>
+              <WallPaper />
+            </Contact>
+          )
       },
       { 
         path: '/login', 

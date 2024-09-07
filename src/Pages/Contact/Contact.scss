@@ -3,9 +3,21 @@
 
 .contact {
   @include page;
-  border: 2px solid green;
+  
+  &__inner {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    margin-inline: auto;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+}
 
   &__heading {
-    color: green;
+    font-size: 3rem;
+    margin-block: 50vh;
+    position: relative;
+    z-index: 1;
   }
 }
