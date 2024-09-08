@@ -39,7 +39,6 @@ const getRandomIcon = () => {
 };
 
 const WallPaperRow = ({ className }) => {
-  // const [itemsPerRow] = useState(5);
   const windowWidth = window.innerWidth;
   const itemsPerRow = windowWidth < 320 
     ? 4
