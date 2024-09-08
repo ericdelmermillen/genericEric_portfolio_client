@@ -17,7 +17,7 @@ const skills = [
   { skillName: "Next JS", skillIcon: SiNextdotjs },
   { skillName: "Git/Github", skillIcon: FaGithub },
   { skillName: "Node JS", skillIcon: DiNodejs },
-  { skillName: "Express JS", skillIcon: SiExpress },
+  { skillName: "Express", skillIcon: SiExpress },
   { skillName: "MySQL", skillIcon: SiMysql },
   { skillName: "AWS", skillIcon: FaAws },
   { skillName: "Postman", skillIcon: SiPostman },

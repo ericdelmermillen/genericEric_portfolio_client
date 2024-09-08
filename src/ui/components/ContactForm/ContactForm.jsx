@@ -1,10 +1,19 @@
 import { useState } from "react";
 import "./ContactForm.scss";
+import { useLocation } from "react-router-dom";
 
-const ContactForm = () => {
+const ContactForm = ({ children }) => {
   const [ name, setName ] = useState("");
   const [ email, setEmail ] = useState("");
   const [ message, setMessage ] = useState("");
+
+  const location = useLocation();
+  // console.log(location.pathname)
+
+  const isOnContact = location.pathname === "/contact"
+
+  console.log(isOnContact)
+
 
   const handleNameChange = (e) => {
     setName(e.target.value);
@@ -28,9 +37,10 @@ const ContactForm = () => {
       <section className="contactForm">
         <div className="contactForm__inner">
 
-          <div className="contactForm__header">
+          <div className={`contactForm__header ${isOnContact ? "hide" : ""}`}>
             <h4 className="contactForm__heading">
-              Contact
+              {/* Contact */}
+              CONTACT
             </h4>
             <h2 className="contactForm__sub-heading">
               I'd love to hear from you.
@@ -45,6 +55,9 @@ const ContactForm = () => {
             className="contactForm__form"
             onSubmit={(e) => handleSubmit(e)}
           >
+
+            {children}
+            
             <div className="contactForm__field">
               <input
                 type="text"

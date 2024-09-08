@@ -3,15 +3,16 @@
 
 .contact {
   @include page;
-  
+  height: auto;
   &__inner {
-    align-items: center;
     display: flex;
     justify-content: center;
-    margin-inline: auto;
-    overflow: hidden;
+    padding-inline: 1rem;
     position: relative;
     width: 100%;
+    height: calc(100vh - $navHeight);
+    padding-top: calc($navHeight + 2rem);
+    padding-bottom: 2rem;
 }
 
   &__heading {
@@ -19,5 +20,25 @@
     margin-block: 50vh;
     position: relative;
     z-index: 1;
+  }
+
+  &__content {
+    width: 100%;
+    max-width: $largeTablet;
+    max-width: $tablet;
+    box-shadow: var(--box-shadow);
+  }
+
+  &__child {
+    @include headingGeneral;
+    display: inline-block;
+    font-size: 2rem;
+    margin-bottom: 3rem;
+    position: relative;
+
+    &::after {
+      @include afterAccent;
+      // background: var(--text-color);
+    }
   }
 }
