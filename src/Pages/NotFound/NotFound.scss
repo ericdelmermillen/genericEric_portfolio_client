@@ -3,9 +3,12 @@
 
 .notFound {
   @include page;
-  border: 2px solid purple;
 
-  &__heading {
-    color: purple;
+  &__inner {
+    @include wallpaperContainer;
   }
+
+  // &__heading {
+  //   color: purple;
+  // }
 }

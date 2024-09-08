@@ -27,29 +27,35 @@ const router = createBrowserRouter([
       },
       { 
         path: '/projects', 
-        // element: <Projects />
         element: (
           <Projects>
             <WallPaper />
-            </Projects>
-          )
+          </Projects>
+        )
       },
       { 
         path: '/projects/project/:projectID', 
-        element: <ProjectDetails />
+        element: (
+          <ProjectDetails>
+            <WallPaper />
+          </ProjectDetails>
+        )
       },
       { 
         path: '/blog', 
-        element: 
-          (
-            <Blog>
-              <WallPaper />
-            </Blog>
-          )
+        element: (
+          <Blog>
+            <WallPaper />
+          </Blog>
+        )
       },
       { 
         path: '/blog/post/:postID', 
-        element: <BlogPost />
+        element: (
+          <BlogPost>
+            <WallPaper />
+          </BlogPost >
+        )
       },
       { 
         path: '/contact', 
@@ -61,11 +67,19 @@ const router = createBrowserRouter([
       },
       { 
         path: '/login', 
-        element: <Login />
+        element: (
+          <Login>
+            <WallPaper />
+          </Login>
+          )
       },
       { 
         path: '/*', 
-        element: <NotFound />
+        element: (
+          <NotFound>
+            <WallPaper />
+          </NotFound>
+        )
       },
       // { 
       //   path: '/menu', 

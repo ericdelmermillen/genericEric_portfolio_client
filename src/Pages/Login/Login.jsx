@@ -3,8 +3,9 @@ import { useNavigate } from "react-router-dom";
 import { useAppContext } from "../../contexts/AppContext";
 import { scrollToTop } from "../../../utils/utils";
 import "./Login.scss";
+import LoginForm from "../../ui/components/LoginForm/LoginForm";
 
-const Login = () => {
+const Login = ({ children }) => {
   const { isLoggedIn, loginUser } = useAppContext();
 
   const navigate = useNavigate();
@@ -24,13 +25,13 @@ const Login = () => {
   return (
     <>
     <div className="login">
-      <h1 className="login__heading">Login</h1>
-      <button
-        onClick={handleLogin}
-      >
-        Login
-      </button>
-      <h2>IsLoggedIn: {isLoggedIn ? "true" : "false"}</h2>
+      <div className="login__inner">
+        { children }
+        <div className="login__content">
+          <LoginForm />
+          {/* </LoginForm> */}
+        </div>
+      </div>
     </div>
     </>
   )};

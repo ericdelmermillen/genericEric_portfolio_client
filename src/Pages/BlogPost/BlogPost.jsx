@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { scrollToTop } from "../../../utils/utils";
 import "./BlogPost.scss";
 
-const BlogPost = () => {
+const BlogPost = ({ children }) => {
   const { postID } = useParams();
 
   const navigate = useNavigate();
@@ -16,18 +16,22 @@ const BlogPost = () => {
   return (
     <>
     <div className="blogPost">
-      <h1
-        className="blogPost__heading"
-      >
-        Blog Post: {postID}
-      </h1>
-      
-      <button
-        onClick={() => navigate(-1)}
-      >
-        Back
-      </button>
+      <div className="blogPost__inner">
+        {children}
 
+        <h1
+          className="blogPost__heading"
+        >
+          Blog Post: {postID}
+        </h1>
+        
+        {/* <button
+          onClick={() => navigate(-1)}
+        >
+          Back
+        </button> */}
+
+      </div>
     </div>
     </>
   )};

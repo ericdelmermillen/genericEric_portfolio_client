@@ -3,33 +3,16 @@
 
 .contact {
   @include page;
-  height: auto;
+
   &__inner {
-    display: flex;
-    justify-content: center;
-    padding-inline: 1rem;
-    position: relative;
-    width: 100%;
-    height: calc(100vh - $navHeight);
-    padding-top: calc($navHeight + 2rem);
-    padding-bottom: 2rem;
+    @include wallpaperContainer;
 }
 
-  &__heading {
-    font-size: 3rem;
-    margin-block: 50vh;
-    position: relative;
-    z-index: 1;
-  }
-
   &__content {
-    width: 100%;
-    max-width: $largeTablet;
-    max-width: $tablet;
-    box-shadow: var(--box-shadow);
+    @include formContent;
   }
 
-  &__child {
+  &__heading {
     @include headingGeneral;
     display: inline-block;
     font-size: 2rem;
@@ -38,7 +21,6 @@
 
     &::after {
       @include afterAccent;
-      // background: var(--text-color);
     }
   }
 }

@@ -202,6 +202,50 @@
   font-weight: 600;
 }
 
+@mixin formFullWidth { 
+  align-items: center;
+  background: var(--neutral-gray-2);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding-inline: 2rem;
+  position: relative;
+  text-align: center;
+  z-index: 1;
+}
+
+@mixin formFullWidthInner {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  max-width: $tablet;
+  min-width: 100%;
+  padding-block: 3rem;
+  padding-inline: 2rem;
+}
+
+@mixin formFullWidthInput {
+  background: none;
+  border: none;
+  border-bottom: 2px solid var(--text-color);
+  font-family: var(--body-font);
+  font-size: 1.25rem;
+  margin-bottom: 1.5rem;
+  outline: none;
+  padding-block: 0.75rem;
+  padding-inline: 0.75rem;
+  position: relative;
+  width: 100%;
+}
+
+@mixin formHeading {
+  @include headingGeneral;
+    display: inline-block;
+    font-size: 2rem;
+    margin-bottom: 3rem;
+    position: relative;
+}
+
 @mixin heroImgTop {
   opacity: 1;
   transition: all 1s ease-in-out;
@@ -222,6 +266,26 @@
   transform: scale(0.99);
   transition: all 0.25s ease-in;
 }
+
+
+@mixin wallpaperContainer {
+  display: flex;
+  justify-content: center;
+  padding-inline: 1rem;
+  position: relative;
+  width: 100%;
+  height: calc(100vh - $navHeight);
+  padding-top: calc($navHeight + 2rem);
+  padding-bottom: 2rem;
+}
+
+@mixin formContent {
+  box-shadow: var(--box-shadow);
+  max-width: $tablet;
+  max-width: $largeTablet;
+  width: 100%;
+}
+
 
 @mixin button {
   align-items: center;

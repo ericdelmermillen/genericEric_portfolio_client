@@ -17,19 +17,13 @@ const Contact = ({ children }) => {
       <div className="contact__inner">
         {children}
         <div className="contact__content">
-        <ContactForm>
-          {/* <TypingText 
-            classNames={"contact__typing"}
-            textToType={'What can I do for you?'}
-            typingDelayInterval={200}
-            elementType={'h1'} 
-          /> */}
-          <div className="contact__children">
-            <h4 className="contact__child">
-              How can I help?
-            </h4>
-          </div>
-        </ContactForm>
+          <ContactForm>
+            <div className="contact__children">
+              <h4 className="contact__heading">
+                How can I help?
+              </h4>
+            </div>
+          </ContactForm>
         </div>
       </div>
     </div>

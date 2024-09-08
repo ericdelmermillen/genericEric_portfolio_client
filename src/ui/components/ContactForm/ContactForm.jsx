@@ -8,11 +8,7 @@ const ContactForm = ({ children }) => {
   const [ message, setMessage ] = useState("");
 
   const location = useLocation();
-  // console.log(location.pathname)
-
-  const isOnContact = location.pathname === "/contact"
-
-  console.log(isOnContact)
+  const isOnContact = location.pathname === "/contact";
 
 
   const handleNameChange = (e) => {
@@ -39,7 +35,6 @@ const ContactForm = ({ children }) => {
 
           <div className={`contactForm__header ${isOnContact ? "hide" : ""}`}>
             <h4 className="contactForm__heading">
-              {/* Contact */}
               CONTACT
             </h4>
             <h2 className="contactForm__sub-heading">

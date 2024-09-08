@@ -3,9 +3,24 @@
 
 .login {
   @include page;
-  border: 2px solid pink;
+
+  &__inner {
+    @include wallpaperContainer;
+}
+
+  &__content {
+    @include formContent;
+  }
 
   &__heading {
-    color: pink;
+    @include headingGeneral;
+    display: inline-block;
+    font-size: 2rem;
+    margin-bottom: 3rem;
+    position: relative;
+
+    &::after {
+      @include afterAccent;
+    }
   }
 }
