@@ -15,8 +15,6 @@ const initialState = {
   error: ""
 };
 
-// const [ isFirefox, setIsFirefox ] = useState(navigator.userAgent.toLowerCase().indexOf('firefox') > -1);
-
 const reducer = (state, action) => {
   switch(action.type) {
 
@@ -36,18 +34,19 @@ const reducer = (state, action) => {
     case "user/login":
       // api call wil be made either in Login
       // initial mount will check for token in local storage so no need to check email and password here
-      const { email, password } = action.payload;
+      // const { email, password } = action.payload;
 
-      if(!email || !password) {
-        return "Email and Password required";
-      }
+      // if(!email || !password) {
+      //   return "Email and Password required";
+      // }
       
-      if(email === user.email && password === user.password) {
-        // handle login call here
-        // set token in local storage
-        // set refresh token in local storage
-        return {...state, isLoggedIn: true};
-      }
+      // if(email === user.email && password === user.password) {
+      //   // handle login call here
+      //   // set token in local storage
+      //   // set refresh token in local storage
+      //   return {...state, isLoggedIn: true};
+      // }
+      return {...state, isLoggedIn: true};
       
     case "user/logout":
       // remove token

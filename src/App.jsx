@@ -1,4 +1,5 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import AppLayout from "./ui/AppLayout/AppLayout.jsx";
 import Blog from "./Pages/Blog/Blog.jsx";
 
@@ -9,8 +10,10 @@ import Projects from "./pages/Projects/Projects.jsx";
 import ProjectDetails from "./pages/ProjectDetails/ProjectDetails.jsx";
 import Login from "./pages/Login/Login.jsx";
 import NotFound from "./pages/NotFound/NotFound.jsx";
-import './App.scss';
 import WallPaper from "./ui/WallPaper/WallPaper.jsx";
+import './App.scss';
+
+const queryClient = new QueryClient();
 
 const router = createBrowserRouter([
   {
@@ -120,16 +123,14 @@ const App = () => {
 
   return (
     <>
-      <RouterProvider router={router} />
+     <QueryClientProvider client={queryClient}>
+        <RouterProvider router={router} />
+     </QueryClientProvider>
     </>
   )};
 
 export default App;
 
-// 1) make AppLayout
-// 2) Navbar & SideNav
-// --NavBar shows when scrolling up or at top only
-// --can I use a checkbox for the state to show the SideNav
 // --NavLogo with initials
 // 3) AppContext
 // --user
