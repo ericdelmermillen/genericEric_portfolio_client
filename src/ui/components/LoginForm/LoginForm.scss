@@ -73,10 +73,17 @@
   }
 }
 
-.passwordInput__icon {
-  margin-top: 0.75rem;
-  position: absolute;
-  right: 0.75rem;
-  top: 0;
-  fill: var(--text-color);
+.passwordInput {
+  
+  &__icon {
+    display: flex;
+    fill: var(--text-color);
+    margin-top: -3.5rem;
+    position: absolute;
+    right: 0.5rem;
+
+    &.hide {
+      display: none;
+    }
+  }
 }

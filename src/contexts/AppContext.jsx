@@ -15,6 +15,8 @@ const initialState = {
   error: ""
 };
 
+// const [ isFirefox, setIsFirefox ] = useState(navigator.userAgent.toLowerCase().indexOf('firefox') > -1);
+
 const reducer = (state, action) => {
   switch(action.type) {
 

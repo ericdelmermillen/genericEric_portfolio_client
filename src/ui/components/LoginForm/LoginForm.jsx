@@ -1,7 +1,14 @@
-import { useState } from "react";
-import "./LoginForm.scss";
-import Hide from "../../../assets/svgs/Hide.jsx"
-import Show from "../../../assets/svgs/Show.jsx"
+import { useEffect, useState } from "react";
+import { isValidEmail,
+  isValidPassword } from "../../../../utils/utils.js";
+  import Hide from "../../../assets/svgs/Hide.jsx"
+  import Show from "../../../assets/svgs/Show.jsx"
+  import "./LoginForm.scss";
+
+
+const isSafari = navigator.userAgent.toLowerCase().includes("safari") && 
+  (!navigator.userAgent.toLowerCase().includes("chrome") || !navigator.userAgent.toLowerCase().includes("mozilla"));
+
 
 const LoginForm = ({ children }) => {
   const [ email, setEmail ] = useState("");
@@ -9,9 +16,8 @@ const LoginForm = ({ children }) => {
   const [ showPassword, setShowPassword ] = useState(false);
 
   const handleTogglePasswordVisibility = () => {
-    console.log("first")
     setShowPassword(c => !c)
-  }
+  };
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
@@ -66,26 +72,23 @@ const LoginForm = ({ children }) => {
                 onChange={(e) => handlePasswordChange(e)}
               />
 
-                <div 
-                  className="passwordInput__icon"
-                  onClick={handleTogglePasswordVisibility}
-                >
+              <div 
+                className={`passwordInput__icon ${isSafari ? "hide": ""}`}
+                onClick={handleTogglePasswordVisibility}
+              >
 
-                  {showPassword 
-                    ? <Hide className={'passwordInput__icon--hide'}/>
-                    : <Show className={'passwordInput__icon--show'}/>
-                  }
-                </div>
+                {showPassword
+                  ? <Hide className="passwordInput__icon--hide"/>
+                  : <Show className="passwordInput__icon--show"/>
+                }
+
+              </div>
             </div>
     
             <div className="contactForm__submit">
-              <button
-                type="submit"
-                className="contactForm__button"
-              >
-                SUBMIT
-              </button>
+              <button type="submit" className="contactForm__button">SUBMIT</button>
             </div>
+
           </form>
         </div>
       </section>
