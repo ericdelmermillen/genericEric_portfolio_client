@@ -1,5 +1,6 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { Toaster } from 'react-hot-toast';
 import AppLayout from "./ui/AppLayout/AppLayout.jsx";
 import Blog from "./Pages/Blog/Blog.jsx";
 
@@ -125,6 +126,60 @@ const App = () => {
     <>
      <QueryClientProvider client={queryClient}>
         <RouterProvider router={router} />
+
+         <Toaster
+          position="bottom-center"  
+          reverseOrder={false} // Newest toast at the bottom
+          gutter={8} // Space between toasts
+          containerStyle={{
+            top: 20,
+            right: 20,
+          }}
+          toastOptions={{
+            duration: 4000, // Default duration
+            ariaProps: {
+              role: 'status',
+              'aria-live': 'polite',
+            },
+            style: {
+              background: '#333',
+              color: '#fff',
+              padding: '16px',
+            },
+            success: {
+              duration: 5000,
+              theme: {
+                primary: 'green',
+                secondary: 'black',
+              },
+              iconTheme: {
+                primary: 'white',
+                secondary: 'green',
+              },
+              style: {
+                background: 'green',
+                color: '#fff',
+              },
+            },
+            error: {
+              duration: 7000,
+              icon: '🔥',
+              style: {
+                background: 'red',
+                color: '#fff',
+              },
+            },
+            loading: {
+              duration: Infinity,
+              icon: '⏳',
+              style: {
+                background: '#007bff',
+                color: '#fff',
+              },
+            },
+          }}
+        />
+
      </QueryClientProvider>
     </>
   )};

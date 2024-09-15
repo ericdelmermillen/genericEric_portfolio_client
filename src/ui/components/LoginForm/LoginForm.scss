@@ -29,11 +29,10 @@
   }
 
   &__form {
-    width: 100%;
-    // border: 2px solid blue;
-    flex: 1;
     display: flex;
+    flex: 1;
     flex-direction: column;
+    width: 100%;
   }
   
   &__field {
@@ -52,12 +51,11 @@
       color: var(--text-color);
       font-size: 1rem;
     }
+  }
 
-    &--message {
-      height: 12rem;
-      height: 10rem;
-      resize: none;
-    }
+  &__error {
+    color: var(--error-color);
+    margin-top: -1.25rem;
   }
 
   &__submit {
@@ -87,3 +85,8 @@
     }
   }
 }
+
+// .loginForm__error {
+//   color: red;
+//   text-align: start;
+// }

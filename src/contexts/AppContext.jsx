@@ -1,4 +1,4 @@
-import { createContext, useContext, useReducer, useEffect } from "react";
+import { createContext, useContext, useReducer, useEffect, useState } from "react";
 
 const AppContext = createContext();
 
@@ -7,7 +7,6 @@ const user = { email: "ericdelmermillen@gmail.com", password: "12345678"};
 
 const initialState = {
   isLoggedIn: false,
-  isLoading: false,
   colorMode: localStorage.getItem('colorMode') || "light",
   scrollYPos: window.scrollY,
   prevScrollYPos: window.scrollY,
@@ -17,9 +16,6 @@ const initialState = {
 
 const reducer = (state, action) => {
   switch(action.type) {
-
-    case "app/loading":
-      return {...state, isLoading: true};
 
     case "app/scrollY":
       return {
@@ -32,6 +28,7 @@ const reducer = (state, action) => {
       return {...state, showSideNav: !state.showSideNav}
 
     case "user/login":
+      console.log("From reducer")
       // api call wil be made either in Login
       // initial mount will check for token in local storage so no need to check email and password here
       // const { email, password } = action.payload;
@@ -67,10 +64,12 @@ const reducer = (state, action) => {
   }
 };
 
+const minLoadingTime = 200;
 
 const AppContextProvider = ({ children }) => {
   const [ state, dispatch ] = useReducer(reducer, initialState);
-  const { isLoading, isLoggedIn, colorMode, scrollYPos, prevScrollYPos, showSideNav} = state;
+  const { isLoggedIn, colorMode, scrollYPos, prevScrollYPos, showSideNav} = state;
+  const [ isLoading, setIsLoading ] = useState(false)
 
   const toggleColorMode = () => {
     dispatch({ type: "colorMode/toggle"});
@@ -93,6 +92,8 @@ const AppContextProvider = ({ children }) => {
 
   const contextValues = {
     isLoading,
+    setIsLoading,
+    minLoadingTime,
     isLoggedIn,
     loginUser,
     logoutUser,

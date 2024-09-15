@@ -1,10 +1,14 @@
 import { useState } from "react";
 import { useAppContext } from "../../../contexts/AppContext.jsx";
+import { useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
 import { isValidEmail, isValidPassword } from "../../../../utils/utils.js";
+import { toast } from 'react-hot-toast'; 
 import Hide from "../../../assets/svgs/Hide.jsx";
 import Show from "../../../assets/svgs/Show.jsx";
 import "./LoginForm.scss";
+
+// configure mutation options for retry attempts and delay centrally
 
 const isSafari = navigator.userAgent.toLowerCase().includes("safari") &&
   (!navigator.userAgent.toLowerCase().includes("chrome") || !navigator.userAgent.toLowerCase().includes("mozilla"));
@@ -12,11 +16,20 @@ const isSafari = navigator.userAgent.toLowerCase().includes("safari") &&
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 const LoginForm = ({ children }) => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [showPassword, setShowPassword] = useState(false);
+  const [ email, setEmail ] = useState("");
+  const [ password, setPassword ] = useState("");
+  const [ showPassword, setShowPassword ] = useState(false);
+  const [ initialFormCheck, setInitialFormCheck ] = useState(false);
+  const [ emailIsValid, setEmailIsValid ] = useState(true);
+  const [ passwordIsValid, setPasswordIsValid ] = useState(true);
 
-  const { loginUser } = useAppContext();
+  const { 
+    isLoading, 
+    setIsLoading, 
+    loginUser 
+  } = useAppContext();
+
+  const navigate = useNavigate();
 
   const handleTogglePasswordVisibility = () => {
     setShowPassword(c => !c);
@@ -24,15 +37,26 @@ const LoginForm = ({ children }) => {
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
+    checkEmailIsValid();
   };
 
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
+    checkPasswordIsValid();
+  };
+  
+  const checkEmailIsValid = () => {
+    setEmailIsValid(isValidEmail(email));
+  };
+
+  const checkPasswordIsValid = () => {
+    setPasswordIsValid(isValidPassword(password));
   };
 
   // Setup useMutation hook
-  const mutation = useMutation({
+  const { mutate } = useMutation({
     mutationFn: async ({ email, password }) => {
+
       const response = await fetch(`${BASE_URL}/auth/loginuser`, {
         method: "POST",
         headers: {
@@ -43,7 +67,7 @@ const LoginForm = ({ children }) => {
 
       const data = await response.json();
 
-      if (!response.ok) {
+      if(!response.ok) {
         throw new Error(data.message || "Login failed");
       }
 
@@ -52,24 +76,44 @@ const LoginForm = ({ children }) => {
     retry: 3, // Number of retry attempts on failure
     retryDelay: 1000, // Delay between retries (in milliseconds)
     onSuccess: (data) => {
-      // give loginUser the token and regresh token
-      loginUser()
-      console.log("Login successful:", data);
+      // give loginUser the token and refresh token
+      loginUser();
+      navigate("/home");
+      setIsLoading(false);
       // Handle login success (e.g., redirect or store token)
+      return toast.success("Logged in successfully");
     },
     onError: (error) => {
       console.error("Login failed:", error.message);
-      // Optionally display an error message to the user
+      setIsLoading(false);
+      return toast.error(`${error.message}`);
     },
   });
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Call mutate function with email and password
+    setIsLoading(true);
+    setInitialFormCheck(true);
+    checkEmailIsValid();
+    checkPasswordIsValid();
 
-    // handle validation before the mutate call
+    if(email.length === 0) {
+      setIsLoading(false);
+      return toast.error("Email address is required");
+    };
+    
+    if(password.length === 0) {
+      setIsLoading(false);
+      return toast.error("Password is required");
+    };
 
-    mutation.mutate({ email, password });
+    if(!isValidEmail(email) || !isValidPassword(password)) {
+      setIsLoading(false);
+      return toast.error("Email and/or Password is invalid");
+    };
+
+    // set token and refresh token here?
+    return mutate({ email, password });
   };
 
   return (
@@ -97,13 +141,24 @@ const LoginForm = ({ children }) => {
                 placeholder="EMAIL"
                 value={email}
                 onChange={handleEmailChange}
+                onBlur={handleEmailChange}
               />
+
+              {!emailIsValid && initialFormCheck 
+                ? (
+                    <div className="loginForm__error">
+                      Invalid Email
+                    </div>
+                  )
+
+                : null}
+
             </div>
 
-            <div className="loginForm__field loginForm__field--email">
+            <div className="loginForm__field loginForm__field--password">
               <input
                 type={showPassword ? "text" : "password"}
-                className="contactForm__input"
+                className="loginForm__input"
                 name="password"
                 placeholder="PASSWORD"
                 value={password}
@@ -119,11 +174,26 @@ const LoginForm = ({ children }) => {
                   : <Show className="passwordInput__icon--show" />
                 }
               </div>
+              
+              {!passwordIsValid && initialFormCheck 
+                ? ( 
+                    <div className="loginForm__error">
+                      Invalid Password
+                    </div>
+                  )
+
+                : null
+              }
+              
             </div>
 
-            <div className="contactForm__submit">
-              <button type="submit" className="contactForm__button">
-                {mutation.isLoading ? "Loading..." : "SUBMIT"}
+            <div className="loginForm__submit">
+              <button 
+                type="submit" 
+                className="loginForm__button"
+                disabled={isLoading}
+              >
+                SUBMIT
               </button>
             </div>
 
@@ -131,7 +201,6 @@ const LoginForm = ({ children }) => {
         </div>
       </section>
     </>
-  );
-};
+  )};
 
 export default LoginForm;
