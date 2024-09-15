@@ -29,11 +29,12 @@
   }
 
   &__form {
-    width: 100%;
-    // border: 2px solid blue;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
+    @include formTall;
+    // overflow-y: scroll!important;
+    
+    @media(min-height: 750px) {
+      overflow-y: hidden!important;
+    }
   }
   
   &__lead {
@@ -62,9 +63,17 @@
     }
   }
 
+  &__error {
+    @include formErrorMessage;
+  }
+
   &__submit {
     display: flex;
-    margin-top: auto;
+    margin-top: 1rem;
+    
+    @media(min-height: 800px) {
+      margin-top: auto;
+    }
   }
   
   &__button {

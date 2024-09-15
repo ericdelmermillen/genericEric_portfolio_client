@@ -9,6 +9,7 @@ import Show from "../../../assets/svgs/Show.jsx";
 import "./LoginForm.scss";
 
 // configure mutation options for retry attempts and delay centrally
+//  conditional retries in case error code is 401
 
 const isSafari = navigator.userAgent.toLowerCase().includes("safari") &&
   (!navigator.userAgent.toLowerCase().includes("chrome") || !navigator.userAgent.toLowerCase().includes("mozilla"));
@@ -140,6 +141,7 @@ const LoginForm = ({ children }) => {
                 name="email"
                 placeholder="EMAIL"
                 value={email}
+                // onChange={(e) => handleEmailChange(e)}
                 onChange={handleEmailChange}
                 onBlur={handleEmailChange}
               />
@@ -163,6 +165,7 @@ const LoginForm = ({ children }) => {
                 placeholder="PASSWORD"
                 value={password}
                 onChange={handlePasswordChange}
+                onBlur={handlePasswordChange}
               />
 
               <div

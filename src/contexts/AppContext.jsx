@@ -28,7 +28,6 @@ const reducer = (state, action) => {
       return {...state, showSideNav: !state.showSideNav}
 
     case "user/login":
-      console.log("From reducer")
       // api call wil be made either in Login
       // initial mount will check for token in local storage so no need to check email and password here
       // const { email, password } = action.payload;

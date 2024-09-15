@@ -29,10 +29,7 @@
   }
 
   &__form {
-    display: flex;
-    flex: 1;
-    flex-direction: column;
-    width: 100%;
+    @include form;
   }
   
   &__field {
@@ -54,8 +51,7 @@
   }
 
   &__error {
-    color: var(--error-color);
-    margin-top: -1.25rem;
+    @include formErrorMessage;
   }
 
   &__submit {
@@ -85,8 +81,3 @@
     }
   }
 }
-
-// .loginForm__error {
-//   color: red;
-//   text-align: start;
-// }

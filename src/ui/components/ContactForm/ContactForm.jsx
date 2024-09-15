@@ -1,31 +1,63 @@
 import { useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import { isValidEmail } from "../../../../utils/utils.js";
 import "./ContactForm.scss";
-import { useLocation } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const ContactForm = ({ children }) => {
   const [ name, setName ] = useState("");
   const [ email, setEmail ] = useState("");
   const [ message, setMessage ] = useState("");
+  const [ nameIsValid, setNameIsValid ] = useState(true);
+  const [ emailIsValid, setEmailIsValid ] = useState(true);
+  const [ messageIsValid, setMessageIsValid ] = useState(true);
+  const [ initialFormCheck , setInitialFormCheck ] = useState(false);
 
   const location = useLocation();
+  const navigate = useNavigate();
   const isOnContact = location.pathname === "/contact";
-
 
   const handleNameChange = (e) => {
     setName(e.target.value);
+    checkNameIsValid();
   };
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
+    checkEmailIsValid();
   };
 
   const handleMessageChange = (e) => {
     setMessage(e.target.value);
+    checkMessageIsValid();
+  };
+
+  const checkNameIsValid = () => {
+    setNameIsValid(name.length >= 2);
+  };
+  
+  const checkEmailIsValid = () => {
+    setEmailIsValid(isValidEmail(email));
+  };
+
+  const checkMessageIsValid = () => {
+    setMessageIsValid(message.length >= 25);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("submit");
+    setInitialFormCheck(true);
+
+    checkNameIsValid();
+    checkEmailIsValid();
+    checkMessageIsValid();
+
+    console.log(location.pathname)
+
+    if(location.pathname === "/contact") {
+      navigate("/home");
+      return toast.success("Message sent!")
+    }
   };
 
   return (
@@ -62,6 +94,17 @@ const ContactForm = ({ children }) => {
                 value={name}
                 onChange={(e) => handleNameChange(e)}
               />
+
+              {!nameIsValid && initialFormCheck 
+                ? ( 
+                    <div className="contactForm__error">
+                      Name is too short
+                    </div>
+                  )
+
+                : null
+              }
+
             </div>
 
             <div className="contactForm__field">
@@ -72,7 +115,19 @@ const ContactForm = ({ children }) => {
                 placeholder="EMAIL"
                 value={email}
                 onChange={(e) => handleEmailChange(e)}
+                onBlur={handleEmailChange}
               />
+
+              {!emailIsValid && initialFormCheck 
+                ? ( 
+                    <div className="contactForm__error">
+                      Invalid Email
+                    </div>
+                  )
+
+                : null
+              }
+              
             </div>
             <div className="contactForm__field">
               <textarea
@@ -82,6 +137,17 @@ const ContactForm = ({ children }) => {
                 value={message}
                 onChange={(e) => handleMessageChange(e)}
               ></textarea>
+
+              {!messageIsValid && initialFormCheck 
+                ? ( 
+                    <div className="contactForm__error">
+                      Message is too short
+                    </div>
+                  )
+
+                : null
+              }
+              
             </div>
             <div className="contactForm__submit">
               <button

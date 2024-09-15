@@ -223,7 +223,10 @@
   max-width: $tablet;
   min-width: 100%;
   padding-block: 3rem;
-  padding-inline: 2rem;
+  
+  @media(min-width: $smallTablet) {
+    padding-inline: 2rem;
+  }
 }
 
 @mixin formFullWidthInput {
@@ -238,6 +241,33 @@
   padding-inline: 0.75rem;
   position: relative;
   width: 100%;
+}
+
+@mixin form {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  width: 100%;
+  
+  @media(min-height: 600px) {
+    overflow-y: hidden;
+  }
+}
+
+@mixin formTall {
+  @include form;
+  overflow-y: scroll!important;
+  
+  @media(min-height: 750px) {
+    overflow-y: hidden;
+  }
+}
+
+@mixin formErrorMessage {
+  color: var(--error-color);
+  margin-top: -1.25rem;
 }
 
 @mixin formHeading {
@@ -268,7 +298,6 @@
   transform: scale(0.99);
   transition: all 0.25s ease-in;
 }
-
 
 @mixin wallpaperContainer {
   display: flex;
@@ -314,12 +343,14 @@
   &:hover, 
   &:focus {
     @include hoverClickGrow;
+    @include hoverClickGrow;
     font-weight: 500;
+    outline: none;
   }
   
-  &:focus {
-    outline: 1.5px solid var(--text-color);
-  }
+  // &:focus {
+  //   outline: 1.5px solid var(--text-color);
+  // }
 
 
   &:active {
