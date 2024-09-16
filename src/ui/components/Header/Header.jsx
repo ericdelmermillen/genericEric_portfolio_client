@@ -49,7 +49,7 @@ const Header = () => {
             className={`header__nightImg ${colorMode === 'dark' 
               ? "top" 
               : ""}`}
-            aria-label="Nighttime background showing a the sun in the sky above the ocean."
+            aria-label="Nighttime background showing the moon in the sky above the ocean."
           ></div>
                   
           <div className="header__content">

@@ -35,14 +35,11 @@
   
   &__nightImg {
     @include heroImg;
-    background: url("../../../assets/images/night-top-1.jpg") center center;
-    background: url("../../../assets/images/night-top-2.jpg") center center;
-    // background: url("../../../assets/images/night-top-3.jpg") center center;
-    // background: url("../../../assets/images/night-top-4.jpg") center center;
-    // background: url("../../../assets/images/night-top-5.jpg") center bottom;
-    // background: url("../../../assets/images/night-top-6.jpg") center top;
-    // background: url("../../../assets/images/night-top-7.jpg") center center;
-    // background: url("../../../assets/images/night-top-8.jpg") center top;
+    background: url("../../../assets/images/night-top-1.jpg") center top;
+    background: url("../../../assets/images/night-top-2.jpg") center top;
+
+    background-repeat: no-repeat;
+    background-size: cover;
     
     &.top {
       @include heroImgTop;

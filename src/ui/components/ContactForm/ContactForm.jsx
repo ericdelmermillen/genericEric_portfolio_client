@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { isValidEmail } from "../../../../utils/utils.js";
-import "./ContactForm.scss";
+import { isValidEmail, scrollToTop } from "../../../../utils/utils.js";
 import toast from "react-hot-toast";
+import "./ContactForm.scss";
 
 const ContactForm = ({ children }) => {
   const [ name, setName ] = useState("");
@@ -44,6 +44,13 @@ const ContactForm = ({ children }) => {
     setMessageIsValid(message.length >= 25);
   };
 
+  const clearForm = () => {
+    setName("");
+    setInitialFormCheck(false);
+    setEmail("");
+    setMessage("");
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault();
     setInitialFormCheck(true);
@@ -56,7 +63,12 @@ const ContactForm = ({ children }) => {
 
     if(location.pathname === "/contact") {
       navigate("/home");
-      return toast.success("Message sent!")
+      clearForm();
+      return toast.success("Message sent!");
+    } else {
+      clearForm();
+      scrollToTop();
+      return toast.success("Message sent!");
     }
   };
 

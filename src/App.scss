@@ -26,3 +26,14 @@ a {
 ul {
   list-style-type: none;
 }
+
+input {
+  
+  // gooogle chrome auto fill styling override
+  &:-webkit-autofill {
+    background-color: none !important;
+    box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+    transition: background-color 5000s ease-in-out 0s;
+  }
+}

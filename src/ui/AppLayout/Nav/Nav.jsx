@@ -57,13 +57,13 @@ const Nav = ({ children }) => {
 
         </ul>
 
-        {/* 
+        
         <div className="nav__colorModeToggle">
           <ColorModeToggle
             inputId={"nav__colorModeToggler"}
           />
         </div> 
-        */}
+       
 
         <div 
           className="nav__open-button"
