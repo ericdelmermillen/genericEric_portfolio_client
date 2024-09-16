@@ -241,14 +241,6 @@
   padding-inline: 0.75rem;
   position: relative;
   width: 100%;
-
-  // // gooogle chrome auto fill styling override
-  // &:-webkit-autofill {
-  //   background-color: none !important;
-  //   box-shadow: none !important;
-  //   -webkit-box-shadow: none !important;
-  //   transition: background-color 5000s ease-in-out 0s;
-  // }
 }
 
 @mixin form {
@@ -351,15 +343,9 @@
   &:hover, 
   &:focus {
     @include hoverClickGrow;
-    @include hoverClickGrow;
     font-weight: 500;
     outline: none;
   }
-  
-  // &:focus {
-  //   outline: 1.5px solid var(--text-color);
-  // }
-
 
   &:active {
     @include hoverClickShrink;
@@ -377,10 +363,42 @@
 }
 
 
-// @mixin buttonRounded {
-//   @include button;
-//   border-radius: 50px;
-// }
+
+@mixin adminButton {
+  background: none;
+  border: 1px solid var(--text-color);
+  border-radius: 8px;
+  color: var(--text-color);
+  cursor: pointer;
+  display: block;
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: 2px;
+  margin-inline-start: 2rem;
+  padding-block: 0.5rem;
+  padding-inline: 1rem;
+
+  &:hover, 
+  &:focus {
+    @include hoverClickGrow;
+    font-weight: 500;
+    outline: none;
+  }
+  
+  &:active {
+    @include hoverClickShrink;
+  }
+    
+  &:disabled {
+    opacity: 0.8;
+  
+    &:hover {
+      transform: scale(1);
+      user-select: none;
+      cursor: default;
+    }
+  }
+}
 
 // @mixin input {
 //   border: 1px solid var(--text-color);

@@ -74,8 +74,6 @@ const LoginForm = ({ children }) => {
 
       return data; // Return data if successful
     },
-    retry: 3, // Number of retry attempts on failure
-    retryDelay: 1000, // Delay between retries (in milliseconds)
     onSuccess: (data) => {
       // give loginUser the token and refresh token
       loginUser();
@@ -85,7 +83,7 @@ const LoginForm = ({ children }) => {
       return toast.success("Logged in successfully");
     },
     onError: (error) => {
-      console.error("Login failed:", error.message);
+      console.log(error.message)
       setIsLoading(false);
       return toast.error(`${error.message}`);
     },

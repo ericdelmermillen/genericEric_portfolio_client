@@ -1,8 +1,7 @@
 import { useAppContext } from '../../../contexts/AppContext.jsx'; 
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
-// import { toast } from 'react-toastify';
 import './SideNav.scss';
-import { useEffect } from 'react';
+import toast from 'react-hot-toast';
 
 const SideNav = ({ children }) => {
   const { 
@@ -54,7 +53,7 @@ const SideNav = ({ children }) => {
   // };
 
   const handleSideNavClick = () => {
-    toggleSideNav()
+    toggleSideNav();
   };
 
   return (

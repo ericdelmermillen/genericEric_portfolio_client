@@ -23,14 +23,17 @@
   
   &__logout--nav {
     display: none;
-  
+    
     @media(min-width: $tablet) {
-      cursor: pointer;
-      display: block;
+      @include adminButton;
+      border: 1px solid var(--text-color-bright);
+      color: var(--text-color-bright);
     }
   }
   
   &__logout--sideNav {
     cursor: pointer;
+    @include adminButton;
+    margin-inline: auto;
   }
 }
