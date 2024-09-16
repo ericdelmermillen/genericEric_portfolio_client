@@ -3,7 +3,6 @@
 
 .appLayout {
   @include appLayout;
-  color: var(--text-color);
   
   &__inner {
     @include inner;
@@ -32,8 +31,40 @@
   }
   
   &__logout--sideNav {
-    cursor: pointer;
     @include adminButton;
     margin-inline: auto;
   }
 }
+
+.loading {
+  left: 50%;
+  opacity: 1;
+  position: fixed;
+  text-align: center;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  transition: opacity 0.25s ease;
+  z-index: 5;
+
+  &::after {
+    content: '';
+    animation: spin 0.5s infinite linear; 
+    border: 6px solid var(--text-color);
+    border-radius: 50%;
+    border-top-color: transparent;
+    display: block;
+    height: 60px;
+    width: 60px;
+  }
+}
+
+.loading:not(.isLoading) {
+  opacity: 0;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+

@@ -3,8 +3,8 @@ import { QueryClient } from "@tanstack/react-query";
 const queryClient = new QueryClient({
   defaultOptions: {
     mutations: {
-      retry: 3, // Number of retries
-      retryDelay: 1000, // Delay between retries (in milliseconds)
+      retry: 3, 
+      retryDelay: 1000
     },
   },
 });

@@ -16,6 +16,7 @@ html {
 
 body {
   background: var(--background-color);
+  color: var(--text-color);
 }
 
 a {
@@ -28,7 +29,7 @@ ul {
 }
 
 input {
-  
+
   // gooogle chrome auto fill styling override
   &:-webkit-autofill {
     background-color: none !important;

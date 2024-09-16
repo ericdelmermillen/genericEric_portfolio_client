@@ -33,6 +33,12 @@ const AppLayout = () => {
     <>
       <div className="appLayout" data-color-mode={colorMode}>
 
+        <div 
+          className={`loading ${isLoading 
+            ? "isLoading" 
+            : ""}`}
+        ></div>
+
         <div className="appLayout__inner">
 
         <Nav>

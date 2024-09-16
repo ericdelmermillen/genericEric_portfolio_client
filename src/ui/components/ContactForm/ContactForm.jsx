@@ -1,16 +1,28 @@
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { useMutation } from "@tanstack/react-query";
 import { isValidEmail, scrollToTop } from "../../../../utils/utils.js";
 import toast from "react-hot-toast";
 import "./ContactForm.scss";
+import { useAppContext } from "../../../contexts/AppContext.jsx";
+
+const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 const ContactForm = ({ children }) => {
+
+  const { 
+    isLoading, 
+    setIsLoading, 
+  } = useAppContext();
+
   const [ name, setName ] = useState("");
   const [ email, setEmail ] = useState("");
   const [ message, setMessage ] = useState("");
+
   const [ nameIsValid, setNameIsValid ] = useState(true);
   const [ emailIsValid, setEmailIsValid ] = useState(true);
   const [ messageIsValid, setMessageIsValid ] = useState(true);
+
   const [ initialFormCheck , setInitialFormCheck ] = useState(false);
 
   const location = useLocation();
@@ -49,17 +61,61 @@ const ContactForm = ({ children }) => {
     setInitialFormCheck(false);
     setEmail("");
     setMessage("");
-  }
+  };
+
+  const { mutate } = useMutation({
+    mutationFn: async (name, email, message) => {
+      console.log("mutate")
+
+      const response = await fetch(`${BASE_URL}/contact`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(name, email, message)
+      })
+
+      const data = await response.json();
+      console.log(data)
+
+    },
+    onSuccess: (data) => {
+      console.log("success")
+      
+    }, onError: (error) => {
+      console.log("error")
+
+    }
+
+  });
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setInitialFormCheck(true);
+    setIsLoading(true);
 
+    
     checkNameIsValid();
     checkEmailIsValid();
     checkMessageIsValid();
+    
+    if(name.length === 0) {
+      setIsLoading(false);
+      return toast.error("Name is required");
+    };
 
-    console.log(location.pathname)
+    if(email.length === 0) {
+      setIsLoading(false);
+      return toast.error("Email address is required");
+    };
+
+    if(message.length < 25) {
+      setIsLoading(false);
+      return toast.error("Min message 25 characters");
+    };
+
+    
+    return mutate()
 
     if(location.pathname === "/contact") {
       navigate("/home");
@@ -165,6 +221,7 @@ const ContactForm = ({ children }) => {
               <button
                 type="submit"
                 className="contactForm__button"
+                disabled={isLoading}
               >
                 SUBMIT
               </button>

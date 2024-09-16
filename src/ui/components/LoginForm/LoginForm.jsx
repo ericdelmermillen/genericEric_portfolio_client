@@ -8,7 +8,6 @@ import Hide from "../../../assets/svgs/Hide.jsx";
 import Show from "../../../assets/svgs/Show.jsx";
 import "./LoginForm.scss";
 
-// configure mutation options for retry attempts and delay centrally
 //  conditional retries in case error code is 401
 
 const isSafari = navigator.userAgent.toLowerCase().includes("safari") &&
@@ -111,7 +110,6 @@ const LoginForm = ({ children }) => {
       return toast.error("Email and/or Password is invalid");
     };
 
-    // set token and refresh token here?
     return mutate({ email, password });
   };
 

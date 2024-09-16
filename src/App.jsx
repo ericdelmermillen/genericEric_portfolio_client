@@ -1,11 +1,10 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { QueryClientProvider } from '@tanstack/react-query';
 import { Toaster } from 'react-hot-toast';
+import queryClient from "./queryClient/queryClient.js";
 import AppLayout from "./ui/AppLayout/AppLayout.jsx";
 import Blog from "./Pages/Blog/Blog.jsx";
 
-// import { queryClient } from "./queryClient/queryClient.js";
-import queryClient from "./queryClient/queryClient.js";
 import BlogPost from "./pages/BlogPost/BlogPost.jsx";
 import Contact from "./pages/Contact/Contact.jsx";
 import Home from "./pages/Home/Home.jsx";
@@ -15,8 +14,6 @@ import Login from "./pages/Login/Login.jsx";
 import NotFound from "./pages/NotFound/NotFound.jsx";
 import WallPaper from "./ui/WallPaper/WallPaper.jsx";
 import './App.scss';
-
-// const queryClient = new QueryClient();
 
 const router = createBrowserRouter([
   {
