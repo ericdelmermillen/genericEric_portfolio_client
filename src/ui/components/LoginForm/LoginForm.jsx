@@ -13,7 +13,7 @@ import "./LoginForm.scss";
 const isSafari = navigator.userAgent.toLowerCase().includes("safari") &&
   (!navigator.userAgent.toLowerCase().includes("chrome") || !navigator.userAgent.toLowerCase().includes("mozilla"));
 
-const BASE_URL = import.meta.env.VITE_BASE_URL;
+const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 const LoginForm = ({ children }) => {
   const [ email, setEmail ] = useState("");
@@ -56,37 +56,43 @@ const LoginForm = ({ children }) => {
   // Setup useMutation hook
   const { mutate } = useMutation({
     mutationFn: async ({ email, password }) => {
-
       const response = await fetch(`${BASE_URL}/auth/loginuser`, {
         method: "POST",
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify({ email, password })
+        body: JSON.stringify({ email, password }),
       });
-
+  
       const data = await response.json();
-
+  
       if(!response.ok) {
-        throw new Error(data.message || "Login failed");
+        const error = new Error(data.message || "Login failed");
+        error.status = response.status;
+        throw error;
       }
 
-      return data; // Return data if successful
+      return data;
+    },
+    retry: (failureCount, error) => {
+      if(error.status === 401) {
+        return false;
+      }
+      return failureCount < 3; 
     },
     onSuccess: (data) => {
-      // give loginUser the token and refresh token
-      loginUser();
+      loginUser(data);
       navigate("/home");
       setIsLoading(false);
-      // Handle login success (e.g., redirect or store token)
-      return toast.success("Logged in successfully");
+      toast.success("Logged in successfully");
     },
     onError: (error) => {
-      console.log(error.message)
+      console.log(error.message);
       setIsLoading(false);
-      return toast.error(`${error.message}`);
+      toast.error(`${error.message}`);
     },
   });
+  
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -137,7 +143,6 @@ const LoginForm = ({ children }) => {
                 name="email"
                 placeholder="EMAIL"
                 value={email}
-                // onChange={(e) => handleEmailChange(e)}
                 onChange={handleEmailChange}
                 onBlur={handleEmailChange}
               />

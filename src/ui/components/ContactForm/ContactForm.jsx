@@ -1,12 +1,14 @@
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { useAppContext } from "../../../contexts/AppContext.jsx";
 import { useMutation } from "@tanstack/react-query";
 import { isValidEmail, scrollToTop } from "../../../../utils/utils.js";
 import toast from "react-hot-toast";
 import "./ContactForm.scss";
-import { useAppContext } from "../../../contexts/AppContext.jsx";
 
-const BASE_URL = import.meta.env.VITE_BASE_URL;
+//  conditional retries in case error code is 401
+
+const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 const ContactForm = ({ children }) => {
 
@@ -94,7 +96,6 @@ const ContactForm = ({ children }) => {
     setInitialFormCheck(true);
     setIsLoading(true);
 
-    
     checkNameIsValid();
     checkEmailIsValid();
     checkMessageIsValid();

@@ -1,9 +1,17 @@
-import { createContext, useContext, useReducer, useEffect, useState } from "react";
+import { 
+  createContext, 
+  useContext, 
+  useReducer, 
+  useEffect, 
+  useState
+} from "react";
+import { useNavigate } from "react-router-dom";
+import { checkTokenExpiration } from "../../utils/utils";
 
 const AppContext = createContext();
 
 // stand in for api response
-const user = { email: "ericdelmermillen@gmail.com", password: "12345678"};
+const user = { email: "ericdelmermillen@gmail.com", password: "12345678" };
 
 const initialState = {
   isLoggedIn: false,
@@ -13,6 +21,9 @@ const initialState = {
   showSideNav: false,
   error: ""
 };
+
+// console.log(initialState)
+
 
 const reducer = (state, action) => {
   switch(action.type) {
@@ -33,8 +44,6 @@ const reducer = (state, action) => {
       return {...state, isLoggedIn: true};
       
     case "user/logout":
-      // remove token
-      // remove refresh token
       return {...state, isLoggedIn: false};
 
     case "colorMode/toggle":
@@ -56,20 +65,23 @@ const minLoadingTime = 200;
 const AppContextProvider = ({ children }) => {
   const [ state, dispatch ] = useReducer(reducer, initialState);
   const { isLoggedIn, colorMode, scrollYPos, prevScrollYPos, showSideNav} = state;
-  const [ isLoading, setIsLoading ] = useState(false)
+  const [ isLoading, setIsLoading ] = useState(false);
 
   const toggleColorMode = () => {
     dispatch({ type: "colorMode/toggle"});
   };
 
-  const loginUser = (email, password) => {
-    dispatch({ 
-      type: "user/login",
-      payload: { email, password}
-    });
+  const loginUser = (user) => {
+    const { token, refreshToken } = user;
+    localStorage.setItem('token', token);
+    localStorage.setItem('refreshToken', refreshToken); 
+
+    dispatch({ type: "user/login" });
   };
 
   const logoutUser = () => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('refreshToken'); 
     dispatch({ type: "user/logout" });
   };
 
@@ -92,14 +104,32 @@ const AppContextProvider = ({ children }) => {
     toggleSideNav
   };
 
-  
+
   // useEffect to check for token for isLoggedIn status
+  useEffect(() => {
+    const checkLoginStatus = async () => {
+      try {
+        const isLoggedIn = await checkTokenExpiration();
+        
+        if(isLoggedIn) {
+          dispatch({ type: "user/login" });
+        } else {
+          dispatch({ type: "user/logout" });
+        }
+      } catch (error) {
+        console.error("Error checking token expiration", error);
+      }
+    };
+  
+    checkLoginStatus();
+  }, []);
 
 
   // Update local storage when color mode state changes
   useEffect(() => {
     localStorage.setItem('colorMode', colorMode);
   }, [colorMode]);
+
 
   // handle scroll position for show hide of menu
   useEffect(() => {
