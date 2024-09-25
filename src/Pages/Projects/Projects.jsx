@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { scrollToTop } from "../../../utils/utils";
-import TypingText from "../../ui/components/TypingText/TypingText";
+import TypingText from "../../components/TypingText/TypingText.jsx";
 import "./Projects.scss";
 
 const Projects = ({ children }) => {

@@ -1,11 +1,11 @@
 import { useEffect } from "react";
 import { scrollToTop } from "../../../utils/utils.js";
-import About from "../../ui/components/About/About.jsx";
-import ContactForm from "../../ui/components/ContactForm/ContactForm.jsx";
-import Header from "../../ui/components/Header/Header.jsx";
-import Portfolio from "../../ui/components/Portfolio/Portfolio.jsx";
-import Services from "../../ui/components/Services/Services.jsx";
-import Summary from "../../ui/components/Summary/Summary.jsx";
+import About from "../../components/About/About.jsx";
+import ContactForm from "../../components/ContactForm/ContactForm.jsx";
+import Header from "../../components/Header/Header.jsx";
+import Portfolio from "../../components/Portfolio/Portfolio.jsx";
+import Services from "../../components/Services/Services.jsx";
+import Summary from "../../components/Summary/Summary.jsx";
 import "./Home.scss";
 import { Link } from "react-router-dom";
 

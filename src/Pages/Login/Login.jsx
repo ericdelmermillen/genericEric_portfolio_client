@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { scrollToTop } from "../../../utils/utils";
-import LoginForm from "../../ui/components/LoginForm/LoginForm";
+import LoginForm from "../../components/LoginForm/LoginForm.jsx";
 import "./Login.scss";
 
 const Login = ({ children }) => {

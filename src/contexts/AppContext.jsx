@@ -22,8 +22,6 @@ const initialState = {
   error: ""
 };
 
-// console.log(initialState)
-
 
 const reducer = (state, action) => {
   switch(action.type) {
@@ -89,21 +87,6 @@ const AppContextProvider = ({ children }) => {
     dispatch({ type: "app/toggleSideNav"})
   }
 
-  const contextValues = {
-    isLoading,
-    setIsLoading,
-    minLoadingTime,
-    isLoggedIn,
-    loginUser,
-    logoutUser,
-    colorMode,
-    toggleColorMode,
-    scrollYPos,
-    prevScrollYPos,
-    showSideNav,
-    toggleSideNav
-  };
-
 
   // useEffect to check for token for isLoggedIn status
   useEffect(() => {
@@ -150,6 +133,21 @@ const AppContextProvider = ({ children }) => {
       window.removeEventListener("scroll", handleScrollY);
     };
   }, [scrollYPos]);
+
+  const contextValues = {
+    isLoading,
+    setIsLoading,
+    minLoadingTime,
+    isLoggedIn,
+    loginUser,
+    logoutUser,
+    colorMode,
+    toggleColorMode,
+    scrollYPos,
+    prevScrollYPos,
+    showSideNav,
+    toggleSideNav
+  };
 
 
   return (
