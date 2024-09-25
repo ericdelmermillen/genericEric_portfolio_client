@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 import { scrollToTop } from "../../../utils/utils";
-// import TypingText from "../../ui/components/TypingText/TypingText";
 import ContactForm from "../../components/ContactForm/ContactForm.jsx";
 import "./Contact.scss";
 

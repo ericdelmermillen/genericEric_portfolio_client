@@ -6,7 +6,8 @@ import {
   useState
 } from "react";
 import { useNavigate } from "react-router-dom";
-import { checkTokenExpiration } from "../../utils/utils";
+import { checkTokenIsValid } from "../../utils/utils";
+import toast from "react-hot-toast";
 
 const AppContext = createContext();
 
@@ -65,6 +66,8 @@ const AppContextProvider = ({ children }) => {
   const { isLoggedIn, colorMode, scrollYPos, prevScrollYPos, showSideNav} = state;
   const [ isLoading, setIsLoading ] = useState(false);
 
+  const navigate = useNavigate();
+
   const toggleColorMode = () => {
     dispatch({ type: "colorMode/toggle"});
   };
@@ -92,14 +95,14 @@ const AppContextProvider = ({ children }) => {
   useEffect(() => {
     const checkLoginStatus = async () => {
       try {
-        const isLoggedIn = await checkTokenExpiration();
+        const isLoggedIn = await checkTokenIsValid(navigate);
         
         if(isLoggedIn) {
           dispatch({ type: "user/login" });
         } else {
-          dispatch({ type: "user/logout" });
+          logoutUser();
         }
-      } catch (error) {
+      } catch(error) {
         console.error("Error checking token expiration", error);
       }
     };
@@ -148,7 +151,6 @@ const AppContextProvider = ({ children }) => {
     showSideNav,
     toggleSideNav
   };
-
 
   return (
     <AppContext.Provider value={contextValues}>

@@ -1,10 +1,12 @@
 import { jwtDecode } from "jwt-decode";
+import toast from "react-hot-toast";
 
 // use for setting up drag and drop functionality since firefox has issues with on drag (use onTouchStart)
 const checkIfIsFirefox = () => {
   return navigator.userAgent.toLowerCase().indexOf('firefox') > -1;
 };
 
+// scroll to top function for mounting page and scrolling to top
 const scrollToTop = () => {
   window.scrollTo({
     top: 0,
@@ -24,7 +26,7 @@ const isValidPassword = (password) =>{
 
 // should only return true or false
 // use react query here
-const checkTokenExpiration = async () => {
+const checkTokenIsValid = async (navigate) => {
   const BASE_URL = import.meta.env.VITE_API_BASE_URL;
   const token = localStorage.getItem('token');
 
@@ -57,17 +59,15 @@ const checkTokenExpiration = async () => {
             localStorage.setItem('refreshToken', newRefreshToken);
             return true;
           } else {
-            localStorage.removeItem('token');
-            localStorage.removeItem('refreshToken');
+            navigate("/");
+            toast.error("Token expired. Logging you out...");
             return false;
           }
         } else {
           localStorage.removeItem('token');
-          toast.error('Token expired. Logging you out...');
+          toast.error('Unable to verify token. Logging you out...');
           return true;
         }
-      } else {
-        return false;
       }
     } catch(error) {
       console.log('Error decoding token:', error);
@@ -89,5 +89,5 @@ export {
   scrollToTop,
   isValidEmail,
   isValidPassword,
-  checkTokenExpiration
+  checkTokenIsValid
 };
