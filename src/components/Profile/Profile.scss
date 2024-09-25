@@ -1,0 +1,65 @@
+@import '../../partials/mixins';
+@import '../../partials/variables';
+
+.profile {
+  margin-bottom: 3rem;
+  min-height: 30rem;
+  padding-inline: 1rem;
+  width: 100%;
+
+  &__info {
+    min-height: 8rem;
+  }
+
+  &__heading {
+    @include headingGeneral;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    text-align: center;
+
+    @media(min-width: $largeTablet) {
+      text-align: start;
+    }
+  }
+
+  &__lead {
+    font-size: 1.15rem;
+    line-height: var(--line-height-general);
+  }
+
+  &__items {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    padding: 1rem;
+  }
+
+  &__item {
+    position: relative;
+
+    &::after {
+      @include afterAccent;
+    }
+
+    &:last-child::after {
+      background: none;
+    }
+  }
+  
+  &__item-header {
+    align-items: center;
+    display: flex;
+    gap: 0.75rem;
+    margin-bottom: 0.5rem;
+  }
+
+  &__item-icon {
+    height: 1.25rem;
+    width: 1.25rem;
+  }
+
+  &__item-label {
+    font-size: 1.25rem;
+    font-weight: 600;
+  }
+}

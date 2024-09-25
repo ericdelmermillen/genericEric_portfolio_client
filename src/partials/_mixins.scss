@@ -1,6 +1,6 @@
 @import './_variables.scss';
 
-.appLayout {
+.app {
   --body-font: "Arial";
   // --borderRadius: 8px;
   --heading-font: "Tahoma";
@@ -12,6 +12,7 @@
 
   // light mode custom variables
   &[data-color-mode='light'] {
+    --background-color: #f8f8f8;
     --text-color: #21343c;
     --neutral-gray-1: #cdd3d8;
     --neutral-gray-2: #c3c9d0;
@@ -38,6 +39,8 @@
     --button-link: #1A7697;
     --link: #1A7697;
     --box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+
+    --error-color: #ff0000;
     // --box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.8);
     // --nav-boxShadow: 0 4px 8px rgba(0, 0, 0, 0.25);
     // --footer-boxShadow: 0 -4px 8px rgba(0, 0, 0, 0.25);
@@ -108,7 +111,7 @@
 
 @mixin page {
   max-width: $ultraWide;
-  min-height: 100vh;
+  // min-height: 100vh;
   width: 100%;
 //   align-items: center;
 //   background: var(--background-color);
@@ -136,11 +139,11 @@
   align-items: center;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  // justify-content: center;
   margin-inline: auto;
   // margin-top: $navHeight;
   max-width: $ultraWide;
-  min-height: calc(100vh + 1px);
+  min-height: calc((100vh - $navHeight) + 1px);
   width: 100%;
   box-shadow: var(--box-shadow);
   
@@ -201,6 +204,80 @@
   font-weight: 600;
 }
 
+@mixin formFullWidth { 
+  align-items: center;
+  background: var(--neutral-gray-2);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding-inline: 2rem;
+  position: relative;
+  text-align: center;
+  z-index: 1;
+}
+
+@mixin formFullWidthInner {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  max-width: $tablet;
+  min-width: 100%;
+  padding-block: 3rem;
+  
+  @media(min-width: $smallTablet) {
+    padding-inline: 2rem;
+  }
+}
+
+@mixin formFullWidthInput {
+  background: none;
+  border: none;
+  border-bottom: 2px solid var(--text-color);
+  font-family: var(--body-font);
+  font-size: 1.25rem;
+  margin-bottom: 1.5rem;
+  outline: none;
+  padding-block: 0.75rem;
+  padding-inline: 0.75rem;
+  position: relative;
+  width: 100%;
+}
+
+@mixin form {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  width: 100%;
+  
+  @media(min-height: 600px) {
+    overflow-y: hidden;
+  }
+}
+
+@mixin formTall {
+  @include form;
+  overflow-y: scroll!important;
+  
+  @media(min-height: 750px) {
+    overflow-y: hidden;
+  }
+}
+
+@mixin formErrorMessage {
+  color: var(--error-color);
+  margin-top: -1.25rem;
+}
+
+@mixin formHeading {
+  @include headingGeneral;
+    display: inline-block;
+    font-size: 2rem;
+    margin-bottom: 3rem;
+    position: relative;
+}
+
 @mixin heroImgTop {
   opacity: 1;
   transition: all 1s ease-in-out;
@@ -221,6 +298,25 @@
   transform: scale(0.99);
   transition: all 0.25s ease-in;
 }
+
+@mixin wallpaperContainer {
+  display: flex;
+  justify-content: center;
+  padding-inline: 1rem;
+  position: relative;
+  width: 100%;
+  height: calc(100vh - $navHeight);
+  padding-top: calc($navHeight + 2rem);
+  padding-bottom: 2rem;
+}
+
+@mixin formContent {
+  box-shadow: var(--box-shadow);
+  max-width: $tablet;
+  max-width: $largeTablet;
+  width: 100%;
+}
+
 
 @mixin button {
   align-items: center;
@@ -248,23 +344,61 @@
   &:focus {
     @include hoverClickGrow;
     font-weight: 500;
+    outline: none;
   }
-  
-  &:focus {
-    outline: 1.5px solid var(--text-color);
-  }
-
 
   &:active {
     @include hoverClickShrink;
   }
+  
+  &:disabled {
+    opacity: 0.8;
+  
+    &:hover {
+      transform: scale(1);
+      user-select: none;
+      cursor: default;
+    }
+  }
 }
 
 
-// @mixin buttonRounded {
-//   @include button;
-//   border-radius: 50px;
-// }
+
+@mixin adminButton {
+  background: none;
+  border: 1px solid var(--text-color);
+  border-radius: 8px;
+  color: var(--text-color);
+  cursor: pointer;
+  display: block;
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: 2px;
+  margin-inline-start: 2rem;
+  padding-block: 0.5rem;
+  padding-inline: 1rem;
+
+  &:hover, 
+  &:focus {
+    @include hoverClickGrow;
+    font-weight: 500;
+    outline: none;
+  }
+  
+  &:active {
+    @include hoverClickShrink;
+  }
+    
+  &:disabled {
+    opacity: 0.8;
+  
+    &:hover {
+      transform: scale(1);
+      user-select: none;
+      cursor: default;
+    }
+  }
+}
 
 // @mixin input {
 //   border: 1px solid var(--text-color);
@@ -287,15 +421,6 @@
 //     border: 1px solid var(--text-color);
 //     outline: 1px solid var(--text-color);
 //   }
-// }
-
-// @mixin error {
-//   color: var(--error-color);
-//   bottom: 0.25rem;
-//   display: block;
-//   font-size: 0.8rem;
-//   margin-inline-start: 0.5rem;
-//   position: absolute;
 // }
 
 // @mixin shootImg {

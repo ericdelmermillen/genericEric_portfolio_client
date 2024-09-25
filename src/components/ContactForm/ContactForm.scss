@@ -1,0 +1,93 @@
+@import '../../partials/mixins';
+@import '../../partials/variables';
+
+.contactForm {
+  @include formFullWidth;
+  
+  &__inner {
+    @include formFullWidthInner;
+  }
+
+  &__header {
+    
+    &.hide {
+      display: none;
+    }
+  }
+
+  &__heading {
+    @include formHeading;
+
+    &::after {
+      @include afterAccent;
+    }
+  }
+  
+  &__sub-heading {
+    font-size: 1.75rem;
+    margin-bottom: 2rem;
+  }
+
+  &__form {
+    @include formTall;
+    // overflow-y: scroll!important;
+    
+    @media(min-height: 750px) {
+      overflow-y: hidden!important;
+    }
+  }
+  
+  &__lead {
+    font-size: 1.25rem;
+    line-height: 1.5;
+    margin-bottom: 1.5rem;
+  }
+
+  &__input {
+    @include formFullWidthInput;
+  
+    &:focus {
+      box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+      outline: none;
+    }
+    
+    &::placeholder {
+      color: var(--text-color);
+      font-size: 1rem;
+    }
+
+    &--message {
+      height: 12rem;
+      height: 10rem;
+      resize: none;
+    }
+  }
+
+  &__error {
+    @include formErrorMessage;
+  }
+
+  &__submit {
+    display: flex;
+    margin-top: 1rem;
+    
+    @media(min-height: 800px) {
+      margin-top: auto;
+    }
+  }
+  
+  &__button {
+    @include button;
+    background: var(--accent-color);
+    border: none;
+    width: 100%;
+  }
+}
+
+
+// input:-webkit-autofill {
+//   background-color: var(--) !important;
+//   box-shadow: 0 0 0 1000px red inset;
+//   -webkit-box-shadow: 0 0 0 1000px red inset;
+//   transition: background-color 5000s ease-in-out 0s;
+// }

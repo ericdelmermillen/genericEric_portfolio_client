@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { scrollToTop } from "../../../utils/utils";
-import TypingText from "../../ui/components/TypingText/TypingText";
+// import TypingText from "../../ui/components/TypingText/TypingText";
+import ContactForm from "../../components/ContactForm/ContactForm.jsx";
 import "./Contact.scss";
 
 const Contact = ({ children }) => {
@@ -15,10 +16,15 @@ const Contact = ({ children }) => {
     <div className="contact">
       <div className="contact__inner">
         {children}
-        <TypingText 
-          classNames={"contact__heading"}
-          textToType = 'Contact Page'
-        />
+        <div className="contact__content">
+          <ContactForm>
+            <div className="contact__children">
+              <h4 className="contact__heading">
+                How can I help?
+              </h4>
+            </div>
+          </ContactForm>
+        </div>
       </div>
     </div>
     </>

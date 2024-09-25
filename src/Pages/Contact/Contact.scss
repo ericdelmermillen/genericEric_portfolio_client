@@ -3,21 +3,24 @@
 
 .contact {
   @include page;
-  
+
   &__inner {
-    align-items: center;
-    display: flex;
-    justify-content: center;
-    margin-inline: auto;
-    overflow: hidden;
-    position: relative;
-    width: 100%;
+    @include wallpaperContainer;
 }
 
+  &__content {
+    @include formContent;
+  }
+
   &__heading {
-    font-size: 3rem;
-    margin-block: 50vh;
+    @include headingGeneral;
+    display: inline-block;
+    font-size: 2rem;
+    margin-bottom: 3rem;
     position: relative;
-    z-index: 1;
+
+    &::after {
+      @include afterAccent;
+    }
   }
 }

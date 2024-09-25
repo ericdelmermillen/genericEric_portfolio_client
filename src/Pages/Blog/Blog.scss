@@ -4,22 +4,13 @@
 
 .blog {
   @include page;
-  display: flex;
-  // height: 300vh;
   
   &__inner {
-    // align-items: center;
-    // box-shadow: var(--box-shadow);
-    display: flex;
-    justify-content: center;
-    margin-inline: auto;
-    overflow: hidden;
-    position: relative;
-    width: 100%;
+    @include wallpaperContainer;
 }
+
   &__heading {
     font-size: 3rem;
-    margin-block: 50vh;
     position: relative;
     z-index: 1;
   }

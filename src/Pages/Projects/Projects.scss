@@ -1,21 +1,15 @@
-@import "../../partials/mixins";
+@import "../../partials//mixins";
 @import "../../partials/variables";
 
 .projects {
   @include page;
 
   &__inner {
-    display: flex;
-    justify-content: center;
-    margin-inline: auto;
-    overflow: hidden;
-    position: relative;
-    width: 100%;
+    @include wallpaperContainer;
 }
 
 &__heading {
   font-size: 3rem;
-  margin-block: 50vh;
   position: relative;
   z-index: 1;
 }

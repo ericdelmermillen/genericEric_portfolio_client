@@ -1,13 +1,20 @@
-import { createContext, useContext, useReducer, useEffect } from "react";
+import { 
+  createContext, 
+  useContext, 
+  useReducer, 
+  useEffect, 
+  useState
+} from "react";
+import { useNavigate } from "react-router-dom";
+import { checkTokenExpiration } from "../../utils/utils";
 
 const AppContext = createContext();
 
 // stand in for api response
-const user = { email: "ericdelmermillen@gmail.com", password: "12345678"};
+const user = { email: "ericdelmermillen@gmail.com", password: "12345678" };
 
 const initialState = {
   isLoggedIn: false,
-  isLoading: false,
   colorMode: localStorage.getItem('colorMode') || "light",
   scrollYPos: window.scrollY,
   prevScrollYPos: window.scrollY,
@@ -15,11 +22,9 @@ const initialState = {
   error: ""
 };
 
+
 const reducer = (state, action) => {
   switch(action.type) {
-
-    case "app/loading":
-      return {...state, isLoading: true};
 
     case "app/scrollY":
       return {
@@ -34,22 +39,9 @@ const reducer = (state, action) => {
     case "user/login":
       // api call wil be made either in Login
       // initial mount will check for token in local storage so no need to check email and password here
-      const { email, password } = action.payload;
-
-      if(!email || !password) {
-        return "Email and Password required";
-      }
-      
-      if(email === user.email && password === user.password) {
-        // handle login call here
-        // set token in local storage
-        // set refresh token in local storage
-        return {...state, isLoggedIn: true};
-      }
+      return {...state, isLoggedIn: true};
       
     case "user/logout":
-      // remove token
-      // remove refresh token
       return {...state, isLoggedIn: false};
 
     case "colorMode/toggle":
@@ -66,23 +58,28 @@ const reducer = (state, action) => {
   }
 };
 
+const minLoadingTime = 200;
 
 const AppContextProvider = ({ children }) => {
   const [ state, dispatch ] = useReducer(reducer, initialState);
-  const { isLoading, isLoggedIn, colorMode, scrollYPos, prevScrollYPos, showSideNav} = state;
+  const { isLoggedIn, colorMode, scrollYPos, prevScrollYPos, showSideNav} = state;
+  const [ isLoading, setIsLoading ] = useState(false);
 
   const toggleColorMode = () => {
     dispatch({ type: "colorMode/toggle"});
   };
 
-  const loginUser = (email, password) => {
-    dispatch({ 
-      type: "user/login",
-      payload: { email, password}
-    });
+  const loginUser = (user) => {
+    const { token, refreshToken } = user;
+    localStorage.setItem('token', token);
+    localStorage.setItem('refreshToken', refreshToken); 
+
+    dispatch({ type: "user/login" });
   };
 
   const logoutUser = () => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('refreshToken'); 
     dispatch({ type: "user/logout" });
   };
 
@@ -90,27 +87,32 @@ const AppContextProvider = ({ children }) => {
     dispatch({ type: "app/toggleSideNav"})
   }
 
-  const contextValues = {
-    isLoading,
-    isLoggedIn,
-    loginUser,
-    logoutUser,
-    colorMode,
-    toggleColorMode,
-    scrollYPos,
-    prevScrollYPos,
-    showSideNav,
-    toggleSideNav
-  };
 
-  
   // useEffect to check for token for isLoggedIn status
+  useEffect(() => {
+    const checkLoginStatus = async () => {
+      try {
+        const isLoggedIn = await checkTokenExpiration();
+        
+        if(isLoggedIn) {
+          dispatch({ type: "user/login" });
+        } else {
+          dispatch({ type: "user/logout" });
+        }
+      } catch (error) {
+        console.error("Error checking token expiration", error);
+      }
+    };
+  
+    checkLoginStatus();
+  }, []);
 
 
   // Update local storage when color mode state changes
   useEffect(() => {
     localStorage.setItem('colorMode', colorMode);
   }, [colorMode]);
+
 
   // handle scroll position for show hide of menu
   useEffect(() => {
@@ -131,6 +133,21 @@ const AppContextProvider = ({ children }) => {
       window.removeEventListener("scroll", handleScrollY);
     };
   }, [scrollYPos]);
+
+  const contextValues = {
+    isLoading,
+    setIsLoading,
+    minLoadingTime,
+    isLoggedIn,
+    loginUser,
+    logoutUser,
+    colorMode,
+    toggleColorMode,
+    scrollYPos,
+    prevScrollYPos,
+    showSideNav,
+    toggleSideNav
+  };
 
 
   return (
