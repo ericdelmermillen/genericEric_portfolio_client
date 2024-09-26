@@ -30,15 +30,7 @@ const services = [
 
 const Services = () => {
   const { 
-    colorMode,
-    toggleColorMode,
-    scrollYPos,
-    prevScrollYPos,
-    toggleSideNav,
-    isLoading,
-    isLoggedIn,
-    loginUser,
-    logoutUser
+    colorMode
    } = useAppContext();
   
   return (
@@ -50,8 +42,12 @@ const Services = () => {
         <div className="services__overlay"></div>
 
           <div className="services__content">
-            <h4 className="services__heading">Services</h4>
-            <h2 className="services__sub-heading">What Can I Do For You?</h2>
+            <h4 className="services__heading">
+              Services
+            </h4>
+            <h2 className="services__sub-heading">
+              What Can I Do For You?
+            </h2>
             <p className="services__lead">
               Here are some of the services that I offer when it comes to web
               development and business.

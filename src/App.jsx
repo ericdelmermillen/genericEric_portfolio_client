@@ -1,8 +1,8 @@
 import { useAppContext } from './contexts/AppContext.jsx';
-import { Routes, Route, useNavigate, Navigate } from 'react-router-dom';
+import { Routes, Route, useNavigate } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 import Blog from "./Pages/Blog/Blog.jsx";
-import BlogPost from "./pages/BlogPost/BlogPost.jsx";
+import BlogPostDetails from "./pages/BlogPostDetails/BlogPostDetails.jsx";
 import ColorModeToggle from './components/ColorModeToggle/ColorModeToggle.jsx';
 import Contact from "./pages/Contact/Contact.jsx";
 import Footer from "./components/Footer/Footer.jsx";
@@ -23,7 +23,6 @@ const App = () => {
     toggleSideNav,
     isLoading,
     isLoggedIn,
-    loginUser,
     logoutUser
    } = useAppContext();
 
@@ -44,7 +43,7 @@ const App = () => {
       <div className="app" data-color-mode={colorMode}>
 
         <div className={`loading ${isLoading ? "isLoading" : ""}`}></div>
-
+        
         <div className="app__inner">
 
           <Nav>
@@ -61,7 +60,7 @@ const App = () => {
               : null
             }
           </Nav>
-
+          
           <SideNav>
             <div className="app__sideNav-children">
 
@@ -120,9 +119,9 @@ const App = () => {
             <Route 
               path='/blog/post/:postID'
               element={
-                <BlogPost>
+                <BlogPostDetails>
                   <WallPaper />
-                </BlogPost>
+                </BlogPostDetails>
               } 
             />
 
@@ -207,7 +206,7 @@ const App = () => {
             }}
           />
         
-        </div>
+        </div> 
      </div>
     </>
   )};

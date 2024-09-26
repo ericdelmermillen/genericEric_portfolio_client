@@ -44,7 +44,6 @@ const WallPaperRow = ({ className }) => {
     ? 4
     : windowWidth <= 400
     ? 5
-    // : windowWidth <= 450
     : windowWidth <= 500
     ? 6
     : windowWidth <= 600
@@ -58,8 +57,6 @@ const WallPaperRow = ({ className }) => {
     : windowWidth <= 1000
     ? 11
     : 12;
-
-    // console.log(itemsPerRow)
 
   return (
     <div className={className}>

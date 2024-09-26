@@ -1,5 +1,5 @@
 import { useAppContext } from "../../contexts/AppContext.jsx";
-import { NavLink, useLocation, useNavigate } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import './SideNav.scss';
 import toast from 'react-hot-toast';
 
@@ -13,44 +13,8 @@ const SideNav = ({ children }) => {
 
 
   const location = useLocation();
-  const navigate = useNavigate();
 
   const isOnHome = location.pathname === "/" || location.pathname === "/home";
-  
-  // const handleNavLinkBio = () => {
-  //   handleNavLinkClick();
-
-  //   if(location.pathname === "/bio") {
-  //     setShowSideNav(false);
-  //     toast.info("Already on Bio");
-  //   } else {
-  //     setShowSideNav(false);
-  //     setTimeout(() => {
-  //       navigate('/bio');
-  //     }, minLoadingInterval);
-  //   }
-  // };
-  
-  // const handleNavLinkContact = () => { 
-  //   handleNavLinkClick();
-    
-  //   if(location.pathname === "/contact") {
-  //     setShowSideNav(false);
-  //     toast.info("Already on Contact");
-  //   } else {
-  //     setShowSideNav(false);
-  //     setTimeout(() => {
-  //       navigate('/contact');
-  //     }, minLoadingInterval);
-  //   }
-  // };
-  
-  // const handleSideNavLogout = () => {
-  //   setTimeout(() => {
-  //     handleLogOut();
-  //   }, 500);
-  //   setShowSideNav(false);
-  // };
 
   const handleSideNavClick = () => {
     toggleSideNav();

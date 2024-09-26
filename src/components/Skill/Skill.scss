@@ -10,10 +10,10 @@
     flex-direction: column;
     gap: 0.5rem;
     height: 5.5rem;
+    margin-inline: auto;
     padding-bottom: 0.25rem;
     padding-top: 1rem;
     width: 5.5rem;
-    margin-inline: auto;
 
     @media(min-width: $tablet) {
       height: 7rem;

@@ -3,14 +3,15 @@
 
 .projects {
   @include page;
-
+  // min-height: calc(100vh - $navHeight);
+  
   &__inner {
     @include wallpaperContainer;
 }
 
-&__heading {
-  font-size: 3rem;
-  position: relative;
-  z-index: 1;
-}
+  &__heading {
+    font-size: 3rem;
+    position: relative;
+    z-index: 1;
+  }
 }

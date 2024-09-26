@@ -25,7 +25,6 @@ const isValidPassword = (password) =>{
 
 
 // should only return true or false
-// use react query here
 const checkTokenIsValid = async (navigate) => {
   const BASE_URL = import.meta.env.VITE_API_BASE_URL;
   const token = localStorage.getItem('token');

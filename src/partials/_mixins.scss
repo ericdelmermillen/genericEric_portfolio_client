@@ -9,7 +9,6 @@
   --navBoxShadow: 0 4px 6px rgba(0, 0, 0, 0.25), 0 1px 3px rgba(0, 0, 0, 0.25);
 
 
-
   // light mode custom variables
   &[data-color-mode='light'] {
     --background-color: #f8f8f8;
@@ -92,7 +91,6 @@
 
 @mixin appLayout {
   align-items: center;
-  // background: var(--background-color);
   box-shadow: var(--box-shadow);
   color: var(--text-color);
   display: flex;
@@ -111,50 +109,18 @@
 
 @mixin page {
   max-width: $ultraWide;
-  // min-height: 100vh;
   width: 100%;
-//   align-items: center;
-//   background: var(--background-color);
-//   box-shadow: var(--box-shadow);
-//   color: var(--text-color);
-//   display: flex;
-//   flex-direction: column;
-//   margin-inline: auto;
-//   max-width: 1920px;
-//   min-height: calc(100vh - 10rem + 1px);
-//   padding-block: 4rem;
-//   padding-top: 0rem;
-//   width: 100%;
-
-  // @media(min-width: $tablet) {
-  //   min-height: calc(100vh - ($navHeight + $footerHeight));
-  // }
-  
-//   @media(min-width: 768px) {
-//     margin-top: 0;
-//   }
 }
 
 @mixin inner {
   align-items: center;
+  width: 100%;
   display: flex;
   flex-direction: column;
-  // justify-content: center;
   margin-inline: auto;
-  // margin-top: $navHeight;
   max-width: $ultraWide;
   min-height: calc((100vh - $navHeight) + 1px);
-  width: 100%;
   box-shadow: var(--box-shadow);
-  
-  @media(min-width: $tablet) {
-    // padding-top: 2rem;
-    // margin-top: 4rem;
-  }
-  
-  @media(min-width: 768px) {
-    // margin-top: 0;
-  }
 }
 
 @mixin heroImg {
@@ -168,12 +134,17 @@
   z-index: 0;
 }
 
+@mixin heroImgTop {
+  opacity: 1;
+  transition: all 1s ease-in-out;
+  z-index: 1;
+}
+
 @mixin navLink {
-  letter-spacing: 2.5px;
   color: var(--text-color-bright);
-  letter-spacing: 4px;
   font-weight: 500;
   font-family: var(--heading-font);
+  letter-spacing: 4px;
   position: relative;
 }
 
@@ -278,12 +249,6 @@
     position: relative;
 }
 
-@mixin heroImgTop {
-  opacity: 1;
-  transition: all 1s ease-in-out;
-  z-index: 1;
-}
-
 @mixin hoverClickGrow {
   transform: scale(1.025);
   transition: all 0.25s ease-in-out;
@@ -301,22 +266,20 @@
 
 @mixin wallpaperContainer {
   display: flex;
+  height: calc(100vh - $navHeight);
   justify-content: center;
+  padding-bottom: 2rem;
   padding-inline: 1rem;
+  padding-top: calc($navHeight + 2rem);
   position: relative;
   width: 100%;
-  height: calc(100vh - $navHeight);
-  padding-top: calc($navHeight + 2rem);
-  padding-bottom: 2rem;
 }
 
 @mixin formContent {
   box-shadow: var(--box-shadow);
-  max-width: $tablet;
   max-width: $largeTablet;
   width: 100%;
 }
-
 
 @mixin button {
   align-items: center;
@@ -507,13 +470,3 @@
 //     }
 //   }
 // }
-
-// @mixin navLink {
-//   color: var(--text-color);
-//   cursor: pointer;
-//   display: flex;
-//   font-size: 1.25rem;
-//   font-weight: 600;
-//   justify-content: center;
-//   letter-spacing: 3px;
-// } 

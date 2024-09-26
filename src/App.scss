@@ -42,7 +42,6 @@ input {
 .app {
   @include appLayout;
 
-    
   &__inner {
     @include inner;
     box-shadow: var(--box-shadow);

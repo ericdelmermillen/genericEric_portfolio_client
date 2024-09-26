@@ -1,6 +1,6 @@
 import { useAppContext } from "../../contexts/AppContext.jsx";
-import sun from "../../assets/svgs/sun.svg";
 import moon from "../../assets/svgs/crescent_moon.svg";
+import sun from "../../assets/svgs/sun.svg";
 import './ColorModeToggle.scss';
 
 const ColorModeToggle = ({ inputId }) => {

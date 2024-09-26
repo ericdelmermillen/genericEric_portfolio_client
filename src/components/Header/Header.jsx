@@ -6,8 +6,8 @@ import Github from "../../assets/svgs/Github.jsx";
 import Instagram from "../../assets/svgs/Instagram.jsx";
 import LinkedIn from "../../assets/svgs/LInkedIn.jsx";
 import Twitter from "../../assets/svgs/Twitter.jsx";
-import Youtube from "../../assets/svgs/Youtube.jsx";
 import TypingText from "../TypingText/TypingText.jsx";
+import Youtube from "../../assets/svgs/Youtube.jsx";
 import "./Header.scss";
 
 const headerSocials = [
@@ -21,11 +21,11 @@ const headerSocials = [
 
 const Header = () => {
   const { colorMode, scrollYPos } = useAppContext();
-  const [ documentHeight, setDocumentHeight ] = useState(Infinity);
+  const [ windowHeight, setwindowHeight ] = useState(Infinity);
 
   useEffect(() => {
-    setDocumentHeight(document.documentElement.scrollHeight)
-  }, [documentHeight]);
+    setwindowHeight(window.innerHeight);
+  }, [windowHeight]);
 
   return (
     <>
@@ -34,7 +34,7 @@ const Header = () => {
 
           <div className="header__overlay"></div>
           
-          {scrollYPos > (documentHeight * 0.8)
+          {scrollYPos > (windowHeight * 0.9)
             ? <div className="header__bg-layer"></div>
             : null
           }
@@ -43,7 +43,7 @@ const Header = () => {
             className={`header__dayImg ${colorMode === 'light' 
               ? "top" 
               : ""}`}
-            aria-label="Daytime background showing a the sun in the sky above the ocean."
+            aria-label="Daytime background showing the sun in the sky above the ocean."
           ></div>
           <div 
             className={`header__nightImg ${colorMode === 'dark' 
@@ -78,7 +78,7 @@ const Header = () => {
 
           </div>
 
-          {scrollYPos < (documentHeight * 0.8)
+          {scrollYPos < (windowHeight * 0.9)
 
             ? <ul className="header__socials">
 

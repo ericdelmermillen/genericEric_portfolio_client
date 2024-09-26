@@ -1,0 +1,25 @@
+@import "../../partials/mixins";
+@import "../../partials/variables";
+
+.blogPostSummary {
+  background: var(--neutral-gray-1);
+  background: orange;
+  
+  &__inner {
+    border: 2px solid red;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding-block: 4rem;
+    width: 100%;
+  }
+
+  &__video-text {
+    border: 2px solid blue;
+    text-align: center;
+  }
+
+  &__video-title {
+    color: #fff;
+  }
+}

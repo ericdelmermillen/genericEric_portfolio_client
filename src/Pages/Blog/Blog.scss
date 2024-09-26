@@ -4,9 +4,11 @@
 
 .blog {
   @include page;
+  // min-height: calc(100vh - $navHeight);
   
   &__inner {
     @include wallpaperContainer;
+    flex-direction: column;
 }
 
   &__heading {

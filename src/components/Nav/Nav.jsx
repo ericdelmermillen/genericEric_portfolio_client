@@ -5,8 +5,6 @@ import "./Nav.scss";
 
 const Nav = ({ children }) => {
   const { 
-    colorMode,
-    toggleColorMode,
     scrollYPos,
     prevScrollYPos,
     toggleSideNav,
@@ -31,7 +29,7 @@ const Nav = ({ children }) => {
         <ul className="nav__links">
           <li className="nav__item">
             <Link className={`nav__link ${
-              pathname === "/" || pathname === "/home" 
+              pathname === "/" || pathname === "/home" || pathname === "/home/"
                 ? "active" 
                 : ""}`} 
               to={"/home"}
@@ -64,7 +62,6 @@ const Nav = ({ children }) => {
           />
         </div> 
        
-
         <div 
           className="nav__open-button"
           onClick={toggleSideNav}

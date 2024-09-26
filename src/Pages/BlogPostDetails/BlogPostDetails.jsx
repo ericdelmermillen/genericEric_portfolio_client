@@ -1,12 +1,11 @@
 import { useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { scrollToTop } from "../../../utils/utils";
-import "./BlogPost.scss";
+import "./BlogPostDetails.scss";
 
-const BlogPost = ({ children }) => {
+const BlogPostDetails = ({ children }) => {
   const { postID } = useParams();
 
-  const navigate = useNavigate();
 
   // scroll to top on mount
   useEffect(() => {
@@ -15,12 +14,12 @@ const BlogPost = ({ children }) => {
   
   return (
     <>
-    <div className="blogPost">
-      <div className="blogPost__inner">
+    <div className="blogPostDetails">
+      <div className="blogPostDetails__inner">
         {children}
 
         <h1
-          className="blogPost__heading"
+          className="blogPostDetails__heading"
         >
           Blog Post: {postID}
         </h1>
@@ -36,4 +35,4 @@ const BlogPost = ({ children }) => {
     </>
   )};
 
-export default BlogPost;
+export default BlogPostDetails;

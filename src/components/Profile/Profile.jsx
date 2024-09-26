@@ -3,8 +3,6 @@ import { FaBuilding, FaHouse } from "react-icons/fa6";
 import { MdEmail } from "react-icons/md";
 import "./Profile.scss";
 
-// make profile item its own component if it can accept the icon as props
-
 const profileItems = [
   { itemIcon: FaUser, itemLabel: "Name:", itemValue: "Eric Delmer Millen" },
   { itemIcon: FaBuilding, itemLabel: "Current Position:", itemValue: "Owner at Zidgy Road Labs Inc" },

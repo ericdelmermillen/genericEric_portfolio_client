@@ -7,7 +7,6 @@ import {
 } from "react";
 import { useNavigate } from "react-router-dom";
 import { checkTokenIsValid } from "../../utils/utils";
-import toast from "react-hot-toast";
 
 const AppContext = createContext();
 
@@ -23,7 +22,6 @@ const initialState = {
   error: ""
 };
 
-
 const reducer = (state, action) => {
   switch(action.type) {
 
@@ -38,8 +36,6 @@ const reducer = (state, action) => {
       return {...state, showSideNav: !state.showSideNav}
 
     case "user/login":
-      // api call wil be made either in Login
-      // initial mount will check for token in local storage so no need to check email and password here
       return {...state, isLoggedIn: true};
       
     case "user/logout":
@@ -56,7 +52,7 @@ const reducer = (state, action) => {
 
     default: 
       throw new Error("Unknown action type")
-  }
+  };
 };
 
 const minLoadingTime = 200;
@@ -88,7 +84,7 @@ const AppContextProvider = ({ children }) => {
 
   const toggleSideNav = () => {
     dispatch({ type: "app/toggleSideNav"})
-  }
+  };
 
 
   // useEffect to check for token for isLoggedIn status
@@ -124,7 +120,7 @@ const AppContextProvider = ({ children }) => {
       
       if(scrollYPos !== undefined && newScrollYPos !== scrollYPos) {
         dispatch({ type: "app/scrollY", payload: newScrollYPos});
-      }
+      };
 
     };
 
@@ -140,7 +136,7 @@ const AppContextProvider = ({ children }) => {
   const contextValues = {
     isLoading,
     setIsLoading,
-    minLoadingTime,
+    // minLoadingTime,
     isLoggedIn,
     loginUser,
     logoutUser,

@@ -161,7 +161,7 @@
   }
 
   &__button-text {
-    text-shadow: 3.5px 3.5px 6px rgba(0, 0, 0, 0.7);
+    text-shadow: var(--text-shadow-bright);
     
     @media(min-width: $tablet) {
       font-size: 1.5rem;

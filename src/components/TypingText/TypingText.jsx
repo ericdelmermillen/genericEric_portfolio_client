@@ -1,5 +1,5 @@
-import "./TypingText.scss";
 import { useState, useEffect, createElement } from 'react';
+import "./TypingText.scss";
 
 const TypingText = ({ 
   textToType = 'text to type', 
@@ -24,7 +24,7 @@ const TypingText = ({
     <div>
       {createElement(
         elementType, 
-        { className: classNames,}, 
+        { className: classNames}, 
         typingText
       )}
     </div>

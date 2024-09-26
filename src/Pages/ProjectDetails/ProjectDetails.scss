@@ -3,6 +3,7 @@
 
 .projectDetails {
   @include page;
+  // min-height: calc(100vh - $navHeight);
 
   &__inner {
     @include wallpaperContainer;
