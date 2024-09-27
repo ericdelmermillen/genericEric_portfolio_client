@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { scrollToTop } from "../../../utils/utils";
 import "./ProjectDetails.scss";
+import BackButton from "../../components/BackButton/BackButton";
 
 const ProjectDetails = ({ children }) => {
   const { projectID } = useParams();
@@ -16,18 +17,10 @@ const ProjectDetails = ({ children }) => {
   return (
     <>
     <div className="projectDetails">
+      <BackButton />
       <div className="projectDetails__inner">
         {children}
         <h1 className="projectDetails__heading">Project Details: Project {projectID}</h1>
-        
-        {/* 
-        <button
-          onClick={() => navigate(-1)}
-        >
-          Back
-        </button> 
-        */}
-        
       </div>
     </div>
     </>
