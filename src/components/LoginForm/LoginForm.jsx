@@ -1,14 +1,11 @@
 import { useState } from "react";
 import { useAppContext } from "../../contexts/AppContext.jsx";
 import { useNavigate } from "react-router-dom";
-import { useMutation } from "@tanstack/react-query";
 import { isValidEmail, isValidPassword } from "../../../utils/utils.js";
 import { toast } from 'react-hot-toast'; 
 import Hide from "../../assets/svgs/Hide.jsx";
 import Show from "../../assets/svgs/Show.jsx";
 import "./LoginForm.scss";
-
-//  conditional retries in case error code is 401
 
 const isSafari = navigator.userAgent.toLowerCase().includes("safari") &&
   (!navigator.userAgent.toLowerCase().includes("chrome") || !navigator.userAgent.toLowerCase().includes("mozilla"));
@@ -52,49 +49,8 @@ const LoginForm = ({ children }) => {
   const checkPasswordIsValid = () => {
     setPasswordIsValid(isValidPassword(password));
   };
-
-  // Setup useMutation hook
-  const { mutate } = useMutation({
-    mutationFn: async ({ email, password }) => {
-      const response = await fetch(`${BASE_URL}/auth/loginuser`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email, password }),
-      });
   
-      const data = await response.json();
-  
-      if(!response.ok) {
-        const error = new Error(data.message || "Login failed");
-        error.status = response.status;
-        throw error;
-      }
-
-      return data;
-    },
-    retry: (failureCount, error) => {
-      if(error.status === 401) {
-        return false;
-      }
-      return failureCount < 3; 
-    },
-    onSuccess: (data) => {
-      loginUser(data);
-      navigate("/home");
-      setIsLoading(false);
-      toast.success("Logged in successfully");
-    },
-    onError: (error) => {
-      console.log(error.message);
-      setIsLoading(false);
-      toast.error(`${error.message}`);
-    },
-  });
-  
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
     setInitialFormCheck(true);
@@ -116,7 +72,37 @@ const LoginForm = ({ children }) => {
       return toast.error("Email and/or Password is invalid");
     };
 
-    return mutate({ email, password });
+    try {
+      const response = await fetch(`${BASE_URL}/auth/loginuser`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+      });
+
+      if(!response.ok) {
+
+        if(response.status === 401) {
+          return toast.error("Incorrect email or password");
+        } else {
+          throw new Error("Error logging you in");
+        }
+      }
+
+      const { message, token, refreshToken} = await response.json();
+
+      loginUser({ token, refreshToken });
+      navigate("/");
+
+      return toast.success(message);
+          
+      } catch(error) {
+        console.log(error)
+        return toast.error(error.message)
+      } finally {
+      setIsLoading(false);
+    }
   };
 
   return (

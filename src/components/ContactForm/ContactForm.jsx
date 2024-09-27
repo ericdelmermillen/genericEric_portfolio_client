@@ -1,12 +1,10 @@
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useAppContext } from "../../contexts/AppContext.jsx";
-import { useMutation } from "@tanstack/react-query";
+// import { useMutation } from "@tanstack/react-query";
 import { isValidEmail, scrollToTop } from "../../../utils/utils.js";
 import toast from "react-hot-toast";
 import "./ContactForm.scss";
-
-//  conditional retries in case error code is 401
 
 const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
@@ -64,33 +62,7 @@ const ContactForm = ({ children }) => {
     setMessage("");
   };
 
-  const { mutate } = useMutation({
-    mutationFn: async (name, email, message) => {
-      console.log("mutate")
-
-      const response = await fetch(`${BASE_URL}/contact`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(name, email, message)
-      })
-
-      const data = await response.json();
-      console.log(data)
-
-    },
-    onSuccess: (data) => {
-      console.log("success")
-      
-    }, onError: (error) => {
-      console.log("error")
-
-    }
-
-  });
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setInitialFormCheck(true);
     setIsLoading(true);
@@ -114,17 +86,34 @@ const ContactForm = ({ children }) => {
       return toast.error("Min message 25 characters");
     };
 
-    
-    return mutate()
+    try {
+      const response = await fetch(`${BASE_URL}/contact/`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ name, email, message }),
+      });
 
-    if(location.pathname === "/contact") {
-      navigate("/home");
-      clearForm();
-      return toast.success("Message sent!");
-    } else {
+      if(!response.ok) {
+        throw new Error("Failed to send message");
+      }
+
+      const data = await response.json();
+      console.log("Message sent successfully:", data);
+      toast.success("Message sent!");
+      
+      if(location.pathname === "/contact" || location.pathname === "/contact/") {
+        navigate("/home");
+      }
+
       clearForm();
       scrollToTop();
-      return toast.success("Message sent!");
+    } catch (error) {
+      console.error("Error sending message:", error);
+      toast.error("Failed to send message");
+    } finally {
+      setIsLoading(false);
     }
   };
 
