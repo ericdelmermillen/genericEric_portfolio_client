@@ -1,20 +1,16 @@
 import { useAppContext } from "../../contexts/AppContext.jsx";
 import { NavLink, useLocation } from 'react-router-dom';
 import './SideNav.scss';
-import toast from 'react-hot-toast';
 
 const SideNav = ({ children }) => {
   const { 
     showSideNav,
-    toggleSideNav,
-    isLoggedIn, 
-    logoutUser
+    toggleSideNav
    } = useAppContext();
-
 
   const location = useLocation();
 
-  const isOnHome = location.pathname === "/" || location.pathname === "/home";
+  const isOnHome = location.pathname === "/" || location.pathname === "/home" || location.pathname === "/home/";
 
   const handleSideNavClick = () => {
     toggleSideNav();

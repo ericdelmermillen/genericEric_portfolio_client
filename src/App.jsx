@@ -16,7 +16,6 @@ import SideNav from './components/SideNav/SideNav.jsx';
 import WallPaper from './components/WallPaper/WallPaper.jsx';
 import "./App.scss";
 
-
 const App = () => {
   const { 
     colorMode,

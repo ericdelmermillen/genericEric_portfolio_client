@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import BlogPostSummary from '../BlogPostSummary/BlogPostSummary';
+import BlogPost from '../BlogPost/BlogPost.jsx';
 import "./BlogFeed.scss";
 
 const BlogFeed = () => {
@@ -21,10 +21,10 @@ const BlogFeed = () => {
           </div>
           {/* 
             map through returned blog posts
-            each BlogPostSummary gets truncated info and thumbnail:
+            each BlogPost gets truncated info and thumbnail:
             may make video playable
            */}
-          <BlogPostSummary />   
+          <BlogPost />   
           
           <div className="blogFeed__cta">
 

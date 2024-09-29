@@ -73,7 +73,7 @@ const checkTokenIsValid = async (navigate) => {
       localStorage.removeItem('token');
       localStorage.removeItem('refreshToken');
       navigate('/');
-      toast.error('Token expired. Logging you out...');
+      toast.error(error.message);
       return true;
     }
   } else {

@@ -73,7 +73,7 @@ const AppContextProvider = ({ children }) => {
       const response = await fetch(`${BASE_URL}/auth/loginuser`, {
         method: "POST",
         headers: {
-          "Content-Type": "application/json",
+          "Content-Type": "application/json"
         },
         body: JSON.stringify({ email, password }),
       });
@@ -85,7 +85,7 @@ const AppContextProvider = ({ children }) => {
         } else {
           throw new Error("Error logging you in");
         }
-      }
+      };
 
       const { message, token, refreshToken } = await response.json();
 
@@ -106,11 +106,40 @@ const AppContextProvider = ({ children }) => {
     }
   };
 
-  const logoutUser = () => {
+  const logoutUser = async () => {
+    setIsLoading(true);
 
-    localStorage.removeItem('token');
-    localStorage.removeItem('refreshToken'); 
-    dispatch({ type: "user/logout" });
+    const token = localStorage.getItem("token")
+    const refreshToken = localStorage.getItem("refreshToken");
+
+    try {
+      const response = await fetch(`${BASE_URL}/auth/logoutuser`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ token, refreshToken })
+      });
+
+      if(!response.ok) {
+        throw new Error("Error logging you out");
+      }
+
+      const { message } = await response.json();
+
+      localStorage.removeItem('token');
+      localStorage.removeItem('refreshToken'); 
+      dispatch({ type: "user/logout" });
+
+      return toast.success(message);
+
+    } catch(error) {
+      console.log(error);
+      return toast.error(error.message)
+
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const toggleSideNav = () => {
@@ -126,7 +155,9 @@ const AppContextProvider = ({ children }) => {
         if(isLoggedIn) {
           dispatch({ type: "user/login" });
         } else {
-          logoutUser();
+          localStorage.removeItem("token");
+          localStorage.removeItem("refreshToken");
+          dispatch({ type: "user/logout" });
         }
       } catch(error) {
         console.error("Error checking token expiration", error);
