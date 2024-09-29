@@ -108,8 +108,6 @@ const AppContextProvider = ({ children }) => {
 
   const logoutUser = () => {
 
-    // call logoutuser here with the token and refresh token
-    // 
     localStorage.removeItem('token');
     localStorage.removeItem('refreshToken'); 
     dispatch({ type: "user/logout" });
