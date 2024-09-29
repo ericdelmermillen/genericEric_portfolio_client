@@ -7,11 +7,9 @@ import {
 } from "react";
 import { useNavigate } from "react-router-dom";
 import { checkTokenIsValid } from "../../utils/utils";
+import { toast } from 'react-hot-toast'; 
 
 const AppContext = createContext();
-
-// stand in for api response
-const user = { email: "ericdelmermillen@gmail.com", password: "12345678" };
 
 const initialState = {
   isLoggedIn: false,
@@ -55,11 +53,11 @@ const reducer = (state, action) => {
   };
 };
 
-const minLoadingTime = 200;
+const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 const AppContextProvider = ({ children }) => {
   const [ state, dispatch ] = useReducer(reducer, initialState);
-  const { isLoggedIn, colorMode, scrollYPos, prevScrollYPos, showSideNav} = state;
+  const { isLoggedIn, colorMode, scrollYPos, prevScrollYPos, showSideNav } = state;
   const [ isLoading, setIsLoading ] = useState(false);
 
   const navigate = useNavigate();
@@ -68,15 +66,50 @@ const AppContextProvider = ({ children }) => {
     dispatch({ type: "colorMode/toggle"});
   };
 
-  const loginUser = (user) => {
-    const { token, refreshToken } = user;
-    localStorage.setItem('token', token);
-    localStorage.setItem('refreshToken', refreshToken); 
+  const loginUser = async (email, password) => {
+    setIsLoading(true);
 
-    dispatch({ type: "user/login" });
+    try {
+      const response = await fetch(`${BASE_URL}/auth/loginuser`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+      });
+
+      if(!response.ok) {
+
+        if(response.status === 401) {
+          return toast.error("Incorrect email or password");
+        } else {
+          throw new Error("Error logging you in");
+        }
+      }
+
+      const { message, token, refreshToken } = await response.json();
+
+      localStorage.setItem('token', token);
+      localStorage.setItem('refreshToken', refreshToken); 
+  
+      toast.success(message);
+      
+      dispatch({ type: "user/login" });
+
+      return navigate("/");
+          
+      } catch(error) {
+        console.log(error);
+        return toast.error(error.message);
+      } finally {
+      setIsLoading(false);
+    }
   };
 
   const logoutUser = () => {
+
+    // call logoutuser here with the token and refresh token
+    // 
     localStorage.removeItem('token');
     localStorage.removeItem('refreshToken'); 
     dispatch({ type: "user/logout" });
@@ -85,7 +118,6 @@ const AppContextProvider = ({ children }) => {
   const toggleSideNav = () => {
     dispatch({ type: "app/toggleSideNav"})
   };
-
 
   // useEffect to check for token for isLoggedIn status
   useEffect(() => {

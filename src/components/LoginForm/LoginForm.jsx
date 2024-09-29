@@ -1,6 +1,5 @@
-import { useState } from "react";
 import { useAppContext } from "../../contexts/AppContext.jsx";
-import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 import { isValidEmail, isValidPassword } from "../../../utils/utils.js";
 import { toast } from 'react-hot-toast'; 
 import Hide from "../../assets/svgs/Hide.jsx";
@@ -9,8 +8,6 @@ import "./LoginForm.scss";
 
 const isSafari = navigator.userAgent.toLowerCase().includes("safari") &&
   (!navigator.userAgent.toLowerCase().includes("chrome") || !navigator.userAgent.toLowerCase().includes("mozilla"));
-
-const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 const LoginForm = ({ children }) => {
   const [ email, setEmail ] = useState("");
@@ -25,8 +22,6 @@ const LoginForm = ({ children }) => {
     setIsLoading, 
     loginUser 
   } = useAppContext();
-
-  const navigate = useNavigate();
 
   const handleTogglePasswordVisibility = () => {
     setShowPassword(c => !c);
@@ -52,7 +47,6 @@ const LoginForm = ({ children }) => {
   
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setIsLoading(true);
     setInitialFormCheck(true);
     checkEmailIsValid();
     checkPasswordIsValid();
@@ -72,37 +66,7 @@ const LoginForm = ({ children }) => {
       return toast.error("Email and/or Password is invalid");
     };
 
-    try {
-      const response = await fetch(`${BASE_URL}/auth/loginuser`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email, password }),
-      });
-
-      if(!response.ok) {
-
-        if(response.status === 401) {
-          return toast.error("Incorrect email or password");
-        } else {
-          throw new Error("Error logging you in");
-        }
-      }
-
-      const { message, token, refreshToken} = await response.json();
-
-      loginUser({ token, refreshToken });
-      navigate("/");
-
-      return toast.success(message);
-          
-      } catch(error) {
-        console.log(error)
-        return toast.error(error.message)
-      } finally {
-      setIsLoading(false);
-    }
+    return loginUser(email, password);
   };
 
   return (

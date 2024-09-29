@@ -27,7 +27,7 @@ const App = () => {
    } = useAppContext();
 
    const navigate = useNavigate();
-
+   
    const handleLogoutNav = () => {
     logoutUser();
     navigate("/");
