@@ -3,10 +3,10 @@
 
 .contact {
   @include page;
-
+  
   &__inner {
     @include wallpaperContainer;
-}
+  }
 
   &__content {
     @include formContent;

@@ -4,12 +4,13 @@
 .blogPost {
   background: var(--neutral-gray-1);
   background: orange;
+  border: 2px solid red;
   
   &__inner {
-    border: 2px solid red;
     display: flex;
     flex-direction: column;
     gap: 2rem;
+    height: 20rem;
     padding-block: 4rem;
     width: 100%;
   }

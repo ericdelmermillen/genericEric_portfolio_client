@@ -8,13 +8,24 @@
   
   &__inner {
     @include wallpaperContainer;
-    flex-direction: column;
+    // flex-direction: column;
+    // height: 200vh;
+  }
+  
+  &__content {
+  border: 2px solid red;
+  width: 100%;
+  max-width: $ultraWide;
+  z-index: 1;
+  // @include formContent;
 }
 
   &__heading {
     font-size: 3rem;
     position: relative;
     z-index: 1;
+    height: 3rem;
+    text-align: center;
   }
 }
 
