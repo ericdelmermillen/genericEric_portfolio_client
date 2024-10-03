@@ -4,29 +4,22 @@
 
 .blog {
   @include page;
-  // min-height: calc(100vh - $navHeight);
   
   &__inner {
     @include wallpaperContainer;
-    // flex-direction: column;
-    // height: 200vh;
   }
   
   &__content {
-  border: 2px solid red;
-  width: 100%;
-  max-width: $ultraWide;
-  z-index: 1;
-  // @include formContent;
+    max-width: $ultraWide;
+    width: 100%;
+    z-index: 1;
 }
 
   &__heading {
     font-size: 3rem;
-    position: relative;
-    z-index: 1;
     height: 3rem;
+    position: relative;
     text-align: center;
+    z-index: 1;
   }
 }
-
-

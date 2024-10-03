@@ -2,25 +2,36 @@
 @import "../../partials/variables";
 
 .blogPost {
-  background: var(--neutral-gray-1);
-  background: orange;
-  border: 2px solid red;
-  
-  &__inner {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-    height: 20rem;
-    padding-block: 4rem;
-    width: 100%;
-  }
+  & {
 
-  &__video-text {
-    border: 2px solid blue;
-    text-align: center;
-  }
+    // background: var(--neutral-gray-1);
+    
+    &__inner {
+      height: 100%;
+      width: 100%;
+    }
 
-  &__video-title {
-    color: #fff;
+    &__video {
+      // border: 2px dashed #333;
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      max-width: $largeTablet;
+    }
+
+    &__iframe {
+      max-width: 100%;
+      aspect-ratio: 16/9;
+    }
+
+    &__video-text {
+      // border: 2px solid blue;
+      text-align: center;
+    }
+
+    &__video-title {
+      color: var(--text-color);
+      margin-block: 1rem;
+    }
   }
 }

@@ -20,16 +20,9 @@ const Blog = ({ children }) => {
 
             <TypingText 
               classNames={"blog__heading"}
-              textToType = 'Blog Page'
+              textToType = 'Welcome To My Blog'
+              typingDelayInterval="150"
             /> 
-            <BlogFeed />
-            <BlogFeed />
-            <BlogFeed />
-            <BlogFeed />
-            <BlogFeed />
-            <BlogFeed />
-            <BlogFeed />
-            <BlogFeed />
             <BlogFeed />
 
           </div>
