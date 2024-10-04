@@ -2,82 +2,85 @@
 @import '../../partials/variables';
 
 .skills {
-  padding-inline: 1rem;
-  width: 100%;
 
-  &__info {
-    min-height: 8rem;
-  }
-
-  &__heading {
-    @include headingGeneral;
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
-    text-align: center;
-
-
-    @media(min-width: $largeTablet) {
-      text-align: start;
-    }
-  }
-
-  &__lead {
-    font-size: 1.15rem;
-    line-height: var(--line-height-general);
-    margin-bottom: 2.5rem
-  }
-
-  &__items {
-    align-items: center;
-    display: grid;
-    gap: 1rem;
-    grid-template-columns: repeat(3, 1fr);
-    justify-content: center;
+  & {
     padding-inline: 1rem;
-    
-    @media(min-width: $smallTablet) {
-      gap: 0.75rem;
-      margin-top: 2rem;
-      grid-template-columns: repeat(4, 1fr); 
-    }
-  }
+    width: 100%;
 
-  &__icon {
-    height: 2.75rem;
-    width: 2.75rem;
-    
-    @media(min-width: $smallTablet) {
-      height: 3rem;
-      width: 3rem;
+    &__info {
+      min-height: 8rem;
     }
-    
-    @media(min-width: $tablet) {
-      height: 3.5rem;
-      width: 3.5rem;
+
+    &__heading {
+      @include headingGeneral;
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      text-align: center;
+
+
+      @media(min-width: $largeTablet) {
+        text-align: start;
+      }
     }
-    
-    @media(min-width: $largeTablet) {
-      height: 2.75rem;
-      width: 2.75rem;
+
+    &__lead {
+      font-size: 1.15rem;
+      line-height: var(--line-height-general);
+      margin-bottom: 2.5rem
     }
-    
-    &--small {
-      height: 4rem;
-      width: 4rem;
+
+    &__items {
+      align-items: center;
+      display: grid;
+      gap: 1rem;
+      grid-template-columns: repeat(3, 1fr);
+      justify-content: center;
+      padding-inline: 1rem;
       
       @media(min-width: $smallTablet) {
-        height: 4.5rem;
-        width: 4.5rem;
+        gap: 0.75rem;
+        margin-top: 2rem;
+        grid-template-columns: repeat(4, 1fr); 
+      }
+    }
+
+    &__icon {
+      height: 2.75rem;
+      width: 2.75rem;
+      
+      @media(min-width: $smallTablet) {
+        height: 3rem;
+        width: 3rem;
       }
       
       @media(min-width: $tablet) {
-        height: 5rem;
-        width: 5rem;
+        height: 3.5rem;
+        width: 3.5rem;
       }
       
       @media(min-width: $largeTablet) {
+        height: 2.75rem;
+        width: 2.75rem;
+      }
+      
+      &--small {
         height: 4rem;
         width: 4rem;
+        
+        @media(min-width: $smallTablet) {
+          height: 4.5rem;
+          width: 4.5rem;
+        }
+        
+        @media(min-width: $tablet) {
+          height: 5rem;
+          width: 5rem;
+        }
+        
+        @media(min-width: $largeTablet) {
+          height: 4rem;
+          width: 4rem;
+        }
       }
     }
   }

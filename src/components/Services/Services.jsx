@@ -2,8 +2,6 @@ import { useAppContext } from "../../contexts/AppContext.jsx";
 import { FaGlobe, FaCode, FaCartShopping } from "react-icons/fa6";
 import "./Services.scss";
 
-// make the Service component if it can take the icon as props
-
 const services = [
   {
     name: "Web Development",

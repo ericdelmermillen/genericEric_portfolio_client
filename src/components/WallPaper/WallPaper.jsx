@@ -27,11 +27,10 @@ const iconOptions = [
 
 let prevRandomIdx;
 
-// Function to get a random icon
 const getRandomIcon = () => {
   const randomIdx = Math.floor(Math.random() * iconOptions.length);
   if (prevRandomIdx === randomIdx) {
-    return getRandomIcon(); // Prevents repeating the same icon
+    return getRandomIcon();
   } else {
     prevRandomIdx = randomIdx;
     return iconOptions[randomIdx];
@@ -91,16 +90,16 @@ const WallPaper = () => {
     <div className="wallpaper">
 
       <div className="wallpaper__inner">
-      {Array.from({ length: numberOfRows }).map((_, idx) => (
-        <WallPaperRow
-          key={idx}
-          className={(idx + 1) % 2 === 0
-            ? "wallpaper__row wallpaper__row--even"
-            : "wallpaper__row wallpaper__row--odd"
-          }
-        />
-      ))}
-    </div>
+        {Array.from({ length: numberOfRows }).map((_, idx) => (
+          <WallPaperRow
+            key={idx}
+            className={(idx + 1) % 2 === 0
+              ? "wallpaper__row wallpaper__row--even"
+              : "wallpaper__row wallpaper__row--odd"
+            }
+          />
+        ))}
+      </div>
     </div>
   );
 };

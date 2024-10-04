@@ -2,25 +2,29 @@
 @import "../../partials/variables";
 
 .login {
-  @include page;
 
-  &__inner {
-    @include wallpaperContainer;
-}
+  & {
 
-  &__content {
-    @include formContent;
+    @include page;
+
+    &__inner {
+      @include wallpaperContainer;
   }
 
-  &__heading {
-    @include headingGeneral;
-    display: inline-block;
-    font-size: 2rem;
-    margin-bottom: 3rem;
-    position: relative;
+    &__content {
+      @include formContent;
+    }
 
-    &::after {
-      @include afterAccent;
+    &__heading {
+      @include headingGeneral;
+      display: inline-block;
+      font-size: 2rem;
+      margin-bottom: 3rem;
+      position: relative;
+
+      &::after {
+        @include afterAccent;
+      }
     }
   }
 }

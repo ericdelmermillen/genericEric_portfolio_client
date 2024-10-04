@@ -3,7 +3,7 @@ import "./BlogPost.scss";
 const BlogPost = ({ description, title, videoID }) => {
   const embedUrl = `https://www.youtube.com/embed/${videoID}`;
 
-  console.log(description.slice(0, 50))
+  // console.log(description.slice(0, 50))
 
   return (
     <>
@@ -14,7 +14,7 @@ const BlogPost = ({ description, title, videoID }) => {
               className="blogPost__iframe"
               src={embedUrl}
               title={title}
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allow="clipboard-write; encrypted-media; picture-in-picture"
               allowFullScreen
             ></iframe>
 
@@ -27,7 +27,6 @@ const BlogPost = ({ description, title, videoID }) => {
         </div>
       </div>
     </>
-  );
-};
+  )};
 
 export default BlogPost;

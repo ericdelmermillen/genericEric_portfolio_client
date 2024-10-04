@@ -2,13 +2,16 @@
 @import "../../partials/variables";
 
 .notFound {
-  @include page;
 
-  &__inner {
-    @include wallpaperContainer;
+  & {
+    @include page;
+
+    &__inner {
+      @include wallpaperContainer;
+    }
+
+    // &__heading {
+    //   color: purple;
+    // }
   }
-
-  // &__heading {
-  //   color: purple;
-  // }
 }

@@ -76,7 +76,9 @@ const LoginForm = ({ children }) => {
         <div className="loginForm__inner">
 
           <div className="loginForm__header">
-            <h4 className="loginForm__heading">Login</h4>
+            <h4 className="loginForm__heading">
+              Login
+            </h4>
           </div>
 
           <form

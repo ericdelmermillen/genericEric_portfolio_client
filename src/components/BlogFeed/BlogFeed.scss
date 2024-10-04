@@ -2,6 +2,7 @@
 @import "../../partials/variables";
 
 .blogFeed {
+
   & {
     padding-inline: 2rem;
     
@@ -36,7 +37,6 @@
     }
 
     &__cta {
-      // border: 2px dashed #333;
       padding-block: 2rem;
       text-align: center;
     }

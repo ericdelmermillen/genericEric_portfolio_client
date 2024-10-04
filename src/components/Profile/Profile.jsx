@@ -6,8 +6,8 @@ import "./Profile.scss";
 const profileItems = [
   { itemIcon: FaUser, itemLabel: "Name:", itemValue: "Eric Delmer Millen" },
   { itemIcon: FaBuilding, itemLabel: "Current Position:", itemValue: "Owner at Zidgy Road Labs Inc" },
-  { itemIcon: FaHouse, itemLabel: "Website:", itemValue: "https://www.genericEric.dev" },
-  { itemIcon: MdEmail, itemLabel: "Email:", itemValue: "ericdelmermillen@gmail.com" , itemHref: "mailto:ericdelmermillen@gmail.com?subject=Contact%20from%20genericEric.dev"}
+  { itemIcon: FaHouse, itemLabel: "Website:", itemValue: "https://www.genericeric.dev" },
+  { itemIcon: MdEmail, itemLabel: "Email:", itemValue: "ericdelmermillen@gmail.com" , itemHref: "mailto:ericdelmermillen@gmail.com?subject=Contact%20from%20genericeric.dev"}
 ];
 
 const Profile = () => {

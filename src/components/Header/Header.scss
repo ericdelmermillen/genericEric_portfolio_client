@@ -2,220 +2,222 @@
 @import '../../partials/variables';
 
 .header {
-  color: var(--text-color-bright);
-  height: 100vh;
-  max-width: $ultraWide;
-  position: fixed;
-  top: 0;
-  width: 100vw;
 
-  &__hero {
-    align-items: center;
-    display: flex;
-    height: 100%;
-    justify-content: center;
-    position: relative;
-    top: 0;
-    width: 100%;
-  }
+  & {
 
-  &__dayImg {
-    @include heroImg;
-    background: url("../../assets/images/bg-day-top.jpg") center top;
-    background-repeat: no-repeat;
-    background-size: cover;
-
-    &.top {
-      @include heroImgTop;
-    }
-  }
-  
-  &__nightImg {
-    @include heroImg;
-    background: url("../../assets/images/bg-night-top.jpg") center top;
-
-    background-repeat: no-repeat;
-    background-size: cover;
-    
-    &.top {
-      @include heroImgTop;
-    }
-  }
-
-  &__overlay {
-    background: var(--gradient-overlay);
-    height: 100%;
-    left: 0;
-    position: absolute;
-    top: 0;
-    width: 100%;
-    z-index: 2;
-  }
-
-  &__bg-layer {
-    background: var(--background-color);
-    height: 100%;
-    left: 0;
-    position: absolute;
-    top: 0;
-    width: 100%;
-    z-index: 2;
-  }
-
-  &__content {
-    display: flex;
-    flex-direction: column;
-    z-index: 2;
-  }
-
-  &__headline {
-    font-family: var(--heading-font);
-    font-size: 1.5rem;
-    letter-spacing: 3.5px;
-    margin-bottom: 1.5rem;
-    text-align: center;
-    text-shadow: var(--text-shadow-bright);
-    
-    @media(min-width: $smallTablet) {
-      font-size: 2rem;
-      margin-bottom: 1.75rem;
-    }
-    
-    @media(min-width: $tablet) {
-      margin-bottom: 2rem;
-    }
-
-    @media(min-width: $largeTablet) {
-      font-size: 2.5rem;
-    }
-  }
-
-  &__introduction {
-    font-size: 2.5rem;
-    font-weight: 500;
-    height: 3rem;
-    letter-spacing: 1px;
-    margin-bottom: 1.25rem;
-    text-align: center;
-    text-shadow: var(--text-shadow-bright);
-    
-    @media(min-width: $smallTablet) {
-      font-size: 2.75rem;
-      height: 3.25rem;
-      margin-bottom: 1.5rem;
-    }
-    
-    @media(min-width: $tablet) {
-      font-size: 4rem;
-      height: 4.25rem;
-      margin-bottom: 2.5rem;
-    }
-    
-    @media(min-width: $largeTablet) {
-      font-size: 4.5rem;
-      height: 4.5rem;
-      margin-bottom: 3rem;
-    }
-  }
-
-  &__description {
-    font-size: 1.5rem;
-    font-weight: 300;
-    letter-spacing: 1.5px;
-    margin-bottom: 1.75rem;
-    text-align: center;
-    text-shadow: var(--text-shadow-bright);
-
-    @media(min-width: $smallTablet) {
-      margin-bottom: 1.5rem;
-    }
-    
-    @media(min-width: $tablet) {
-      font-size: 1.8rem;
-      margin-bottom: 2rem;
-    }
-    
-    @media(min-width: $largeTablet) {
-      font-size: 2rem;
-      margin-bottom: 2rem;
-    }
-  }
-
-  &__button-link {
-    margin-inline: auto;
-
-    @media(min-width: $tablet) {
-      gap: 1rem;
-    }
-  }
-
-  &__button {
-    @include button;
-    border: 2px solid var(--text-color-bright);
-    box-shadow: var(--box-shadow);
     color: var(--text-color-bright);
+    height: 100vh;
+    max-width: $ultraWide;
+    position: fixed;
+    top: 0;
+    width: 100vw;
+
+    &__hero {
+      align-items: center;
+      display: flex;
+      height: 100%;
+      justify-content: center;
+      position: relative;
+      top: 0;
+      width: 100%;
+    }
+
+    &__dayImg {
+      @include heroImg;
+      background: url("../../assets/images/bg-day-top.jpg") center top;
+      background-repeat: no-repeat;
+      background-size: cover;
+
+      &.top {
+        @include heroImgTop;
+      }
+    }
     
-    @media(min-width: $smallTablet) {
+    &__nightImg {
+      @include heroImg;
+      background: url("../../assets/images/bg-night-top.jpg") center top;
+      background-repeat: no-repeat;
+      background-size: cover;
+      
+      &.top {
+        @include heroImgTop;
+      }
+    }
+
+    &__overlay {
+      background: var(--gradient-overlay);
+      height: 100%;
+      left: 0;
+      position: absolute;
+      top: 0;
+      width: 100%;
+      z-index: 2;
+    }
+
+    &__bg-layer {
+      background: var(--background-color);
+      height: 100%;
+      left: 0;
+      position: absolute;
+      top: 0;
+      width: 100%;
+      z-index: 2;
+    }
+
+    &__content {
+      display: flex;
+      flex-direction: column;
+      z-index: 2;
+    }
+
+    &__headline {
+      font-family: var(--heading-font);
+      font-size: 1.5rem;
+      letter-spacing: 3.5px;
       margin-bottom: 1.5rem;
-    }
-  }
+      text-align: center;
+      text-shadow: var(--text-shadow-bright);
+      
+      @media(min-width: $smallTablet) {
+        font-size: 2rem;
+        margin-bottom: 1.75rem;
+      }
+      
+      @media(min-width: $tablet) {
+        margin-bottom: 2rem;
+      }
 
-  &__button-text {
-    text-shadow: var(--text-shadow-bright);
-    
-    @media(min-width: $tablet) {
+      @media(min-width: $largeTablet) {
+        font-size: 2.5rem;
+      }
+    }
+
+    &__introduction {
+      font-size: 2.5rem;
+      font-weight: 500;
+      height: 3rem;
+      letter-spacing: 1px;
+      margin-bottom: 1.25rem;
+      text-align: center;
+      text-shadow: var(--text-shadow-bright);
+      
+      @media(min-width: $smallTablet) {
+        font-size: 2.75rem;
+        height: 3.25rem;
+        margin-bottom: 1.5rem;
+      }
+      
+      @media(min-width: $tablet) {
+        font-size: 4rem;
+        height: 4.25rem;
+        margin-bottom: 2.5rem;
+      }
+      
+      @media(min-width: $largeTablet) {
+        font-size: 4.5rem;
+        height: 4.5rem;
+        margin-bottom: 3rem;
+      }
+    }
+
+    &__description {
       font-size: 1.5rem;
-    }
-  }
+      font-weight: 300;
+      letter-spacing: 1.5px;
+      margin-bottom: 1.75rem;
+      text-align: center;
+      text-shadow: var(--text-shadow-bright);
 
-  &__button-down {
-    filter: drop-shadow(6px 6px 6px rgba(0, 0, 0, 0.8));
-    height: 20px;
-    stroke: var(--text-color-bright);
-    width: 20px;
-  }
-
-  &__socials {
-    align-items: center;
-    bottom: 2rem;
-    display: flex;
-    gap: 1.125rem;
-    height: 4rem;
-    justify-content: center;
-    position: absolute;
-    width: 20rem;
-    z-index: 2;
-    
-    @media(min-width: $smallTablet) {
-      font-size: 1.5rem;
-      gap: 1.5rem;
-    }
-  }
-
-  &__social {
-
-    &:hover, &:focus {
-      @include hoverClickGrowIcon;
-    }
-  }
-
-  &__social-icon {
-    fill: var(--text-color-bright);
-    filter: drop-shadow(6px 6px 6px rgba(0, 0, 0, 0.8));
-    width: 1.85rem;
-    
-    @media(min-width: $smallTablet) {
-      width: 2.25rem;
-    }
-    
-    @media(min-width: $tablet) {
-      font-size: 1.5rem;
-      width: 2.5rem;
+      @media(min-width: $smallTablet) {
+        margin-bottom: 1.5rem;
+      }
+      
+      @media(min-width: $tablet) {
+        font-size: 1.8rem;
+        margin-bottom: 2rem;
+      }
+      
+      @media(min-width: $largeTablet) {
+        font-size: 2rem;
+        margin-bottom: 2rem;
+      }
     }
 
-    @media(min-width: $largeTablet) {
-      font-size: 1.5rem;
-      width: 2.75rem;
+    &__button-link {
+      margin-inline: auto;
+
+      @media(min-width: $tablet) {
+        gap: 1rem;
+      }
+    }
+
+    &__button {
+      @include button;
+      border: 2px solid var(--text-color-bright);
+      box-shadow: var(--box-shadow);
+      color: var(--text-color-bright);
+      
+      @media(min-width: $smallTablet) {
+        margin-bottom: 1.5rem;
+      }
+    }
+
+    &__button-text {
+      text-shadow: var(--text-shadow-bright);
+      
+      @media(min-width: $tablet) {
+        font-size: 1.5rem;
+      }
+    }
+
+    &__button-down {
+      filter: drop-shadow(6px 6px 6px rgba(0, 0, 0, 0.8));
+      height: 20px;
+      stroke: var(--text-color-bright);
+      width: 20px;
+    }
+
+    &__socials {
+      align-items: center;
+      bottom: 2rem;
+      display: flex;
+      gap: 1.125rem;
+      height: 4rem;
+      justify-content: center;
+      position: absolute;
+      z-index: 2;
+      
+      @media(min-width: $smallTablet) {
+        font-size: 1.5rem;
+        gap: 1.5rem;
+      }
+    }
+
+    &__social {
+
+      &:hover, &:focus {
+        @include hoverClickGrowIcon;
+      }
+    }
+
+    &__social-icon {
+      fill: var(--text-color-bright);
+      filter: drop-shadow(6px 6px 6px rgba(0, 0, 0, 0.8));
+      width: 1.85rem;
+      
+      @media(min-width: $smallTablet) {
+        width: 2.25rem;
+      }
+      
+      @media(min-width: $tablet) {
+        font-size: 1.5rem;
+        width: 2.5rem;
+      }
+
+      @media(min-width: $largeTablet) {
+        font-size: 1.5rem;
+        width: 2.75rem;
+      }
     }
   }
 }

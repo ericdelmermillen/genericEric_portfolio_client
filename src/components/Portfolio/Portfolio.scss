@@ -2,57 +2,60 @@
 @import '../../partials/variables';
 
 .portfolio {
-  background: var(--neutral-gray-2);
 
-  &__inner {
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding-bottom: 4rem;
-    padding-inline: 1rem;
-    padding-top: 2rem;
-    text-align: center;
-    
-    @media(min-width: $tablet){
-      padding-inline: 2rem;
+  & {
+    background: var(--neutral-gray-2);
+
+    &__inner {
+      align-items: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding-bottom: 4rem;
+      padding-inline: 1rem;
+      padding-top: 2rem;
+      text-align: center;
+      
+      @media(min-width: $tablet){
+        padding-inline: 2rem;
+      }
     }
-  }
 
-  &__heading {
-    @include headingGeneral;
-    align-items: center;
-    display: inline-block;
-    justify-content: center;
-    font-size: 1.5rem;
-    margin-bottom: 3rem;
-    margin-top: 2rem;
-    position: relative;
+    &__heading {
+      @include headingGeneral;
+      align-items: center;
+      display: inline-block;
+      justify-content: center;
+      font-size: 1.5rem;
+      margin-bottom: 3rem;
+      margin-top: 2rem;
+      position: relative;
 
-    &::after {
-      @include afterAccent;
+      &::after {
+        @include afterAccent;
+      }
     }
-  }
 
-  &__sub-heading {
-    font-size: 1.5rem;
-    margin-bottom: 2rem;
-  }
+    &__sub-heading {
+      font-size: 1.5rem;
+      margin-bottom: 2rem;
+    }
 
-  &__lead {
-    font-size: 1.25rem;
-    margin-bottom: 2rem;
-  }
+    &__lead {
+      font-size: 1.25rem;
+      margin-bottom: 2rem;
+    }
 
-  &__projects {
-    display: grid;
-    gap: 1rem;
-    grid-template-columns: 1fr;
-    max-width: $largeTablet;
-    width: 100%;
-    
-    @media(min-width: $tablet) {
-      grid-template-columns: 1fr 1fr;
+    &__projects {
+      display: grid;
+      gap: 1rem;
+      grid-template-columns: 1fr;
+      max-width: $largeTablet;
+      width: 100%;
+      
+      @media(min-width: $tablet) {
+        grid-template-columns: 1fr 1fr;
+      }
     }
   }
 }

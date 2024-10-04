@@ -2,14 +2,12 @@
 @import "../../partials/variables";
 
 .projectDetails {
-  @include page;
-  // min-height: calc(100vh - $navHeight);
 
-  &__inner {
-    @include wallpaperContainer;
+  & {
+    @include page;
+
+    &__inner {
+      @include wallpaperContainer;
+    }
   }
-
-  // &__heading {
-  //   color: orangered;
-  // }
 }

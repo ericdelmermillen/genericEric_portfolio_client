@@ -15,7 +15,7 @@ const TypingText = ({
         const nextLetterIdx = typingText.length;
         const nextLetter = textToType[nextLetterIdx]
         setTypingText((c) => c+= nextLetter);
-      }, typingDelayInterval)
+      }, typingDelayInterval);
       return () => clearInterval(typing);
     }
   }, [textToType, typingText]);

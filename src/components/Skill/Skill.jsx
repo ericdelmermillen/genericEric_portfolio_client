@@ -8,7 +8,6 @@ const Skill = ({ children, skillName}) => {
         <span className='skill__skill-name'>{skillName}</span>
       </li>
     </>
-  );
-};
+  )};
 
 export default Skill;

@@ -1,25 +1,27 @@
 @import "../../partials/mixins";
 @import "../../partials/variables";
 
-
 .blog {
-  @include page;
-  
-  &__inner {
-    @include wallpaperContainer;
-  }
-  
-  &__content {
-    max-width: $ultraWide;
-    width: 100%;
-    z-index: 1;
-}
 
-  &__heading {
-    font-size: 3rem;
-    height: 3rem;
-    position: relative;
-    text-align: center;
-    z-index: 1;
+  & {
+    @include page;
+    
+    &__inner {
+      @include wallpaperContainer;
+    }
+    
+    &__content {
+      max-width: $ultraWide;
+      width: 100%;
+      z-index: 1;
+  }
+
+    &__heading {
+      font-size: 3rem;
+      height: 3rem;
+      position: relative;
+      text-align: center;
+      z-index: 1;
+    }
   }
 }

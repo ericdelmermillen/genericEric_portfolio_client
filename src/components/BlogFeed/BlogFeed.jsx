@@ -59,18 +59,16 @@ const BlogFeed = () => {
         }));
 
         // using set to deal with doubling in dev: may refactor to use conditional logic with functional state updating in prod
-
-
         if(environment === "development") {
 
-          console.log(`In ${environment} mode`)
+          // console.log(`In ${environment} mode`)
             
           const updatedBlogPosts = [...new Set([...blogPosts, ...posts])]
           
           setBlogPosts(updatedBlogPosts);
 
         } else if(environment === "production") {
-          console.log(`In ${environment} mode`)
+          // console.log(`In ${environment} mode`)
           setBlogPosts(prevPosts => [...prevPosts, ...posts]);
         }
       } catch (error) {
@@ -103,7 +101,6 @@ const BlogFeed = () => {
             
             : null
           }
-          
 
           {blogPosts.map(post => (
             <BlogPost 

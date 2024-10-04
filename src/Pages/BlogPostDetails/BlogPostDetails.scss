@@ -2,13 +2,16 @@
 @import "../../partials/variables";
 
 .blogPostDetails {
-  @include page;
 
-  &__inner {
-    @include wallpaperContainer;
+  & {
+    @include page;
+
+    &__inner {
+      @include wallpaperContainer;
+    }
+
+    // &__heading {
+    //   color: orange;
+    // }
   }
-
-  // &__heading {
-  //   color: orange;
-  // }
 }
