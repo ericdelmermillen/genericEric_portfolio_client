@@ -10,6 +10,9 @@ const PLAYLIST_ID = "UU6aTLuI_j4-0wiDSzmaPctQ";
 // GE's playlist
 // const PLAYLIST_ID = "UUxF40kFyhKJ9JGuvNtfypyQ";
 
+const environment = import.meta.env.VITE_NODE_ENV;
+
+
 const BlogFeed = () => {
   
   const [ blogPosts, setBlogPosts ] = useState([]);
@@ -17,18 +20,14 @@ const BlogFeed = () => {
   const [ nextPageToken, setNextPageToken ] = useState("");
   const [ allResultsFetched, setAllResultsFetched ] = useState(false);
   const location = useLocation();
-  const [ isOnHome ] = useState(location.pathname === "/" || location.pathname === "/home" || location.pathname === "/home/")
+  const [ isOnHome ] = useState(
+    location.pathname === "/" || 
+    location.pathname === "/home" || 
+    location.pathname === "/home/");
 
   const MAX_RESULTS = isOnHome
     ? 1
     : 5;
-  // const MAX_RESULTS = isOnHome
-  //   ? 1
-  //   : 10;
-
-    // console.log(MAX_RESULTS)
-
-  const isOnBlogPage = location.pathname === "/blog" || location.pathname === "/blog/";
 
   const handleFetchBlogPosts = async () => {
     
@@ -59,9 +58,21 @@ const BlogFeed = () => {
           description: item.snippet.description
         }));
 
-        const updatedBlogPosts = [...new Set([...blogPosts, ...posts])]
+        // using set to deal with doubling in dev: may refactor to use conditional logic with functional state updating in prod
 
-        setBlogPosts(updatedBlogPosts);
+
+        if(environment === "development") {
+
+          console.log(`In ${environment} mode`)
+            
+          const updatedBlogPosts = [...new Set([...blogPosts, ...posts])]
+          
+          setBlogPosts(updatedBlogPosts);
+
+        } else if(environment === "production") {
+          console.log(`In ${environment} mode`)
+          setBlogPosts(prevPosts => [...prevPosts, ...posts]);
+        }
       } catch (error) {
         console.log(error);
       }
@@ -105,24 +116,30 @@ const BlogFeed = () => {
           ))}
 
           <div className="blogFeed__cta">
-            {isOnBlogPage ? (
-              <button
-                className="blogFeed__button"
-                onClick={handleFetchBlogPosts}
-                disabled={allResultsFetched} 
-              >
-                Load More Posts
-              </button>
-            ) : (
-              <Link to="/blog" className="blogFeed__button">
-                See More Posts
-              </Link>
-            )}
+            {isOnHome 
+              ? 
+                (
+                  <Link to="/blog" className="blogFeed__button">
+                    See More Posts
+                  </Link>
+                )
+     
+              : 
+                     
+                (
+                  <button
+                    className="blogFeed__button"
+                    onClick={handleFetchBlogPosts}
+                    disabled={allResultsFetched} 
+                  >
+                    Load More Posts
+                  </button>
+                ) 
+            }
           </div>
         </div>
       </div>
     </>
-  );
-};
+  )};
 
 export default BlogFeed;

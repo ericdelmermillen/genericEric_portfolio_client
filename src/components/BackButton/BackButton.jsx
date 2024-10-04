@@ -7,7 +7,7 @@ const BackButton = () => {
 
   const handleBackClick = () => {
     navigate(-1);
-  }
+  };
   
   return (
     <>
@@ -16,7 +16,7 @@ const BackButton = () => {
         onClick={handleBackClick}
       >
         <span className="backButton__arrow">
-         <IoArrowBackSharp />   
+          <IoArrowBackSharp />   
         </span>
       </button>
     </>
