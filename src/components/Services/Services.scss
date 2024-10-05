@@ -90,9 +90,11 @@
     }
     
     &__lead {
-      font-size: 1.5rem;
+      font-size: 1.75rem;
+      font-weight: bold;
+      letter-spacing: var(--letter-spacing-general);
       line-height: 1.25;
-      margin-bottom: 2rem;
+      margin-bottom: 3rem;
       text-align: center;
       text-shadow: var(--text-shadow-bright);
     }
@@ -132,6 +134,7 @@
     &__service-name {
       display: inline-block;
       font-size: 1.5rem;
+      letter-spacing: var(--letter-spacing-general);
       margin-bottom: 3rem;
       position: relative;
 
@@ -144,6 +147,7 @@
 
     &__service-description {
       font-size: 1.25rem;
+      letter-spacing: var(--letter-spacing-general);
       line-height: var(--line-height-medium);
       text-shadow: var(--text-shadow-bright);
     }

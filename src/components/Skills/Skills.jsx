@@ -34,8 +34,20 @@ const Skills = () => {
           <h3 className="skills__heading">
             Skills
           </h3>
+          {/* <p className="skills__lead">
+            From crafting seamless user interfaces to building robust back-end systems, these are the technologies that power my journey as a full-stack developer
+          </p> */}
+          {/* <p className="skills__lead">
+            These are the tools and languages I leverage daily to turn ideas into dynamic, scalable, and efficient solutions.
+          </p> */}
+          {/* <p className="skills__lead">
+            A developer is only as good as the tools in their toolbox. Here’s a breakdown of the technologies I use to bring digital visions to life.
+          </p> */}
+          {/* <p className="skills__lead">
+            Mastering the essentials and embracing new frameworks—these are the skills that enable me to stay ahead in a rapidly evolving tech landscape
+          </p> */}
           <p className="skills__lead">
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cum molestias est itaque explicabo eos quo.
+            My expertise spans a wide range of technologies. From front-end development to cloud infrastructure, here are the skills I bring to every project.
           </p>
         </div>
         <div className="skills__content">

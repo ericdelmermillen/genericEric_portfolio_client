@@ -27,6 +27,7 @@
 
     &__lead {
       font-size: 1.15rem;
+      letter-spacing: var(--letter-spacing-general);
       line-height: var(--line-height-general);
     }
 
@@ -34,6 +35,7 @@
       display: flex;
       flex-direction: column;
       gap: 3rem;
+      letter-spacing: var(--letter-spacing-general);
       padding: 1rem;
     }
 
