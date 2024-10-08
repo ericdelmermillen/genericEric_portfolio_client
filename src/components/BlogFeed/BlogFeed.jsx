@@ -6,9 +6,9 @@ import "./BlogFeed.scss";
 const YOUTUBE_API_KEY = import.meta.env.VITE_YOUTUBE_API_KEY;
 const YOUTUBE_BASE_URL = import.meta.env.VITE_YOUTUBE_BASE_URL;
 // SMW's playlist
-const PLAYLIST_ID = "UU6aTLuI_j4-0wiDSzmaPctQ";
+// const PLAYLIST_ID = "UU6aTLuI_j4-0wiDSzmaPctQ";
 // GE's playlist
-// const PLAYLIST_ID = "UUxF40kFyhKJ9JGuvNtfypyQ";
+const PLAYLIST_ID = "UUxF40kFyhKJ9JGuvNtfypyQ";
 
 const environment = import.meta.env.VITE_NODE_ENV;
 
@@ -37,6 +37,8 @@ const BlogFeed = () => {
         const response = await fetch(`${YOUTUBE_BASE_URL}/playlistItems?part=snippet&playlistId=${PLAYLIST_ID}&maxResults=${MAX_RESULTS}${nextPageToken ? `&pageToken=${nextPageToken}` : ''}&key=${YOUTUBE_API_KEY}`);
 
         const data = await response.json();
+
+        // console.log(data.items[1].snippet)
 
         const hasMorePages = data.nextPageToken;
 

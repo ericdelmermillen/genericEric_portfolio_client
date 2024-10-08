@@ -4,9 +4,7 @@
 .profile {
 
   & {
-
     margin-bottom: 3rem;
-    min-height: 30rem;
     padding-inline: 1rem;
     width: 100%;
 
@@ -22,6 +20,7 @@
 
       @media(min-width: $largeTablet) {
         text-align: start;
+        padding-inline-start: 1rem;;
       }
     }
 
@@ -29,6 +28,8 @@
       font-size: 1.15rem;
       letter-spacing: var(--letter-spacing-general);
       line-height: var(--line-height-general);
+      margin-bottom: 1rem;
+      padding-inline: 1rem;
     }
 
     &__items {

@@ -20,15 +20,10 @@ const Profile = () => {
           <h3 className="profile__heading">
             Profile
           </h3>
-          {/* <p className="profile__lead">
-            Here’s a quick overview of who I am, where I’ve been, and how you can get in touch.
-          </p> */}
           <p className="profile__lead">
-            Here’s a little more about me and the work I do, along with how you can get in touch.
+            Here’s a quick overview of who I am, where I’ve been, and how you can get in touch.
           </p>
-          {/* <p className="profile__lead">
-            My journey as a developer is defined by growth, creativity, and the pursuit of excellence.
-          </p> */}
+
         </div>
 
         <div className="profile__content">

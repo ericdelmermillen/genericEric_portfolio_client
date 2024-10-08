@@ -2,7 +2,6 @@ import { useAppContext } from './contexts/AppContext.jsx';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 import Blog from "./Pages/Blog/Blog.jsx";
-import BlogPostDetails from "./pages/BlogPostDetails/BlogPostDetails.jsx";
 import ColorModeToggle from './components/ColorModeToggle/ColorModeToggle.jsx';
 import Contact from "./pages/Contact/Contact.jsx";
 import Footer from "./components/Footer/Footer.jsx";
@@ -112,15 +111,6 @@ const App = () => {
                 <Blog>
                   <WallPaper />
                 </Blog>
-              } 
-            />
-              
-            <Route 
-              path='/blog/post/:postID'
-              element={
-                <BlogPostDetails>
-                  <WallPaper />
-                </BlogPostDetails>
               } 
             />
 

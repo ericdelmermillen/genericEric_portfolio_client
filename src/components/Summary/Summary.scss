@@ -5,12 +5,11 @@
 
   & {
     background: var(--neutral-gray-1);
-
+    
     &__inner {
       margin-inline: auto;
       max-width: $largeTablet;
       padding-block: 4em;
-      padding-inline: 1rem;
       
       @media(min-width: $tablet) {
         padding-inline: 2rem;
@@ -24,7 +23,7 @@
     &__article {
       display: flex;
       flex-direction: column;
-      padding-inline: 2rem;
+      // padding-inline: 2rem;
       
       @media(min-width: $largeTablet) {
         flex-direction: row;
