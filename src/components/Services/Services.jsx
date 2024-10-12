@@ -13,7 +13,7 @@ const services = [
     {
       name: "Web Design",
       description:
-      "Engaging, user-friendly designs that work seamlessly and look great on any device.",
+      "Designing engaging, user-friendly designs that work seamlessly, and look great on any device.",
       icon: FaCode,
       iconClass: "services__service-icon services__service-icon--small" 
     },
