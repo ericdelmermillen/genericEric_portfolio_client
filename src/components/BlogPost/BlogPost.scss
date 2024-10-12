@@ -7,7 +7,18 @@
     
     &__inner {
       height: 100%;
+      margin-bottom: 1.5rem;
+      margin-inline: auto;
+      max-width: $tablet;
       width: 100%;
+      
+      @media(min-width: $smallTablet) {
+        margin-bottom: 2rem;
+      }
+      
+      @media(min-width: $tablet) {
+        margin-bottom: 2.5rem;
+      }
     }
 
     &__video {
@@ -19,16 +30,59 @@
 
     &__iframe {
       aspect-ratio: 16/9;
+      border: none;
+      margin-bottom: 1rem;
       max-width: 100%;
+      outline: none;
     }
 
     &__video-text {
-      text-align: center;
+      color: var(--text-color);
+      display: flex;
+      flex-direction: column;
+      font-size: 0.75rem;
+      gap: 0.5rem;
+      letter-spacing: var(--letter-spacing-general);
+      line-height: 1.5;
+      padding-inline: 0.5rem;
+      
+      @media(min-width: $smallTablet) {
+        font-size: 1rem;
+        gap: 1rem;
+      }
+      
+      @media(min-width: $tablet) {
+        font-size: 1.25rem;
+        gap: 1rem;
+
+      }
     }
 
     &__video-title {
-      color: var(--text-color);
-      margin-block: 1rem;
+      font-size: inherit;
+      font-weight: normal;
+      overflow: hidden;   
+      text-overflow: ellipsis;  
+      white-space: nowrap;   
+    }
+    
+    &__title-label {
+      font-weight: 600;
+    }
+
+    &__description {
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 3;
+      display: -webkit-box;
+      font-size: inherit;
+      line-height: inherit;
+      overflow: hidden; 
+      text-overflow: ellipsis;
+
+    }
+
+    &__description-label {
+      font-weight: 600;
     }
   }
 }

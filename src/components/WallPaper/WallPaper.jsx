@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, memo } from "react";
 import { BsCpuFill, BsHddNetworkFill } from "react-icons/bs";
 import { FaCode, FaRegObjectUngroup } from "react-icons/fa6";
 import { FaDatabase, FaServer } from "react-icons/fa";
@@ -57,6 +57,7 @@ const WallPaperRow = ({ className }) => {
     ? 11
     : 12;
 
+
   return (
     <div className={className}>
       {Array.from({ length: itemsPerRow }).map((_, idx) => {
@@ -73,7 +74,7 @@ const WallPaperRow = ({ className }) => {
 };
 
 
-const WallPaper = () => {
+const WallPaper = memo (() => {
   const [ rerenderTrigger, setRerenderTrigger ] = useState(0); 
 
   const numberOfRows = 15;
@@ -102,6 +103,6 @@ const WallPaper = () => {
       </div>
     </div>
   );
-};
+});
 
 export default WallPaper;

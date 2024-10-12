@@ -26,13 +26,26 @@
     --neutral-gray-1: #f1e7e0;
     --neutral-gray-1: #e1e7e0;
     --neutral-gray-1: #e1e7e3;
+    --neutral-gray-1: #dfe5e1;
+    --neutral-gray-1: #e1e7e3;
+    --neutral-gray-1: #e2e8e4;
+    --neutral-gray-1: #e4ebe7;
+    --neutral-gray-1: #e6eae7;
+
+
+
+
+    // --neutral-gray-1: red;
+
+
+
 
 
     --neutral-gray-2: #c3c9d0;
     --neutral-gray-2: #efe7e5;
     --neutral-gray-2: #f5edeb;
     --neutral-gray-2: #e5edeb;
-    --neutral-gray-2: #eaedeb;
+    // --neutral-gray-2: #eaedeb;
 
 
     --accent-color: #bcb066;
@@ -168,7 +181,7 @@
 
 @mixin formFullWidth { 
   align-items: center;
-  background: var(--neutral-gray-2);
+  background: var(--neutral-gray-1);
   display: flex;
   flex-direction: column;
   height: 100%;

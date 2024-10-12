@@ -17,11 +17,25 @@
   }
 
     &__heading {
-      font-size: 3rem;
-      height: 3rem;
+      font-size: 1.25rem;
+      height: 1.25rem;
+      letter-spacing: var(--letter-spacing-general);
+      margin-bottom: 1rem;
       position: relative;
       text-align: center;
       z-index: 1;
+      
+      @media(min-width: $smallTablet) {
+        font-size: 1.75rem;
+        height: 1.75rem;
+        margin-bottom: 1rem;
+        
+        @media(min-width: $tablet) {
+          font-size: 2rem;
+          height: 2rem;
+          margin-bottom: 2rem;
+        }
+      }
     }
   }
 }

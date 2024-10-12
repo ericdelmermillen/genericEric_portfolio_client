@@ -3,7 +3,8 @@ import "./BlogPost.scss";
 const BlogPost = ({ description, title, videoID }) => {
   const embedUrl = `https://www.youtube.com/embed/${videoID}`;
 
-  // console.log(description.slice(0, 50))
+  const desc = description.split("\n")[0];
+
 
   return (
     <>
@@ -20,8 +21,12 @@ const BlogPost = ({ description, title, videoID }) => {
 
             <div className="blogPost__video-text">
               <h3 className="blogPost__video-title">
-                Title: {title}
+                <span className="blogPost__title-label">Title:</span> {title}
               </h3>
+
+              <p className="blogPost__description">
+                <span className="blogPost__description-label">Description:</span> {desc}
+              </p>
             </div>
           </div>
         </div>
