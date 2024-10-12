@@ -43,6 +43,7 @@
 
     &__button {
       @include button;
+      background: var(--neutralBG);
       margin-inline: auto;
       position: relative;
       z-index: 1;
