@@ -68,7 +68,6 @@
           overflow: hidden;   
           text-overflow: ellipsis;  
           white-space: nowrap;   
-
         }
       }
     }
@@ -79,43 +78,37 @@
       line-height: inherit;
       
       &.ellipsis {
-        overflow: hidden; 
-        text-overflow: ellipsis;
         -webkit-box-orient: vertical;
         -webkit-line-clamp: 3;
-        line-clamp: 3;  
         display: -webkit-box;
+        line-clamp: 3;  
+        overflow: hidden; 
+        text-overflow: ellipsis;
 
       }
       
       &--label {
         font-weight: 600;
       }
-
-      &--more {
-        color: blue;
-        cursor: pointer;
-      }
     }
   }
 
   &__show-full-info {
     background: none;
-    font-size: 0.75rem;
-    font-family: inherit;
-    letter-spacing: var(--letter-spacing-general);
-    color: var(--link-button-BG);
-    cursor: pointer;
     border: none;
-    outline: none;
-    text-decoration: underline;
-    max-width: 100%;
-    margin-inline-end: auto;
+    color: var(--link-button-color);
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 0.75rem;
+    letter-spacing: var(--letter-spacing-general);
     line-height: 1.4;
+    outline: none;
+    margin-inline-end: auto;
+    max-width: 100%;
+    text-decoration: underline;
     
     @media(min-width: $smallTablet) {
       font-size: 1rem;
-
     }
   }
 }
