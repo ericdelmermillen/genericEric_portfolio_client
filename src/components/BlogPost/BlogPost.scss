@@ -1,32 +1,44 @@
 @import "../../partials/mixins";
 @import "../../partials/variables";
 
+// need loading styles to standarize height of BlogPost while placeholders show to prevent overflow
+
 .blogPost {
 
   & {
+    opacity: 1;
+    position: relative;
+    transition: all 0.75s ease-in-out;
     
-    &__inner {
-      height: 100%;
-      margin-bottom: 1.5rem;
-      margin-inline: auto;
-      max-width: $tablet;
+    &.hide {
+      opacity: 0;
+    }
+
+    &__placeholder-container {
+      position: absolute;
+      top: 0;
       width: 100%;
       
-      @media(min-width: $smallTablet) {
-        margin-bottom: 2rem;
+      &.hide {
+        opacity: 0;
+        z-index: -1;
+        transition: all 0.75s ease-in-out;
       }
-      
-      @media(min-width: $tablet) {
-        margin-bottom: 2.5rem;
-        margin-bottom: 3rem;
+    }
+    
+    &__inner {
+      @include blogPost;
+      opacity: 1;
+      transition: all 0.75s ease-in-out;
+
+      &.hide {
+        border: 2px solid red;
+        opacity: 0;
       }
     }
 
     &__video {
-      display: flex;
-      flex-direction: column;
-      max-width: $largeTablet;
-      width: 100%;
+      @include blogPostVideo;
     }
 
     &__iframe {
@@ -71,7 +83,6 @@
         }
       }
     }
-    
 
     &__description {
       font-size: inherit;
@@ -84,7 +95,6 @@
         line-clamp: 3;  
         overflow: hidden; 
         text-overflow: ellipsis;
-
       }
       
       &--label {

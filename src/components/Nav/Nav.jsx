@@ -51,7 +51,6 @@ const Nav = ({ children }) => {
 
         </ul>
 
-        
         <div className="nav__colorModeToggle">
           <ColorModeToggle
             inputId={"nav__colorModeToggler"}

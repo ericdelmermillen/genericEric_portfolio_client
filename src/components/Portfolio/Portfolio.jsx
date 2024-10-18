@@ -16,6 +16,10 @@ const projects = [
   {id: 6, imgSrc: project6Img, projectTitle: "Grid Layout"},
 ];
 
+
+// need lightbox here
+
+
 const Portfolio = () => {
 
   return (

@@ -1,8 +1,23 @@
 import { useState, useRef, useEffect } from "react";
+import BlogPostPlaceholder from "../BlogPostPlaceholder/blogPostPlaceholder";
 import "./BlogPost.scss";
 
-const BlogPost = ({ description, title, videoID }) => {
-  const embedUrl = `https://www.youtube.com/embed/${videoID}`;
+const BlogPost = ({ 
+  description, 
+  title, 
+  videoID, 
+  isFirstPage,
+  isOnHome, 
+  idx, 
+  maxPostIdx,
+  handleMaxIdxPostLoaded,
+  isLoading,
+  RESULTS_PER_PAGE,
+  allResultsFetched })=> {
+  
+  const embedUrl = `https://www.youtube.com/embed/${videoID}?rel=0`;
+  // related videos disabled
+  // const embedUrl = `https://www.youtube.com/embed/${videoID}`;
   
   const [ showFullInfo, setShowFullInfo ] = useState(false);
   const [ hasLongTitle, setHasLongTitle ] = useState(false);
@@ -17,7 +32,11 @@ const BlogPost = ({ description, title, videoID }) => {
     : description.split("\n")[0];
 
   const handleToggleShowFullInfo = () => {
-    setShowFullInfo(prev => !prev)
+    setShowFullInfo(prev => !prev);
+  };
+
+  const handleLastBlogPostLoaded = () => {
+    handleMaxIdxPostLoaded();
   };
 
   const checkHasLongTitle = () => {
@@ -32,7 +51,7 @@ const BlogPost = ({ description, title, videoID }) => {
     if(descRef.current) {
       const lineHeight = parseFloat(getComputedStyle(descRef.current).lineHeight);
       const height = descRef.current.getBoundingClientRect().height;
-      setHasLongDesc(height > lineHeight); 
+      setHasLongDesc(description.split("\n").length > 1 || height > (lineHeight * 3)); 
     }
   };
 
@@ -41,11 +60,6 @@ const BlogPost = ({ description, title, videoID }) => {
     checkHasLongTitle();
     checkHasLongDesc();
   };
-
-  // set initial value of hasLongDescription after first render
-  useEffect(() => {
-    setHasLongDesc(description.split("\n").length > 1);
-  }, [])
 
   //add event listener for resize of window and call handleResize for initial calculation
   useEffect(() => {
@@ -57,9 +71,22 @@ const BlogPost = ({ description, title, videoID }) => {
     };
   }, []);
 
+  
   return (
-    <div className="blogPost">
-      <div className="blogPost__inner">
+    <div className={`blogPost ${isFirstPage ? "hide" : ""}`}>
+
+      <div className={`blogPost__placeholder-container ${idx <= (maxPostIdx - RESULTS_PER_PAGE) || allResultsFetched
+        ? "hide"
+        : ""
+      }`}>
+        <BlogPostPlaceholder />
+      </div>
+
+
+      <div className={`blogPost__inner ${idx > (maxPostIdx - RESULTS_PER_PAGE) && !allResultsFetched
+          ? "hide"
+          : ""}`
+      }>
         <div className="blogPost__video">
           <iframe
             className="blogPost__iframe"
@@ -67,6 +94,10 @@ const BlogPost = ({ description, title, videoID }) => {
             title={title}
             allow="clipboard-write; encrypted-media; picture-in-picture"
             allowFullScreen
+            onLoad={idx === maxPostIdx
+              ? handleLastBlogPostLoaded
+              : null
+            }
           ></iframe>
 
           <div className="blogPost__video-text">
@@ -119,11 +150,15 @@ const BlogPost = ({ description, title, videoID }) => {
               : null
             }
 
-            {(hasLongDesc || hasLongTitle) && (
-              <button className="blogPost__show-full-info" onClick={handleToggleShowFullInfo}>
-                {showFullInfo ? "Show Less" : "Show Full Info"}
-              </button>
-            )}
+            {((hasLongDesc && !isOnHome && !isLoading) || (hasLongTitle && !isOnHome &&!isLoading)) 
+              ?
+                <button 
+                  className="blogPost__show-full-info"  
+                  onClick={handleToggleShowFullInfo}>
+                    {showFullInfo ? "Show Less" : "Show Full Info"}
+                  </button>
+              : null
+            }
           </div>
         </div>
       </div>

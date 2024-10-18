@@ -5,7 +5,7 @@ import {
   useEffect, 
   useState
 } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { checkTokenIsValid } from "../../utils/utils";
 import { toast } from 'react-hot-toast'; 
 
@@ -16,8 +16,7 @@ const initialState = {
   colorMode: localStorage.getItem('colorMode') || "light",
   scrollYPos: window.scrollY,
   prevScrollYPos: window.scrollY,
-  showSideNav: false,
-  error: ""
+  showSideNav: false
 };
 
 const reducer = (state, action) => {
@@ -58,9 +57,12 @@ const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 const AppContextProvider = ({ children }) => {
   const [ state, dispatch ] = useReducer(reducer, initialState);
   const { isLoggedIn, colorMode, scrollYPos, prevScrollYPos, showSideNav } = state;
-  const [ isLoading, setIsLoading ] = useState(false);
-
+  
   const navigate = useNavigate();
+  const { pathname } = useLocation();
+  
+  const [ isLoading, setIsLoading ] = useState(false);
+  const [ pathame, setPathname ] = useState("");
 
   const toggleColorMode = () => {
     dispatch({ type: "colorMode/toggle"});
@@ -109,7 +111,7 @@ const AppContextProvider = ({ children }) => {
   const logoutUser = async () => {
     setIsLoading(true);
 
-    const token = localStorage.getItem("token")
+    const token = localStorage.getItem("token");
     const refreshToken = localStorage.getItem("refreshToken");
 
     try {
@@ -135,15 +137,14 @@ const AppContextProvider = ({ children }) => {
 
     } catch(error) {
       console.log(error);
-      return toast.error(error.message)
-
+      return toast.error(error.message);
     } finally {
       setIsLoading(false);
     }
   };
 
   const toggleSideNav = () => {
-    dispatch({ type: "app/toggleSideNav"})
+    dispatch({ type: "app/toggleSideNav"});
   };
 
   // useEffect to check for token for isLoggedIn status
@@ -194,10 +195,20 @@ const AppContextProvider = ({ children }) => {
     };
   }, [scrollYPos]);
 
+  // useEffect to turn off isLoading if it is set true on one page but the user goes to another before it is set to false
+  useEffect(() => {
+    const currentPathname = location.pathname;
+
+    if(pathname === currentPathname) {
+      setIsLoading(false);
+      setPathname(currentPathname);
+    }
+
+  }, [pathname]);
+
   const contextValues = {
     isLoading,
     setIsLoading,
-    // minLoadingTime,
     isLoggedIn,
     loginUser,
     logoutUser,

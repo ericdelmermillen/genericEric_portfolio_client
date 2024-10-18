@@ -31,11 +31,7 @@ const SideNav = ({ children }) => {
           : null
       }
       
-      <div 
-        className={`sideNav ${showSideNav 
-          ? "show" 
-          : ""}`}
-      >
+      <div className={`sideNav ${showSideNav ? "show" : ""}`}>
         <div className="sideNav__inner">
           <div 
             className="sideNav__close-button"

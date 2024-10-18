@@ -40,15 +40,11 @@ const Header = () => {
           }
           
           <div 
-            className={`header__dayImg ${colorMode === 'light' 
-              ? "top" 
-              : ""}`}
+            className={`header__dayImg ${colorMode === 'light' ? "top" : ""}`}
             aria-label="Daytime background showing the sun in the sky above the ocean."
           ></div>
           <div 
-            className={`header__nightImg ${colorMode === 'dark' 
-              ? "top" 
-              : ""}`}
+            className={`header__nightImg ${colorMode === 'dark' ? "top" : ""}`}
             aria-label="Nighttime background showing the moon in the sky above the ocean."
           ></div>
                   

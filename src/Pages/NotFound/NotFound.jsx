@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { scrollToTop } from "../../../utils/utils";
+import BackButton from "../../components/BackButton/BackButton";
 import "./NotFound.scss";
 
 const NotFound = ({ children }) => {
@@ -12,6 +13,7 @@ const NotFound = ({ children }) => {
   return (
     <>
       <div className="notFound">
+        <BackButton />
         <div className="notFound__inner">
           {children}
           <h1 className="notFound__heading">Not Found</h1>

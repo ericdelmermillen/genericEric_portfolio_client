@@ -29,7 +29,7 @@ let prevRandomIdx;
 
 const getRandomIcon = () => {
   const randomIdx = Math.floor(Math.random() * iconOptions.length);
-  if (prevRandomIdx === randomIdx) {
+  if(prevRandomIdx === randomIdx) {
     return getRandomIcon();
   } else {
     prevRandomIdx = randomIdx;

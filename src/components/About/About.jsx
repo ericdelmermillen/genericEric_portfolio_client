@@ -24,9 +24,8 @@ const About = () => {
             <div className="about__content">
 
             <p className="about__blurb">
-                
-A results-oriented full-stack developer with a strong foundation in React and Node.js. I thrive on solving complex problems and collaborating with teams to build high-quality web applications. With a focus on clean code and efficient practices, I strive to deliver exceptional user experiences.
-              </p>
+              A results-oriented full-stack developer with a strong foundation in React and Node.js. I thrive on solving complex problems and collaborating with teams to build high-quality web applications. With a focus on clean code and efficient practices, I strive to deliver exceptional user experiences.
+            </p>
          
             </div>
           </div>

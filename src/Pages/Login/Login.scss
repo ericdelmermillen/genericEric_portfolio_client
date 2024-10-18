@@ -4,27 +4,14 @@
 .login {
 
   & {
-
     @include page;
 
     &__inner {
       @include wallpaperContainer;
-  }
+    }
 
     &__content {
       @include formContent;
-    }
-
-    &__heading {
-      @include headingGeneral;
-      display: inline-block;
-      font-size: 2rem;
-      margin-bottom: 3rem;
-      position: relative;
-
-      &::after {
-        @include afterAccent;
-      }
     }
   }
 }
