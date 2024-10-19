@@ -5,7 +5,9 @@ import project3Img from '../../assets/images/project3.jpg';
 import project4Img from '../../assets/images/project4.jpg';
 import project5Img from '../../assets/images/project5.jpg';
 import project6Img from '../../assets/images/project6.jpg';
+import LightBox from '../LightBox/LightBox.jsx';
 import './Portfolio.scss';
+import { useState } from 'react';
 
 const projects = [
   {id: 1, imgSrc: project1Img, projectTitle: "Cliboard Landing Page"},
@@ -21,10 +23,26 @@ const projects = [
 
 
 const Portfolio = () => {
+  const [ showLightBox, setShowLightBox ] = useState(true);
+
+  const toggleShowLightBox = () => {
+    setShowLightBox(c => !c);
+  };
 
   return (
     <>
       <section className="portfolio">
+
+      {showLightBox
+        ? (
+            <LightBox 
+            setShowLightBox={setShowLightBox}
+              toggleShowLightBox={toggleShowLightBox}
+            />
+          )
+        : null
+      }
+        
         <div className="portfolio__inner">
           <div className="portfolio__header">
             <h4 className="portfolio__heading">
