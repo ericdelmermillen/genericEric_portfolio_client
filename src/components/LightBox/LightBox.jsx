@@ -16,15 +16,33 @@ const LightBoxImage = ({
     const lightBoxImage = document.getElementById(`${img.id}`);
 
     if(isMovingForward) {
-      // console.log("forward")
-      
+
+      if(currentIdx === 0 && (idx + 1) === maxIdx) {
+        // console.log(img.id)
+        // console.log(idx)
+        // console.log(maxIdx)
+        lightBoxImage.classList.remove("current");
+        lightBoxImage.classList.add("right");
+      }
+    
       if(isCurrentImage) {
         lightBoxImage.classList.add("current");
       } else if(idx < currentIdx) {
         lightBoxImage.classList.remove("current");
         lightBoxImage.classList.add("right");
-      } else  {
-        console.log("else")
+        setTimeout(() => {
+          lightBoxImage.classList.remove("right");
+        }, 1000)
+      } else if((idx + 1) === maxIdx && currentIdx === 0) {
+        console.log(img)
+        lightBoxImage.classList.remove("current");
+        lightBoxImage.classList.add("right");
+        setTimeout(() => {
+          lightBoxImage.classList.remove("right");
+        }, 1000)
+      }
+       else {
+        // console.log(img)
         lightBoxImage.classList.remove("right");
       }
 
@@ -181,7 +199,10 @@ const LightBox = ({
               <div className="lightBox__count"> 
 
                 {images.map((img, idx) => (
-                  <div key={img.id} className="lightBox__count-circle"></div>
+                  <div 
+                    key={img.id} 
+                    className={`lightBox__count-circle ${idx === currentIdx ? "current" : ""}`}>
+                  </div>
                 ))}
 
               </div>
