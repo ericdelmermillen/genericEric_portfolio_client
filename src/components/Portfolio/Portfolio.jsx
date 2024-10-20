@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import ProjectCard from '../ProjectCard/ProjectCard.jsx';
 import project1Img from '../../assets/images/project1.jpg';
 import project2Img from '../../assets/images/project2.jpg';
@@ -7,7 +8,6 @@ import project5Img from '../../assets/images/project5.jpg';
 import project6Img from '../../assets/images/project6.jpg';
 import LightBox from '../LightBox/LightBox.jsx';
 import './Portfolio.scss';
-import { useState } from 'react';
 
 const projects = [
   {id: 1, imgSrc: project1Img, projectTitle: "Cliboard Landing Page"},
@@ -19,29 +19,66 @@ const projects = [
 ];
 
 
-// need lightbox here
-
-
 const Portfolio = () => {
-  const [ showLightBox, setShowLightBox ] = useState(true);
+  const [ showLightBox, setShowLightBox ] = useState(false);
+  const [ currentIdx, setCurrentIdx ] = useState(null);
 
-  const toggleShowLightBox = () => {
-    setShowLightBox(c => !c);
+  const handleSetShowLightBoxTrue = () => {
+    setShowLightBox(true);
   };
+
+  const handleSetShowLightBoxFalse = () => {
+    setTimeout(() => {
+      setShowLightBox(false);
+    }, 500);
+  };
+
+  const handleProjectCardClick = (idx) => {
+    handleSetShowLightBoxTrue();
+    setCurrentIdx(idx)
+  };
+
+  const handleIncrementCurrentIdx = () => {
+    if(currentIdx >= projects.length - 1) {
+      // console.log("last")
+      setCurrentIdx(0)
+    } else {
+      setCurrentIdx(c => ++c)
+    }
+  };
+
+  const handleDecrementCurrentIdx = () => {
+    if(currentIdx <= 0) {
+      console.log("first")
+      setCurrentIdx(projects.length - 1)
+
+    } else {
+      setCurrentIdx(c => --c)
+    }
+  };
+
 
   return (
     <>
       <section className="portfolio">
 
-      {showLightBox
-        ? (
-            <LightBox 
-            setShowLightBox={setShowLightBox}
-              toggleShowLightBox={toggleShowLightBox}
-            />
-          )
-        : null
-      }
+        {showLightBox
+
+          ? 
+            (
+              <LightBox 
+                setShowLightBox={setShowLightBox}
+                handleSetShowLightBoxFalse={handleSetShowLightBoxFalse}
+                showLightBox={showLightBox}
+                images={projects}
+                currentIdx={currentIdx}
+                handleIncrementCurrentIdx={handleIncrementCurrentIdx}
+                handleDecrementCurrentIdx={handleDecrementCurrentIdx}
+              />
+            )
+          : null
+        }
+
         
         <div className="portfolio__inner">
           <div className="portfolio__header">
@@ -59,11 +96,14 @@ const Portfolio = () => {
 
           <div className="portfolio__projects">
 
-            {projects.map(project => 
+            {projects.map((project, idx) => 
               <ProjectCard 
                 key={project.id}
+                idx={idx}
                 imgSrc={project.imgSrc}
                 projectTitle={project.projectTitle}
+                handleSetShowLightBoxTrue={handleSetShowLightBoxTrue}
+                handleProjectCardClick={handleProjectCardClick}
               />
             )} 
 

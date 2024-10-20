@@ -8,6 +8,7 @@
     
     &:hover {
       @include hoverClickGrow;
+      cursor: pointer;
       opacity: 0.8;
     }
 
