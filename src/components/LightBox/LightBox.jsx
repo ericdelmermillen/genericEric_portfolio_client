@@ -14,6 +14,8 @@ const LightBoxImage = ({
  }) => {
 
   const isCurrentImage = idx === currentIdx;
+  const beforeCurrentIdx = idx < currentIdx;
+  const isFirstImage = idx === 0;
   const isLastImage = idx === maxIdx;
 
   // useEffect to set intial classes only
@@ -25,42 +27,46 @@ const LightBoxImage = ({
     } else if(!isCurrentImage && isInitialView) {
       lightBoxImage.classList.add("left");
     };
-
-  }, [isInitialView]);
+  }, []);
 
 
 
   // useEffect to reset classes when direction changes
   useEffect(() => {
     if(!isInitialView) {
+      console.log("toggling")
       const lightBoxImage = document.getElementById(`${img.id}`);
-      lightBoxImage.classList.remove("transition");
-
+      
       if(isMovingForward && !isCurrentImage) {
-        lightBoxImage.classList.add("left");
-        lightBoxImage.classList.remove("right");
+        lightBoxImage.classList = "lightBoxImage left";
+      // } else if(!isMovingForward && !isCurrentImage) {
       } else if(!isMovingForward && !isCurrentImage) {
-        lightBoxImage.classList.remove("left");
-        lightBoxImage.classList.add("right");
+        lightBoxImage.classList = "lightBoxImage right";
+      }
+      else {
+        console.log("other condition")
       }
     }
-  }, [isMovingForward, isInitialView]);
+  }, [isMovingForward]);
+
 
 
   // useEffect to handle transitions when moving forward and backward and not when isInitialView
   useEffect(() => {
     
+    const lightBoxImage = document.getElementById(`${img.id}`);
+
     if(!isInitialView && isMovingForward) {
-      const lightBoxImage = document.getElementById(`${img.id}`);
       
-      // if(isMovingForward) {
         lightBoxImage.classList.add("transition");
 
-        if(isCurrentImage) { // case is now the current image (idx === currentIdx)
+        if(isCurrentImage) { 
           lightBoxImage.classList.remove("left");
           lightBoxImage.classList.add("current");
-
-        } else if(idx < currentIdx) { // case: comes before currentIdx in the order
+        } 
+        
+        else if(beforeCurrentIdx) { 
+          lightBoxImage.classList.remove("current");
           lightBoxImage.classList.add("right");
           setTimeout(() => {
             lightBoxImage.classList.remove("right");
@@ -69,14 +75,43 @@ const LightBoxImage = ({
 
         } else if(isLastImage && currentIdx === 0) { 
           lightBoxImage.classList.add("right");
+          lightBoxImage.classList.remove("current");
           setTimeout(() => {
             lightBoxImage.classList.remove("right");
             lightBoxImage.classList.add("left");
           }, TIMEOUT_DELAY);
 
         }
+
       } else if(!isInitialView && !isMovingForward) {
-        console.log("moving backward")
+        lightBoxImage.classList.add("transition");
+        // console.log("adding transition")
+
+        if(isCurrentImage) { 
+          lightBoxImage.classList.remove("right");
+          lightBoxImage.classList.add("current");
+        } 
+        
+        else if(idx > currentIdx) { 
+          lightBoxImage.classList.remove("current");
+          lightBoxImage.classList.add("left");
+          setTimeout(() => {
+            lightBoxImage.classList.remove("left");
+            lightBoxImage.classList.add("right");
+          }, TIMEOUT_DELAY);
+
+        } 
+
+      else if(isFirstImage && currentIdx === maxIdx) { 
+        lightBoxImage.classList.add("left");
+        lightBoxImage.classList.remove("current");
+        setTimeout(() => {
+          lightBoxImage.classList.remove("left");
+          lightBoxImage.classList.add("right");
+        }, TIMEOUT_DELAY);
+
+      }
+        
     }
 
   }, [isInitialView, idx, currentIdx]);
@@ -128,10 +163,16 @@ const LightBox = ({
     
     if(isMovingForward) {
       setIsMovingForward(false)
-    };
-
-    handleDecrementCurrentIdx();
+      setTimeout(() => {
+        handleDecrementCurrentIdx();
+      }, 0)
+    } else {
+      handleDecrementCurrentIdx();
+    }
   };
+
+
+
 
   const handleNextClick = () => {
     if(isInitialView) {
@@ -140,9 +181,13 @@ const LightBox = ({
     
     if(!isMovingForward) {
       setIsMovingForward(true)
-    };
-
-    handleIncrementCurrentIdx();
+      setTimeout(() => {
+        handleIncrementCurrentIdx();
+      }, 0)
+    }
+     else {
+      handleIncrementCurrentIdx();
+    }
   };
 
 
@@ -256,7 +301,7 @@ const LightBox = ({
           </div>
 
           {/* reverse direction button for testing */}
-          <button 
+          {/* <button 
             className="reverseButton"
             onClick={() => {
               setIsMovingForward(c => !c)
@@ -264,7 +309,7 @@ const LightBox = ({
             }}
           >
             Reverse Direction
-          </button>
+          </button> */}
         </div>
       </div>
     </>

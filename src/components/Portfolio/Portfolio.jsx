@@ -40,20 +40,18 @@ const Portfolio = () => {
 
   const handleIncrementCurrentIdx = () => {
     if(currentIdx >= projects.length - 1) {
-      // console.log("last")
       setCurrentIdx(0)
     } else {
-      setCurrentIdx(c => ++c)
+      setCurrentIdx(c => c + 1)
     }
   };
 
   const handleDecrementCurrentIdx = () => {
     if(currentIdx <= 0) {
-      console.log("first")
       setCurrentIdx(projects.length - 1)
 
     } else {
-      setCurrentIdx(c => --c)
+      setCurrentIdx(c => c - 1)
     }
   };
 

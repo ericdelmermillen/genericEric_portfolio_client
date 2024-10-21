@@ -58,7 +58,7 @@
     aspect-ratio: 16/9;
     background: pink;
     // ***
-    // overflow: hidden;
+    overflow: hidden;
     position: relative;
     width: 60%;
     z-index: 3;
@@ -66,6 +66,7 @@
 
   &__button {
     position: absolute;
+    cursor: pointer;
     z-index: 5;
     
     &--prev {
