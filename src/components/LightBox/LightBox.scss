@@ -17,7 +17,7 @@
     transition: 
       border-radius 250ms ease-in-out,
       height 300ms ease-in-out, 
-      opacity 200ms ease-in-out,
+      opacity 500ms ease-in-out,
       width 300ms ease-in-out;
     width: 5%;
     
@@ -28,8 +28,8 @@
       transition: 
         border-radius 1000ms ease-in-out,
         height 300ms ease-in-out, 
-        width 300ms ease-in-out, 
-        opacity 300ms ease-in-out;
+        opacity 500ms ease-in-out,
+        width 300ms ease-in-out;
       width: 100%;
       z-index: 3;
     }
@@ -57,10 +57,11 @@
   &__images {
     aspect-ratio: 16/9;
     background: pink;
+    // ***
+    // overflow: hidden;
     position: relative;
     width: 60%;
     z-index: 3;
-    // overflow: hidden;
   }
 
   &__button {
@@ -81,7 +82,6 @@
   }
 
   &__count {
-    // background: green;
     bottom: 0.5rem;
     display: flex;
     gap: 0.75rem;
@@ -99,8 +99,8 @@
     width: 0.5rem;
 
     &.current {
-      outline: 1px solid var(--text-color);
       opacity: 0.5;
+      outline: 1px solid var(--text-color);
     }
   }
 }
@@ -110,29 +110,35 @@
 
   & {
     background: orange;
-    // border: 2px solid red;
     height: 100%;
     position: absolute;
-    transition: margin 1s ease-in-out;
     width: 100%;
-    z-index: 2;
-    // margin-inline-start: -100%;
+    
+    &.transition {
+      @include lightBoxTransition;
+    }
     
     &.current {
-      // border: 2px solid purple;
       margin-inline-start: 0;
       z-index: 4;
     }
     
     &.left {
-      background: blue;
       margin-inline-start: -100%;
+      z-index: -1;
+      
+      &.transition {
+        @include lightBoxTransition;
+      }
     }
     
     &.right {
-      background: pink;
       margin-inline-start: 100%;
-      z-index: 1;
+      z-index: -1;
+      
+      &.transition {
+        @include lightBoxTransition;
+      }
     }
   }
 
@@ -140,4 +146,9 @@
     height: 100%;
     width: 100%;
   }
+}
+
+
+.reverseButton {
+  z-index: 10;
 }

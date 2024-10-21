@@ -2,87 +2,88 @@ import { useEffect, useState } from "react";
 // import { useAppContext } from "../../contexts/AppContext";
 import "./LightBox.scss";
 
+const TIMEOUT_DELAY = 750;
+
 const LightBoxImage = ({ 
   img, 
   idx, 
   currentIdx,
   maxIdx,
-  isMovingForward,
-  isInitialView
+  isInitialView,
+  isMovingForward
  }) => {
 
   const isCurrentImage = idx === currentIdx;
-  const isLastImage = currentIdx === maxIdx;
+  const isLastImage = idx === maxIdx;
 
+  // useEffect to set intial classes only
   useEffect(() => {
     const lightBoxImage = document.getElementById(`${img.id}`);
 
-    if(isMovingForward && isInitialView) {
-      if(isCurrentImage) {
-        lightBoxImage.classList.add("current");
-      } else if(!isCurrentImage) {
+    if(isCurrentImage && isInitialView) {
+      lightBoxImage.classList.add("current");
+    } else if(!isCurrentImage && isInitialView) {
+      lightBoxImage.classList.add("left");
+    };
+
+  }, [isInitialView]);
+
+
+
+  // useEffect to reset classes when direction changes
+  useEffect(() => {
+    if(!isInitialView) {
+      const lightBoxImage = document.getElementById(`${img.id}`);
+      lightBoxImage.classList.remove("transition");
+
+      if(isMovingForward && !isCurrentImage) {
         lightBoxImage.classList.add("left");
-      }      
+        lightBoxImage.classList.remove("right");
+      } else if(!isMovingForward && !isCurrentImage) {
+        lightBoxImage.classList.remove("left");
+        lightBoxImage.classList.add("right");
+      }
+    }
+  }, [isMovingForward, isInitialView]);
+
+
+  // useEffect to handle transitions when moving forward and backward and not when isInitialView
+  useEffect(() => {
+    
+    if(!isInitialView && isMovingForward) {
+      const lightBoxImage = document.getElementById(`${img.id}`);
+      
+      // if(isMovingForward) {
+        lightBoxImage.classList.add("transition");
+
+        if(isCurrentImage) { // case is now the current image (idx === currentIdx)
+          lightBoxImage.classList.remove("left");
+          lightBoxImage.classList.add("current");
+
+        } else if(idx < currentIdx) { // case: comes before currentIdx in the order
+          lightBoxImage.classList.add("right");
+          setTimeout(() => {
+            lightBoxImage.classList.remove("right");
+            lightBoxImage.classList.add("left");
+          }, TIMEOUT_DELAY);
+
+        } else if(isLastImage && currentIdx === 0) { 
+          lightBoxImage.classList.add("right");
+          setTimeout(() => {
+            lightBoxImage.classList.remove("right");
+            lightBoxImage.classList.add("left");
+          }, TIMEOUT_DELAY);
+
+        }
+      } else if(!isInitialView && !isMovingForward) {
+        console.log("moving backward")
     }
 
-    if(isMovingForward && !isInitialView) {
-
-      if(currentIdx === 0 && (idx + 1) === maxIdx) {
-        lightBoxImage.classList.remove("current");
-        lightBoxImage.classList.add("right");
-        setTimeout(() => {
-          lightBoxImage.classList.remove("right");
-          lightBoxImage.classList.add("left");
-        }, 1000)
-      } else 
-
-      if(isCurrentImage) {
-        // console.log(img.id)
-        lightBoxImage.classList.remove("left");
-        lightBoxImage.classList.add("current");
-      } else if(idx < currentIdx) {
-        lightBoxImage.classList.remove("current");
-        lightBoxImage.classList.add("right");
-        setTimeout(() => {
-          lightBoxImage.classList.remove("right");
-          lightBoxImage.classList.add("left");
-        }, 1000)
-      } else if((idx + 1) === maxIdx && currentIdx === 0) {
-        console.log(img)
-        lightBoxImage.classList.remove("current");
-        lightBoxImage.classList.add("right");
-        lightBoxImage.classList.remove("left");
-        setTimeout(() => {
-          lightBoxImage.classList.remove("right");
-        }, 1000)
-      }
-       else if(idx === maxIdx && currentIdx === 0) {
-        console.log(idx)
-        console.log(maxIdx)
-        console.log("here")
-        lightBoxImage.classList.add("right");
-        setTimeout(() => {
-          lightBoxImage.classList.remove("right");
-          lightBoxImage.classList.add("left");
-
-        }, 1000)
-        // lightBoxImage.classList.remove("right");
-        // lightBoxImage.classList.add("left");
-      }
-
-    } 
-
-    if(!isMovingForward) {
-      console.log("moving backward")
-    }
-  }, [idx, currentIdx])
+  }, [isInitialView, idx, currentIdx]);
   
   return (
     <>
-      <div 
-        id={img.id}
-        className={`lightBoxImage`}
-      >
+      <div id={img.id} className={`lightBoxImage`}>
         <img 
           src={img.imgSrc}
           alt={img.projectTitle} 
@@ -118,6 +119,7 @@ const LightBox = ({
     handleSetShowLightBoxFalse();
     setFadeOpacity(true);
   };
+
 
   const handlePrevClick = () => {
     if(isInitialView) {
@@ -175,80 +177,94 @@ const LightBox = ({
             onClick={handleOverlayClick}
           ></div>
 
-            <div className="lightBox__images">
+          <div className="lightBox__images">
 
-              <LightBoxImage 
-                img={images[0]}
-                idx={0}
-                currentIdx={currentIdx}
-                isMovingForward={isMovingForward}
-                maxIdx={maxIdx}
-                isInitialView={isInitialView}
-                />
-              <LightBoxImage 
-                img={images[1]}
-                idx={1}
-                currentIdx={currentIdx}
-                isMovingForward={isMovingForward}
-                maxIdx={maxIdx}
-                isInitialView={isInitialView}
-                />
-              <LightBoxImage 
-                img={images[2]}
-                idx={2}
-                currentIdx={currentIdx}
-                isMovingForward={isMovingForward}
-                maxIdx={maxIdx}
-                isInitialView={isInitialView}
-                />
-              <LightBoxImage 
-                img={images[3]}
-                idx={3}
-                currentIdx={currentIdx}
-                isMovingForward={isMovingForward}
-                maxIdx={maxIdx}
-                isInitialView={isInitialView}
-                />
-              <LightBoxImage 
-                img={images[4]}
-                idx={4}
-                currentIdx={currentIdx}
-                isMovingForward={isMovingForward}
-                maxIdx={maxIdx}
-                isInitialView={isInitialView}
-                />
-              <LightBoxImage 
-                img={images[5]}
-                idx={5}
-                currentIdx={currentIdx}
-                isMovingForward={isMovingForward}
-                maxIdx={maxIdx}
-                isInitialView={isInitialView}
+            <LightBoxImage 
+              img={images[0]}
+              idx={0}
+              currentIdx={currentIdx}
+              isMovingForward={isMovingForward}
+              maxIdx={maxIdx}
+              isInitialView={isInitialView}
               />
+            <LightBoxImage 
+              img={images[1]}
+              idx={1}
+              currentIdx={currentIdx}
+              isMovingForward={isMovingForward}
+              maxIdx={maxIdx}
+              isInitialView={isInitialView}
+              />
+            <LightBoxImage 
+              img={images[2]}
+              idx={2}
+              currentIdx={currentIdx}
+              isMovingForward={isMovingForward}
+              maxIdx={maxIdx}
+              isInitialView={isInitialView}
+              />
+            <LightBoxImage 
+              img={images[3]}
+              idx={3}
+              currentIdx={currentIdx}
+              isMovingForward={isMovingForward}
+              maxIdx={maxIdx}
+              isInitialView={isInitialView}
+              />
+            <LightBoxImage 
+              img={images[4]}
+              idx={4}
+              currentIdx={currentIdx}
+              isMovingForward={isMovingForward}
+              maxIdx={maxIdx}
+              isInitialView={isInitialView}
+              />
+            <LightBoxImage 
+              img={images[5]}
+              idx={5}
+              currentIdx={currentIdx}
+              isMovingForward={isMovingForward}
+              maxIdx={maxIdx}
+              isInitialView={isInitialView}
+            />
 
-              <button
-                className="lightBox__button lightBox__button--prev"
-                onClick={handlePrevClick}
-              >PREV</button>
+            <button
+              className="lightBox__button lightBox__button--prev"
+              onClick={handlePrevClick}
+            >
+              PREV
+            </button>
 
-              <button
-                className="lightBox__button lightBox__button--next"
-                onClick={handleNextClick}
-              >NEXT</button>
+            <button
+              className="lightBox__button lightBox__button--next"
+              onClick={handleNextClick}
+            >
+              NEXT
+            </button>
 
-              <div className="lightBox__count"> 
+            <div className="lightBox__count"> 
 
-                {images.map((img, idx) => (
-                  <div 
-                    key={img.id} 
-                    className={`lightBox__count-circle ${idx === currentIdx ? "current" : ""}`}>
-                  </div>
-                ))}
-
-              </div>
+              {images.map((img, idx) => (
+                <div 
+                  key={img.id} 
+                  className={`lightBox__count-circle ${idx === currentIdx ? "current" : ""}`}>
+                </div>
+              ))}
 
             </div>
 
+          </div>
+
+          {/* reverse direction button for testing */}
+          <button 
+            className="reverseButton"
+            onClick={() => {
+              setIsMovingForward(c => !c)
+              setIsInitialView(false)
+            }}
+          >
+            Reverse Direction
+          </button>
         </div>
       </div>
     </>

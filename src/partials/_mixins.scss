@@ -9,6 +9,9 @@
   --letter-spacing-general: 0.6px;
   --border-radius: 4px;
 
+  // timing
+  --lightBox-transition-interval: 750ms;
+
 
   // light mode custom variables
   &[data-color-mode='light'] {
@@ -274,6 +277,10 @@
   flex-direction: column;
   max-width: $largeTablet;
   width: 100%;
+}
+
+@mixin lightBoxTransition {
+  transition: margin var(--lightBox-transition-interval) ease-in-out;
 }
 
 @mixin button {
