@@ -34,9 +34,11 @@ const Skills = () => {
           <h3 className="skills__heading">
             Skills
           </h3>
+
           <p className="skills__lead">
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cum molestias est itaque explicabo eos quo.
+            These are the tools and languages I leverage to turn ideas into scalable, efficient solutions.
           </p>
+  
         </div>
         <div className="skills__content">
           

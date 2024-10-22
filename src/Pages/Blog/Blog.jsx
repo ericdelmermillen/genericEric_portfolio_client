@@ -14,16 +14,18 @@ const Blog = ({ children }) => {
   return (
     <>
       <div className="blog">
-        <div className="blog__inner"
-        >
+        <div className="blog__inner">
           {children}
-          
-          <TypingText 
-            classNames={"blog__heading"}
-            textToType = 'Blog Page'
-          />
+          <div className="blog__content">
 
-          <BlogFeed />
+            <TypingText 
+              classNames={"blog__heading"}
+              textToType = 'Welcome To My Blog'
+              typingDelayInterval="150"
+            /> 
+            <BlogFeed />
+
+          </div>
         </div>
       </div>
     </>

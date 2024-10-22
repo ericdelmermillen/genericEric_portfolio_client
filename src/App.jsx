@@ -1,8 +1,7 @@
 import { useAppContext } from './contexts/AppContext.jsx';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
-import Blog from "./Pages/Blog/Blog.jsx";
-import BlogPostDetails from "./pages/BlogPostDetails/BlogPostDetails.jsx";
+import Blog from './pages/Blog/Blog.jsx';
 import ColorModeToggle from './components/ColorModeToggle/ColorModeToggle.jsx';
 import Contact from "./pages/Contact/Contact.jsx";
 import Footer from "./components/Footer/Footer.jsx";
@@ -41,6 +40,7 @@ const App = () => {
     <>
       <div className="app" data-color-mode={colorMode}>
 
+        {/* main loading spinner */}
         <div className={`loading ${isLoading ? "isLoading" : ""}`}></div>
         
         <div className="app__inner">
@@ -76,9 +76,7 @@ const App = () => {
                 : null
               }
 
-              <ColorModeToggle 
-                inputId={"sideNavColorModeToggle"} 
-              />
+              <ColorModeToggle inputId={"sideNavColorModeToggle"} />
             </div>
           </SideNav>
       
@@ -112,15 +110,6 @@ const App = () => {
                 <Blog>
                   <WallPaper />
                 </Blog>
-              } 
-            />
-              
-            <Route 
-              path='/blog/post/:postID'
-              element={
-                <BlogPostDetails>
-                  <WallPaper />
-                </BlogPostDetails>
               } 
             />
 
@@ -161,7 +150,7 @@ const App = () => {
             gutter={8} // Space between toasts
             containerStyle={{ top: 20, right: 20 }}
             toastOptions={{
-              duration: 4000, // Default duration
+              duration: 3000, // Default duration
               ariaProps: {
                 role: 'status',
                 'aria-live': 'polite',
@@ -172,7 +161,7 @@ const App = () => {
                 padding: '16px',
               },
               success: {
-                duration: 5000,
+                duration: 3000,
                 theme: {
                   primary: 'green',
                   secondary: 'black',
@@ -187,7 +176,7 @@ const App = () => {
                 },
               },
               error: {
-                duration: 7000,
+                duration: 5000,
                 icon: '🔥',
                 style: {
                   background: 'red',
@@ -217,7 +206,6 @@ export default App;
 // --user
 // --currentPost for blog session
 // 4) Posts/What I'm Learning section/Blog
-// --Typing Text for Hero section of Page
 // --paginated list of posts
 // --keyword filtering of posts(?)
 // --ability to make comments

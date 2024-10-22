@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, memo } from "react";
 import { BsCpuFill, BsHddNetworkFill } from "react-icons/bs";
 import { FaCode, FaRegObjectUngroup } from "react-icons/fa6";
 import { FaDatabase, FaServer } from "react-icons/fa";
@@ -27,11 +27,10 @@ const iconOptions = [
 
 let prevRandomIdx;
 
-// Function to get a random icon
 const getRandomIcon = () => {
   const randomIdx = Math.floor(Math.random() * iconOptions.length);
-  if (prevRandomIdx === randomIdx) {
-    return getRandomIcon(); // Prevents repeating the same icon
+  if(prevRandomIdx === randomIdx) {
+    return getRandomIcon();
   } else {
     prevRandomIdx = randomIdx;
     return iconOptions[randomIdx];
@@ -58,6 +57,7 @@ const WallPaperRow = ({ className }) => {
     ? 11
     : 12;
 
+
   return (
     <div className={className}>
       {Array.from({ length: itemsPerRow }).map((_, idx) => {
@@ -74,7 +74,7 @@ const WallPaperRow = ({ className }) => {
 };
 
 
-const WallPaper = () => {
+const WallPaper = memo (() => {
   const [ rerenderTrigger, setRerenderTrigger ] = useState(0); 
 
   const numberOfRows = 15;
@@ -91,18 +91,18 @@ const WallPaper = () => {
     <div className="wallpaper">
 
       <div className="wallpaper__inner">
-      {Array.from({ length: numberOfRows }).map((_, idx) => (
-        <WallPaperRow
-          key={idx}
-          className={(idx + 1) % 2 === 0
-            ? "wallpaper__row wallpaper__row--even"
-            : "wallpaper__row wallpaper__row--odd"
-          }
-        />
-      ))}
-    </div>
+        {Array.from({ length: numberOfRows }).map((_, idx) => (
+          <WallPaperRow
+            key={idx}
+            className={(idx + 1) % 2 === 0
+              ? "wallpaper__row wallpaper__row--even"
+              : "wallpaper__row wallpaper__row--odd"
+            }
+          />
+        ))}
+      </div>
     </div>
   );
-};
+});
 
 export default WallPaper;

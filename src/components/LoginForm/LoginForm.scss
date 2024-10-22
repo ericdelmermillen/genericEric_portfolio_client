@@ -2,68 +2,71 @@
 @import '../../partials/variables';
 
 .loginForm {
-  @include formFullWidth;
-  
-  &__inner {
-    @include formFullWidthInner;
-  }
 
-  &__header {
-    
-    &.hide {
-      display: none;
+  & {    
+    @include formFullWidth;
+  
+    &__inner {
+      @include formFullWidthInner;
     }
-  }
 
-  &__heading {
-    @include formHeading;
-
-    &::after {
-      @include afterAccent;
+    &__header {
+      
+      &.hide {
+        display: none;
+      }
     }
-  }
-  
-  &__sub-heading {
-    font-size: 1.75rem;
-    margin-bottom: 2rem;
-  }
 
-  &__form {
-    @include form;
-  }
-  
-  &__field {
-    position: relative;
-  }
+    &__heading {
+      @include formHeading;
 
-  &__input {
-   @include formFullWidthInput;
-  
-    &:focus {
-      box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
-      outline: none;
+      &::after {
+        @include afterAccent;
+      }
     }
     
-    &::placeholder {
-      color: var(--text-color);
-      font-size: 1rem;
+    &__sub-heading {
+      font-size: 1.75rem;
+      margin-bottom: 2rem;
     }
-  }
 
-  &__error {
-    @include formErrorMessage;
-  }
+    &__form {
+      @include form;
+    }
+    
+    &__field {
+      position: relative;
+    }
 
-  &__submit {
-    display: flex;
-    margin-top: auto;
-  }
-  
-  &__button {
-    @include button;
-    background: var(--accent-color);
-    border: none;
-    width: 100%;
+    &__input {
+      @include formFullWidthInput;
+    
+      &:focus {
+        box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+        outline: none;
+      }
+      
+      &::placeholder {
+        color: var(--text-color);
+        font-size: 1rem;
+      }
+    }
+
+    &__error {
+      @include formErrorMessage;
+    }
+
+    &__submit {
+      display: flex;
+      margin-top: auto;
+    }
+    
+    &__button {
+      @include button;
+      background: var(--accent-color);
+      border: none;
+      width: 100%;
+    }
   }
 }
 

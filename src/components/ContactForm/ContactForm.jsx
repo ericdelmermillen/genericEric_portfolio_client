@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useAppContext } from "../../contexts/AppContext.jsx";
-// import { useMutation } from "@tanstack/react-query";
 import { isValidEmail, scrollToTop } from "../../../utils/utils.js";
 import toast from "react-hot-toast";
 import "./ContactForm.scss";
@@ -26,7 +25,7 @@ const ContactForm = ({ children }) => {
 
   const location = useLocation();
   const navigate = useNavigate();
-  const isOnContact = location.pathname === "/contact";
+  const isOnContact = location.pathname === "/contact" || location.pathname === "/contact/";
 
   const handleNameChange = (e) => {
     setName(e.target.value);
@@ -99,8 +98,6 @@ const ContactForm = ({ children }) => {
         throw new Error("Failed to send message");
       }
 
-      const data = await response.json();
-      console.log("Message sent successfully:", data);
       toast.success("Message sent!");
       
       if(location.pathname === "/contact" || location.pathname === "/contact/") {

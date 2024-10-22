@@ -2,75 +2,78 @@
 @import '../../partials/variables';
 
 .about {
-  background: var(--neutral-gray-2);
 
-  &__inner {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-    padding-block: 4rem;
-    width: 100%;
-  }
+  & {
+    background: var(--neutral-gray-1);
 
-  &__header {
-    display: flex;
-    flex-direction: column;
-    font-size: 1.25rem;
-    gap: 2rem;
-    text-align: center;
-  }
-
-  &__heading {
-    @include headingGeneral;
-    display: inline-block; 
-    font-size: 1.5rem;;
-    margin-inline: auto;
-    position: relative;
-
-    &::after {
-      @include afterAccent;
+    &__inner {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      padding-block: 4rem;
+      width: 100%;
     }
-  }
 
-  &__summary {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-    margin-inline: auto;
-    max-width: $largeTablet;
-    
-    @media(min-width: $tablet) {
-      align-items: center;
-      flex-direction: row;
-      gap: 1rem;
+    &__header {
+      display: flex;
+      flex-direction: column;
+      font-size: 1.25rem;
+      gap: 2rem;
+      text-align: center;
+    }
+
+    &__heading {
+      @include headingGeneral;
+      display: inline-block; 
+      font-size: 1.5rem;
+      margin-inline: auto;
+      position: relative;
+
+      &::after {
+        @include afterAccent;
+      }
+    }
+
+    &__summary {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      margin-inline: auto;
+      max-width: $largeTablet;
+      
+      @media(min-width: $tablet) {
+        align-items: center;
+        flex-direction: row;
+        gap: 1rem;
+        padding-inline: 2rem;
+      }
+    }
+
+    &__img {
+      border-radius: 50%;
+      height: 15rem;
+      margin-inline: auto;
+      width: 15rem;
+      
+      @media(min-width: $tablet) {
+        margin-inline-end: 0;
+        margin-inline-start: auto;
+      }
+    }
+
+    &__content {
+      margin-inline: auto;
+      max-width: $tablet;
       padding-inline: 2rem;
+      
+      @media(min-width: $tablet) {
+        margin-inline-start: 0;
+      }
     }
-  }
-
-  &__img {
-    border-radius: 50%;
-    height: 15rem;
-    margin-inline: auto;
-    width: 15rem;
-    
-    @media(min-width: $tablet) {
-      margin-inline-end: 0;
-      margin-inline-start: auto;
+      
+    &__blurb {
+      font-size: 1.5rem;;
+      line-height: var(--line-height-general);
     }
-  }
-
-  &__content {
-    padding-inline: 2rem;
-    margin-inline: auto;
-    max-width: $tablet;
-    
-    @media(min-width: $tablet) {
-      margin-inline-start: 0;
-    }
-  }
-    
-  &__blurb {
-    font-size: 1.5rem;;
-    line-height: var(--line-height-general);
   }
 }

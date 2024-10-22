@@ -7,11 +7,7 @@ const Nav = ({ children }) => {
   const { 
     scrollYPos,
     prevScrollYPos,
-    toggleSideNav,
-    isLoading,
-    isLoggedIn,
-    loginUser,
-    logoutUser
+    toggleSideNav
    } = useAppContext();
    
   const { pathname } = useLocation();
@@ -55,7 +51,6 @@ const Nav = ({ children }) => {
 
         </ul>
 
-        
         <div className="nav__colorModeToggle">
           <ColorModeToggle
             inputId={"nav__colorModeToggler"}

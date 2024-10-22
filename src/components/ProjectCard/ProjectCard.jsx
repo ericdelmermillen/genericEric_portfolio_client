@@ -1,11 +1,18 @@
 import "./ProjectCard.scss";
 
-const ProjectCard = ({ imgSrc, projectTitle }) => {
-  // don't need <a></a>: can use onClick to set the active project for the LightBox
+const ProjectCard = ({ 
+  imgSrc, 
+  projectTitle, 
+  handleProjectCardClick, 
+  idx
+}) => {
 
   return (
     <>
-      <div className="projectCard">
+      <div 
+        className="projectCard"
+        onClick={() => handleProjectCardClick(idx)}
+      >
 				<div className="projectCard__inner">
           <img 
             className="projectCard__img"

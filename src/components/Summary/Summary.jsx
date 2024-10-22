@@ -4,6 +4,8 @@ import "./Summary.scss";
 
 const Summary = () => {
 
+  // what does Hire me now do? Open contact form with prefilled in headline?
+
   return (
     <>
       <section className="summary">

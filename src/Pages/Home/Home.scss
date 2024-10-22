@@ -2,12 +2,15 @@
 @import "../../partials/variables";
 
 .home {
-  @include page;
-  background: var(--background-color);
-  min-height: calc(100vh - $navHeight);
 
-  &__main {
-    margin-top: 100vh;
-    position: relative;
+  & {
+    @include page;
+    background: var(--background-color);
+    min-height: calc(100vh - $navHeight);
+
+    &__main {
+      margin-top: 100vh;
+      position: relative;
+    }
   }
 }

@@ -3,11 +3,11 @@ import { IoArrowBackSharp } from "react-icons/io5";
 import "./BackButton.scss";
 
 const BackButton = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const handleBackClick = () => {
     navigate(-1);
-  }
+  };
   
   return (
     <>
@@ -16,7 +16,7 @@ const BackButton = () => {
         onClick={handleBackClick}
       >
         <span className="backButton__arrow">
-         <IoArrowBackSharp />   
+          <IoArrowBackSharp />   
         </span>
       </button>
     </>

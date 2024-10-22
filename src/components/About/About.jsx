@@ -22,10 +22,11 @@ const About = () => {
               className="about__img"
             />
             <div className="about__content">
-            
-              <p className="about__blurb">
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nihil amet repellendus dolore cumque error porro reprehenderit, accusamus esse aspernatur. Iste cum quod nam atque tempora magnam, consequuntur at dolorum quis consectetur, unde aut, laboriosam dolor ab nihil iure? Accusantium, in!
-              </p>
+
+            <p className="about__blurb">
+              A results-oriented full-stack developer with a strong foundation in React and Node.js. I thrive on solving complex problems and collaborating with teams to build high-quality web applications. With a focus on clean code and efficient practices, I strive to deliver exceptional user experiences.
+            </p>
+         
             </div>
           </div>
 

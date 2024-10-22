@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import ProjectCard from '../ProjectCard/ProjectCard.jsx';
 import project1Img from '../../assets/images/project1.jpg';
 import project2Img from '../../assets/images/project2.jpg';
@@ -5,6 +6,7 @@ import project3Img from '../../assets/images/project3.jpg';
 import project4Img from '../../assets/images/project4.jpg';
 import project5Img from '../../assets/images/project5.jpg';
 import project6Img from '../../assets/images/project6.jpg';
+import LightBox from '../LightBox/LightBox.jsx';
 import './Portfolio.scss';
 
 const projects = [
@@ -16,11 +18,65 @@ const projects = [
   {id: 6, imgSrc: project6Img, projectTitle: "Grid Layout"},
 ];
 
+
 const Portfolio = () => {
+  const [ showLightBox, setShowLightBox ] = useState(false);
+  const [ currentIdx, setCurrentIdx ] = useState(null);
+
+  const handleSetShowLightBoxTrue = () => {
+    setShowLightBox(true);
+  };
+
+  const handleSetShowLightBoxFalse = () => {
+    setTimeout(() => {
+      setShowLightBox(false);
+    }, 500);
+  };
+
+  const handleProjectCardClick = (idx) => {
+    handleSetShowLightBoxTrue();
+    setCurrentIdx(idx);
+  };
+
+  const handleIncrementCurrentIdx = () => {
+    if(currentIdx >= projects.length - 1) {
+      setCurrentIdx(0);
+    } else {
+      setCurrentIdx(c => c + 1);
+    }
+  };
+
+  const handleDecrementCurrentIdx = () => {
+    if(currentIdx <= 0) {
+      setCurrentIdx(projects.length - 1);
+    } else {
+      setCurrentIdx(c => c - 1);
+    }
+  };
 
   return (
     <>
       <section className="portfolio">
+
+        {showLightBox
+
+          ? 
+            (
+              <LightBox 
+                images={projects}
+                currentIdx={currentIdx}
+                setCurrentIdx={setCurrentIdx}
+                showLightBox={showLightBox}
+                setShowLightBox={setShowLightBox}
+                handleSetShowLightBoxFalse={handleSetShowLightBoxFalse}
+                handleIncrementCurrentIdx={handleIncrementCurrentIdx}
+                handleDecrementCurrentIdx={handleDecrementCurrentIdx}
+              />
+            )
+          : null
+        }
+
+        
         <div className="portfolio__inner">
           <div className="portfolio__header">
             <h4 className="portfolio__heading">
@@ -37,11 +93,14 @@ const Portfolio = () => {
 
           <div className="portfolio__projects">
 
-            {projects.map(project => 
+            {projects.map((project, idx) => 
               <ProjectCard 
                 key={project.id}
+                idx={idx}
                 imgSrc={project.imgSrc}
                 projectTitle={project.projectTitle}
+                handleSetShowLightBoxTrue={handleSetShowLightBoxTrue}
+                handleProjectCardClick={handleProjectCardClick}
               />
             )} 
 

@@ -1,21 +1,53 @@
 @import "../../partials/mixins";
 @import "../../partials/variables";
 
-
 .blog {
-  @include page;
-  // min-height: calc(100vh - $navHeight);
-  
-  &__inner {
-    @include wallpaperContainer;
-    flex-direction: column;
-}
 
-  &__heading {
-    font-size: 3rem;
-    position: relative;
-    z-index: 1;
+  & {
+    @include page;
+    
+    &__inner {
+      @include wallpaperContainer;
+    }
+    
+    &__content {
+      max-width: $ultraWide;
+      width: 100%;
+      z-index: 1;
+    }
+
+    &__heading {
+      font-size: 1.25rem;
+      height: 1.25rem;
+      letter-spacing: var(--letter-spacing-general);
+      margin-bottom: 1rem;
+      position: relative;
+      text-align: center;
+      z-index: 1;
+      
+      @media(min-width: $smallTablet) {
+        font-size: 1.75rem;
+        height: 1.75rem;
+        margin-bottom: 1.5rem;
+        
+        @media(min-width: $tablet) {
+          font-size: 2rem;
+          height: 2rem;
+          margin-bottom: 2rem;
+        }
+        
+        @media(min-width: $largeTablet) {
+          font-size: 2.25rem;
+          height: 2.25rem;
+          margin-bottom: 2rem;
+        }
+        
+        @media(min-width: $desktop) {
+          font-size: 2.5rem;
+          height: 2.5rem;
+          margin-bottom: 2.5rem;
+        }
+      }
+    }
   }
 }
-
-

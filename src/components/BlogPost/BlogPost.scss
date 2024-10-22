@@ -1,25 +1,124 @@
 @import "../../partials/mixins";
 @import "../../partials/variables";
 
+// need loading styles to standarize height of BlogPost while placeholders show to prevent overflow
+
 .blogPost {
-  background: var(--neutral-gray-1);
-  background: orange;
-  
-  &__inner {
-    border: 2px solid red;
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-    padding-block: 4rem;
-    width: 100%;
+
+  & {
+    opacity: 1;
+    position: relative;
+    transition: all 0.75s ease-in-out;
+    
+    &.hide {
+      opacity: 0;
+    }
+
+    &__placeholder-container {
+      position: absolute;
+      top: 0;
+      width: 100%;
+      
+      &.hide {
+        opacity: 0;
+        z-index: -1;
+        transition: all 0.75s ease-in-out;
+      }
+    }
+    
+    &__inner {
+      @include blogPost;
+      opacity: 1;
+      transition: all 0.75s ease-in-out;
+
+      &.hide {
+        border: 2px solid red;
+        opacity: 0;
+      }
+    }
+
+    &__video {
+      @include blogPostVideo;
+    }
+
+    &__iframe {
+      aspect-ratio: 16/9;
+      border: none;
+      margin-bottom: 1rem;
+      max-width: 100%;
+      outline: none;
+    }
+
+    &__video-text {
+      color: var(--text-color);
+      display: flex;
+      flex-direction: column;
+      font-size: 0.75rem;
+      gap: 0.5rem;
+      letter-spacing: var(--letter-spacing-general);
+      line-height: 1.5;
+      padding-inline: 0.5rem;
+      
+      @media(min-width: $smallTablet) {
+        font-size: 1rem;
+      }
+      
+      @media(min-width: $tablet) {
+        font-size: 1.25rem;
+        gap: 0.75rem;
+      }
+
+      &--label {
+        font-weight: 600;
+      }
+
+      &--title {
+        font-size: inherit;
+        font-weight: normal;
+        
+        &.ellipse {
+          overflow: hidden;   
+          text-overflow: ellipsis;  
+          white-space: nowrap;   
+        }
+      }
+    }
+
+    &__description {
+      font-size: inherit;
+      line-height: inherit;
+      
+      &.ellipsis {
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 3;
+        display: -webkit-box;
+        line-clamp: 3;  
+        overflow: hidden; 
+        text-overflow: ellipsis;
+      }
+      
+      &--label {
+        font-weight: 600;
+      }
+    }
   }
 
-  &__video-text {
-    border: 2px solid blue;
-    text-align: center;
-  }
-
-  &__video-title {
-    color: #fff;
+  &__show-full-info {
+    background: none;
+    border: none;
+    color: var(--link-button-color);
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 0.75rem;
+    letter-spacing: var(--letter-spacing-general);
+    line-height: 1.4;
+    outline: none;
+    margin-inline-end: auto;
+    max-width: 100%;
+    text-decoration: underline;
+    
+    @media(min-width: $smallTablet) {
+      font-size: 1rem;
+    }
   }
 }
