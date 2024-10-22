@@ -55,7 +55,7 @@ const Portfolio = () => {
     }
   };
 
-
+  console.log(`showLightBox: ${showLightBox ? "true" : "false"}`)
   return (
     <>
       <section className="portfolio">
@@ -72,6 +72,7 @@ const Portfolio = () => {
                 currentIdx={currentIdx}
                 handleIncrementCurrentIdx={handleIncrementCurrentIdx}
                 handleDecrementCurrentIdx={handleDecrementCurrentIdx}
+                setCurrentIdx={setCurrentIdx}
               />
             )
           : null

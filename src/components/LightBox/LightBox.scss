@@ -17,9 +17,10 @@
     transition: 
       border-radius 250ms ease-in-out,
       height 300ms ease-in-out, 
-      opacity 500ms ease-in-out,
+      opacity 200ms ease-in-out,
       width 300ms ease-in-out;
     width: 5%;
+    z-index: 3;
     
     &.show {
       border-radius: 0;
@@ -28,10 +29,9 @@
       transition: 
         border-radius 1000ms ease-in-out,
         height 300ms ease-in-out, 
-        opacity 500ms ease-in-out,
+        opacity 300ms ease-in-out,
         width 300ms ease-in-out;
       width: 100%;
-      z-index: 3;
     }
   }
   
@@ -39,9 +39,9 @@
     align-items: center;
     display: flex;
     flex-direction: column;
+    height: 100%;
     justify-content: center;
     position: relative;
-    height: 100%;
     transition: all 1s ease;
     width: 100%;
   }
@@ -56,34 +56,81 @@
 
   &__images {
     aspect-ratio: 16/9;
-    background: pink;
-    // ***
+    background: var(--background-color);
+    max-width: $largeTablet;
     overflow: hidden;
     position: relative;
-    width: 60%;
+    width: 90%;
     z-index: 3;
   }
 
   &__button {
-    position: absolute;
+    background: none;
+    border: none;
     cursor: pointer;
+    opacity: 0.75;
+    outline: none;
+    position: absolute;
+    transition: opacity 200ms ease-in-out;
     z-index: 5;
+
+    &:disabled {
+      opacity: 0.25;
+    }
     
-    &--prev {
-      left: 1rem;
+    &--prev, 
+    &--next {
       top: 50%;
       transform: translateY(-50%);
     }
+    
+    &--prev {
+      left: 0.25rem;
+      
+      @media(min-width: $tablet) {
+        left: 0.5rem;
+      }
+    }
 
     &--next {
-      right: 1rem;
-      top: 50%;
-      transform: translateY(-50%);
+      right: 0.25rem;
+
+      @media(min-width: $tablet) {
+        right: 0.5rem;
+      }
+    }
+  }
+
+  &__prev-icon,
+  &__next-icon {
+    border-radius: 50%;
+    color: var(--text-color);
+    height: 2rem;
+    width: 2rem;
+    
+    @media(min-width: $smallTablet) {
+      height: 2.25rem;
+      width: 2.25rem;
+    }
+
+    @media(min-width: $tablet) {
+      height: 3.5rem;
+      width: 3.5rem;
+    }
+  
+    @media(min-width: $largeTablet) {
+      height: 4rem;
+      width: 4rem;
+    }
+
+    @media(min-width: $desktop) {
+      height: 4.5rem;
+      width: 4.5rem;
     }
   }
 
   &__count {
-    bottom: 0.5rem;
+    bottom: 0.75rem;
     display: flex;
     gap: 0.75rem;
     left: 50%;
@@ -91,16 +138,45 @@
     position: absolute;
     transform: translateX(-50%);
     z-index: 5;
+    
+    @media(min-width: $largeTablet) {
+      gap: 1rem;
+    }
+    
+    @media(min-width: $desktop) {
+      gap: 1.5rem;
+    }
   }
 
-  &__count-circle {
-    background: #333;
-    border-radius: 50%;
-    height: 0.5rem;
-    width: 0.5rem;
-
+  &__count-indicatior {
+    background: var(--text-color);
+    border-radius: var(--border-radius);
+    height: 0.15rem;
+    opacity: 0.75;
+    width: 1.75rem;
+    
+    @media(min-width: $smallTablet) {
+      height: 0.25rem;
+      width: 2.5rem;
+    }
+    
+    @media(min-width: $tablet) {
+      height: 0.35rem;
+      width: 3.5rem;
+    }
+    
+    @media(min-width: $largeTablet) {
+      height: 0.35rem;
+      width: 4rem;
+    }
+    
+    @media(min-width: $desktop) {
+      height: 0.35rem;
+      width: 4.5rem;
+    }
+  
     &.current {
-      opacity: 0.5;
+      opacity: 0.25;
       outline: 1px solid var(--text-color);
     }
   }
@@ -110,10 +186,10 @@
 .lightBoxImage {
 
   & {
-    background: orange;
     height: 100%;
     position: absolute;
     width: 100%;
+    z-index: -1;
     
     &.transition {
       @include lightBoxTransition;
@@ -147,9 +223,4 @@
     height: 100%;
     width: 100%;
   }
-}
-
-
-.reverseButton {
-  z-index: 10;
 }
