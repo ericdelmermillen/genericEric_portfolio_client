@@ -6,12 +6,12 @@ import "./LightBox.scss";
 const TIMEOUT_DELAY = 400;
 
 const LightBoxImage = ({ 
-  imageID,
-  imgSrc,
-  projectTitle,
   idx, 
   currentIdx,
   maxIdx,
+  imageID,
+  imgSrc,
+  projectTitle,
   isInitialView,
   isMovingForward,
   setIsTransitioning
@@ -51,6 +51,7 @@ const LightBoxImage = ({
         if(isCurrentImage) { 
           lightBoxImage.classList.remove("left");
           lightBoxImage.classList.add("current");
+          return
         } else if(beforeCurrentIdx) { 
           lightBoxImage.classList.remove("current");
           lightBoxImage.classList.add("right");
@@ -72,6 +73,7 @@ const LightBoxImage = ({
         if(isCurrentImage) { 
           lightBoxImage.classList.remove("right");
           lightBoxImage.classList.add("current");
+          return
         } else if(afterCurrentIdx) { 
           lightBoxImage.classList.remove("current");
           lightBoxImage.classList.add("left");
@@ -108,16 +110,18 @@ const LightBoxImage = ({
   )};
 
 const LightBox = ({ 
-  showLightBox, 
-  setShowLightBox,
-  handleSetShowLightBoxFalse, 
   images, 
   currentIdx,
   setCurrentIdx,
+  showLightBox, 
+  setShowLightBox,
+  handleSetShowLightBoxFalse, 
   handleIncrementCurrentIdx,
   handleDecrementCurrentIdx
 }) => {
+
   const { scrollYPos, prevScrollYPos } = useAppContext();
+
   const [ fadeOpacity, setFadeOpacity ] = useState(false);
   const [ isMovingForward, setIsMovingForward ] = useState(true);
   const [ isInitialView, setIsInitialView ] = useState(true);
@@ -137,17 +141,18 @@ const LightBox = ({
     
     lightBoxImages.forEach((image, idx) => {
       if(idx !== currentIdx) {
-        image.classList = `lightBoxImage ${side}`
-      }
+        image.classList = `lightBoxImage ${side}`;
+      };
     });
   };
 
 
   const handlePrevClick = () => {
-    setIsTransitioning(true)
+    setIsTransitioning(true);
+
     if(isInitialView) {
-      setIsInitialView(false)
-    }
+      setIsInitialView(false);
+    };
 
     if(isMovingForward) {
       changeLightBoxDirection("right");
@@ -157,12 +162,13 @@ const LightBox = ({
       }, 0)
     } else {
       handleDecrementCurrentIdx();
-    }
+    };
   };
 
 
   const handleNextClick = () => {
     setIsTransitioning(true);
+
     if(isInitialView) {
       setIsInitialView(false);
     };
@@ -173,10 +179,9 @@ const LightBox = ({
       setTimeout(() => {
         handleIncrementCurrentIdx();
       }, 0)
-    }
-     else {
+    } else {
        handleIncrementCurrentIdx();
-    }
+    };
   };
 
 
@@ -189,11 +194,11 @@ const LightBox = ({
       setTimeout(() => {
         lightBox.classList.add("show");
       }, 0);
-    } 
+    } ;
     
     if(fadeOpacity) {
       lightBox.classList.remove("show");
-    }
+    };
 
   }, [showLightBox, fadeOpacity]);
 
@@ -218,24 +223,21 @@ const LightBox = ({
       >
         <div className={"lightBox__inner"}>
 
-          <div 
-            className="lightBox__overlay"
-            onClick={handleOverlayClick}
-          ></div>
+          <div className="lightBox__overlay" onClick={handleOverlayClick}></div>
 
           <div className="lightBox__images">
 
             {images.map((image, idx) => (
               <LightBoxImage 
                 key={image.id}
+                idx={idx}
+                currentIdx={currentIdx}
+                maxIdx={maxIdx}
                 imageID={image.id}
                 imgSrc={image.imgSrc}
                 projectTitle={image.projectTitle}
-                idx={idx}
-                currentIdx={currentIdx}
-                isMovingForward={isMovingForward}
-                maxIdx={maxIdx}
                 isInitialView={isInitialView}
+                isMovingForward={isMovingForward}
                 setIsTransitioning={setIsTransitioning}
               />
             ))}

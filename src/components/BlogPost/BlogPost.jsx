@@ -94,6 +94,7 @@ const BlogPost = ({
             title={title}
             allow="clipboard-write; encrypted-media; picture-in-picture"
             allowFullScreen
+            sandbox="allow-scripts allow-same-origin allow-presentation"
             onLoad={idx === maxPostIdx
               ? handleLastBlogPostLoaded
               : null

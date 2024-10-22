@@ -3,7 +3,6 @@ import "./ProjectCard.scss";
 const ProjectCard = ({ 
   imgSrc, 
   projectTitle, 
-  handleSetShowLightBoxTrue, 
   handleProjectCardClick, 
   idx
 }) => {

@@ -35,27 +35,25 @@ const Portfolio = () => {
 
   const handleProjectCardClick = (idx) => {
     handleSetShowLightBoxTrue();
-    setCurrentIdx(idx)
+    setCurrentIdx(idx);
   };
 
   const handleIncrementCurrentIdx = () => {
     if(currentIdx >= projects.length - 1) {
-      setCurrentIdx(0)
+      setCurrentIdx(0);
     } else {
-      setCurrentIdx(c => c + 1)
+      setCurrentIdx(c => c + 1);
     }
   };
 
   const handleDecrementCurrentIdx = () => {
     if(currentIdx <= 0) {
-      setCurrentIdx(projects.length - 1)
-
+      setCurrentIdx(projects.length - 1);
     } else {
-      setCurrentIdx(c => c - 1)
+      setCurrentIdx(c => c - 1);
     }
   };
 
-  console.log(`showLightBox: ${showLightBox ? "true" : "false"}`)
   return (
     <>
       <section className="portfolio">
@@ -65,14 +63,14 @@ const Portfolio = () => {
           ? 
             (
               <LightBox 
-                setShowLightBox={setShowLightBox}
-                handleSetShowLightBoxFalse={handleSetShowLightBoxFalse}
-                showLightBox={showLightBox}
                 images={projects}
                 currentIdx={currentIdx}
+                setCurrentIdx={setCurrentIdx}
+                showLightBox={showLightBox}
+                setShowLightBox={setShowLightBox}
+                handleSetShowLightBoxFalse={handleSetShowLightBoxFalse}
                 handleIncrementCurrentIdx={handleIncrementCurrentIdx}
                 handleDecrementCurrentIdx={handleDecrementCurrentIdx}
-                setCurrentIdx={setCurrentIdx}
               />
             )
           : null

@@ -16,7 +16,7 @@
     }
     
     &__content {
-      min-height: calc(100vh - ($navHeight + 3rem));
+      min-height: 200vh;
       position: relative;
       
       &.isOnHome {
