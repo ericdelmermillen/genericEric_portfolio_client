@@ -10,7 +10,6 @@ import Login from "./pages/Login/Login.jsx";
 import Nav from './components/Nav/Nav.jsx';
 import NotFound from "./pages/NotFound/NotFound.jsx";
 import Projects from "./pages/Projects/Projects.jsx";
-import ProjectDetails from "./pages/ProjectDetails/ProjectDetails.jsx";
 import SideNav from './components/SideNav/SideNav.jsx';
 import WallPaper from './components/WallPaper/WallPaper.jsx';
 import "./App.scss";
@@ -92,15 +91,6 @@ const App = () => {
                 <Projects>
                   <WallPaper />
                 </Projects>
-              } 
-            />
-      
-            <Route 
-              path='/projects/project/:projectID'
-              element={
-                <ProjectDetails>
-                  <WallPaper />
-                </ProjectDetails>
               } 
             />
         

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import ProjectCard from '../ProjectCard/ProjectCard.jsx';
 import project1Img from '../../assets/images/project1.jpg';
 import project2Img from '../../assets/images/project2.jpg';
@@ -8,6 +8,7 @@ import project5Img from '../../assets/images/project5.jpg';
 import project6Img from '../../assets/images/project6.jpg';
 import LightBox from '../LightBox/LightBox.jsx';
 import './Portfolio.scss';
+import toast from 'react-hot-toast';
 
 const projects = [
   {id: 1, imgSrc: project1Img, projectTitle: "Cliboard Landing Page"},
@@ -18,10 +19,13 @@ const projects = [
   {id: 6, imgSrc: project6Img, projectTitle: "Grid Layout"},
 ];
 
+const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 const Portfolio = () => {
   const [ showLightBox, setShowLightBox ] = useState(false);
   const [ currentIdx, setCurrentIdx ] = useState(null);
+  const [ portfolioSummarries, setPortfolioSummarries ] = useState([]);
+  const [ showPortfolioPlaceholders, setShowPortfolioPlaceholders ] = useState(true);
 
   const handleSetShowLightBoxTrue = () => {
     setShowLightBox(true);
@@ -54,6 +58,32 @@ const Portfolio = () => {
     }
   };
 
+  // useEffect to get portfolio summaries for ProjectCards
+  // only need at initial mount
+  useEffect(() => {
+
+    const getPortfolioSummaries = async () => {
+      try {
+        const response = await fetch(`${BASE_URL}/projects/portfoliosummary`);
+        const data = await response.json(response);
+
+        if(!response.ok) {
+          throw new Error("Error fetching portfolio project sumamries")
+        }
+
+        console.log(data)
+        // need to set portfolioSummarries with returned data
+        setShowPortfolioPlaceholders(false)
+
+      } catch(error) {
+        console.log(error);
+        toast.error(error.message);
+      }
+    }
+
+    getPortfolioSummaries();
+  }, []);
+
   return (
     <>
       <section className="portfolio">
@@ -78,6 +108,7 @@ const Portfolio = () => {
 
         
         <div className="portfolio__inner">
+
           <div className="portfolio__header">
             <h4 className="portfolio__heading">
               PORTFOLIO
@@ -93,7 +124,27 @@ const Portfolio = () => {
 
           <div className="portfolio__projects">
 
-            {projects.map((project, idx) => 
+          {showPortfolioPlaceholders
+            ? 
+              (
+                <h4>Placeholders here</h4>
+              )
+            :
+              (
+                projects.map((project, idx) => 
+                  <ProjectCard 
+                    key={project.id}
+                    idx={idx}
+                    imgSrc={project.imgSrc}
+                    projectTitle={project.projectTitle}
+                    handleSetShowLightBoxTrue={handleSetShowLightBoxTrue}
+                    handleProjectCardClick={handleProjectCardClick}
+                  />
+              )
+            )
+          }
+
+            {/* {projects.map((project, idx) => 
               <ProjectCard 
                 key={project.id}
                 idx={idx}
@@ -102,7 +153,7 @@ const Portfolio = () => {
                 handleSetShowLightBoxTrue={handleSetShowLightBoxTrue}
                 handleProjectCardClick={handleProjectCardClick}
               />
-            )} 
+            )}  */}
 
           </div>
 
