@@ -33,6 +33,7 @@ const BlogFeed = () => {
   const [ allResultsFetched, setAllResultsFetched ] = useState(false);
   const [ isPaginationComplete, setIsPaginationComplete] = useState(false);
   const [ page, setPage ] = useState(1);
+  const [ isInitialLoad, setIsInitialLoad ] = useState(true);
   const [ maxPostIdx, setMaxPostIdx ] = useState((RESULTS_PER_PAGE * page) - 1);
 
   const { 
@@ -92,6 +93,8 @@ const BlogFeed = () => {
       } catch (error) {
         console.log(error);
         toast.error("Error connecting to youtube");
+      } finally {
+        setIsInitialLoad(false)
       }
     }
   };
@@ -157,30 +160,38 @@ const BlogFeed = () => {
           ))}
           </div>
 
-          <div className="blogFeed__cta">
-            {isOnHome 
-              ? 
-                (
-                  <Link to="/blog" className="blogFeed__button isOnHome">
-                    See More Posts
-                  </Link>
-                )
-     
-              : 
-                     
-                (
-                  <button
-                    className={`blogFeed__button ${isPaginationComplete 
-                      ? "disabled"
-                      : ""
-                    }`}
-                    onClick={handleFetchBlogPosts}
-                  >
-                    Load More Posts
-                  </button>
-                ) 
-            }
-          </div>
+          {!isInitialLoad
+
+            ?
+              (
+                <div className="blogFeed__cta">
+                  {isOnHome 
+                    ? 
+                      (
+                        <Link to="/blog" className="blogFeed__button isOnHome">
+                          See More Posts
+                        </Link>
+                      )
+    
+                    : 
+                    
+                      (
+                        <button
+                          className={`blogFeed__button ${isPaginationComplete 
+                            ? "disabled"
+                            : ""
+                          }`}
+                          onClick={handleFetchBlogPosts}
+                        >
+                          Load More Posts
+                        </button>
+                      ) 
+                  }
+                </div>
+              )
+            : null
+          }
+
         </div>
       </div>
     </>

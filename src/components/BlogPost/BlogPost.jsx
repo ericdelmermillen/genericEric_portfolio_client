@@ -2,6 +2,8 @@ import { useState, useRef, useEffect } from "react";
 import BlogPostPlaceholder from "../BlogPostPlaceholder/blogPostPlaceholder";
 import "./BlogPost.scss";
 
+// ***crazy issue with resizing on calling for next page on narrow screen: current fix is maxWidth on &__video at 75vw
+
 const BlogPost = ({ 
   description, 
   title, 
@@ -16,8 +18,6 @@ const BlogPost = ({
   allResultsFetched })=> {
   
   const embedUrl = `https://www.youtube.com/embed/${videoID}?rel=0`;
-  // related videos disabled
-  // const embedUrl = `https://www.youtube.com/embed/${videoID}`;
   
   const [ showFullInfo, setShowFullInfo ] = useState(false);
   const [ hasLongTitle, setHasLongTitle ] = useState(false);

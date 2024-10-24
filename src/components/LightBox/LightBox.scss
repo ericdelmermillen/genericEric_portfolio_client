@@ -1,226 +1,217 @@
-@import '../../partials/mixins';
-@import '../../partials/variables';
+@import "../../partials/mixins";
+@import "../../partials/variables";
 
 .lightBox {
+	& {
+		align-items: center;
+		border-radius: 50%;
+		display: flex;
+		height: 5%;
+		justify-content: center;
+		left: 50%;
+		opacity: 0;
+		position: fixed;
+		top: 50%;
+		transform: translate(-50%, -50%);
+		transition: border-radius 250ms ease-in-out, height 300ms ease-in-out,
+			opacity 200ms ease-in-out, width 300ms ease-in-out;
+		width: 5%;
+		z-index: 3;
 
-  & {
-    align-items: center;
-    border-radius: 50%;
-    display: flex;
-    height: 5%;
-    justify-content: center;
-    left: 50%;
-    opacity: 0;
-    position: fixed;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    transition: 
-      border-radius 250ms ease-in-out,
-      height 300ms ease-in-out, 
-      opacity 200ms ease-in-out,
-      width 300ms ease-in-out;
-    width: 5%;
-    z-index: 3;
-    
-    &.show {
-      border-radius: 0;
-      height: 100%;
-      opacity: 1;
-      transition: 
-        border-radius 1000ms ease-in-out,
-        height 300ms ease-in-out, 
-        opacity 300ms ease-in-out,
-        width 300ms ease-in-out;
-      width: 100%;
-    }
-  }
-  
-  &__inner {
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    justify-content: center;
-    position: relative;
-    transition: all 1s ease;
-    width: 100%;
-  }
-  
-  &__overlay {
-    background: var(--overlay-dark);
-    height: 100%;
-    position: absolute;
-    top: 0;
-    width: 100%;
-  }
+		&.show {
+			border-radius: 0;
+			height: 100%;
+			opacity: 1;
+			transition: border-radius 1000ms ease-in-out, height 300ms ease-in-out,
+				opacity 300ms ease-in-out, width 300ms ease-in-out;
+			width: 100%;
+		}
+	}
 
-  &__images {
-    aspect-ratio: 16/9;
-    background: var(--background-color);
-    max-width: $largeTablet;
-    overflow: hidden;
-    position: relative;
-    width: 90%;
-    z-index: 3;
-  }
+	&__inner {
+		align-items: center;
+		display: flex;
+		flex-direction: column;
+		height: 100%;
+		justify-content: center;
+		position: relative;
+		transition: all 1s ease;
+		width: 100%;
+	}
 
-  &__button {
-    background: none;
-    border: none;
-    cursor: pointer;
-    opacity: 0.75;
-    outline: none;
-    position: absolute;
-    transition: opacity 200ms ease-in-out;
-    z-index: 5;
+	&__overlay {
+		background: var(--overlay-dark);
+		height: 100%;
+		position: absolute;
+		top: 0;
+		width: 100%;
+	}
 
-    &:disabled {
-      opacity: 0.25;
-    }
-    
-    &--prev, 
-    &--next {
-      top: 50%;
-      transform: translateY(-50%);
-    }
-    
-    &--prev {
-      left: 0.25rem;
-      
-      @media(min-width: $tablet) {
-        left: 0.5rem;
-      }
-    }
+	&__images {
+		aspect-ratio: 16/9;
+		background: var(--background-color);
+		max-width: $largeTablet;
+		overflow: hidden;
+		position: relative;
+		width: 90%;
+		z-index: 3;
+	}
 
-    &--next {
-      right: 0.25rem;
+	&__button {
+		background: none;
+		border: none;
+		cursor: pointer;
+		opacity: 0.75;
+		outline: none;
+		position: absolute;
+		transition: opacity 100ms ease-in-out;
+		z-index: 5;
 
-      @media(min-width: $tablet) {
-        right: 0.5rem;
-      }
-    }
-  }
+		&:disabled {
+			opacity: 0.25;
+		}
 
-  &__prev-icon,
-  &__next-icon {
-    border-radius: 50%;
-    color: var(--text-color);
-    height: 2rem;
-    width: 2rem;
-    
-    @media(min-width: $smallTablet) {
-      height: 2.25rem;
-      width: 2.25rem;
-    }
+		&--prev,
+		&--next {
+			top: 50%;
+			transform: translateY(-50%);
+		}
 
-    @media(min-width: $tablet) {
-      height: 3.5rem;
-      width: 3.5rem;
-    }
-  
-    @media(min-width: $largeTablet) {
-      height: 4rem;
-      width: 4rem;
-    }
+		&--prev {
+			left: 0.25rem;
 
-    @media(min-width: $desktop) {
-      height: 4.5rem;
-      width: 4.5rem;
-    }
-  }
+			@media (min-width: $tablet) {
+				left: 0.5rem;
+			}
+		}
 
-  &__count {
-    bottom: 0.75rem;
-    display: flex;
-    gap: 0.75rem;
-    left: 50%;
-    padding-inline: 0.5rem;
-    position: absolute;
-    transform: translateX(-50%);
-    z-index: 5;
-    
-    @media(min-width: $largeTablet) {
-      gap: 1rem;
-    }
-    
-    @media(min-width: $desktop) {
-      gap: 1.5rem;
-    }
-  }
+		&--next {
+			right: 0.25rem;
 
-  &__count-indicatior {
-    background: var(--text-color);
-    border-radius: var(--border-radius);
-    height: 0.15rem;
-    opacity: 0.75;
-    width: 1.75rem;
-    
-    @media(min-width: $smallTablet) {
-      height: 0.25rem;
-      width: 2.5rem;
-    }
-    
-    @media(min-width: $tablet) {
-      height: 0.35rem;
-      width: 3.5rem;
-    }
-    
-    @media(min-width: $largeTablet) {
-      height: 0.35rem;
-      width: 4rem;
-    }
-    
-    @media(min-width: $desktop) {
-      height: 0.35rem;
-      width: 4.5rem;
-    }
-  
-    &.current {
-      opacity: 0.25;
-      outline: 1px solid var(--text-color);
-    }
-  }
+			@media (min-width: $tablet) {
+				right: 0.5rem;
+			}
+		}
+	}
+
+	&__prev-icon,
+	&__next-icon {
+		border-radius: 50%;
+		color: var(--text-color);
+		height: 2rem;
+		width: 2rem;
+
+		@media (min-width: $smallTablet) {
+			height: 2.25rem;
+			width: 2.25rem;
+		}
+
+		@media (min-width: $tablet) {
+			height: 3.5rem;
+			width: 3.5rem;
+		}
+
+		@media (min-width: $largeTablet) {
+			height: 4rem;
+			width: 4rem;
+		}
+
+		@media (min-width: $desktop) {
+			height: 4.5rem;
+			width: 4.5rem;
+		}
+	}
+
+	&__count {
+		bottom: 0.75rem;
+		display: flex;
+		gap: 0.75rem;
+		left: 50%;
+		padding-inline: 0.5rem;
+		position: absolute;
+		transform: translateX(-50%);
+		z-index: 5;
+
+		@media (min-width: $largeTablet) {
+			gap: 1rem;
+		}
+
+		@media (min-width: $desktop) {
+			gap: 1.5rem;
+		}
+	}
+
+	&__count-indicatior {
+		background: var(--text-color);
+		border-radius: var(--border-radius);
+		height: 0.15rem;
+		opacity: 0.75;
+		width: 1.75rem;
+
+		@media (min-width: $smallTablet) {
+			height: 0.25rem;
+			width: 2.5rem;
+		}
+
+		@media (min-width: $tablet) {
+			height: 0.35rem;
+			width: 3.5rem;
+		}
+
+		@media (min-width: $largeTablet) {
+			height: 0.35rem;
+			width: 4rem;
+		}
+
+		@media (min-width: $desktop) {
+			height: 0.35rem;
+			width: 4.5rem;
+		}
+
+		&.current {
+			opacity: 0.25;
+			outline: 1px solid var(--text-color);
+		}
+	}
 }
 
-
 .lightBoxImage {
+	& {
+		height: 100%;
+		position: absolute;
+		width: 100%;
+		z-index: -1;
 
-  & {
-    height: 100%;
-    position: absolute;
-    width: 100%;
-    z-index: -1;
-    
-    &.transition {
-      @include lightBoxTransition;
-    }
-    
-    &.current {
-      margin-inline-start: 0;
-      z-index: 4;
-    }
-    
-    &.left {
-      margin-inline-start: -100%;
-      z-index: -1;
-      
-      &.transition {
-        @include lightBoxTransition;
-      }
-    }
-    
-    &.right {
-      margin-inline-start: 100%;
-      z-index: -1;
-      
-      &.transition {
-        @include lightBoxTransition;
-      }
-    }
-  }
+		&.transition {
+			@include lightBoxTransition;
+		}
 
-  &__img {
-    height: 100%;
-    width: 100%;
-  }
+		&.current {
+			margin-inline-start: 0;
+			z-index: 4;
+		}
+
+		&.left {
+			margin-inline-start: -100%;
+			z-index: -1;
+
+			&.transition {
+				@include lightBoxTransition;
+			}
+		}
+
+		&.right {
+			margin-inline-start: 100%;
+			z-index: -1;
+
+			&.transition {
+				@include lightBoxTransition;
+			}
+		}
+	}
+
+	&__img {
+		height: 100%;
+		width: 100%;
+	}
 }

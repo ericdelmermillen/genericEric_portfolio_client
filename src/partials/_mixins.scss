@@ -281,6 +281,19 @@
 	}
 }
 
+@mixin portfolioContainer {
+	display: grid;
+	gap: 1rem;
+	grid-template-columns: 1fr;
+	max-width: $largeTablet;
+	position: relative;
+	width: 100%;
+
+	@media (min-width: $tablet) {
+		grid-template-columns: 1fr 1fr;
+	}
+}
+
 @mixin blogPostVideo {
 	display: flex;
 	flex-direction: column;

@@ -1,62 +1,87 @@
-@import '../../partials/mixins';
-@import '../../partials/variables';
+@import "../../partials/mixins";
+@import "../../partials/variables";
 
 .portfolio {
+	& {
+		background: var(--neutral-gray-1);
 
-  & {
-    background: var(--neutral-gray-1);
+		&__inner {
+			align-items: center;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			padding-bottom: 4rem;
+			padding-inline: 1rem;
+			padding-top: 2rem;
+			text-align: center;
 
-    &__inner {
-      align-items: center;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding-bottom: 4rem;
-      padding-inline: 1rem;
-      padding-top: 2rem;
-      text-align: center;
-      
-      @media(min-width: $tablet){
-        padding-inline: 2rem;
-      }
-    }
+			@media (min-width: $tablet) {
+				padding-inline: 2rem;
+			}
+		}
 
-    &__heading {
-      @include headingGeneral;
-      align-items: center;
-      display: inline-block;
-      justify-content: center;
-      font-size: 1.5rem;
-      margin-bottom: 3rem;
-      margin-top: 2rem;
-      position: relative;
+		&__heading {
+			@include headingGeneral;
+			align-items: center;
+			display: inline-block;
+			justify-content: center;
+			font-size: 1.5rem;
+			margin-bottom: 3rem;
+			margin-top: 2rem;
+			position: relative;
 
-      &::after {
-        @include afterAccent;
-      }
-    }
+			&::after {
+				@include afterAccent;
+			}
+		}
 
-    &__sub-heading {
-      font-size: 1.5rem;
-      margin-bottom: 2rem;
-    }
+		&__sub-heading {
+			font-size: 1.5rem;
+			margin-bottom: 2rem;
+		}
 
-    &__lead {
-      font-size: 1.25rem;
-      letter-spacing: var(--letter-spacing-general);
-      margin-bottom: 2rem;
-    }
+		&__lead {
+			font-size: 1.25rem;
+			letter-spacing: var(--letter-spacing-general);
+			margin-bottom: 2rem;
+		}
 
-    &__projects {
-      display: grid;
-      gap: 1rem;
-      grid-template-columns: 1fr;
-      max-width: $largeTablet;
-      width: 100%;
-      
-      @media(min-width: $tablet) {
-        grid-template-columns: 1fr 1fr;
-      }
-    }
-  }
+		&__projects {
+			@include portfolioContainer;
+			opacity: 0;
+
+			@media (min-width: $tablet) {
+				grid-template-columns: 1fr 1fr;
+			}
+
+			&.show {
+				opacity: 1;
+				transition: opacity 1s ease;
+			}
+		}
+
+		&__project-placeholders {
+			@include portfolioContainer;
+			height: 100%;
+			opacity: 0.5;
+			display: none;
+			position: absolute;
+
+			&.show {
+				display: grid;
+			}
+		}
+
+		&__project-placeholder {
+			aspect-ratio: 16/9;
+			background: green;
+			max-width: 100%;
+			overflow: hidden;
+		}
+
+		&__button {
+			@include button;
+			margin-top: 3rem;
+		}
+	}
 }

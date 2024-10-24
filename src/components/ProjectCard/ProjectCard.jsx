@@ -1,10 +1,12 @@
 import "./ProjectCard.scss";
 
 const ProjectCard = ({ 
+  idx,
+  maxIdx,
   imgSrc, 
   projectTitle, 
-  handleProjectCardClick, 
-  idx
+  handleProjectCardClick,
+  handleSetShowPortfolioPlaceholders
 }) => {
 
   return (
@@ -18,6 +20,10 @@ const ProjectCard = ({
             className="projectCard__img"
             src={imgSrc}
             alt={`Card Image for ${projectTitle} Project`}
+            onLoad={idx === maxIdx
+              ? () => handleSetShowPortfolioPlaceholders()
+              : null
+            }
           />
 				</div>
 			</div>

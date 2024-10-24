@@ -117,7 +117,8 @@ const LightBox = ({
   setShowLightBox,
   handleSetShowLightBoxFalse, 
   handleIncrementCurrentIdx,
-  handleDecrementCurrentIdx
+  handleDecrementCurrentIdx,
+  handleSetShowPortfolioPlaceholders
 }) => {
 
   const { scrollYPos, prevScrollYPos } = useAppContext();
@@ -229,16 +230,17 @@ const LightBox = ({
 
             {images.map((image, idx) => (
               <LightBoxImage 
-                key={image.id}
+                key={image.project_id}
                 idx={idx}
                 currentIdx={currentIdx}
                 maxIdx={maxIdx}
-                imageID={image.id}
+                imageID={image.project_id}
                 imgSrc={image.imgSrc}
                 projectTitle={image.projectTitle}
                 isInitialView={isInitialView}
                 isMovingForward={isMovingForward}
                 setIsTransitioning={setIsTransitioning}
+                handleSetShowPortfolioPlaceholders={handleSetShowPortfolioPlaceholders}
               />
             ))}
 
@@ -262,7 +264,7 @@ const LightBox = ({
 
               {images.map((img, idx) => (
                 <div 
-                  key={img.id} 
+                  key={img.project_id} 
                   className={`lightBox__count-indicatior ${idx === currentIdx ? "current" : ""}`}>
                 </div>
               ))}
