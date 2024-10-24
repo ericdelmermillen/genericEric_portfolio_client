@@ -11,6 +11,7 @@
 
 	// timing
 	--lightBox-transition-interval: 450ms;
+	--placeholder-transition: all 0.75s ease-in-out;
 
 	// light mode custom variables
 	&[data-color-mode="light"] {
@@ -286,7 +287,6 @@
 	gap: 1rem;
 	grid-template-columns: 1fr;
 	max-width: $largeTablet;
-	position: relative;
 	width: 100%;
 
 	@media (min-width: $tablet) {

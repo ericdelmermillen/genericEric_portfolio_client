@@ -5,16 +5,16 @@ import "./BlogPost.scss";
 // ***crazy issue with resizing on calling for next page on narrow screen: current fix is maxWidth on &__video at 75vw
 
 const BlogPost = ({ 
-  description, 
+  idx, 
+  maxPostIdx,
+  RESULTS_PER_PAGE,
   title, 
+  description, 
   videoID, 
   isFirstPage,
   isOnHome, 
-  idx, 
-  maxPostIdx,
   handleMaxIdxPostLoaded,
   isLoading,
-  RESULTS_PER_PAGE,
   allResultsFetched })=> {
   
   const embedUrl = `https://www.youtube.com/embed/${videoID}?rel=0`;

@@ -23,7 +23,6 @@ const BlogFeed = () => {
     location.pathname === "/home" || 
     location.pathname === "/home/");
 
-  // const RESULTS_PER_PAGE = isOnHome ? 1 : 5;
   const RESULTS_PER_PAGE = isOnHome ? 1 : 3;
 
   const [ blogPosts, setBlogPosts ] = useState([]);

@@ -3,7 +3,6 @@
 
 .projectCard {
 	& {
-		display: grid;
 		max-width: 100%;
 
 		&:hover {
@@ -14,6 +13,7 @@
 
 		&__img {
 			aspect-ratio: 16/9;
+			height: 100%;
 			max-width: 100%;
 			object-fit: cover;
 			object-position: center center;

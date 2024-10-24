@@ -1,15 +1,9 @@
 import { useEffect, useState } from 'react';
-import ProjectCard from '../ProjectCard/ProjectCard.jsx';
-// import project1Img from '../../assets/images/project1.jpg';
-// import project2Img from '../../assets/images/project2.jpg';
-// import project3Img from '../../assets/images/project3.jpg';
-// import project4Img from '../../assets/images/project4.jpg';
-// import project5Img from '../../assets/images/project5.jpg';
-// import project6Img from '../../assets/images/project6.jpg';
+import { Link } from 'react-router-dom';
 import LightBox from '../LightBox/LightBox.jsx';
+import ProjectCard from '../ProjectCard/ProjectCard.jsx';
 import toast from 'react-hot-toast';
 import './Portfolio.scss';
-import { Link } from 'react-router-dom';
 
 const PROJECT_COUNT = 6;
 const BASE_URL = import.meta.env.VITE_API_BASE_URL;
@@ -36,29 +30,24 @@ const Portfolio = () => {
   };
 
   const handleIncrementCurrentIdx = () => {
-    // if(currentIdx >= projects.length - 1) {
     if(currentIdx >= portfolioSummaries.length - 1) {
       setCurrentIdx(0);
     } else {
       setCurrentIdx(c => c + 1);
-    }
+    };
   };
 
   const handleDecrementCurrentIdx = () => {
     if(currentIdx <= 0) {
-      // setCurrentIdx(projects.length - 1);
       setCurrentIdx(portfolioSummaries.length - 1);
     } else {
       setCurrentIdx(c => c - 1);
-    }
+    };
   };
 
   const handleSetShowPortfolioPlaceholders = () => {
-    // setTimeout(() => {
-      setShowPortfolioPlaceholders(false);
-
-    // }, 100000)
-  }
+    setShowPortfolioPlaceholders(false);
+  };
 
   // useEffect to get portfolio summaries for ProjectCards
   // only need at initial mount
@@ -94,7 +83,6 @@ const Portfolio = () => {
           ? 
             (
               <LightBox 
-                // images={projects}
                 images={portfolioSummaries}
                 currentIdx={currentIdx}
                 setCurrentIdx={setCurrentIdx}
@@ -108,7 +96,6 @@ const Portfolio = () => {
           : null
         }
 
-        
         <div className="portfolio__inner">
 
           <div className="portfolio__header">
@@ -124,28 +111,30 @@ const Portfolio = () => {
             
           </div>
 
-          <div className={`portfolio__projects ${showPortfolioPlaceholders ? "" : "show"}`}>
+          <div className="portfolio__projects">
 
-            {
-              // projects.map((project, idx) => 
+            <div className={`portfolio__projects-inner ${showPortfolioPlaceholders ? "" : "show"}`}>
+
+              {
                 portfolioSummaries.map((project, idx) => 
-                <ProjectCard 
-                  key={project.project_id}
-                  // key={project.id}
-                  idx={idx}
-                  maxIdx={portfolioSummaries.length - 1}
-                  imgSrc={project.imgSrc}
-                  projectTitle={project.projectTitle}
-                  handleSetShowLightBoxTrue={handleSetShowLightBoxTrue}
-                  handleProjectCardClick={handleProjectCardClick}
-                  handleSetShowPortfolioPlaceholders={handleSetShowPortfolioPlaceholders}
-                />
-              )
-            }
+                  <ProjectCard 
+                    key={project.project_id}
+                    idx={idx}
+                    maxIdx={portfolioSummaries.length - 1}
+                    imgSrc={project.imgSrc}
+                    projectTitle={project.projectTitle}
+                    handleSetShowLightBoxTrue={handleSetShowLightBoxTrue}
+                    handleProjectCardClick={handleProjectCardClick}
+                    handleSetShowPortfolioPlaceholders={handleSetShowPortfolioPlaceholders}
+                  />
+                )
+              }
 
-            <div className={`portfolio__project-placeholders ${showPortfolioPlaceholders ? "show" : ""}`}>
+            </div>
 
-              {Array.from({ length: PROJECT_COUNT}).map((placeHolder, idx) => (
+            <div className={`portfolio__project-placeholders ${showPortfolioPlaceholders ? "" : "hide"}`}>
+
+              {Array.from({ length: PROJECT_COUNT}).map((_, idx) => (
                 <div 
                   key={idx}
                   className='portfolio__project-placeholder'

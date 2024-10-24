@@ -5,10 +5,9 @@
 
 .blogPost {
 	& {
-		// max-width: 75vw;
 		opacity: 1;
 		position: relative;
-		transition: all 0.75s ease-in-out;
+		transition: var(--placeholder-transition);
 
 		&.hide {
 			opacity: 0;
@@ -21,15 +20,15 @@
 
 			&.hide {
 				opacity: 0;
+				transition: var(--placeholder-transition);
 				z-index: -1;
-				transition: all 0.75s ease-in-out;
 			}
 		}
 
 		&__inner {
 			@include blogPost;
 			opacity: 1;
-			transition: all 0.75s ease-in-out;
+			transition: var(--placeholder-transition);
 
 			&.hide {
 				opacity: 0;
