@@ -4,11 +4,50 @@
 .projectCard {
 	& {
 		max-width: 100%;
+		position: relative;
+
+		&.draggable {
+			animation: shake 0.45s infinite;
+			cursor: grab;
+		}
 
 		&:hover {
 			@include hoverClickGrow;
 			cursor: pointer;
 			opacity: 0.8;
+		}
+
+		&__button {
+			height: 3.5rem;
+			width: 3.5rem;
+			top: 1rem;
+			border-radius: 50%;
+			position: absolute;
+			opacity: 0;
+			background-color: var(--background-color);
+			box-shadow: var(--box-shadow);
+			@include generalOpacityTransition;
+
+			&--delete {
+				left: 1rem;
+			}
+
+			&--edit {
+				right: 1rem;
+			}
+
+			&.show {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				opacity: 1;
+				@include generalOpacityTransition;
+			}
+		}
+
+		&__button-icon {
+			height: 2rem;
+			width: 2rem;
 		}
 
 		&__img {
@@ -18,5 +57,25 @@
 			object-fit: cover;
 			object-position: center center;
 		}
+	}
+}
+
+@keyframes shake {
+	0%,
+	100% {
+		transform: translate(0, 0) rotate(0);
+		scale: 1;
+	}
+	25% {
+		transform: translate(-0.1px, -0.1px) rotate(-0.5deg);
+		scale: 0.999;
+	}
+	50% {
+		transform: translate(0.1px, 0.1px) rotate(0.5deg);
+		scale: 1;
+	}
+	75% {
+		transform: translate(-0.1px, -0.1px) rotate(-0.5deg);
+		scale: 0.999;
 	}
 }

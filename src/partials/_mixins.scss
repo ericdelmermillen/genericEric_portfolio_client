@@ -157,6 +157,10 @@
 	letter-spacing: 2px;
 }
 
+@mixin generalOpacityTransition {
+	transition: opacity 0.25s ease-in-out;
+}
+
 @mixin formFullWidth {
 	align-items: center;
 	background: var(--neutral-gray-1);
@@ -237,6 +241,25 @@
 	box-shadow: var(--box-shadow);
 	max-width: $largeTablet;
 	width: 100%;
+}
+
+@mixin linkButton {
+	background: none;
+	border: none;
+	color: var(--link-button-color);
+	cursor: pointer;
+	font-family: inherit;
+	font-size: 0.75rem;
+	letter-spacing: var(--letter-spacing-general);
+	line-height: 1.4;
+	outline: none;
+	margin-inline-end: auto;
+	max-width: 100%;
+	text-decoration: underline;
+
+	@media (min-width: $smallTablet) {
+		font-size: 1rem;
+	}
 }
 
 @mixin hoverClickGrow {

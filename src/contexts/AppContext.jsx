@@ -6,8 +6,9 @@ import {
   useState
 } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import { checkTokenIsValid } from "../../utils/utils";
+import { checkTokenIsValid, removeTokens } from "../../utils/utils";
 import { toast } from 'react-hot-toast'; 
+import { setTokens } from "../../utils/utils.js"
 
 const AppContext = createContext();
 
@@ -62,7 +63,11 @@ const AppContextProvider = ({ children }) => {
   const { pathname } = useLocation();
   
   const [ isLoading, setIsLoading ] = useState(false);
+  const [ isProjectOrderEditable, setIsProjectOrderEditable ] = useState(false);
   const [ pathame, setPathname ] = useState("");
+
+  const MIN_LOADING_INTERVAL = 250;
+  const LIGHTBOX_TIMING_INTERVAL = 250;
 
   const toggleColorMode = () => {
     dispatch({ type: "colorMode/toggle"});
@@ -91,8 +96,7 @@ const AppContextProvider = ({ children }) => {
 
       const { message, token, refreshToken } = await response.json();
 
-      localStorage.setItem('token', token);
-      localStorage.setItem('refreshToken', refreshToken); 
+      setTokens(token, refreshToken);
   
       toast.success(message);
       
@@ -108,12 +112,13 @@ const AppContextProvider = ({ children }) => {
     }
   };
 
+
   const logoutUser = async () => {
     setIsLoading(true);
-
+  
     const token = localStorage.getItem("token");
     const refreshToken = localStorage.getItem("refreshToken");
-
+  
     try {
       const response = await fetch(`${BASE_URL}/auth/logoutuser`, {
         method: "POST",
@@ -122,30 +127,30 @@ const AppContextProvider = ({ children }) => {
         },
         body: JSON.stringify({ token, refreshToken })
       });
-
+  
       if(!response.ok) {
         throw new Error("Error logging you out");
+      } else {
+        const { message } = await response.json();
+        toast.success(message);
       }
-
-      const { message } = await response.json();
-
-      localStorage.removeItem('token');
-      localStorage.removeItem('refreshToken'); 
-      dispatch({ type: "user/logout" });
-
-      return toast.success(message);
-
-    } catch(error) {
-      console.log(error);
-      return toast.error(error.message);
+  
+    } catch (error) {
+      console.log(error.message);
+      // toast.error("Unable to verify token or access token. Logging you out...");
     } finally {
+      removeTokens()
+      dispatch({ type: "user/logout" });
       setIsLoading(false);
+      setIsProjectOrderEditable(false);
     }
   };
+
 
   const toggleSideNav = () => {
     dispatch({ type: "app/toggleSideNav"});
   };
+
 
   // useEffect to check for token for isLoggedIn status
   useEffect(() => {
@@ -156,8 +161,7 @@ const AppContextProvider = ({ children }) => {
         if(isLoggedIn) {
           dispatch({ type: "user/login" });
         } else {
-          localStorage.removeItem("token");
-          localStorage.removeItem("refreshToken");
+          removeTokens();
           dispatch({ type: "user/logout" });
         }
       } catch(error) {
@@ -217,7 +221,10 @@ const AppContextProvider = ({ children }) => {
     scrollYPos,
     prevScrollYPos,
     showSideNav,
-    toggleSideNav
+    toggleSideNav,
+    isProjectOrderEditable, 
+    setIsProjectOrderEditable,
+    MIN_LOADING_INTERVAL
   };
 
   return (

@@ -24,6 +24,24 @@ const isValidPassword = (password) =>{
 };
 
 
+const setTokens = (token, refreshToken) => {
+  if(token) {
+    localStorage.setItem('token', token);
+  }
+  if(refreshToken) {
+    localStorage.setItem('refreshToken', refreshToken);
+  }
+  return true;
+};
+
+const removeTokens = () => {
+  localStorage.removeItem('token');
+  localStorage.removeItem('refreshToken');
+  return true; 
+};
+
+
+
 // should only return true or false
 const checkTokenIsValid = async (navigate) => {
   const BASE_URL = import.meta.env.VITE_API_BASE_URL;
@@ -54,8 +72,9 @@ const checkTokenIsValid = async (navigate) => {
 
           if(refreshResponse.ok) {
             const { newToken, newRefreshToken } = await refreshResponse.json();
-            localStorage.setItem('token', newToken);
-            localStorage.setItem('refreshToken', newRefreshToken);
+            setTokens(newToken, newRefreshToken);
+            // localStorage.setItem('token', newToken);
+            // localStorage.setItem('refreshToken', newRefreshToken);
             return true;
           } else {
             navigate("/");
@@ -64,6 +83,7 @@ const checkTokenIsValid = async (navigate) => {
           }
         } else {
           localStorage.removeItem('token');
+          console.log("here")
           toast.error('Unable to verify token. Logging you out...');
           return true;
         }
@@ -88,5 +108,7 @@ export {
   scrollToTop,
   isValidEmail,
   isValidPassword,
+  setTokens,
+  removeTokens,
   checkTokenIsValid
 };
