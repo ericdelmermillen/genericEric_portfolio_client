@@ -21,7 +21,10 @@
 	&__projects {
 		position: relative;
 		min-width: 100%;
-		// min-height: 120vh;
+
+		&.isLoading {
+			min-height: 100vh;
+		}
 	}
 
 	&__editProjectOrder {

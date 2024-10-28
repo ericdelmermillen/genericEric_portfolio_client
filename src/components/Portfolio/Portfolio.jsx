@@ -8,8 +8,8 @@ import toast from 'react-hot-toast';
 import './Portfolio.scss';
 import { MdModeEdit } from 'react-icons/md';
 
-const PROJECT_COUNT = 6;
-// const PROJECT_COUNT = 2;
+// const PROJECT_COUNT = 6;
+const PROJECT_COUNT = 2;
 const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 const Portfolio = () => {
@@ -175,6 +175,9 @@ const Portfolio = () => {
   // only need at initial mount
   useEffect(() => {
     getPortfolioSummaries(PROJECT_COUNT);
+    setTimeout(() => {
+      document.getElementById("projects").classList.remove("isLoading")
+    }, MIN_LOADING_INTERVAL * 2);
   }, []);
 
 
@@ -236,7 +239,7 @@ const Portfolio = () => {
            
           </div>
 
-          <div className={`portfolio__projects ${isLoading ? "" : "isLoaded"}`}>
+          <div id="projects" className="portfolio__projects isLoading">
 
             <div className={`portfolio__projects-inner ${showPortfolioPlaceholders ? "" : "show"}`}>
 
