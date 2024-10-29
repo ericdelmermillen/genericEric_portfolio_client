@@ -10,16 +10,17 @@ import './Portfolio.scss';
 import ProjectPlaceholder from '../ProjectPlaceholder/ProjectPlaceholder.jsx';
 import { addClassToDiv } from '../../../utils/utils.js';
 
-const PROJECT_COUNT = 6;
+// const PROJECT_COUNT = 6;
 // const PROJECT_COUNT = 4;
-// const PROJECT_COUNT = 2;
+const PROJECT_COUNT = 2;
 const BASE_URL = import.meta.env.VITE_API_BASE_URL;
+const initialProjects = Array.from({length: PROJECT_COUNT}, () => ({isInitialPlaceholder: true}))
 
 const Portfolio = () => {
+  
   const [ showLightBox, setShowLightBox ] = useState(false);
   const [ currentIdx, setCurrentIdx ] = useState(null);
-  const [ portfolioSummaries, setPortfolioSummaries ] = useState(Array.from({length: PROJECT_COUNT}, () => ({isInitialPlaceholder: true})));
-  const [ showPortfolioPlaceholders, setShowPortfolioPlaceholders ] = useState(true);
+  const [ portfolioSummaries, setPortfolioSummaries ] = useState(initialProjects);
 
   const [ showInitialPlaceholders, setShowInitialPlaceholders ] = useState(true);
 
@@ -73,7 +74,6 @@ const Portfolio = () => {
   };
 
   const handleSetShowPortfolioPlaceholders = () => {
-    setShowPortfolioPlaceholders(false);
     // setShowInitialPlaceholders(false)
   };
 
@@ -83,8 +83,8 @@ const Portfolio = () => {
 
   const handleSetIsEditMode = async () => {
     setIsLoading(true);
-    setShowPortfolioPlaceholders(true)
-    setPortfolioSummaries([]);
+    setPortfolioSummaries(initialProjects);
+    setShowInitialPlaceholders(true)
     toast("Fetching all Project Summaries...");
   
     try {
@@ -101,7 +101,6 @@ const Portfolio = () => {
       toast.error("Unexpected error occurred.");
     } finally {
       setTimeout(() => {
-        setShowPortfolioPlaceholders(false);
         setIsLoading(false);
       }, MIN_LOADING_INTERVAL)
     };
@@ -171,17 +170,16 @@ const Portfolio = () => {
 
   const handleCancel = () => {
     setIsLoading(true);
-    setShowPortfolioPlaceholders(true)
     toast("Exiting Edit Mode...");
     setIsEditMode(false);
     setIsProjectOrderEditable(false);
-    setPortfolioSummaries( c => c.slice(0, PROJECT_COUNT))
-
+    setShowInitialPlaceholders(true)
+    setPortfolioSummaries(initialProjects)
+    getPortfolioSummaries(PROJECT_COUNT)
     scrollToDivTop();
     
     setTimeout(() => {
       setIsLoading(false);
-      setShowPortfolioPlaceholders(false)
     }, MIN_LOADING_INTERVAL)
     
   };
@@ -200,171 +198,17 @@ const Portfolio = () => {
       const initialFetchSuccessful = await getPortfolioSummaries(PROJECT_COUNT);
 
       if(initialFetchSuccessful) {
-        setShowInitialPlaceholders(false);
         addClassToDiv("portfolio__projects-inner", "show")
+        setShowInitialPlaceholders(false);
       }
     };
   
-    const x = fetchPortfolioSummaries();
+    fetchPortfolioSummaries();
   }, []);
 
 
   return (
     <>
-    {/* 
-      <section className="portfolio" id="portfolio">
-
-        {isLoggedIn && showActionModal && isEditMode
-          ? 
-            (
-              <AddEditDeleteProjectModal 
-                setShowActionModal={setShowActionModal}
-                projectID={selectedProject.project_id}
-                modalAction={modalAction}
-                handleClearActionState={handleClearActionState}
-                setPortfolioSummaries={setPortfolioSummaries}
-              />
-            )
-          : null
-
-        }
-
-        {showLightBox
-
-          ? 
-            (
-              <LightBox 
-                images={portfolioSummaries}
-                currentIdx={currentIdx}
-                setCurrentIdx={setCurrentIdx}
-                showLightBox={showLightBox}
-                setShowLightBox={setShowLightBox}
-                handleSetShowLightBoxFalse={handleSetShowLightBoxFalse}
-                handleIncrementCurrentIdx={handleIncrementCurrentIdx}
-                handleDecrementCurrentIdx={handleDecrementCurrentIdx}
-              />
-            )
-          : null
-        }
-
-        <div className="portfolio__inner">
-
-          <div className="portfolio__header">
-
-            <h4 className="portfolio__heading">
-              PORTFOLIO
-              <button 
-              className={`portfolio__editModeButton ${isLoggedIn && !isEditMode ? "" : "hide"}`}
-              onClick={handleSetIsEditMode}
-            >
-              <MdModeEdit className="portfolio__editMode-icon"/>
-            </button>
-            </h4>
-            <h2 className="portfolio__sub-heading">
-              Check Out My Work
-            </h2>
-            <p className="portfolio__lead">
-              Here is a small smaple of my projects:
-            </p>
-      
-          <button 
-            className={`portfolio__editProjectOrder ${
-                isLoggedIn && isEditMode && !isProjectOrderEditable
-                ? "show" 
-                : isLoggedIn && isEditMode && isProjectOrderEditable
-                ? "show disabled" 
-                : ""
-              }`
-            } 
-            onClick={handleSetOrderIsEditable}
-          >
-            Edit Project Order
-          </button>
-           
-          </div>
-
-          <div id="projects" className="portfolio__projects">
-
-            <div className={`portfolio__projects-inner ${showPortfolioPlaceholders ? "" : "show"}`}>
-
-              {
-                portfolioSummaries.map((project, idx) => 
-                  <ProjectCard 
-                    key={project.project_id || idx}
-                    projectID={project.project_id}
-                    idx={idx}
-                    maxIdx={portfolioSummaries.length - 1}
-                    imgSrc={project.imgSrc}
-                    projectTitle={project.projectTitle}
-                    isLoggedIn={isLoggedIn}
-                    isEditMode={isEditMode}
-                    isProjectOrderEditable={isProjectOrderEditable}
-                    handleSetShowLightBoxTrue={handleSetShowLightBoxTrue}
-                    handleProjectCardClick={handleProjectCardClick}
-                    handleSetShowPortfolioPlaceholders={handleSetShowPortfolioPlaceholders}
-                    handleDeleteProjectClick={handleDeleteProjectClick}
-                    handleEditProjectClick={handleEditProjectClick}
-                    modalAction={modalAction}
-                    isInitialPlaceholder={project.isInitialPlaceholder}
-                  />
-                )
-              }
-
-            </div>
-
-            <div className={`portfolio__project-placeholders ${showPortfolioPlaceholders ? "" : "hide"}`}>
-
-              {Array.from({ length: PROJECT_COUNT}).map((_, idx) => (
-                <div 
-                  key={idx}
-                  className='portfolio__project-placeholder'
-                >
-                </div>
-                ))
-              }
-
-            </div>
-          </div>
-
-          {isLoggedIn && isEditMode
-
-            ? (
-
-                <div className="portfolio__buttons">
-                  <button 
-                    className='portfolio__button portfolio__button--cancel'
-                    onClick={handleCancel}
-                  >
-                    Cancel
-                  </button>
-                  <button 
-                    className='portfolio__button portfolio__button--save'
-                    onClick={handleSave}
-                  >
-                    Save
-                  </button>
-                </div>
-              )
-              : (
-                  <Link
-                    className="portfolio__button portfolio__button--moreProjects"
-                    to="/projects"
-                  >
-                    More Projects
-                  </Link>
-                )
-          }
-
-   
-
-        </div>
-      </section>  
-      */}
-
-
-
-      {/* ---------------------- */}
-
       <section className="portfolio" id="portfolio">
 
         {isLoggedIn && showActionModal && isEditMode
@@ -478,7 +322,6 @@ const Portfolio = () => {
                     isProjectOrderEditable={isProjectOrderEditable}
                     handleSetShowLightBoxTrue={handleSetShowLightBoxTrue}
                     handleProjectCardClick={handleProjectCardClick}
-                    handleSetShowPortfolioPlaceholders={handleSetShowPortfolioPlaceholders}
                     handleDeleteProjectClick={handleDeleteProjectClick}
                     handleEditProjectClick={handleEditProjectClick}
                     modalAction={modalAction}

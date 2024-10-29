@@ -14,7 +14,6 @@ const ProjectCard = ({
   isLoggedIn,
   isEditMode,
   handleProjectCardClick,
-  handleSetShowPortfolioPlaceholders,
   handleDeleteProjectClick,
   handleEditProjectClick,
   isInitialPlaceholder
@@ -78,10 +77,10 @@ const ProjectCard = ({
             className="projectCard__img"
             src={imgSrc}
             alt={`Card Image for ${projectTitle} Project`}
-            onLoad={idx === maxIdx
-              ? () => handleSetShowPortfolioPlaceholders()
-              : null
-            }
+            // onLoad={idx === maxIdx
+            //   ? () => handleSetShowPortfolioPlaceholders()
+            //   : null
+            // }
           />
 				</div>
 			</div>
