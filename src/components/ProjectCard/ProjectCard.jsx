@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { MdModeEdit } from "react-icons/md";
 import { MdDelete } from "react-icons/md";
 import ProjectPlaceholder from "../ProjectPlaceholder/ProjectPlaceholder";
@@ -19,6 +20,14 @@ const ProjectCard = ({
   isInitialPlaceholder
 }) => {
 
+  const [ showPlaceholder, setShowPlaceholder ] = useState(true);
+
+  const handleOnLoad = () => {
+    setShowPlaceholder(false);
+    console.log(`Loaded card ${projectID}`)
+  };
+
+  
   const handleDeleteClick = (e) => {
     e.preventDefault();
     e.stopPropagation();
@@ -50,6 +59,16 @@ const ProjectCard = ({
         }
       >
 
+        {showPlaceholder
+          ? (
+            <div className="projectCard__placeholder">
+              <ProjectPlaceholder />
+            </div>
+              )
+          : null
+        }
+
+
         <button 
           className={`projectCard__button projectCard__button--delete ${isLoggedIn && isEditMode && !isProjectOrderEditable
             ? "show" 
@@ -77,10 +96,7 @@ const ProjectCard = ({
             className="projectCard__img"
             src={imgSrc}
             alt={`Card Image for ${projectTitle} Project`}
-            // onLoad={idx === maxIdx
-            //   ? () => handleSetShowPortfolioPlaceholders()
-            //   : null
-            // }
+            onLoad={handleOnLoad}
           />
 				</div>
 			</div>
