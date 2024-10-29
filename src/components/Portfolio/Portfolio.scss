@@ -143,6 +143,10 @@
 		height: 100%;
 		position: absolute;
 		top: 0;
+		left: 50%;
+		transform: translateX(-50%);
+		border: 2px solid green;
+		width: 100%;
 
 		&.hide {
 			display: none;
@@ -184,7 +188,8 @@
 		&--cancel,
 		&--save {
 			margin-top: 0rem;
-			@media (min-width: $tablet) {
+
+			@media (min-width: $smallTablet) {
 				width: 12rem;
 			}
 		}
@@ -192,13 +197,5 @@
 		&--moreProjects {
 			width: 18rem;
 		}
-
-		// &--cancel {
-		// 	border: 2px solid red;
-		// }
-
-		// &--save {
-		// 	border: 2px solid red;
-		// }
 	}
 }

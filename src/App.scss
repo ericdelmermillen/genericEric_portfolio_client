@@ -17,6 +17,9 @@ html {
 body {
 	background: var(--neutralBG);
 	color: var(--text-color);
+	-moz-osx-font-smoothing: grayscale;
+	text-rendering: optimizeLegibility;
+	-webkit-font-smoothing: antialiased;
 }
 
 a {
@@ -44,37 +47,37 @@ img {
 .app {
 	& {
 		@include appLayout;
+	}
 
-		&__inner {
-			@include inner;
-			box-shadow: var(--box-shadow);
-		}
+	&__inner {
+		@include inner;
+		box-shadow: var(--box-shadow);
+	}
 
-		&__sideNav-children {
-			align-items: center;
-			display: flex;
-			flex: 1;
-			flex-direction: column;
-			gap: 2rem;
-			justify-content: end;
-			padding-top: 1rem;
-			width: 100%;
-		}
+	&__sideNav-children {
+		align-items: center;
+		display: flex;
+		flex: 1;
+		flex-direction: column;
+		gap: 2rem;
+		justify-content: end;
+		padding-top: 1rem;
+		width: 100%;
+	}
 
-		&__logout--nav {
-			display: none;
+	&__logout--nav {
+		display: none;
 
-			@media (min-width: $tablet) {
-				@include adminButton;
-				border: 1px solid var(--text-color-bright);
-				color: var(--text-color-bright);
-			}
-		}
-
-		&__logout--sideNav {
+		@media (min-width: $tablet) {
 			@include adminButton;
-			margin-inline: auto;
+			border: 1px solid var(--text-color-bright);
+			color: var(--text-color-bright);
 		}
+	}
+
+	&__logout--sideNav {
+		@include adminButton;
+		margin-inline: auto;
 	}
 }
 
@@ -87,7 +90,6 @@ img {
 		top: 50%;
 		transform: translate(-50%, -50%);
 		transition: opacity 0.25s ease;
-		// z-index: 5;
 		z-index: 4;
 
 		&::after {

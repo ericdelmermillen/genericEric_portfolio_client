@@ -1,48 +1,46 @@
 @import "../../partials/mixins";
 @import "../../partials/variables";
 
-
 .blogPostPlaceholder {
+	& {
+		@include blogPost;
+	}
 
-  & {
-    @include blogPost;
-    
-    &__video {
-      @include blogPostVideo;
-      aspect-ratio: 16/9;
-      background: var(--placeholder-color);
-      border-radius: var(--border-radius);
-      box-shadow: var(--box-shadow);
-      margin-bottom: 1rem;
-    }
-    
-    &__title {
-      background: var(--placeholder-color);
-      border-radius: var(--border-radius);
-      box-shadow: var(--box-shadow);
-      height: 1.125rem;
-      margin-bottom: 0.5rem; 
-      margin-inline: auto;
-      width: 80%;
-      
-      @media(min-width: $smallTablet) {
-        height: 2rem;
-        margin-bottom: 1rem; 
-      }
-    }
-    
-    &__desc {
-      background: var(--placeholder-color);
-      border-radius: var(--border-radius);
-      box-shadow: var(--box-shadow);
-      height: 3rem;
-      margin-bottom: 2.5rem;
-      margin-inline: auto;
-      width: 90%;
-      
-      @media(min-width: $smallTablet) {
-        height: 2rem;
-      }
-    }
-  }
+	&__video {
+		@include blogPostVideo;
+		aspect-ratio: 16/9;
+		background: var(--placeholder-color);
+		border-radius: var(--border-radius);
+		box-shadow: var(--box-shadow);
+		margin-bottom: 1rem;
+	}
+
+	&__title {
+		background: var(--placeholder-color);
+		border-radius: var(--border-radius);
+		box-shadow: var(--box-shadow);
+		height: 1.125rem;
+		margin-bottom: 0.5rem;
+		margin-inline: auto;
+		width: 80%;
+
+		@media (min-width: $smallTablet) {
+			height: 2rem;
+			margin-bottom: 1rem;
+		}
+	}
+
+	&__desc {
+		background: var(--placeholder-color);
+		border-radius: var(--border-radius);
+		box-shadow: var(--box-shadow);
+		height: 3rem;
+		margin-bottom: 2.5rem;
+		margin-inline: auto;
+		width: 90%;
+
+		@media (min-width: $smallTablet) {
+			height: 2rem;
+		}
+	}
 }

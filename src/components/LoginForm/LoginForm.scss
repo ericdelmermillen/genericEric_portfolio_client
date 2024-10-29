@@ -1,86 +1,77 @@
-@import '../../partials/mixins';
-@import '../../partials/variables';
+@import "../../partials/mixins";
+@import "../../partials/variables";
 
 .loginForm {
+	& {
+		@include formFullWidth;
+	}
 
-  & {    
-    @include formFullWidth;
-  
-    &__inner {
-      @include formFullWidthInner;
-    }
+	&__inner {
+		@include formFullWidthInner;
+	}
 
-    &__header {
-      
-      &.hide {
-        display: none;
-      }
-    }
+	&__heading {
+		@include formHeading;
 
-    &__heading {
-      @include formHeading;
+		&::after {
+			@include afterAccent;
+		}
+	}
 
-      &::after {
-        @include afterAccent;
-      }
-    }
-    
-    &__sub-heading {
-      font-size: 1.75rem;
-      margin-bottom: 2rem;
-    }
+	&__sub-heading {
+		font-size: 1.75rem;
+		margin-bottom: 2rem;
+	}
 
-    &__form {
-      @include form;
-    }
-    
-    &__field {
-      position: relative;
-    }
+	&__form {
+		@include form;
+	}
 
-    &__input {
-      @include formFullWidthInput;
-    
-      &:focus {
-        box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
-        outline: none;
-      }
-      
-      &::placeholder {
-        color: var(--text-color);
-        font-size: 1rem;
-      }
-    }
+	&__field {
+		position: relative;
+	}
 
-    &__error {
-      @include formErrorMessage;
-    }
+	&__input {
+		@include formFullWidthInput;
 
-    &__submit {
-      display: flex;
-      margin-top: auto;
-    }
-    
-    &__button {
-      @include button;
-      background: var(--accent-color);
-      border: none;
-      width: 100%;
-    }
-  }
+		&:focus {
+			box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+			outline: none;
+		}
+
+		&::placeholder {
+			color: var(--text-color);
+			font-size: 1rem;
+		}
+	}
+
+	&__error {
+		@include formErrorMessage;
+	}
+
+	&__submit {
+		display: flex;
+		margin-top: auto;
+	}
+
+	&__button {
+		@include button;
+		background: var(--accent-color);
+		border: none;
+		width: 100%;
+	}
 }
 
 .passwordInput {
-  
-  &__icon {
-    display: flex;
-    fill: var(--text-color);
-    margin-top: -3.5rem;
-    position: absolute;
-    right: 0.5rem;
+	&__icon {
+		display: flex;
+		fill: var(--text-color);
+		margin-top: -3.5rem;
+		position: absolute;
+		right: 0.5rem;
 
-    &.hide {
-      display: none;
-    }
-  }
+		&.hide {
+			display: none;
+		}
+	}
 }

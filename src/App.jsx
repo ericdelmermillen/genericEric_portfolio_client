@@ -194,11 +194,8 @@ export default App;
 // --NavLogo with initials
 // 3) AppContext
 // --user
-// --currentPost for blog session
 // 4) Posts/What I'm Learning section/Blog
 // --paginated list of posts
-// --keyword filtering of posts(?)
-// --ability to make comments
 // captcha to prevent spam
 
 

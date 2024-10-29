@@ -1,6 +1,8 @@
 import { jwtDecode } from "jwt-decode";
 import toast from "react-hot-toast";
 
+const BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
 // use for setting up drag and drop functionality since firefox has issues with on drag (use onTouchStart)
 const checkIfIsFirefox = () => {
   return navigator.userAgent.toLowerCase().indexOf('firefox') > -1;
@@ -23,11 +25,11 @@ const isValidPassword = (password) =>{
   return password.trim().length >= 8;
 };
 
-
 const setTokens = (token, refreshToken) => {
   if(token) {
     localStorage.setItem('token', token);
   }
+
   if(refreshToken) {
     localStorage.setItem('refreshToken', refreshToken);
   }
@@ -41,10 +43,8 @@ const removeTokens = () => {
 };
 
 
-
-// should only return true or false
+// returns true or false
 const checkTokenIsValid = async (navigate) => {
-  const BASE_URL = import.meta.env.VITE_API_BASE_URL;
   const token = localStorage.getItem('token');
 
   if(token) {
@@ -73,35 +73,39 @@ const checkTokenIsValid = async (navigate) => {
           if(refreshResponse.ok) {
             const { newToken, newRefreshToken } = await refreshResponse.json();
             setTokens(newToken, newRefreshToken);
-            // localStorage.setItem('token', newToken);
-            // localStorage.setItem('refreshToken', newRefreshToken);
             return true;
           } else {
             navigate("/");
             toast.error("Token expired. Logging you out...");
+            removeTokens();
             return false;
           }
         } else {
-          localStorage.removeItem('token');
-          console.log("here")
+          removeTokens();
           toast.error('Unable to verify token. Logging you out...');
           return true;
         }
       }
     } catch(error) {
       console.log('Error decoding token:', error);
-      localStorage.removeItem('token');
-      localStorage.removeItem('refreshToken');
+      removeTokens();
       navigate('/');
       toast.error(error.message);
       return true;
     }
   } else {
-    localStorage.removeItem('refreshToken');
+    removeTokens();
     return false; 
-  }
+  };
 };
 
+const addClassToDiv = (divID, className) => {
+  document.getElementById(divID).classList.add(className);
+};
+
+const removeClassFromDiv = (divID, className) => {
+  document.getElementById(divID).classList.remove(className);
+};
 
 export {
   checkIfIsFirefox,
@@ -110,5 +114,7 @@ export {
   isValidPassword,
   setTokens,
   removeTokens,
-  checkTokenIsValid
+  checkTokenIsValid,
+  addClassToDiv,
+  removeClassFromDiv
 };

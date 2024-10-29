@@ -12,6 +12,7 @@ import { setTokens } from "../../utils/utils.js"
 
 const AppContext = createContext();
 
+// new global state to initial state where appropriate and make functions to dispatch updates
 const initialState = {
   isLoggedIn: false,
   colorMode: localStorage.getItem('colorMode') || "light",
@@ -64,10 +65,11 @@ const AppContextProvider = ({ children }) => {
   
   const [ isLoading, setIsLoading ] = useState(false);
   const [ isProjectOrderEditable, setIsProjectOrderEditable ] = useState(false);
+  const [ isEditMode, setIsEditMode ] = useState(false);
   const [ pathame, setPathname ] = useState("");
 
   const MIN_LOADING_INTERVAL = 250;
-  const LIGHTBOX_TIMING_INTERVAL = 250;
+  const MODAL_TRANSITION_INTERVAL = 200;
 
   const toggleColorMode = () => {
     dispatch({ type: "colorMode/toggle"});
@@ -137,13 +139,13 @@ const AppContextProvider = ({ children }) => {
   
     } catch (error) {
       console.log(error.message);
-      // toast.error("Unable to verify token or access token. Logging you out...");
     } finally {
-      removeTokens()
+      removeTokens();
       dispatch({ type: "user/logout" });
       setIsLoading(false);
       setIsProjectOrderEditable(false);
-    }
+      setIsEditMode(false);
+    };
   };
 
 
@@ -179,7 +181,7 @@ const AppContextProvider = ({ children }) => {
   }, [colorMode]);
 
 
-  // handle scroll position for show hide of menu
+  // useEffect for updating of scrollYPos
   useEffect(() => {
     const handleScrollY = () => {
       const newScrollYPos = window.scrollY;
@@ -191,6 +193,7 @@ const AppContextProvider = ({ children }) => {
     };
 
     handleScrollY();
+
 
     window.addEventListener("scroll", handleScrollY);
 
@@ -205,10 +208,14 @@ const AppContextProvider = ({ children }) => {
 
     if(pathname === currentPathname) {
       setIsLoading(false);
-      setPathname(currentPathname);
     }
 
-  }, [pathname]);
+    setIsProjectOrderEditable(false);
+    setIsEditMode(false);
+
+    setPathname(currentPathname);
+
+  }, [location.pathname]);
 
   const contextValues = {
     isLoading,
@@ -224,7 +231,10 @@ const AppContextProvider = ({ children }) => {
     toggleSideNav,
     isProjectOrderEditable, 
     setIsProjectOrderEditable,
-    MIN_LOADING_INTERVAL
+    MIN_LOADING_INTERVAL,
+    MODAL_TRANSITION_INTERVAL,
+    isEditMode, 
+    setIsEditMode
   };
 
   return (

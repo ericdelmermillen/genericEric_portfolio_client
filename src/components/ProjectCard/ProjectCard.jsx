@@ -14,19 +14,22 @@ const ProjectCard = ({
   isEditMode,
   handleProjectCardClick,
   handleSetShowPortfolioPlaceholders,
-  handleDeleteProject
+  handleDeleteProjectClick,
+  handleEditProjectClick
 }) => {
 
   const handleDeleteClick = (e) => {
     e.preventDefault();
     e.stopPropagation();
-    handleDeleteProject(projectID)
+    handleDeleteProjectClick(projectID);
+    console.log(`projectID: ${projectID}`)
   };
 
   const handleEditClick = (e) => {
     e.preventDefault();
     e.stopPropagation();
-    console.log(`edit card ${idx + 1}?`)
+    handleEditProjectClick(projectID)
+    console.log(`projectID: ${projectID}`)
   };
 
 
@@ -34,28 +37,33 @@ const ProjectCard = ({
     <>
       <div 
         className={`projectCard ${isProjectOrderEditable ? "draggable" : ""}`}
-        onClick={() => handleProjectCardClick(idx)}
+        onClick={!isProjectOrderEditable
+          ? () => handleProjectCardClick(idx)
+          : null
+        }
       >
 
-        <div 
-          className={`projectCard__button projectCard__button--edit ${isLoggedIn && !isProjectOrderEditable && isEditMode
+        <button 
+          className={`projectCard__button projectCard__button--delete ${isLoggedIn && isEditMode && !isProjectOrderEditable
             ? "show" 
             : ""}`}
-          onClick={(e) => handleEditClick(e)}
-        >
-          <MdModeEdit className="projectCard__button-icon"/>
+            onClick={isLoggedIn && isEditMode &!isProjectOrderEditable
+              ? (e) => handleDeleteClick(e)
+              : null
+            }
+        ><MdDelete className="projectCard__button-icon"/>
+        </button>
 
-        </div>
-        <div 
-          className={`projectCard__button projectCard__button--delete ${isLoggedIn && !isProjectOrderEditable && isEditMode
+        <button 
+          className={`projectCard__button projectCard__button--edit ${isLoggedIn && isEditMode && !isProjectOrderEditable
             ? "show" 
             : ""}`}
-          onClick={(e) => handleDeleteClick(e)}
-        >
-          <MdDelete className="projectCard__button-icon"/>
-
-        </div>
-
+          onClick={isLoggedIn && isEditMode &!isProjectOrderEditable
+              ? (e) => handleEditClick(e)
+              : null
+            }
+        ><MdModeEdit className="projectCard__button-icon"/>
+        </button>
 
 				<div className="projectCard__inner">
           <img 

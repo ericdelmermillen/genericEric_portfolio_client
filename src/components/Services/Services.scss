@@ -1,155 +1,160 @@
-@import '../../partials/mixins';
-@import '../../partials/variables';
+@import "../../partials/mixins";
+@import "../../partials/variables";
 
 .services {
+	& {
+		color: var(--text-color-bright);
+		text-align: center;
+	}
 
-  & {
-    color: var(--text-color-bright);
-    text-align: center;
-    
-    &__inner {
-      left: 0;
-      position: relative;
-      top: 0;
-      width: 100%;
-    }
+	&__inner {
+		left: 0;
+		position: relative;
+		top: 0;
+		width: 100%;
+	}
 
-    &__bg--light.show{
-      @include servicesBg;
-      background: url("../../assets/images/day-bottom-11.jpg") no-repeat center center;
-      background: url("../../assets/images/day-bottom-11a.jpg") no-repeat center center;
-      background: url("../../assets/images/day-bottom-11b.jpg") no-repeat center center;
-      background: url("../../assets/images/day-bottom-11c.jpg") no-repeat center center;
-      background: url("../../assets/images/day-bottom-11d.jpg") no-repeat center center;
-      background: url("../../assets/images/day-bottom-11e.jpg") no-repeat center center;
-      // background: url("../../../assets/images/day-bottom-11f.jpg") no-repeat center center;
-      // background: url("../../../assets/images/day-bottom-11g.jpg") no-repeat center center;
-      // background: url("../../../assets/images/day-bottom-11h.jpg") no-repeat center center;
-      // background: url("../../../assets/images/day-bottom-11h.jpg") no-repeat center center;
-      // background: url("../../../assets/images/day-bottom-11i.jpg") no-repeat center center;
-      // background: url("../../../assets/images/day-bottom-11k.jpg") no-repeat center center;
-    }
+	&__bg--light.show {
+		@include servicesBg;
+		background: url("../../assets/images/day-bottom-11.jpg") no-repeat center
+			center;
+		background: url("../../assets/images/day-bottom-11a.jpg") no-repeat center
+			center;
+		background: url("../../assets/images/day-bottom-11b.jpg") no-repeat center
+			center;
+		background: url("../../assets/images/day-bottom-11c.jpg") no-repeat center
+			center;
+		background: url("../../assets/images/day-bottom-11d.jpg") no-repeat center
+			center;
+		background: url("../../assets/images/day-bottom-11e.jpg") no-repeat center
+			center;
+		// background: url("../../../assets/images/day-bottom-11f.jpg") no-repeat center center;
+		// background: url("../../../assets/images/day-bottom-11g.jpg") no-repeat center center;
+		// background: url("../../../assets/images/day-bottom-11h.jpg") no-repeat center center;
+		// background: url("../../../assets/images/day-bottom-11h.jpg") no-repeat center center;
+		// background: url("../../../assets/images/day-bottom-11i.jpg") no-repeat center center;
+		// background: url("../../../assets/images/day-bottom-11k.jpg") no-repeat center center;
+	}
 
-    &__bg--dark.show {
-      @include servicesBg;
-      // background: green;
-      // background: url("../../../assets/images/night-bottom-1.jpg") no-repeat center center;
-      // background: url("../../../assets/images/night-bottom-2.jpg") no-repeat center center;
-      // background: url("../../../assets/images/night-bottom-3.jpg") no-repeat center center;
-      // background: url("../../../assets/images/night-bottom-4.jpg") no-repeat center center;
-      
-      // need image here
-    }
+	&__bg--dark.show {
+		@include servicesBg;
+		// background: green;
+		// background: url("../../../assets/images/night-bottom-1.jpg") no-repeat center center;
+		// background: url("../../../assets/images/night-bottom-2.jpg") no-repeat center center;
+		// background: url("../../../assets/images/night-bottom-3.jpg") no-repeat center center;
+		// background: url("../../../assets/images/night-bottom-4.jpg") no-repeat center center;
 
-    &__overlay {
-      background: var(--gradient-overlay);
-      height: 100%;
-      position: absolute;
-      width: 100%;
-      z-index: 1;
-    }
+		// need image here
+	}
 
-    &__content {
-      align-items: center;
-      display: flex;
-      flex-direction: column;
-      height: 100%;
-      justify-content: center;
-      margin-inline: auto;
-      max-width: $largeTablet;
-      padding-block: 3rem;
-      padding-inline: 1rem;
-      position: relative;
-      z-index: 1;
-    }
+	&__overlay {
+		background: var(--gradient-overlay);
+		height: 100%;
+		position: absolute;
+		width: 100%;
+		z-index: 1;
+	}
 
-    &__heading {
-      @include headingGeneral;
-      font-size: 2rem;
-      letter-spacing: 1.5px;
-      margin-bottom: 3rem;
-      position: relative;
-      text-shadow: var(--text-shadow-bright);
+	&__content {
+		align-items: center;
+		display: flex;
+		flex-direction: column;
+		height: 100%;
+		justify-content: center;
+		margin-inline: auto;
+		max-width: $largeTablet;
+		padding-block: 3rem;
+		padding-inline: 1rem;
+		position: relative;
+		z-index: 1;
+	}
 
-      &::after {
-        @include afterAccent;
-        background: var(--text-color-bright);
-        bottom: -1rem;
-      }
-    }
-    
-    &__sub-heading {
-      font-size: 2rem;
-      margin-bottom: 2rem;
-      text-align: center;
-      text-shadow: var(--text-shadow-bright);
-      
-      @media(min-width: $tablet) {
-        text-align: start;
-      }
-    }
-    
-    &__lead {
-      font-size: 1.75rem;
-      font-weight: bold;
-      letter-spacing: var(--letter-spacing-general);
-      line-height: 1.25;
-      margin-bottom: 3rem;
-      text-align: center;
-      text-shadow: var(--text-shadow-bright);
-    }
+	&__heading {
+		@include headingGeneral;
+		font-size: 2rem;
+		letter-spacing: 1.5px;
+		margin-bottom: 3rem;
+		position: relative;
+		text-shadow: var(--text-shadow-bright);
 
-    &__services-list {
-      display: flex;
-      flex-direction: column;
-      gap: 3rem;
-      margin-bottom: 1rem;
-      text-shadow: var(--text-shadow-bright);
-      
-      @media(min-width: $tablet) {
-        display: grid;
-        gap: 1.25rem;
-        grid-template-columns: repeat(3, 1fr);
-      }
-    }
+		&::after {
+			@include afterAccent;
+			background: var(--text-color-bright);
+			bottom: -1rem;
+		}
+	}
 
-    &__item {
-      align-items: center;
-      display: flex;
-      flex-direction: column;
-    }
+	&__sub-heading {
+		font-size: 2rem;
+		margin-bottom: 2rem;
+		text-align: center;
+		text-shadow: var(--text-shadow-bright);
 
-    &__service-icon {
-      height: 2.75rem;
-      margin-bottom: 2rem;
-      width: 2.75rem;
-      
-      &--small {
-        height: 3.25rem;
-        margin-bottom: 1.5rem;
-        width: 3.25rem;
-      }
-    }
+		@media (min-width: $tablet) {
+			text-align: start;
+		}
+	}
 
-    &__service-name {
-      display: inline-block;
-      font-size: 1.5rem;
-      letter-spacing: var(--letter-spacing-general);
-      margin-bottom: 3rem;
-      position: relative;
+	&__lead {
+		font-size: 1.75rem;
+		font-weight: bold;
+		letter-spacing: var(--letter-spacing-general);
+		line-height: 1.25;
+		margin-bottom: 3rem;
+		text-align: center;
+		text-shadow: var(--text-shadow-bright);
+	}
 
-      &::after {
-        @include afterAccent;
-        background: var(--text-color-bright);
-        bottom: -1rem;
-      }
-    }
+	&__services-list {
+		display: flex;
+		flex-direction: column;
+		gap: 3rem;
+		margin-bottom: 1rem;
+		text-shadow: var(--text-shadow-bright);
 
-    &__service-description {
-      font-size: 1.25rem;
-      letter-spacing: var(--letter-spacing-general);
-      line-height: var(--line-height-medium);
-      text-shadow: var(--text-shadow-bright);
-    }
-  }
+		@media (min-width: $tablet) {
+			display: grid;
+			gap: 1.25rem;
+			grid-template-columns: repeat(3, 1fr);
+		}
+	}
+
+	&__item {
+		align-items: center;
+		display: flex;
+		flex-direction: column;
+	}
+
+	&__service-icon {
+		height: 2.75rem;
+		margin-bottom: 2rem;
+		width: 2.75rem;
+
+		&--small {
+			height: 3.25rem;
+			margin-bottom: 1.5rem;
+			width: 3.25rem;
+		}
+	}
+
+	&__service-name {
+		display: inline-block;
+		font-size: 1.5rem;
+		letter-spacing: var(--letter-spacing-general);
+		margin-bottom: 3rem;
+		position: relative;
+
+		&::after {
+			@include afterAccent;
+			background: var(--text-color-bright);
+			bottom: -1rem;
+		}
+	}
+
+	&__service-description {
+		font-size: 1.25rem;
+		letter-spacing: var(--letter-spacing-general);
+		line-height: var(--line-height-medium);
+		text-shadow: var(--text-shadow-bright);
+	}
 }

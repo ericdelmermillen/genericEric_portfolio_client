@@ -6,6 +6,10 @@ import BlogPostPlaceholder from '../BlogPostPlaceholder/blogPostPlaceholder.jsx'
 import toast from 'react-hot-toast';
 import "./BlogFeed.scss";
 
+
+// ***use initial class removed by useEffect after load to give min-height appropriate for placeholders
+
+
 const YOUTUBE_API_KEY = import.meta.env.VITE_YOUTUBE_API_KEY;
 const YOUTUBE_BASE_URL = import.meta.env.VITE_YOUTUBE_BASE_URL;
 // SMW's playlist
@@ -25,14 +29,14 @@ const BlogFeed = () => {
 
   const RESULTS_PER_PAGE = isOnHome ? 1 : 3;
 
+  const [ allResultsFetched, setAllResultsFetched ] = useState(false);
   const [ blogPosts, setBlogPosts ] = useState([]);
   const [ isFirstPage, setIsFirstPage ] = useState(true);
   const [ isInitialFetch, setIsInitialFetch ] = useState(true);
-  const [ nextPageToken, setNextPageToken ] = useState("");
-  const [ allResultsFetched, setAllResultsFetched ] = useState(false);
   const [ isPaginationComplete, setIsPaginationComplete] = useState(false);
-  const [ page, setPage ] = useState(1);
   const [ isInitialLoad, setIsInitialLoad ] = useState(true);
+  const [ nextPageToken, setNextPageToken ] = useState("");
+  const [ page, setPage ] = useState(1);
   const [ maxPostIdx, setMaxPostIdx ] = useState((RESULTS_PER_PAGE * page) - 1);
 
   const { 
@@ -60,7 +64,7 @@ const BlogFeed = () => {
         if(data.error) {
           console.error('Error fetching blog posts:', data.error);
           return;
-        }
+        };
         
         if(!hasMorePages) {
           setAllResultsFetched(true);
@@ -70,7 +74,7 @@ const BlogFeed = () => {
           }, 500);
         } else if(hasMorePages) {
           setNextPageToken(hasMorePages);
-        }
+        };
         
         const posts = data.items.map(item => ({
           videoId: item.snippet.resourceId.videoId,
@@ -88,14 +92,14 @@ const BlogFeed = () => {
         } else if(environment === "production") {
           console.log(`In ${environment} mode`)
           setBlogPosts(prevPosts => [...prevPosts, ...posts]);
-        }
+        };
       } catch (error) {
         console.log(error);
         toast.error("Error connecting to youtube");
       } finally {
         setIsInitialLoad(false)
-      }
-    }
+      };
+    };
   };
 
   const handleMaxIdxPostLoaded = () => {

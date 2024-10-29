@@ -1,72 +1,71 @@
-@import '../../partials/mixins';
-@import '../../partials/variables';
+@import "../../partials/mixins";
+@import "../../partials/variables";
 
 .profile {
+	& {
+		margin-bottom: 3rem;
+		padding-inline: 1rem;
+		width: 100%;
+	}
 
-  & {
-    margin-bottom: 3rem;
-    padding-inline: 1rem;
-    width: 100%;
+	&__info {
+		min-height: 8rem;
+	}
 
-    &__info {
-      min-height: 8rem;
-    }
+	&__heading {
+		@include headingGeneral;
+		font-size: 1.5rem;
+		margin-bottom: 1rem;
+		text-align: center;
 
-    &__heading {
-      @include headingGeneral;
-      font-size: 1.5rem;
-      margin-bottom: 1rem;
-      text-align: center;
+		@media (min-width: $largeTablet) {
+			text-align: start;
+			padding-inline-start: 1rem;
+		}
+	}
 
-      @media(min-width: $largeTablet) {
-        text-align: start;
-        padding-inline-start: 1rem;;
-      }
-    }
+	&__lead {
+		font-size: 1.15rem;
+		letter-spacing: var(--letter-spacing-general);
+		line-height: var(--line-height-general);
+		margin-bottom: 1rem;
+		padding-inline: 1rem;
+	}
 
-    &__lead {
-      font-size: 1.15rem;
-      letter-spacing: var(--letter-spacing-general);
-      line-height: var(--line-height-general);
-      margin-bottom: 1rem;
-      padding-inline: 1rem;
-    }
+	&__items {
+		display: flex;
+		flex-direction: column;
+		gap: 3rem;
+		letter-spacing: var(--letter-spacing-general);
+		padding: 1rem;
+	}
 
-    &__items {
-      display: flex;
-      flex-direction: column;
-      gap: 3rem;
-      letter-spacing: var(--letter-spacing-general);
-      padding: 1rem;
-    }
+	&__item {
+		position: relative;
 
-    &__item {
-      position: relative;
+		&::after {
+			@include afterAccent;
+		}
 
-      &::after {
-        @include afterAccent;
-      }
+		&:last-child::after {
+			background: none;
+		}
+	}
 
-      &:last-child::after {
-        background: none;
-      }
-    }
-    
-    &__item-header {
-      align-items: center;
-      display: flex;
-      gap: 0.75rem;
-      margin-bottom: 0.5rem;
-    }
+	&__item-header {
+		align-items: center;
+		display: flex;
+		gap: 0.75rem;
+		margin-bottom: 0.5rem;
+	}
 
-    &__item-icon {
-      height: 1.25rem;
-      width: 1.25rem;
-    }
+	&__item-icon {
+		height: 1.25rem;
+		width: 1.25rem;
+	}
 
-    &__item-label {
-      font-size: 1.25rem;
-      font-weight: 600;
-    }
-  }
+	&__item-label {
+		font-size: 1.25rem;
+		font-weight: 600;
+	}
 }

@@ -1,15 +1,16 @@
 import { useEffect, useState } from 'react';
 import { useAppContext } from '../../contexts/AppContext.jsx';
 import { Link } from 'react-router-dom';
-import { removeTokens, setTokens } from '../../../utils/utils.js';
+import { MdModeEdit } from 'react-icons/md';
+import AddEditDeleteProjectModal from '../AddEditDeleteProjectModal/AddEditDeleteProjectModal.jsx';
 import LightBox from '../LightBox/LightBox.jsx';
 import ProjectCard from '../ProjectCard/ProjectCard.jsx';
 import toast from 'react-hot-toast';
 import './Portfolio.scss';
-import { MdModeEdit } from 'react-icons/md';
 
 // const PROJECT_COUNT = 6;
-const PROJECT_COUNT = 2;
+const PROJECT_COUNT = 4;
+// const PROJECT_COUNT = 2;
 const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 const Portfolio = () => {
@@ -17,18 +18,20 @@ const Portfolio = () => {
   const [ currentIdx, setCurrentIdx ] = useState(null);
   const [ portfolioSummaries, setPortfolioSummaries ] = useState([]);
   const [ showPortfolioPlaceholders, setShowPortfolioPlaceholders ] = useState(true);
-  const [ isEditMode, setIsEditMode ] = useState(false);
-
+  const [ showActionModal, setShowActionModal ] = useState(false);
+  const [ selectedProject, setSelectedProject ] = useState({});
+  const [ modalAction, setModalAction ] = useState("");
   
   const {
-    isLoading, 
     setIsLoading,
     isLoggedIn,
     logoutUser,
     isProjectOrderEditable, 
     setIsProjectOrderEditable,
     MIN_LOADING_INTERVAL,
-    LIGHTBOX_TIMING_INTERVAL
+    LIGHTBOX_TIMING_INTERVAL,
+    isEditMode, 
+    setIsEditMode
   } = useAppContext();
 
   const handleSetShowLightBoxTrue = () => {
@@ -44,6 +47,7 @@ const Portfolio = () => {
   const handleProjectCardClick = (idx) => {
     handleSetShowLightBoxTrue();
     setCurrentIdx(idx);
+
   };
 
   const handleIncrementCurrentIdx = () => {
@@ -64,6 +68,32 @@ const Portfolio = () => {
 
   const handleSetShowPortfolioPlaceholders = () => {
     setShowPortfolioPlaceholders(false);
+  };
+
+  const handleSetIsEditMode = async () => {
+    setIsLoading(true);
+    setShowPortfolioPlaceholders(true)
+    setPortfolioSummaries([]);
+    toast("Fetching all Project Summaries...");
+  
+    try {
+      const isSuccess = await getPortfolioSummaries();
+      
+      if(isSuccess) {
+        setIsEditMode(true);
+        toast("Fetch successful. Ready to edit.");
+      } else {
+        toast.error("Failed to fetch project summaries.");
+      }
+    } catch (error) {
+      console.error("Error in fetching summaries:", error);
+      toast.error("Unexpected error occurred.");
+    } finally {
+      setTimeout(() => {
+        setShowPortfolioPlaceholders(false);
+        setIsLoading(false);
+      }, MIN_LOADING_INTERVAL)
+    };
   };
 
   const handleSetOrderIsEditable = () => {
@@ -87,86 +117,71 @@ const Portfolio = () => {
       console.error('Error fetching portfolio summaries:', error);
       toast.error(error.message);
       return false;
-    }
-  };
-
-
-  const handleDeleteProject = async (projectID) => {
-    setIsLoading(true);
-    const token = localStorage.getItem('token');
-    const refreshToken = localStorage.getItem('refreshToken');
-  
-    if(!token || !refreshToken) {
-      toast.error('Authorization or refresh token missing.');
-      logoutUser();
-      return;
-    }
-  
-    try {
-      const response = await fetch(`${BASE_URL}/projects/project/delete/${projectID}`, {
-        method: 'DELETE',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
-          refreshToken: refreshToken,
-        },
-      });
-  
-      if(!response.ok && response.status === 401) {
-        removeTokens();
-        logoutUser();
-        throw new Error("Not authorized. Logging you out...");
-      } else if(!response.ok) {
-        const errorResponse = await response.json();
-        throw new Error(errorResponse.message || 'Failed to delete project');
-      }
-  
-      const { message, newToken, newRefreshToken } = await response.json();
-  
-      setTokens(newToken, newRefreshToken);
-
-      setPortfolioSummaries(c => c.filter(summary => summary.project_id !== projectID));
-      toast.success(message);  
-    } catch(error) {
-      console.error('Error deleting project:', error);
-      toast.error(error.message);
     } finally {
       setTimeout(() => {
-        setIsLoading(false);
-      }, MIN_LOADING_INTERVAL);
-    };
+        document.getElementById("projects").classList.remove("isLoading")
+      }, MIN_LOADING_INTERVAL * 2);
+    }
   };
 
-  const handleSetIsEditMode = async () => {
-    setIsLoading(true);
-    setPortfolioSummaries([]);
-    toast("Fetching all Project Summaries...");
+  const handleDeleteOrEditClick = (projectID) => {
+    setShowActionModal(true);
+    const project = portfolioSummaries.find(summary => summary.project_id === projectID);
+    setSelectedProject(project);
+  };
+
+  const handleDeleteProjectClick = (projectID) => {
+    handleDeleteOrEditClick(projectID)
+    setModalAction("Delete");
+  };
+
+
+  const handleEditProjectClick = (projectID) => {
+    handleDeleteOrEditClick(projectID)
+    setModalAction("Edit");
+  };
+
   
-    try {
-      const isSuccess = await getPortfolioSummaries();
-      
-      if(isSuccess) {
-        setIsEditMode(true);
-        toast("Fetch successful. Ready to edit.");
-      } else {
-        toast.error("Failed to fetch project summaries.");
-      }
-    } catch (error) {
-      console.error("Error in fetching summaries:", error);
-      toast.error("Unexpected error occurred.");
+  
+
+  const handleClearActionState = () => {
+    setSelectedProject({});
+    setModalAction("");
+    setShowActionModal(false);
+    console.log("state cleared")
+  }
+
+  const scrollToDivTop = () => {
+    const targetDiv = document.getElementById("portfolio");
+    if(targetDiv) {
+      const offsetTop = targetDiv.offsetTop; 
+      window.scrollTo({
+        top: offsetTop + 750,
+        behavior: "smooth"
+      });
     }
-  
-    setIsLoading(false);
-    setShowPortfolioPlaceholders(true);
   };
 
   const handleCancel = () => {
-    console.log("cancel")
+    setIsLoading(true);
+    setShowPortfolioPlaceholders(true)
+    toast("Exiting Edit Mode...");
+    setIsEditMode(false);
+    setIsProjectOrderEditable(false);
+    setPortfolioSummaries( c => c.slice(0, PROJECT_COUNT))
+
+    scrollToDivTop();
+    
+    setTimeout(() => {
+      setIsLoading(false);
+      setShowPortfolioPlaceholders(false)
+    }, MIN_LOADING_INTERVAL)
     
   };
   
   const handleSave = () => {
     console.log("save")
+    // make call to update project order here
 
   };
   
@@ -175,15 +190,30 @@ const Portfolio = () => {
   // only need at initial mount
   useEffect(() => {
     getPortfolioSummaries(PROJECT_COUNT);
-    setTimeout(() => {
-      document.getElementById("projects").classList.remove("isLoading")
-    }, MIN_LOADING_INTERVAL * 2);
+    // setTimeout(() => {
+    //   document.getElementById("projects").classList.remove("isLoading")
+    // }, MIN_LOADING_INTERVAL * 2);
   }, []);
 
 
   return (
     <>
-      <section className="portfolio">
+      <section className="portfolio" id="portfolio">
+
+        {isLoggedIn && showActionModal && isEditMode
+          ? 
+            (
+              <AddEditDeleteProjectModal 
+                setShowActionModal={setShowActionModal}
+                projectID={selectedProject.project_id}
+                modalAction={modalAction}
+                handleClearActionState={handleClearActionState}
+                setPortfolioSummaries={setPortfolioSummaries}
+              />
+            )
+          : null
+
+        }
 
         {showLightBox
 
@@ -258,7 +288,10 @@ const Portfolio = () => {
                     handleSetShowLightBoxTrue={handleSetShowLightBoxTrue}
                     handleProjectCardClick={handleProjectCardClick}
                     handleSetShowPortfolioPlaceholders={handleSetShowPortfolioPlaceholders}
-                    handleDeleteProject={handleDeleteProject}
+                    // handleDeleteProject={handleDeleteProject}
+                    handleDeleteProjectClick={handleDeleteProjectClick}
+                    handleEditProjectClick={handleEditProjectClick}
+                    modalAction={modalAction}
                   />
                 )
               }

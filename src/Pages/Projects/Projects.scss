@@ -2,18 +2,17 @@
 @import "../../partials/variables";
 
 .projects {
+	& {
+		@include page;
+	}
 
-  & {
-    @include page;
-    
-    &__inner {
-      @include wallpaperContainer;
-    }
+	&__inner {
+		@include wallpaperContainer;
+	}
 
-    &__heading {
-      font-size: 3rem;
-      position: relative;
-      z-index: 1;
-    }
-  }
+	&__heading {
+		font-size: 3rem;
+		position: relative;
+		z-index: 1;
+	}
 }

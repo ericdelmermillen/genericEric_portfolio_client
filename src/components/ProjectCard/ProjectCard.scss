@@ -3,6 +3,7 @@
 
 .projectCard {
 	& {
+		cursor: pointer;
 		max-width: 100%;
 		position: relative;
 
@@ -13,50 +14,101 @@
 
 		&:hover {
 			@include hoverClickGrow;
-			cursor: pointer;
 			opacity: 0.8;
 		}
+	}
 
-		&__button {
-			height: 3.5rem;
-			width: 3.5rem;
+	&__button {
+		@include generalOpacityTransition;
+		background-color: var(--background-color);
+		border: none;
+		border-radius: 50%;
+		box-shadow: var(--box-shadow);
+		cursor: pointer;
+		height: 2.25rem;
+		opacity: 0;
+		outline: none;
+		position: absolute;
+		top: 0.75rem;
+		width: 2.25rem;
+
+		@media (min-width: $smallTablet) {
+			height: 2.75rem;
 			top: 1rem;
-			border-radius: 50%;
-			position: absolute;
-			opacity: 0;
-			background-color: var(--background-color);
-			box-shadow: var(--box-shadow);
-			@include generalOpacityTransition;
+			width: 2.75rem;
+		}
 
-			&--delete {
+		@media (min-width: $tablet) {
+			height: 2.5rem;
+			top: 0.75rem;
+			width: 2.5rem;
+		}
+
+		@media (min-width: $desktop) {
+			height: 3rem;
+			top: 1rem;
+			width: 3rem;
+		}
+
+		&--delete {
+			left: 1rem;
+
+			@media (min-width: $tablet) {
+				left: 0.75rem;
+			}
+
+			@media (min-width: $desktop) {
 				left: 1rem;
 			}
+		}
 
-			&--edit {
+		&--edit {
+			right: 1rem;
+
+			@media (min-width: $tablet) {
+				right: 0.75rem;
+			}
+
+			@media (min-width: $desktop) {
 				right: 1rem;
 			}
-
-			&.show {
-				display: flex;
-				justify-content: center;
-				align-items: center;
-				opacity: 1;
-				@include generalOpacityTransition;
-			}
 		}
 
-		&__button-icon {
-			height: 2rem;
-			width: 2rem;
+		&.show {
+			@include generalOpacityTransition;
+			align-items: center;
+			display: flex;
+			justify-content: center;
+			opacity: 1;
+		}
+	}
+
+	&__button-icon {
+		height: 1.5rem;
+		width: 1.5rem;
+
+		@media (min-width: $smallTablet) {
+			height: 1.75rem;
+			width: 1.75rem;
 		}
 
-		&__img {
-			aspect-ratio: 16/9;
-			height: 100%;
-			max-width: 100%;
-			object-fit: cover;
-			object-position: center center;
+		@media (min-width: $tablet) {
+			height: 1.5rem;
+			width: 1.5rem;
 		}
+
+		@media (min-width: $desktop) {
+			height: 1.75rem;
+			width: 1.75rem;
+		}
+	}
+
+	&__img {
+		aspect-ratio: 16/9;
+		height: 100%;
+		max-width: 100%;
+		object-fit: cover;
+		object-position: center center;
 	}
 }
 

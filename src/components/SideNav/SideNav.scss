@@ -1,107 +1,106 @@
-@import '../../partials/mixins';
-@import '../../partials/variables';
+@import "../../partials/mixins";
+@import "../../partials/variables";
 
 .sideNav {
-  
-  & {
-    background: var(--neutralBG);
-    bottom: 0;
-    box-shadow: var(--box-shadow);
-    height: 100vh;
-    left: 200vw;
-    position: fixed;
-    top: 0;
-    transition: all 0.5s ease-in-out;
-    width: 80vw;
-    z-index: 3;
+	& {
+		background: var(--neutralBG);
+		bottom: 0;
+		box-shadow: var(--box-shadow);
+		height: 100vh;
+		left: 200vw;
+		position: fixed;
+		top: 0;
+		transition: all 0.5s ease-in-out;
+		width: 80vw;
+		z-index: 3;
 
-    @media(min-width: 525px) {
-      width: 50vw;
-    }
+		@media (min-width: 525px) {
+			width: 50vw;
+		}
 
-    &.show {
-      left: 20vw;
-      transition: all 0.5s ease-out;
+		&.show {
+			left: 20vw;
+			transition: all 0.5s ease-out;
 
-      @media(min-width: 525px) {
-        left: 50vw;
-      }
-    }
+			@media (min-width: 525px) {
+				left: 50vw;
+			}
+		}
+	}
 
-    &__inner {
-      align-items: center;
-      display: flex;
-      flex-direction: column;
-      height: 100%;
-      overflow-y: scroll;
-      padding-bottom: min(4rem, 10%);
-      position: relative;
-    }
+	&__inner {
+		align-items: center;
+		display: flex;
+		flex-direction: column;
+		height: 100%;
+		overflow-y: scroll;
+		padding-bottom: min(4rem, 10%);
+		position: relative;
+	}
 
-    &__touchOff-div {
-      height: 100%;
-      position: fixed;
-      top: 0;
-      width: 100%;
-      z-index: 3;
-    }
+	&__touchOff-div {
+		height: 100%;
+		position: fixed;
+		top: 0;
+		width: 100%;
+		z-index: 3;
+	}
 
-    &__close-button {
-      cursor: pointer;
-      height: 2rem;
-      padding-top: 0.8rem;
-      position: fixed;
-      top: 2.5rem;
-      width: 2rem;
-    }
+	&__close-button {
+		cursor: pointer;
+		height: 2rem;
+		padding-top: 0.8rem;
+		position: fixed;
+		top: 2.5rem;
+		width: 2rem;
+	}
 
-    &__links {
-      display: flex;
-      flex-direction: column;
-      gap: 4rem;
-      margin-top: 8rem;
-    }
+	&__links {
+		display: flex;
+		flex-direction: column;
+		gap: 4rem;
+		margin-top: 8rem;
+	}
 
-    &__link {
-      @include navLink;
-      color: var(--text-color);
+	&__link {
+		@include navLink;
+		color: var(--text-color);
 
-      &.active {
-        &:after {
-          @include afterAccent;
-          bottom: -2rem;
-        }
-      }
-    }
+		&.active {
+			&:after {
+				@include afterAccent;
+				bottom: -2rem;
+			}
+		}
+	}
 
-    &__close-icon {
-      background-color: var(--text-color);
-      border-radius: 2px;
-      height: 3.75px;
-      position: absolute;
-      transform-origin: center;
-      width: 100%;
-    }
+	&__close-icon {
+		background-color: var(--text-color);
+		border-radius: 2px;
+		height: 3.75px;
+		position: absolute;
+		transform-origin: center;
+		width: 100%;
+	}
 
-    &__close-icon:first-child {
-      transform: rotate(45deg);
-    }
+	&__close-icon:first-child {
+		transform: rotate(45deg);
+	}
 
-    &__close-icon:last-child {
-      transform: rotate(-45deg);
-    }
+	&__close-icon:last-child {
+		transform: rotate(-45deg);
+	}
 
-    &__logout {
-      margin-inline: auto;
-    }
+	&__logout {
+		margin-inline: auto;
+	}
 
-    &__colorModeToggler {
-      align-items: center;
-      display: flex;
-      justify-content: center;
-      left: 50%;
-      margin-inline: auto;
-      margin-top: auto;
-    }
-  }
+	&__colorModeToggler {
+		align-items: center;
+		display: flex;
+		justify-content: center;
+		left: 50%;
+		margin-inline: auto;
+		margin-top: auto;
+	}
 }

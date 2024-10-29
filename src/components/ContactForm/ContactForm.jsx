@@ -111,7 +111,7 @@ const ContactForm = ({ children }) => {
       toast.error("Failed to send message");
     } finally {
       setIsLoading(false);
-    }
+    };
   };
 
   return (

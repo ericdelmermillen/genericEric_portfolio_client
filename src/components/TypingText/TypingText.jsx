@@ -16,7 +16,7 @@ const TypingText = ({
     // intervals not automatically cleared by unmounting
     if(intervalRef.current) {
       clearInterval(intervalRef.current);
-    }
+    };
 
     // Reset typing state: not technically necessary since the ref is redefined on each mounting and we are not updating the textToType while to component is mounted
     typingTextRef.current = '';

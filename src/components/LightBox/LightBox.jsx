@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useAppContext } from "../../contexts/AppContext";
 import { IoChevronBackOutline, IoChevronForwardOutline } from "react-icons/io5";
+import { addClassToDiv, removeClassFromDiv } from "../../../utils/utils";
 import "./LightBox.scss";
 
 const TIMEOUT_DELAY = 400;
@@ -90,6 +91,7 @@ const LightBoxImage = ({
           }, TIMEOUT_DELAY);
         }
       }
+
       setTimeout(() => {
         setIsTransitioning(false);
       }, TIMEOUT_DELAY + 400);
@@ -113,17 +115,18 @@ const LightBox = ({
   images, 
   currentIdx,
   setCurrentIdx,
-  showLightBox, 
   setShowLightBox,
-  handleSetShowLightBoxFalse, 
   handleIncrementCurrentIdx,
   handleDecrementCurrentIdx,
   handleSetShowPortfolioPlaceholders
 }) => {
 
-  const { scrollYPos, prevScrollYPos } = useAppContext();
+  const { 
+    scrollYPos, 
+    prevScrollYPos,
+    MODAL_TRANSITION_INTERVAL
+  } = useAppContext();
 
-  const [ fadeOpacity, setFadeOpacity ] = useState(false);
   const [ isMovingForward, setIsMovingForward ] = useState(true);
   const [ isInitialView, setIsInitialView ] = useState(true);
   const [ isTransitioning, setIsTransitioning ] = useState(true);
@@ -131,10 +134,11 @@ const LightBox = ({
   const maxIdx = images.length - 1;
  
   const handleOverlayClick = () => {
-    handleSetShowLightBoxFalse();
-    setFadeOpacity(true);
+    removeClassFromDiv("lightBox", "show");
+    setTimeout(() => {
+      setShowLightBox(false);
+    }, MODAL_TRANSITION_INTERVAL)
   };
-
 
   // for resetting LightBoxImage classes on direction change
   const changeLightBoxDirection = (side) => {
@@ -146,7 +150,6 @@ const LightBox = ({
       };
     });
   };
-
 
   const handlePrevClick = () => {
     setIsTransitioning(true);
@@ -166,7 +169,6 @@ const LightBox = ({
     };
   };
 
-
   const handleNextClick = () => {
     setIsTransitioning(true);
 
@@ -185,23 +187,12 @@ const LightBox = ({
     };
   };
 
-
-  // useEffect to add or remove show class once lightbox has been conditionally rendered in client
+  // useEffect to add show class to lightbox after initial render to allow for transitions
   useEffect(() => {
-    const lightBox = document.getElementById("lightBox");
-
-    if(showLightBox && !fadeOpacity) {
-      // setTimeout reequired to allow parent to render the component before adding the class to it since the transitions are triggered by the class being added or removed
-      setTimeout(() => {
-        lightBox.classList.add("show");
-      }, 0);
-    } ;
-    
-    if(fadeOpacity) {
-      lightBox.classList.remove("show");
-    };
-
-  }, [showLightBox, fadeOpacity]);
+    setTimeout(() => {
+      addClassToDiv("lightBox", "show");
+    }, MODAL_TRANSITION_INTERVAL);
+  }, []);
 
 
   // useEffect to close overlay on scroll
@@ -209,8 +200,11 @@ const LightBox = ({
     if(!isTransitioning) {
 
       if(scrollYPos !== prevScrollYPos) {
-        setShowLightBox(false);
-        setCurrentIdx(null);
+        removeClassFromDiv("lightBox", "show")
+        setTimeout(() => {
+          setShowLightBox(false);
+          setCurrentIdx(null);
+        }, MODAL_TRANSITION_INTERVAL);
       };
     }
   }, [scrollYPos, prevScrollYPos]);

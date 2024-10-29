@@ -1,32 +1,31 @@
-@import '../../partials/mixins';
-@import '../../partials/variables';
+@import "../../partials/mixins";
+@import "../../partials/variables";
 
 .backButton {
- 
-  & {
-    background-color: var(--background-nav-footer);
-    border: none;
-    border-radius: 50%;
-    cursor: pointer;
-    height: 3rem;
-    left: 2rem;
-    position: absolute;
-    top: calc($navHeight + 2rem);
-    transition: background-color 0.3s ease, transform 0.3s ease;
-    width: 3rem;
-    z-index: 2;
-    
-    &:hover {
-      @include hoverClickGrow;
-    }
-    
-    &__arrow {
-      align-items: center;
-      color: var(--background-color);
-      display: flex;
-      font-size: 2rem;
-      font-weight: bold;
-      justify-content: center;
-    }
-  }
+	& {
+		background-color: var(--background-nav-footer);
+		border: none;
+		border-radius: 50%;
+		cursor: pointer;
+		height: 3rem;
+		left: 2rem;
+		position: absolute;
+		top: calc($navHeight + 2rem);
+		transition: background-color 0.3s ease, transform 0.3s ease;
+		width: 3rem;
+		z-index: 2;
+
+		&:hover {
+			@include hoverClickGrow;
+		}
+	}
+
+	&__arrow {
+		align-items: center;
+		color: var(--background-color);
+		display: flex;
+		font-size: 2rem;
+		font-weight: bold;
+		justify-content: center;
+	}
 }
