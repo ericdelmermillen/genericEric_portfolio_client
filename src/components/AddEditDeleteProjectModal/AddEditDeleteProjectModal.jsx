@@ -90,12 +90,9 @@ const AddEditDeleteProjectModal = ({
       setTimeout(() => {
         setIsLoading(false);
         handleActionClearing();
-      }, MIN_LOADING_INTERVAL);
+      }, MIN_LOADING_INTERVAL * 2);
     };
   };
-  
-  
-
 
 
     // useEffect to close overlay on scroll
@@ -138,7 +135,10 @@ const AddEditDeleteProjectModal = ({
 
             <button 
               className="addEditDeleteProjectModal__button addEditDeleteProjectModal__button--commit"
-              onClick={() => handleDeleteProject(projectID)}
+              onClick={modalAction === "Delete"
+                ? () => handleDeleteProject(projectID)
+                : null
+              }
             >{modalAction}
             </button>
 

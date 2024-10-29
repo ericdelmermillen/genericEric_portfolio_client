@@ -350,6 +350,11 @@
 	}
 }
 
+@mixin projectCard {
+	aspect-ratio: 16/9;
+	width: 100%;
+}
+
 @mixin blogPostVideo {
 	display: flex;
 	flex-direction: column;

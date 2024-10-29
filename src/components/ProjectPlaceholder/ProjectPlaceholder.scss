@@ -1,0 +1,10 @@
+@import "../../partials/mixins";
+@import "../../partials/variables";
+
+.projectPlaceholder {
+	& {
+		@include projectCard;
+		background: var(--placeholder-color);
+		border-radius: var(--border-radius);
+	}
+}

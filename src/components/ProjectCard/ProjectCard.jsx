@@ -1,5 +1,6 @@
 import { MdModeEdit } from "react-icons/md";
 import { MdDelete } from "react-icons/md";
+import ProjectPlaceholder from "../ProjectPlaceholder/ProjectPlaceholder";
 import "./ProjectCard.scss";
 
 
@@ -15,7 +16,8 @@ const ProjectCard = ({
   handleProjectCardClick,
   handleSetShowPortfolioPlaceholders,
   handleDeleteProjectClick,
-  handleEditProjectClick
+  handleEditProjectClick,
+  isInitialPlaceholder
 }) => {
 
   const handleDeleteClick = (e) => {
@@ -31,6 +33,12 @@ const ProjectCard = ({
     handleEditProjectClick(projectID)
     console.log(`projectID: ${projectID}`)
   };
+
+  if(isInitialPlaceholder) {
+    return (
+      <ProjectPlaceholder />
+    )
+  }
 
 
   return (
