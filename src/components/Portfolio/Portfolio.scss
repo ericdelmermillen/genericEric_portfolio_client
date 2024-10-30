@@ -120,23 +120,6 @@
 		position: relative;
 	}
 
-	&__initialProjectPlaceholders {
-		@include portfolioContainer;
-		position: absolute;
-		left: 50%;
-		transform: translateX(-50%);
-		width: 100%;
-
-		// & > * {
-		// 	border: 1px dashed #333;
-		// 	background: yellow;
-		// }
-
-		&.hide {
-			display: none;
-		}
-	}
-
 	&__projects-inner {
 		@include portfolioContainer;
 		margin-inline: auto;

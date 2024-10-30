@@ -2,22 +2,22 @@ import { useEffect, useState } from "react";
 import { useAppContext } from "../../contexts/AppContext";
 import { addClassToDiv, removeClassFromDiv } from "../../../utils/utils";
 import { removeTokens, setTokens } from '../../../utils/utils.js';
-import "./AddEditDeleteProjectModal.scss";
 import toast from "react-hot-toast";
+import "./AddEditDeleteProjectModal.scss";
 
 const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 // console.log(`${BASE_URL}/projects/project`)
 
 const AddEditDeleteProjectModal = ({ 
+  modalAction,
   showActionModal,
   setShowActionModal, 
-  modalAction,
   projectID,
   handleClearActionState,
   setPortfolioSummaries
 }) => {
 
-  const [ modalIsOpen, setModalIsOpen ] = useState(false)
+  const [ modalIsOpen, setModalIsOpen ] = useState(false);
 
   const { 
     setIsLoading,
@@ -32,25 +32,20 @@ const AddEditDeleteProjectModal = ({
     removeClassFromDiv("addEditDeleteProjectModal", "show")
     setTimeout(() => {
       setShowActionModal(false);
-      handleClearActionState()
+      handleClearActionState();
     }, MODAL_TRANSITION_INTERVAL);
-  }
+  };
 
   const handleOverlayClick = () => {
     handleActionClearing();
   };
 
-
-
-
   const handleCancelClick = () => {
     handleActionClearing();
   }
 
-
   const handleDeleteProject = async (projectID) => {
     console.log(projectID)
-    // return
     setIsLoading(true);
     const token = localStorage.getItem('token');
     const refreshToken = localStorage.getItem('refreshToken');
@@ -78,7 +73,7 @@ const AddEditDeleteProjectModal = ({
       } else if(!response.ok) {
         const errorResponse = await response.json();
         throw new Error(errorResponse.message || 'Failed to delete project');
-      }
+      };
   
       const { message, newToken, newRefreshToken } = await response.json();
   
@@ -95,6 +90,10 @@ const AddEditDeleteProjectModal = ({
         handleActionClearing();
       }, MIN_LOADING_INTERVAL * 2);
     };
+  };
+
+  const handleEditProject = (projectID) => {
+    console.log(`Edit project ${projectID}?`)
   };
 
 
@@ -114,7 +113,7 @@ const AddEditDeleteProjectModal = ({
   useEffect(() => {
     setTimeout(() => {
       addClassToDiv("addEditDeleteProjectModal", "show");
-      setModalIsOpen(true)
+      setModalIsOpen(true);
     }, MODAL_TRANSITION_INTERVAL);
   }, []);
 
@@ -128,7 +127,13 @@ const AddEditDeleteProjectModal = ({
         <div className="addEditDeleteProjectModal__inner">
 
           <div className="addEditDeleteProjectModal__content">
-            <h4 className="addEditDeleteProjectModal__header">{modalAction} Project</h4>
+
+            <div className="addEditDeleteProjectModal__header">
+
+              <h4 className="addEditDeleteProjectModal__heading">
+                {modalAction} Project
+              </h4>
+            </div>
           <h3 className="addEditDeleteProjectModal__sub-heading">{modalAction} Project {projectID}?</h3>
 
           <div className="addEditDeleteProjectModal__buttons">
@@ -143,13 +148,14 @@ const AddEditDeleteProjectModal = ({
               className="addEditDeleteProjectModal__button addEditDeleteProjectModal__button--commit"
               onClick={modalAction === "Delete"
                 ? () => handleDeleteProject(projectID)
+                : modalAction === "Edit"
+                ? () => handleEditProject(projectID)
                 : null
               }
             >{modalAction}
             </button>
 
           </div>
-
 
           </div>
 

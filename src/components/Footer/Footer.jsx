@@ -22,7 +22,7 @@ const Footer = () => {
         <div className="footer__content">
 
           <p className="footer__copyright">
-            Copyright Eric Delmer Millen &copy; {new Date().getFullYear()} 
+            Copyright Eric Delmer Millen &copy; {new Date().getFullYear()}
           </p>
           <ul className="footer__socials">
 

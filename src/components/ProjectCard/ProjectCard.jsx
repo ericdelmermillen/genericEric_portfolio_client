@@ -6,6 +6,7 @@ import "./ProjectCard.scss";
 
 const ProjectCard = ({ 
   projectID,
+  isInitialPlaceholder,
   showPlaceholders, 
   setShowPlaceholders,
   displayNonePlaceholders, 
@@ -19,14 +20,12 @@ const ProjectCard = ({
   isEditMode,
   handleProjectCardClick,
   handleDeleteProjectClick,
-  handleEditProjectClick,
-  isInitialPlaceholder
+  handleEditProjectClick
 }) => {
 
-  const { LIGHTBOX_TIMING_INTERVAL } = useAppContext()
+  const { LIGHTBOX_TIMING_INTERVAL } = useAppContext();
 
   const handleOnLoad = () => {
-    console.log(`loaded final placeholder ${projectID}`)
     setTimeout(() => {
       setShowPlaceholders(false);
     }, LIGHTBOX_TIMING_INTERVAL);
@@ -46,7 +45,7 @@ const ProjectCard = ({
   const handleEditClick = (e) => {
     e.preventDefault();
     e.stopPropagation();
-    handleEditProjectClick(projectID)
+    handleEditProjectClick(projectID);
     console.log(`projectID: ${projectID}`)
   };
 

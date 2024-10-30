@@ -12,7 +12,9 @@ import './Portfolio.scss';
 // const PROJECT_COUNT = 4;
 const PROJECT_COUNT = 2;
 const BASE_URL = import.meta.env.VITE_API_BASE_URL;
-const initialProjects = Array.from({length: PROJECT_COUNT}, () => ({isInitialPlaceholder: true}))
+const initialProjects = Array.from({length: PROJECT_COUNT}, () => ({isInitialPlaceholder: true}));
+
+// *** instead of More Projects button when isLoggedIn can have Load All Projects or Edit Projects which can do the same as the Pencil Icon
 
 const Portfolio = () => {
   
@@ -28,13 +30,12 @@ const Portfolio = () => {
   const {
     setIsLoading,
     isLoggedIn,
-    logoutUser,
     isProjectOrderEditable, 
     setIsProjectOrderEditable,
-    MIN_LOADING_INTERVAL,
-    LIGHTBOX_TIMING_INTERVAL,
     isEditMode, 
-    setIsEditMode
+    setIsEditMode,
+    MIN_LOADING_INTERVAL,
+    LIGHTBOX_TIMING_INTERVAL
   } = useAppContext();
 
   const handleSetShowLightBoxTrue = () => {
@@ -50,7 +51,6 @@ const Portfolio = () => {
   const handleProjectCardClick = (idx) => {
     handleSetShowLightBoxTrue();
     setCurrentIdx(idx);
-
   };
 
   const handleIncrementCurrentIdx = () => {
@@ -69,6 +69,7 @@ const Portfolio = () => {
     };
   };
 
+  // ***need logic to open AddEditDeleteProjectModal then navigate to new project page
   const handleAddNewProject = () => {
     console.log("add new project")
   };
@@ -104,13 +105,13 @@ const Portfolio = () => {
 
   const getPortfolioSummaries = async (limit) => {
     try {
-      const url = `${BASE_URL}/projects/portfoliosummary${limit ? `?limit=${limit}` : ''}`;
+      const url = `${BASE_URL}/projects/portfoliosummary${limit ? `?limit=${limit}` : ""}`;
       const response = await fetch(url);
       const data = await response.json();
   
       if(!response.ok) {
         throw new Error("Error fetching portfolio project summaries");
-      }
+      };
   
       setPortfolioSummaries(data);
       return true;
@@ -124,6 +125,7 @@ const Portfolio = () => {
 
   const handleDeleteOrEditClick = (projectID) => {
     setShowActionModal(true);
+    // do I need error handling here if the projectID is not a number or doesn't exist?
     const project = portfolioSummaries.find(summary => summary.project_id === projectID);
     setSelectedProject(project);
   };
@@ -142,8 +144,8 @@ const Portfolio = () => {
     setSelectedProject({});
     setModalAction("");
     setShowActionModal(false);
-    console.log("state cleared")
-  }
+    console.log("state cleared");
+  };
 
   const scrollToDivTop = () => {
     const targetDiv = document.getElementById("portfolio");
@@ -153,7 +155,7 @@ const Portfolio = () => {
         top: offsetTop + 750,
         behavior: "smooth"
       });
-    }
+    };
   };
 
   const handleCancel = () => {
@@ -172,9 +174,13 @@ const Portfolio = () => {
   };
   
   const handleSave = () => {
-    console.log("save")
-    // make call to update project order here
+    if(!isProjectOrderEditable) {
+      console.log("saving no changes")
 
+    } else if(isProjectOrderEditable) {
+      console.log("saving new order")
+    }
+    // make call to update project order here
   };
   
 
@@ -273,15 +279,16 @@ const Portfolio = () => {
                 portfolioSummaries.map((project, idx) => 
                   <ProjectCard 
                     key={project.project_id || idx}
+                    idx={idx}
+                    maxIdx={portfolioSummaries.length - 1}
+                    imgSrc={project.imgSrc}
+                    projectTitle={project.projectTitle}
+                    isInitialPlaceholder={project.isInitialPlaceholder}
                     showPlaceholders={showPlaceholders}
                     setShowPlaceholders={setShowPlaceholders}
                     displayNonePlaceholders={displayNonePlaceholders}
                     setDisplayNonePlaceholders={setDisplayNonePlaceholders}
                     projectID={project.project_id}
-                    idx={idx}
-                    maxIdx={portfolioSummaries.length - 1}
-                    imgSrc={project.imgSrc}
-                    projectTitle={project.projectTitle}
                     isLoggedIn={isLoggedIn}
                     isEditMode={isEditMode}
                     isProjectOrderEditable={isProjectOrderEditable}
@@ -290,7 +297,6 @@ const Portfolio = () => {
                     handleDeleteProjectClick={handleDeleteProjectClick}
                     handleEditProjectClick={handleEditProjectClick}
                     modalAction={modalAction}
-                    isInitialPlaceholder={project.isInitialPlaceholder}
                   />
                 )
               }
