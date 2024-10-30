@@ -140,12 +140,7 @@
 	&__projects-inner {
 		@include portfolioContainer;
 		margin-inline: auto;
-		opacity: 0;
-
-		&.show {
-			opacity: 1;
-			transition: var(--placeholder-transition);
-		}
+		opacity: 1;
 	}
 
 	&__buttons {

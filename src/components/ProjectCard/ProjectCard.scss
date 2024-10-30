@@ -3,9 +3,8 @@
 
 .projectCard {
 	& {
-		// @include projectCard;
+		@include projectCard;
 		cursor: pointer;
-		max-width: 100%;
 		position: relative;
 
 		&.draggable {
@@ -21,8 +20,17 @@
 
 	&__placeholder {
 		position: absolute;
-		z-index: 20;
+		z-index: 2;
 		width: 100%;
+
+		&.fade {
+			opacity: 0;
+			@include smoothClosingTransition;
+		}
+
+		&.hide {
+			display: none;
+		}
 	}
 
 	&__button {

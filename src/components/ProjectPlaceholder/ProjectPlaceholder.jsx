@@ -1,4 +1,4 @@
-import "./ProjectPlaceholder.scss"
+import "./ProjectPlaceholder.scss";
 
 const ProjectPlaceholder = () => {
   return (

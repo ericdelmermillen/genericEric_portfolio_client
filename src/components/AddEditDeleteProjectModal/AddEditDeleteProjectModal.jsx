@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useAppContext } from "../../contexts/AppContext";
 import { addClassToDiv, removeClassFromDiv } from "../../../utils/utils";
 import { removeTokens, setTokens } from '../../../utils/utils.js';
@@ -9,12 +9,15 @@ const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 // console.log(`${BASE_URL}/projects/project`)
 
 const AddEditDeleteProjectModal = ({ 
+  showActionModal,
   setShowActionModal, 
   modalAction,
   projectID,
   handleClearActionState,
   setPortfolioSummaries
 }) => {
+
+  const [ modalIsOpen, setModalIsOpen ] = useState(false)
 
   const { 
     setIsLoading,
@@ -97,18 +100,21 @@ const AddEditDeleteProjectModal = ({
 
     // useEffect to close overlay on scroll
     useEffect(() => {
-      if(scrollYPos !== prevScrollYPos) {
+      if(scrollYPos !== prevScrollYPos && modalIsOpen) {
         removeClassFromDiv("addEditDeleteProjectModal", "show");
         setTimeout(() => {
-          setShowActionModal(false);
+          if(showActionModal) {
+            setShowActionModal(false);
+          }
         }, MODAL_TRANSITION_INTERVAL);
       };
     }, [scrollYPos, prevScrollYPos]);
 
-  // useEffect to add show class after initial render to allow transitioning on sheight, width and opacity
+  // useEffect to add show class after initial render to allow transitioning on height, width and opacity
   useEffect(() => {
     setTimeout(() => {
       addClassToDiv("addEditDeleteProjectModal", "show");
+      setModalIsOpen(true)
     }, MODAL_TRANSITION_INTERVAL);
   }, []);
 

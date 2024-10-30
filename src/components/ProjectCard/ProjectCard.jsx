@@ -1,12 +1,15 @@
-import { useState } from "react";
+import { useAppContext } from "../../contexts/AppContext";
 import { MdModeEdit } from "react-icons/md";
 import { MdDelete } from "react-icons/md";
 import ProjectPlaceholder from "../ProjectPlaceholder/ProjectPlaceholder";
 import "./ProjectCard.scss";
 
-
 const ProjectCard = ({ 
   projectID,
+  showPlaceholders, 
+  setShowPlaceholders,
+  displayNonePlaceholders, 
+  setDisplayNonePlaceholders,
   idx,
   maxIdx,
   imgSrc, 
@@ -20,13 +23,18 @@ const ProjectCard = ({
   isInitialPlaceholder
 }) => {
 
-  const [ showPlaceholder, setShowPlaceholder ] = useState(true);
+  const { LIGHTBOX_TIMING_INTERVAL } = useAppContext()
 
   const handleOnLoad = () => {
-    setShowPlaceholder(false);
-    console.log(`Loaded card ${projectID}`)
-  };
+    console.log(`loaded final placeholder ${projectID}`)
+    setTimeout(() => {
+      setShowPlaceholders(false);
+    }, LIGHTBOX_TIMING_INTERVAL);
 
+    setTimeout(() => {
+      setDisplayNonePlaceholders(true);
+    }, 500);
+  };  
   
   const handleDeleteClick = (e) => {
     e.preventDefault();
@@ -46,7 +54,7 @@ const ProjectCard = ({
     return (
       <ProjectPlaceholder />
     )
-  }
+  };
 
 
   return (
@@ -59,15 +67,14 @@ const ProjectCard = ({
         }
       >
 
-        {showPlaceholder
-          ? (
-            <div className="projectCard__placeholder">
-              <ProjectPlaceholder />
-            </div>
-              )
-          : null
-        }
-
+        <div className={`projectCard__placeholder ${!showPlaceholders && displayNonePlaceholders
+          ? "hide" 
+          : !showPlaceholders
+          ? "fade"
+          : ""}`}
+        >
+          <ProjectPlaceholder />
+        </div>
 
         <button 
           className={`projectCard__button projectCard__button--delete ${isLoggedIn && isEditMode && !isProjectOrderEditable
@@ -96,7 +103,10 @@ const ProjectCard = ({
             className="projectCard__img"
             src={imgSrc}
             alt={`Card Image for ${projectTitle} Project`}
-            onLoad={handleOnLoad}
+            onLoad={idx === maxIdx
+              ? handleOnLoad
+              : null
+            }
           />
 				</div>
 			</div>

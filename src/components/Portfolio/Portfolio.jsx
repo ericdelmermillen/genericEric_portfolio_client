@@ -7,8 +7,6 @@ import LightBox from '../LightBox/LightBox.jsx';
 import ProjectCard from '../ProjectCard/ProjectCard.jsx';
 import toast from 'react-hot-toast';
 import './Portfolio.scss';
-import ProjectPlaceholder from '../ProjectPlaceholder/ProjectPlaceholder.jsx';
-import { addClassToDiv } from '../../../utils/utils.js';
 
 // const PROJECT_COUNT = 6;
 // const PROJECT_COUNT = 4;
@@ -20,14 +18,12 @@ const Portfolio = () => {
   
   const [ showLightBox, setShowLightBox ] = useState(false);
   const [ currentIdx, setCurrentIdx ] = useState(null);
+  const [ showPlaceholders, setShowPlaceholders ] = useState(true);
+  const [ displayNonePlaceholders, setDisplayNonePlaceholders ] = useState(false);
   const [ portfolioSummaries, setPortfolioSummaries ] = useState(initialProjects);
-
-  const [ showInitialPlaceholders, setShowInitialPlaceholders ] = useState(true);
-
   const [ showActionModal, setShowActionModal ] = useState(false);
   const [ selectedProject, setSelectedProject ] = useState({});
   const [ modalAction, setModalAction ] = useState("");
-  
   
   const {
     setIsLoading,
@@ -73,10 +69,6 @@ const Portfolio = () => {
     };
   };
 
-  const handleSetShowPortfolioPlaceholders = () => {
-    // setShowInitialPlaceholders(false)
-  };
-
   const handleAddNewProject = () => {
     console.log("add new project")
   };
@@ -84,7 +76,7 @@ const Portfolio = () => {
   const handleSetIsEditMode = async () => {
     setIsLoading(true);
     setPortfolioSummaries(initialProjects);
-    setShowInitialPlaceholders(true)
+    setShowPlaceholders(true);
     toast("Fetching all Project Summaries...");
   
     try {
@@ -127,9 +119,7 @@ const Portfolio = () => {
       console.error('Error fetching portfolio summaries:', error);
       toast.error(error.message);
       return false;
-    } finally {
-      
-    }
+    };
   };
 
   const handleDeleteOrEditClick = (projectID) => {
@@ -139,16 +129,14 @@ const Portfolio = () => {
   };
 
   const handleDeleteProjectClick = (projectID) => {
-    handleDeleteOrEditClick(projectID)
+    handleDeleteOrEditClick(projectID);
     setModalAction("Delete");
   };
 
-
   const handleEditProjectClick = (projectID) => {
-    handleDeleteOrEditClick(projectID)
+    handleDeleteOrEditClick(projectID);
     setModalAction("Edit");
   };
-
 
   const handleClearActionState = () => {
     setSelectedProject({});
@@ -173,9 +161,8 @@ const Portfolio = () => {
     toast("Exiting Edit Mode...");
     setIsEditMode(false);
     setIsProjectOrderEditable(false);
-    setShowInitialPlaceholders(true)
-    setPortfolioSummaries(initialProjects)
-    getPortfolioSummaries(PROJECT_COUNT)
+    setPortfolioSummaries(initialProjects);
+    getPortfolioSummaries(PROJECT_COUNT);
     scrollToDivTop();
     
     setTimeout(() => {
@@ -194,16 +181,7 @@ const Portfolio = () => {
   // useEffect to get portfolio summaries for ProjectCards
   // only need at initial mount
   useEffect(() => {
-    const fetchPortfolioSummaries = async () => {
-      const initialFetchSuccessful = await getPortfolioSummaries(PROJECT_COUNT);
-
-      if(initialFetchSuccessful) {
-        addClassToDiv("portfolio__projects-inner", "show")
-        setShowInitialPlaceholders(false);
-      }
-    };
-  
-    fetchPortfolioSummaries();
+    getPortfolioSummaries(PROJECT_COUNT);
   }, []);
 
 
@@ -215,6 +193,7 @@ const Portfolio = () => {
           ? 
             (
               <AddEditDeleteProjectModal 
+                showActionModal={showActionModal}
                 setShowActionModal={setShowActionModal}
                 projectID={selectedProject.project_id}
                 modalAction={modalAction}
@@ -226,21 +205,20 @@ const Portfolio = () => {
         }
 
         {showLightBox
-
-        ? 
-          (
-            <LightBox 
-              images={portfolioSummaries}
-              currentIdx={currentIdx}
-              setCurrentIdx={setCurrentIdx}
-              showLightBox={showLightBox}
-              setShowLightBox={setShowLightBox}
-              handleSetShowLightBoxFalse={handleSetShowLightBoxFalse}
-              handleIncrementCurrentIdx={handleIncrementCurrentIdx}
-              handleDecrementCurrentIdx={handleDecrementCurrentIdx}
-            />
-          )
-        : null
+          ? 
+            (
+              <LightBox 
+                images={portfolioSummaries}
+                currentIdx={currentIdx}
+                setCurrentIdx={setCurrentIdx}
+                showLightBox={showLightBox}
+                setShowLightBox={setShowLightBox}
+                handleSetShowLightBoxFalse={handleSetShowLightBoxFalse}
+                handleIncrementCurrentIdx={handleIncrementCurrentIdx}
+                handleDecrementCurrentIdx={handleDecrementCurrentIdx}
+              />
+            )
+          : null
         }
 
         <div className="portfolio__inner">
@@ -288,23 +266,6 @@ const Portfolio = () => {
           </div>
 
           <div id="projects" className="portfolio__projects">
-
-            <div 
-              className={`portfolio__initialProjectPlaceholders ${showInitialPlaceholders 
-                ? "" 
-                : "hide"}`}
-            >
-
-              {Array.from({ length: PROJECT_COUNT}).map((_, idx) => (
-                <ProjectPlaceholder 
-                  key={idx}
-                >
-                </ProjectPlaceholder>
-                ))
-              }
-
-            </div>
-            
             
             <div id="portfolio__projects-inner" className="portfolio__projects-inner">
 
@@ -312,6 +273,10 @@ const Portfolio = () => {
                 portfolioSummaries.map((project, idx) => 
                   <ProjectCard 
                     key={project.project_id || idx}
+                    showPlaceholders={showPlaceholders}
+                    setShowPlaceholders={setShowPlaceholders}
+                    displayNonePlaceholders={displayNonePlaceholders}
+                    setDisplayNonePlaceholders={setDisplayNonePlaceholders}
                     projectID={project.project_id}
                     idx={idx}
                     maxIdx={portfolioSummaries.length - 1}
