@@ -14,7 +14,7 @@ const AddEditDeleteProjectModal = ({
   setShowActionModal, 
   projectID,
   handleClearActionState,
-  setPortfolioSummaries
+  setProjects
 }) => {
 
   const [ modalIsOpen, setModalIsOpen ] = useState(false);
@@ -79,7 +79,7 @@ const AddEditDeleteProjectModal = ({
   
       setTokens(newToken, newRefreshToken);
 
-      setPortfolioSummaries(c => c.filter(summary => summary.project_id !== projectID));
+      setProjects(c => c.filter(summary => summary.project_id !== projectID));
       toast.success(message);  
     } catch(error) {
       console.error('Error deleting project:', error);

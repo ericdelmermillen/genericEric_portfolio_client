@@ -3,6 +3,9 @@ import { MdModeEdit } from "react-icons/md";
 import { MdDelete } from "react-icons/md";
 import ProjectPlaceholder from "../ProjectPlaceholder/ProjectPlaceholder";
 import "./ProjectCard.scss";
+import { checkIfIsFirefox } from "../../../utils/utils";
+
+const isFirefox = checkIfIsFirefox();
 
 const ProjectCard = ({ 
   projectID,
@@ -15,14 +18,17 @@ const ProjectCard = ({
   maxIdx,
   imgSrc, 
   projectTitle, 
+  displayOrder,
   isProjectOrderEditable,
   isLoggedIn,
   isEditMode,
   handleProjectCardClick,
   handleDeleteProjectClick,
-  handleEditProjectClick
+  handleEditProjectClick,
+  handleProjectDragStart,
+  handleDropProjectTarget
 }) => {
-
+  
   const { LIGHTBOX_TIMING_INTERVAL } = useAppContext();
 
   const handleOnLoad = () => {
@@ -55,15 +61,38 @@ const ProjectCard = ({
     )
   };
 
+  // const handleProjectDragStart = (projectID) => {
+  //   console.log(`Drag started for project ${projectID}`)
+  // };
+
+  const handleDragOver = (e) => {
+    e.preventDefault();
+  };
+
+
+  
+  // console.log(displayOrder)
 
   return (
     <>
       <div 
         className={`projectCard ${isProjectOrderEditable ? "draggable" : ""}`}
+        draggable={isProjectOrderEditable}
+        onDragStart={isProjectOrderEditable && !isFirefox
+          ? () => handleProjectDragStart(projectID)
+          : null}
+        onMouseDown={isProjectOrderEditable && isFirefox
+          ? () => handleProjectDragStart(projectID)
+          : null}
+        onDragOver={isProjectOrderEditable
+          ? handleDragOver
+          : null}
+        onDrop={isProjectOrderEditable
+          ? () => handleDropProjectTarget(projectID, displayOrder)
+          : null}
         onClick={!isProjectOrderEditable
           ? () => handleProjectCardClick(idx)
-          : null
-        }
+          : null}
       >
 
         <div className={`projectCard__placeholder ${!showPlaceholders && displayNonePlaceholders

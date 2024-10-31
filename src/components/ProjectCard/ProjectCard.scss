@@ -6,6 +6,7 @@
 		@include projectCard;
 		box-shadow: var(--box-shadow);
 		cursor: pointer;
+		overflow: hidden;
 		position: relative;
 
 		&.draggable {
