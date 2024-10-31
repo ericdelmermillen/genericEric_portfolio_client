@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { useAppContext } from '../../contexts/AppContext.jsx';
 import { Link } from 'react-router-dom';
 import { MdModeEdit } from 'react-icons/md';
@@ -23,7 +23,7 @@ const Portfolio = () => {
   const [ showPlaceholders, setShowPlaceholders ] = useState(true);
   const [ displayNonePlaceholders, setDisplayNonePlaceholders ] = useState(false);
 
-  const [ projects, setProjects ] = useState(initialProjects);
+  const [ projectsData, setProjectsData ] = useState(initialProjects);
 
   const [ showActionModal, setShowActionModal ] = useState(false);
   const [ selectedProject, setSelectedProject ] = useState({});
@@ -57,7 +57,7 @@ const Portfolio = () => {
   };
 
   const handleIncrementCurrentIdx = () => {
-    if(currentIdx >= projects.length - 1) {
+    if(currentIdx >= projectsData.length - 1) {
       setCurrentIdx(0);
     } else {
       setCurrentIdx(c => c + 1);
@@ -66,7 +66,7 @@ const Portfolio = () => {
 
   const handleDecrementCurrentIdx = () => {
     if(currentIdx <= 0) {
-      setCurrentIdx(projects.length - 1);
+      setCurrentIdx(projectsData.length - 1);
     } else {
       setCurrentIdx(c => c - 1);
     };
@@ -79,7 +79,7 @@ const Portfolio = () => {
 
   const handleSetIsEditMode = async () => {
     setIsLoading(true);
-    setProjects(initialProjects);
+    setProjectsData(initialProjects);
     setShowPlaceholders(true);
     toast("Fetching all Project Summaries...");
   
@@ -106,70 +106,52 @@ const Portfolio = () => {
     setIsProjectOrderEditable(true);
   };
 
-  const handleProjectDragStart = (projectID) => {
-      // console.log(`Drag started for project ${projectID}`)
-      setActiveDragProject(() => projects.find(project => project.project_id === projectID));
-  };
+  const handleDragStart = useCallback((projectID) => {
+      setActiveDragProject(() => projectsData.find(project => project.project_id === projectID));
+  }, [projectsData]);  
 
-  
-  
+  const handleDropTarget = useCallback((dropTargetID, dropTargetDisplayOrder) => {
 
-  const handleDropProjectTarget = (dropTargetProjectID, dropTargetProjectDisplayOrder) => {
-
-    setProjects(prevProjects => {
-      const activeDraggedProjectID = activeDragProject.project_id;
-      // console.log(`activeDraggedProjectID: ${activeDraggedProjectID}`)
+    setProjectsData(prevProjects => {
+      const activeDraggedID = activeDragProject.project_id;
       const activeDraggedProjectOldDisplayOrder = activeDragProject.display_order;
-      // console.log(`activeDraggedProjectOldDisplayOrder: ${activeDraggedProjectOldDisplayOrder}`)
-  
       const highestDisplayOrder = prevProjects.reduce((maxDisplayOrder, project) => {
         return Math.max(maxDisplayOrder, project.display_order);
       }, 0);
 
-      // console.log(`highestDisplayOrder: ${highestDisplayOrder}`)
       const updatedProjects = prevProjects.map(project => ({ ...project }));
-      // console.log(updatedProjects)
-      // --------
 
       for(const project of updatedProjects) {
         
-        if(dropTargetProjectID !== activeDraggedProjectID) {
+        if(dropTargetID !== activeDraggedID) {
           
-          if(dropTargetProjectDisplayOrder === highestDisplayOrder) {
+          if(dropTargetDisplayOrder === highestDisplayOrder) {
 
-            if(project.project_id === dropTargetProjectID) {
-              project.display_order = dropTargetProjectDisplayOrder - 1;
-            } else if(project.project_id === activeDraggedProjectID) {
-              project.display_order = dropTargetProjectDisplayOrder;
-            } else if (project.display_order < dropTargetProjectDisplayOrder && project.display_order >= activeDraggedProjectOldDisplayOrder) {
+            if(project.project_id === dropTargetID) {
+              project.display_order = dropTargetDisplayOrder - 1;
+            } else if(project.project_id === activeDraggedID) {
+              project.display_order = dropTargetDisplayOrder;
+            } else if (project.display_order < dropTargetDisplayOrder && project.display_order >= activeDraggedProjectOldDisplayOrder) {
               project.display_order--;
             }
 
-          } else if (activeDraggedProjectOldDisplayOrder > dropTargetProjectDisplayOrder) {
+          } else if (activeDraggedProjectOldDisplayOrder > dropTargetDisplayOrder) {
 
-            if(project.shoot_id === dropTargetProjectID) {
-              project.display_order = dropTargetProjectDisplayOrder + 1;
-            } 
-
-              else if (project.project_id === activeDraggedProjectID) {
-              project.display_order = dropTargetProjectDisplayOrder;
-            } 
-              else if (project.display_order > dropTargetProjectDisplayOrder && project.display_order <= activeDraggedProjectOldDisplayOrder) {
+            if(project.project_id === dropTargetID) {
+              project.display_order = dropTargetDisplayOrder + 1;
+            } else if (project.project_id === activeDraggedID) {
+              project.display_order = dropTargetDisplayOrder;
+            } else if (project.display_order > dropTargetDisplayOrder && project.display_order <= activeDraggedProjectOldDisplayOrder) {
               project.display_order++;
             }
-          } 
-          
-            else if (dropTargetProjectDisplayOrder > activeDraggedProjectOldDisplayOrder) {
 
-            if (project.project_id === dropTargetProjectID) {
-              project.display_order = dropTargetProjectDisplayOrder - 1;
-            } 
+          } else if (dropTargetDisplayOrder > activeDraggedProjectOldDisplayOrder) {
 
-            else if (project.project_id === activeDraggedProjectID) {
-              project.display_order = dropTargetProjectDisplayOrder;
-            } 
-
-            else if (project.display_order <= dropTargetProjectDisplayOrder && project.display_order > activeDraggedProjectOldDisplayOrder) {
+            if(project.project_id === dropTargetID) {
+              project.display_order = dropTargetDisplayOrder - 1;
+            } else if (project.project_id === activeDraggedID) {
+              project.display_order = dropTargetDisplayOrder;
+            } else if (project.display_order <= dropTargetDisplayOrder && project.display_order > activeDraggedProjectOldDisplayOrder) {
               project.display_order--;
             }
 
@@ -182,11 +164,7 @@ const Portfolio = () => {
     });
   
     setActiveDragProject({id: -1});
-  };
-
-
-  
-  
+  }, [activeDragProject.project_id]);
 
 
   const getPortfolioSummaries = async (limit) => {
@@ -199,10 +177,9 @@ const Portfolio = () => {
         throw new Error("Error fetching portfolio project summaries");
       };
   
-      // setPortfolioSummaries(data);
-      setProjects(data);
+      setProjectsData(data);
       return true;
-  
+
     } catch (error) {
       console.error('Error fetching portfolio summaries:', error);
       toast.error(error.message);
@@ -214,7 +191,7 @@ const Portfolio = () => {
     setShowActionModal(true);
     // do I need error handling here if the projectID is not a number or doesn't exist?
     // const project = portfolioSummaries.find(summary => summary.project_id === projectID);
-    const project = projects.find(summary => summary.project_id === projectID);
+    const project = projectsData.find(summary => summary.project_id === projectID);
     setSelectedProject(project);
   };
 
@@ -251,13 +228,13 @@ const Portfolio = () => {
     toast("Exiting Edit Mode...");
     setIsEditMode(false);
     setIsProjectOrderEditable(false);
-    setProjects(initialProjects);
+    setProjectsData(initialProjects);
     getPortfolioSummaries(PROJECT_COUNT);
     scrollToDivTop();
     
     setTimeout(() => {
       setIsLoading(false);
-    }, MIN_LOADING_INTERVAL)
+    }, MIN_LOADING_INTERVAL);
     
   };
   
@@ -292,7 +269,7 @@ const Portfolio = () => {
                 projectID={selectedProject.project_id}
                 modalAction={modalAction}
                 handleClearActionState={handleClearActionState}
-                setProjects={setProjects}
+                setProjectsData={setProjectsData}
               />
             )
           : null
@@ -302,7 +279,7 @@ const Portfolio = () => {
           ? 
             (
               <LightBox 
-                images={projects}
+                images={projectsData}
                 currentIdx={currentIdx}
                 setCurrentIdx={setCurrentIdx}
                 showLightBox={showLightBox}
@@ -364,11 +341,11 @@ const Portfolio = () => {
             <div id="portfolio__projects-inner" className="portfolio__projects-inner">
 
               {
-                  projects.map((project, idx) => 
+                  projectsData.map((project, idx) => 
                   <ProjectCard 
                     key={project.project_id || idx}
                     idx={idx}
-                    maxIdx={projects.length - 1}
+                    maxIdx={projectsData.length - 1}
                     imgSrc={project.imgSrc}
                     projectTitle={project.projectTitle}
                     displayOrder={project.display_order}
@@ -386,8 +363,8 @@ const Portfolio = () => {
                     handleDeleteProjectClick={handleDeleteProjectClick}
                     handleEditProjectClick={handleEditProjectClick}
                     modalAction={modalAction}
-                    handleProjectDragStart={handleProjectDragStart}
-                    handleDropProjectTarget={handleDropProjectTarget}
+                    handleDragStart={handleDragStart}
+                    handleDropTarget={handleDropTarget}
                   />
                 )
               }

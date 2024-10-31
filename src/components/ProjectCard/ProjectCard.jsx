@@ -25,8 +25,8 @@ const ProjectCard = ({
   handleProjectCardClick,
   handleDeleteProjectClick,
   handleEditProjectClick,
-  handleProjectDragStart,
-  handleDropProjectTarget
+  handleDragStart,
+  handleDropTarget
 }) => {
   
   const { LIGHTBOX_TIMING_INTERVAL } = useAppContext();
@@ -61,7 +61,7 @@ const ProjectCard = ({
     )
   };
 
-  // const handleProjectDragStart = (projectID) => {
+  // const handleDragStart = (projectID) => {
   //   console.log(`Drag started for project ${projectID}`)
   // };
 
@@ -79,16 +79,16 @@ const ProjectCard = ({
         className={`projectCard ${isProjectOrderEditable ? "draggable" : ""}`}
         draggable={isProjectOrderEditable}
         onDragStart={isProjectOrderEditable && !isFirefox
-          ? () => handleProjectDragStart(projectID)
+          ? () => handleDragStart(projectID)
           : null}
         onMouseDown={isProjectOrderEditable && isFirefox
-          ? () => handleProjectDragStart(projectID)
+          ? () => handleDragStart(projectID)
           : null}
         onDragOver={isProjectOrderEditable
           ? handleDragOver
           : null}
         onDrop={isProjectOrderEditable
-          ? () => handleDropProjectTarget(projectID, displayOrder)
+          ? () => handleDropTarget(projectID, displayOrder)
           : null}
         onClick={!isProjectOrderEditable
           ? () => handleProjectCardClick(idx)
