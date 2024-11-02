@@ -145,6 +145,7 @@ const AppContextProvider = ({ children }) => {
       setIsLoading(false);
       setIsProjectOrderEditable(false);
       setIsEditMode(false);
+      navigate("/");
     };
   };
 

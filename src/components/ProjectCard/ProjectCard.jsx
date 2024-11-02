@@ -69,10 +69,6 @@ const ProjectCard = ({
     e.preventDefault();
   };
 
-
-  
-  // console.log(displayOrder)
-
   return (
     <>
       <div 

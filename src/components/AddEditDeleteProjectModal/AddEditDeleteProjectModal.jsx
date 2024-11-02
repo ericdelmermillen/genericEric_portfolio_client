@@ -45,7 +45,6 @@ const AddEditDeleteProjectModal = ({
   }
 
   const handleDeleteProject = async (projectID) => {
-    console.log(projectID)
     setIsLoading(true);
     const token = localStorage.getItem('token');
     const refreshToken = localStorage.getItem('refreshToken');
@@ -84,6 +83,7 @@ const AddEditDeleteProjectModal = ({
     } catch(error) {
       console.error('Error deleting project:', error);
       toast.error(error.message);
+      logoutUser()
     } finally {
       setTimeout(() => {
         setIsLoading(false);

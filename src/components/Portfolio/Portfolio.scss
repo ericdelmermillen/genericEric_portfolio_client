@@ -151,9 +151,8 @@
 		}
 
 		&--cancel,
+		&--edit,
 		&--save {
-			margin-top: 0rem;
-
 			@media (min-width: $smallTablet) {
 				width: 12rem;
 			}

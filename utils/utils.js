@@ -58,6 +58,7 @@ const checkTokenIsValid = async (navigate) => {
         const refreshToken = localStorage.getItem('refreshToken');
         
         if(refreshToken) {
+
           const refreshResponse = await fetch(`${BASE_URL}/auth/refreshtoken`, {
             method: 'POST',
             headers: {
@@ -91,13 +92,14 @@ const checkTokenIsValid = async (navigate) => {
       removeTokens();
       navigate('/');
       toast.error(error.message);
-      return true;
+      return false;
     }
   } else {
     removeTokens();
     return false; 
   };
 };
+
 
 const addClassToDiv = (divID, className) => {
   document.getElementById(divID).classList.add(className);

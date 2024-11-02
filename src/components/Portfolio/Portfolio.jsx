@@ -2,6 +2,7 @@ import { useEffect, useState, useCallback } from 'react';
 import { useAppContext } from '../../contexts/AppContext.jsx';
 import { Link } from 'react-router-dom';
 import { MdModeEdit } from 'react-icons/md';
+import { removeTokens } from '../../../utils/utils.js';
 import AddEditDeleteProjectModal from '../AddEditDeleteProjectModal/AddEditDeleteProjectModal.jsx';
 import LightBox from '../LightBox/LightBox.jsx';
 import ProjectCard from '../ProjectCard/ProjectCard.jsx';
@@ -22,9 +23,7 @@ const Portfolio = () => {
   const [ currentIdx, setCurrentIdx ] = useState(null);
   const [ showPlaceholders, setShowPlaceholders ] = useState(true);
   const [ displayNonePlaceholders, setDisplayNonePlaceholders ] = useState(false);
-
   const [ projectsData, setProjectsData ] = useState(initialProjects);
-
   const [ showActionModal, setShowActionModal ] = useState(false);
   const [ selectedProject, setSelectedProject ] = useState({});
   const [ activeDragProject, setActiveDragProject ] = useState({project_id: -1}); 
@@ -33,6 +32,7 @@ const Portfolio = () => {
   const {
     setIsLoading,
     isLoggedIn,
+    logoutUser,
     isProjectOrderEditable, 
     setIsProjectOrderEditable,
     isEditMode, 
@@ -77,7 +77,7 @@ const Portfolio = () => {
     console.log("add new project")
   };
 
-  const handleSetIsEditMode = async () => {
+  const handleSetIsEditModeTrue = async () => {
     setIsLoading(true);
     setProjectsData(initialProjects);
     setShowPlaceholders(true);
@@ -99,8 +99,20 @@ const Portfolio = () => {
       setTimeout(() => {
         setIsLoading(false);
       }, MIN_LOADING_INTERVAL)
+      scrollToDivTop();
     };
   };
+
+  const handleSetIsEditModeFalse = () => {
+    setIsLoading(true);
+    setIsEditMode(false);
+    scrollToDivTop()
+    toast("Exiting edit mode...");
+    setTimeout(() => {
+      setIsLoading(false);
+    }, MIN_LOADING_INTERVAL);
+    console.log("Edit mode now false")
+  }
 
   const handleSetOrderIsEditable = () => {
     setIsProjectOrderEditable(true);
@@ -228,8 +240,6 @@ const Portfolio = () => {
     toast("Exiting Edit Mode...");
     setIsEditMode(false);
     setIsProjectOrderEditable(false);
-    setProjectsData(initialProjects);
-    getPortfolioSummaries(PROJECT_COUNT);
     scrollToDivTop();
     
     setTimeout(() => {
@@ -237,15 +247,62 @@ const Portfolio = () => {
     }, MIN_LOADING_INTERVAL);
     
   };
-  
-  const handleSave = () => {
-    if(!isProjectOrderEditable) {
-      console.log("saving no changes")
 
-    } else if(isProjectOrderEditable) {
-      console.log("saving new order")
+
+  // ***
+
+
+  const saveNewOrder = async () => {
+    setIsProjectOrderEditable(false)
+    setIsLoading(true);
+
+    const token = localStorage.getItem('token');
+    const refreshToken = localStorage.getItem('refreshToken');
+  
+    if(!token || !refreshToken) {
+      toast.error('Authorization or refresh token missing.');
+      logoutUser();
+      return;
     }
-    // make call to update project order here
+
+    try {
+      const newProjectOrder = projectsData.map((project, idx) => (
+        {project_id: project.project_id, display_order: idx + 1}))
+
+      const response = await fetch(`${BASE_URL}/projects/updateorder`, {
+        method: "PATCH",
+        headers: {
+          'Content-Type': 'application/json', 
+          Authorization: `Bearer ${token}`,
+          refreshToken: refreshToken,
+        },
+        body: JSON.stringify({ new_project_order: newProjectOrder })
+      });
+
+      const data = await response.json();
+
+      if(!response.ok) {
+        throw new Error(data.message);
+      };
+      
+    } catch(error) {
+      console.log(error.message);
+      removeTokens();
+      logoutUser();
+    } finally {
+      setTimeout(() => {
+        setIsLoading(false);
+      }, MIN_LOADING_INTERVAL);
+      setActiveDragProject({project_id: -1});
+    }
+  };
+   
+  const handleSave = () => {
+    console.log("saving new order")
+    saveNewOrder();
+    scrollToDivTop();
+    toast("Saving new order...");
+    setIsEditMode(false);
   };
   
 
@@ -300,7 +357,7 @@ const Portfolio = () => {
               PORTFOLIO
               <button 
                 className={`portfolio__editModeButton ${isLoggedIn && !isEditMode ? "" : "hide"}`}
-                onClick={handleSetIsEditMode}
+                onClick={handleSetIsEditModeTrue}
               >
                 <MdModeEdit className="portfolio__editMode-icon"/>
               </button>
@@ -328,6 +385,7 @@ const Portfolio = () => {
             >
               {isLoggedIn && !isEditMode && !isProjectOrderEditable 
               ? "Add New Project"
+              // ? ""
               : isLoggedIn && isEditMode
               ? "Edit Project Order"
               : ""
@@ -373,9 +431,40 @@ const Portfolio = () => {
 
           </div>
 
-          {isLoggedIn && isEditMode
 
-            ? (
+          {!isLoggedIn
+
+            ?
+              (
+                <Link
+                  className="portfolio__button portfolio__button--moreProjects"
+                  to="/projects"
+                >
+                  More Projects
+                </Link>
+              )
+            : isLoggedIn && !isEditMode && !isProjectOrderEditable
+            ? 
+              (
+                  <button
+                    className="portfolio__button portfolio__button--edit"
+                    onClick={handleSetIsEditModeTrue}
+                  >
+                    Edit
+                  </button>
+                )
+            : isLoggedIn && isEditMode && !isProjectOrderEditable
+            ?
+              (
+                <button
+                  className="portfolio__button portfolio__button--edit"
+                  onClick={handleSetIsEditModeFalse}
+                >
+                  Finish
+                </button>
+              )
+            :
+              (
                 <div className="portfolio__buttons">
                   <button 
                     className='portfolio__button portfolio__button--cancel'
@@ -391,14 +480,6 @@ const Portfolio = () => {
                   </button>
                 </div>
               )
-              : (
-                  <Link
-                    className="portfolio__button portfolio__button--moreProjects"
-                    to="/projects"
-                  >
-                    More Projects
-                  </Link>
-                )
           }
 
         </div>
