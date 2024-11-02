@@ -91,14 +91,14 @@ const Portfolio = () => {
         toast("Fetch successful. Ready to edit.");
       } else {
         toast.error("Failed to fetch project summaries.");
-      }
+      };
     } catch (error) {
       console.error("Error in fetching summaries:", error);
       toast.error("Unexpected error occurred.");
     } finally {
       setTimeout(() => {
         setIsLoading(false);
-      }, MIN_LOADING_INTERVAL)
+      }, MIN_LOADING_INTERVAL);
       scrollToDivTop();
     };
   };
@@ -106,12 +106,13 @@ const Portfolio = () => {
   const handleSetIsEditModeFalse = () => {
     setIsLoading(true);
     setIsEditMode(false);
-    scrollToDivTop()
+
+    scrollToDivTop();
+
     toast("Exiting edit mode...");
     setTimeout(() => {
       setIsLoading(false);
     }, MIN_LOADING_INTERVAL);
-    console.log("Edit mode now false")
   }
 
   const handleSetOrderIsEditable = () => {
@@ -237,20 +238,21 @@ const Portfolio = () => {
 
   const handleCancel = () => {
     setIsLoading(true);
-    toast("Exiting Edit Mode...");
+    toast("Cancelling...");
     setIsEditMode(false);
     setIsProjectOrderEditable(false);
-    scrollToDivTop();
+    
+    setShowPlaceholders(true);
+    
+    const refreshPlaceholders = Array.from({length: projectsData.length}, () => ({isInitialPlaceholder: true}));
+    setProjectsData(refreshPlaceholders);
     
     setTimeout(() => {
+      getPortfolioSummaries()
+      scrollToDivTop();
       setIsLoading(false);
     }, MIN_LOADING_INTERVAL);
-    
   };
-
-
-  // ***
-
 
   const saveNewOrder = async () => {
     setIsProjectOrderEditable(false)
