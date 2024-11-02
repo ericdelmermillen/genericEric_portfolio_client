@@ -84,7 +84,7 @@ const Portfolio = () => {
     toast("Fetching all Project Summaries...");
   
     try {
-      const isSuccess = await getPortfolioSummaries();
+      const isSuccess = await getPortfolioProjecrs();
       
       if(isSuccess) {
         setIsEditMode(true);
@@ -180,7 +180,7 @@ const Portfolio = () => {
   }, [activeDragProject.project_id]);
 
 
-  const getPortfolioSummaries = async (limit) => {
+  const getPortfolioProjecrs = async (limit) => {
     try {
       const url = `${BASE_URL}/projects/portfoliosummary${limit ? `?limit=${limit}` : ""}`;
       const response = await fetch(url);
@@ -222,7 +222,6 @@ const Portfolio = () => {
     setSelectedProject({});
     setModalAction("");
     setShowActionModal(false);
-    console.log("state cleared");
   };
 
   const scrollToDivTop = () => {
@@ -248,7 +247,7 @@ const Portfolio = () => {
     setProjectsData(refreshPlaceholders);
     
     setTimeout(() => {
-      getPortfolioSummaries()
+      getPortfolioProjecrs()
       scrollToDivTop();
       setIsLoading(false);
     }, MIN_LOADING_INTERVAL);
@@ -311,7 +310,7 @@ const Portfolio = () => {
   // useEffect to get portfolio summaries for ProjectCards
   // only need at initial mount
   useEffect(() => {
-    getPortfolioSummaries(PROJECT_COUNT);
+    getPortfolioProjecrs(PROJECT_COUNT);
   }, []);
 
 

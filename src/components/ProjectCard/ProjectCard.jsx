@@ -45,7 +45,6 @@ const ProjectCard = ({
     e.preventDefault();
     e.stopPropagation();
     handleDeleteProjectClick(projectID);
-    console.log(`projectID: ${projectID}`)
   };
 
   const handleEditClick = (e) => {
@@ -60,10 +59,6 @@ const ProjectCard = ({
       <ProjectPlaceholder />
     )
   };
-
-  // const handleDragStart = (projectID) => {
-  //   console.log(`Drag started for project ${projectID}`)
-  // };
 
   const handleDragOver = (e) => {
     e.preventDefault();
