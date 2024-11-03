@@ -1,5 +1,6 @@
 import { useAppContext } from "../../contexts/AppContext.jsx";
 import { useEffect, useState } from "react";
+import { scrollToDivTop } from "../../../utils/utils.js";
 import DownIcon from "../../assets/svgs/DownIcon.jsx";
 import Facebook from "../../assets/svgs/Facebook.jsx";
 import Github from "../../assets/svgs/Github.jsx";
@@ -20,8 +21,14 @@ const headerSocials = [
 ];
 
 const Header = () => {
+  const divTopOffset = window.innerHeight - 50;
+
   const { colorMode, scrollYPos } = useAppContext();
   const [ windowHeight, setwindowHeight ] = useState(Infinity);
+
+  const handleScrollToAbout = () => {
+    scrollToDivTop("about", divTopOffset)
+  };
 
   useEffect(() => {
     setwindowHeight(window.innerHeight);
@@ -63,14 +70,15 @@ const Header = () => {
               Full Stack Developer
             </h4>
 
-              <a className="header__button-link" href="#about">
-                <div className="header__button">
-                  <DownIcon className={"header__button-down"}/>
-                  <span className="header__button-text">
-                    More About Me
-                </span>
-                </div>
-              </a>
+            <div 
+              className="header__button"
+              onClick={handleScrollToAbout}
+            >
+              <DownIcon className={"header__button-down"}/>
+              <span className="header__button-text">
+                More About Me
+            </span>
+            </div>
 
           </div>
 

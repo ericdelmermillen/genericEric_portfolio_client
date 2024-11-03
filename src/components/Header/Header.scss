@@ -142,19 +142,12 @@
 		}
 	}
 
-	&__button-link {
-		margin-inline: auto;
-
-		@media (min-width: $tablet) {
-			gap: 1rem;
-		}
-	}
-
 	&__button {
 		@include button;
 		border: 2px solid var(--text-color-bright);
 		box-shadow: var(--box-shadow);
 		color: var(--text-color-bright);
+		margin-inline: auto;
 
 		@media (min-width: $smallTablet) {
 			margin-bottom: 1.5rem;

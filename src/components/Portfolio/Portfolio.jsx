@@ -2,7 +2,7 @@ import { useEffect, useState, useCallback } from 'react';
 import { useAppContext } from '../../contexts/AppContext.jsx';
 import { Link } from 'react-router-dom';
 import { MdModeEdit } from 'react-icons/md';
-import { removeTokens } from '../../../utils/utils.js';
+import { removeTokens, scrollToDivTop } from '../../../utils/utils.js';
 import AddEditDeleteProjectModal from '../AddEditDeleteProjectModal/AddEditDeleteProjectModal.jsx';
 import LightBox from '../LightBox/LightBox.jsx';
 import ProjectCard from '../ProjectCard/ProjectCard.jsx';
@@ -20,7 +20,7 @@ const initialProjects = Array.from({length: PROJECT_COUNT}, () => ({isInitialPla
 
 const Portfolio = () => {
   
-  const windowHeight = window.innerHeight;
+  const divTopOffset = window.innerHeight - 45;
   
   const [ showLightBox, setShowLightBox ] = useState(false);
   const [ currentIdx, setCurrentIdx ] = useState(null);
@@ -102,7 +102,7 @@ const Portfolio = () => {
       setTimeout(() => {
         setIsLoading(false);
       }, MIN_LOADING_INTERVAL);
-      scrollToDivTop();
+      scrollToDivTop("portfolio", divTopOffset);
     };
   };
 
@@ -110,7 +110,7 @@ const Portfolio = () => {
     setIsLoading(true);
     setIsEditMode(false);
 
-    scrollToDivTop();
+    scrollToDivTop("portfolio", divTopOffset);
 
     toast("Exiting edit mode...");
     setTimeout(() => {
@@ -227,17 +227,6 @@ const Portfolio = () => {
     setShowActionModal(false);
   };
 
-  const scrollToDivTop = () => {
-    const targetDiv = document.getElementById("portfolio");
-    if(targetDiv) {
-      const offsetTop = targetDiv.offsetTop; 
-      window.scrollTo({
-        top: offsetTop + (windowHeight - 45),
-        behavior: "smooth"
-      });
-    };
-  };
-
   const handleCancel = () => {
     setIsLoading(true);
     toast("Cancelling...");
@@ -251,7 +240,7 @@ const Portfolio = () => {
     
     setTimeout(() => {
       getPortfolioProjecrs()
-      scrollToDivTop();
+      scrollToDivTop("portfolio", divTopOffset)
       setIsLoading(false);
     }, MIN_LOADING_INTERVAL);
   };
@@ -304,7 +293,7 @@ const Portfolio = () => {
   const handleSave = () => {
     console.log("saving new order")
     saveNewOrder();
-    scrollToDivTop();
+    scrollToDivTop("portfolio", divTopOffset);
     toast("Saving new order...");
     setIsEditMode(false);
   };

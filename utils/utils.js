@@ -16,6 +16,18 @@ const scrollToTop = () => {
   });
 };
 
+const scrollToDivTop = (divID, divTopOffset) => {
+  const targetDiv = document.getElementById(divID);
+  if(targetDiv) {
+    const offsetTop = targetDiv.offsetTop; 
+    window.scrollTo({
+      // top: offsetTop + (windowHeight - 45),
+      top: offsetTop + divTopOffset,
+      behavior: "smooth"
+    });
+  };
+};
+
 const isValidEmail = (email) => {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return emailRegex.test(email);
@@ -112,6 +124,7 @@ const removeClassFromDiv = (divID, className) => {
 export {
   checkIfIsFirefox,
   scrollToTop,
+  scrollToDivTop,
   isValidEmail,
   isValidPassword,
   setTokens,
