@@ -18,9 +18,8 @@ const initialProjects = Array.from({length: PROJECT_COUNT}, () => ({isInitialPla
 
 // *** instead of More Projects button when isLoggedIn can have Load All Projects or Edit Projects which can do the same as the Pencil Icon
 
-const Portfolio = () => {
-  
-  const divTopOffset = window.innerHeight - 45;
+const Portfolio = () => {  
+  const divTopOffset = window.innerHeight - 50;
   
   const [ showLightBox, setShowLightBox ] = useState(false);
   const [ currentIdx, setCurrentIdx ] = useState(null);
@@ -397,8 +396,8 @@ const Portfolio = () => {
                     key={project.project_id || idx}
                     idx={idx}
                     maxIdx={projectsData.length - 1}
-                    imgSrc={project.imgSrc}
-                    projectTitle={project.projectTitle}
+                    imgSrc={project.img_src}
+                    projectTitle={project.project_title}
                     displayOrder={project.display_order}
                     isInitialPlaceholder={project.isInitialPlaceholder}
                     showPlaceholders={showPlaceholders}
