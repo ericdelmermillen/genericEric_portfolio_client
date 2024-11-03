@@ -9,6 +9,7 @@ import ProjectCard from '../ProjectCard/ProjectCard.jsx';
 import toast from 'react-hot-toast';
 import './Portfolio.scss';
 
+
 // const PROJECT_COUNT = 6;
 // const PROJECT_COUNT = 4;
 const PROJECT_COUNT = 2;
@@ -18,6 +19,8 @@ const initialProjects = Array.from({length: PROJECT_COUNT}, () => ({isInitialPla
 // *** instead of More Projects button when isLoggedIn can have Load All Projects or Edit Projects which can do the same as the Pencil Icon
 
 const Portfolio = () => {
+  
+  const windowHeight = window.innerHeight;
   
   const [ showLightBox, setShowLightBox ] = useState(false);
   const [ currentIdx, setCurrentIdx ] = useState(null);
@@ -229,7 +232,7 @@ const Portfolio = () => {
     if(targetDiv) {
       const offsetTop = targetDiv.offsetTop; 
       window.scrollTo({
-        top: offsetTop + 750,
+        top: offsetTop + (windowHeight - 45),
         behavior: "smooth"
       });
     };

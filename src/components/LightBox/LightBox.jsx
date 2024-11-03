@@ -254,16 +254,32 @@ const LightBox = ({
               <IoChevronForwardOutline className="lightBox__next-icon"/>
             </button>
 
-            <div className="lightBox__count"> 
+            {images.length <= 6
+            
+              ?
+                (
+                  <div className="lightBox__count"> 
 
-              {images.map((img, idx) => (
-                <div 
-                  key={img.project_id} 
-                  className={`lightBox__count-indicatior ${idx === currentIdx ? "current" : ""}`}>
+                    {images.map((img, idx) => (
+                      <div 
+                        key={img.project_id} 
+                        className={`lightBox__count-indicatior ${idx === currentIdx ? "current" : ""}`}>
+                      </div>
+                    ))}
+
+                  </div>
+
+                )
+              : 
+                (
+                  <div className="lightBox__numeric-counter">
+                  <h4 className="lightBox__numeric-count">
+                    {currentIdx + 1} / {images.length}
+                  </h4>
                 </div>
-              ))}
 
-            </div>
+                )
+            }
 
           </div>
 
