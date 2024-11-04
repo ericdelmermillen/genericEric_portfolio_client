@@ -6,7 +6,7 @@ import {
   useState
 } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import { checkTokenIsValid, removeTokens } from "../../utils/utils";
+import { checkTokenIsValid, removeTokens, scrollToTop } from "../../utils/utils";
 import { toast } from 'react-hot-toast'; 
 import { setTokens } from "../../utils/utils.js"
 
@@ -67,6 +67,7 @@ const AppContextProvider = ({ children }) => {
   const [ isProjectOrderEditable, setIsProjectOrderEditable ] = useState(false);
   const [ isEditMode, setIsEditMode ] = useState(false);
   const [ pathame, setPathname ] = useState("");
+  const [ rerenderTrigger, setRerenderTrigger ] = useState(1);
 
   const MIN_LOADING_INTERVAL = 250;
   const MODAL_TRANSITION_INTERVAL = 200;
@@ -142,10 +143,14 @@ const AppContextProvider = ({ children }) => {
     } finally {
       removeTokens();
       dispatch({ type: "user/logout" });
-      setIsLoading(false);
       setIsProjectOrderEditable(false);
       setIsEditMode(false);
       navigate("/");
+      setRerenderTrigger(c => c + 1);
+      scrollToTop();
+      setTimeout(() => {
+        setIsLoading(false);
+      }, MIN_LOADING_INTERVAL);
     };
   };
 
@@ -235,7 +240,9 @@ const AppContextProvider = ({ children }) => {
     MIN_LOADING_INTERVAL,
     MODAL_TRANSITION_INTERVAL,
     isEditMode, 
-    setIsEditMode
+    setIsEditMode,
+    rerenderTrigger, 
+    setRerenderTrigger
   };
 
   return (

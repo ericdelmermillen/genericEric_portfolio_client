@@ -2,8 +2,8 @@ import { useAppContext } from "../../contexts/AppContext";
 import { MdModeEdit } from "react-icons/md";
 import { MdDelete } from "react-icons/md";
 import ProjectPlaceholder from "../ProjectPlaceholder/ProjectPlaceholder";
-import "./ProjectCard.scss";
 import { checkIfIsFirefox } from "../../../utils/utils";
+import "./ProjectCard.scss";
 
 const isFirefox = checkIfIsFirefox();
 
@@ -57,7 +57,7 @@ const ProjectCard = ({
   if(isInitialPlaceholder) {
     return (
       <ProjectPlaceholder />
-    )
+    );
   };
 
   const handleDragOver = (e) => {

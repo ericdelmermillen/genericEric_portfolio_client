@@ -11,8 +11,8 @@ import './Portfolio.scss';
 
 
 // const PROJECT_COUNT = 6;
-// const PROJECT_COUNT = 4;
-const PROJECT_COUNT = 2;
+const PROJECT_COUNT = 4;
+// const PROJECT_COUNT = 2;
 const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 const initialProjects = Array.from({length: PROJECT_COUNT}, () => ({isInitialPlaceholder: true}));
 
@@ -20,6 +20,19 @@ const initialProjects = Array.from({length: PROJECT_COUNT}, () => ({isInitialPla
 
 const Portfolio = () => {  
   const divTopOffset = window.innerHeight - 50;
+
+  const {
+    setIsLoading,
+    isLoggedIn,
+    logoutUser,
+    isProjectOrderEditable, 
+    setIsProjectOrderEditable,
+    isEditMode, 
+    setIsEditMode,
+    MIN_LOADING_INTERVAL,
+    LIGHTBOX_TIMING_INTERVAL,
+    rerenderTrigger
+  } = useAppContext();
   
   const [ showLightBox, setShowLightBox ] = useState(false);
   const [ currentIdx, setCurrentIdx ] = useState(null);
@@ -30,18 +43,8 @@ const Portfolio = () => {
   const [ selectedProject, setSelectedProject ] = useState({});
   const [ activeDragProject, setActiveDragProject ] = useState({project_id: -1}); 
   const [ modalAction, setModalAction ] = useState("");
-  
-  const {
-    setIsLoading,
-    isLoggedIn,
-    logoutUser,
-    isProjectOrderEditable, 
-    setIsProjectOrderEditable,
-    isEditMode, 
-    setIsEditMode,
-    MIN_LOADING_INTERVAL,
-    LIGHTBOX_TIMING_INTERVAL
-  } = useAppContext();
+
+  const [ isInitialMount, setIsInitialMount ] = useState(true);
 
   const handleSetShowLightBoxTrue = () => {
     setShowLightBox(true);
@@ -86,7 +89,7 @@ const Portfolio = () => {
     toast("Fetching all Project Summaries...");
   
     try {
-      const isSuccess = await getPortfolioProjecrs();
+      const isSuccess = await getPortfolioProjects();
       
       if(isSuccess) {
         setIsEditMode(true);
@@ -182,7 +185,7 @@ const Portfolio = () => {
   }, [activeDragProject.project_id]);
 
 
-  const getPortfolioProjecrs = async (limit) => {
+  const getPortfolioProjects = async (limit) => {
     try {
       const url = `${BASE_URL}/projects/portfoliosummary${limit ? `?limit=${limit}` : ""}`;
       const response = await fetch(url);
@@ -238,7 +241,7 @@ const Portfolio = () => {
     setProjectsData(refreshPlaceholders);
     
     setTimeout(() => {
-      getPortfolioProjecrs()
+      getPortfolioProjects()
       scrollToDivTop("portfolio", divTopOffset)
       setIsLoading(false);
     }, MIN_LOADING_INTERVAL);
@@ -301,8 +304,23 @@ const Portfolio = () => {
   // useEffect to get portfolio summaries for ProjectCards
   // only need at initial mount
   useEffect(() => {
-    getPortfolioProjecrs(PROJECT_COUNT);
-  }, []);
+
+    if(isInitialMount) {
+      getPortfolioProjects(PROJECT_COUNT);
+      setIsInitialMount(false);
+    };
+    
+    if(!isInitialMount) {
+      setProjectsData(initialProjects);
+      setShowPlaceholders(true);
+      setDisplayNonePlaceholders(false);
+      setActiveDragProject({project_id: -1}); 
+
+      setTimeout(() => {
+        getPortfolioProjects(PROJECT_COUNT);
+      }, MIN_LOADING_INTERVAL);
+    };
+  }, [rerenderTrigger, isInitialMount]);
 
 
   return (
