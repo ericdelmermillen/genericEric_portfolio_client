@@ -9,14 +9,11 @@ import ProjectCard from '../ProjectCard/ProjectCard.jsx';
 import toast from 'react-hot-toast';
 import './Portfolio.scss';
 
-
 // const PROJECT_COUNT = 6;
 const PROJECT_COUNT = 4;
 // const PROJECT_COUNT = 2;
 const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 const initialProjects = Array.from({length: PROJECT_COUNT}, () => ({isInitialPlaceholder: true}));
-
-// *** instead of More Projects button when isLoggedIn can have Load All Projects or Edit Projects which can do the same as the Pencil Icon
 
 const Portfolio = () => {  
   const divTopOffset = window.innerHeight - 50;
@@ -34,17 +31,16 @@ const Portfolio = () => {
     rerenderTrigger
   } = useAppContext();
   
-  const [ showLightBox, setShowLightBox ] = useState(false);
-  const [ currentIdx, setCurrentIdx ] = useState(null);
-  const [ showPlaceholders, setShowPlaceholders ] = useState(true);
-  const [ displayNonePlaceholders, setDisplayNonePlaceholders ] = useState(false);
-  const [ projectsData, setProjectsData ] = useState(initialProjects);
-  const [ showActionModal, setShowActionModal ] = useState(false);
-  const [ selectedProject, setSelectedProject ] = useState({});
   const [ activeDragProject, setActiveDragProject ] = useState({project_id: -1}); 
-  const [ modalAction, setModalAction ] = useState("");
-
+  const [ currentIdx, setCurrentIdx ] = useState(null);
+  const [ displayNonePlaceholders, setDisplayNonePlaceholders ] = useState(false);
   const [ isInitialMount, setIsInitialMount ] = useState(true);
+  const [ modalAction, setModalAction ] = useState("");
+  const [ projectsData, setProjectsData ] = useState(initialProjects);
+  const [ selectedProject, setSelectedProject ] = useState({});
+  const [ showActionModal, setShowActionModal ] = useState(false);
+  const [ showLightBox, setShowLightBox ] = useState(false);
+  const [ showPlaceholders, setShowPlaceholders ] = useState(true);
 
   const handleSetShowLightBoxTrue = () => {
     setShowLightBox(true);
@@ -79,7 +75,7 @@ const Portfolio = () => {
 
   // ***need logic to open AddEditDeleteProjectModal then navigate to new project page
   const handleAddNewProject = () => {
-    console.log("add new project")
+    console.log("add new project");
   };
 
   const handleSetIsEditModeTrue = async () => {
@@ -118,7 +114,7 @@ const Portfolio = () => {
     setTimeout(() => {
       setIsLoading(false);
     }, MIN_LOADING_INTERVAL);
-  }
+  };
 
   const handleSetOrderIsEditable = () => {
     setIsProjectOrderEditable(true);
@@ -151,7 +147,7 @@ const Portfolio = () => {
               project.display_order = dropTargetDisplayOrder;
             } else if (project.display_order < dropTargetDisplayOrder && project.display_order >= activeDraggedProjectOldDisplayOrder) {
               project.display_order--;
-            }
+            };
 
           } else if (activeDraggedProjectOldDisplayOrder > dropTargetDisplayOrder) {
 
@@ -161,7 +157,7 @@ const Portfolio = () => {
               project.display_order = dropTargetDisplayOrder;
             } else if (project.display_order > dropTargetDisplayOrder && project.display_order <= activeDraggedProjectOldDisplayOrder) {
               project.display_order++;
-            }
+            };
 
           } else if (dropTargetDisplayOrder > activeDraggedProjectOldDisplayOrder) {
 
@@ -171,11 +167,11 @@ const Portfolio = () => {
               project.display_order = dropTargetDisplayOrder;
             } else if (project.display_order <= dropTargetDisplayOrder && project.display_order > activeDraggedProjectOldDisplayOrder) {
               project.display_order--;
-            }
+            };
 
-          }
-        }
-      }
+          };
+        };
+      };
 
       updatedProjects.sort((a, b) => a.display_order - b.display_order);
       return updatedProjects;
@@ -248,7 +244,7 @@ const Portfolio = () => {
   };
 
   const saveNewOrder = async () => {
-    setIsProjectOrderEditable(false)
+    setIsProjectOrderEditable(false);
     setIsLoading(true);
 
     const token = localStorage.getItem('token');
@@ -258,11 +254,11 @@ const Portfolio = () => {
       toast.error('Authorization or refresh token missing.');
       logoutUser();
       return;
-    }
+    };
 
     try {
       const newProjectOrder = projectsData.map((project, idx) => (
-        {project_id: project.project_id, display_order: idx + 1}))
+        {project_id: project.project_id, display_order: idx + 1}));
 
       const response = await fetch(`${BASE_URL}/projects/updateorder`, {
         method: "PATCH",
@@ -289,11 +285,10 @@ const Portfolio = () => {
         setIsLoading(false);
       }, MIN_LOADING_INTERVAL);
       setActiveDragProject({project_id: -1});
-    }
+    };
   };
    
   const handleSave = () => {
-    console.log("saving new order")
     saveNewOrder();
     scrollToDivTop("portfolio", divTopOffset);
     toast("Saving new order...");

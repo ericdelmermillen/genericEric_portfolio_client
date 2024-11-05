@@ -27,7 +27,7 @@ const Header = () => {
   const [ windowHeight, setwindowHeight ] = useState(Infinity);
 
   const handleScrollToAbout = () => {
-    scrollToDivTop("about", divTopOffset)
+    scrollToDivTop("about", divTopOffset);
   };
 
   useEffect(() => {

@@ -1,0 +1,210 @@
+.app {
+  --body-font: "Arial";
+  --heading-font: "Tahoma";
+  --line-height-general: 1.45;
+  --line-height-medium: 1.75;
+  --navBoxShadow: 0 4px 6px rgba(0, 0, 0, 0.25), 0 1px 3px rgba(0, 0, 0, 0.25);
+  --letter-spacing-general: 0.6px;
+  --border-radius: 4px;
+  --lightBox-transition-interval: 450ms;
+  --placeholder-transition: all 0.75s ease-in-out;
+}
+.app[data-color-mode=light] {
+  --background-color: #f8f8f8;
+  --text-color: #21343c;
+  --neutral-gray-1: #e6eae7;
+  --neutral-gray-2: #e5edeb;
+  --neutral-gray-2: #eaedeb;
+  --accent-color: #bcb066;
+  --link-button-color: blue;
+  --neutralBG: #f8f8f8;
+  --overlay: rgba(0, 0, 0, 0.125);
+  --overlay-dark: rgba(0, 0, 0, 0.5) 0;
+  --gradient-overlay: linear-gradient(
+  	to top,
+  	rgba(0, 0, 0, 0.28),
+  	rgba(255, 255, 255, 0.2)
+  );
+  --text-shadow-bright: 5px 5px 6px rgba(0, 0, 0, 0.7);
+  --text-color-bright: #f8f8f8;
+  --background-nav-footer: #152f39;
+  --background-color: #d6dadd;
+  --modalOverlayBg: rgba(0, 0, 0, 0.5);
+  --button-color: #1a7697;
+  --button-link: #1a7697;
+  --link: #1a7697;
+  --box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+  --placeholder-color: #c7c7c7;
+  --error-color: #ff0000;
+}
+.app[data-color-mode=dark] {
+  --text-color: #21343c;
+  --neutral-gray-1: #cdd3d8;
+  --neutral-gray-2: #c3c9d0;
+  --accent-color: #c3be68;
+  --nav-link-active: #bcb066;
+  --neutralBG: #f8f8f8;
+  --link-button-color: blue;
+  --gradient-overlay: linear-gradient(
+  	to top,
+  	rgba(0, 0, 0, 0.28),
+  	rgba(255, 255, 255, 0.2)
+  );
+  --text-shadow-bright: 5px 5px 6px rgba(0, 0, 0, 0.7);
+  --text-color-bright: #f8f8f8;
+  --overlay: rgba(0, 0, 0, 0.125);
+  --background-nav-footer: #152f39;
+  --background-color: #d6dadd;
+  --button-color: #1a7697;
+  --button-link: #1a7697;
+  --link: #1a7697;
+  --box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+}
+
+.projectCard {
+  aspect-ratio: 16/9;
+  width: 100%;
+  box-shadow: var(--box-shadow);
+  cursor: pointer;
+  overflow: hidden;
+  position: relative;
+}
+.projectCard.draggable {
+  animation: shake 0.45s infinite;
+  cursor: grab;
+}
+.projectCard:hover {
+  transform: scale(1.025);
+  transition: all 0.25s ease-in-out;
+  opacity: 0.8;
+}
+.projectCard__placeholder {
+  position: absolute;
+  width: 100%;
+  z-index: 2;
+}
+.projectCard__placeholder.fade {
+  transition: border-radius 250ms ease-in-out, height 300ms ease-in-out, opacity 200ms ease-in-out, width 300ms ease-in-out;
+  opacity: 0;
+}
+.projectCard__placeholder.hide {
+  display: none;
+}
+.projectCard__button {
+  transition: opacity 0.25s ease-in-out;
+  background-color: var(--background-color);
+  border: none;
+  border-radius: 50%;
+  box-shadow: var(--box-shadow);
+  cursor: pointer;
+  height: 2.25rem;
+  opacity: 0;
+  outline: none;
+  position: absolute;
+  top: 0.75rem;
+  width: 2.25rem;
+}
+@media (min-width: 480px) {
+  .projectCard__button {
+    height: 2.75rem;
+    top: 1rem;
+    width: 2.75rem;
+  }
+}
+@media (min-width: 768px) {
+  .projectCard__button {
+    height: 2.5rem;
+    top: 0.75rem;
+    width: 2.5rem;
+  }
+}
+@media (min-width: 1280px) {
+  .projectCard__button {
+    height: 3rem;
+    top: 1rem;
+    width: 3rem;
+  }
+}
+.projectCard__button--delete {
+  left: 1rem;
+}
+@media (min-width: 768px) {
+  .projectCard__button--delete {
+    left: 0.75rem;
+  }
+}
+@media (min-width: 1280px) {
+  .projectCard__button--delete {
+    left: 1rem;
+  }
+}
+.projectCard__button--edit {
+  right: 1rem;
+}
+@media (min-width: 768px) {
+  .projectCard__button--edit {
+    right: 0.75rem;
+  }
+}
+@media (min-width: 1280px) {
+  .projectCard__button--edit {
+    right: 1rem;
+  }
+}
+.projectCard__button.show {
+  transition: opacity 0.25s ease-in-out;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  opacity: 1;
+}
+.projectCard__button-icon {
+  height: 1.5rem;
+  width: 1.5rem;
+}
+@media (min-width: 480px) {
+  .projectCard__button-icon {
+    height: 1.75rem;
+    width: 1.75rem;
+  }
+}
+@media (min-width: 768px) {
+  .projectCard__button-icon {
+    height: 1.5rem;
+    width: 1.5rem;
+  }
+}
+@media (min-width: 1280px) {
+  .projectCard__button-icon {
+    height: 1.75rem;
+    width: 1.75rem;
+  }
+}
+.projectCard__img {
+  aspect-ratio: 16/9;
+  height: 100%;
+  max-width: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center center;
+     object-position: center center;
+}
+
+@keyframes shake {
+  0%, 100% {
+    transform: translate(0, 0) rotate(0);
+    scale: 1;
+  }
+  25% {
+    transform: translate(-0.1px, -0.1px) rotate(-0.5deg);
+    scale: 0.999;
+  }
+  50% {
+    transform: translate(0.1px, 0.1px) rotate(0.5deg);
+    scale: 1;
+  }
+  75% {
+    transform: translate(-0.1px, -0.1px) rotate(-0.5deg);
+    scale: 0.999;
+  }
+}/*# sourceMappingURL=ProjectCard.css.map */

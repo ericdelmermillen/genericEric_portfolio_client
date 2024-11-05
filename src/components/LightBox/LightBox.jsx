@@ -206,7 +206,7 @@ const LightBox = ({
           setCurrentIdx(null);
         }, MODAL_TRANSITION_INTERVAL);
       };
-    }
+    };
   }, [scrollYPos, prevScrollYPos]);
 
 

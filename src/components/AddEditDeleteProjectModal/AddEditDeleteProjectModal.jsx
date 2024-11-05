@@ -6,7 +6,6 @@ import toast from "react-hot-toast";
 import "./AddEditDeleteProjectModal.scss";
 
 const BASE_URL = import.meta.env.VITE_API_BASE_URL;
-// console.log(`${BASE_URL}/projects/project`)
 
 const AddEditDeleteProjectModal = ({ 
   modalAction,
@@ -42,7 +41,7 @@ const AddEditDeleteProjectModal = ({
 
   const handleCancelClick = () => {
     handleActionClearing();
-  }
+  };
 
   const handleDeleteProject = async (projectID) => {
     setIsLoading(true);

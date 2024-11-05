@@ -1,0 +1,82 @@
+.app {
+  --body-font: "Arial";
+  --heading-font: "Tahoma";
+  --line-height-general: 1.45;
+  --line-height-medium: 1.75;
+  --navBoxShadow: 0 4px 6px rgba(0, 0, 0, 0.25), 0 1px 3px rgba(0, 0, 0, 0.25);
+  --letter-spacing-general: 0.6px;
+  --border-radius: 4px;
+  --lightBox-transition-interval: 450ms;
+  --placeholder-transition: all 0.75s ease-in-out;
+}
+.app[data-color-mode=light] {
+  --background-color: #f8f8f8;
+  --text-color: #21343c;
+  --neutral-gray-1: #e6eae7;
+  --neutral-gray-2: #e5edeb;
+  --neutral-gray-2: #eaedeb;
+  --accent-color: #bcb066;
+  --link-button-color: blue;
+  --neutralBG: #f8f8f8;
+  --overlay: rgba(0, 0, 0, 0.125);
+  --overlay-dark: rgba(0, 0, 0, 0.5) 0;
+  --gradient-overlay: linear-gradient(
+  	to top,
+  	rgba(0, 0, 0, 0.28),
+  	rgba(255, 255, 255, 0.2)
+  );
+  --text-shadow-bright: 5px 5px 6px rgba(0, 0, 0, 0.7);
+  --text-color-bright: #f8f8f8;
+  --background-nav-footer: #152f39;
+  --background-color: #d6dadd;
+  --modalOverlayBg: rgba(0, 0, 0, 0.5);
+  --button-color: #1a7697;
+  --button-link: #1a7697;
+  --link: #1a7697;
+  --box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+  --placeholder-color: #c7c7c7;
+  --error-color: #ff0000;
+}
+.app[data-color-mode=dark] {
+  --text-color: #21343c;
+  --neutral-gray-1: #cdd3d8;
+  --neutral-gray-2: #c3c9d0;
+  --accent-color: #c3be68;
+  --nav-link-active: #bcb066;
+  --neutralBG: #f8f8f8;
+  --link-button-color: blue;
+  --gradient-overlay: linear-gradient(
+  	to top,
+  	rgba(0, 0, 0, 0.28),
+  	rgba(255, 255, 255, 0.2)
+  );
+  --text-shadow-bright: 5px 5px 6px rgba(0, 0, 0, 0.7);
+  --text-color-bright: #f8f8f8;
+  --overlay: rgba(0, 0, 0, 0.125);
+  --background-nav-footer: #152f39;
+  --background-color: #d6dadd;
+  --button-color: #1a7697;
+  --button-link: #1a7697;
+  --link: #1a7697;
+  --box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+}
+
+.projects {
+  max-width: 1920px;
+  width: 100%;
+}
+.projects__inner {
+  display: flex;
+  justify-content: center;
+  min-height: calc(100vh - 4rem);
+  padding-bottom: 2rem;
+  padding-inline: 1rem;
+  padding-top: 6rem;
+  position: relative;
+  width: 100%;
+}
+.projects__heading {
+  font-size: 3rem;
+  position: relative;
+  z-index: 1;
+}/*# sourceMappingURL=Projects.css.map */

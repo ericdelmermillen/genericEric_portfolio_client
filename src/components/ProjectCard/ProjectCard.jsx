@@ -51,7 +51,7 @@ const ProjectCard = ({
     e.preventDefault();
     e.stopPropagation();
     handleEditProjectClick(projectID);
-    console.log(`projectID: ${projectID}`)
+    console.log(`projectID: ${projectID}`);
   };
 
   if(isInitialPlaceholder) {
@@ -103,7 +103,8 @@ const ProjectCard = ({
               ? (e) => handleDeleteClick(e)
               : null
             }
-        ><MdDelete className="projectCard__button-icon"/>
+        >
+          <MdDelete className="projectCard__button-icon"/>
         </button>
 
         <button 
@@ -114,7 +115,8 @@ const ProjectCard = ({
               ? (e) => handleEditClick(e)
               : null
             }
-        ><MdModeEdit className="projectCard__button-icon"/>
+        >
+          <MdModeEdit className="projectCard__button-icon"/>
         </button>
 
 				<div className="projectCard__inner">

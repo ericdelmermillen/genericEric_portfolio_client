@@ -21,7 +21,6 @@ const scrollToDivTop = (divID, divTopOffset) => {
   if(targetDiv) {
     const offsetTop = targetDiv.offsetTop; 
     window.scrollTo({
-      // top: offsetTop + (windowHeight - 45),
       top: offsetTop + divTopOffset,
       behavior: "smooth"
     });
