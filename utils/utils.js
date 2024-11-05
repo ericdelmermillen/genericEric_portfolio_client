@@ -111,7 +111,6 @@ const checkTokenIsValid = async (navigate) => {
   };
 };
 
-
 const addClassToDiv = (divID, className) => {
   document.getElementById(divID).classList.add(className);
 };
@@ -119,6 +118,17 @@ const addClassToDiv = (divID, className) => {
 const removeClassFromDiv = (divID, className) => {
   document.getElementById(divID).classList.remove(className);
 };
+
+function getMonthYear(dateString) {
+  const [ day, month, year ] = dateString.split("-");
+
+  const date = new Date(`${year}-${month}-${day}`);
+
+  const monthName = date.toLocaleString('en-US', { month: 'short' });
+
+  return `${monthName} ${year}`;
+}
+
 
 export {
   checkIfIsFirefox,
@@ -130,5 +140,6 @@ export {
   removeTokens,
   checkTokenIsValid,
   addClassToDiv,
-  removeClassFromDiv
+  removeClassFromDiv,
+  getMonthYear
 };

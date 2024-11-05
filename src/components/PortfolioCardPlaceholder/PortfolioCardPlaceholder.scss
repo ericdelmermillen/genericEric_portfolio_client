@@ -1,7 +1,7 @@
 @import "../../partials/mixins";
 @import "../../partials/variables";
 
-.projectPlaceholder {
+.portfolioCardPlaceholder {
 	& {
 		@include projectCard;
 		background: var(--placeholder-color);

@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { scrollToTop } from "../../../utils/utils";
 import TypingText from "../../components/TypingText/TypingText.jsx";
-import Portfolio from "../../components/Portfolio/Portfolio.jsx";
+import ProjectsFeed from "../../components/ProjectsFeed/ProjectsFeed.jsx";
 import "./Projects.scss";
 
 const Projects = ({ children }) => {
@@ -10,18 +10,23 @@ const Projects = ({ children }) => {
   useEffect(() => {
     scrollToTop();
   }, []);
+
   
   return (
     <>
       <div className="projects">
-
         <div className="projects__inner">
-          {/* {children}
-          <TypingText 
-            classNames={"projects__heading"}
-            textToType = 'Projects Page'
-          /> */}
-          <Portfolio />
+            {children}
+          <div className="projects__content">
+
+            <TypingText 
+              classNames={"projects__heading"}
+              textToType = 'Some Of My Projects'
+            />
+            <ProjectsFeed />
+
+          </div>
+
         </div>
       </div>
     </>

@@ -4,15 +4,20 @@
 .projects {
 	& {
 		@include page;
+		min-height: calc(100vh);
 	}
 
 	&__inner {
 		@include wallpaperContainer;
 	}
 
-	&__heading {
-		font-size: 3rem;
-		position: relative;
+	&__content {
+		max-width: $ultraWide;
+		width: 100%;
 		z-index: 1;
+	}
+
+	&__heading {
+		@include secondaryPageHeading;
 	}
 }

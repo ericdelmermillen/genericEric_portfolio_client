@@ -1,0 +1,15 @@
+@import "../../partials//mixins";
+@import "../../partials/variables";
+
+.project {
+	& {
+		border: 2px solid green;
+		width: 100%;
+		height: 100%;
+	}
+
+	&__inner {
+		background: yellow;
+		width: 100%;
+	}
+}

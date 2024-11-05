@@ -7,7 +7,7 @@ import toast from 'react-hot-toast';
 import "./BlogFeed.scss";
 
 
-// ***use initial class removed by useEffect after load to give min-height appropriate for placeholders
+// ***refactor to use initialBlogPosts objects for blogPosts and return placeholders until last image of first page is loaded
 
 
 const YOUTUBE_API_KEY = import.meta.env.VITE_YOUTUBE_API_KEY;

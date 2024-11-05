@@ -1,13 +1,12 @@
 import { useAppContext } from "../../contexts/AppContext";
-import { MdModeEdit } from "react-icons/md";
-import { MdDelete } from "react-icons/md";
-import ProjectPlaceholder from "../ProjectPlaceholder/ProjectPlaceholder";
+import { MdModeEdit, MdDelete } from "react-icons/md";
 import { checkIfIsFirefox } from "../../../utils/utils";
-import "./ProjectCard.scss";
+import PortfolioCardPlaceholder from "../PortfolioCardPlaceholder/PortfolioCardPlaceholder";
+import "./PortfolioCard.scss";
 
 const isFirefox = checkIfIsFirefox();
 
-const ProjectCard = ({ 
+const PortfolioCard = ({ 
   projectID,
   isInitialPlaceholder,
   showPlaceholders, 
@@ -56,7 +55,7 @@ const ProjectCard = ({
 
   if(isInitialPlaceholder) {
     return (
-      <ProjectPlaceholder />
+      <PortfolioCardPlaceholder />
     );
   };
 
@@ -67,7 +66,7 @@ const ProjectCard = ({
   return (
     <>
       <div 
-        className={`projectCard ${isProjectOrderEditable ? "draggable" : ""}`}
+        className={`portfolioCard ${isProjectOrderEditable ? "draggable" : ""}`}
         draggable={isProjectOrderEditable}
         onDragStart={isProjectOrderEditable && !isFirefox
           ? () => handleDragStart(projectID)
@@ -86,17 +85,17 @@ const ProjectCard = ({
           : null}
       >
 
-        <div className={`projectCard__placeholder ${!showPlaceholders && displayNonePlaceholders
+        <div className={`portfolioCard__placeholder ${!showPlaceholders && displayNonePlaceholders
           ? "hide" 
           : !showPlaceholders
           ? "fade"
           : ""}`}
         >
-          <ProjectPlaceholder />
+          <PortfolioCardPlaceholder />
         </div>
 
         <button 
-          className={`projectCard__button projectCard__button--delete ${isLoggedIn && isEditMode && !isProjectOrderEditable
+          className={`portfolioCard__button portfolioCard__button--delete ${isLoggedIn && isEditMode && !isProjectOrderEditable
             ? "show" 
             : ""}`}
             onClick={isLoggedIn && isEditMode &!isProjectOrderEditable
@@ -104,11 +103,11 @@ const ProjectCard = ({
               : null
             }
         >
-          <MdDelete className="projectCard__button-icon"/>
+          <MdDelete className="portfolioCard__button-icon"/>
         </button>
 
         <button 
-          className={`projectCard__button projectCard__button--edit ${isLoggedIn && isEditMode && !isProjectOrderEditable
+          className={`portfolioCard__button portfolioCard__button--edit ${isLoggedIn && isEditMode && !isProjectOrderEditable
             ? "show" 
             : ""}`}
           onClick={isLoggedIn && isEditMode &!isProjectOrderEditable
@@ -116,12 +115,12 @@ const ProjectCard = ({
               : null
             }
         >
-          <MdModeEdit className="projectCard__button-icon"/>
+          <MdModeEdit className="portfolioCard__button-icon"/>
         </button>
 
-				<div className="projectCard__inner">
+				<div className="portfolioCard__inner">
           <img 
-            className="projectCard__img"
+            className="portfolioCard__img"
             src={imgSrc}
             alt={`Card Image for ${projectTitle} Project`}
             onLoad={idx === maxIdx
@@ -134,4 +133,4 @@ const ProjectCard = ({
     </>
   )};
 
-export default ProjectCard;
+export default PortfolioCard;

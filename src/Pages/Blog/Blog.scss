@@ -3,6 +3,7 @@
 
 .blog {
 	& {
+		@include page;
 		min-height: calc(100vh);
 	}
 
@@ -17,36 +18,6 @@
 	}
 
 	&__heading {
-		font-size: 1.25rem;
-		height: 1.25rem;
-		letter-spacing: var(--letter-spacing-general);
-		margin-bottom: 1rem;
-		position: relative;
-		text-align: center;
-		z-index: 1;
-
-		@media (min-width: $smallTablet) {
-			font-size: 1.75rem;
-			height: 1.75rem;
-			margin-bottom: 1.5rem;
-
-			@media (min-width: $tablet) {
-				font-size: 2rem;
-				height: 2rem;
-				margin-bottom: 2rem;
-			}
-
-			@media (min-width: $largeTablet) {
-				font-size: 2.25rem;
-				height: 2.25rem;
-				margin-bottom: 2rem;
-			}
-
-			@media (min-width: $desktop) {
-				font-size: 2.5rem;
-				height: 2.5rem;
-				margin-bottom: 2.5rem;
-			}
-		}
+		@include secondaryPageHeading;
 	}
 }

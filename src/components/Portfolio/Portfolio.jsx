@@ -5,14 +5,16 @@ import { MdModeEdit } from 'react-icons/md';
 import { removeTokens, scrollToDivTop } from '../../../utils/utils.js';
 import AddEditDeleteProjectModal from '../AddEditDeleteProjectModal/AddEditDeleteProjectModal.jsx';
 import LightBox from '../LightBox/LightBox.jsx';
-import ProjectCard from '../ProjectCard/ProjectCard.jsx';
+import PortfolioCard from '../PortfolioCard/PortfolioCard.jsx';
 import toast from 'react-hot-toast';
 import './Portfolio.scss';
 
 // const PROJECT_COUNT = 6;
 const PROJECT_COUNT = 4;
 // const PROJECT_COUNT = 2;
+
 const BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
 const initialProjects = Array.from({length: PROJECT_COUNT}, () => ({isInitialPlaceholder: true}));
 
 const Portfolio = () => {  
@@ -372,7 +374,7 @@ const Portfolio = () => {
               Check Out My Work
             </h2>
             <p className="portfolio__lead">
-              Here is a small smaple of my projects:
+              Here is a smaple of my projects:
             </p>
 
             <button 
@@ -390,7 +392,6 @@ const Portfolio = () => {
             >
               {isLoggedIn && !isEditMode && !isProjectOrderEditable 
               ? "Add New Project"
-              // ? ""
               : isLoggedIn && isEditMode
               ? "Edit Project Order"
               : ""
@@ -405,7 +406,7 @@ const Portfolio = () => {
 
               {
                   projectsData.map((project, idx) => 
-                  <ProjectCard 
+                  <PortfolioCard 
                     key={project.project_id || idx}
                     idx={idx}
                     maxIdx={projectsData.length - 1}
@@ -432,7 +433,7 @@ const Portfolio = () => {
                 )
               }
               
-            </div>
+            </div> 
 
           </div>
 

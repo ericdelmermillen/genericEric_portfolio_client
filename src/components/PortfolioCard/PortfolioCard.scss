@@ -1,7 +1,7 @@
 @import "../../partials/mixins";
 @import "../../partials/variables";
 
-.projectCard {
+.portfolioCard {
 	& {
 		@include projectCard;
 		box-shadow: var(--box-shadow);
