@@ -3,6 +3,8 @@
 
 .blogFeed {
 	& {
+		padding-inline: 2rem;
+
 		&.home {
 			background: var(--neutral-gray-2);
 		}
