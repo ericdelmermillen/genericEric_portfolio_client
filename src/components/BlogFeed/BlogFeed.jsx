@@ -1,13 +1,9 @@
-import { useAppContext } from '../../contexts/AppContext.jsx';
 import { useEffect, useState } from 'react';
+import { useAppContext } from '../../contexts/AppContext.jsx';
 import { Link, useLocation } from 'react-router-dom';
 import BlogPost from '../BlogPost/BlogPost.jsx';
-import BlogPostPlaceholder from '../BlogPostPlaceholder/blogPostPlaceholder.jsx';
 import toast from 'react-hot-toast';
 import "./BlogFeed.scss";
-
-
-// ***refactor to use initialBlogPosts objects for blogPosts and return placeholders until last image of first page is loaded
 
 
 const YOUTUBE_API_KEY = import.meta.env.VITE_YOUTUBE_API_KEY;
@@ -19,29 +15,33 @@ const PLAYLIST_ID = "UU6aTLuI_j4-0wiDSzmaPctQ";
 
 const environment = import.meta.env.VITE_NODE_ENV;
 
-
 const BlogFeed = () => {
   const location = useLocation();
   const [ isOnHome ] = useState(
     location.pathname === "/" || 
     location.pathname === "/home" || 
     location.pathname === "/home/");
-
+    
   const RESULTS_PER_PAGE = isOnHome ? 1 : 3;
-
+    
+  const initialVideos = Array.from({length: RESULTS_PER_PAGE}, () => (
+    {
+      isInitialPlaceholder: true,
+      description: ""
+    }
+  ));
+  
   const [ allResultsFetched, setAllResultsFetched ] = useState(false);
-  const [ blogPosts, setBlogPosts ] = useState([]);
-  const [ isFirstPage, setIsFirstPage ] = useState(true);
-  const [ isInitialFetch, setIsInitialFetch ] = useState(true);
+  const [ blogPosts, setBlogPosts ] = useState(initialVideos);
   const [ isPaginationComplete, setIsPaginationComplete] = useState(false);
   const [ isInitialLoad, setIsInitialLoad ] = useState(true);
   const [ nextPageToken, setNextPageToken ] = useState("");
   const [ page, setPage ] = useState(1);
-  const [ maxPostIdx, setMaxPostIdx ] = useState((RESULTS_PER_PAGE * page) - 1);
 
   const { 
     isLoading,
-    setIsLoading
+    setIsLoading,
+    MIN_LOADING_INTERVAL
    } = useAppContext();
 
   const handleFetchBlogPosts = async () => {
@@ -49,7 +49,7 @@ const BlogFeed = () => {
     if(allResultsFetched && !isPaginationComplete) {
       setIsPaginationComplete(true);
       toast("No more posts to show");
-    }
+    };
     
     if(!allResultsFetched) {
       setIsLoading(true);
@@ -69,9 +69,6 @@ const BlogFeed = () => {
         if(!hasMorePages) {
           setAllResultsFetched(true);
           setIsFirstPage(false);
-          setTimeout(() => {
-            setIsLoading(false);
-          }, 500);
         } else if(hasMorePages) {
           setNextPageToken(hasMorePages);
         };
@@ -84,40 +81,47 @@ const BlogFeed = () => {
 
         // using set to deal with doubling in dev: may refactor to use conditional logic with functional state updating in prod
         if(environment === "development") {
+
+          if(page === 1) {
+            setBlogPosts(posts);
             
-          const updatedBlogPosts = [...new Set([...blogPosts, ...posts])];
-          
-          setBlogPosts(updatedBlogPosts);
+          } else {
+            const updatedBlogPosts = [...new Set([...blogPosts, ...posts])];
+            setBlogPosts(updatedBlogPosts);
+          };
 
         } else if(environment === "production") {
           console.log(`In ${environment} mode`)
-          setBlogPosts(prevPosts => [...prevPosts, ...posts]);
+
+          if(page === 1) {
+            setBlogPosts(posts);
+          } else {
+            setBlogPosts(prevPosts => [...prevPosts, ...posts]);
+          };
+
         };
+        setPage(c => c + 1);
+
       } catch (error) {
         console.log(error);
         toast.error("Error connecting to youtube");
       } finally {
-        setIsInitialLoad(false)
+        setIsInitialLoad(false);
+        setTimeout(() => {
+          setIsLoading(false);
+        }, MIN_LOADING_INTERVAL);
       };
     };
-  };
-
-  const handleMaxIdxPostLoaded = () => {
-    if(isFirstPage) {
-      setIsFirstPage(false);
-    }
-    setPage(c => c + 1);
-    setMaxPostIdx((RESULTS_PER_PAGE * (page + 1)) - 1);
-    setIsLoading(false);
   };
   
   // initial blogPost fetch on mount
   useEffect(() => {
-    if(isInitialFetch) {
-      setIsInitialFetch(false);
+    if(isInitialLoad) {
       handleFetchBlogPosts();
     }
   }, []);
+
+  console.log(`page: ${page}`)
 
   return (
     <>
@@ -137,28 +141,18 @@ const BlogFeed = () => {
             : null
           }
 
-          <div className="blogFeed__placeholders--initial">
-
-            {isFirstPage && Array.from({length: RESULTS_PER_PAGE}).map((_, idx) => (
-              <BlogPostPlaceholder key={idx}/>
-            ))}
-
-          </div>
-
           {blogPosts.map((post, idx) => (
             <BlogPost 
-              key={post.videoId}
+              key={post.videoId || idx}
+              isInitialPlaceholder={post.isInitialPlaceholder}
               idx={idx}
               title={post.title}
               description={post.description}
               videoID={post.videoId}
               isLoading={isLoading}
               isOnHome={isOnHome}
-              isFirstPage={isFirstPage}
               RESULTS_PER_PAGE={RESULTS_PER_PAGE}
               allResultsFetched={allResultsFetched}
-              maxPostIdx={maxPostIdx}
-              handleMaxIdxPostLoaded={handleMaxIdxPostLoaded}
             />
           ))}
           </div>

@@ -1,27 +1,30 @@
 import { useState, useRef, useEffect } from "react";
 import BlogPostPlaceholder from "../BlogPostPlaceholder/blogPostPlaceholder";
+import { useAppContext } from "../../contexts/AppContext";
 import "./BlogPost.scss";
 
 // ***crazy issue with resizing on calling for next page on narrow screen: current fix is maxWidth on &__video at 75vw
 
 const BlogPost = ({ 
   idx, 
-  maxPostIdx,
-  RESULTS_PER_PAGE,
+  isInitialPlaceholder,
   title, 
   description, 
   videoID, 
-  isFirstPage,
   isOnHome, 
-  handleMaxIdxPostLoaded,
-  isLoading,
-  allResultsFetched })=> {
+  isLoading })=> {
   
   const embedUrl = `https://www.youtube.com/embed/${videoID}?rel=0`;
+
+  const { LIGHTBOX_TIMING_INTERVAL } = useAppContext();
   
   const [ showFullInfo, setShowFullInfo ] = useState(false);
   const [ hasLongTitle, setHasLongTitle ] = useState(false);
   const [ hasLongDesc, setHasLongDesc ] = useState(false);
+  const [ showPlaceholder, setShowPlaceholder ] = useState(true);
+  const [ displayNonePlaceholder, setDisplayNonePlaceholder ] = useState(false);
+  const [ postIsReady, setPostIsReady ] = useState(false);
+
   const [ windowWidth, setWindowWidth ] = useState(window.innerWidth);
 
   const titleRef = useRef(null); 
@@ -35,9 +38,16 @@ const BlogPost = ({
     setShowFullInfo(prev => !prev);
   };
 
-  const handleLastBlogPostLoaded = () => {
-    handleMaxIdxPostLoaded();
-  };
+  const handleOnLoad = () => {
+    setTimeout(() => {
+      setShowPlaceholder(false);
+    }, LIGHTBOX_TIMING_INTERVAL);
+
+    setTimeout(() => {
+      setDisplayNonePlaceholder(true);
+      setPostIsReady(true);
+    }, 500);
+  };  
 
   const checkHasLongTitle = () => {
     if(titleRef.current) {
@@ -71,22 +81,26 @@ const BlogPost = ({
     };
   }, []);
 
+
+  if(isInitialPlaceholder) {
+    return (
+      <BlogPostPlaceholder />
+    );
+  };
   
   return (
-    <div className={`blogPost ${isFirstPage ? "hide" : ""}`}>
+    <div className={`blogPost ${postIsReady ? "isReady" : "" }`}>
 
-      <div className={`blogPost__placeholder-container ${idx <= (maxPostIdx - RESULTS_PER_PAGE) || allResultsFetched
+      <div className={`blogPost__placeholder ${displayNonePlaceholder
         ? "hide"
+        : !showPlaceholder
+        ? "fade"
         : ""
       }`}>
         <BlogPostPlaceholder />
       </div>
 
-
-      <div className={`blogPost__inner ${idx > (maxPostIdx - RESULTS_PER_PAGE) && !allResultsFetched
-          ? "hide"
-          : ""}`
-      }>
+      <div className={`blogPost__inner ${showPlaceholder ? "" : "show"}`}>
         <div className="blogPost__video">
           <iframe
             className="blogPost__iframe"
@@ -95,10 +109,7 @@ const BlogPost = ({
             allow="clipboard-write; encrypted-media; picture-in-picture"
             allowFullScreen
             sandbox="allow-scripts allow-same-origin allow-presentation"
-            onLoad={idx === maxPostIdx
-              ? handleLastBlogPostLoaded
-              : null
-            }
+            onLoad={handleOnLoad}
           ></iframe>
 
           <div className="blogPost__video-text">

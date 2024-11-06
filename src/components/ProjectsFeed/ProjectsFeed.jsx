@@ -30,7 +30,7 @@ const ProjectsFeed = () => {
     fetchProjects();
   }, []);
 
-  console.log(projectsData)
+  // console.log(projectsData)
 
 
   return (
@@ -39,7 +39,7 @@ const ProjectsFeed = () => {
         
         <div className="projectsFeed__inner">
 
-          
+
 
         </div>
 

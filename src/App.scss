@@ -90,7 +90,7 @@ img {
 		top: 50%;
 		transform: translate(-50%, -50%);
 		transition: opacity 0.25s ease;
-		z-index: 4;
+		z-index: 5;
 
 		&::after {
 			content: "";

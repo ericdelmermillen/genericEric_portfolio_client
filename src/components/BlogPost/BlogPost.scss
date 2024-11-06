@@ -7,37 +7,120 @@
 	& {
 		opacity: 1;
 		position: relative;
-		transition: var(--placeholder-transition);
+		border: 2px solid rgba(0, 0, 0, 0);
+		height: 100%;
+		max-height: 15rem;
+		min-height: 15rem;
 
-		&.hide {
-			opacity: 0;
+		@media (min-width: 375px) {
+			max-height: 16rem;
+			min-height: 16rem;
+		}
+
+		@media (min-width: 400px) {
+			max-height: 17rem;
+			min-height: 17rem;
+		}
+
+		@media (min-width: 425px) {
+			max-height: 18rem;
+			min-height: 18rem;
+		}
+
+		@media (min-width: 450px) {
+			max-height: 19rem;
+			min-height: 19rem;
+		}
+
+		@media (min-width: 475px) {
+			max-height: 20rem;
+			min-height: 20rem;
+		}
+
+		@media (min-width: 500px) {
+			max-height: 21.5rem;
+			min-height: 21.5rem;
+		}
+
+		@media (min-width: 525px) {
+			max-height: 23rem;
+			min-height: 32rem;
+		}
+
+		@media (min-width: 550px) {
+			max-height: 25rem;
+			min-height: 25rem;
+		}
+
+		@media (min-width: 575px) {
+			max-height: 26.5rem;
+			min-height: 26.5rem;
+		}
+
+		@media (min-width: 600px) {
+			max-height: 28rem;
+			min-height: 28rem;
+		}
+
+		@media (min-width: 625px) {
+			max-height: 29.5rem;
+			min-height: 29.5rem;
+		}
+
+		@media (min-width: 650px) {
+			max-height: 31rem;
+			min-height: 31rem;
+		}
+
+		@media (min-width: 675px) {
+			max-height: 32.5rem;
+			min-height: 32.5rem;
+		}
+
+		@media (min-width: 700px) {
+			outline: 2px solid red;
+			max-height: 34rem;
+			min-height: 34rem;
+		}
+
+		&.isReady {
+			min-height: 100%;
+			max-height: 100%;
+			height: 100%;
+			overflow: none;
+			outline: none;
 		}
 	}
 
-	&__placeholder-container {
+	&__placeholder {
 		position: absolute;
-		top: 0;
 		width: 100%;
+		z-index: 2;
+
+		&.fade {
+			@include smoothClosingTransition;
+			opacity: 0;
+		}
 
 		&.hide {
-			opacity: 0;
-			transition: var(--placeholder-transition);
-			z-index: -1;
+			display: none;
 		}
 	}
 
 	&__inner {
 		@include blogPost;
-		opacity: 1;
+		opacity: 0;
 		transition: var(--placeholder-transition);
 
-		&.hide {
-			opacity: 0;
+		&.show {
+			@include generalOpacityTransition;
+			opacity: 1;
 		}
 	}
 
 	&__video {
 		@include blogPostVideo;
+		margin-inline: auto;
 		max-width: 75vw;
 	}
 
