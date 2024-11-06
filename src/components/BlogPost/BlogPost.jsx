@@ -16,6 +16,10 @@ const BlogPost = ({
   
   const embedUrl = `https://www.youtube.com/embed/${videoID}?rel=0`;
 
+  // can use windowWidth to determine values to use for font-size and line-height and pass them in as inline styles to deal with issues getting ref div line height for determining if the elipse class should be used
+  const windowWidth = window.innerWidth;
+  console.log(windowWidth)
+
   const { LIGHTBOX_TIMING_INTERVAL } = useAppContext();
   
   const [ showFullInfo, setShowFullInfo ] = useState(false);
@@ -24,8 +28,6 @@ const BlogPost = ({
   const [ showPlaceholder, setShowPlaceholder ] = useState(true);
   const [ displayNonePlaceholder, setDisplayNonePlaceholder ] = useState(false);
   const [ postIsReady, setPostIsReady ] = useState(false);
-
-  const [ windowWidth, setWindowWidth ] = useState(window.innerWidth);
 
   const titleRef = useRef(null); 
   const descRef = useRef(null); 
@@ -66,7 +68,7 @@ const BlogPost = ({
   };
 
   const handleResize = () => {
-    setWindowWidth(window.innerWidth);
+    // setWindowWidth(window.innerWidth);
     checkHasLongTitle();
     checkHasLongDesc();
   };
