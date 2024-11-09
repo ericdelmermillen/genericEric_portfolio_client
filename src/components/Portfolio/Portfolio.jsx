@@ -8,6 +8,7 @@ import LightBox from '../LightBox/LightBox.jsx';
 import PortfolioCard from '../PortfolioCard/PortfolioCard.jsx';
 import toast from 'react-hot-toast';
 import './Portfolio.scss';
+import { useLightBoxContext } from '../../contexts/LightBoxContext.jsx';
 
 // const PROJECT_COUNT = 6;
 const PROJECT_COUNT = 4;
@@ -32,31 +33,27 @@ const Portfolio = () => {
     LIGHTBOX_TIMING_INTERVAL,
     rerenderTrigger
   } = useAppContext();
+
+  const {
+    showLightBox, 
+    setShowLightBox,
+    currentIdx, 
+    setCurrentIdx,
+    handleCardClick
+  } = useLightBoxContext();
+
   
   const [ activeDragProject, setActiveDragProject ] = useState({project_id: -1}); 
-  const [ currentIdx, setCurrentIdx ] = useState(null);
   const [ displayNonePlaceholders, setDisplayNonePlaceholders ] = useState(false);
   const [ isInitialMount, setIsInitialMount ] = useState(true);
   const [ modalAction, setModalAction ] = useState("");
   const [ projectsData, setProjectsData ] = useState(initialProjects);
   const [ selectedProject, setSelectedProject ] = useState({});
   const [ showActionModal, setShowActionModal ] = useState(false);
-  const [ showLightBox, setShowLightBox ] = useState(false);
   const [ showPlaceholders, setShowPlaceholders ] = useState(true);
 
   const handleSetShowLightBoxTrue = () => {
     setShowLightBox(true);
-  };
-
-  const handleSetShowLightBoxFalse = () => {
-    setTimeout(() => {
-      setShowLightBox(false);
-    }, LIGHTBOX_TIMING_INTERVAL);
-  };
-
-  const handleProjectCardClick = (idx) => {
-    handleSetShowLightBoxTrue();
-    setCurrentIdx(idx);
   };
 
   const handleIncrementCurrentIdx = () => {
@@ -348,7 +345,6 @@ const Portfolio = () => {
                 setCurrentIdx={setCurrentIdx}
                 showLightBox={showLightBox}
                 setShowLightBox={setShowLightBox}
-                handleSetShowLightBoxFalse={handleSetShowLightBoxFalse}
                 handleIncrementCurrentIdx={handleIncrementCurrentIdx}
                 handleDecrementCurrentIdx={handleDecrementCurrentIdx}
               />
@@ -423,7 +419,11 @@ const Portfolio = () => {
                     isEditMode={isEditMode}
                     isProjectOrderEditable={isProjectOrderEditable}
                     handleSetShowLightBoxTrue={handleSetShowLightBoxTrue}
-                    handleProjectCardClick={handleProjectCardClick}
+
+
+                    handleCardClick={handleCardClick}
+
+
                     handleDeleteProjectClick={handleDeleteProjectClick}
                     handleEditProjectClick={handleEditProjectClick}
                     modalAction={modalAction}

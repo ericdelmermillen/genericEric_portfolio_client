@@ -9,7 +9,8 @@ const Project = ({
   projectTitle,
   projectPhotos,
   projectURLs,
-  projectDescription
+  projectDescription,
+  handleSetShowLightBoxTrue
  }) => {
   
   projectURLs.forEach((url, idx) => {
@@ -22,11 +23,12 @@ const Project = ({
     };
   });
 
-  console.log(projectDescription)
+  // console.log(projectDescription)
 
 
   const handleImageClick = () => {
-    console.log(`projectID: ${projectID}`)
+    // console.log(`projectID: ${projectID}`)
+    handleSetShowLightBoxTrue(projectID)
   }
 
   return (
@@ -50,49 +52,9 @@ const Project = ({
             onClick={() => handleImageClick()}
           />
 
-          <h3 
-            className="project__title"
-          >
+          <h3 className="project__title">
             {projectTitle}
           </h3>
-{/* 
-          {projectURLs.length
-            ?
-              (  
-                <ul className="project__urls">
-                  <li className="project__url"> 
-                    <FaGlobe className="project__url-icon"/> 
-                      <a 
-                        className="project__url-link"
-                        href={Object.values(projectURLs[0])[0]}
-                        target="_blank"
-                      >
-                        {Object.values(projectURLs[0])[0]}
-                      </a>
-                  </li>
-
-                  <li className="project__url">
-                    <FaYoutube className="project__url-icon"/> 
-                    <a 
-                      className="project__url-link"
-                      href={Object.values(projectURLs[1])[0]} 
-                      target="_blank"
-                    >
-                      {Object.values(projectURLs[1])[0]}
-                    </a>
-                  </li>
-
-                  <li className="project__url">
-                    Github (Client): {Object.values(projectURLs[2])[0]}
-                  </li>
-                  <li className="project__url">
-                  Github (Server): {Object.values(projectURLs[3])[0]}
-                  </li>
-                </ul>
-              )
-
-            : null
-          } */}
 
         {projectURLs.length ? (
           <ul className="project__urls">

@@ -21,7 +21,9 @@ const PortfolioCard = ({
   isProjectOrderEditable,
   isLoggedIn,
   isEditMode,
-  handleProjectCardClick,
+
+  handleCardClick,
+  
   handleDeleteProjectClick,
   handleEditProjectClick,
   handleDragStart,
@@ -81,7 +83,7 @@ const PortfolioCard = ({
           ? () => handleDropTarget(projectID, displayOrder)
           : null}
         onClick={!isProjectOrderEditable
-          ? () => handleProjectCardClick(idx)
+          ? () => handleCardClick(idx)
           : null}
       >
 

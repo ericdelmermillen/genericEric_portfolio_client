@@ -13,6 +13,7 @@ import Projects from "./pages/Projects/Projects.jsx";
 import SideNav from './components/SideNav/SideNav.jsx';
 import WallPaper from './components/WallPaper/WallPaper.jsx';
 import "./App.scss";
+import { LightBoxContextProvider } from './contexts/LightBoxContext.jsx';
 
 const App = () => {
   const { 
@@ -81,19 +82,37 @@ const App = () => {
       
           <Routes>
 
-            <Route path="/" element={<Home />} />
+              {/* <Route path="/" element={<Home />} /> */}
 
-            <Route path="/home" element={<Home />} />
-        
+            <Route 
+              path="/" 
+              element={
+                <LightBoxContextProvider>
+                  <Home />
+                </LightBoxContextProvider>
+              } 
+              />
+
+            <Route 
+              path="/home" 
+              element={
+                <LightBoxContextProvider>
+                  <Home />
+                </LightBoxContextProvider>
+              } 
+            />
+          
             <Route 
               path="/projects" 
               element={
-                <Projects>
-                  <WallPaper />
-                </Projects>
+                <LightBoxContextProvider>
+                  <Projects>
+                    <WallPaper />
+                  </Projects>
+                </LightBoxContextProvider>
               } 
             />
-        
+
             <Route 
               path='/blog'
               element={

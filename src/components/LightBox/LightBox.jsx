@@ -18,12 +18,15 @@ const LightBoxImage = ({
   setIsTransitioning
  }) => {
 
+  // console.log(idx)
+  // console.log(currentIdx)
+  // console.log(maxIdx)
+
   const isCurrentImage = idx === currentIdx;
   const beforeCurrentIdx = idx < currentIdx;
   const afterCurrentIdx = idx > currentIdx;
   const isFirstImage = idx === 0;
   const isLastImage = idx === maxIdx;
-
 
   // useEffect to set intial classes only
   useEffect(() => {
@@ -111,6 +114,10 @@ const LightBoxImage = ({
     </>
   )};
 
+
+  // ***
+  
+  
 const LightBox = ({ 
   images, 
   currentIdx,
@@ -120,6 +127,8 @@ const LightBox = ({
   handleDecrementCurrentIdx,
   handleSetShowPortfolioPlaceholders
 }) => {
+
+  console.log(images)
 
   const { 
     scrollYPos, 
