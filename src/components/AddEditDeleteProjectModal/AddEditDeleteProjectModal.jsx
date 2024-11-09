@@ -13,7 +13,9 @@ const AddEditDeleteProjectModal = ({
   setShowActionModal, 
   projectID,
   handleClearActionState,
-  setProjectsData
+  setProjectsData,
+  lightBoxImages,
+  setLightBoxImages
 }) => {
 
   const [ modalIsOpen, setModalIsOpen ] = useState(false);
@@ -52,7 +54,7 @@ const AddEditDeleteProjectModal = ({
       toast.error('Authorization or refresh token missing.');
       logoutUser();
       return;
-    }
+    };
   
     try {
       const response = await fetch(`${BASE_URL}/projects/project/delete/${projectID}`, {
@@ -78,6 +80,16 @@ const AddEditDeleteProjectModal = ({
       setTokens(newToken, newRefreshToken);
 
       setProjectsData(c => c.filter(summary => summary.project_id !== projectID));
+
+      setLightBoxImages(lightBoxImages.filter(image => image.img_id !== projectID).map(image => (
+
+        {
+          img_id: image.img_id,
+          img_alt: image.img_alt,
+          img_src: image.img_src
+        }
+      )));
+
       toast.success(message);  
     } catch(error) {
       console.error('Error deleting project:', error);

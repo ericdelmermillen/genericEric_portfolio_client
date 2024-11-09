@@ -16,7 +16,7 @@ const PROJECT_COUNT = 4;
 
 const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
-const initialProjects = Array.from({length: PROJECT_COUNT}, () => ({isInitialPlaceholder: true}));
+const initialImages = Array.from({length: PROJECT_COUNT}, () => ({isInitialPlaceholder: true}));
 
 const Portfolio = () => {  
   const divTopOffset = window.innerHeight - 50;
@@ -30,13 +30,13 @@ const Portfolio = () => {
     isEditMode, 
     setIsEditMode,
     MIN_LOADING_INTERVAL,
-    LIGHTBOX_TIMING_INTERVAL,
     rerenderTrigger
   } = useAppContext();
 
   const {
     showLightBox, 
     setShowLightBox,
+    handleSetShowLightBoxTrue,
     currentIdx, 
     setCurrentIdx,
     handleCardClick
@@ -47,14 +47,31 @@ const Portfolio = () => {
   const [ displayNonePlaceholders, setDisplayNonePlaceholders ] = useState(false);
   const [ isInitialMount, setIsInitialMount ] = useState(true);
   const [ modalAction, setModalAction ] = useState("");
-  const [ projectsData, setProjectsData ] = useState(initialProjects);
+
+
+
+  const [ projectsData, setProjectsData ] = useState(initialImages);
+  const [ lightBoxImages, setLightBoxImages ] = useState(initialImages);
+
+
+
   const [ selectedProject, setSelectedProject ] = useState({});
   const [ showActionModal, setShowActionModal ] = useState(false);
   const [ showPlaceholders, setShowPlaceholders ] = useState(true);
 
-  const handleSetShowLightBoxTrue = () => {
-    setShowLightBox(true);
+  const updateLightBoxImages = (data) => {
+    setLightBoxImages(data.map(project => (
+
+      {
+        img_id: project.project_id,
+        img_alt: project.project_title,
+        img_src: project.img_src
+      }
+    )));
   };
+
+  
+
 
   const handleIncrementCurrentIdx = () => {
     if(currentIdx >= projectsData.length - 1) {
@@ -72,6 +89,10 @@ const Portfolio = () => {
     };
   };
 
+
+
+
+
   // ***need logic to open AddEditDeleteProjectModal then navigate to new project page
   const handleAddNewProject = () => {
     console.log("add new project");
@@ -79,7 +100,11 @@ const Portfolio = () => {
 
   const handleSetIsEditModeTrue = async () => {
     setIsLoading(true);
-    setProjectsData(initialProjects);
+
+    // *** shouldn't need to set projectsData after
+    setProjectsData(initialImages);
+    setLightBoxImages(initialImages)
+
     setShowPlaceholders(true);
     toast("Fetching all Project Summaries...");
   
@@ -191,6 +216,18 @@ const Portfolio = () => {
       };
   
       setProjectsData(data);
+      // console.log(data)
+
+      // setLightBoxImages(data.map(project => (
+
+      //   {
+      //     img_id: project.project_id,
+      //     img_alt: project.project_title,
+      //     img_src: project.img_src
+      //   }
+      // )));
+      
+      updateLightBoxImages(data)
       return true;
 
     } catch (error) {
@@ -305,7 +342,7 @@ const Portfolio = () => {
     };
     
     if(!isInitialMount) {
-      setProjectsData(initialProjects);
+      setProjectsData(initialImages);
       setShowPlaceholders(true);
       setDisplayNonePlaceholders(false);
       setActiveDragProject({project_id: -1}); 
@@ -331,6 +368,9 @@ const Portfolio = () => {
                 modalAction={modalAction}
                 handleClearActionState={handleClearActionState}
                 setProjectsData={setProjectsData}
+                lightBoxImages={lightBoxImages}
+                // updateLightBoxImages={updateLightBoxImages}
+                setLightBoxImages={setLightBoxImages}
               />
             )
           : null
@@ -341,10 +381,17 @@ const Portfolio = () => {
             (
               <LightBox 
                 images={projectsData}
+                lightBoxImages={lightBoxImages}
+
+
                 currentIdx={currentIdx}
                 setCurrentIdx={setCurrentIdx}
+
                 showLightBox={showLightBox}
                 setShowLightBox={setShowLightBox}
+
+
+
                 handleIncrementCurrentIdx={handleIncrementCurrentIdx}
                 handleDecrementCurrentIdx={handleDecrementCurrentIdx}
               />
@@ -405,6 +452,8 @@ const Portfolio = () => {
                   <PortfolioCard 
                     key={project.project_id || idx}
                     idx={idx}
+
+                    
                     maxIdx={projectsData.length - 1}
                     imgSrc={project.img_src}
                     projectTitle={project.project_title}

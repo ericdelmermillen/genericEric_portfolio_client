@@ -12,15 +12,12 @@ const LightBoxImage = ({
   maxIdx,
   imageID,
   imgSrc,
-  projectTitle,
+  imgAlt,
   isInitialView,
   isMovingForward,
   setIsTransitioning
  }) => {
 
-  // console.log(idx)
-  // console.log(currentIdx)
-  // console.log(maxIdx)
 
   const isCurrentImage = idx === currentIdx;
   const beforeCurrentIdx = idx < currentIdx;
@@ -107,7 +104,7 @@ const LightBoxImage = ({
       <div id={imageID} className={`lightBoxImage`}>
         <img 
           src={imgSrc}
-          alt={projectTitle} 
+          alt={imgAlt} 
           className="lightBoxImage__img" 
         />
       </div>
@@ -120,6 +117,10 @@ const LightBoxImage = ({
   
 const LightBox = ({ 
   images, 
+  lightBoxImages,
+
+
+
   currentIdx,
   setCurrentIdx,
   setShowLightBox,
@@ -128,7 +129,8 @@ const LightBox = ({
   handleSetShowPortfolioPlaceholders
 }) => {
 
-  console.log(images)
+  // console.log(images)
+  console.log(lightBoxImages)
 
   const { 
     scrollYPos, 
@@ -140,7 +142,8 @@ const LightBox = ({
   const [ isInitialView, setIsInitialView ] = useState(true);
   const [ isTransitioning, setIsTransitioning ] = useState(true);
 
-  const maxIdx = images.length - 1;
+  // const maxIdx = images.length - 1;
+  const maxIdx = lightBoxImages.length - 1;
  
   const handleOverlayClick = () => {
     removeClassFromDiv("lightBox", "show");
@@ -236,7 +239,7 @@ const LightBox = ({
 
           <div className="lightBox__images">
 
-            {images.map((image, idx) => (
+            {/* {images.map((image, idx) => (
               <LightBoxImage 
                 key={image.project_id}
                 idx={idx}
@@ -244,7 +247,23 @@ const LightBox = ({
                 maxIdx={maxIdx}
                 imageID={image.project_id}
                 imgSrc={image.img_src}
-                projectTitle={image.project_title}
+                imgAlt={image.project_title}
+                isInitialView={isInitialView}
+                isMovingForward={isMovingForward}
+                setIsTransitioning={setIsTransitioning}
+                handleSetShowPortfolioPlaceholders={handleSetShowPortfolioPlaceholders}
+              />
+            ))} */}
+
+            {lightBoxImages.map((image, idx) => (
+              <LightBoxImage 
+                key={image.img_id}
+                idx={idx}
+                currentIdx={currentIdx}
+                maxIdx={maxIdx}
+                imageID={image.img_id}
+                imgSrc={image.img_src}
+                imgAlt={image.img_alt}
                 isInitialView={isInitialView}
                 isMovingForward={isMovingForward}
                 setIsTransitioning={setIsTransitioning}
@@ -267,7 +286,7 @@ const LightBox = ({
             >
               <IoChevronForwardOutline className="lightBox__next-icon"/>
             </button>
-
+{/* 
             {images.length <= 6
             
               ?
@@ -289,6 +308,33 @@ const LightBox = ({
                   <div className="lightBox__numeric-counter">
                   <h4 className="lightBox__numeric-count">
                     {currentIdx + 1} / {images.length}
+                  </h4>
+                </div>
+
+                )
+            } */}
+
+            {lightBoxImages.length <= 6
+            
+              ?
+                (
+                  <div className="lightBox__count"> 
+
+                    {lightBoxImages.map((img, idx) => (
+                      <div 
+                        key={img.img_id} 
+                        className={`lightBox__count-indicatior ${idx === currentIdx ? "current" : ""}`}>
+                      </div>
+                    ))}
+
+                  </div>
+
+                )
+              : 
+                (
+                  <div className="lightBox__numeric-counter">
+                  <h4 className="lightBox__numeric-count">
+                    {currentIdx + 1} / {lightBoxImages.length}
                   </h4>
                 </div>
 

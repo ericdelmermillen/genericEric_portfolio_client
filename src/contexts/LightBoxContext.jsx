@@ -15,11 +15,39 @@ const LightBoxContextProvider = ( { children }) => {
 
 
 
-
   const handleCardClick = (idx) => {
     setShowLightBox(true);
     setCurrentIdx(idx);
+    console.log(idx)
   };
+
+
+  const handleSetShowLightBoxTrue = () => {
+    setShowLightBox(true);
+  };
+
+
+  // images
+  // change project_id to img_id
+  // project_title to img_alt
+  [
+    {
+      project_id: 1,
+      project_title: "",
+      display_order: 1,
+      img_src: "https://...."
+    }
+  ]
+
+
+  [
+    {
+      img_id: 1,
+      img_alt: "",
+      img_src: "https://...."
+    }
+  ]
+
 
 
 
@@ -27,6 +55,7 @@ const LightBoxContextProvider = ( { children }) => {
   const contextValues = {
     showLightBox, 
     setShowLightBox,
+    handleSetShowLightBoxTrue,
     currentIdx, 
     setCurrentIdx,
     handleCardClick
