@@ -10,11 +10,23 @@
 		// margin-top: calc(-100vh + $navHeight);
 	}
 
+	&__clickOffDiv {
+		position: fixed;
+		width: 100%;
+		top: 0;
+		left: 0;
+		height: 100%;
+		background: red;
+		opacity: 0.5;
+	}
+
 	&__inner {
 		margin-inline: auto;
-		max-width: $largeTablet;
+		min-height: calc(100vh - $navHeight);
+		max-width: $tablet;
 		border: 2px solid blue;
-		height: 20rem;
-		height: 100rem;
+		display: flex;
+		flex-direction: column;
+		gap: 4rem;
 	}
 }

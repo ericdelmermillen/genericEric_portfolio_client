@@ -70,7 +70,6 @@ const BlogFeed = () => {
         
         if(!hasMorePages) {
           setAllResultsFetched(true);
-          setIsFirstPage(false);
         } else if(hasMorePages) {
           setNextPageToken(hasMorePages);
         };

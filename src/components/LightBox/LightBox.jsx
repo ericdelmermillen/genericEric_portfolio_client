@@ -153,39 +153,44 @@ const LightBox = ({
 
   const handlePrevClick = () => {
     setIsTransitioning(true);
-
+  
     if(isInitialView) {
       setIsInitialView(false);
-    };
-
+    }
+  
     if(isMovingForward) {
       changeLightBoxDirection("right");
       setIsMovingForward(false);
-      setTimeout(() => {
+  
+      // Use requestAnimationFrame to wait for the next repaint
+      requestAnimationFrame(() => {
         handleDecrementCurrentIdx();
-      }, 0)
+      });
     } else {
       handleDecrementCurrentIdx();
-    };
+    }
   };
-
+  
   const handleNextClick = () => {
     setIsTransitioning(true);
-
+  
     if(isInitialView) {
       setIsInitialView(false);
-    };
-    
+    }
+  
     if(!isMovingForward) {
       changeLightBoxDirection("left");
       setIsMovingForward(true);
-      setTimeout(() => {
+  
+      // Use requestAnimationFrame to wait for the next repaint
+      requestAnimationFrame(() => {
         handleIncrementCurrentIdx();
-      }, 0)
+      });
     } else {
-       handleIncrementCurrentIdx();
-    };
+      handleIncrementCurrentIdx();
+    }
   };
+  
 
   // useEffect to add show class to lightbox after initial render to allow for transitions
   useEffect(() => {

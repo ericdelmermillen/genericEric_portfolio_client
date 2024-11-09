@@ -23,7 +23,7 @@ const SideNav = ({ children }) => {
         ? 
           (
             <div 
-              className="sideNav__touchOff-div"
+              className="sideNav__clickOffDiv"
               onClick={toggleSideNav}
             ></div>
           )

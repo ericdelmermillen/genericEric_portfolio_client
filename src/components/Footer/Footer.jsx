@@ -1,9 +1,9 @@
-import Facebook from "../../assets/svgs/Facebook";
-import Github from "../../assets/svgs/Github";
-import Instagram from "../../assets/svgs/Instagram";
-import LinkedIn from "../../assets/svgs/LInkedIn";
-import Twitter from "../../assets/svgs/Twitter";
-import Youtube from "../../assets/svgs/Youtube";
+import Facebook from "../../assets/svgs/Facebook.jsx";
+import Github from "../../assets/svgs/Github.jsx";
+import Instagram from "../../assets/svgs/Instagram.jsx";
+import LinkedIn from "../../assets/svgs/LInkedIn.jsx";
+import Twitter from "../../assets/svgs/Twitter.jsx";
+import Youtube from "../../assets/svgs/Youtube.jsx";
 import "./Footer.scss";
 
 const footerSocials = [
