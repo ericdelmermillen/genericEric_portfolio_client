@@ -13,13 +13,11 @@ const LightBoxContext = createContext();
 const LightBoxContextProvider = ( { children }) => {
   const [ showLightBox, setShowLightBox ] = useState(false);
   const [ currentIdx, setCurrentIdx ] = useState(null);
-  const [ lightBoxImages, setLightBoxImages ] = useState();
+  const [ lightBoxImages, setLightBoxImages ] = useState([]);
 
-
-  const handleCardClick = (idx) => {
+  const handleCardClick = (idx = 0) => {
     setShowLightBox(true);
     setCurrentIdx(idx);
-    console.log(idx)
   };
 
 
@@ -43,34 +41,6 @@ const LightBoxContextProvider = ( { children }) => {
       setCurrentIdx(c => c - 1);
     };
   };
-
-  
-  
-  
-  
-
-  // images
-  // change project_id to img_id
-  // project_title to img_alt
-  [
-    {
-      project_id: 1,
-      project_title: "",
-      display_order: 1,
-      img_src: "https://...."
-    }
-  ]
-
-
-  [
-    {
-      img_id: 1,
-      img_alt: "",
-      img_src: "https://...."
-    }
-  ]
-
-
 
 
 
@@ -96,6 +66,6 @@ const LightBoxContextProvider = ( { children }) => {
 
 const useLightBoxContext = () => {
   return useContext(LightBoxContext);
-}
+};
 
 export { LightBoxContextProvider, useLightBoxContext};

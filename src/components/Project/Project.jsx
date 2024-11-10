@@ -10,7 +10,8 @@ const Project = ({
   projectPhotos,
   projectURLs,
   projectDescription,
-  handleSetShowLightBoxTrue
+  handleSetCurrentProjectImages,
+  handleCardClick
  }) => {
   
   projectURLs.forEach(url => {
@@ -28,7 +29,8 @@ const Project = ({
 
   const handleImageClick = () => {
     console.log(`projectID: ${projectID}`)
-    handleSetShowLightBoxTrue(projectID)
+    handleSetCurrentProjectImages(projectID);
+    handleCardClick()
   }
 
   return (

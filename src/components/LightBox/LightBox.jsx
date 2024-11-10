@@ -121,6 +121,8 @@ const LightBox = ({
   handleSetShowPortfolioPlaceholders
 }) => {
 
+  // console.log(lightBoxImages)
+
   const { 
     scrollYPos, 
     prevScrollYPos,
@@ -243,48 +245,29 @@ const LightBox = ({
               />
             ))}
 
-            <button
-              className="lightBox__button lightBox__button--prev"
-              onClick={handlePrevClick}
-              disabled={isTransitioning}
-            >
-              <IoChevronBackOutline className="lightBox__prev-icon"/>
-            </button>
+            {lightBoxImages.length > 1
 
-            <button
-              className="lightBox__button lightBox__button--next"
-              onClick={handleNextClick}
-              disabled={isTransitioning}
-            >
-              <IoChevronForwardOutline className="lightBox__next-icon"/>
-            </button>
-{/* 
-            {images.length <= 6
-            
-              ?
+              ? 
                 (
-                  <div className="lightBox__count"> 
-
-                    {images.map((img, idx) => (
-                      <div 
-                        key={img.project_id} 
-                        className={`lightBox__count-indicatior ${idx === currentIdx ? "current" : ""}`}>
-                      </div>
-                    ))}
-
-                  </div>
-
+                  <>                    
+                    <button
+                      className="lightBox__button lightBox__button--prev"
+                      onClick={handlePrevClick}
+                      disabled={isTransitioning}
+                    >
+                      <IoChevronBackOutline className="lightBox__prev-icon"/>
+                    </button>
+                    <button
+                      className="lightBox__button lightBox__button--next"
+                      onClick={handleNextClick}
+                      disabled={isTransitioning}
+                    >
+                      <IoChevronForwardOutline className="lightBox__next-icon"/>
+                    </button>
+                  </>
                 )
-              : 
-                (
-                  <div className="lightBox__numeric-counter">
-                  <h4 className="lightBox__numeric-count">
-                    {currentIdx + 1} / {images.length}
-                  </h4>
-                </div>
-
-                )
-            } */}
+              : null
+            }
 
             {lightBoxImages.length <= 6
             

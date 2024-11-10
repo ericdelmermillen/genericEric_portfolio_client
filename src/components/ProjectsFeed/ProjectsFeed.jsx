@@ -1,26 +1,40 @@
 import { useEffect, useState } from "react";
+import { useLightBoxContext } from "../../contexts/LightBoxContext.jsx";
 import LightBox from "../../components/LightBox/LightBox.jsx";
 import Project from "../Project/Project";
 import "./ProjectsFeed.scss";
-import { useLightBoxContext } from "../../contexts/LightBoxContext.jsx";
 
 const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 const ProjectsFeed = () => {
-  const { 
+  const {
     showLightBox, 
-    setShowLightBox
-  } = useLightBoxContext()
-  
+    setShowLightBox,
+    handleSetShowLightBoxTrue,
+    lightBoxImages, 
+    setLightBoxImages,
+    currentIdx, 
+    setCurrentIdx,
+    handleCardClick,
+    handleIncrementCurrentIdx,
+    handleDecrementCurrentIdx
+  } = useLightBoxContext();
   
   const [ projectsData, setProjectsData ] = useState([]);
-  const [ currentIdx, setCurrentIdx ] = useState(0);
 
-  const [ currentProjectPhotos, setCurrentProjectPhotos ] = useState([]);
-
-  const handleSetShowLightBoxTrue = (projectID) => {
+  const handleSetCurrentProjectImages = (projectID) => {
     setShowLightBox(true);
-    setCurrentProjectPhotos(projectsData[0].project_photos)
+
+    const selectedProject = projectsData.find(project => project.project_id === projectID);
+    const projectTitle = selectedProject.project_title;
+
+    setLightBoxImages(selectedProject.project_photos.map((photo, idx) => (
+      {
+        img_id: photo.photo_id,
+        img_src: photo.photo_url,
+        img_alt: `Photo number ${idx + 1} from ${projectTitle}`
+      }
+    )));    
   };
 
   const handleSetShowLightBoxFalse = () => {
@@ -28,23 +42,6 @@ const ProjectsFeed = () => {
       setShowLightBox(false);
     }, LIGHTBOX_TIMING_INTERVAL);
   };
-
-  const handleIncrementCurrentIdx = () => {
-    if(currentIdx >= projectsData.length - 1) {
-      setCurrentIdx(0);
-    } else {
-      setCurrentIdx(c => c + 1);
-    };
-  };
-
-  const handleDecrementCurrentIdx = () => {
-    if(currentIdx <= 0) {
-      setCurrentIdx(projectsData.length - 1);
-    } else {
-      setCurrentIdx(c => c - 1);
-    };
-  };
-
 
 
   const fetchProjects = async () => {
@@ -69,8 +66,6 @@ const ProjectsFeed = () => {
     fetchProjects();
   }, []);
 
-  // console.log(projectsData)
-
 
   return (
     <>
@@ -80,7 +75,7 @@ const ProjectsFeed = () => {
           ? 
             (
               <LightBox 
-                images={currentProjectPhotos}
+                lightBoxImages={lightBoxImages}
                 currentIdx={currentIdx}
                 setCurrentIdx={setCurrentIdx}
                 showLightBox={showLightBox}
@@ -108,14 +103,13 @@ const ProjectsFeed = () => {
               projectURLs={project.project_urls}
               projectDescription={project.project_description}
               setShowLightBox={setShowLightBox}
-              handleSetShowLightBoxTrue={handleSetShowLightBoxTrue}
+              handleCardClick={handleCardClick}
+              handleSetCurrentProjectImages={handleSetCurrentProjectImages}
             />
 
           )}
 
         </div>
-
-
 
       </div>
     </>
