@@ -16,15 +16,11 @@ const ProjectsFeed = () => {
   const [ projectsData, setProjectsData ] = useState([]);
   const [ currentIdx, setCurrentIdx ] = useState(0);
 
-
   const [ currentProjectPhotos, setCurrentProjectPhotos ] = useState([]);
 
   const handleSetShowLightBoxTrue = (projectID) => {
     setShowLightBox(true);
-    console.log(projectID)
     setCurrentProjectPhotos(projectsData[0].project_photos)
-
-    // console.log(projectsData[0].project_photos)
   };
 
   const handleSetShowLightBoxFalse = () => {

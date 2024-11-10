@@ -13,7 +13,7 @@ const Project = ({
   handleSetShowLightBoxTrue
  }) => {
   
-  projectURLs.forEach((url, idx) => {
+  projectURLs.forEach(url => {
     if(Object.keys(url)[0] === "Deployed Url") {
       url.url_icon = FaGlobe
     } else if(Object.keys(url)[0] === "Youtube Video") {
@@ -27,7 +27,7 @@ const Project = ({
 
 
   const handleImageClick = () => {
-    // console.log(`projectID: ${projectID}`)
+    console.log(`projectID: ${projectID}`)
     handleSetShowLightBoxTrue(projectID)
   }
 
@@ -56,26 +56,30 @@ const Project = ({
             {projectTitle}
           </h3>
 
-        {projectURLs.length ? (
-          <ul className="project__urls">
-            {projectURLs.map((project, index) => (
-              <li key={index} className="project__url">
-                {project.url_icon && (
-                  <project.url_icon className="project__url-icon" />
-                )}
-                <a 
-                  className="project__url-link" 
-                  href={Object.values(project)[0]} 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                >
-                  {Object.values(project)[0]}
-                </a>
-              </li>
-            ))}
-          </ul>
-        ) : null}
+        {projectURLs.length 
 
+          ? 
+            (
+              <ul className="project__urls">
+                {projectURLs.map((project, index) => (
+                  <li key={index} className="project__url">
+                    {project.url_icon && (
+                      <project.url_icon className="project__url-icon" />
+                    )}
+                    <a 
+                      className="project__url-link" 
+                      href={Object.values(project)[0]} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                    >
+                      {Object.values(project)[0]}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            ) 
+            : null
+          }
      
           </div>
 

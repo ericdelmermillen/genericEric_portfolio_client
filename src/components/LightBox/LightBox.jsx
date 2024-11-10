@@ -18,7 +18,6 @@ const LightBoxImage = ({
   setIsTransitioning
  }) => {
 
-
   const isCurrentImage = idx === currentIdx;
   const beforeCurrentIdx = idx < currentIdx;
   const afterCurrentIdx = idx > currentIdx;
@@ -89,8 +88,8 @@ const LightBoxImage = ({
             lightBoxImage.classList.remove("left");
             lightBoxImage.classList.add("right");
           }, TIMEOUT_DELAY);
-        }
-      }
+        };
+      };
 
       setTimeout(() => {
         setIsTransitioning(false);
@@ -110,17 +109,10 @@ const LightBoxImage = ({
       </div>
     </>
   )};
-
-
-  // ***
   
-  
+
 const LightBox = ({ 
-  images, 
   lightBoxImages,
-
-
-
   currentIdx,
   setCurrentIdx,
   setShowLightBox,
@@ -128,9 +120,6 @@ const LightBox = ({
   handleDecrementCurrentIdx,
   handleSetShowPortfolioPlaceholders
 }) => {
-
-  // console.log(images)
-  console.log(lightBoxImages)
 
   const { 
     scrollYPos, 
@@ -142,7 +131,6 @@ const LightBox = ({
   const [ isInitialView, setIsInitialView ] = useState(true);
   const [ isTransitioning, setIsTransitioning ] = useState(true);
 
-  // const maxIdx = images.length - 1;
   const maxIdx = lightBoxImages.length - 1;
  
   const handleOverlayClick = () => {
@@ -168,7 +156,7 @@ const LightBox = ({
   
     if(isInitialView) {
       setIsInitialView(false);
-    }
+    };
   
     if(isMovingForward) {
       changeLightBoxDirection("right");
@@ -180,7 +168,7 @@ const LightBox = ({
       });
     } else {
       handleDecrementCurrentIdx();
-    }
+    };
   };
   
   const handleNextClick = () => {
@@ -188,7 +176,7 @@ const LightBox = ({
   
     if(isInitialView) {
       setIsInitialView(false);
-    }
+    };
   
     if(!isMovingForward) {
       changeLightBoxDirection("left");
@@ -200,7 +188,7 @@ const LightBox = ({
       });
     } else {
       handleIncrementCurrentIdx();
-    }
+    };
   };
   
 
@@ -238,22 +226,6 @@ const LightBox = ({
           <div className="lightBox__overlay" onClick={handleOverlayClick}></div>
 
           <div className="lightBox__images">
-
-            {/* {images.map((image, idx) => (
-              <LightBoxImage 
-                key={image.project_id}
-                idx={idx}
-                currentIdx={currentIdx}
-                maxIdx={maxIdx}
-                imageID={image.project_id}
-                imgSrc={image.img_src}
-                imgAlt={image.project_title}
-                isInitialView={isInitialView}
-                isMovingForward={isMovingForward}
-                setIsTransitioning={setIsTransitioning}
-                handleSetShowPortfolioPlaceholders={handleSetShowPortfolioPlaceholders}
-              />
-            ))} */}
 
             {lightBoxImages.map((image, idx) => (
               <LightBoxImage 

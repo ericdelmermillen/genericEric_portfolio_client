@@ -249,7 +249,7 @@ const AppContextProvider = ({ children }) => {
     <AppContext.Provider value={contextValues}>
       { children }
     </AppContext.Provider>
-  )
+  );
 };
 
 const useAppContext = () => {

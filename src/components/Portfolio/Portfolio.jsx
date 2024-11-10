@@ -1,5 +1,6 @@
 import { useEffect, useState, useCallback } from 'react';
 import { useAppContext } from '../../contexts/AppContext.jsx';
+import { useLightBoxContext } from '../../contexts/LightBoxContext.jsx';
 import { Link } from 'react-router-dom';
 import { MdModeEdit } from 'react-icons/md';
 import { removeTokens, scrollToDivTop } from '../../../utils/utils.js';
@@ -8,7 +9,6 @@ import LightBox from '../LightBox/LightBox.jsx';
 import PortfolioCard from '../PortfolioCard/PortfolioCard.jsx';
 import toast from 'react-hot-toast';
 import './Portfolio.scss';
-import { useLightBoxContext } from '../../contexts/LightBoxContext.jsx';
 
 // const PROJECT_COUNT = 6;
 const PROJECT_COUNT = 4;
@@ -37,9 +37,13 @@ const Portfolio = () => {
     showLightBox, 
     setShowLightBox,
     handleSetShowLightBoxTrue,
+    lightBoxImages, 
+    setLightBoxImages,
     currentIdx, 
     setCurrentIdx,
-    handleCardClick
+    handleCardClick,
+    handleIncrementCurrentIdx,
+    handleDecrementCurrentIdx
   } = useLightBoxContext();
 
   
@@ -48,17 +52,14 @@ const Portfolio = () => {
   const [ isInitialMount, setIsInitialMount ] = useState(true);
   const [ modalAction, setModalAction ] = useState("");
 
-
-
   const [ projectsData, setProjectsData ] = useState(initialImages);
-  const [ lightBoxImages, setLightBoxImages ] = useState(initialImages);
-
-
-
   const [ selectedProject, setSelectedProject ] = useState({});
+
   const [ showActionModal, setShowActionModal ] = useState(false);
   const [ showPlaceholders, setShowPlaceholders ] = useState(true);
 
+
+  // for mapping the projects into lightBoxImage objects
   const updateLightBoxImages = (data) => {
     setLightBoxImages(data.map(project => (
 
@@ -69,28 +70,6 @@ const Portfolio = () => {
       }
     )));
   };
-
-  
-
-
-  const handleIncrementCurrentIdx = () => {
-    if(currentIdx >= projectsData.length - 1) {
-      setCurrentIdx(0);
-    } else {
-      setCurrentIdx(c => c + 1);
-    };
-  };
-
-  const handleDecrementCurrentIdx = () => {
-    if(currentIdx <= 0) {
-      setCurrentIdx(projectsData.length - 1);
-    } else {
-      setCurrentIdx(c => c - 1);
-    };
-  };
-
-
-
 
 
   // ***need logic to open AddEditDeleteProjectModal then navigate to new project page
@@ -216,18 +195,8 @@ const Portfolio = () => {
       };
   
       setProjectsData(data);
-      // console.log(data)
+      updateLightBoxImages(data);
 
-      // setLightBoxImages(data.map(project => (
-
-      //   {
-      //     img_id: project.project_id,
-      //     img_alt: project.project_title,
-      //     img_src: project.img_src
-      //   }
-      // )));
-      
-      updateLightBoxImages(data)
       return true;
 
     } catch (error) {
@@ -301,7 +270,7 @@ const Portfolio = () => {
         headers: {
           'Content-Type': 'application/json', 
           Authorization: `Bearer ${token}`,
-          refreshToken: refreshToken,
+          refreshToken: refreshToken
         },
         body: JSON.stringify({ new_project_order: newProjectOrder })
       });
@@ -337,6 +306,7 @@ const Portfolio = () => {
   useEffect(() => {
 
     if(isInitialMount) {
+      setLightBoxImages(initialImages);
       getPortfolioProjects(PROJECT_COUNT);
       setIsInitialMount(false);
     };
@@ -369,7 +339,6 @@ const Portfolio = () => {
                 handleClearActionState={handleClearActionState}
                 setProjectsData={setProjectsData}
                 lightBoxImages={lightBoxImages}
-                // updateLightBoxImages={updateLightBoxImages}
                 setLightBoxImages={setLightBoxImages}
               />
             )
@@ -380,18 +349,11 @@ const Portfolio = () => {
           ? 
             (
               <LightBox 
-                images={projectsData}
                 lightBoxImages={lightBoxImages}
-
-
                 currentIdx={currentIdx}
                 setCurrentIdx={setCurrentIdx}
-
                 showLightBox={showLightBox}
                 setShowLightBox={setShowLightBox}
-
-
-
                 handleIncrementCurrentIdx={handleIncrementCurrentIdx}
                 handleDecrementCurrentIdx={handleDecrementCurrentIdx}
               />
@@ -447,13 +409,12 @@ const Portfolio = () => {
             
             <div id="portfolio__projects-inner" className="portfolio__projects-inner">
 
-              {
-                  projectsData.map((project, idx) => 
+              {projectsData.map((project, idx) => 
+
                   <PortfolioCard 
                     key={project.project_id || idx}
                     idx={idx}
 
-                    
                     maxIdx={projectsData.length - 1}
                     imgSrc={project.img_src}
                     projectTitle={project.project_title}
@@ -468,11 +429,7 @@ const Portfolio = () => {
                     isEditMode={isEditMode}
                     isProjectOrderEditable={isProjectOrderEditable}
                     handleSetShowLightBoxTrue={handleSetShowLightBoxTrue}
-
-
                     handleCardClick={handleCardClick}
-
-
                     handleDeleteProjectClick={handleDeleteProjectClick}
                     handleEditProjectClick={handleEditProjectClick}
                     modalAction={modalAction}
@@ -501,13 +458,13 @@ const Portfolio = () => {
             : isLoggedIn && !isEditMode && !isProjectOrderEditable
             ? 
               (
-                  <button
-                    className="portfolio__button portfolio__button--edit"
-                    onClick={handleSetIsEditModeTrue}
-                  >
-                    Edit
-                  </button>
-                )
+                <button
+                  className="portfolio__button portfolio__button--edit"
+                  onClick={handleSetIsEditModeTrue}
+                >
+                  Edit
+                </button>
+              )
             : isLoggedIn && isEditMode && !isProjectOrderEditable
             ?
               (
