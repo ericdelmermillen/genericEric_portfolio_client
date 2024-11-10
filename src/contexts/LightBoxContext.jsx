@@ -1,14 +1,11 @@
 import { 
   createContext, 
   useContext, 
-  useReducer, 
-  useEffect, 
   useState
 } from "react";
 
-// will need a useEffect that watches the current and prev urls to reset all values when the page changes
-const LightBoxContext = createContext();
 
+const LightBoxContext = createContext();
 
 const LightBoxContextProvider = ( { children }) => {
   const [ showLightBox, setShowLightBox ] = useState(false);
@@ -20,11 +17,9 @@ const LightBoxContextProvider = ( { children }) => {
     setCurrentIdx(idx);
   };
 
-
   const handleSetShowLightBoxTrue = () => {
     setShowLightBox(true);
   };
-
 
   const handleIncrementCurrentIdx = () => {
     if(currentIdx >= lightBoxImages.length - 1) {

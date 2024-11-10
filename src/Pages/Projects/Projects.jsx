@@ -1,16 +1,8 @@
-import { useEffect } from "react";
-import { scrollToTop } from "../../../utils/utils";
 import TypingText from "../../components/TypingText/TypingText.jsx";
 import ProjectsFeed from "../../components/ProjectsFeed/ProjectsFeed.jsx";
 import "./Projects.scss";
 
 const Projects = ({ children }) => {
-
-  // scroll to top on mount
-  useEffect(() => {
-    scrollToTop();
-  }, []);
-
   
   return (
     <>

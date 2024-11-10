@@ -51,36 +51,43 @@ const LightBoxImage = ({
         if(isCurrentImage) { 
           lightBoxImage.classList.remove("left");
           lightBoxImage.classList.add("current");
-          return
+          
+          return;
         } else if(beforeCurrentIdx) { 
           lightBoxImage.classList.remove("current");
           lightBoxImage.classList.add("right");
+
           setTimeout(() => {
             lightBoxImage.classList.remove("right");
             lightBoxImage.classList.add("left");
           }, TIMEOUT_DELAY);
+
         } else if(isLastImage && currentIdx === 0) { 
           lightBoxImage.classList.add("right");
           lightBoxImage.classList.remove("current");
+
           setTimeout(() => {
             lightBoxImage.classList.remove("right");
             lightBoxImage.classList.add("left");
           }, TIMEOUT_DELAY);
-        }
+        };
       } else if(!isMovingForward) {
         lightBoxImage.classList.add("transition");
           
         if(isCurrentImage) { 
           lightBoxImage.classList.remove("right");
           lightBoxImage.classList.add("current");
-          return
+
+          return;
         } else if(afterCurrentIdx) { 
           lightBoxImage.classList.remove("current");
           lightBoxImage.classList.add("left");
+
           setTimeout(() => {
             lightBoxImage.classList.remove("left");
             lightBoxImage.classList.add("right");
           }, TIMEOUT_DELAY);
+
         } else if(isFirstImage && currentIdx === maxIdx) { 
           lightBoxImage.classList.add("left");
           lightBoxImage.classList.remove("current");
@@ -121,8 +128,6 @@ const LightBox = ({
   handleSetShowPortfolioPlaceholders
 }) => {
 
-  // console.log(lightBoxImages)
-
   const { 
     scrollYPos, 
     prevScrollYPos,
@@ -151,6 +156,7 @@ const LightBox = ({
         image.classList = `lightBoxImage ${side}`;
       };
     });
+    
   };
 
   const handlePrevClick = () => {

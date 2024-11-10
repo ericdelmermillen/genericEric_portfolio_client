@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import { useLightBoxContext } from "../../contexts/LightBoxContext.jsx";
+import { scrollToTop } from "../../../utils/utils.js";
 import LightBox from "../../components/LightBox/LightBox.jsx";
 import Project from "../Project/Project";
 import "./ProjectsFeed.scss";
+import toast from "react-hot-toast";
 
 const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
@@ -21,6 +23,7 @@ const ProjectsFeed = () => {
   } = useLightBoxContext();
   
   const [ projectsData, setProjectsData ] = useState([]);
+  const [ isInitialFetch, setIsInitialFetch ] = useState(true);
 
   const handleSetCurrentProjectImages = (projectID) => {
     setShowLightBox(true);
@@ -49,20 +52,25 @@ const ProjectsFeed = () => {
       const response = await fetch(`${BASE_URL}/projects/all`);
       const data = await response.json();
 
-      setProjectsData(data)
+      setProjectsData(data);
 
       if(!response.ok) {
         throw new Error(data.message);
-      }
+      };
+
+      if(isInitialFetch) {
+        scrollToTop();
+        setIsInitialFetch(false);
+      };
        
     } catch(error) {
-      console.log(error)
-    }
-  }
+      console.log(error);
+      toast.error(error.message);
+    };
+  };
   
 
   useEffect(() => {
-
     fetchProjects();
   }, []);
 

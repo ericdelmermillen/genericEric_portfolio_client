@@ -51,16 +51,14 @@ const Portfolio = () => {
   const [ displayNonePlaceholders, setDisplayNonePlaceholders ] = useState(false);
   const [ isInitialMount, setIsInitialMount ] = useState(true);
   const [ modalAction, setModalAction ] = useState("");
-
   const [ projectsData, setProjectsData ] = useState(initialImages);
   const [ selectedProject, setSelectedProject ] = useState({});
-
   const [ showActionModal, setShowActionModal ] = useState(false);
   const [ showPlaceholders, setShowPlaceholders ] = useState(true);
 
-
   // for mapping the projects into lightBoxImage objects
   const updateLightBoxImages = (data) => {
+
     setLightBoxImages(data.map(project => (
 
       {
@@ -79,10 +77,8 @@ const Portfolio = () => {
 
   const handleSetIsEditModeTrue = async () => {
     setIsLoading(true);
-
-    // *** shouldn't need to set projectsData after
     setProjectsData(initialImages);
-    setLightBoxImages(initialImages)
+    setLightBoxImages(initialImages);
 
     setShowPlaceholders(true);
     toast("Fetching all Project Summaries...");
@@ -238,12 +234,15 @@ const Portfolio = () => {
     
     setShowPlaceholders(true);
     
-    const refreshPlaceholders = Array.from({length: projectsData.length}, () => ({isInitialPlaceholder: true}));
+    const refreshPlaceholders = Array.from({length: projectsData.length}, () => (
+      { isInitialPlaceholder: true }
+    ));
+
     setProjectsData(refreshPlaceholders);
     
     setTimeout(() => {
-      getPortfolioProjects()
-      scrollToDivTop("portfolio", divTopOffset)
+      getPortfolioProjects();
+      scrollToDivTop("portfolio", divTopOffset);
       setIsLoading(false);
     }, MIN_LOADING_INTERVAL);
   };
@@ -302,7 +301,6 @@ const Portfolio = () => {
   
 
   // useEffect to get portfolio summaries for ProjectCards
-  // only need at initial mount
   useEffect(() => {
 
     if(isInitialMount) {

@@ -30,8 +30,8 @@ const Project = ({
   const handleImageClick = () => {
     console.log(`projectID: ${projectID}`)
     handleSetCurrentProjectImages(projectID);
-    handleCardClick()
-  }
+    handleCardClick();
+  };
 
   return (
     <>
@@ -63,11 +63,17 @@ const Project = ({
           ? 
             (
               <ul className="project__urls">
+
                 {projectURLs.map((project, index) => (
+
                   <li key={index} className="project__url">
-                    {project.url_icon && (
-                      <project.url_icon className="project__url-icon" />
-                    )}
+
+                    {project.url_icon 
+                    
+                      ? <project.url_icon className="project__url-icon" />
+                      : null
+                    }
+                    
                     <a 
                       className="project__url-link" 
                       href={Object.values(project)[0]} 
@@ -77,7 +83,9 @@ const Project = ({
                       {Object.values(project)[0]}
                     </a>
                   </li>
+
                 ))}
+
               </ul>
             ) 
             : null
