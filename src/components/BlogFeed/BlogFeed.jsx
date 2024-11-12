@@ -1,18 +1,18 @@
 import { useEffect, useState } from 'react';
 import { useAppContext } from '../../contexts/AppContext.jsx';
 import { Link, useLocation } from 'react-router-dom';
+import { scrollToTop } from '../../../utils/utils.js';
 import BlogPost from '../BlogPost/BlogPost.jsx';
 import toast from 'react-hot-toast';
 import "./BlogFeed.scss";
-import { scrollToTop } from '../../../utils/utils.js';
 
 
 const YOUTUBE_API_KEY = import.meta.env.VITE_YOUTUBE_API_KEY;
 const YOUTUBE_BASE_URL = import.meta.env.VITE_YOUTUBE_BASE_URL;
 // SMW's playlist
-const PLAYLIST_ID = "UU6aTLuI_j4-0wiDSzmaPctQ"; 
+// const PLAYLIST_ID = "UU6aTLuI_j4-0wiDSzmaPctQ"; 
 // GE's playlist
-// const PLAYLIST_ID = "UUxF40kFyhKJ9JGuvNtfypyQ"; 
+const PLAYLIST_ID = "UUxF40kFyhKJ9JGuvNtfypyQ"; 
 
 const environment = import.meta.env.VITE_NODE_ENV;
 

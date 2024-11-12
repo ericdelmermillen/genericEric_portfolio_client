@@ -3,10 +3,12 @@ import { useLightBoxContext } from "../../contexts/LightBoxContext.jsx";
 import { scrollToTop } from "../../../utils/utils.js";
 import LightBox from "../../components/LightBox/LightBox.jsx";
 import Project from "../Project/Project";
-import "./ProjectsFeed.scss";
 import toast from "react-hot-toast";
+import "./ProjectsFeed.scss";
 
 const BASE_URL = import.meta.env.VITE_API_BASE_URL;
+const PROJECTS_PER_PAGE = 2;
+// const PROJECTS_PER_PAGE = 8;
 
 const ProjectsFeed = () => {
   const {
@@ -24,6 +26,10 @@ const ProjectsFeed = () => {
   
   const [ projectsData, setProjectsData ] = useState([]);
   const [ isInitialFetch, setIsInitialFetch ] = useState(true);
+  const [ page, setPage ] = useState(1);
+  const [ isFinalPageFetched, setIsFinalPageFetched ] = useState(false);
+  const [ isFinalPageLoaded, setIsFinalPageLoaded ] = useState(false);
+
 
   const handleSetCurrentProjectImages = (projectID) => {
     setShowLightBox(true);
@@ -48,32 +54,55 @@ const ProjectsFeed = () => {
 
 
   const fetchProjects = async () => {
-    try {
-      const response = await fetch(`${BASE_URL}/projects/all`);
-      const data = await response.json();
+    if(!isFinalPageFetched) {
+      const offset = PROJECTS_PER_PAGE * (page - 1);
 
-      setProjectsData(data);
+      try {
+        const response = await fetch(`${BASE_URL}/projects/all?limit=${PROJECTS_PER_PAGE}&offset=${offset}`);
 
-      if(!response.ok) {
-        throw new Error(data.message);
+        const { projects, isPaginationComplete } = await response.json();
+
+        if(!response.ok) {
+          throw new Error(data.message);
+        };
+
+        if(isInitialFetch) {
+          setProjectsData(projects);
+        } else if(!isInitialFetch) {
+          setProjectsData(c => [...c, ...projects])
+        };
+
+        if(isInitialFetch) {
+          scrollToTop();
+          setIsInitialFetch(false);
+        };
+
+        if(isPaginationComplete) {
+          setIsFinalPageFetched(true);
+        };
+
+        setPage(c => c + 1)
+        
+      } catch(error) {
+        console.log(error);
+        toast.error(error.message);
       };
-
-      if(isInitialFetch) {
-        scrollToTop();
-        setIsInitialFetch(false);
-      };
-       
-    } catch(error) {
-      console.log(error);
-      toast.error(error.message);
     };
+  };
+
+  const handleFetchNextPage = () => {
+    if(!isFinalPageFetched) {
+      fetchProjects()
+    } else if(isFinalPageFetched) {
+      setIsFinalPageLoaded(true);
+      toast("No more projects to show")
+    }
   };
   
 
   useEffect(() => {
     fetchProjects();
   }, []);
-
 
   return (
     <>
@@ -116,8 +145,20 @@ const ProjectsFeed = () => {
             />
 
           )}
-
         </div>
+        
+        <button
+          className={`projectsFeed__button ${isFinalPageLoaded 
+            ? "disabled"
+            : ""
+          }`}
+          onClick={!isFinalPageLoaded
+            ? handleFetchNextPage
+            : null
+          }
+        >
+          Load More Posts
+        </button>
 
       </div>
     </>
