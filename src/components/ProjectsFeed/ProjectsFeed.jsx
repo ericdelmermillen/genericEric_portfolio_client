@@ -80,8 +80,6 @@ const ProjectsFeed = () => {
         if(isPaginationComplete) {
           setIsFinalPageFetched(true);
         };
-
-        setPage(c => c + 1)
         
       } catch(error) {
         console.log(error);
@@ -92,17 +90,19 @@ const ProjectsFeed = () => {
 
   const handleFetchNextPage = () => {
     if(!isFinalPageFetched) {
-      fetchProjects()
+      setPage(c => c + 1);
     } else if(isFinalPageFetched) {
       setIsFinalPageLoaded(true);
-      toast("No more projects to show")
-    }
+      toast("No more projects to show");
+    };
   };
   
 
   useEffect(() => {
-    fetchProjects();
-  }, []);
+    if(!isFinalPageFetched) {
+      fetchProjects();
+    }
+  }, [page]);
 
   return (
     <>

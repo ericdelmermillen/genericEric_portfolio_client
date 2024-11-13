@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import Facebook from "../../assets/svgs/Facebook.jsx";
 import Github from "../../assets/svgs/Github.jsx";
 import Instagram from "../../assets/svgs/Instagram.jsx";
@@ -15,15 +16,40 @@ const footerSocials = [
   { socialLink: "https://www.youtube.com/@EricMillen", socialIcon: Youtube }
 ];
 
+
 const Footer = () => {
+  const [ windowWidth, setWindowWidth ] = useState(window.innerWidth);
+  
+  useEffect(() => {
+    const handleResize = () => setWindowWidth(window.innerWidth);
+
+    window.addEventListener('resize', handleResize);
+
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   return (
     <>
       <footer className="footer">
         <div className="footer__content">
 
-          <p className="footer__copyright">
-            Copyright Eric Delmer Millen &copy; {new Date().getFullYear()}
-          </p>
+            {windowWidth >= 380
+            ?
+              (
+                <p className="footer__copyright">
+                  Copyright Eric Delmer Millen &copy; {new Date().getFullYear()}
+                </p>
+              )
+            : 
+              (
+                <p className="footer__copyright">
+                  Eric Delmer Millen &copy; {new Date().getFullYear()}
+                </p>
+              )
+            
+            
+
+            }
           <ul className="footer__socials">
 
             {footerSocials.map((social, idx) => (

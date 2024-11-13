@@ -3,7 +3,11 @@
 
 .blogFeed {
 	& {
-		padding-inline: 2rem;
+		margin-top: 2rem;
+
+		@media (min-width: $smallTablet) {
+			padding-inline: 2rem;
+		}
 
 		&.home {
 			background: var(--neutral-gray-2);

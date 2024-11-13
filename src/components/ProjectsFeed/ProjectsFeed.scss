@@ -3,11 +3,12 @@
 
 .projectsFeed {
 	& {
-		border: 2px solid red;
-		padding-inline: 2rem;
+		// border: 2px solid red;
+		// padding-inline: 2rem;
 		width: 100%;
 		display: flex;
 		flex-direction: column;
+		margin-top: 1.5rem;
 		// height: 100%;
 		// margin-top: calc(-100vh + $navHeight);
 	}
@@ -26,10 +27,9 @@
 		margin-inline: auto;
 		min-height: calc(100vh - $navHeight);
 		max-width: $tablet;
-		border: 2px solid blue;
 		display: flex;
 		flex-direction: column;
-		gap: 4rem;
+		gap: 2rem;
 		margin-bottom: 4rem;
 	}
 

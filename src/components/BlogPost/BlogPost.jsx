@@ -117,7 +117,7 @@ const BlogPost = ({
           <div className="blogPost__video-text">
             <h3 
               className={`blogPost__video-text--title ${hasLongTitle && !showFullInfo 
-                ? "ellipse" 
+                ? "ellipsis" 
                 : ""}`
               } 
               ref={titleRef}

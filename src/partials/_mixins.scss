@@ -389,11 +389,31 @@
 	width: 100%;
 }
 
+@mixin projectImg {
+	aspect-ratio: 16/9;
+	max-width: 100%;
+	object-fit: cover;
+	object-position: center center;
+}
+
 @mixin blogPostVideo {
 	display: flex;
 	flex-direction: column;
 	max-width: $largeTablet;
 	width: 100%;
+}
+
+@mixin ellipsisOneLine {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+@mixin ellipsisMultiLine {
+	-webkit-box-orient: vertical;
+	display: -webkit-box;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
 @mixin lightBoxTransition {

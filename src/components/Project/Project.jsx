@@ -1,6 +1,7 @@
+import { useState, useRef } from "react";
 import { getMonthYear } from "../../../utils/utils";
-import { FaGlobe, FaYoutube, FaGithub } from "react-icons/fa6";
 import "./Project.scss";
+import { useAppContext } from "../../contexts/AppContext";
 
 const Project = ({ 
   idx,
@@ -13,18 +14,24 @@ const Project = ({
   handleSetCurrentProjectImages,
   handleCardClick
  }) => {
-  
-  projectURLs.forEach(url => {
-    if(Object.keys(url)[0] === "Deployed Url") {
-      url.url_icon = FaGlobe
-    } else if(Object.keys(url)[0] === "Youtube Video") {
-      url.url_icon = FaYoutube
-    } else if(Object.keys(url)[0].includes("Github")) {
-      url.url_icon = FaGithub
-    };
-  });
 
+  const { isLoading } = useAppContext();
+
+  const [ showFullInfo, setShowFullInfo ] = useState(false);
+  const [ hasLongTitle, setHasLongTitle ] = useState(!false);
+  const [ hasLongDesc, setHasLongDesc ] = useState(!false);
+  
   // console.log(projectDescription)
+  // console.log(projectURLs)
+
+  const titleRef = useRef(null); 
+  const descRef = useRef(null); 
+
+  const desc = showFullInfo 
+  ? projectDescription 
+  : projectDescription.split("\n")[0];
+
+  // console.log(desc)
 
 
   const handleImageClick = () => {
@@ -33,6 +40,12 @@ const Project = ({
     handleCardClick();
   };
 
+  const handleToggleShowFullInfo = () => {
+    setShowFullInfo(prev => !prev)
+  }
+
+  // console.log(titleRef.current)
+  
   return (
     <>
 
@@ -40,23 +53,69 @@ const Project = ({
           
         <div className="project__inner">
 
-          <h4 
-            className="project__date"
-            dateTime={projectDate}
-          >
+          <h4 className="project__date" dateTime={projectDate}>
             {getMonthYear(projectDate)}
           </h4>
 
-          <img 
+         <img 
             className="project__image" 
             src={projectPhotos[0].photo_url} 
             alt={`Main image for project ${projectTitle}`} 
             onClick={() => handleImageClick()}
-          />
+          /> 
 
-          <h3 className="project__title">
-            {projectTitle}
-          </h3>
+          <div className="project__text">
+
+            <h3 
+              className={`project__title ${hasLongTitle && !showFullInfo 
+                ? "ellipsis"
+                : ""}`}
+              ref={titleRef}
+            >
+              {projectTitle}
+            </h3>
+
+           
+
+              {desc.length && projectDescription.split("\n").length === 1
+
+                ?
+                  (
+                    <p 
+                    className={`project__description ellipsis`}
+                    >
+                      {desc}
+                    </p>
+                  )
+                : desc.length && projectDescription.split("\n").length > 1 && showFullInfo
+                ?
+                  <>
+                    {projectDescription.split("\n").map((paragraph, idx) => 
+                      <p className="project__description" key={idx}>
+                        {paragraph}
+                      </p>
+                      )
+                    }
+                  </>
+                
+                : desc.length && projectDescription.split("\n").length > 1 && !showFullInfo
+                ?
+                <>
+                  <p className={`project__description ${hasLongDesc && !showFullInfo 
+                    ? "ellipsis" 
+                    : ""}`}
+                    ref={descRef}
+                  >
+                    {desc}
+                  </p>
+                </>
+              : null
+            }
+
+            
+
+
+          </div>
 
         {projectURLs.length 
 
@@ -67,12 +126,6 @@ const Project = ({
                 {projectURLs.map((project, index) => (
 
                   <li key={index} className="project__url">
-
-                    {project.url_icon 
-                    
-                      ? <project.url_icon className="project__url-icon" />
-                      : null
-                    }
                     
                     <a 
                       className="project__url-link" 
@@ -89,7 +142,18 @@ const Project = ({
               </ul>
             ) 
             : null
-          }
+          } 
+
+
+            {((hasLongDesc && !isLoading) || (hasLongTitle &&!isLoading)) 
+              ?
+                <button 
+                  className="project__show-full-info"  
+                  onClick={handleToggleShowFullInfo}>
+                    {showFullInfo ? "Show Less" : "Show Full Info"}
+                  </button>
+              : null
+            }
      
           </div>
 
