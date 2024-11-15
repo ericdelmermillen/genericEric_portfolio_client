@@ -5,7 +5,6 @@
 	& {
 		@include page;
 		background: var(--background-color);
-		min-height: calc(100vh - $navHeight);
 	}
 
 	&__main {

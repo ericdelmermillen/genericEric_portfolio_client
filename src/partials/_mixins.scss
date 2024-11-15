@@ -124,6 +124,7 @@
 
 @mixin page {
 	max-width: $ultraWide;
+	min-height: calc(100vh - $navHeight);
 	width: 100%;
 }
 

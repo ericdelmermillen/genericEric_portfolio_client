@@ -4,7 +4,6 @@
 .blog {
 	& {
 		@include page;
-		min-height: calc(100vh);
 	}
 
 	&__inner {

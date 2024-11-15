@@ -1,0 +1,8 @@
+@import "../../partials/mixins";
+@import "../../partials/variables";
+
+.addEditProject {
+	& {
+		@include page;
+	}
+}

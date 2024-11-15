@@ -14,6 +14,7 @@ import SideNav from './components/SideNav/SideNav.jsx';
 import WallPaper from './components/WallPaper/WallPaper.jsx';
 import "./App.scss";
 import { LightBoxContextProvider } from './contexts/LightBoxContext.jsx';
+import AddEditProject from './pages/AddEditProject/AddEditProject.jsx';
 
 const App = () => {
   const { 
@@ -110,6 +111,14 @@ const App = () => {
                     <WallPaper />
                   </Projects>
                 </LightBoxContextProvider>
+              } 
+            />
+            <Route 
+              path="/projects/add" 
+              element={
+                <AddEditProject>
+                  <WallPaper />
+                </AddEditProject>
               } 
             />
 
