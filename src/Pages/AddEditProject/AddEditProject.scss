@@ -5,4 +5,12 @@
 	& {
 		@include page;
 	}
+
+	&__inner {
+		@include wallpaperContainer;
+	}
+
+	&__h1 {
+		margin-block: 10rem;
+	}
 }

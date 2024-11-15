@@ -113,8 +113,18 @@ const App = () => {
                 </LightBoxContextProvider>
               } 
             />
+            
             <Route 
               path="/projects/add" 
+              element={
+                <AddEditProject>
+                  <WallPaper />
+                </AddEditProject>
+              } 
+            />
+
+            <Route 
+              path="/projects/edit/:projectID" 
               element={
                 <AddEditProject>
                   <WallPaper />

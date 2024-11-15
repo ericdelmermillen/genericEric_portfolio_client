@@ -115,7 +115,6 @@ const AppContextProvider = ({ children }) => {
     }
   };
 
-
   const logoutUser = async () => {
     setIsLoading(true);
   
@@ -126,9 +125,10 @@ const AppContextProvider = ({ children }) => {
       const response = await fetch(`${BASE_URL}/auth/logoutuser`, {
         method: "POST",
         headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ token, refreshToken })
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`,
+          "x-refresh-token": refreshToken, 
+        }
       });
   
       if(!response.ok) {
@@ -199,7 +199,6 @@ const AppContextProvider = ({ children }) => {
     };
 
     handleScrollY();
-
 
     window.addEventListener("scroll", handleScrollY);
 
