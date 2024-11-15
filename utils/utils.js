@@ -73,11 +73,9 @@ const checkTokenIsValid = async (navigate) => {
           const refreshResponse = await fetch(`${BASE_URL}/auth/refreshtoken`, {
             method: 'POST',
             headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-              refreshToken
-            })
+              'Content-Type': 'application/json',
+              'x-refresh-token': refreshToken
+            }
           });
 
           console.log("Token expired: attempting refresh");
