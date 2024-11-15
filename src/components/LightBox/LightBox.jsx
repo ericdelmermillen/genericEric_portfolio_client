@@ -144,7 +144,7 @@ const LightBox = ({
     removeClassFromDiv("lightBox", "show");
     setTimeout(() => {
       setShowLightBox(false);
-    }, MODAL_TRANSITION_INTERVAL)
+    }, MODAL_TRANSITION_INTERVAL);
   };
 
   // for resetting LightBoxImage classes on direction change
@@ -170,7 +170,6 @@ const LightBox = ({
       changeLightBoxDirection("right");
       setIsMovingForward(false);
   
-      // Use requestAnimationFrame to wait for the next repaint
       requestAnimationFrame(() => {
         handleDecrementCurrentIdx();
       });
@@ -190,7 +189,6 @@ const LightBox = ({
       changeLightBoxDirection("left");
       setIsMovingForward(true);
   
-      // Use requestAnimationFrame to wait for the next repaint
       requestAnimationFrame(() => {
         handleIncrementCurrentIdx();
       });

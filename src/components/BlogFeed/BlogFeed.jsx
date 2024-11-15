@@ -16,7 +16,6 @@ const PLAYLIST_ID = "UU6aTLuI_j4-0wiDSzmaPctQ";
 
 const environment = import.meta.env.VITE_NODE_ENV;
 
-
 const BlogFeed = () => {
   const location = useLocation();
   const [ isOnHome ] = useState(
@@ -57,7 +56,9 @@ const BlogFeed = () => {
       setIsLoading(true);
 
       try {
-        const response = await fetch(`${YOUTUBE_BASE_URL}/playlistItems?part=snippet&playlistId=${PLAYLIST_ID}&maxResults=${RESULTS_PER_PAGE}${nextPageToken ? `&pageToken=${nextPageToken}` : ''}&key=${YOUTUBE_API_KEY}`);
+        const response = await fetch(`${YOUTUBE_BASE_URL}/playlistItems?part=snippet&playlistId=${PLAYLIST_ID}&maxResults=${RESULTS_PER_PAGE}${nextPageToken 
+          ? `&pageToken=${nextPageToken}` 
+          : ''}&key=${YOUTUBE_API_KEY}`);
 
         const data = await response.json();
 
@@ -146,7 +147,6 @@ const BlogFeed = () => {
             <BlogPost 
               key={post.videoId || idx}
               isInitialPlaceholder={post.isInitialPlaceholder}
-              idx={idx}
               title={post.title}
               description={post.description}
               videoID={post.videoId}

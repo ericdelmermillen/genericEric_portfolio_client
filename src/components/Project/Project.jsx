@@ -1,10 +1,9 @@
 import { useState, useRef, useEffect } from "react";
+import { useAppContext } from "../../contexts/AppContext";
 import { getMonthYear } from "../../../utils/utils";
 import "./Project.scss";
-import { useAppContext } from "../../contexts/AppContext";
 
 const Project = ({ 
-  idx,
   projectDate,
   projectID,
   projectTitle,
@@ -28,29 +27,21 @@ const Project = ({
   ? projectDescription 
   : projectDescription.split("\n")[0];
 
-
-  // if(projectID === 8) {
-  //   console.log(desc)
-  // }
-
-
   const handleImageClick = () => {
-    console.log(`projectID: ${projectID}`)
     handleSetCurrentProjectImages(projectID);
     handleCardClick();
   };
 
   const handleToggleShowFullInfo = () => {
-    setShowFullInfo(prev => !prev)
-  }
-
+    setShowFullInfo(prev => !prev);
+  };
 
   const checkHasLongTitle = () => {
     if(titleRef.current) {
       const lineHeight = parseFloat(getComputedStyle(titleRef.current).lineHeight);
       const height = titleRef.current.getBoundingClientRect().height;
       setHasLongTitle(height > lineHeight); 
-    }
+    };
   };
 
   const checkHasLongDesc = () => {
@@ -58,7 +49,7 @@ const Project = ({
       const lineHeight = parseFloat(getComputedStyle(descRef.current).lineHeight);
       const height = descRef.current.getBoundingClientRect().height;
       setHasLongDesc(projectDescription.split("\n").length > 1 || height > (lineHeight * 3)); 
-    }
+    };
   };
 
   const handleResize = () => {
@@ -77,11 +68,9 @@ const Project = ({
     };
   }, []);
 
-
   
   return (
     <>
-
       <div className="project">
           
         <div className="project__inner">
@@ -108,98 +97,87 @@ const Project = ({
               {projectTitle}
             </h3>
 
-           
-
-              {desc.length && projectDescription.split("\n").length === 1
-
-                ?
-                  (
-                    <p 
-                    className={`project__description ${showFullInfo
-                      ? ""
-                      : "ellipsis"
-
-                    }`}
-                    >
-                      {desc}
-                    </p>
-                  )
-                : desc.length && projectDescription.split("\n").length > 1 && showFullInfo
-                ?
-                  <>
-                    {projectDescription.split("\n").map((paragraph, idx) => 
-                      <p className="project__description" key={idx}>
-                        {paragraph}
-                      </p>
-                      )
-                    }
-                  </>
-                
-                : desc.length && projectDescription.split("\n").length > 1 && !showFullInfo
-                ?
-                <>
-                  <p className={`project__description ${hasLongDesc && !showFullInfo 
-                    ? "ellipsis" 
-                    : ""}`}
-                    ref={descRef}
+            {desc.length && projectDescription.split("\n").length === 1
+              ?
+                (
+                  <p 
+                  className={`project__description ${showFullInfo
+                    ? ""
+                    : "ellipsis"}`}
                   >
                     {desc}
                   </p>
+                )
+              : desc.length && projectDescription.split("\n").length > 1 && showFullInfo
+              ?
+                <>
+                  {projectDescription.split("\n").map((paragraph, idx) => 
+                    <p className="project__description" key={idx}>
+                      {paragraph}
+                    </p>
+                    )
+                  }
                 </>
+              : desc.length && projectDescription.split("\n").length > 1 && !showFullInfo
+              ?
+              <>
+                <p className={`project__description ${hasLongDesc && !showFullInfo 
+                  ? "ellipsis" 
+                  : ""}`}
+                  ref={descRef}
+                >
+                  {desc}
+                </p>
+              </>
               : null
             }
-
-            
-
 
           </div>
 
 
-        {projectURLs.length 
+          {projectURLs.length 
 
-          ? 
-            (
-              <>
-                
-                <h4 className="project__links">Project Links:</h4>
-                <ul className="project__urls">
+            ? 
+              (
+                <>
+                  
+                  <h4 className="project__links">Project Links:</h4>
+                  <ul className="project__urls">
+                    {projectURLs.map((project, index) => (
 
-                  {projectURLs.map((project, index) => (
+                      <li key={index} className="project__url">
+                        
+                        <a 
+                          className="project__url-link" 
+                          href={Object.values(project)[0]} 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                        >
+                          {Object.values(project)[0]}
+                        </a>
+                      </li>
 
-                    <li key={index} className="project__url">
-                      
-                      <a 
-                        className="project__url-link" 
-                        href={Object.values(project)[0]} 
-                        target="_blank" 
-                        rel="noopener noreferrer"
-                      >
-                        {Object.values(project)[0]}
-                      </a>
-                    </li>
+                    ))}
 
-                  ))}
-
-                </ul>
-              </>
-            ) 
+                  </ul>
+                </>
+              ) 
             : null
           } 
 
-
-            {((hasLongDesc && !isLoading) || (hasLongTitle &&!isLoading)) 
-              ?
-                <button 
-                  className="project__show-full-info"  
-                  onClick={handleToggleShowFullInfo}>
-                    {showFullInfo ? "Show Less" : "Show Full Info"}
-                  </button>
-              : null
-            }
+          {((hasLongDesc && !isLoading) || (hasLongTitle &&!isLoading)) 
+            ?
+              <button 
+                className="project__show-full-info"  
+                onClick={handleToggleShowFullInfo}>
+                  {showFullInfo ? "Show Less" : "Show Full Info"}
+                </button>
+            : null
+          }
      
-          </div>
-
         </div>
+
+      </div>
 
     </>
   )};

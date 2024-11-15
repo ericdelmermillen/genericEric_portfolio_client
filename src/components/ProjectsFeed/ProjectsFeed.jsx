@@ -40,7 +40,6 @@ const ProjectsFeed = () => {
   // ));
 
 
-
   const handleSetCurrentProjectImages = (projectID) => {
     setShowLightBox(true);
 
@@ -106,13 +105,14 @@ const ProjectsFeed = () => {
       toast("No more projects to show");
     };
   };
-  
 
+  // initial fetch useEffect
   useEffect(() => {
     if(!isFinalPageFetched) {
       fetchProjects();
-    }
+    };
   }, [page]);
+
 
   return (
     <>
@@ -138,11 +138,10 @@ const ProjectsFeed = () => {
         
         <div className="projectsFeed__inner">
 
-          {projectsData.map((project, idx) => 
+          {projectsData.map(project => 
             
             <Project 
               key={project.project_id}
-              idx={idx}
               projectID={project.project_id}
               projectDate={project.project_date}
               projectTitle={project.project_title}
@@ -160,8 +159,7 @@ const ProjectsFeed = () => {
         <button
           className={`projectsFeed__button ${isFinalPageLoaded 
             ? "disabled"
-            : ""
-          }`}
+            : ""}`}
           onClick={!isFinalPageLoaded
             ? handleFetchNextPage
             : null

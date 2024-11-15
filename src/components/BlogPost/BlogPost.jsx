@@ -1,12 +1,11 @@
 import { useState, useRef, useEffect } from "react";
-import BlogPostPlaceholder from "../BlogPostPlaceholder/blogPostPlaceholder";
 import { useAppContext } from "../../contexts/AppContext";
+import BlogPostPlaceholder from "../BlogPostPlaceholder/blogPostPlaceholder";
 import "./BlogPost.scss";
 
 // ***crazy issue with resizing on calling for next page on narrow screen: current fix is maxWidth on &__video at 75vw
 
 const BlogPost = ({ 
-  idx, 
   isInitialPlaceholder,
   title, 
   description, 
@@ -15,11 +14,6 @@ const BlogPost = ({
   isLoading })=> {
   
   const embedUrl = `https://www.youtube.com/embed/${videoID}?rel=0`;
-
-  // can use windowWidth to determine values to use for font-size and line-height and pass them in as inline styles to deal with issues getting ref div line height for determining if the elipse class should be used
-  // const windowWidth = window.innerWidth;
-  // console.log(windowWidth)
-  
   
   const { LIGHTBOX_TIMING_INTERVAL } = useAppContext();
   
@@ -57,7 +51,7 @@ const BlogPost = ({
       const lineHeight = parseFloat(getComputedStyle(titleRef.current).lineHeight);
       const height = titleRef.current.getBoundingClientRect().height;
       setHasLongTitle(height > lineHeight); 
-    }
+    };
   };
 
   const checkHasLongDesc = () => {
@@ -65,7 +59,7 @@ const BlogPost = ({
       const lineHeight = parseFloat(getComputedStyle(descRef.current).lineHeight);
       const height = descRef.current.getBoundingClientRect().height;
       setHasLongDesc(description.split("\n").length > 1 || height > (lineHeight * 3)); 
-    }
+    };
   };
 
   const handleResize = () => {

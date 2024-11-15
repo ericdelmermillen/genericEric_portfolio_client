@@ -152,7 +152,8 @@ const AddEditDeleteProjectModal = ({
             <button 
               className="addEditDeleteProjectModal__button addEditDeleteProjectModal__button--cancel"
               onClick={handleCancelClick}
-            >Cancel
+            >
+              Cancel
             </button>
 
             <button 

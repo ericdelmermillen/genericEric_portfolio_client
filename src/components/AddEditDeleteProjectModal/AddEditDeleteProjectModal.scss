@@ -36,16 +36,11 @@
 		display: flex;
 		flex-direction: column;
 		height: 80%;
-		max-height: 40rem;
-		max-width: $largeTablet;
+		max-height: 35rem;
+		max-width: $tablet;
 		padding-block: 3rem;
-		width: 100%;
 		width: 90%;
 		z-index: 5;
-		// border: 2px solid red;
-		max-width: $tablet;
-
-		max-height: 35rem;
 
 		@media (min-width: $smallTablet) {
 			max-height: 30rem;
@@ -56,8 +51,8 @@
 		display: flex;
 		justify-content: center;
 
-		@media (min-width: $smallTablet) {
-		}
+		// @media (min-width: $smallTablet) {
+		// }
 	}
 
 	&__heading {
@@ -65,8 +60,8 @@
 		display: block;
 		margin-bottom: 3rem;
 
-		@media (min-width: $smallTablet) {
-		}
+		// @media (min-width: $smallTablet) {
+		// }
 
 		&::after {
 			@include afterAccent;
