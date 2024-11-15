@@ -299,9 +299,17 @@
 @mixin formHeading {
 	@include headingGeneral;
 	display: inline-block;
-	font-size: 2rem;
+	font-size: 1.125rem;
 	margin-bottom: 3rem;
 	position: relative;
+
+	@media (min-width: $smallTablet) {
+		font-size: 1.5rem;
+	}
+
+	@media (min-width: $tablet) {
+		font-size: 2rem;
+	}
 }
 
 @mixin formContent {
@@ -349,7 +357,7 @@
 	justify-content: center;
 	min-height: calc(100vh - $navHeight);
 	padding-bottom: 2rem;
-	padding-inline: 1rem;
+	// padding-inline: 1rem;
 	padding-top: calc($navHeight + 2rem);
 	position: relative;
 	width: 100%;
@@ -429,6 +437,7 @@
 	display: inline-flex;
 	font-size: 1.25rem;
 	font-family: var(--body-font);
+	font-size: 1.125rem;
 	font-weight: bold;
 	gap: 0.75rem;
 	font-weight: 200;
@@ -438,6 +447,10 @@
 	transition: all 250 ease-in-out;
 
 	@media (min-width: $smallTablet) {
+		font-size: 1.25rem;
+	}
+
+	@media (min-width: $tablet) {
 		font-size: 1.5rem;
 	}
 

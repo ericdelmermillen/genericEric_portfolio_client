@@ -4,13 +4,16 @@
 .projectsFeed {
 	& {
 		// border: 2px solid red;
-		// padding-inline: 2rem;
 		width: 100%;
 		display: flex;
 		flex-direction: column;
 		margin-top: 1.5rem;
 		// height: 100%;
 		// margin-top: calc(-100vh + $navHeight);
+
+		@media (min-width: $smallTablet) {
+			padding-inline: 2rem;
+		}
 	}
 
 	&__clickOffDiv {

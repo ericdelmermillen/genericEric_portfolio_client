@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { getMonthYear } from "../../../utils/utils";
 import "./Project.scss";
 import { useAppContext } from "../../contexts/AppContext";
@@ -18,11 +18,8 @@ const Project = ({
   const { isLoading } = useAppContext();
 
   const [ showFullInfo, setShowFullInfo ] = useState(false);
-  const [ hasLongTitle, setHasLongTitle ] = useState(!false);
-  const [ hasLongDesc, setHasLongDesc ] = useState(!false);
-  
-  // console.log(projectDescription)
-  // console.log(projectURLs)
+  const [ hasLongTitle, setHasLongTitle ] = useState(false);
+  const [ hasLongDesc, setHasLongDesc ] = useState(false);
 
   const titleRef = useRef(null); 
   const descRef = useRef(null); 
@@ -31,7 +28,10 @@ const Project = ({
   ? projectDescription 
   : projectDescription.split("\n")[0];
 
-  // console.log(desc)
+
+  // if(projectID === 8) {
+  //   console.log(desc)
+  // }
 
 
   const handleImageClick = () => {
@@ -44,7 +44,40 @@ const Project = ({
     setShowFullInfo(prev => !prev)
   }
 
-  // console.log(titleRef.current)
+
+  const checkHasLongTitle = () => {
+    if(titleRef.current) {
+      const lineHeight = parseFloat(getComputedStyle(titleRef.current).lineHeight);
+      const height = titleRef.current.getBoundingClientRect().height;
+      setHasLongTitle(height > lineHeight); 
+    }
+  };
+
+  const checkHasLongDesc = () => {
+    if(descRef.current) {
+      const lineHeight = parseFloat(getComputedStyle(descRef.current).lineHeight);
+      const height = descRef.current.getBoundingClientRect().height;
+      setHasLongDesc(projectDescription.split("\n").length > 1 || height > (lineHeight * 3)); 
+    }
+  };
+
+  const handleResize = () => {
+    checkHasLongTitle();
+    checkHasLongDesc();
+  };
+
+
+  //add event listener for resize of window and call handleResize for initial calculation
+  useEffect(() => {
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+
   
   return (
     <>
@@ -82,7 +115,11 @@ const Project = ({
                 ?
                   (
                     <p 
-                    className={`project__description ellipsis`}
+                    className={`project__description ${showFullInfo
+                      ? ""
+                      : "ellipsis"
+
+                    }`}
                     >
                       {desc}
                     </p>
@@ -117,29 +154,34 @@ const Project = ({
 
           </div>
 
+
         {projectURLs.length 
 
           ? 
             (
-              <ul className="project__urls">
+              <>
+                
+                <h4 className="project__links">Project Links:</h4>
+                <ul className="project__urls">
 
-                {projectURLs.map((project, index) => (
+                  {projectURLs.map((project, index) => (
 
-                  <li key={index} className="project__url">
-                    
-                    <a 
-                      className="project__url-link" 
-                      href={Object.values(project)[0]} 
-                      target="_blank" 
-                      rel="noopener noreferrer"
-                    >
-                      {Object.values(project)[0]}
-                    </a>
-                  </li>
+                    <li key={index} className="project__url">
+                      
+                      <a 
+                        className="project__url-link" 
+                        href={Object.values(project)[0]} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                      >
+                        {Object.values(project)[0]}
+                      </a>
+                    </li>
 
-                ))}
+                  ))}
 
-              </ul>
+                </ul>
+              </>
             ) 
             : null
           } 

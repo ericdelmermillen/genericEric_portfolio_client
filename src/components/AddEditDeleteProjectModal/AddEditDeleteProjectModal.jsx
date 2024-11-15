@@ -108,17 +108,18 @@ const AddEditDeleteProjectModal = ({
   };
 
 
-    // useEffect to close overlay on scroll
-    useEffect(() => {
-      if(scrollYPos !== prevScrollYPos && modalIsOpen) {
-        removeClassFromDiv("addEditDeleteProjectModal", "show");
-        setTimeout(() => {
-          if(showActionModal) {
-            setShowActionModal(false);
-          }
-        }, MODAL_TRANSITION_INTERVAL);
-      };
-    }, [scrollYPos, prevScrollYPos]);
+  // useEffect to close overlay on scroll
+  useEffect(() => {
+    if(scrollYPos !== prevScrollYPos && modalIsOpen) {
+      removeClassFromDiv("addEditDeleteProjectModal", "show");
+      setTimeout(() => {
+        if(showActionModal) {
+          setShowActionModal(false);
+        }
+      }, MODAL_TRANSITION_INTERVAL);
+    };
+  }, [scrollYPos, prevScrollYPos]);
+
 
   // useEffect to add show class after initial render to allow transitioning on height, width and opacity
   useEffect(() => {
@@ -142,10 +143,9 @@ const AddEditDeleteProjectModal = ({
             <div className="addEditDeleteProjectModal__header">
 
               <h4 className="addEditDeleteProjectModal__heading">
-                {modalAction} Project
+              {modalAction} Project #{projectID}?
               </h4>
             </div>
-          <h3 className="addEditDeleteProjectModal__sub-heading">{modalAction} Project {projectID}?</h3>
 
           <div className="addEditDeleteProjectModal__buttons">
 

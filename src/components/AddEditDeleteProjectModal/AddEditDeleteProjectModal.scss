@@ -39,13 +39,25 @@
 		max-height: 40rem;
 		max-width: $largeTablet;
 		padding-block: 3rem;
-		width: 80%;
+		width: 100%;
+		width: 90%;
 		z-index: 5;
+		// border: 2px solid red;
+		max-width: $tablet;
+
+		max-height: 35rem;
+
+		@media (min-width: $smallTablet) {
+			max-height: 30rem;
+		}
 	}
 
 	&__header {
 		display: flex;
 		justify-content: center;
+
+		@media (min-width: $smallTablet) {
+		}
 	}
 
 	&__heading {
@@ -53,15 +65,12 @@
 		display: block;
 		margin-bottom: 3rem;
 
+		@media (min-width: $smallTablet) {
+		}
+
 		&::after {
 			@include afterAccent;
 		}
-	}
-
-	&__sub-heading {
-		font-size: 1.75rem;
-		margin-block: auto;
-		margin-inline: auto;
 	}
 
 	&__buttons {

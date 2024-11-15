@@ -60,6 +60,11 @@
 		}
 	}
 
+	&__links {
+		font-weight: 400;
+		margin-top: 1rem;
+	}
+
 	&__urls {
 		display: flex;
 		flex-direction: column;
@@ -74,13 +79,11 @@
 		gap: 0.5rem;
 		color: var(--text-color);
 		font-size: 1rem;
-		// @include ellipsisOneLine;
-		// max-width: 15rem;
 	}
 
 	&__url-link {
 		@include ellipsisOneLine;
-		max-width: 15rem;
+		max-width: 90vw;
 		&:hover {
 			color: var(--accent-color);
 		}
@@ -88,5 +91,6 @@
 
 	&__show-full-info {
 		@include linkButton;
+		margin-top: 1rem;
 	}
 }

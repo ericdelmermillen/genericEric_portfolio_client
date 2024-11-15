@@ -19,7 +19,8 @@ const BlogPost = ({
   // can use windowWidth to determine values to use for font-size and line-height and pass them in as inline styles to deal with issues getting ref div line height for determining if the elipse class should be used
   // const windowWidth = window.innerWidth;
   // console.log(windowWidth)
-
+  
+  
   const { LIGHTBOX_TIMING_INTERVAL } = useAppContext();
   
   const [ showFullInfo, setShowFullInfo ] = useState(false);
@@ -68,7 +69,6 @@ const BlogPost = ({
   };
 
   const handleResize = () => {
-    // setWindowWidth(window.innerWidth);
     checkHasLongTitle();
     checkHasLongDesc();
   };
