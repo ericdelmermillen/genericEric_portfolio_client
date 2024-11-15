@@ -10,13 +10,11 @@ const Projects = ({ children }) => {
         <div className="projects__inner">
             {children}
           <div className="projects__content">
-
             <TypingText 
               classNames={"projects__heading"}
               textToType = 'Some Of My Projects'
             />
             <ProjectsFeed />
-
           </div>
 
         </div>

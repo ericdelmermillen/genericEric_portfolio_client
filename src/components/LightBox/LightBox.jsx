@@ -287,7 +287,6 @@ const LightBox = ({
                     ))}
 
                   </div>
-
                 )
               : 
                 (
@@ -296,7 +295,6 @@ const LightBox = ({
                     {currentIdx + 1} / {lightBoxImages.length}
                   </h4>
                 </div>
-
                 )
             }
 

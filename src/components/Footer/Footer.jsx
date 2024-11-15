@@ -46,9 +46,6 @@ const Footer = () => {
                   Eric Delmer Millen &copy; {new Date().getFullYear()}
                 </p>
               )
-            
-            
-
             }
           <ul className="footer__socials">
 

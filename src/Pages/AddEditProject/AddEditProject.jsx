@@ -16,6 +16,7 @@ const AddEditProject = ({ children }) => {
   // fetch existing project on mount useEffect
   useEffect(() => {
     if(isEditProject) { 
+      // use token and refreshToken in headers
 
       try {
 
@@ -24,7 +25,7 @@ const AddEditProject = ({ children }) => {
       }
 
     }
-    
+
   }, [])
 
   return (

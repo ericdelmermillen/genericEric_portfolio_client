@@ -1,4 +1,4 @@
-import { useState, useEffect, createElement, useRef } from 'react';
+import { useState, useEffect, useRef, createElement } from 'react';
 import "./TypingText.scss";
 
 const TypingText = ({ 
@@ -7,13 +7,15 @@ const TypingText = ({
   classNames, 
   elementType = 'h1', 
 }) => {
+  
   const [ typingText, setTypingText ] = useState('');
   const typingTextRef = useRef('');
   const intervalRef = useRef(null);
 
+
+  // Clear previous interval if any
+  // intervals not automatically cleared by unmounting
   useEffect(() => {
-    // Clear previous interval if any
-    // intervals not automatically cleared by unmounting
     if(intervalRef.current) {
       clearInterval(intervalRef.current);
     };

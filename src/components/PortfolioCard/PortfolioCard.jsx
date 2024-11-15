@@ -21,9 +21,7 @@ const PortfolioCard = ({
   isProjectOrderEditable,
   isLoggedIn,
   isEditMode,
-
   handleCardClick,
-  
   handleDeleteProjectClick,
   handleEditProjectClick,
   handleDragStart,

@@ -4,7 +4,6 @@ import {
   useState
 } from "react";
 
-
 const LightBoxContext = createContext();
 
 const LightBoxContextProvider = ( { children }) => {
@@ -36,8 +35,6 @@ const LightBoxContextProvider = ( { children }) => {
       setCurrentIdx(c => c - 1);
     };
   };
-
-
 
   const contextValues = {
     showLightBox, 
