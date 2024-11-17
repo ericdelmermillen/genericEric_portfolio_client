@@ -4,6 +4,7 @@ import { addClassToDiv, removeClassFromDiv } from "../../../utils/utils";
 import { removeTokens, setTokens } from '../../../utils/utils.js';
 import toast from "react-hot-toast";
 import "./AddEditDeleteProjectModal.scss";
+import { useNavigate } from "react-router-dom";
 
 const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
@@ -28,6 +29,8 @@ const AddEditDeleteProjectModal = ({
     logoutUser,
     MODAL_TRANSITION_INTERVAL
   } = useAppContext();
+
+  const navigate = useNavigate();
 
   const handleActionClearing = () => {
     removeClassFromDiv("addEditDeleteProjectModal", "show")
@@ -60,10 +63,10 @@ const AddEditDeleteProjectModal = ({
       const response = await fetch(`${BASE_URL}/projects/project/delete/${projectID}`, {
         method: 'DELETE',
         headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
-          refreshToken: refreshToken,
-        },
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`,
+          "x-refresh-token": refreshToken, 
+        }
       });
   
       if(!response.ok && response.status === 401) {
@@ -104,7 +107,8 @@ const AddEditDeleteProjectModal = ({
   };
 
   const handleEditProject = (projectID) => {
-    console.log(`Edit project ${projectID}?`)
+    navigate(`/projects/edit/${projectID}`);
+
   };
 
 

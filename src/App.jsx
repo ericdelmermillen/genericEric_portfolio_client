@@ -114,23 +114,35 @@ const App = () => {
               } 
             />
             
-            <Route 
-              path="/projects/add" 
-              element={
-                <AddEditProject>
-                  <WallPaper />
-                </AddEditProject>
-              } 
-            />
+            {isLoggedIn
+              ? 
+                (
+                  <Route 
+                  path="/projects/add" 
+                  element={
+                    <AddEditProject>
+                      <WallPaper />
+                    </AddEditProject>
+                  } 
+                  />
+                )
+              : null
+            }
 
-            <Route 
-              path="/projects/edit/:projectID" 
-              element={
-                <AddEditProject>
-                  <WallPaper />
-                </AddEditProject>
-              } 
-            />
+            {isLoggedIn
+              ? 
+                (
+                  <Route 
+                    path="/projects/edit/:projectID" 
+                    element={
+                      <AddEditProject>
+                        <WallPaper />
+                      </AddEditProject>
+                    } 
+                  />
+                )
+              : null
+            }
 
             <Route 
               path='/blog'

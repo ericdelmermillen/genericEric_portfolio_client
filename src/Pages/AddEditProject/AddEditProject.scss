@@ -10,7 +10,50 @@
 		@include wallpaperContainer;
 	}
 
-	&__h1 {
-		margin-block: 10rem;
+	&__content {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		max-width: $largeTablet;
+		// max-width: $tablet;
+		width: 90%;
+		@include formFullWidth;
+		min-height: calc(90vh - ($navHeight + $footerHeight));
+		margin-top: 1rem;
+	}
+
+	&__heading {
+		@include headingGeneral;
+		display: inline-block;
+		margin-top: 2rem;
+		position: relative;
+
+		&::after {
+			@include afterAccent;
+		}
+	}
+
+	&__buttons {
+		display: flex;
+		justify-content: center;
+		gap: 1rem;
+		margin-top: auto;
+		margin-bottom: 2rem;
+		flex-direction: column-reverse;
+		width: 100%;
+
+		@media (min-width: $smallTablet) {
+			flex-direction: row;
+			gap: 2rem;
+		}
+	}
+
+	&__button {
+		@include button;
+	}
+
+	&__calendar-icon {
+		fill: var(--text-color);
+		fill: var(--accent-color);
 	}
 }

@@ -1,7 +1,7 @@
 import { useEffect, useState, useCallback } from 'react';
 import { useAppContext } from '../../contexts/AppContext.jsx';
 import { useLightBoxContext } from '../../contexts/LightBoxContext.jsx';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { MdModeEdit } from 'react-icons/md';
 import { removeTokens, scrollToDivTop } from '../../../utils/utils.js';
 import AddEditDeleteProjectModal from '../AddEditDeleteProjectModal/AddEditDeleteProjectModal.jsx';
@@ -46,6 +46,8 @@ const Portfolio = () => {
     handleDecrementCurrentIdx
   } = useLightBoxContext();
 
+  const navigate = useNavigate();
+
   
   const [ activeDragProject, setActiveDragProject ] = useState({project_id: -1}); 
   const [ displayNonePlaceholders, setDisplayNonePlaceholders ] = useState(false);
@@ -73,6 +75,7 @@ const Portfolio = () => {
   // ***need logic to open AddEditDeleteProjectModal then navigate to new project page
   const handleAddNewProject = () => {
     console.log("add new project");
+    navigate("/projects/add")
   };
 
   const handleSetIsEditModeTrue = async () => {
@@ -267,9 +270,9 @@ const Portfolio = () => {
       const response = await fetch(`${BASE_URL}/projects/updateorder`, {
         method: "PATCH",
         headers: {
-          'Content-Type': 'application/json', 
-          Authorization: `Bearer ${token}`,
-          refreshToken: refreshToken
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`,
+          "x-refresh-token": refreshToken, 
         },
         body: JSON.stringify({ new_project_order: newProjectOrder })
       });
