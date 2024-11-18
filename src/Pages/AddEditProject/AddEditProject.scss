@@ -56,4 +56,37 @@
 		fill: var(--text-color);
 		fill: var(--accent-color);
 	}
+
+	&__photoInputs {
+		border: 2px solid red;
+		display: grid;
+		gap: 2rem;
+		grid-template-columns: repeat(auto-fit, 1fr);
+		justify-content: center;
+		padding-block: 1rem;
+		margin-block: 1rem;
+		width: 100%;
+
+		@media (min-width: 500px) {
+			gap: 3rem;
+			grid-template-columns: repeat(2, 1fr);
+			min-width: 20rem;
+		}
+
+		@media (min-width: $tablet) {
+			margin-block: 2rem;
+			min-width: 30rem;
+			padding-inline: 25%;
+		}
+
+		@media (min-width: $largeTablet) {
+			gap: 2rem;
+			grid-template-columns: repeat(5, 1fr);
+		}
+	}
+
+	&__photoInput {
+		max-height: 100%;
+		max-width: 100%;
+	}
 }

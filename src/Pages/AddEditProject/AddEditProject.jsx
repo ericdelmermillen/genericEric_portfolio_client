@@ -1,12 +1,16 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useAppContext } from "../../contexts/AppContext";
 import { useLocation, useParams } from "react-router-dom";
 import { scrollToTop } from "../../../utils/utils";
+import Compressor from "compressorjs";
 import ProjectDatePicker from "../../components/ProjectDatePicker/ProjectDatePicker";
 import toast from "react-hot-toast";
+import PhotoInput from "../../components/PhotoInput/PhotoInput";
 import "./AddEditProject.scss"
 
 const BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
+const numberOfPhotoUploads = 4;
 
 const AddEditProject = ({ children }) => {
 
@@ -19,6 +23,50 @@ const AddEditProject = ({ children }) => {
 
   const isEditProject = pathname.includes("edit");
   const isAddProject = pathname.includes("add");
+
+  const [ photos, setPhotos ] = useState(
+    Array.from({ length: numberOfPhotoUploads }, (_, idx) => ({
+      photoNo: idx + 1,
+      photoPreview: null,
+      photoData: null,
+      displayOrder: idx + 1
+    }))
+  );
+  
+  const handleImageChange = useCallback(async (e, inputNo) => {
+    const file = e.target.files[0];
+    
+    try {
+      const compressedImage = await new Promise((resolve, reject) => {
+        new Compressor(file, {
+          quality: 0.8,
+          maxWidth: 1200,
+          maxHeight: 900,
+          mimeType: 'auto',
+          convertSize: 600000,
+          success(result) {
+            resolve(result);
+          },
+          error(error) {
+            reject(error);
+          }
+        });
+      });
+
+      const compressedImageUrl = URL.createObjectURL(compressedImage);
+
+      setPhotos((prevPhotos) => 
+        prevPhotos.map((photo) => 
+          photo.photoNo === inputNo 
+            ? { ...photo, photoPreview: compressedImageUrl, photoData: compressedImage } 
+            : photo
+        )
+      );
+    } catch (error) {
+      console.error('Error compressing image:', error);
+    }
+  }, []);
+
 
   const fetchProjectDetails = async (projectID) => {
     // setIsLoading(true);
@@ -97,6 +145,24 @@ const AddEditProject = ({ children }) => {
             iconClassName={"addEditProject__calendar-icon"}
             rawDate={rawDate}
           />
+
+          <div className="addEditProject__photoInputs">
+
+            {photos.map(shootPhoto => 
+              <div 
+              className="addEditProject__photoInput"
+              key={shootPhoto.photoNo}
+              > 
+                <PhotoInput 
+                  shootPhoto={shootPhoto}
+                  setPhotos={setPhotos}
+                  handleImageChange={handleImageChange}
+                />
+              </div>
+              )
+            }
+
+          </div>
 
 
           <div className="addEditProject__buttons">
