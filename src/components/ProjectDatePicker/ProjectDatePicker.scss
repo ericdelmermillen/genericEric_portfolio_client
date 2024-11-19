@@ -5,20 +5,17 @@
 	& {
 		margin-top: 2rem;
 		position: relative;
-		width: 9rem;
+		width: 8.75rem;
 		z-index: 2;
 	}
 
 	&__selector {
-		border: 2px solid red;
-		// @include input;
-		cursor: pointer;
-
 		border: 1px solid var(--text-color);
 		border-radius: var(--border-radius);
 		background: var(--neutralBG);
 		background: none;
 		color: var(--text-color) !important;
+		cursor: pointer;
 		font-family: Arial, Helvetica, sans-serif;
 		font-size: 1.125rem;
 		padding-block: 0.5rem;

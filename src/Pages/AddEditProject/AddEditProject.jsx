@@ -18,6 +18,8 @@ const AddEditProject = ({ children }) => {
   const [ projectDate, setProjectDate ] = useState(new Date());
   const [ rawDate, setRawDate ] = useState('');
 
+  const [ activeDragInput, setActiveDragInput ] = useState({id: -1}); 
+
   const { projectID } = useParams();
   const { pathname} = useLocation();
 
@@ -67,18 +69,77 @@ const AddEditProject = ({ children }) => {
     }
   }, []);
 
+  const handleInputDragStart = useCallback((photoNo) => {
+    const draggedInput = photos.find(photo => photo.photoNo === photoNo);
+    setActiveDragInput(draggedInput);
+  }, [photos]);
+
+
+  const handleDropInputTarget = useCallback((dropTargetInputNo, dropTargetInputDisplayOrder) => {
+    setPhotos(prevPhotos => {
+      const activeDraggedInputNo = activeDragInput.photoNo;
+      const activeDraggedInputOldDisplayOrder = activeDragInput.displayOrder;
+  
+      const highestDisplayOrder = prevPhotos.reduce((maxDisplayOrder, photo) => {
+        return Math.max(maxDisplayOrder, photo.displayOrder);
+      }, 0);
+  
+      const updatedPhotos = prevPhotos.map(photo => ({ ...photo }));
+  
+      for (const photo of updatedPhotos) {
+        if (dropTargetInputNo !== activeDraggedInputNo) {
+          if (dropTargetInputDisplayOrder === highestDisplayOrder) {
+            if (photo.photoNo === dropTargetInputNo) {
+              photo.displayOrder = dropTargetInputDisplayOrder - 1;
+            } else if (photo.photoNo === activeDraggedInputNo) {
+              photo.displayOrder = dropTargetInputDisplayOrder;
+            } else if (photo.displayOrder < dropTargetInputDisplayOrder && photo.displayOrder >= activeDraggedInputOldDisplayOrder) {
+              photo.displayOrder--;
+            }
+          } else if (activeDraggedInputOldDisplayOrder > dropTargetInputDisplayOrder) {
+            if (photo.photoNo === dropTargetInputNo) {
+              photo.displayOrder = dropTargetInputDisplayOrder + 1;
+            } else if (photo.photoNo === activeDraggedInputNo) {
+              photo.displayOrder = dropTargetInputDisplayOrder;
+            } else if (photo.displayOrder > dropTargetInputDisplayOrder && photo.displayOrder <= activeDraggedInputOldDisplayOrder) {
+              photo.displayOrder++;
+            }
+          } else if (dropTargetInputDisplayOrder > activeDraggedInputOldDisplayOrder) {
+            if (photo.photoNo === dropTargetInputNo) {
+              photo.displayOrder = dropTargetInputDisplayOrder - 1;
+            } else if (photo.photoNo === activeDraggedInputNo) {
+              photo.displayOrder = dropTargetInputDisplayOrder;
+            } else if (photo.displayOrder <= dropTargetInputDisplayOrder && photo.displayOrder > activeDraggedInputOldDisplayOrder) {
+              photo.displayOrder--;
+            }
+          }
+        }
+      }
+  
+      updatedPhotos.sort((a, b) => a.displayOrder - b.displayOrder);
+  
+      return updatedPhotos;
+    });
+  
+    setActiveDragInput({id: -1});
+  }, [activeDragInput.id]);
+
+
+
+
+
 
   const fetchProjectDetails = async (projectID) => {
     // setIsLoading(true);
     const token = localStorage.getItem('token');
     const refreshToken = localStorage.getItem('refreshToken');
-  
+    
     if(!token || !refreshToken) {
       toast.error('Authorization or refresh token missing.');
       logoutUser();
       return;
     };
-
+    
     try {
       const response = await fetch(`${BASE_URL}/projects/project/${projectID}`, {
         headers: {
@@ -98,7 +159,19 @@ const AddEditProject = ({ children }) => {
       };
 
       const data = await response.json();
-      console.log(data)
+      
+      const fetchedPhotos = data.project_photos.map((photo, idx) => (
+        {
+          photoNo: idx + 1,
+          photoPreview: data.project_photos[idx]?.photo_url ?? photo.photoPreview,
+          photoData: null,
+          displayOrder: idx + 1
+
+        }
+      ));
+
+      setPhotos(fetchedPhotos);
+      
     } catch(error) {
       console.log(error);
       toast.error(error.message);
@@ -120,9 +193,9 @@ const AddEditProject = ({ children }) => {
   // fetch existing project on mount useEffect
   useEffect(() => {
     if(isEditProject) { 
-      fetchProjectDetails(projectID)
-    }
-    scrollToTop()
+      fetchProjectDetails(projectID);
+    };
+    scrollToTop();
   }, []);
 
   return (
@@ -157,6 +230,8 @@ const AddEditProject = ({ children }) => {
                   shootPhoto={shootPhoto}
                   setPhotos={setPhotos}
                   handleImageChange={handleImageChange}
+                  handleInputDragStart={handleInputDragStart}
+                  handleDropInputTarget={handleDropInputTarget}
                 />
               </div>
               )

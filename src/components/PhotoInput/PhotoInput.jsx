@@ -13,7 +13,6 @@ const PhotoInput = ({
   handleDropInputTarget = null
 }) => {
 
-  // console.log(typeof handleImageChange)
   const [ showImage, setShowImage ] = useState(false);
 
   const inputNo = shootPhoto.photoNo;
@@ -23,7 +22,6 @@ const PhotoInput = ({
 
   const handleFileInputChange = () => {
     fileInputRef.current.click();
-    console.log("input change")
   };
 
   const handleFileChange = async (e) => {
