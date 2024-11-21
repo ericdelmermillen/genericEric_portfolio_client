@@ -37,6 +37,10 @@ const AddEditProject = ({ children }) => {
 
   const [ title, setTitle ] = useState('');
   const [ desc, setDesc ] = useState('');
+  const [ deployedURL, setDeployedURL ] = useState('');
+  const [ youtubeVideoURL, setYoutubeVideoURL ] = useState('');
+  const [ githubClientUrl, setGithubClientUrl ] = useState('');
+  const [ githubServerUrl, setGithubServerUrl ] = useState('');
   
   const handleImageChange = useCallback(async (e, inputNo) => {
     const file = e.target.files[0];
@@ -184,6 +188,21 @@ const AddEditProject = ({ children }) => {
       
       setTitle(data.project_title);
       setDesc(data.project_description.replace(/\n/g, "\n\n"));
+
+      console.log(data.project_urls)
+      
+
+      data.project_urls.forEach(url => {
+        if(url["Deployed Url"]) {
+          setDeployedURL(Object.entries(url)[0][1])
+        } else if(url["Youtube Video"]) {
+          setYoutubeVideoURL(Object.entries(url)[0][1])
+        } else if(url["Github (Client)"]) {
+          setGithubClientUrl(Object.entries(url)[0][1])
+        } else if(url["Github (Server)"]) {
+          setGithubServerUrl(Object.entries(url)[0][1])
+        }
+      })
       
     } catch(error) {
       console.log(error);
@@ -202,6 +221,36 @@ const AddEditProject = ({ children }) => {
   const handleDescChange = (e) => {
     console.log(e.target.value)
     setDesc(e.target.value)
+  }
+  
+  
+  const handleDeployedURLChange = (e) => {
+    console.log(e.target.value)
+    setDeployedURL(e.target.value)
+  }
+  
+
+  
+  const handleYoutubeVideoURLChange = (e) => {
+    console.log(e.target.value)
+    setYoutubeVideoURL(e.target.value)
+  }
+  
+  
+
+
+  const handleGithubClientURLChange = (e) => {
+    console.log(e.target.value)
+    setGithubClientUrl(e.target.value)
+  }
+  
+
+
+
+
+  const handleGithubServerURLChange = (e) => {
+    console.log(e.target.value)
+    setGithubServerUrl(e.target.value)
   }
   
   
@@ -280,6 +329,7 @@ const AddEditProject = ({ children }) => {
                 type="text" 
                 value={title}
                 onChange={(e) => handleTitleChange(e)}
+                placeholder="Title for project"
               />
 
 
@@ -295,7 +345,69 @@ const AddEditProject = ({ children }) => {
               className="addEditProject__desc" 
               value={desc}
               onChange={(e) => handleDescChange(e)}
+              placeholder="Description of the project"
             ></textarea>
+
+            <label
+              // className="addEditProject__deployed-url" 
+              htmlFor="deployedURL"
+            >
+              {/* {`Title for project ${title}`} */}
+            </label>
+              <input 
+                id="deployedURL"
+                className="addEditProject__deployed-url" 
+                type="url" 
+                value={deployedURL}
+                onChange={(e) => handleDeployedURLChange(e)}
+                placeholder="Deployed site url"
+              />
+
+            <label
+              // className="addEditProject__youtube-url" 
+              htmlFor="youtubeURL"
+            >
+              {/* {`Title for project ${title}`} */}
+            </label>
+              <input 
+                id="youtubeURL"
+                className="addEditProject__youtube-url" 
+                type="url" 
+                value={youtubeVideoURL}
+                onChange={(e) => handleYoutubeVideoURLChange(e)}
+                placeholder="Youtube video url"
+              />
+  
+            <label
+              // className="addEditProject__githubClient-url" 
+              htmlFor="githubClient"
+            >
+              {/* {`Title for project ${title}`} */}
+            </label>
+              <input 
+                id="githubClient"
+                className="addEditProject__githubClient-url" 
+                type="url" 
+                value={githubClientUrl}
+                onChange={(e) => handleGithubClientURLChange(e)}
+                placeholder="Github client url"
+              />
+  
+            <label
+              // className="addEditProject__githubClient-url" 
+              htmlFor="githubServer"
+            >
+              {/* {`Title for project ${title}`} */}
+            </label>
+              <input 
+                id="githubServer"
+                className="addEditProject__githubServer-url" 
+                type="url" 
+                value={githubServerUrl}
+                onChange={(e) => handleGithubServerURLChange(e)}
+                placeholder="Github server url"
+              />
+
 
             
           </div>

@@ -93,10 +93,16 @@
 
 	&__text {
 		border: 2px solid red;
-		height: 20rem;
+		height: 30rem;
 		width: 100%;
 		display: flex;
 		flex-direction: column;
+		max-width: $tablet;
+		margin-bottom: 2rem;
+	}
+
+	&__desc {
+		margin-bottom: 1rem;
 	}
 
 	&__title-label,
@@ -104,7 +110,18 @@
 		@include hiddenLabel;
 	}
 
+	&__title {
+		margin-bottom: 1rem;
+	}
+
 	&__desc {
 		height: 100%;
+	}
+
+	&__deployed-url,
+	&__youtube-url,
+	&__githubClient-url,
+	&__githubServer-url {
+		margin-bottom: 1rem;
 	}
 }
