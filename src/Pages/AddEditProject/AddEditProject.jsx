@@ -34,6 +34,9 @@ const AddEditProject = ({ children }) => {
       displayOrder: idx + 1
     }))
   );
+
+  const [ title, setTitle ] = useState('');
+  const [ desc, setDesc ] = useState('');
   
   const handleImageChange = useCallback(async (e, inputNo) => {
     const file = e.target.files[0];
@@ -170,7 +173,17 @@ const AddEditProject = ({ children }) => {
         }
       ));
 
-      setPhotos(fetchedPhotos);
+      setRawDate(data.project_date);
+
+      setPhotos(prevPhotos => 
+        prevPhotos.map((photo, idx) => ({
+          ...photo,
+          photoPreview: data.project_photos[idx]?.photo_url || photo.photoPreview
+        }))
+      );
+      
+      setTitle(data.project_title);
+      setDesc(data.project_description.replace(/\n/g, "\n\n"));
       
     } catch(error) {
       console.log(error);
@@ -179,6 +192,19 @@ const AddEditProject = ({ children }) => {
       setIsLoading(false);
     };
   };
+
+  const handleTitleChange = (e) => {
+    console.log(e.target.value)
+    setTitle(e.target.value)
+  }
+  
+  
+  const handleDescChange = (e) => {
+    console.log(e.target.value)
+    setDesc(e.target.value)
+  }
+  
+  
 
   const handleCancel = () => {
     console.log("Cancel")
@@ -208,7 +234,7 @@ const AddEditProject = ({ children }) => {
           <h1 className="addEditProject__heading">
             {isAddProject
               ? "Add New Project"
-              : `Edit Project #${projectID}`
+              : `Update Project #${projectID}`
             }
           </h1>
 
@@ -238,6 +264,42 @@ const AddEditProject = ({ children }) => {
             }
 
           </div>
+
+
+          <div className="addEditProject__text">
+
+            <label
+              className="addEditProject__title-label" 
+              htmlFor="projectTitle"
+            >
+              {`Title for project ${title}`}
+            </label>
+              <input 
+                id="projectTitle"
+                className="addEditProject__title" 
+                type="text" 
+                value={title}
+                onChange={(e) => handleTitleChange(e)}
+              />
+
+
+            <label
+              className="addEditProject__desc-label" 
+              htmlFor="projectTitle"
+            >
+              {`Description for project ${title}`}
+            </label>
+
+            <textarea 
+              id="projectDescription"
+              className="addEditProject__desc" 
+              value={desc}
+              onChange={(e) => handleDescChange(e)}
+            ></textarea>
+
+            
+          </div>
+
 
 
           <div className="addEditProject__buttons">

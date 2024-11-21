@@ -90,4 +90,21 @@
 		max-height: 100%;
 		max-width: 100%;
 	}
+
+	&__text {
+		border: 2px solid red;
+		height: 20rem;
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+	}
+
+	&__title-label,
+	&__desc-label {
+		@include hiddenLabel;
+	}
+
+	&__desc {
+		height: 100%;
+	}
 }
