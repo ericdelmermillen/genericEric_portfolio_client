@@ -6,7 +6,7 @@ import './PhotoInput.scss';
 const isFirefox = checkIfIsFirefox();
 
 const PhotoInput = ({ 
-  shootPhoto, 
+  photo, 
   setPhotos, 
   handleImageChange,
   handleInputDragStart = null,
@@ -15,8 +15,8 @@ const PhotoInput = ({
 
   const [ showImage, setShowImage ] = useState(false);
 
-  const inputNo = shootPhoto.photoNo;
-  const displayOrder = shootPhoto.displayOrder;
+  const inputNo = photo.photoNo;
+  const displayOrder = photo.displayOrder;
 
   const fileInputRef = useRef(null);
 
@@ -27,19 +27,19 @@ const PhotoInput = ({
   const handleFileChange = async (e) => {
     const file = e.target.files[0];
     setShowImage(true);
-    file && handleImageChange(e, shootPhoto.photoNo);
+    file && handleImageChange(e, photo.photoNo);
   };
 
   const handleClearInput = (e) => {
     e.stopPropagation();
     setShowImage(false);
   
-    setPhotos(prevShootPhotos => {
-      return prevShootPhotos.map(shootPhoto => {
-        if(shootPhoto.photoNo === inputNo) {
-          return { ...shootPhoto, photoPreview: null, photoData: null };
+    setPhotos(prevPhotos => {
+      return prevPhotos.map(photo => {
+        if(photo.photoNo === inputNo) {
+          return { ...photo, photoPreview: null, photoData: null };
         }
-        return shootPhoto;
+        return photo;
       });
     });
   };
@@ -82,7 +82,7 @@ const PhotoInput = ({
             className={`photoInput__image ${showImage 
               ? "inFront" 
               : ""}`}
-            src={shootPhoto.photoPreview}
+            src={photo.photoPreview}
             onLoad={handleImageLoad} 
             draggable={true}
           />
@@ -108,7 +108,7 @@ const PhotoInput = ({
         <input
           ref={fileInputRef}
           type="file"
-          id={`fileInput_${shootPhoto.photoNo}`}
+          id={`fileInput_${photo.photoNo}`}
           accept="image/jpeg, image/png"
           className="photoInput__fileInput"
           onChange={(e) => handleFileChange(e)}

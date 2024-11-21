@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useAppContext } from "../../contexts/AppContext";
 import { useLocation, useParams } from "react-router-dom";
 import { scrollToTop } from "../../../utils/utils";
@@ -14,11 +14,16 @@ const numberOfPhotoUploads = 4;
 
 const AddEditProject = ({ children }) => {
 
-  const { loading, setIsLoading } = useAppContext();
+  const { 
+    loading, 
+    setIsLoading,
+    MIN_LOADING_INTERVAL 
+  } = useAppContext();
+  
   const [ projectDate, setProjectDate ] = useState(new Date());
   const [ rawDate, setRawDate ] = useState('');
 
-  const [ activeDragInput, setActiveDragInput ] = useState({id: -1}); 
+  const [ activeDragInput, setActiveDragInput ] = useState({id: - 1}); 
 
   const { projectID } = useParams();
   const { pathname} = useLocation();
@@ -37,6 +42,7 @@ const AddEditProject = ({ children }) => {
 
   const [ title, setTitle ] = useState('');
   const [ desc, setDesc ] = useState('');
+
   const [ deployedURL, setDeployedURL ] = useState('');
   const [ youtubeVideoURL, setYoutubeVideoURL ] = useState('');
   const [ githubClientUrl, setGithubClientUrl ] = useState('');
@@ -118,10 +124,10 @@ const AddEditProject = ({ children }) => {
               photo.displayOrder = dropTargetInputDisplayOrder;
             } else if (photo.displayOrder <= dropTargetInputDisplayOrder && photo.displayOrder > activeDraggedInputOldDisplayOrder) {
               photo.displayOrder--;
-            }
-          }
-        }
-      }
+            };
+          };
+        };
+      };
   
       updatedPhotos.sort((a, b) => a.displayOrder - b.displayOrder);
   
@@ -133,11 +139,8 @@ const AddEditProject = ({ children }) => {
 
 
 
-
-
-
   const fetchProjectDetails = async (projectID) => {
-    // setIsLoading(true);
+    setIsLoading(true);
     const token = localStorage.getItem('token');
     const refreshToken = localStorage.getItem('refreshToken');
     
@@ -152,7 +155,7 @@ const AddEditProject = ({ children }) => {
         headers: {
           "Content-Type": "application/json",
           "Authorization": `Bearer ${token}`,
-          "x-refresh-token": refreshToken, 
+          "x-refresh-token": refreshToken
         }
       });
 
@@ -166,6 +169,8 @@ const AddEditProject = ({ children }) => {
       };
 
       const data = await response.json();
+
+      setRawDate(data.project_date);
       
       const fetchedPhotos = data.project_photos.map((photo, idx) => (
         {
@@ -177,8 +182,6 @@ const AddEditProject = ({ children }) => {
         }
       ));
 
-      setRawDate(data.project_date);
-
       setPhotos(prevPhotos => 
         prevPhotos.map((photo, idx) => ({
           ...photo,
@@ -189,71 +192,58 @@ const AddEditProject = ({ children }) => {
       setTitle(data.project_title);
       setDesc(data.project_description.replace(/\n/g, "\n\n"));
 
-      console.log(data.project_urls)
-      
-
       data.project_urls.forEach(url => {
         if(url["Deployed Url"]) {
-          setDeployedURL(Object.entries(url)[0][1])
+          setDeployedURL(Object.entries(url)[0][1]);
         } else if(url["Youtube Video"]) {
-          setYoutubeVideoURL(Object.entries(url)[0][1])
+          setYoutubeVideoURL(Object.entries(url)[0][1]);
         } else if(url["Github (Client)"]) {
-          setGithubClientUrl(Object.entries(url)[0][1])
+          setGithubClientUrl(Object.entries(url)[0][1]);
         } else if(url["Github (Server)"]) {
-          setGithubServerUrl(Object.entries(url)[0][1])
-        }
-      })
+          setGithubServerUrl(Object.entries(url)[0][1]);
+        };
+      });
       
     } catch(error) {
       console.log(error);
       toast.error(error.message);
     } finally {
-      setIsLoading(false);
+      setTimeout(() => {
+        setIsLoading(false);
+      }, MIN_LOADING_INTERVAL);
     };
   };
 
+
+
   const handleTitleChange = (e) => {
-    console.log(e.target.value)
-    setTitle(e.target.value)
-  }
-  
+    setTitle(e.target.value);
+  };
   
   const handleDescChange = (e) => {
-    console.log(e.target.value)
-    setDesc(e.target.value)
-  }
-  
+    setDesc(e.target.value);
+  };
   
   const handleDeployedURLChange = (e) => {
-    console.log(e.target.value)
-    setDeployedURL(e.target.value)
-  }
+    setDeployedURL(e.target.value);
+  };
   
-
   
   const handleYoutubeVideoURLChange = (e) => {
-    console.log(e.target.value)
-    setYoutubeVideoURL(e.target.value)
-  }
-  
-  
-
+    setYoutubeVideoURL(e.target.value);
+  };
 
   const handleGithubClientURLChange = (e) => {
-    console.log(e.target.value)
-    setGithubClientUrl(e.target.value)
-  }
+    setGithubClientUrl(e.target.value);
+  };
   
-
-
-
-
   const handleGithubServerURLChange = (e) => {
-    console.log(e.target.value)
-    setGithubServerUrl(e.target.value)
-  }
+    setGithubServerUrl(e.target.value);
+  };
   
   
+
+
 
   const handleCancel = () => {
     console.log("Cancel")
@@ -263,6 +253,7 @@ const AddEditProject = ({ children }) => {
   const handleSubmit = () => {
     console.log(`Submitting ${isAddProject ? "new project" : "updated project"}`)
   };
+
 
 
   // fetch existing project on mount useEffect
@@ -275,54 +266,50 @@ const AddEditProject = ({ children }) => {
 
   return (
     <>
-    <div className="addEditProject">
-      <div className="addEditProject__inner">
-        {children}
-        <div className="addEditProject__content">
+      <div className="addEditProject">
+        <div className="addEditProject__inner">
+          {children}
+          <div className="addEditProject__content">
 
-          <h1 className="addEditProject__heading">
-            {isAddProject
-              ? "Add New Project"
-              : `Update Project #${projectID}`
-            }
-          </h1>
+            <h1 className="addEditProject__heading">
+              {isAddProject
+                ? "Add New Project"
+                : `Edit Project #${projectID}`
+              }
+            </h1>
 
-          <ProjectDatePicker 
-            projectDate={projectDate}
-            setProjectDate={setProjectDate}
-            iconClassName={"addEditProject__calendar-icon"}
-            rawDate={rawDate}
-          />
+            <ProjectDatePicker 
+              projectDate={projectDate}
+              setProjectDate={setProjectDate}
+              iconClassName={"addEditProject__calendar-icon"}
+              rawDate={rawDate}
+            />
 
-          <div className="addEditProject__photoInputs">
+            <div className="addEditProject__photoInputs">
 
-            {photos.map(shootPhoto => 
-              <div 
-              className="addEditProject__photoInput"
-              key={shootPhoto.photoNo}
-              > 
-                <PhotoInput 
-                  shootPhoto={shootPhoto}
-                  setPhotos={setPhotos}
-                  handleImageChange={handleImageChange}
-                  handleInputDragStart={handleInputDragStart}
-                  handleDropInputTarget={handleDropInputTarget}
-                />
-              </div>
-              )
-            }
+              {photos.map(photo => 
 
-          </div>
+                <div className="addEditProject__photoInput" key={photo.photoNo}> 
+                  <PhotoInput 
+                    photo={photo}
+                    setPhotos={setPhotos}
+                    handleImageChange={handleImageChange}
+                    handleInputDragStart={handleInputDragStart}
+                    handleDropInputTarget={handleDropInputTarget}
+                  />
+                </div>
+
+              )}
+
+            </div>
 
 
-          <div className="addEditProject__text">
+            <div className="addEditProject__text">
 
-            <label
-              className="addEditProject__title-label" 
-              htmlFor="projectTitle"
-            >
-              {`Title for project ${title}`}
-            </label>
+              <label className="addEditProject__title-label" htmlFor="projectTitle">
+                {`Title for project ${title}`}
+              </label>
+
               <input 
                 id="projectTitle"
                 className="addEditProject__title" 
@@ -333,27 +320,22 @@ const AddEditProject = ({ children }) => {
               />
 
 
-            <label
-              className="addEditProject__desc-label" 
-              htmlFor="projectTitle"
-            >
-              {`Description for project ${title}`}
-            </label>
+              <label className="addEditProject__desc-label" htmlFor="projectTitle">
+                {`Description for project ${title}`}
+              </label>
 
-            <textarea 
-              id="projectDescription"
-              className="addEditProject__desc" 
-              value={desc}
-              onChange={(e) => handleDescChange(e)}
-              placeholder="Description of the project"
-            ></textarea>
+              <textarea 
+                id="projectDescription"
+                className="addEditProject__desc" 
+                value={desc}
+                onChange={(e) => handleDescChange(e)}
+                placeholder="Description of the project"
+              ></textarea>
 
-            <label
-              // className="addEditProject__deployed-url" 
-              htmlFor="deployedURL"
-            >
-              {/* {`Title for project ${title}`} */}
-            </label>
+              <label className="addEditProject__label" htmlFor="deployedURL">
+                {/* {`Title for project ${title}`} */}
+              </label>
+
               <input 
                 id="deployedURL"
                 className="addEditProject__deployed-url" 
@@ -363,12 +345,10 @@ const AddEditProject = ({ children }) => {
                 placeholder="Deployed site url"
               />
 
-            <label
-              // className="addEditProject__youtube-url" 
-              htmlFor="youtubeURL"
-            >
-              {/* {`Title for project ${title}`} */}
-            </label>
+              <label className="addEditProject__label" htmlFor="youtubeURL">
+                {/* {`Title for project ${title}`} */}
+              </label>
+
               <input 
                 id="youtubeURL"
                 className="addEditProject__youtube-url" 
@@ -377,13 +357,11 @@ const AddEditProject = ({ children }) => {
                 onChange={(e) => handleYoutubeVideoURLChange(e)}
                 placeholder="Youtube video url"
               />
-  
-            <label
-              // className="addEditProject__githubClient-url" 
-              htmlFor="githubClient"
-            >
-              {/* {`Title for project ${title}`} */}
-            </label>
+    
+              <label className="addEditProject__label" htmlFor="githubClient">
+                {/* {`Title for project ${title}`} */}
+              </label>
+
               <input 
                 id="githubClient"
                 className="addEditProject__githubClient-url" 
@@ -392,13 +370,11 @@ const AddEditProject = ({ children }) => {
                 onChange={(e) => handleGithubClientURLChange(e)}
                 placeholder="Github client url"
               />
-  
-            <label
-              // className="addEditProject__githubClient-url" 
-              htmlFor="githubServer"
-            >
-              {/* {`Title for project ${title}`} */}
-            </label>
+    
+              <label className="addEditProject__label" htmlFor="githubServer">
+                {/* {`Title for project ${title}`} */}
+              </label>
+
               <input 
                 id="githubServer"
                 className="addEditProject__githubServer-url" 
@@ -407,34 +383,29 @@ const AddEditProject = ({ children }) => {
                 onChange={(e) => handleGithubServerURLChange(e)}
                 placeholder="Github server url"
               />
-
-
-            
-          </div>
+              
+            </div>
 
 
 
-          <div className="addEditProject__buttons">
-            <button 
-              className="addEditProject__button"
-              onClick={handleCancel}
-            >
-              Cancel
-            </button>
-            <button 
-              className="addEditProject__button"
-              onClick={handleSubmit}
-            >
-              {isAddProject 
-                ? "Submit" 
-                : "Update"}
-            </button>
+            <div className="addEditProject__buttons">
+
+              <button className="addEditProject__button" onClick={handleCancel}>
+                Cancel
+              </button>
+
+              <button className="addEditProject__button" onClick={handleSubmit}>
+                {isAddProject 
+                  ? "Submit" 
+                  : "Update"}
+              </button>
+
+            </div>
+
           </div>
 
         </div>
-
       </div>
-    </div>
       
     </>
   )};

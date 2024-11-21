@@ -11,15 +11,13 @@
 	}
 
 	&__content {
+		@include formFullWidth;
+		align-items: center;
 		display: flex;
 		flex-direction: column;
-		align-items: center;
-		max-width: $largeTablet;
-		// max-width: $tablet;
-		width: 90%;
-		@include formFullWidth;
-		min-height: calc(90vh - ($navHeight + $footerHeight));
 		margin-top: 1rem;
+		max-width: $largeTablet;
+		width: 90%;
 	}
 
 	&__heading {
@@ -53,7 +51,6 @@
 	}
 
 	&__calendar-icon {
-		fill: var(--text-color);
 		fill: var(--accent-color);
 	}
 
@@ -81,7 +78,6 @@
 
 		@media (min-width: $largeTablet) {
 			gap: 2rem;
-			grid-template-columns: repeat(5, 1fr);
 			grid-template-columns: repeat(4, 1fr);
 		}
 	}
@@ -92,17 +88,12 @@
 	}
 
 	&__text {
-		border: 2px solid red;
-		height: 30rem;
-		width: 100%;
 		display: flex;
 		flex-direction: column;
-		max-width: $tablet;
+		height: 40rem;
 		margin-bottom: 2rem;
-	}
-
-	&__desc {
-		margin-bottom: 1rem;
+		max-width: $tablet;
+		width: 100%;
 	}
 
 	&__title-label,
@@ -112,6 +103,12 @@
 
 	&__title {
 		margin-bottom: 1rem;
+		// @include formFullWidthInput;
+	}
+
+	&__desc {
+		margin-bottom: 1rem;
+		// @include formFullWidthInput;
 	}
 
 	&__desc {
@@ -123,5 +120,6 @@
 	&__githubClient-url,
 	&__githubServer-url {
 		margin-bottom: 1rem;
+		// @include formFullWidthInput;
 	}
 }
