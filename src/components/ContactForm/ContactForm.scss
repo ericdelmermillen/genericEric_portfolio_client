@@ -43,6 +43,10 @@
 		margin-bottom: 1.5rem;
 	}
 
+	&__label {
+		@include hiddenLabel;
+	}
+
 	&__input {
 		@include formFullWidthInput;
 

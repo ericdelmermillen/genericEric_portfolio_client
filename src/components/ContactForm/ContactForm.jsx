@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
 import { useAppContext } from "../../contexts/AppContext.jsx";
+import { useLocation, useNavigate } from "react-router-dom";
 import { isValidEmail, scrollToTop } from "../../../utils/utils.js";
 import toast from "react-hot-toast";
 import "./ContactForm.scss";
@@ -96,13 +96,13 @@ const ContactForm = ({ children }) => {
 
       if(!response.ok) {
         throw new Error("Failed to send message");
-      }
+      };
 
       toast.success("Message sent!");
       
       if(location.pathname === "/contact" || location.pathname === "/contact/") {
         navigate("/home");
-      }
+      };
 
       clearForm();
       scrollToTop();
@@ -120,9 +120,7 @@ const ContactForm = ({ children }) => {
         <div className="contactForm__inner">
 
           <div className={`contactForm__header ${isOnContact ? "hide" : ""}`}>
-            <h4 className="contactForm__heading">
-              CONTACT
-            </h4>
+            <h4 className="contactForm__heading">CONTACT</h4>
             <h2 className="contactForm__sub-heading">
               I'd love to hear from you.
             </h2>
@@ -135,23 +133,31 @@ const ContactForm = ({ children }) => {
             name="contactForm"
             className="contactForm__form"
             onSubmit={(e) => handleSubmit(e)}
+            aria-labelledby="contact-heading"
           >
 
             {children}
             
             <div className="contactForm__field">
+
+              <label htmlFor="name" className="contactForm__label">Name</label>
+
               <input
                 type="text"
+                id="name" 
                 className="contactForm__input"
                 name="name"
                 placeholder="NAME"
                 value={name}
                 onChange={(e) => handleNameChange(e)}
+                aria-invalid={!nameIsValid}
+                aria-describedby="name-error" 
               />
 
               {!nameIsValid && initialFormCheck 
+
                 ? ( 
-                    <div className="contactForm__error">
+                    <div id="name-error" className="contactForm__error">
                       Name is too short
                     </div>
                   )
@@ -162,19 +168,25 @@ const ContactForm = ({ children }) => {
             </div>
 
             <div className="contactForm__field">
+            <label htmlFor="email" className="contactForm__label">Email</label>
+
               <input
                 type="email"
+                id="email"
                 className="contactForm__input"
                 name="email"
                 placeholder="EMAIL"
                 value={email}
                 onChange={(e) => handleEmailChange(e)}
                 onBlur={handleEmailChange}
+                aria-invalid={!emailIsValid}
+                aria-describedby="email-error"
               />
 
               {!emailIsValid && initialFormCheck 
+
                 ? ( 
-                    <div className="contactForm__error">
+                    <div id="email-error" className="contactForm__error">
                       Invalid Email
                     </div>
                   )
@@ -184,17 +196,23 @@ const ContactForm = ({ children }) => {
               
             </div>
             <div className="contactForm__field">
+              <label htmlFor="message" className="contactForm__label">Message</label> 
+
               <textarea
+                id="message" 
                 className="contactForm__input contactForm__input--message"
                 name="message"
                 placeholder="MESSAGE"
                 value={message}
                 onChange={(e) => handleMessageChange(e)}
+                aria-invalid={!messageIsValid}
+                aria-describedby="message-error"
               ></textarea>
 
               {!messageIsValid && initialFormCheck 
+              
                 ? ( 
-                    <div className="contactForm__error">
+                    <div id="message-error" className="contactForm__error">
                       Message is too short
                     </div>
                   )
@@ -208,6 +226,7 @@ const ContactForm = ({ children }) => {
                 type="submit"
                 className="contactForm__button"
                 disabled={isLoading}
+                aria-busy={isLoading}
               >
                 SUBMIT
               </button>

@@ -15,9 +15,8 @@
 	}
 
 	&__heading {
-		@include headingGeneral;
+		@include formHeading;
 		display: inline-block;
-		font-size: 2rem;
 		margin-bottom: 3rem;
 		position: relative;
 

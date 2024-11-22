@@ -271,7 +271,10 @@ const AddEditProject = ({ children }) => {
           {children}
           <div className="addEditProject__content">
 
-            <h1 className="addEditProject__heading">
+            <h1 
+              id="addEditHeading"
+              className="addEditProject__heading"
+            >
               {isAddProject
                 ? "Add New Project"
                 : `Edit Project #${projectID}`
@@ -283,19 +286,30 @@ const AddEditProject = ({ children }) => {
               setProjectDate={setProjectDate}
               iconClassName={"addEditProject__calendar-icon"}
               rawDate={rawDate}
+              aria-label="Project Date Picker"
             />
 
-            <div className="addEditProject__photoInputs">
+            <div 
+              className="addEditProject__photoInputs"
+              role="list" 
+              aria-label="Photo Upload Inputs"
+            >
 
               {photos.map(photo => 
 
-                <div className="addEditProject__photoInput" key={photo.photoNo}> 
+                <div 
+                  key={photo.photoNo}
+                  className="addEditProject__photoInput" 
+                  role="listitem"
+                  aria-label={`Photo input ${photo.photoNo}`}
+                > 
                   <PhotoInput 
                     photo={photo}
                     setPhotos={setPhotos}
                     handleImageChange={handleImageChange}
                     handleInputDragStart={handleInputDragStart}
                     handleDropInputTarget={handleDropInputTarget}
+                    aria-label={`Photo ${photo.photoNo}`}
                   />
                 </div>
 
@@ -306,21 +320,22 @@ const AddEditProject = ({ children }) => {
 
             <div className="addEditProject__text">
 
-              <label className="addEditProject__title-label" htmlFor="projectTitle">
+              <label className="addEditProject__label" htmlFor="projectTitle">
                 {`Title for project ${title}`}
               </label>
 
               <input 
                 id="projectTitle"
-                className="addEditProject__title" 
+                className="addEditProject__input addEditProject__input--title" 
                 type="text" 
                 value={title}
                 onChange={(e) => handleTitleChange(e)}
                 placeholder="Title for project"
+                aria-required="true"
               />
 
 
-              <label className="addEditProject__desc-label" htmlFor="projectTitle">
+              <label className="addEditProject__label" htmlFor="projectDescription">
                 {`Description for project ${title}`}
               </label>
 
@@ -330,71 +345,76 @@ const AddEditProject = ({ children }) => {
                 value={desc}
                 onChange={(e) => handleDescChange(e)}
                 placeholder="Description of the project"
+                aria-required="true"
               ></textarea>
 
-              <label className="addEditProject__label" htmlFor="deployedURL">
-                {/* {`Title for project ${title}`} */}
-              </label>
 
-              <input 
-                id="deployedURL"
-                className="addEditProject__deployed-url" 
-                type="url" 
-                value={deployedURL}
-                onChange={(e) => handleDeployedURLChange(e)}
-                placeholder="Deployed site url"
-              />
+              <div className="addEditProject__urls">
 
-              <label className="addEditProject__label" htmlFor="youtubeURL">
-                {/* {`Title for project ${title}`} */}
-              </label>
+                <label className="addEditProject__label" htmlFor="deployedURL">Deployed URL</label>
 
-              <input 
-                id="youtubeURL"
-                className="addEditProject__youtube-url" 
-                type="url" 
-                value={youtubeVideoURL}
-                onChange={(e) => handleYoutubeVideoURLChange(e)}
-                placeholder="Youtube video url"
-              />
-    
-              <label className="addEditProject__label" htmlFor="githubClient">
-                {/* {`Title for project ${title}`} */}
-              </label>
+                <input 
+                  id="deployedURL"
+                  className="addEditProject__input addEditProject__input--deployedURL"
+                  type="url" 
+                  value={deployedURL}
+                  onChange={(e) => handleDeployedURLChange(e)}
+                  placeholder="Deployed site url"
+                />
+     
+                <label className="addEditProject__label" htmlFor="youtubeURL">YouTube Video URL</label>
 
-              <input 
-                id="githubClient"
-                className="addEditProject__githubClient-url" 
-                type="url" 
-                value={githubClientUrl}
-                onChange={(e) => handleGithubClientURLChange(e)}
-                placeholder="Github client url"
-              />
-    
-              <label className="addEditProject__label" htmlFor="githubServer">
-                {/* {`Title for project ${title}`} */}
-              </label>
+                <input 
+                  id="youtubeURL"
+                  className="addEditProject__input addEditProject__input--youtubeURL"
+                  type="url" 
+                  value={youtubeVideoURL}
+                  onChange={(e) => handleYoutubeVideoURLChange(e)}
+                  placeholder="Youtube video url"
+                />
 
-              <input 
-                id="githubServer"
-                className="addEditProject__githubServer-url" 
-                type="url" 
-                value={githubServerUrl}
-                onChange={(e) => handleGithubServerURLChange(e)}
-                placeholder="Github server url"
-              />
-              
+                <label className="addEditProject__label" htmlFor="githubClient">GitHub Client URL</label>
+
+                <input 
+                  id="githubClient"
+                  className="addEditProject__input addEditProject__input--githubClient"
+                  type="url" 
+                  value={githubClientUrl}
+                  onChange={(e) => handleGithubClientURLChange(e)}
+                  placeholder="Github client url"
+                />
+                
+                <label className="addEditProject__label" htmlFor="githubServer">GitHub Server URL</label>
+
+                <input 
+                  id="githubServer"
+                  className="addEditProject__input addEditProject__input--githubServer"
+                  type="url" 
+                  value={githubServerUrl}
+                  onChange={(e) => handleGithubServerURLChange(e)}
+                  placeholder="Github server url"
+                />
+
+              </div>
+
             </div>
-
 
 
             <div className="addEditProject__buttons">
 
-              <button className="addEditProject__button" onClick={handleCancel}>
+              <button 
+                className="addEditProject__button" 
+                onClick={handleCancel} 
+                aria-label="Cancel changes"
+              >
                 Cancel
               </button>
 
-              <button className="addEditProject__button" onClick={handleSubmit}>
+              <button 
+                className="addEditProject__button" 
+                onClick={handleSubmit}
+                aria-label={isAddProject ? "Submit new project" : "Update project"}
+              >
                 {isAddProject 
                   ? "Submit" 
                   : "Update"}

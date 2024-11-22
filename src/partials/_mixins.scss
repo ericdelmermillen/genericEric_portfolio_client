@@ -261,12 +261,43 @@
 	border-bottom: 2px solid var(--text-color);
 	font-family: var(--body-font);
 	font-size: 1.25rem;
+	line-height: var(--line-height-general);
 	margin-bottom: 1.5rem;
 	outline: none;
 	padding-block: 0.75rem;
 	padding-inline: 0.75rem;
 	position: relative;
+	resize: none;
 	width: 100%;
+
+	&::placeholder {
+		color: var(--text-color);
+		opacity: 0.5;
+	}
+
+	&:-webkit-autofill {
+		-webkit-box-shadow: none !important;
+		background-color: none !important;
+		box-shadow: none !important;
+		color: inherit;
+		transition: background-color 5000s ease-in-out 0s;
+	}
+
+	&:-webkit-autofill::first-line {
+		color: var(--text-color) !important;
+	}
+
+	&:active,
+	&:focus {
+		color: inherit;
+	}
+}
+
+@mixin adminInput {
+	@include formFullWidthInput;
+	background: var(--neutralBG);
+	border-radius: var(--border-radius);
+	border: none;
 }
 
 @mixin form {

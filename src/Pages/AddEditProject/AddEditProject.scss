@@ -12,12 +12,11 @@
 
 	&__content {
 		@include formFullWidth;
-		align-items: center;
-		display: flex;
-		flex-direction: column;
-		margin-top: 1rem;
-		max-width: $largeTablet;
 		width: 90%;
+
+		@media (min-width: $desktop) {
+			width: 100%;
+		}
 	}
 
 	&__heading {
@@ -82,6 +81,10 @@
 		}
 	}
 
+	&__label {
+		@include hiddenLabel;
+	}
+
 	&__photoInput {
 		max-height: 100%;
 		max-width: 100%;
@@ -96,30 +99,33 @@
 		width: 100%;
 	}
 
+	// &__urls {
+	// }
+
 	&__title-label,
-	&__desc-label {
+	&__desc-label,
+	&--youtubeURL {
 		@include hiddenLabel;
 	}
 
-	&__title {
-		margin-bottom: 1rem;
-		// @include formFullWidthInput;
+	&__input {
+		@include adminInput;
+
+		&--title,
+		&--deployedURL,
+		&--youtubeURL,
+		&--githubClient,
+		&--githubServer {
+			margin-bottom: 1rem;
+		}
 	}
 
 	&__desc {
+		@include adminInput;
 		margin-bottom: 1rem;
-		// @include formFullWidthInput;
 	}
 
 	&__desc {
 		height: 100%;
-	}
-
-	&__deployed-url,
-	&__youtube-url,
-	&__githubClient-url,
-	&__githubServer-url {
-		margin-bottom: 1rem;
-		// @include formFullWidthInput;
 	}
 }
