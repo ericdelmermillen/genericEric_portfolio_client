@@ -235,6 +235,7 @@
 	display: flex;
 	flex-direction: column;
 	height: 100%;
+	margin-inline: auto;
 	padding-inline: 2rem;
 	position: relative;
 	text-align: center;
@@ -285,7 +286,8 @@
 
 @mixin hiddenLabel {
 	border: 0;
-	clip: rect(0, 0, 0, 0);
+	clip-path: inset(50%);
+	clip: rect(0, 0, 0, 0); // Fallback for older browsers
 	height: 1px;
 	padding: 0;
 	margin: -1px;
@@ -328,7 +330,11 @@
 @mixin formContent {
 	box-shadow: var(--box-shadow);
 	max-width: $largeTablet;
-	width: 100%;
+	width: 90%;
+
+	@media (min-width: $desktop) {
+		width: 100%;
+	}
 }
 
 @mixin linkButton {

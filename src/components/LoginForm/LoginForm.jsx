@@ -1,5 +1,5 @@
-import { useAppContext } from "../../contexts/AppContext.jsx";
 import { useState } from "react";
+import { useAppContext } from "../../contexts/AppContext.jsx";
 import { isValidEmail, isValidPassword } from "../../../utils/utils.js";
 import { toast } from 'react-hot-toast'; 
 import Hide from "../../assets/svgs/Hide.jsx";
@@ -23,7 +23,8 @@ const LoginForm = ({ children }) => {
     loginUser 
   } = useAppContext();
 
-  const handleTogglePasswordVisibility = () => {
+  const handleTogglePasswordVisibility = (e) => {
+    e.preventDefault();
     setShowPassword(c => !c);
   };
 
@@ -76,9 +77,7 @@ const LoginForm = ({ children }) => {
         <div className="loginForm__inner">
 
           <div className="loginForm__header">
-            <h4 className="loginForm__heading">
-              Login
-            </h4>
+            <h4 className="loginForm__heading">Login</h4>
           </div>
 
           <form
@@ -90,19 +89,30 @@ const LoginForm = ({ children }) => {
             {children}
 
             <div className="loginForm__field">
+
+              <label htmlFor="email" className="loginForm__label">Email Address</label>
+
               <input
+                id="email"
                 type="email"
                 className="loginForm__input"
                 name="email"
                 placeholder="EMAIL"
                 value={email}
                 onChange={handleEmailChange}
+                aria-describedby="emailError"
                 onBlur={handleEmailChange}
+                aria-invalid={!emailIsValid && initialFormCheck ? "true" : "false"}
               />
 
               {!emailIsValid && initialFormCheck 
+
                 ? (
-                    <div className="loginForm__error">
+                    <div 
+                      id="emailError"
+                      className="loginForm__error"
+                      role="alert"
+                    >
                       Invalid Email
                     </div>
                   )
@@ -112,7 +122,11 @@ const LoginForm = ({ children }) => {
             </div>
 
             <div className="loginForm__field loginForm__field--password">
+
+              <label htmlFor="password" className="loginForm__label">Password</label>
+              
               <input
+                id="password"
                 type={showPassword ? "text" : "password"}
                 className="loginForm__input"
                 name="password"
@@ -120,21 +134,30 @@ const LoginForm = ({ children }) => {
                 value={password}
                 onChange={handlePasswordChange}
                 onBlur={handlePasswordChange}
+                aria-describedby="passwordError"
+                aria-invalid={!passwordIsValid && initialFormCheck ? "true" : "false"}
               />
 
-              <div
+              <button
+                type="button"
                 className={`passwordInput__icon ${isSafari ? "hide" : ""}`}
-                onClick={handleTogglePasswordVisibility}
+                onClick={(e) => handleTogglePasswordVisibility(e)}
+                aria-label={showPassword ? "Hide password" : "Show password"}
               >
                 {showPassword
                   ? <Hide className="passwordInput__icon--hide" />
                   : <Show className="passwordInput__icon--show" />
                 }
-              </div>
+              </button>
               
               {!passwordIsValid && initialFormCheck 
+
                 ? ( 
-                    <div className="loginForm__error">
+                    <div 
+                      id="passwordError"
+                      className="loginForm__error"
+                      role="alert"
+                    >
                       Invalid Password
                     </div>
                   )
@@ -149,6 +172,7 @@ const LoginForm = ({ children }) => {
                 type="submit" 
                 className="loginForm__button"
                 disabled={isLoading}
+                aria-busy={isLoading}
               >
                 SUBMIT
               </button>
