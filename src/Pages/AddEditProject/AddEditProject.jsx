@@ -45,8 +45,20 @@ const AddEditProject = ({ children }) => {
 
   const [ deployedURL, setDeployedURL ] = useState('');
   const [ youtubeVideoURL, setYoutubeVideoURL ] = useState('');
-  const [ githubClientUrl, setGithubClientUrl ] = useState('');
-  const [ githubServerUrl, setGithubServerUrl ] = useState('');
+  const [ githubClientURL, setGithubClientURL ] = useState('');
+  const [ githubServerURL, setGithubServerURL ] = useState('');
+
+  
+  // validation state
+  const [ initialFormCheck , setInitialFormCheck ] = useState(!false);
+
+  const [ titleIsValid, setTitleIsValid ] = useState(!true);
+
+  const [ descIsValid, setDescIsValid ] = useState(!true);
+  const [ deployedURLIsValid, setDeployedURLIsValid ] = useState(!true);
+  const [ youtubeURLIsValid, setYoutubeURLIsValid ] = useState(!true);
+  const [ githubClientURLIsValid, setGithubClientURLIsValid ] = useState(!true);
+  const [ githubServerURLIsValid, setGithubServerURLIsValid ] = useState(!true);
   
   const handleImageChange = useCallback(async (e, inputNo) => {
     const file = e.target.files[0];
@@ -198,9 +210,9 @@ const AddEditProject = ({ children }) => {
         } else if(url["Youtube Video"]) {
           setYoutubeVideoURL(Object.entries(url)[0][1]);
         } else if(url["Github (Client)"]) {
-          setGithubClientUrl(Object.entries(url)[0][1]);
+          setGithubClientURL(Object.entries(url)[0][1]);
         } else if(url["Github (Server)"]) {
-          setGithubServerUrl(Object.entries(url)[0][1]);
+          setGithubServerURL(Object.entries(url)[0][1]);
         };
       });
       
@@ -234,24 +246,30 @@ const AddEditProject = ({ children }) => {
   };
 
   const handleGithubClientURLChange = (e) => {
-    setGithubClientUrl(e.target.value);
+    setGithubClientURL(e.target.value);
   };
   
   const handleGithubServerURLChange = (e) => {
-    setGithubServerUrl(e.target.value);
+    setGithubServerURL(e.target.value);
   };
   
   
+
+
+  // validation checkers
+
+
+
+
+  const handleSubmit = () => {
+    console.log(`Submitting ${isAddProject ? "new project" : "updated project"}`)
+  };
+
 
 
 
   const handleCancel = () => {
     console.log("Cancel")
-  };
-
-
-  const handleSubmit = () => {
-    console.log(`Submitting ${isAddProject ? "new project" : "updated project"}`)
   };
 
 
@@ -326,7 +344,9 @@ const AddEditProject = ({ children }) => {
 
               <input 
                 id="projectTitle"
-                className="addEditProject__input addEditProject__input--title" 
+                className={`addEditProject__input addEditProject__input--title ${!titleIsValid && initialFormCheck 
+                  ? "error" 
+                  : ""}`} 
                 type="text" 
                 value={title}
                 onChange={(e) => handleTitleChange(e)}
@@ -334,20 +354,24 @@ const AddEditProject = ({ children }) => {
                 aria-required="true"
               />
 
+              <div className="addEditProject__descContainer">
 
-              <label className="addEditProject__label" htmlFor="projectDescription">
-                {`Description for project ${title}`}
-              </label>
+                <label className="addEditProject__label" htmlFor="projectDescription">
+                  {`Description for project ${title}`}
+                </label>
 
-              <textarea 
-                id="projectDescription"
-                className="addEditProject__desc" 
-                value={desc}
-                onChange={(e) => handleDescChange(e)}
-                placeholder="Description of the project"
-                aria-required="true"
-              ></textarea>
+                <textarea 
+                  id="projectDescription"
+                  className={`addEditProject__desc ${!descIsValid && initialFormCheck 
+                    ? "error" 
+                    : ""}`}
+                  value={desc}
+                  onChange={(e) => handleDescChange(e)}
+                  placeholder="Description of the project"
+                  aria-required="true"
+                  ></textarea>
 
+              </div>
 
               <div className="addEditProject__urls">
 
@@ -355,7 +379,9 @@ const AddEditProject = ({ children }) => {
 
                 <input 
                   id="deployedURL"
-                  className="addEditProject__input addEditProject__input--deployedURL"
+                  className={`addEditProject__input addEditProject__input--deployedURL ${!deployedURLIsValid && initialFormCheck 
+                    ? "error" 
+                    : ""}`}
                   type="url" 
                   value={deployedURL}
                   onChange={(e) => handleDeployedURLChange(e)}
@@ -366,7 +392,9 @@ const AddEditProject = ({ children }) => {
 
                 <input 
                   id="youtubeURL"
-                  className="addEditProject__input addEditProject__input--youtubeURL"
+                  className={`addEditProject__input addEditProject__input--youtubeURL ${!youtubeURLIsValid && initialFormCheck 
+                    ? "error" 
+                    : ""}`}
                   type="url" 
                   value={youtubeVideoURL}
                   onChange={(e) => handleYoutubeVideoURLChange(e)}
@@ -377,9 +405,11 @@ const AddEditProject = ({ children }) => {
 
                 <input 
                   id="githubClient"
-                  className="addEditProject__input addEditProject__input--githubClient"
+                  className={`addEditProject__input addEditProject__input--githubClient ${!githubClientURLIsValid && initialFormCheck 
+                    ? "error" 
+                    : ""}`}
                   type="url" 
-                  value={githubClientUrl}
+                  value={githubClientURL}
                   onChange={(e) => handleGithubClientURLChange(e)}
                   placeholder="Github client url"
                 />
@@ -388,9 +418,11 @@ const AddEditProject = ({ children }) => {
 
                 <input 
                   id="githubServer"
-                  className="addEditProject__input addEditProject__input--githubServer"
+                  className={`addEditProject__input addEditProject__input--githubServer ${!githubServerURLIsValid && initialFormCheck 
+                    ? "error" 
+                    : ""}`}
                   type="url" 
-                  value={githubServerUrl}
+                  value={githubServerURL}
                   onChange={(e) => handleGithubServerURLChange(e)}
                   placeholder="Github server url"
                 />

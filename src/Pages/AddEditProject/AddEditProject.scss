@@ -12,6 +12,7 @@
 
 	&__content {
 		@include formFullWidth;
+		max-width: $largeTablet;
 		width: 90%;
 
 		@media (min-width: $desktop) {
@@ -93,7 +94,6 @@
 	&__text {
 		display: flex;
 		flex-direction: column;
-		height: 40rem;
 		margin-bottom: 2rem;
 		max-width: $tablet;
 		width: 100%;
@@ -111,6 +111,10 @@
 	&__input {
 		@include adminInput;
 
+		&.error {
+			outline: 2px solid var(--error-color);
+		}
+
 		&--title,
 		&--deployedURL,
 		&--youtubeURL,
@@ -120,9 +124,21 @@
 		}
 	}
 
+	&__descContainer {
+		height: 30rem;
+		margin-bottom: 1rem;
+
+		@media (min-width: $desktop) {
+			height: 25rem;
+		}
+	}
+
 	&__desc {
 		@include adminInput;
-		margin-bottom: 1rem;
+
+		&.error {
+			outline: 2px solid var(--error-color);
+		}
 	}
 
 	&__desc {
