@@ -47,6 +47,21 @@ const setTokens = (token, refreshToken) => {
   return true;
 };
 
+const isValidURL = (str) => {
+  if(str.includes("mailto:") || str.includes("@")) {
+    return false
+  };
+
+  const pattern = new RegExp('^(https?:\\/\\/)?' +
+    '(?:([^:@]+)(?::([^@]+))?@)?' + // Optional username and password
+    '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|' + // domain name
+    '((\\d{1,3}\\.){3}\\d{1,3}))' + // OR ip (v4) address
+    '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*' + // port and path
+    '(\\?[;&a-z\\d%_.~+=-]*)?' + // query string
+    '(\\#[-a-z\\d_]*)?$', 'i'); // fragment locator
+  return !!pattern.test(str);
+};
+
 const removeTokens = () => {
   localStorage.removeItem('token');
   localStorage.removeItem('refreshToken');
@@ -133,6 +148,7 @@ export {
   scrollToTop,
   scrollToDivTop,
   isValidEmail,
+  isValidURL,
   isValidPassword,
   setTokens,
   removeTokens,

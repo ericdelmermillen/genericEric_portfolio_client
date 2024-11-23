@@ -1,7 +1,7 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { useAppContext } from "../../contexts/AppContext";
 import { useLocation, useParams } from "react-router-dom";
-import { scrollToTop } from "../../../utils/utils";
+import { scrollToTop, isValidURL } from "../../../utils/utils";
 import Compressor from "compressorjs";
 import ProjectDatePicker from "../../components/ProjectDatePicker/ProjectDatePicker";
 import toast from "react-hot-toast";
@@ -50,15 +50,22 @@ const AddEditProject = ({ children }) => {
 
   
   // validation state
-  const [ initialFormCheck , setInitialFormCheck ] = useState(!false);
+  const [ initialFormCheck , setInitialFormCheck ] = useState(false);
 
-  const [ titleIsValid, setTitleIsValid ] = useState(!true);
+  const [ titleIsValid, setTitleIsValid ] = useState(true);
 
-  const [ descIsValid, setDescIsValid ] = useState(!true);
-  const [ deployedURLIsValid, setDeployedURLIsValid ] = useState(!true);
-  const [ youtubeURLIsValid, setYoutubeURLIsValid ] = useState(!true);
-  const [ githubClientURLIsValid, setGithubClientURLIsValid ] = useState(!true);
-  const [ githubServerURLIsValid, setGithubServerURLIsValid ] = useState(!true);
+  const [ descIsValid, setDescIsValid ] = useState(true);
+  const [ deployedURLIsValid, setDeployedURLIsValid ] = useState(true);
+  const [ youtubeURLIsValid, setYoutubeURLIsValid ] = useState(true);
+  const [ githubClientURLIsValid, setGithubClientURLIsValid ] = useState(true);
+  const [ githubServerURLIsValid, setGithubServerURLIsValid ] = useState(true);
+
+  const titleRef = useRef(null);
+  const descRef = useRef(null);
+  const deployedURLRef = useRef(null);
+  const youtubeURLRef = useRef(null);
+  const githubClientURLRef = useRef(null);
+  const githubServerURLRef = useRef(null);
   
   const handleImageChange = useCallback(async (e, inputNo) => {
     const file = e.target.files[0];
@@ -190,7 +197,6 @@ const AddEditProject = ({ children }) => {
           photoPreview: data.project_photos[idx]?.photo_url ?? photo.photoPreview,
           photoData: null,
           displayOrder: idx + 1
-
         }
       ));
 
@@ -227,42 +233,191 @@ const AddEditProject = ({ children }) => {
   };
 
 
+  // ***
 
   const handleTitleChange = (e) => {
-    setTitle(e.target.value);
+    if(e) {
+      setTitle(e.target.value);
+      
+      if(initialFormCheck) {
+        const isValidLength = e.target.value.trim().length >= 5;
+        setTitleIsValid(isValidLength);
+        return isValidLength
+      };
+    } else {
+      const isValidLength = titleRef.current.value.trim().length >= 5
+      setTitleIsValid(isValidLength)
+      return isValidLength;
+    };
+
   };
+
   
   const handleDescChange = (e) => {
-    setDesc(e.target.value);
+    if(e) {
+      setDesc(e.target.value);
+      
+      if(initialFormCheck) {
+        const isValidLength = e.target.value.trim().length >= 25;
+        setDescIsValid(isValidLength);
+        return isValidLength;
+      };
+    } else {
+      const isValidLength = descRef.current.value.trim().length >= 25;
+      setDescIsValid(isValidLength);
+      return isValidLength;
+    };
   };
+
   
   const handleDeployedURLChange = (e) => {
-    setDeployedURL(e.target.value);
+    const validURL = isValidURL(e ? e.target.value : deployedURLRef.current.value);
+
+    if(e) {
+      setDeployedURL(e.target.value);
+      
+      if(initialFormCheck) {
+        setDeployedURLIsValid(validURL)
+        return validURL;
+      }
+
+    } else {
+      setDeployedURLIsValid(validURL);
+      return validURL;
+    };
   };
   
   
   const handleYoutubeVideoURLChange = (e) => {
-    setYoutubeVideoURL(e.target.value);
+    const validURL = isValidURL(e ? e.target.value : youtubeURLRef.current.value);
+
+    if(e) {
+      setYoutubeVideoURL(e.target.value);
+      
+      if(initialFormCheck && e.target.value.length) {
+        setYoutubeURLIsValid(validURL);
+        return validURL;
+
+      } else if(e.target.value.length == 0){
+        setYoutubeURLIsValid(true);
+        return true
+      };
+
+    } else if(youtubeURLRef.current.value.length){
+      setYoutubeURLIsValid(validURL);
+      return validURL;
+    };
   };
 
+
   const handleGithubClientURLChange = (e) => {
-    setGithubClientURL(e.target.value);
+    const validURL = isValidURL(e ? e.target.value : githubClientURLRef.current.value);
+
+    if(e) {
+      setGithubClientURL(e.target.value);
+
+      if(initialFormCheck && e.target.value.length) {
+        setGithubClientURLIsValid(validURL)
+        return validURL;
+      } else if(e.target.value.length == 0){
+        setGithubClientURLIsValid(true);
+        return true
+      };
+
+    } else if(githubClientURLRef.current.value.length){
+      setGithubClientURLIsValid(validURL)
+      return validURL;
+    };
   };
+  
   
   const handleGithubServerURLChange = (e) => {
-    setGithubServerURL(e.target.value);
+    const validURL = isValidURL(e ? e.target.value : githubServerURLRef.current.value);
+    
+    if(e) {
+      setGithubServerURL(e.target.value);
+
+      if(initialFormCheck && e.target.value.length) {
+        setGithubServerURLIsValid(validURL);
+        return validURL;
+      } else if(e.target.value.length == 0){
+        setGithubServerURLIsValid(true);
+        return true
+      };
+      
+    } else if(githubServerURLRef.current.value.length) {
+      setGithubServerURLIsValid(validURL);
+      return validURL;
+    };
   };
+
+  // ***
+
   
   
+  // ***
 
 
   // validation checkers
 
+  // const clearForm = () => {
+  //   // setName("");
+  //   setInitialFormCheck(false);
+  //   // setEmail("");
+  //   // setMessage("");
+  // };
 
 
 
-  const handleSubmit = () => {
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setInitialFormCheck(true);
+    // setIsLoading(true);
+
+    let errors = 0;
+
+    if(!handleTitleChange()) {
+      toast.error("Title is too short");
+      errors++
+    }
+    
+    if(!handleDescChange()){
+      toast.error("Description is too short");
+      errors++
+    }
+    
+    if(!handleDeployedURLChange()){
+      toast.error("Valid deployment url required");
+      errors++
+    }
+    
+    if(youtubeVideoURL.length && !handleYoutubeVideoURLChange()) {
+      toast.error("Youtube video url invalid");
+      errors++;
+    }
+    
+    if(githubClientURL.length && !handleGithubClientURLChange()) {
+      toast.error("Github Client url invalid");
+      errors++;
+    };
+    
+    if(githubServerURL.length && !handleGithubServerURLChange()) {
+      toast.error("Github server url invalid");
+      errors++;
+    };
+
+
+    // console.log(errors)
+
+    if(errors) {
+      console.log("errors present")
+      return
+    }
+
+
     console.log(`Submitting ${isAddProject ? "new project" : "updated project"}`)
+    return
   };
 
 
@@ -352,6 +507,7 @@ const AddEditProject = ({ children }) => {
                 onChange={(e) => handleTitleChange(e)}
                 placeholder="Title for project"
                 aria-required="true"
+                ref={titleRef}
               />
 
               <div className="addEditProject__descContainer">
@@ -369,6 +525,7 @@ const AddEditProject = ({ children }) => {
                   onChange={(e) => handleDescChange(e)}
                   placeholder="Description of the project"
                   aria-required="true"
+                  ref={descRef}
                   ></textarea>
 
               </div>
@@ -386,6 +543,7 @@ const AddEditProject = ({ children }) => {
                   value={deployedURL}
                   onChange={(e) => handleDeployedURLChange(e)}
                   placeholder="Deployed site url"
+                  ref={deployedURLRef}
                 />
      
                 <label className="addEditProject__label" htmlFor="youtubeURL">YouTube Video URL</label>
@@ -398,7 +556,8 @@ const AddEditProject = ({ children }) => {
                   type="url" 
                   value={youtubeVideoURL}
                   onChange={(e) => handleYoutubeVideoURLChange(e)}
-                  placeholder="Youtube video url"
+                  placeholder="Youtube video url (optional)"
+                  ref={youtubeURLRef}
                 />
 
                 <label className="addEditProject__label" htmlFor="githubClient">GitHub Client URL</label>
@@ -411,7 +570,8 @@ const AddEditProject = ({ children }) => {
                   type="url" 
                   value={githubClientURL}
                   onChange={(e) => handleGithubClientURLChange(e)}
-                  placeholder="Github client url"
+                  placeholder="Github client url (optional)"
+                  ref={githubClientURLRef}
                 />
                 
                 <label className="addEditProject__label" htmlFor="githubServer">GitHub Server URL</label>
@@ -424,7 +584,8 @@ const AddEditProject = ({ children }) => {
                   type="url" 
                   value={githubServerURL}
                   onChange={(e) => handleGithubServerURLChange(e)}
-                  placeholder="Github server url"
+                  placeholder="Github server url (optional)"
+                  ref={githubServerURLRef}
                 />
 
               </div>
@@ -444,7 +605,7 @@ const AddEditProject = ({ children }) => {
 
               <button 
                 className="addEditProject__button" 
-                onClick={handleSubmit}
+                onClick={(e) => handleSubmit(e)}
                 aria-label={isAddProject ? "Submit new project" : "Update project"}
               >
                 {isAddProject 

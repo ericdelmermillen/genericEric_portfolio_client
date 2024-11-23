@@ -298,6 +298,7 @@
 	background: var(--neutralBG);
 	border-radius: var(--border-radius);
 	border: none;
+	letter-spacing: var(--letter-spacing-general);
 }
 
 @mixin form {
