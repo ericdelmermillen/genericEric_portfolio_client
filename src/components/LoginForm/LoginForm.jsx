@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useAppContext } from "../../contexts/AppContext.jsx";
 import { isValidEmail, isValidPassword } from "../../../utils/utils.js";
 import { toast } from 'react-hot-toast'; 
@@ -17,54 +17,65 @@ const LoginForm = ({ children }) => {
   const [ emailIsValid, setEmailIsValid ] = useState(true);
   const [ passwordIsValid, setPasswordIsValid ] = useState(true);
 
+  const emailRef = useRef(null);
+  const passwordRef = useRef(null);
+
   const { 
     isLoading, 
     setIsLoading, 
     loginUser 
   } = useAppContext();
 
+
   const handleTogglePasswordVisibility = (e) => {
     e.preventDefault();
     setShowPassword(c => !c);
   };
 
+
   const handleEmailChange = (e) => {
-    setEmail(e.target.value);
-    checkEmailIsValid();
+    const emailValue = e ? e.target.value : emailRef.current.value;
+    const emailIsValid = isValidEmail(emailValue);
+
+    setEmail(emailValue);
+    setEmailIsValid(emailIsValid);
+
+    return emailIsValid;
   };
+
 
   const handlePasswordChange = (e) => {
-    setPassword(e.target.value);
-    checkPasswordIsValid();
+    const passwordValue = e ? e.target.value : passwordRef.current.value;
+    const passwordIsValid = isValidPassword(passwordValue);
+    
+    setPassword(passwordValue);
+    setPasswordIsValid(passwordIsValid);
+
+    return passwordIsValid;
   };
   
-  const checkEmailIsValid = () => {
-    setEmailIsValid(isValidEmail(email));
-  };
-
-  const checkPasswordIsValid = () => {
-    setPasswordIsValid(isValidPassword(password));
-  };
   
   const handleSubmit = async (e) => {
     e.preventDefault();
     setInitialFormCheck(true);
-    checkEmailIsValid();
-    checkPasswordIsValid();
 
-    if(email.length === 0) {
-      setIsLoading(false);
-      return toast.error("Email address is required");
-    };
-    
-    if(password.length === 0) {
-      setIsLoading(false);
-      return toast.error("Password is required");
+    let errors = 0;
+
+    if(!handleEmailChange()) {
+      toast.error("Invalid email");
+      return;
     };
 
-    if(!isValidEmail(email) || !isValidPassword(password)) {
-      setIsLoading(false);
-      return toast.error("Email and/or Password is invalid");
+    if(!handlePasswordChange()) {
+      toast.error("Invalid password");
+      return;
+    };
+
+    if(errors) {
+      setTimeout(() => {
+        setIsLoading(false);
+      }, MIN_LOADING_INTERVAL);
+      return;
     };
 
     return loginUser(email, password);
@@ -77,7 +88,9 @@ const LoginForm = ({ children }) => {
         <div className="loginForm__inner">
 
           <div className="loginForm__header">
-            <h4 className="loginForm__heading">Login</h4>
+            <h4 className="loginForm__heading">
+              Login
+            </h4>
           </div>
 
           <form
@@ -90,15 +103,18 @@ const LoginForm = ({ children }) => {
 
             <div className="loginForm__field">
 
-              <label htmlFor="email" className="loginForm__label">Email Address</label>
+              <label htmlFor="email" className="loginForm__label">
+                Email Address
+              </label>
 
               <input
+                type="text"
                 id="email"
-                type="email"
                 className="loginForm__input"
                 name="email"
                 placeholder="EMAIL"
                 value={email}
+                ref={emailRef}
                 onChange={handleEmailChange}
                 aria-describedby="emailError"
                 onBlur={handleEmailChange}
@@ -126,12 +142,13 @@ const LoginForm = ({ children }) => {
               <label htmlFor="password" className="loginForm__label">Password</label>
               
               <input
-                id="password"
                 type={showPassword ? "text" : "password"}
+                id="password"
                 className="loginForm__input"
                 name="password"
                 placeholder="PASSWORD"
                 value={password}
+                ref={passwordRef}
                 onChange={handlePasswordChange}
                 onBlur={handlePasswordChange}
                 aria-describedby="passwordError"

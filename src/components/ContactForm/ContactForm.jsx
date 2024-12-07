@@ -33,58 +33,74 @@ const ContactForm = ({ children }) => {
   const isOnContact = location.pathname === "/contact" || location.pathname === "/contact/";
 
 
-  const handleNameChange = (e) => {
-    const isValidLength = e
-      ? e.target.value.trim().length >= 2 
-      : nameRef.current.value.trim().length >= 2;
+  // const handleNameChange = (e) => {
+  //   const isValidLength = e
+  //     ? e.target.value.trim().length >= 2 
+  //     : nameRef.current.value.trim().length >= 2;
 
-    if(e) {
-      setName(e.target.value);
+  //   if(e) {
+  //     setName(e.target.value);
       
-      if(initialFormCheck) {
-        setNameIsValid(isValidLength);
-        return isValidLength;
-      };
-    } else {
-      setNameIsValid(isValidLength);
-      return isValidLength;
-    };
+  //     if(initialFormCheck) {
+  //       setNameIsValid(isValidLength);
+  //       return isValidLength;
+  //     };
+  //   } else {
+  //     setNameIsValid(isValidLength);
+  //     return isValidLength;
+  //   };
+  // };
+
+  const handleNameChange = (e) => {
+    const nameValue = e ? e.target.value : nameRef.current.value;
+    const isValidLength = nameValue.trim().length >= 2;
+  
+    setName(nameValue);
+    setNameIsValid(isValidLength);
+  
+    return isValidLength;
   };
+  
 
   const handleEmailChange = (e) => {
-    const emailIsValid = isValidEmail(e ? e.target.value : emailRef.current.value);
+    const emailValue = e ? e.target.value : emailRef.current.value;
+    const emailIsValid = isValidEmail(emailValue);
 
-    if(e) {
-      setEmail(e.target.value);
-      
-      if(initialFormCheck) {
-        setEmailIsValid(emailIsValid);
-        return emailIsValid;
-      };
+    setEmail(emailValue);
+    setEmailIsValid(emailIsValid);
 
-    } else {
-      setEmailIsValid(emailIsValid);
-      return emailIsValid;
-    };
+    return emailIsValid;
   };
+  
+  
+  // const handleMessageChange = (e) => {
+  //   const isValidLength = e 
+  //     ? e.target.value.trim().length >= 25
+  //     : messageRef.current.value.trim().length >= 25;
+
+  //     if(e) {
+  //       setMessage(e.target.value);
+        
+  //       if(initialFormCheck) {
+  //         setMessageIsValid(isValidLength);
+  //         return isValidLength;
+  //       };
+  //     } else {
+  //     setMessageIsValid(isValidLength);
+  //     return isValidLength;
+  //   };
+  // };
 
   const handleMessageChange = (e) => {
-    const isValidLength = e 
-      ? e.target.value.trim().length >= 25
-      : messageRef.current.value.trim().length >= 25;
-
-      if(e) {
-        setMessage(e.target.value);
-        
-        if(initialFormCheck) {
-          setMessageIsValid(isValidLength);
-          return isValidLength;
-        };
-      } else {
-      setMessageIsValid(isValidLength);
-      return isValidLength;
-    };
+    const messageValue = e ? e.target.value : messageRef.current.value;
+    const isValidLength = messageValue.trim().length >= 25;
+  
+    setMessage(messageValue);
+    setMessageIsValid(isValidLength);
+  
+    return isValidLength;
   };
+  
 
   const clearForm = () => {
     setName("");
