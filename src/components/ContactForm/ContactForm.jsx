@@ -33,24 +33,6 @@ const ContactForm = ({ children }) => {
   const isOnContact = location.pathname === "/contact" || location.pathname === "/contact/";
 
 
-  // const handleNameChange = (e) => {
-  //   const isValidLength = e
-  //     ? e.target.value.trim().length >= 2 
-  //     : nameRef.current.value.trim().length >= 2;
-
-  //   if(e) {
-  //     setName(e.target.value);
-      
-  //     if(initialFormCheck) {
-  //       setNameIsValid(isValidLength);
-  //       return isValidLength;
-  //     };
-  //   } else {
-  //     setNameIsValid(isValidLength);
-  //     return isValidLength;
-  //   };
-  // };
-
   const handleNameChange = (e) => {
     const nameValue = e ? e.target.value : nameRef.current.value;
     const isValidLength = nameValue.trim().length >= 2;
@@ -71,25 +53,7 @@ const ContactForm = ({ children }) => {
 
     return emailIsValid;
   };
-  
-  
-  // const handleMessageChange = (e) => {
-  //   const isValidLength = e 
-  //     ? e.target.value.trim().length >= 25
-  //     : messageRef.current.value.trim().length >= 25;
 
-  //     if(e) {
-  //       setMessage(e.target.value);
-        
-  //       if(initialFormCheck) {
-  //         setMessageIsValid(isValidLength);
-  //         return isValidLength;
-  //       };
-  //     } else {
-  //     setMessageIsValid(isValidLength);
-  //     return isValidLength;
-  //   };
-  // };
 
   const handleMessageChange = (e) => {
     const messageValue = e ? e.target.value : messageRef.current.value;
