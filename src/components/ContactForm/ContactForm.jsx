@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useAppContext } from "../../contexts/AppContext.jsx";
 import { useLocation, useNavigate } from "react-router-dom";
 import { isValidEmail, scrollToTop } from "../../../utils/utils.js";
@@ -11,6 +11,7 @@ const ContactForm = ({ children }) => {
   const { 
     isLoading, 
     setIsLoading, 
+    MIN_LOADING_INTERVAL
   } = useAppContext();
 
   const [ name, setName ] = useState("");
@@ -23,35 +24,66 @@ const ContactForm = ({ children }) => {
 
   const [ initialFormCheck , setInitialFormCheck ] = useState(false);
 
+  const nameRef = useRef(null);
+  const emailRef = useRef(null);
+  const messageRef = useRef(null);
+
   const location = useLocation();
   const navigate = useNavigate();
   const isOnContact = location.pathname === "/contact" || location.pathname === "/contact/";
 
+
   const handleNameChange = (e) => {
-    setName(e.target.value);
-    checkNameIsValid();
+    const isValidLength = e
+      ? e.target.value.trim().length >= 2 
+      : nameRef.current.value.trim().length >= 2;
+
+    if(e) {
+      setName(e.target.value);
+      
+      if(initialFormCheck) {
+        setNameIsValid(isValidLength);
+        return isValidLength;
+      };
+    } else {
+      setNameIsValid(isValidLength);
+      return isValidLength;
+    };
   };
 
   const handleEmailChange = (e) => {
-    setEmail(e.target.value);
-    checkEmailIsValid();
+    const emailIsValid = isValidEmail(e ? e.target.value : emailRef.current.value);
+
+    if(e) {
+      setEmail(e.target.value);
+      
+      if(initialFormCheck) {
+        setEmailIsValid(emailIsValid);
+        return emailIsValid;
+      };
+
+    } else {
+      setEmailIsValid(emailIsValid);
+      return emailIsValid;
+    };
   };
 
   const handleMessageChange = (e) => {
-    setMessage(e.target.value);
-    checkMessageIsValid();
-  };
+    const isValidLength = e 
+      ? e.target.value.trim().length >= 25
+      : messageRef.current.value.trim().length >= 25;
 
-  const checkNameIsValid = () => {
-    setNameIsValid(name.length >= 2);
-  };
-  
-  const checkEmailIsValid = () => {
-    setEmailIsValid(isValidEmail(email));
-  };
-
-  const checkMessageIsValid = () => {
-    setMessageIsValid(message.length >= 25);
+      if(e) {
+        setMessage(e.target.value);
+        
+        if(initialFormCheck) {
+          setMessageIsValid(isValidLength);
+          return isValidLength;
+        };
+      } else {
+      setMessageIsValid(isValidLength);
+      return isValidLength;
+    };
   };
 
   const clearForm = () => {
@@ -61,28 +93,34 @@ const ContactForm = ({ children }) => {
     setMessage("");
   };
 
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
     setInitialFormCheck(true);
     setIsLoading(true);
 
-    checkNameIsValid();
-    checkEmailIsValid();
-    checkMessageIsValid();
-    
-    if(name.length === 0) {
-      setIsLoading(false);
-      return toast.error("Name is required");
+    let errors = 0;
+
+    if(!handleNameChange()) {
+      toast.error("Name is too short");
+      errors++;
     };
 
-    if(email.length === 0) {
-      setIsLoading(false);
-      return toast.error("Email address is required");
+    if(!handleEmailChange()) {
+      toast.error("Email is invalid");
+      errors++;
     };
 
-    if(message.length < 25) {
-      setIsLoading(false);
-      return toast.error("Min message 25 characters");
+    if(!handleMessageChange()) {
+      toast.error("Message too short");
+      errors++;
+    };
+
+    if(errors) {
+      setTimeout(() => {
+        setIsLoading(false);
+      }, MIN_LOADING_INTERVAL);
+      return;
     };
 
     try {
@@ -107,7 +145,7 @@ const ContactForm = ({ children }) => {
       clearForm();
       scrollToTop();
     } catch (error) {
-      console.error("Error sending message:", error);
+      console.error(`Error sending message: ${error}`);
       toast.error("Failed to send message");
     } finally {
       setIsLoading(false);
@@ -120,7 +158,9 @@ const ContactForm = ({ children }) => {
         <div className="contactForm__inner">
 
           <div className={`contactForm__header ${isOnContact ? "hide" : ""}`}>
-            <h4 className="contactForm__heading">CONTACT</h4>
+            <h4 className="contactForm__heading">
+              CONTACT
+            </h4>
             <h2 className="contactForm__sub-heading">
               I'd love to hear from you.
             </h2>
@@ -140,7 +180,9 @@ const ContactForm = ({ children }) => {
             
             <div className="contactForm__field">
 
-              <label htmlFor="name" className="contactForm__label">Name</label>
+              <label htmlFor="name" className="contactForm__label">
+                Name
+              </label>
 
               <input
                 type="text"
@@ -149,6 +191,7 @@ const ContactForm = ({ children }) => {
                 name="name"
                 placeholder="NAME"
                 value={name}
+                ref={nameRef}
                 onChange={(e) => handleNameChange(e)}
                 aria-invalid={!nameIsValid}
                 aria-describedby="name-error" 
@@ -171,12 +214,13 @@ const ContactForm = ({ children }) => {
             <label htmlFor="email" className="contactForm__label">Email</label>
 
               <input
-                type="email"
+                type="text"
                 id="email"
                 className="contactForm__input"
                 name="email"
                 placeholder="EMAIL"
                 value={email}
+                ref={emailRef}
                 onChange={(e) => handleEmailChange(e)}
                 onBlur={handleEmailChange}
                 aria-invalid={!emailIsValid}
@@ -204,6 +248,7 @@ const ContactForm = ({ children }) => {
                 name="message"
                 placeholder="MESSAGE"
                 value={message}
+                ref={messageRef}
                 onChange={(e) => handleMessageChange(e)}
                 aria-invalid={!messageIsValid}
                 aria-describedby="message-error"

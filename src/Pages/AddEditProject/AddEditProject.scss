@@ -12,6 +12,7 @@
 
 	&__content {
 		@include formFullWidth;
+		box-shadow: var(--box-shadow);
 		max-width: $largeTablet;
 		width: 90%;
 
@@ -21,7 +22,7 @@
 	}
 
 	&__heading {
-		@include headingGeneral;
+		@include formHeading;
 		display: inline-block;
 		margin-top: 2rem;
 		position: relative;

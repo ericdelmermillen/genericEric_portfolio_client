@@ -359,6 +359,19 @@
 	}
 }
 
+@mixin subHeadingGeneral {
+	font-size: 1.25rem;
+	letter-spacing: var(--letter-spacing-general);
+
+	@media (min-width: $smallTablet) {
+		font-size: 1.5rem;
+	}
+
+	@media (min-width: $tablet) {
+		font-size: 2rem;
+	}
+}
+
 @mixin formContent {
 	box-shadow: var(--box-shadow);
 	max-width: $largeTablet;

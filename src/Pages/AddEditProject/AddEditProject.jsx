@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { useAppContext } from "../../contexts/AppContext";
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { scrollToTop, isValidURL } from "../../../utils/utils";
 import Compressor from "compressorjs";
 import ProjectDatePicker from "../../components/ProjectDatePicker/ProjectDatePicker";
@@ -47,13 +47,10 @@ const AddEditProject = ({ children }) => {
   const [ youtubeVideoURL, setYoutubeVideoURL ] = useState('');
   const [ githubClientURL, setGithubClientURL ] = useState('');
   const [ githubServerURL, setGithubServerURL ] = useState('');
-
   
   // validation state
   const [ initialFormCheck , setInitialFormCheck ] = useState(false);
-
   const [ titleIsValid, setTitleIsValid ] = useState(true);
-
   const [ descIsValid, setDescIsValid ] = useState(true);
   const [ deployedURLIsValid, setDeployedURLIsValid ] = useState(true);
   const [ youtubeURLIsValid, setYoutubeURLIsValid ] = useState(true);
@@ -66,6 +63,8 @@ const AddEditProject = ({ children }) => {
   const youtubeURLRef = useRef(null);
   const githubClientURLRef = useRef(null);
   const githubServerURLRef = useRef(null);
+
+  const navigate = useNavigate();
   
   const handleImageChange = useCallback(async (e, inputNo) => {
     const file = e.target.files[0];
@@ -98,7 +97,7 @@ const AddEditProject = ({ children }) => {
       );
     } catch (error) {
       console.error('Error compressing image:', error);
-    }
+    };
   }, []);
 
   const handleInputDragStart = useCallback((photoNo) => {
@@ -155,7 +154,6 @@ const AddEditProject = ({ children }) => {
   
     setActiveDragInput({id: -1});
   }, [activeDragInput.id]);
-
 
 
   const fetchProjectDetails = async (projectID) => {
@@ -233,37 +231,38 @@ const AddEditProject = ({ children }) => {
   };
 
 
-  // ***
-
   const handleTitleChange = (e) => {
+    const isValidLength = e 
+      ? e.target.value.trim().length >= 5
+      : titleRef.current.value.trim().length >= 5;
+    
     if(e) {
       setTitle(e.target.value);
       
       if(initialFormCheck) {
-        const isValidLength = e.target.value.trim().length >= 5;
         setTitleIsValid(isValidLength);
-        return isValidLength
+        return isValidLength;
       };
     } else {
-      const isValidLength = titleRef.current.value.trim().length >= 5
-      setTitleIsValid(isValidLength)
+      setTitleIsValid(isValidLength);
       return isValidLength;
     };
-
   };
 
   
   const handleDescChange = (e) => {
+    const isValidLength = e 
+      ? e.target.value.trim().length >= 25
+      : descRef.current.value.trim().length >= 25;
+
     if(e) {
       setDesc(e.target.value);
       
       if(initialFormCheck) {
-        const isValidLength = e.target.value.trim().length >= 25;
         setDescIsValid(isValidLength);
         return isValidLength;
       };
     } else {
-      const isValidLength = descRef.current.value.trim().length >= 25;
       setDescIsValid(isValidLength);
       return isValidLength;
     };
@@ -277,7 +276,7 @@ const AddEditProject = ({ children }) => {
       setDeployedURL(e.target.value);
       
       if(initialFormCheck) {
-        setDeployedURLIsValid(validURL)
+        setDeployedURLIsValid(validURL);
         return validURL;
       }
 
@@ -286,7 +285,7 @@ const AddEditProject = ({ children }) => {
       return validURL;
     };
   };
-  
+
   
   const handleYoutubeVideoURLChange = (e) => {
     const validURL = isValidURL(e ? e.target.value : youtubeURLRef.current.value);
@@ -351,29 +350,12 @@ const AddEditProject = ({ children }) => {
     };
   };
 
-  // ***
-
-  
   
   // ***
-
-
-  // validation checkers
-
-  // const clearForm = () => {
-  //   // setName("");
-  //   setInitialFormCheck(false);
-  //   // setEmail("");
-  //   // setMessage("");
-  // };
-
-
-
-
   const handleSubmit = (e) => {
     e.preventDefault();
     setInitialFormCheck(true);
-    // setIsLoading(true);
+    setIsLoading(true);
 
     let errors = 0;
 
@@ -408,23 +390,28 @@ const AddEditProject = ({ children }) => {
     };
 
 
-    // console.log(errors)
-
     if(errors) {
       console.log("errors present")
-      return
-    }
+      setTimeout(() => {
+        setIsLoading(false);
+      }, MIN_LOADING_INTERVAL);
+      return;
+    };
+
+    // need validation for at least one photo present
 
 
     console.log(`Submitting ${isAddProject ? "new project" : "updated project"}`)
+    setIsLoading(false);
     return
   };
 
 
 
-
+  // add "Are you sure?" modal(?)
   const handleCancel = () => {
     console.log("Cancel")
+    navigate("/");
   };
 
 
@@ -444,10 +431,7 @@ const AddEditProject = ({ children }) => {
           {children}
           <div className="addEditProject__content">
 
-            <h1 
-              id="addEditHeading"
-              className="addEditProject__heading"
-            >
+            <h1 id="addEditHeading" className="addEditProject__heading">
               {isAddProject
                 ? "Add New Project"
                 : `Edit Project #${projectID}`
@@ -490,7 +474,6 @@ const AddEditProject = ({ children }) => {
 
             </div>
 
-
             <div className="addEditProject__text">
 
               <label className="addEditProject__label" htmlFor="projectTitle">
@@ -498,11 +481,11 @@ const AddEditProject = ({ children }) => {
               </label>
 
               <input 
+                type="text" 
                 id="projectTitle"
                 className={`addEditProject__input addEditProject__input--title ${!titleIsValid && initialFormCheck 
                   ? "error" 
                   : ""}`} 
-                type="text" 
                 value={title}
                 onChange={(e) => handleTitleChange(e)}
                 placeholder="Title for project"
@@ -518,80 +501,88 @@ const AddEditProject = ({ children }) => {
 
                 <textarea 
                   id="projectDescription"
+                  type="text"
                   className={`addEditProject__desc ${!descIsValid && initialFormCheck 
                     ? "error" 
                     : ""}`}
                   value={desc}
+                  ref={descRef}
                   onChange={(e) => handleDescChange(e)}
                   placeholder="Description of the project"
                   aria-required="true"
-                  ref={descRef}
                   ></textarea>
 
               </div>
 
               <div className="addEditProject__urls">
 
-                <label className="addEditProject__label" htmlFor="deployedURL">Deployed URL</label>
+                <label className="addEditProject__label" htmlFor="deployedURL">
+                  Deployed URL
+                </label>
 
                 <input 
+                  type="url" 
                   id="deployedURL"
                   className={`addEditProject__input addEditProject__input--deployedURL ${!deployedURLIsValid && initialFormCheck 
                     ? "error" 
                     : ""}`}
-                  type="url" 
                   value={deployedURL}
+                  ref={deployedURLRef}
                   onChange={(e) => handleDeployedURLChange(e)}
                   placeholder="Deployed site url"
-                  ref={deployedURLRef}
                 />
      
-                <label className="addEditProject__label" htmlFor="youtubeURL">YouTube Video URL</label>
+                <label className="addEditProject__label" htmlFor="youtubeURL">
+                  YouTube Video URL
+                </label>
 
                 <input 
+                type="url" 
                   id="youtubeURL"
                   className={`addEditProject__input addEditProject__input--youtubeURL ${!youtubeURLIsValid && initialFormCheck 
                     ? "error" 
                     : ""}`}
-                  type="url" 
                   value={youtubeVideoURL}
+                  ref={youtubeURLRef}
                   onChange={(e) => handleYoutubeVideoURLChange(e)}
                   placeholder="Youtube video url (optional)"
-                  ref={youtubeURLRef}
                 />
 
-                <label className="addEditProject__label" htmlFor="githubClient">GitHub Client URL</label>
+                <label className="addEditProject__label" htmlFor="githubClient">
+                  GitHub Client URL
+                </label>
 
                 <input 
+                  type="url" 
                   id="githubClient"
                   className={`addEditProject__input addEditProject__input--githubClient ${!githubClientURLIsValid && initialFormCheck 
                     ? "error" 
                     : ""}`}
-                  type="url" 
                   value={githubClientURL}
+                  ref={githubClientURLRef}
                   onChange={(e) => handleGithubClientURLChange(e)}
                   placeholder="Github client url (optional)"
-                  ref={githubClientURLRef}
                 />
                 
-                <label className="addEditProject__label" htmlFor="githubServer">GitHub Server URL</label>
+                <label className="addEditProject__label" htmlFor="githubServer">
+                  GitHub Server URL
+                </label>
 
                 <input 
+                  type="url" 
                   id="githubServer"
                   className={`addEditProject__input addEditProject__input--githubServer ${!githubServerURLIsValid && initialFormCheck 
                     ? "error" 
                     : ""}`}
-                  type="url" 
                   value={githubServerURL}
+                  ref={githubServerURLRef}
                   onChange={(e) => handleGithubServerURLChange(e)}
                   placeholder="Github server url (optional)"
-                  ref={githubServerURLRef}
                 />
 
               </div>
 
             </div>
-
 
             <div className="addEditProject__buttons">
 

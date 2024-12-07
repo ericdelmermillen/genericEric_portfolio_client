@@ -25,7 +25,7 @@
 	}
 
 	&__sub-heading {
-		font-size: 1.75rem;
+		@include subHeadingGeneral;
 		margin-bottom: 2rem;
 	}
 
