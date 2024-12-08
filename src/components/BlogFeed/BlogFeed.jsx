@@ -9,8 +9,10 @@ import "./BlogFeed.scss";
 
 const YOUTUBE_API_KEY = import.meta.env.VITE_YOUTUBE_API_KEY;
 const YOUTUBE_BASE_URL = import.meta.env.VITE_YOUTUBE_BASE_URL;
+
 // SMW's playlist
 const PLAYLIST_ID = "UU6aTLuI_j4-0wiDSzmaPctQ"; 
+
 // GE's playlist
 // const PLAYLIST_ID = "UUxF40kFyhKJ9JGuvNtfypyQ"; 
 
@@ -132,30 +134,30 @@ const BlogFeed = () => {
 
           <div className={`blogFeed__content ${isOnHome ? "isOnHome" : ""}`}>
 
-          {isOnHome
-            ? (
-                <div className="blogFeed__header">
-                  <h4 className="blogFeed__heading">MY BLOG</h4>
-                  <h2 className="blogFeed__sub-heading">Check out my most recent post</h2>
-                </div>
-              )
-            
-            : null
-          }
+            {isOnHome
+              ? (
+                  <div className="blogFeed__header">
+                    <h4 className="blogFeed__heading">MY BLOG</h4>
+                    <h2 className="blogFeed__sub-heading">Check out my most recent post</h2>
+                  </div>
+                )
+              
+              : null
+            }
 
-          {blogPosts.map((post, idx) => (
-            <BlogPost 
-              key={post.videoId || idx}
-              isInitialPlaceholder={post.isInitialPlaceholder}
-              title={post.title}
-              description={post.description}
-              videoID={post.videoId}
-              isLoading={isLoading}
-              isOnHome={isOnHome}
-              RESULTS_PER_PAGE={RESULTS_PER_PAGE}
-              allResultsFetched={allResultsFetched}
-            />
-          ))}
+            {blogPosts.map((post, idx) => (
+              <BlogPost 
+                key={post.videoId || idx}
+                isInitialPlaceholder={post.isInitialPlaceholder}
+                title={post.title}
+                description={post.description}
+                videoID={post.videoId}
+                isLoading={isLoading}
+                isOnHome={isOnHome}
+                RESULTS_PER_PAGE={RESULTS_PER_PAGE}
+                allResultsFetched={allResultsFetched}
+              />
+            ))}
           </div>
 
           {!isInitialLoad

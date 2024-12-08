@@ -7,8 +7,18 @@ import toast from "react-hot-toast";
 import "./ProjectsFeed.scss";
 
 const BASE_URL = import.meta.env.VITE_API_BASE_URL;
-const PROJECTS_PER_PAGE = 2;
+// const PROJECTS_PER_PAGE = 2;
+const PROJECTS_PER_PAGE = 3;
 // const PROJECTS_PER_PAGE = 8;
+
+  // ***
+  
+  // const initialPosts = Array.from({length: PROJECTS_PER_PAGE}, () => (
+  //   {
+  //     isInitialPlaceholder: true,
+  //     description: ""
+  //   }
+  // ));
 
 const ProjectsFeed = () => {
   const {
@@ -29,15 +39,6 @@ const ProjectsFeed = () => {
   const [ page, setPage ] = useState(1);
   const [ isFinalPageFetched, setIsFinalPageFetched ] = useState(false);
   const [ isFinalPageLoaded, setIsFinalPageLoaded ] = useState(false);
-
-  // ***
-  
-  // const initialPosts = Array.from({length: PROJECTS_PER_PAGE}, () => (
-  //   {
-  //     isInitialPlaceholder: true,
-  //     description: ""
-  //   }
-  // ));
 
 
   const handleSetCurrentProjectImages = (projectID) => {
