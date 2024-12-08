@@ -27,8 +27,7 @@ const LoginForm = ({ children }) => {
   } = useAppContext();
 
 
-  const handleTogglePasswordVisibility = (e) => {
-    e.preventDefault();
+  const handleTogglePasswordVisibility = () => {
     setShowPassword(c => !c);
   };
 
@@ -139,7 +138,9 @@ const LoginForm = ({ children }) => {
 
             <div className="loginForm__field loginForm__field--password">
 
-              <label htmlFor="password" className="loginForm__label">Password</label>
+              <label htmlFor="password" className="loginForm__label">
+                Password
+              </label>
               
               <input
                 type={showPassword ? "text" : "password"}
@@ -158,7 +159,7 @@ const LoginForm = ({ children }) => {
               <button
                 type="button"
                 className={`passwordInput__icon ${isSafari ? "hide" : ""}`}
-                onClick={(e) => handleTogglePasswordVisibility(e)}
+                onClick={handleTogglePasswordVisibility}
                 aria-label={showPassword ? "Hide password" : "Show password"}
               >
                 {showPassword
