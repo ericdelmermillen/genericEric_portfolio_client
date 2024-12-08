@@ -42,13 +42,11 @@ const AddEditProject = ({ children }) => {
 
   const [ title, setTitle ] = useState('');
   const [ desc, setDesc ] = useState('');
-
   const [ deployedURL, setDeployedURL ] = useState('');
   const [ youtubeVideoURL, setYoutubeVideoURL ] = useState('');
   const [ githubClientURL, setGithubClientURL ] = useState('');
   const [ githubServerURL, setGithubServerURL ] = useState('');
   
-  // validation state
   const [ initialFormCheck , setInitialFormCheck ] = useState(false);
   const [ titleIsValid, setTitleIsValid ] = useState(true);
   const [ descIsValid, setDescIsValid ] = useState(true);
@@ -188,15 +186,6 @@ const AddEditProject = ({ children }) => {
       const data = await response.json();
 
       setRawDate(data.project_date);
-      
-      const fetchedPhotos = data.project_photos.map((photo, idx) => (
-        {
-          photoNo: idx + 1,
-          photoPreview: data.project_photos[idx]?.photo_url ?? photo.photoPreview,
-          photoData: null,
-          displayOrder: idx + 1
-        }
-      ));
 
       setPhotos(prevPhotos => 
         prevPhotos.map((photo, idx) => ({
@@ -232,122 +221,68 @@ const AddEditProject = ({ children }) => {
 
 
   const handleTitleChange = (e) => {
-    const isValidLength = e 
-      ? e.target.value.trim().length >= 5
-      : titleRef.current.value.trim().length >= 5;
-    
-    if(e) {
-      setTitle(e.target.value);
-      
-      if(initialFormCheck) {
-        setTitleIsValid(isValidLength);
-        return isValidLength;
-      };
-    } else {
-      setTitleIsValid(isValidLength);
-      return isValidLength;
-    };
+    const titleValue = e ? e.target.value : titleRef.current.value;
+    const isValidLength = titleValue.trim().length >= 5;
+
+    setTitle(titleValue);
+    setTitleIsValid(isValidLength);
+  
+    return isValidLength;
   };
 
-  
+
   const handleDescChange = (e) => {
-    const isValidLength = e 
-      ? e.target.value.trim().length >= 25
-      : descRef.current.value.trim().length >= 25;
+    const descValue = e ? e.target.value : descRef.current.value;
+    const isValidLength = descValue.trim().length >= 25;
 
-    if(e) {
-      setDesc(e.target.value);
-      
-      if(initialFormCheck) {
-        setDescIsValid(isValidLength);
-        return isValidLength;
-      };
-    } else {
-      setDescIsValid(isValidLength);
-      return isValidLength;
-    };
+    setDesc(descValue);
+    setDescIsValid(isValidLength);
+  
+    return isValidLength;
   };
 
-  
+
   const handleDeployedURLChange = (e) => {
-    const validURL = isValidURL(e ? e.target.value : deployedURLRef.current.value);
+    const deployedURLValue = e ? e.target.value : deployedURLRef.current.value;
+    const validURL = isValidURL(deployedURLValue);
 
-    if(e) {
-      setDeployedURL(e.target.value);
-      
-      if(initialFormCheck) {
-        setDeployedURLIsValid(validURL);
-        return validURL;
-      }
-
-    } else {
-      setDeployedURLIsValid(validURL);
-      return validURL;
-    };
+    setDeployedURL(deployedURLValue)
+    setDeployedURLIsValid(validURL);
+  
+    return validURL;
   };
 
   
   const handleYoutubeVideoURLChange = (e) => {
-    const validURL = isValidURL(e ? e.target.value : youtubeURLRef.current.value);
-
-    if(e) {
-      setYoutubeVideoURL(e.target.value);
-      
-      if(initialFormCheck && e.target.value.length) {
-        setYoutubeURLIsValid(validURL);
-        return validURL;
-
-      } else if(e.target.value.length == 0){
-        setYoutubeURLIsValid(true);
-        return true
-      };
-
-    } else if(youtubeURLRef.current.value.length){
-      setYoutubeURLIsValid(validURL);
-      return validURL;
-    };
+    const youtubeURLValue = e ? e.target.value : youtubeURLRef.current.value;
+    const validURL = isValidURL(youtubeURLValue);
+  
+    setYoutubeVideoURL(youtubeURLValue);
+    setYoutubeURLIsValid(validURL || youtubeURLValue.length === 0);
+  
+    return validURL || youtubeURLValue.length === 0;
   };
-
+  
 
   const handleGithubClientURLChange = (e) => {
-    const validURL = isValidURL(e ? e.target.value : githubClientURLRef.current.value);
-
-    if(e) {
-      setGithubClientURL(e.target.value);
-
-      if(initialFormCheck && e.target.value.length) {
-        setGithubClientURLIsValid(validURL)
-        return validURL;
-      } else if(e.target.value.length == 0){
-        setGithubClientURLIsValid(true);
-        return true
-      };
-
-    } else if(githubClientURLRef.current.value.length){
-      setGithubClientURLIsValid(validURL)
-      return validURL;
-    };
+    const githubClientURLValue = e ? e.target.value : githubClientURLRef.current.value;
+    const validURL = isValidURL(githubClientURLValue);
+  
+    setGithubClientURL(githubClientURLValue);
+    setGithubClientURLIsValid(validURL || githubClientURLValue.length === 0);
+  
+    return validURL || githubClientURLValue.length === 0;
   };
   
-  
-  const handleGithubServerURLChange = (e) => {
-    const validURL = isValidURL(e ? e.target.value : githubServerURLRef.current.value);
-    
-    if(e) {
-      setGithubServerURL(e.target.value);
 
-      if(initialFormCheck && e.target.value.length) {
-        setGithubServerURLIsValid(validURL);
-        return validURL;
-      } else if(e.target.value.length == 0){
-        setGithubServerURLIsValid(true);
-        return true
-      };
-      
-    } else if(githubServerURLRef.current.value.length) {
-      setGithubServerURLIsValid(validURL);
-      return validURL;
-    };
+  const handleGithubServerURLChange = (e) => {
+    const githubServerURLValue = e ? e.target.value : githubServerURLRef.current.value;
+    const validURL = isValidURL(githubServerURLValue);
+  
+    setGithubServerURL(githubServerURLValue);
+    setGithubServerURLIsValid(validURL || githubServerURLValue.length === 0);
+  
+    return validURL || githubServerURLValue.length === 0;
   };
 
   
@@ -391,7 +326,6 @@ const AddEditProject = ({ children }) => {
 
 
     if(errors) {
-      console.log("errors present")
       setTimeout(() => {
         setIsLoading(false);
       }, MIN_LOADING_INTERVAL);
@@ -487,10 +421,10 @@ const AddEditProject = ({ children }) => {
                   ? "error" 
                   : ""}`} 
                 value={title}
+                ref={titleRef}
                 onChange={(e) => handleTitleChange(e)}
                 placeholder="Title for project"
                 aria-required="true"
-                ref={titleRef}
               />
 
               <div className="addEditProject__descContainer">
