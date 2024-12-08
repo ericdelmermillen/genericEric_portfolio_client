@@ -15,7 +15,6 @@ const numberOfPhotoUploads = 4;
 const AddEditProject = ({ children }) => {
 
   const { 
-    loading, 
     setIsLoading,
     MIN_LOADING_INTERVAL 
   } = useAppContext();
@@ -115,10 +114,10 @@ const AddEditProject = ({ children }) => {
   
       const updatedPhotos = prevPhotos.map(photo => ({ ...photo }));
   
-      for (const photo of updatedPhotos) {
-        if (dropTargetInputNo !== activeDraggedInputNo) {
-          if (dropTargetInputDisplayOrder === highestDisplayOrder) {
-            if (photo.photoNo === dropTargetInputNo) {
+      for(const photo of updatedPhotos) {
+        if(dropTargetInputNo !== activeDraggedInputNo) {
+          if(dropTargetInputDisplayOrder === highestDisplayOrder) {
+            if(photo.photoNo === dropTargetInputNo) {
               photo.displayOrder = dropTargetInputDisplayOrder - 1;
             } else if (photo.photoNo === activeDraggedInputNo) {
               photo.displayOrder = dropTargetInputDisplayOrder;
@@ -126,7 +125,7 @@ const AddEditProject = ({ children }) => {
               photo.displayOrder--;
             }
           } else if (activeDraggedInputOldDisplayOrder > dropTargetInputDisplayOrder) {
-            if (photo.photoNo === dropTargetInputNo) {
+            if(photo.photoNo === dropTargetInputNo) {
               photo.displayOrder = dropTargetInputDisplayOrder + 1;
             } else if (photo.photoNo === activeDraggedInputNo) {
               photo.displayOrder = dropTargetInputDisplayOrder;
@@ -134,7 +133,7 @@ const AddEditProject = ({ children }) => {
               photo.displayOrder++;
             }
           } else if (dropTargetInputDisplayOrder > activeDraggedInputOldDisplayOrder) {
-            if (photo.photoNo === dropTargetInputNo) {
+            if(photo.photoNo === dropTargetInputNo) {
               photo.displayOrder = dropTargetInputDisplayOrder - 1;
             } else if (photo.photoNo === activeDraggedInputNo) {
               photo.displayOrder = dropTargetInputDisplayOrder;
@@ -296,23 +295,23 @@ const AddEditProject = ({ children }) => {
 
     if(!handleTitleChange()) {
       toast.error("Title is too short");
-      errors++
-    }
+      errors++;
+    };
     
     if(!handleDescChange()){
       toast.error("Description is too short");
-      errors++
-    }
+      errors++;
+    };
     
     if(!handleDeployedURLChange()){
       toast.error("Valid deployment url required");
-      errors++
-    }
+      errors++;
+    };
     
     if(youtubeVideoURL.length && !handleYoutubeVideoURLChange()) {
       toast.error("Youtube video url invalid");
       errors++;
-    }
+    };
     
     if(githubClientURL.length && !handleGithubClientURLChange()) {
       toast.error("Github Client url invalid");
@@ -363,7 +362,12 @@ const AddEditProject = ({ children }) => {
       <div className="addEditProject">
         <div className="addEditProject__inner">
           {children}
-          <div className="addEditProject__content">
+
+          <form 
+            className="addEditProject__form"
+            onSubmit={handleSubmit}
+            noValidate
+          >
 
             <h1 id="addEditHeading" className="addEditProject__heading">
               {isAddProject
@@ -424,7 +428,6 @@ const AddEditProject = ({ children }) => {
                 ref={titleRef}
                 onChange={(e) => handleTitleChange(e)}
                 placeholder="Title for project"
-                aria-required="true"
               />
 
               <div className="addEditProject__descContainer">
@@ -443,7 +446,6 @@ const AddEditProject = ({ children }) => {
                   ref={descRef}
                   onChange={(e) => handleDescChange(e)}
                   placeholder="Description of the project"
-                  aria-required="true"
                   ></textarea>
 
               </div>
@@ -540,7 +542,7 @@ const AddEditProject = ({ children }) => {
 
             </div>
 
-          </div>
+          </form>
 
         </div>
       </div>

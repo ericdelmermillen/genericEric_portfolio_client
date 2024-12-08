@@ -10,7 +10,7 @@
 		@include wallpaperContainer;
 	}
 
-	&__content {
+	&__form {
 		@include formFullWidth;
 		box-shadow: var(--box-shadow);
 		max-width: $largeTablet;

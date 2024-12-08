@@ -180,7 +180,7 @@ const ContactForm = ({ children }) => {
               {!nameIsValid && initialFormCheck 
 
                 ? ( 
-                    <div id="name-error" className="contactForm__error">
+                    <div id="name-error" className="contactForm__error" role="alert">
                       Name is too short
                     </div>
                   )
@@ -191,7 +191,9 @@ const ContactForm = ({ children }) => {
             </div>
 
             <div className="contactForm__field">
-            <label htmlFor="email" className="contactForm__label">Email</label>
+            <label htmlFor="email" className="contactForm__label">
+              Email
+            </label>
 
               <input
                 type="text"
@@ -210,7 +212,7 @@ const ContactForm = ({ children }) => {
               {!emailIsValid && initialFormCheck 
 
                 ? ( 
-                    <div id="email-error" className="contactForm__error">
+                    <div id="email-error" className="contactForm__error" role="alert">
                       Invalid Email
                     </div>
                   )
@@ -237,7 +239,7 @@ const ContactForm = ({ children }) => {
               {!messageIsValid && initialFormCheck 
               
                 ? ( 
-                    <div id="message-error" className="contactForm__error">
+                    <div id="message-error" className="contactForm__error" role="alert">
                       Message is too short
                     </div>
                   )
