@@ -11,8 +11,7 @@ const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 const PROJECTS_PER_PAGE = 3;
 // const PROJECTS_PER_PAGE = 8;
 
-  // ***
-  
+// *** use for placeholders
   // const initialPosts = Array.from({length: PROJECTS_PER_PAGE}, () => (
   //   {
   //     isInitialPlaceholder: true,

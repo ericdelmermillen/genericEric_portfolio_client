@@ -380,7 +380,7 @@ const Portfolio = () => {
               Check Out My Work
             </h2>
             <p className="portfolio__lead">
-              Here is a smaple of my projects:
+              Here is a sample of my projects:
             </p>
 
             <button 
