@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useAppContext } from '../../contexts/AppContext.jsx';
 import { Link, useLocation } from 'react-router-dom';
 import { scrollToTop } from '../../../utils/utils.js';
@@ -40,6 +40,7 @@ const BlogFeed = () => {
   const [ isInitialLoad, setIsInitialLoad ] = useState(true);
   const [ nextPageToken, setNextPageToken ] = useState("");
   const [ page, setPage ] = useState(1);
+  const [ blogPostLoadedCount, setBlogPostLoadedCount ] = useState(0);
 
   const { 
     isLoading,
@@ -47,11 +48,16 @@ const BlogFeed = () => {
     MIN_LOADING_INTERVAL
    } = useAppContext();
 
-  const handleFetchBlogPosts = async () => {
-
+   
+   const handleFetchBlogPosts = async () => {
     if(allResultsFetched && !isPaginationComplete) {
+      setIsLoading(true);
       setIsPaginationComplete(true);
       toast("No more posts to show");
+
+      setTimeout(() => {
+        setIsLoading(false);
+      }, MIN_LOADING_INTERVAL);
     };
     
     if(!allResultsFetched) {
@@ -96,7 +102,7 @@ const BlogFeed = () => {
           };
 
         } else if(environment === "production") {
-          console.log(`In ${environment} mode`)
+          console.log(`In ${environment} mode`);
 
           if(page === 1) {
             setBlogPosts(posts);
@@ -112,18 +118,30 @@ const BlogFeed = () => {
         toast.error("Error connecting to youtube");
       } finally {
         setIsInitialLoad(false);
-        setTimeout(() => {
-          setIsLoading(false);
-        }, MIN_LOADING_INTERVAL);
       };
     };
   };
+
+  const handleIncrementBlogPostLoadedCount = () => {
+    setBlogPostLoadedCount(c => c + 1);
+  };
+
+
+  // useEffect to handle setting isLoading false after loaded and fetched post increment count reaches equality
+  useEffect(() => {
+    if(blogPostLoadedCount === blogPosts.length && !isInitialLoad) {
+      setIsLoading(false);
+    }
+
+  }, [blogPosts.length, blogPostLoadedCount]);
+
   
   // initial blogPost fetch on mount
   useEffect(() => {
     if(isInitialLoad) {
+      setIsLoading(true);
       handleFetchBlogPosts();
-    }
+    };
   }, []);
 
 
@@ -137,8 +155,12 @@ const BlogFeed = () => {
             {isOnHome
               ? (
                   <div className="blogFeed__header">
-                    <h4 className="blogFeed__heading">MY BLOG</h4>
-                    <h2 className="blogFeed__sub-heading">Check out my most recent post</h2>
+                    <h4 className="blogFeed__heading">
+                      MY BLOG
+                    </h4>
+                    <h2 className="blogFeed__sub-heading">
+                      Check out my most recent post
+                    </h2>
                   </div>
                 )
               
@@ -156,6 +178,7 @@ const BlogFeed = () => {
                 isOnHome={isOnHome}
                 RESULTS_PER_PAGE={RESULTS_PER_PAGE}
                 allResultsFetched={allResultsFetched}
+                handleIncrementBlogPostLoadedCount={handleIncrementBlogPostLoadedCount}
               />
             ))}
           </div>

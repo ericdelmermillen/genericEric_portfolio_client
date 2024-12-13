@@ -16,17 +16,6 @@ const scrollToTop = () => {
   });
 };
 
-const scrollToDivTop = (divID, divTopOffset) => {
-  const targetDiv = document.getElementById(divID);
-  if(targetDiv) {
-    const offsetTop = targetDiv.offsetTop; 
-    window.scrollTo({
-      top: offsetTop + divTopOffset,
-      behavior: "smooth"
-    });
-  };
-};
-
 const isValidEmail = (email) => {
   const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@(([[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   return emailRegex.test(email);
@@ -146,7 +135,6 @@ function getMonthYear(dateString) {
 export {
   checkIfIsFirefox,
   scrollToTop,
-  scrollToDivTop,
   isValidEmail,
   isValidURL,
   isValidPassword,

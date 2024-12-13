@@ -11,6 +11,7 @@ const BlogPost = ({
   description, 
   videoID, 
   isOnHome, 
+  handleIncrementBlogPostLoadedCount,
   isLoading })=> {
   
   const embedUrl = `https://www.youtube.com/embed/${videoID}?rel=0`;
@@ -36,6 +37,7 @@ const BlogPost = ({
   };
 
   const handleOnLoad = () => {
+    handleIncrementBlogPostLoadedCount();
     setTimeout(() => {
       setShowPlaceholder(false);
     }, LIGHTBOX_TIMING_INTERVAL);

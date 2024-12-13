@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useAppContext } from "../../contexts/AppContext.jsx";
 import { isValidEmail, isValidPassword } from "../../../utils/utils.js";
 import { toast } from 'react-hot-toast'; 
@@ -79,6 +79,14 @@ const LoginForm = ({ children }) => {
 
     return loginUser(email, password);
   };
+
+
+  // useEffect to auto focus the email input
+  useEffect(() => {
+    if(emailRef.current) {
+      emailRef.current.focus();
+    };
+  }, []);
 
 
   return (

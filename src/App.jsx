@@ -1,6 +1,8 @@
 import { useAppContext } from './contexts/AppContext.jsx';
+import { LightBoxContextProvider } from './contexts/LightBoxContext.jsx';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
+import AddEditProject from './pages/AddEditProject/AddEditProject.jsx';
 import Blog from './pages/Blog/Blog.jsx';
 import ColorModeToggle from './components/ColorModeToggle/ColorModeToggle.jsx';
 import Contact from "./pages/Contact/Contact.jsx";
@@ -13,8 +15,6 @@ import Projects from "./pages/Projects/Projects.jsx";
 import SideNav from './components/SideNav/SideNav.jsx';
 import WallPaper from './components/WallPaper/WallPaper.jsx';
 import "./App.scss";
-import { LightBoxContextProvider } from './contexts/LightBoxContext.jsx';
-import AddEditProject from './pages/AddEditProject/AddEditProject.jsx';
 
 const App = () => {
   const { 
@@ -83,8 +83,6 @@ const App = () => {
       
           <Routes>
 
-              {/* <Route path="/" element={<Home />} /> */}
-
             <Route 
               path="/" 
               element={
@@ -96,6 +94,15 @@ const App = () => {
 
             <Route 
               path="/home" 
+              element={
+                <LightBoxContextProvider>
+                  <Home />
+                </LightBoxContextProvider>
+              } 
+            />
+
+            <Route 
+              path="/home/" 
               element={
                 <LightBoxContextProvider>
                   <Home />
@@ -216,7 +223,7 @@ const App = () => {
                 },
               },
               error: {
-                duration: 5000,
+                duration: 3000,
                 icon: '🔥',
                 style: {
                   background: 'red',
@@ -240,14 +247,3 @@ const App = () => {
   )};
 
 export default App;
-
-// --NavLogo with initials
-// 3) AppContext
-// --user
-// 4) Posts/What I'm Learning section/Blog
-// --paginated list of posts
-// captcha to prevent spam
-
-
-// contact me floating button?: captcha to prevent spam
-// lightbox alt for images

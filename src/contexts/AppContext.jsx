@@ -3,7 +3,8 @@ import {
   useContext, 
   useReducer, 
   useEffect, 
-  useState
+  useState,
+  useRef
 } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { checkTokenIsValid, removeTokens, scrollToTop } from "../../utils/utils";
@@ -12,7 +13,7 @@ import { setTokens } from "../../utils/utils.js"
 
 const AppContext = createContext();
 
-// new global state to initial state where appropriate and make functions to dispatch updates
+// move new global state to initial state where appropriate and make functions to dispatch updates
 const initialState = {
   isLoggedIn: false,
   colorMode: localStorage.getItem('colorMode') || "light",
@@ -61,13 +62,15 @@ const AppContextProvider = ({ children }) => {
   const { isLoggedIn, colorMode, scrollYPos, prevScrollYPos, showSideNav } = state;
   
   const navigate = useNavigate();
-  const { pathname } = useLocation();
+  const location = useLocation();
   
   const [ isLoading, setIsLoading ] = useState(false);
   const [ isProjectOrderEditable, setIsProjectOrderEditable ] = useState(false);
   const [ isEditMode, setIsEditMode ] = useState(false);
-  const [ pathame, setPathname ] = useState("");
   const [ rerenderTrigger, setRerenderTrigger ] = useState(1);
+
+  const contactSectionRef = useRef(null); 
+  const contactNameRef = useRef(null); 
 
   const MIN_LOADING_INTERVAL = 250;
   const MODAL_TRANSITION_INTERVAL = 200;
@@ -159,7 +162,19 @@ const AppContextProvider = ({ children }) => {
     dispatch({ type: "app/toggleSideNav"});
   };
 
+  
+  const focusContactNameInput = () => {
+    if(contactNameRef.current) {
+      contactNameRef.current.focus();
+    }
+  };
 
+
+  const hideNav = () => {
+    document.getElementById("nav").classList.add("hide");
+  };
+
+  
   // useEffect to check for token for isLoggedIn status
   useEffect(() => {
     const checkLoginStatus = async () => {
@@ -174,7 +189,7 @@ const AppContextProvider = ({ children }) => {
         }
       } catch(error) {
         console.error("Error checking token expiration", error);
-      }
+      };
     };
   
     checkLoginStatus();
@@ -207,18 +222,18 @@ const AppContextProvider = ({ children }) => {
     };
   }, [scrollYPos]);
 
+
   // useEffect to turn off isLoading if it is set true on one page but the user goes to another before it is set to false
   useEffect(() => {
     const currentPathname = location.pathname;
+    console.log(currentPathname)
 
-    if(pathname === currentPathname) {
+    if(isLoading) {
       setIsLoading(false);
     }
 
     setIsProjectOrderEditable(false);
     setIsEditMode(false);
-
-    setPathname(currentPathname);
 
   }, [location.pathname]);
 
@@ -241,7 +256,11 @@ const AppContextProvider = ({ children }) => {
     isEditMode, 
     setIsEditMode,
     rerenderTrigger, 
-    setRerenderTrigger
+    setRerenderTrigger,
+    contactSectionRef,
+    contactNameRef,
+    focusContactNameInput,
+    hideNav
   };
 
   return (

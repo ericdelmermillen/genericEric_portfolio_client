@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useAppContext } from "../../contexts/AppContext.jsx";
 import { useLocation, useNavigate } from "react-router-dom";
 import { isValidEmail, scrollToTop } from "../../../utils/utils.js";
@@ -11,7 +11,9 @@ const ContactForm = ({ children }) => {
   const { 
     isLoading, 
     setIsLoading, 
-    MIN_LOADING_INTERVAL
+    MIN_LOADING_INTERVAL,
+    contactSectionRef,
+    contactNameRef
   } = useAppContext();
 
   const [ name, setName ] = useState("");
@@ -24,7 +26,6 @@ const ContactForm = ({ children }) => {
 
   const [ initialFormCheck , setInitialFormCheck ] = useState(false);
 
-  const nameRef = useRef(null);
   const emailRef = useRef(null);
   const messageRef = useRef(null);
 
@@ -34,7 +35,7 @@ const ContactForm = ({ children }) => {
 
 
   const handleNameChange = (e) => {
-    const nameValue = e ? e.target.value : nameRef.current.value;
+    const nameValue = e ? e.target.value : contactNameRef.current.value;
     const isValidLength = nameValue.trim().length >= 2;
   
     setName(nameValue);
@@ -135,7 +136,7 @@ const ContactForm = ({ children }) => {
   return (
     <>
       <section className="contactForm">
-        <div className="contactForm__inner">
+        <div id="contact" className="contactForm__inner" ref={contactSectionRef}>
 
           <div className={`contactForm__header ${isOnContact ? "hide" : ""}`}>
             <h4 className="contactForm__heading">
@@ -171,7 +172,7 @@ const ContactForm = ({ children }) => {
                 name="name"
                 placeholder="NAME"
                 value={name}
-                ref={nameRef}
+                ref={contactNameRef}
                 onChange={(e) => handleNameChange(e)}
                 aria-invalid={!nameIsValid}
                 aria-describedby="name-error" 

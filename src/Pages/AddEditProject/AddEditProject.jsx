@@ -340,13 +340,11 @@ const AddEditProject = ({ children }) => {
   };
 
 
-
   // add "Are you sure?" modal(?)
   const handleCancel = () => {
     console.log("Cancel")
     navigate("/");
   };
-
 
 
   // fetch existing project on mount useEffect
@@ -355,6 +353,10 @@ const AddEditProject = ({ children }) => {
       fetchProjectDetails(projectID);
     };
     scrollToTop();
+
+    if(titleRef.current) {
+      titleRef.current.focus();
+    }
   }, []);
 
   return (

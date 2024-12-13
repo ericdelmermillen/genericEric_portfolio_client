@@ -1,6 +1,5 @@
+import { useState, useEffect } from "react";
 import { useAppContext } from "../../contexts/AppContext.jsx";
-import { useEffect, useState } from "react";
-import { scrollToDivTop } from "../../../utils/utils.js";
 import DownIcon from "../../assets/svgs/DownIcon.jsx";
 import Facebook from "../../assets/svgs/Facebook.jsx";
 import Github from "../../assets/svgs/Github.jsx";
@@ -21,22 +20,21 @@ const headerSocials = [
 ];
 
 const Header = () => {
-  const divTopOffset = window.innerHeight - 50;
-
-  const { colorMode, scrollYPos } = useAppContext();
+  const { colorMode, scrollYPos, hideNav } = useAppContext();
   const [ windowHeight, setwindowHeight ] = useState(Infinity);
 
-  const handleScrollToAbout = () => {
-    scrollToDivTop("about", divTopOffset);
+  const handleHideNav = () => {
+    hideNav();
   };
 
+  // useEffect to set the window height
   useEffect(() => {
     setwindowHeight(window.innerHeight);
   }, [windowHeight]);
 
   return (
     <>
-      <header className="header">
+      <header id="header" className="header">
         <div className="header__hero">
 
           <div className="header__overlay"></div>
@@ -69,16 +67,16 @@ const Header = () => {
             <h4 className="header__description">
               Full Stack Developer
             </h4>
-
-            <div 
+            <a 
               className="header__button"
-              onClick={handleScrollToAbout}
+              href="#about"
+              onClick={handleHideNav}
             >
               <DownIcon className={"header__button-down"}/>
               <span className="header__button-text">
                 More About Me
-            </span>
-            </div>
+              </span>
+            </a>
 
           </div>
 

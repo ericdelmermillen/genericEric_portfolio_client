@@ -26,7 +26,12 @@
 
 	&__sub-heading {
 		@include subHeadingGeneral;
+		display: none;
 		margin-bottom: 2rem;
+
+		@media (min-width: $smallTablet) {
+			display: block;
+		}
 	}
 
 	&__form {

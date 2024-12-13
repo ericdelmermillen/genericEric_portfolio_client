@@ -3,7 +3,7 @@ import { useAppContext } from '../../contexts/AppContext.jsx';
 import { useLightBoxContext } from '../../contexts/LightBoxContext.jsx';
 import { Link, useNavigate } from 'react-router-dom';
 import { MdModeEdit } from 'react-icons/md';
-import { removeTokens, scrollToDivTop } from '../../../utils/utils.js';
+import { removeTokens } from '../../../utils/utils.js';
 import AddEditDeleteProjectModal from '../AddEditDeleteProjectModal/AddEditDeleteProjectModal.jsx';
 import LightBox from '../LightBox/LightBox.jsx';
 import PortfolioCard from '../PortfolioCard/PortfolioCard.jsx';
@@ -15,11 +15,11 @@ const PROJECT_COUNT = 4;
 // const PROJECT_COUNT = 2;
 
 const BASE_URL = import.meta.env.VITE_API_BASE_URL;
-
 const initialImages = Array.from({length: PROJECT_COUNT}, () => ({isInitialPlaceholder: true}));
 
+
 const Portfolio = () => {  
-  const divTopOffset = window.innerHeight - 50;
+  const portfolioLink = document.getElementById("portfolio-link")
 
   const {
     setIsLoading,
@@ -30,7 +30,8 @@ const Portfolio = () => {
     isEditMode, 
     setIsEditMode,
     MIN_LOADING_INTERVAL,
-    rerenderTrigger
+    rerenderTrigger,
+    hideNav,
   } = useAppContext();
 
   const {
@@ -48,7 +49,6 @@ const Portfolio = () => {
 
   const navigate = useNavigate();
 
-  
   const [ activeDragProject, setActiveDragProject ] = useState({project_id: -1}); 
   const [ displayNonePlaceholders, setDisplayNonePlaceholders ] = useState(false);
   const [ isInitialMount, setIsInitialMount ] = useState(true);
@@ -72,10 +72,12 @@ const Portfolio = () => {
   };
 
 
-  // ***need logic to open AddEditDeleteProjectModal then navigate to new project page
   const handleAddNewProject = () => {
-    console.log("add new project");
     navigate("/projects/add")
+  };
+
+  const handlePortfolioLinkClick = () => {
+    portfolioLink.click()
   };
 
   const handleSetIsEditModeTrue = async () => {
@@ -102,20 +104,29 @@ const Portfolio = () => {
       setTimeout(() => {
         setIsLoading(false);
       }, MIN_LOADING_INTERVAL);
-      scrollToDivTop("portfolio", divTopOffset);
+      
+      setTimeout(() => {
+        hideNav();
+      }, MIN_LOADING_INTERVAL * 3);
+      
+      handlePortfolioLinkClick();
     };
   };
-
+  
   const handleSetIsEditModeFalse = () => {
     setIsLoading(true);
     setIsEditMode(false);
-
-    scrollToDivTop("portfolio", divTopOffset);
-
+    
+    handlePortfolioLinkClick();
     toast("Exiting edit mode...");
+
     setTimeout(() => {
       setIsLoading(false);
     }, MIN_LOADING_INTERVAL);
+
+    setTimeout(() => {
+      hideNav();
+    }, MIN_LOADING_INTERVAL * 3);
   };
 
   const handleSetOrderIsEditable = () => {
@@ -241,13 +252,18 @@ const Portfolio = () => {
       { isInitialPlaceholder: true }
     ));
 
+    getPortfolioProjects();
     setProjectsData(refreshPlaceholders);
+
+    handlePortfolioLinkClick();
     
     setTimeout(() => {
-      getPortfolioProjects();
-      scrollToDivTop("portfolio", divTopOffset);
       setIsLoading(false);
     }, MIN_LOADING_INTERVAL);
+    
+    setTimeout(() => {
+      hideNav();
+    }, MIN_LOADING_INTERVAL * 3);
   };
 
   const saveNewOrder = async () => {
@@ -297,9 +313,14 @@ const Portfolio = () => {
    
   const handleSave = () => {
     saveNewOrder();
-    scrollToDivTop("portfolio", divTopOffset);
+    handlePortfolioLinkClick();
     toast("Saving new order...");
     setIsEditMode(false);
+        
+    setTimeout(() => {
+      hideNav();
+      setIsLoading(false);
+    }, MIN_LOADING_INTERVAL);
   };
   
 
@@ -328,6 +349,8 @@ const Portfolio = () => {
   return (
     <>
       <section className="portfolio" id="portfolio">
+
+        <a href="#portfolio" id="portfolio-link" className='portfolio__scrollTopLink'>Scroll To Portfolio Section Top</a>
 
         {isLoggedIn && showActionModal && isEditMode
           ? 

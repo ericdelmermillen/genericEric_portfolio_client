@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { SiJavascript, SiTypescript, SiExpress, SiAdobe, SiMysql, SiRedux, SiPostman, SiNextdotjs } from "react-icons/si";
 import { FaHtml5, FaReact, FaAws } from "react-icons/fa";
 import { FaGithub, FaSass } from "react-icons/fa6";
@@ -26,7 +27,30 @@ const skills = [
   { skillName: "Figma", skillIcon: PiFigmaLogoFill },
 ];
 
+
 const Skills = () => {
+  const [ isNarrowWindow, setIsNarrowWindow ] = useState(false);
+
+  const skillsRemainder = isNarrowWindow
+  ? skills.length %  3
+  : skills.length %  4;
+
+  // useEffect to handle resizing windowWidth
+  useEffect(() => {
+    const handleWidthResize = () => {
+      const isNarrow = window.innerWidth <= 480;
+      setIsNarrowWindow(isNarrow);
+    };
+
+    handleWidthResize();
+
+    window.addEventListener('resize', handleWidthResize)
+    
+    return () => {
+      window.removeEventListener('resize', handleWidthResize);
+    };
+  }, []);
+
   return (
     <>
       <div className="skills">
@@ -46,9 +70,14 @@ const Skills = () => {
 
             {skills.map((skill, idx) => (
 
-              <Skill key={idx} skillName={skill.skillName}>
-                <skill.skillIcon className='skills__icon'/>
-              </Skill>
+              idx < skills.length - skillsRemainder 
+                ? (
+                    <Skill key={skill.skillName} skillName={skill.skillName}>
+                      <skill.skillIcon className='skills__icon'/>
+                    </Skill>
+                  )
+
+              : null
 
             ))}
 

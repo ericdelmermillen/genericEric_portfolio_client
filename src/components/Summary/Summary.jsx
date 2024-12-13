@@ -1,10 +1,21 @@
+import { useAppContext } from "../../contexts/AppContext";
 import Profile from "../Profile/Profile";
 import Skills from "../Skills/Skills";
 import "./Summary.scss";
 
 const Summary = () => {
+  const { focusContactNameInput, MIN_LOADING_INTERVAL, hideNav } = useAppContext();
 
-  // what does Hire me now do? Open contact form with prefilled in headline?
+  const handleFocusContactNameInput = () => {
+    setTimeout(() => {
+      focusContactNameInput();
+    }, MIN_LOADING_INTERVAL * 5);
+    
+    setTimeout(() => {
+      hideNav()
+    }, MIN_LOADING_INTERVAL * 3);
+
+  };
 
   return (
     <>
@@ -20,12 +31,13 @@ const Summary = () => {
 
           <div className="summary__cta">
             <div className="summary__buttons">
-              <button 
+              <a 
                 className="summary__button"
-                onClick={() => console.log("Hire me now")}
+                onClick={handleFocusContactNameInput}
+                href="#contact"
               >
                 Hire Me Now
-              </button>
+              </a>
               <a 
                 className="summary__button"
                 href="/Ericsume.pdf"

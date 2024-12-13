@@ -7,6 +7,10 @@
 		width: 100%;
 	}
 
+	&__scrollTopLink {
+		display: none;
+	}
+
 	&__inner {
 		align-items: center;
 		display: flex;
@@ -130,12 +134,13 @@
 		align-items: center;
 		display: flex;
 		flex-direction: column-reverse;
-		gap: 2rem;
+		gap: 1rem;
 		justify-content: center;
 		margin-top: 2rem;
 		width: 100%;
 
 		@media (min-width: $tablet) {
+			gap: 2rem;
 			flex-direction: row;
 			margin-top: 3rem;
 		}
@@ -143,8 +148,16 @@
 
 	&__button {
 		@include button;
-		margin-top: 2rem;
 		width: 100%;
+		margin-top: 2rem;
+
+		&:nth-last-of-type(2) {
+			margin-top: 0;
+
+			@media (min-width: $tablet) {
+				margin-top: 3rem;
+			}
+		}
 
 		@media (min-width: $tablet) {
 			margin-top: 3rem;
