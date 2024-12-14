@@ -5,7 +5,11 @@ import './SideNav.scss';
 const SideNav = ({ children }) => {
   const { 
     showSideNav,
-    toggleSideNav
+    toggleSideNav,
+    handleBlogClick,
+    handleContactClick,
+    handleProjectsClick,
+    MIN_LOADING_INTERVAL
    } = useAppContext();
 
   const location = useLocation();
@@ -13,7 +17,13 @@ const SideNav = ({ children }) => {
   const isOnHome = location.pathname === "/" || location.pathname === "/home" || location.pathname === "/home/";
 
   const handleSideNavClick = () => {
-    toggleSideNav();
+    handleBlogClick();
+    handleContactClick();
+    handleProjectsClick();
+
+    setTimeout(() => {
+      toggleSideNav();
+    }, MIN_LOADING_INTERVAL);
   };
 
   return (

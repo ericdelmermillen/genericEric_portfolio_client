@@ -133,6 +133,17 @@ const ContactForm = ({ children }) => {
     };
   };
 
+  // useEffect for initial laoding spinner
+  useEffect(() => {
+    if(isOnContact) {
+      setIsLoading(true);
+
+      setTimeout(() => {
+        setIsLoading(false);
+      }, MIN_LOADING_INTERVAL);
+    }
+  }, [])
+
   return (
     <>
       <section className="contactForm">

@@ -4,7 +4,9 @@ import sun from "../../assets/svgs/sun.svg";
 import './ColorModeToggle.scss';
 
 const ColorModeToggle = ({ inputId }) => {
-  const { toggleColorMode } = useAppContext();
+  const { colorMode, toggleColorMode } = useAppContext();
+  const isDarkMode = colorMode === "dark";
+
 
   return (
     <>
@@ -13,7 +15,8 @@ const ColorModeToggle = ({ inputId }) => {
           className="colorModeToggle__checkbox" 
           type="checkbox" 
           id={inputId} 
-          onClick={toggleColorMode}
+          onChange={toggleColorMode}
+          checked={isDarkMode}
         />
         <label 
           className="colorModeToggle__checkbox-label"

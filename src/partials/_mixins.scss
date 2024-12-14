@@ -15,6 +15,9 @@
 
 	// light mode custom variables
 	&[data-color-mode="light"] {
+		--toggle-ball: #f2f2f2;
+		--toggle-sky: #052463;
+
 		--background-color: #f8f8f8;
 		--text-color: #21343c;
 		--neutral-gray-1: #e6eae7;
@@ -53,6 +56,9 @@
 
 	// dark mode custom variables
 	&[data-color-mode="dark"] {
+		--toggle-ball: #f2f2f2;
+		--toggle-sky: #4480f8;
+
 		--text-color: #21343c;
 		--neutral-gray-1: #cdd3d8;
 		--neutral-gray-2: #c3c9d0;

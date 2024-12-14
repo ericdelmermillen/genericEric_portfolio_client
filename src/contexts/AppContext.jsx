@@ -174,6 +174,39 @@ const AppContextProvider = ({ children }) => {
     document.getElementById("nav").classList.add("hide");
   };
 
+
+  const handleBlogClick = () => {
+    if(location.pathname === "/blog" || location.pathname === "/blog/") {
+      scrollToTop();
+      setIsLoading(true);
+      
+      setTimeout(() => {
+        setIsLoading(false);
+      }, MIN_LOADING_INTERVAL);
+    };
+  };
+
+  const handleContactClick = () => {
+    if(location.pathname === "/contact" || location.pathname === "/contact/") {
+      scrollToTop();
+      setIsLoading(true);
+      
+      setTimeout(() => {
+        setIsLoading(false);
+      }, MIN_LOADING_INTERVAL);
+    };
+  };
+
+  const handleProjectsClick = () => {
+    if(location.pathname === "/projects" || location.pathname === "/projects/") {
+      scrollToTop();
+      setIsLoading(true);
+      
+      setTimeout(() => {
+        setIsLoading(false);
+      }, MIN_LOADING_INTERVAL);
+    };
+  };
   
   // useEffect to check for token for isLoggedIn status
   useEffect(() => {
@@ -260,7 +293,10 @@ const AppContextProvider = ({ children }) => {
     contactSectionRef,
     contactNameRef,
     focusContactNameInput,
-    hideNav
+    hideNav,
+    handleBlogClick,
+    handleContactClick,
+    handleProjectsClick
   };
 
   return (

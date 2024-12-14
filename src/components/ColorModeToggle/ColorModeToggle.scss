@@ -3,6 +3,7 @@
 
 .colorModeToggle {
 	& {
+		border-radius: 50%;
 		position: relative;
 	}
 
@@ -12,41 +13,41 @@
 	}
 
 	&__checkbox-label {
+		border: 1px solid rgba(255, 255, 255, 0.25);
+		box-shadow: inset 2px 2px 2px rgba(255, 255, 255, 0.75);
 		align-items: center;
-		// background-color: var(--toggle-sky);
-		background-color: blue;
+		background-color: var(--toggle-sky);
 		border-radius: 50px;
 		cursor: pointer;
 		display: flex;
-		height: 26px;
+		height: 28px;
 		justify-content: space-between;
 		outline: 1px solid var(--text-color);
 		padding: 5px;
 		position: relative;
-		width: 50px;
+		width: 52.5px;
 	}
 
 	&__ball {
-		// background-color: var(--toggle-ball);
-		background-color: #ff0000;
+		background-color: var(--toggle-ball);
 		border-radius: 50%;
 		height: 22px;
-		left: 2px;
+		left: 3px;
 		position: absolute;
-		top: 2px;
+		top: 2.5px;
 		transition: transform 0.2s linear;
 		width: 22px;
 	}
 
 	&__sun-icon {
 		position: fixed;
-		transform: translateX(125%);
+		transform: translateX(10%);
 		width: 1.1rem;
 	}
 
 	&__moon-icon {
 		position: fixed;
-		transform: translateX(50%);
+		transform: translateX(260%);
 		width: 0.6rem;
 	}
 

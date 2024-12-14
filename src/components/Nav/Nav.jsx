@@ -10,7 +10,10 @@ const Nav = ({ children }) => {
     scrollYPos,
     prevScrollYPos,
     toggleSideNav,
-    MIN_LOADING_INTERVAL
+    MIN_LOADING_INTERVAL,
+    handleBlogClick,
+    handleContactClick,
+    handleProjectsClick
    } = useAppContext();
    
   const { pathname } = useLocation();
@@ -57,17 +60,26 @@ const Nav = ({ children }) => {
               HOME
             </Link>
           </li>
-          <li className="nav__item">
+          <li 
+            className="nav__item"
+            onClick={handleProjectsClick}
+          >
             <NavLink className="nav__link" to={"/projects"}>
               PROJECTS
             </NavLink>
           </li>
-          <li className="nav__item">
+          <li 
+            className="nav__item"
+            onClick={handleBlogClick}
+          >
             <NavLink className="nav__link" to={"/blog"}>
               BLOG
             </NavLink>
           </li>
-          <li className="nav__item">
+          <li 
+            className="nav__item"
+            onClick={handleContactClick}
+          >
             <NavLink className="nav__link" to={"/contact"}>
               CONTACT
             </NavLink>
