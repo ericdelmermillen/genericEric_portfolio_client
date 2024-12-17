@@ -11,13 +11,13 @@
 	&__inner {
 		display: flex;
 		flex-direction: column;
-		gap: 2rem;
+		gap: 4rem;
 		margin-bottom: 4rem;
 		margin-inline: auto;
 		max-width: 90%;
 		min-height: calc(100vh - $navHeight);
 
-		@media (min-width: $tablet) {
+		@media (min-width: $largeTablet) {
 			max-width: $tablet;
 		}
 	}

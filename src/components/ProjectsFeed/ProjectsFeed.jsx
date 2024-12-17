@@ -5,21 +5,25 @@ import LightBox from "../../components/LightBox/LightBox.jsx";
 import Project from "../Project/Project";
 import toast from "react-hot-toast";
 import "./ProjectsFeed.scss";
+import { useAppContext } from "../../contexts/AppContext.jsx";
 
 const BASE_URL = import.meta.env.VITE_API_BASE_URL;
-// const PROJECTS_PER_PAGE = 2;
-const PROJECTS_PER_PAGE = 3;
+const PROJECTS_PER_PAGE = 2;
+// const PROJECTS_PER_PAGE = 3;
 // const PROJECTS_PER_PAGE = 8;
+// const PROJECTS_PER_PAGE = 10;
 
 // *** use for placeholders
-  // const initialPosts = Array.from({length: PROJECTS_PER_PAGE}, () => (
-  //   {
-  //     isInitialPlaceholder: true,
-  //     description: ""
-  //   }
-  // ));
+  const initialPosts = Array.from({length: PROJECTS_PER_PAGE}, () => (
+    {
+      isInitialPlaceholder: true,
+      description: ""
+    }
+  ));
 
 const ProjectsFeed = () => {
+  const { setIsLoading } = useAppContext();
+  
   const {
     showLightBox, 
     setShowLightBox,
@@ -34,11 +38,15 @@ const ProjectsFeed = () => {
   } = useLightBoxContext();
   
   const [ projectsData, setProjectsData ] = useState([]);
-  const [ isInitialFetch, setIsInitialFetch ] = useState(true);
-  const [ page, setPage ] = useState(1);
   const [ isFinalPageFetched, setIsFinalPageFetched ] = useState(false);
   const [ isFinalPageLoaded, setIsFinalPageLoaded ] = useState(false);
-
+  
+  
+  const [ isInitialFetch, setIsInitialFetch ] = useState(true);
+  const [ page, setPage ] = useState(1);
+  const [ isInitialLoad, setIsInitialLoad ] = useState(true);
+  const [ currentPageIsReady, setCurrentPageIsReady ] = useState(false);
+  const [ showPlaceholders, setShowPlaceholders ] = useState(true);
 
   const handleSetCurrentProjectImages = (projectID) => {
     setShowLightBox(true);
@@ -64,6 +72,8 @@ const ProjectsFeed = () => {
 
   const fetchProjects = async () => {
     if(!isFinalPageFetched) {
+      setIsLoading(true);
+      setShowPlaceholders(true)
       const offset = PROJECTS_PER_PAGE * (page - 1);
 
       try {
@@ -93,7 +103,11 @@ const ProjectsFeed = () => {
       } catch(error) {
         console.log(error);
         toast.error(error.message);
-      };
+      } finally {
+        if(isInitialLoad) {
+          setIsInitialLoad(false);
+        }
+      }
     };
   };
 
@@ -138,10 +152,19 @@ const ProjectsFeed = () => {
         
         <div className="projectsFeed__inner">
 
-          {projectsData.map(project => 
+          {projectsData.map((project, idx) => 
             
             <Project 
               key={project.project_id}
+              idx={idx}
+              maxIdx={projectsData.length - 1}
+              page={page}
+              PROJECTS_PER_PAGE={PROJECTS_PER_PAGE}
+              isInitialLoad={isInitialLoad}
+              currentPageIsReady={currentPageIsReady}
+              setCurrentPageIsReady={setCurrentPageIsReady}
+              showPlaceholders={showPlaceholders}
+              setShowPlaceholders={setShowPlaceholders}
               projectID={project.project_id}
               projectDate={project.project_date}
               projectTitle={project.project_title}

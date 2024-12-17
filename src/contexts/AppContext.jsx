@@ -68,6 +68,7 @@ const AppContextProvider = ({ children }) => {
   const [ isProjectOrderEditable, setIsProjectOrderEditable ] = useState(false);
   const [ isEditMode, setIsEditMode ] = useState(false);
   const [ rerenderTrigger, setRerenderTrigger ] = useState(1);
+  const [ prevPathname, setPrevPathname ] = useState(location.pathname);
 
   const contactSectionRef = useRef(null); 
   const contactNameRef = useRef(null); 
@@ -259,10 +260,10 @@ const AppContextProvider = ({ children }) => {
   // useEffect to turn off isLoading if it is set true on one page but the user goes to another before it is set to false
   useEffect(() => {
     const currentPathname = location.pathname;
-    console.log(currentPathname)
 
-    if(isLoading) {
+    if(prevPathname !== currentPathname && isLoading) {
       setIsLoading(false);
+      setPrevPathname(currentPathname)
     }
 
     setIsProjectOrderEditable(false);

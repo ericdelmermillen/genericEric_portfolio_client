@@ -117,7 +117,9 @@ const BlogFeed = () => {
         console.log(error);
         toast.error("Error connecting to youtube");
       } finally {
-        setIsInitialLoad(false);
+        if(isInitialLoad) {
+          setIsInitialLoad(false);
+        };
       };
     };
   };

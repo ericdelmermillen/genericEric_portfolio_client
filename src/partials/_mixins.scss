@@ -365,6 +365,11 @@
 	}
 }
 
+@mixin placeholderContent {
+	background: var(--placeholder-color);
+	border-radius: var(--border-radius);
+}
+
 @mixin subHeadingGeneral {
 	font-size: 1.25rem;
 	letter-spacing: var(--letter-spacing-general);

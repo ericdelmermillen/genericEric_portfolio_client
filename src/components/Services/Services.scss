@@ -4,6 +4,8 @@
 .services {
 	& {
 		color: var(--text-color-bright);
+		margin-inline: auto;
+		max-width: $ultraWide;
 		text-align: center;
 	}
 
@@ -16,24 +18,9 @@
 
 	&__bg--light.show {
 		@include servicesBg;
-		background: url("../../assets/images/day-bottom-11.jpg") no-repeat center
+		background: url("../../assets/images/day-bottom.webp") no-repeat center
 			center;
-		background: url("../../assets/images/day-bottom-11a.jpg") no-repeat center
-			center;
-		background: url("../../assets/images/day-bottom-11b.jpg") no-repeat center
-			center;
-		background: url("../../assets/images/day-bottom-11c.jpg") no-repeat center
-			center;
-		background: url("../../assets/images/day-bottom-11d.jpg") no-repeat center
-			center;
-		background: url("../../assets/images/day-bottom-11e.jpg") no-repeat center
-			center;
-		// background: url("../../../assets/images/day-bottom-11f.jpg") no-repeat center center;
-		// background: url("../../../assets/images/day-bottom-11g.jpg") no-repeat center center;
-		// background: url("../../../assets/images/day-bottom-11h.jpg") no-repeat center center;
-		// background: url("../../../assets/images/day-bottom-11h.jpg") no-repeat center center;
-		// background: url("../../../assets/images/day-bottom-11i.jpg") no-repeat center center;
-		// background: url("../../../assets/images/day-bottom-11k.jpg") no-repeat center center;
+		background-size: cover;
 	}
 
 	&__bg--dark.show {
