@@ -92,16 +92,20 @@ const Nav = ({ children }) => {
             inputId={"nav__colorModeToggler"}
           />
         </div> 
-       
+
         <div 
-          className="nav__open-button"
+          className="nav__toggle-button" 
+          aria-label="Toggle Menu"
           onClick={toggleSideNav}
         >
-          Open
-        </div>
+        <div className="nav__toggle-icon"></div>
+        <div className="nav__toggle-icon"></div>
+        <div className="nav__toggle-icon"></div>
+      </div>
         
         {children}
       </div>
+      
     </nav>
   )};
 

@@ -34,6 +34,12 @@
 		}
 	}
 
+	&__introduction {
+		letter-spacing: var(--letter-spacing-general);
+		margin-inline: auto;
+		max-width: 85%;
+	}
+
 	&__summary {
 		display: flex;
 		flex-direction: column;
@@ -73,6 +79,7 @@
 
 	&__blurb {
 		font-size: 1.5rem;
+		letter-spacing: var(--letter-spacing-general);
 		line-height: var(--line-height-general);
 	}
 }

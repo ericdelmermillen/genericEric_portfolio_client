@@ -36,14 +36,12 @@
 	&__desc {
 		display: flex;
 		flex-direction: column;
-		gap: 0.25rem;
 		gap: 0.3rem;
 		margin-bottom: 1rem;
 	}
 
 	&__desc-line {
 		@include placeholderContent;
-		height: 1.25rem;
 		height: 1.3rem;
 		width: 100%;
 	}

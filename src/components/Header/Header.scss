@@ -23,7 +23,7 @@
 
 	&__dayImg {
 		@include heroImg;
-		background: url("../../assets/images/bg-day-top.jpg") center top;
+		background: url("../../assets/images/bg-day-top.webp") center top;
 		background-repeat: no-repeat;
 		background-size: cover;
 
@@ -34,7 +34,7 @@
 
 	&__nightImg {
 		@include heroImg;
-		background: url("../../assets/images/bg-night-top.jpg") center top;
+		background: url("../../assets/images/bg-night-top.webp") center top;
 		background-repeat: no-repeat;
 		background-size: cover;
 
@@ -72,7 +72,7 @@
 	&__headline {
 		font-family: var(--heading-font);
 		font-size: 1.5rem;
-		letter-spacing: 3.5px;
+		letter-spacing: var(--letter-spacing-headline);
 		margin-bottom: 1.5rem;
 		text-align: center;
 		text-shadow: var(--text-shadow-bright);
@@ -95,7 +95,7 @@
 		font-size: 2.5rem;
 		font-weight: 500;
 		height: 3rem;
-		letter-spacing: 1px;
+		letter-spacing: var(--letter-spacing-medium);
 		margin-bottom: 1.25rem;
 		text-align: center;
 		text-shadow: var(--text-shadow-bright);
@@ -122,7 +122,7 @@
 	&__description {
 		font-size: 1.5rem;
 		font-weight: 300;
-		letter-spacing: 1.75px;
+		letter-spacing: var(--letter-spacing-large);
 		margin-bottom: 1.75rem;
 		text-align: center;
 		text-shadow: var(--text-shadow-bright);
@@ -155,6 +155,7 @@
 	}
 
 	&__button-text {
+		letter-spacing: var(--letter-spacing-medium);
 		text-shadow: var(--text-shadow-bright);
 
 		@media (min-width: $tablet) {

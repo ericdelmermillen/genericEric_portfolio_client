@@ -84,26 +84,36 @@
 		}
 	}
 
-	&__open-button {
-		color: var(--text-color);
-		// remove after adding open icon
-		color: var(--text-color-bright);
-		cursor: pointer;
-		position: absolute;
-		right: 2rem;
-		top: 1rem;
-		z-index: 3;
-
-		@media (min-width: $tablet) {
-			display: none;
-		}
-	}
-
 	&__logout {
 		display: none;
 
 		@media (min-width: $tablet) {
 			display: block;
 		}
+	}
+
+	&__toggle-button {
+		cursor: pointer;
+		display: flex;
+		flex-direction: column;
+		gap: 0.4rem;
+		gap: 0.45rem;
+		height: 2.5rem;
+		justify-content: center;
+		position: absolute;
+		right: 2rem;
+		top: 0.9rem;
+		width: 2rem;
+
+		@media (min-width: $tablet) {
+			display: none;
+		}
+	}
+
+	&__toggle-icon {
+		border: 1.25px solid var(--neutralBG);
+		border-radius: 2px;
+		min-width: 100%;
+		width: 2rem;
 	}
 }
