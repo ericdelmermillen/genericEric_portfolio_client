@@ -9,6 +9,7 @@ import { MdUsb } from "react-icons/md";
 import { PiNetworkFill } from "react-icons/pi";
 import { VscGitMerge } from "react-icons/vsc";
 import "./WallPaper.scss";
+import { useAppContext } from "../../contexts/AppContext";
 
 const iconOptions = [
   FaCode, 
@@ -57,6 +58,9 @@ const WallPaperRow = ({ className }) => {
     ? 11
     : 12;
 
+    const { colorMode } = useAppContext();
+
+    console.log(colorMode)
 
   return (
     <div className={className}>
@@ -64,7 +68,11 @@ const WallPaperRow = ({ className }) => {
         const RandomIcon = getRandomIcon();
 
         return (
-          <div key={idx} className={`wallpaper__item ${idx + 1 === 8 ? "x" : ""}`}>
+          <div 
+            key={idx} 
+            className={`wallpaper__item 
+              ${idx + 1 === 8 ? "x" : ""} ${colorMode === "light" ? "light" : "dark"}`}
+          >
             <RandomIcon className="wallpaper__icon" />
           </div>
         );
