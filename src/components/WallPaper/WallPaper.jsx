@@ -1,4 +1,5 @@
 import { useEffect, useState, memo } from "react";
+import { useAppContext } from "../../contexts/AppContext";
 import { BsCpuFill, BsHddNetworkFill } from "react-icons/bs";
 import { FaCode, FaRegObjectUngroup } from "react-icons/fa6";
 import { FaDatabase, FaServer } from "react-icons/fa";
@@ -9,13 +10,13 @@ import { MdUsb } from "react-icons/md";
 import { PiNetworkFill } from "react-icons/pi";
 import { VscGitMerge } from "react-icons/vsc";
 import "./WallPaper.scss";
-import { useAppContext } from "../../contexts/AppContext";
+
 
 const iconOptions = [
-  FaCode, 
+  FaCode,
   PiNetworkFill,
   BsHddNetworkFill,
-  VscGitMerge, 
+  VscGitMerge,
   BsCpuFill,
   FaDatabase,
   FaServer,
@@ -23,89 +24,100 @@ const iconOptions = [
   LuBinary,
   FaRegObjectUngroup,
   GrTechnology,
-  LiaMicrochipSolid
+  LiaMicrochipSolid,
 ];
 
-let prevRandomIdx;
 
-const getRandomIcon = () => {
-  const randomIdx = Math.floor(Math.random() * iconOptions.length);
-  if(prevRandomIdx === randomIdx) {
-    return getRandomIcon();
-  } else {
-    prevRandomIdx = randomIdx;
+const getRandomIconsForRow = (itemsPerRow) => {
+  return Array.from({ length: itemsPerRow }, () => {
+    const randomIdx = Math.floor(Math.random() * iconOptions.length);
     return iconOptions[randomIdx];
-  }
+  });
 };
 
-const WallPaperRow = ({ className }) => {
-  const windowWidth = window.innerWidth;
-  const itemsPerRow = windowWidth < 320 
-    ? 4
-    : windowWidth <= 400
-    ? 5
-    : windowWidth <= 500
-    ? 6
-    : windowWidth <= 600
-    ? 7
-    : windowWidth <= 700
-    ? 8
-    : windowWidth <= 800
-    ? 9
-    : windowWidth <= 900
-    ? 10
-    : windowWidth <= 1000
-    ? 11
-    : 12;
 
-    const { colorMode } = useAppContext();
-
-    console.log(colorMode)
+const WallPaperRow = ({ className, colorMode, rowIcons }) => {
 
   return (
     <div className={className}>
-      {Array.from({ length: itemsPerRow }).map((_, idx) => {
-        const RandomIcon = getRandomIcon();
-
-        return (
-          <div 
-            key={idx} 
-            className={`wallpaper__item 
-              ${idx + 1 === 8 ? "x" : ""} ${colorMode === "light" ? "light" : "dark"}`}
-          >
-            <RandomIcon className="wallpaper__icon" />
-          </div>
-        );
-      })}
+      {rowIcons.map((IconComponent, idx) => (
+        <div
+          key={idx}
+          className={`wallpaper__item ${
+            idx + 1 === 8 
+              ? "x" 
+              : ""} 
+            ${colorMode === "light" 
+                ? "light" 
+                : "dark"}`
+          }
+        >
+          <IconComponent className="wallpaper__icon" />
+        </div>
+      ))}
     </div>
-  );
-};
+  )};
 
 
-const WallPaper = memo (() => {
-  const [ rerenderTrigger, setRerenderTrigger ] = useState(0); 
+const WallPaper = memo(() => {
+  const [ iconsMatrix, setIconsMatrix ] = useState([]);
+  const { colorMode } = useAppContext();
+
+  const itemsPerRow = (() => {
+    const windowWidth = window.innerWidth;
+    return windowWidth < 320
+      ? 4
+      : windowWidth <= 400
+      ? 5
+      : windowWidth <= 500
+      ? 6
+      : windowWidth <= 600
+      ? 7
+      : windowWidth <= 700
+      ? 8
+      : windowWidth <= 800
+      ? 9
+      : windowWidth <= 900
+      ? 10
+      : windowWidth <= 1000
+      ? 11
+      : 12;
+  })();
 
   const numberOfRows = 15;
 
+  const generateIconsMatrix = () =>
+    Array.from({ length: numberOfRows }, () =>
+      getRandomIconsForRow(itemsPerRow)
+    );
+
+
+  // useEffect to generate initialize icons matrix
   useEffect(() => {
+    setIconsMatrix(generateIconsMatrix());
+
     const interval = setInterval(() => {
-      setRerenderTrigger((prev) => prev + 1);
+      setIconsMatrix(generateIconsMatrix());
     }, 1000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [itemsPerRow]);
+
 
   return (
     <div className="wallpaper">
-
       <div className="wallpaper__inner">
-        {Array.from({ length: numberOfRows }).map((_, idx) => (
+        {iconsMatrix.map((rowIcons, idx) => (
           <WallPaperRow
             key={idx}
-            className={(idx + 1) % 2 === 0
-              ? "wallpaper__row wallpaper__row--even"
-              : "wallpaper__row wallpaper__row--odd"
+            className={
+              (idx + 1) % 2 === 0
+                ? "wallpaper__row wallpaper__row--even"
+                : "wallpaper__row wallpaper__row--odd"
             }
+            itemsPerRow={itemsPerRow}
+            colorMode={colorMode}
+            rowIcons={rowIcons}
           />
         ))}
       </div>
