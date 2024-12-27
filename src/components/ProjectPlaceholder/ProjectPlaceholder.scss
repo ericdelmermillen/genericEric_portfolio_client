@@ -3,9 +3,9 @@
 
 .projectPlaceholder {
 	& {
+		height: 100%;
 		position: absolute;
 		width: 100%;
-		height: 100%;
 	}
 
 	&__date {
@@ -19,8 +19,8 @@
 	}
 
 	&__image {
-		@include projectImg;
 		@include placeholderContent;
+		@include projectImg;
 		box-shadow: var(--box-shadow);
 		margin-bottom: 1rem;
 	}
@@ -29,8 +29,8 @@
 		@include placeholderContent;
 		box-shadow: var(--box-shadow);
 		height: 1.5rem;
-		width: 90%;
 		margin-bottom: 1rem;
+		width: 90%;
 	}
 
 	&__desc {
@@ -47,17 +47,14 @@
 	}
 
 	&__links {
-		margin-bottom: 1.5rem;
-		margin-bottom: 1.75rem;
 		margin-bottom: 1.9rem;
 	}
 
 	&__links-lead {
 		@include placeholderContent;
 		height: 1.3rem;
-		width: 6.5rem;
-		width: 7rem;
 		margin-bottom: 1.5rem;
+		width: 7rem;
 	}
 
 	&__urls {

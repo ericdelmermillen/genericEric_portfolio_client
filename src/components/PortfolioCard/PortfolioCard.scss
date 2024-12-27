@@ -38,6 +38,7 @@
 	&__button {
 		@include generalOpacityTransition;
 		background-color: var(--background-color);
+		color: var(--text-color);
 		border: none;
 		border-radius: 50%;
 		box-shadow: var(--box-shadow);

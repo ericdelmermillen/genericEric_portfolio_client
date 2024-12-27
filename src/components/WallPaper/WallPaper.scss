@@ -9,12 +9,12 @@
 		text-align: center;
 		top: 0;
 		width: min(120vw, $ultraWide);
-		z-index: 01;
+		z-index: 1;
 	}
 
 	&__inner {
-		max-width: $ultraWide;
 		margin-inline: auto;
+		max-width: $ultraWide;
 		min-height: 100%;
 		overflow-x: hidden;
 	}
@@ -106,6 +106,7 @@
 
 		&.light {
 			opacity: 17.5%;
+			opacity: 20%;
 		}
 
 		&.dark {

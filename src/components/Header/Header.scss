@@ -164,7 +164,7 @@
 	}
 
 	&__button-down {
-		filter: drop-shadow(6px 6px 6px rgba(0, 0, 0, 0.8));
+		filter: var(--filter-box-shadow);
 		height: 20px;
 		stroke: var(--text-color-bright);
 		width: 20px;
@@ -195,7 +195,7 @@
 
 	&__social-icon {
 		fill: var(--text-color-bright);
-		filter: drop-shadow(6px 6px 6px rgba(0, 0, 0, 0.8));
+		filter: var(--filter-box-shadow);
 		width: 1.85rem;
 
 		@media (min-width: $smallTablet) {

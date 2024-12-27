@@ -21,7 +21,7 @@ const Profile = () => {
             Profile
           </h3>
           <p className="profile__lead">
-            Here’s a quick overview of who I am, where I’ve been, and how you can get in touch.
+            Here’s a quick overview of who I am, and how you can get in touch.
           </p>
 
         </div>

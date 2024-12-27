@@ -132,6 +132,7 @@ const ContactForm = ({ children }) => {
       setIsLoading(false);
     };
   };
+  
 
   // useEffect for initial laoding spinner
   useEffect(() => {

@@ -40,8 +40,8 @@ const App = () => {
   return (
     <>
       <div className="app" data-color-mode={colorMode}>
+        <div className="app__backgroundDiv"></div>
 
-        {/* main loading spinner */}
         <div className={`loading ${isLoading ? "isLoading" : ""}`}></div>
         
         <div className="app__inner">
@@ -125,12 +125,12 @@ const App = () => {
               ? 
                 (
                   <Route 
-                  path="/projects/add" 
-                  element={
-                    <AddEditProject>
-                      <WallPaper />
-                    </AddEditProject>
-                  } 
+                    path="/projects/add" 
+                    element={
+                      <AddEditProject>
+                        <WallPaper />
+                      </AddEditProject>
+                    } 
                   />
                 )
               : null

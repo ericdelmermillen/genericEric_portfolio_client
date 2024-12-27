@@ -65,6 +65,7 @@ const WallPaper = memo(() => {
 
   const itemsPerRow = (() => {
     const windowWidth = window.innerWidth;
+    
     return windowWidth < 320
       ? 4
       : windowWidth <= 400
@@ -92,7 +93,7 @@ const WallPaper = memo(() => {
     );
 
 
-  // useEffect to generate initialize icons matrix
+  // useEffect to generate icons matrix
   useEffect(() => {
     setIconsMatrix(generateIconsMatrix());
 
@@ -122,7 +123,6 @@ const WallPaper = memo(() => {
         ))}
       </div>
     </div>
-  );
-});
+  )});
 
 export default WallPaper;

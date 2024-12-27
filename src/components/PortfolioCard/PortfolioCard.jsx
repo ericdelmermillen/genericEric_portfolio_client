@@ -28,7 +28,7 @@ const PortfolioCard = ({
   handleDropTarget
 }) => {
   
-  const { LIGHTBOX_TIMING_INTERVAL, MIN_LOADING_INTERVAL } = useAppContext();
+  const { MIN_LOADING_INTERVAL } = useAppContext();
 
   const handleOnLoad = () => {
     setTimeout(() => {

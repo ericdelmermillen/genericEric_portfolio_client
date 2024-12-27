@@ -5,7 +5,7 @@
 	& {
 		align-items: center;
 		background: var(--background-nav-footer);
-		box-shadow: var(--box-shadow);
+		box-shadow: var(--navFooter-box-shadow);
 		display: flex;
 		height: $navHeight;
 		position: fixed;
@@ -111,8 +111,6 @@
 	}
 
 	&__toggle-icon {
-		border: 1.25px solid var(--text-color-bright);
-		border: 1.4px solid var(--text-color-bright);
 		border: 1.45px solid var(--text-color-bright);
 		border-radius: 2px;
 		min-width: 100%;

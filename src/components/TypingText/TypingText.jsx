@@ -1,5 +1,4 @@
 import { useState, useEffect, useRef, createElement } from 'react';
-import "./TypingText.scss";
 
 const TypingText = ({ 
   textToType = 'text to type', 

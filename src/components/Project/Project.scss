@@ -3,10 +3,10 @@
 
 .project {
 	& {
-		max-width: 100%;
-		position: relative;
 		max-height: 560px;
 		min-height: 560px;
+		max-width: 100%;
+		position: relative;
 
 		@media (min-width: 350px) {
 			max-height: 575px;
@@ -138,8 +138,8 @@
 			max-height: 1000rem;
 			min-height: 100%;
 			opacity: 1;
-			overflow: none;
 			outline: none;
+			overflow: none;
 			transition: max-height 1s ease;
 		}
 	}
@@ -209,10 +209,10 @@
 
 	&__description {
 		color: var(--text-color);
-		margin-top: 1.5rem;
 		font-size: 1rem;
 		letter-spacing: var(--letter-spacing-general);
 		line-height: var(--line-height-general);
+		margin-top: 1.5rem;
 
 		&.ellipsis {
 			@include ellipsisMultiLine;

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import Facebook from "../../assets/svgs/Facebook.jsx";
 import Github from "../../assets/svgs/Github.jsx";
 import Instagram from "../../assets/svgs/Instagram.jsx";

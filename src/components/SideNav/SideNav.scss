@@ -48,13 +48,10 @@
 
 	&__close-button {
 		cursor: pointer;
-		height: 2rem;
-		height: 1.75rem;
 		height: 1.85rem;
 		padding-top: 0.8rem;
 		position: fixed;
 		top: 1.5rem;
-		width: 1.75rem;
 		width: 1.85rem;
 	}
 
@@ -80,11 +77,6 @@
 	&__close-icon {
 		background-color: var(--text-color);
 		border-radius: 2px;
-		height: 3.75px;
-		height: 3.5px;
-		height: 3.25px;
-		height: 3px;
-		height: 2.75px;
 		height: 2.5px;
 		position: absolute;
 		transform-origin: center;

@@ -28,11 +28,11 @@ const isValidPassword = (password) =>{
 const setTokens = (token, refreshToken) => {
   if(token) {
     localStorage.setItem('token', token);
-  }
+  };
 
   if(refreshToken) {
     localStorage.setItem('refreshToken', refreshToken);
-  }
+  };
   return true;
 };
 
@@ -93,20 +93,20 @@ const checkTokenIsValid = async (navigate) => {
             toast.error("Token expired. Logging you out...");
             removeTokens();
             return false;
-          }
+          };
         } else {
           removeTokens();
           toast.error('Unable to verify token. Logging you out...');
           return true;
-        }
-      }
+        };
+      };
     } catch(error) {
       console.log('Error decoding token:', error);
       removeTokens();
       navigate('/');
       toast.error(error.message);
       return false;
-    }
+    };
   } else {
     removeTokens();
     return false; 
@@ -129,7 +129,7 @@ function getMonthYear(dateString) {
   const monthName = date.toLocaleString('en-US', { month: 'short' });
 
   return `${monthName} ${year}`;
-}
+};
 
 
 export {

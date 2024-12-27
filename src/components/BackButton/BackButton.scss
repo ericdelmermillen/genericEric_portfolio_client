@@ -3,9 +3,9 @@
 
 .backButton {
 	& {
-		background-color: var(--background-nav-footer);
+		background: none;
+		background-color: none;
 		border: none;
-		border-radius: 50%;
 		cursor: pointer;
 		height: 3rem;
 		left: 2rem;
@@ -22,7 +22,7 @@
 
 	&__arrow {
 		align-items: center;
-		color: var(--background-color);
+		color: var(--text-color);
 		display: flex;
 		font-size: 2rem;
 		font-weight: bold;

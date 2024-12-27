@@ -1,10 +1,10 @@
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import { useAppContext } from "../../contexts/AppContext";
 import { addClassToDiv, removeClassFromDiv } from "../../../utils/utils";
 import { removeTokens, setTokens } from '../../../utils/utils.js';
+import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import "./AddEditDeleteProjectModal.scss";
-import { useNavigate } from "react-router-dom";
 
 const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 

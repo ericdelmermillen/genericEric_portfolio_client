@@ -30,7 +30,7 @@
 	}
 
 	&__content {
-		background: var(--background-color);
+		background: var(--neutral-gray-1);
 		border-radius: var(--border-radius);
 		box-shadow: var(--box-shadow);
 		display: flex;
@@ -50,18 +50,12 @@
 	&__header {
 		display: flex;
 		justify-content: center;
-
-		// @media (min-width: $smallTablet) {
-		// }
 	}
 
 	&__heading {
 		@include formHeading;
 		display: block;
 		margin-bottom: 3rem;
-
-		// @media (min-width: $smallTablet) {
-		// }
 
 		&::after {
 			@include afterAccent;
