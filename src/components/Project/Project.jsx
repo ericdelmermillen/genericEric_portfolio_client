@@ -83,7 +83,7 @@ const Project = ({
   const handleOnLoad = () => {
     if(idx === maxIdx) {
       setTimeout(() => {
-        setShowPlaceholders(false);
+        // setShowPlaceholders(false);
         setIsLoading(false);
       }, MIN_LOADING_INTERVAL * 2);
     }
@@ -91,8 +91,8 @@ const Project = ({
     if(isCurrentPage) {
       setTimeout(() => {
         setCurrentPageIsReady(true);
-        setDisplayNonePlaceholder(true);
-        setProjectIsLoaded(true);
+        // setDisplayNonePlaceholder(true);
+        // setProjectIsLoaded(true);
       }, MIN_LOADING_INTERVAL * 2);
     };
   };
