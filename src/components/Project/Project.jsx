@@ -10,8 +10,6 @@ const Project = ({
   page,
   PROJECTS_PER_PAGE,
   isInitialLoad,
-  currentPageIsReady, 
-  setCurrentPageIsReady,
   showPlaceholders, 
   setShowPlaceholders,
   projectDate,
@@ -24,11 +22,13 @@ const Project = ({
   handleCardClick
  }) => {
 
+   
   const { 
     isLoading, 
     setIsLoading, 
     MIN_LOADING_INTERVAL 
   } = useAppContext();
+
 
   const startIdx = (page - 1) * PROJECTS_PER_PAGE;
   const endIdx = Math.min(startIdx + PROJECTS_PER_PAGE - 1, maxIdx);
@@ -83,16 +83,15 @@ const Project = ({
   const handleOnLoad = () => {
     if(idx === maxIdx) {
       setTimeout(() => {
-        // setShowPlaceholders(false);
+        setShowPlaceholders(false);
         setIsLoading(false);
-      }, MIN_LOADING_INTERVAL * 2);
+      }, MIN_LOADING_INTERVAL);
     }
     
     if(isCurrentPage) {
       setTimeout(() => {
-        setCurrentPageIsReady(true);
-        // setDisplayNonePlaceholder(true);
-        // setProjectIsLoaded(true);
+        setDisplayNonePlaceholder(true);
+        setProjectIsLoaded(true);
       }, MIN_LOADING_INTERVAL * 2);
     };
   };
@@ -117,7 +116,7 @@ const Project = ({
   
   return (
     <>
-      <div className={`project ${currentPageIsReady && !isLoading && projectIsLoaded
+      <div className={`project ${projectIsLoaded
         ? "isReady" 
         : ""}`}>
           
@@ -128,23 +127,18 @@ const Project = ({
           : ""
         }`}>
 
-          {showPlaceholders && isCurrentPage
-            ? <ProjectPlaceholder />
-            : null
-          }
+          <ProjectPlaceholder />
 
         </div>
 
-        <div className={`project__inner ${currentPageIsReady 
-          ? "isReady" 
-          : ""}`}>
+        <div className="project__inner ">
 
           <h4 className="project__date" dateTime={projectDate}>
             {getMonthYear(projectDate)}
           </h4>
 
          <img 
-            className={`project__image ${currentPageIsReady ? "isReady" : ""}`} 
+            className={`project__image ${projectIsLoaded ? "isReady" : ""}`} 
             src={projectPhotos[0].photo_url} 
             alt={`Main image for project ${projectTitle}`} 
             onClick={() => handleImageClick()}
@@ -231,7 +225,7 @@ const Project = ({
             : null
           } 
 
-          {((hasLongDesc && !isLoading) || (hasLongTitle && !isLoading)) 
+          {hasLongDesc || hasLongTitle
             ?
               <button 
                 className="project__show-full-info"  

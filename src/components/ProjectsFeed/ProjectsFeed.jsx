@@ -8,8 +8,9 @@ import "./ProjectsFeed.scss";
 import { useAppContext } from "../../contexts/AppContext.jsx";
 
 const BASE_URL = import.meta.env.VITE_API_BASE_URL;
-const PROJECTS_PER_PAGE = 2;
-// const PROJECTS_PER_PAGE = 3;
+// const PROJECTS_PER_PAGE = 1;
+// const PROJECTS_PER_PAGE = 2;
+const PROJECTS_PER_PAGE = 3;
 // const PROJECTS_PER_PAGE = 8;
 // const PROJECTS_PER_PAGE = 10;
 
@@ -45,7 +46,6 @@ const ProjectsFeed = () => {
   const [ isInitialFetch, setIsInitialFetch ] = useState(true);
   const [ page, setPage ] = useState(1);
   const [ isInitialLoad, setIsInitialLoad ] = useState(true);
-  const [ currentPageIsReady, setCurrentPageIsReady ] = useState(false);
   const [ showPlaceholders, setShowPlaceholders ] = useState(true);
 
   const handleSetCurrentProjectImages = (projectID) => {
@@ -161,8 +161,6 @@ const ProjectsFeed = () => {
               page={page}
               PROJECTS_PER_PAGE={PROJECTS_PER_PAGE}
               isInitialLoad={isInitialLoad}
-              currentPageIsReady={currentPageIsReady}
-              setCurrentPageIsReady={setCurrentPageIsReady}
               showPlaceholders={showPlaceholders}
               setShowPlaceholders={setShowPlaceholders}
               projectID={project.project_id}

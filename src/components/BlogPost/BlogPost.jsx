@@ -160,7 +160,7 @@ const BlogPost = ({
               : null
             }
 
-            {((hasLongDesc && !isOnHome && !isLoading) || (hasLongTitle && !isOnHome &&!isLoading)) 
+            {((hasLongDesc && !isOnHome) || (hasLongTitle && !isOnHome)) 
               ?
                 <button 
                   className="blogPost__show-full-info"  
