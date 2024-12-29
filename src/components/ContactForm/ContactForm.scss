@@ -36,9 +36,9 @@
 
 	&__form {
 		@include formTall;
+		overflow-y: hidden !important;
 
 		@media (min-height: 750px) {
-			overflow-y: hidden !important;
 		}
 	}
 
@@ -66,7 +66,7 @@
 		}
 
 		&--message {
-			height: 10rem;
+			height: 12rem;
 			resize: none;
 		}
 	}
