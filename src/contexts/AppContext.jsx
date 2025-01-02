@@ -80,6 +80,21 @@ const AppContextProvider = ({ children }) => {
     dispatch({ type: "colorMode/toggle"});
   };
 
+  const checkLoginStatus = async () => {
+    try {
+      const isLoggedIn = await checkTokenIsValid(navigate);
+      
+      if(isLoggedIn) {
+        dispatch({ type: "user/login" });
+      } else {
+        removeTokens();
+        dispatch({ type: "user/logout" });
+      }
+    } catch(error) {
+      console.error("Error checking token expiration", error);
+    };
+  };
+  
   const loginUser = async (email, password) => {
     setIsLoading(true);
 
@@ -208,26 +223,6 @@ const AppContextProvider = ({ children }) => {
       }, MIN_LOADING_INTERVAL);
     };
   };
-  
-  // useEffect to check for token for isLoggedIn status
-  useEffect(() => {
-    const checkLoginStatus = async () => {
-      try {
-        const isLoggedIn = await checkTokenIsValid(navigate);
-        
-        if(isLoggedIn) {
-          dispatch({ type: "user/login" });
-        } else {
-          removeTokens();
-          dispatch({ type: "user/logout" });
-        }
-      } catch(error) {
-        console.error("Error checking token expiration", error);
-      };
-    };
-  
-    checkLoginStatus();
-  }, []);
 
 
   // Update local storage when color mode state changes
@@ -263,6 +258,7 @@ const AppContextProvider = ({ children }) => {
 
     if(prevPathname !== currentPathname && isLoading) {
       setIsLoading(false);
+      checkLoginStatus();
       setPrevPathname(currentPathname)
     }
 
@@ -270,6 +266,11 @@ const AppContextProvider = ({ children }) => {
     setIsEditMode(false);
 
   }, [location.pathname]);
+
+    // useEffect to check for token for isLoggedIn status on initial mount
+    useEffect(() => {
+      checkLoginStatus();
+    }, []);
 
   const contextValues = {
     isLoading,

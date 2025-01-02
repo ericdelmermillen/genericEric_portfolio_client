@@ -89,15 +89,16 @@ const checkTokenIsValid = async (navigate) => {
             setTokens(newToken, newRefreshToken);
             return true;
           } else {
-            navigate("/");
             toast.error("Token expired. Logging you out...");
             removeTokens();
+            navigate("/");
             return false;
           };
         } else {
           removeTokens();
           toast.error('Unable to verify token. Logging you out...');
-          return true;
+          navigate("/");
+          return false;
         };
       };
     } catch(error) {
@@ -121,7 +122,7 @@ const removeClassFromDiv = (divID, className) => {
   document.getElementById(divID).classList.remove(className);
 };
 
-function getMonthYear(dateString) {
+const getMonthYear = (dateString) => {
   const [ day, month, year ] = dateString.split("-");
 
   const date = new Date(`${year}-${month}-${day}`);
@@ -130,6 +131,15 @@ function getMonthYear(dateString) {
 
   return `${monthName} ${year}`;
 };
+
+const getFormattedDate = (date) => {
+  const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are 0-based
+  const day = String(date.getDate()).padStart(2, '0');
+  const year = date.getFullYear();
+
+  return `${month}-${day}-${year}`;
+};
+
 
 
 export {
@@ -143,5 +153,6 @@ export {
   checkTokenIsValid,
   addClassToDiv,
   removeClassFromDiv,
-  getMonthYear
+  getMonthYear,
+  getFormattedDate
 };

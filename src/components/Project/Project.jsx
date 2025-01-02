@@ -4,6 +4,10 @@ import { getMonthYear } from "../../../utils/utils";
 import ProjectPlaceholder from "../ProjectPlaceholder/ProjectPlaceholder";
 import "./Project.scss";
 
+const AWS_SS3_BUCKET_URL = import.meta.env.VITE_AWS_S3_BUCKET_URL;
+
+// console.log(AWS_SS3_BUCKET_URL)
+
 const Project = ({ 
   idx,
   maxIdx,
@@ -21,7 +25,6 @@ const Project = ({
   handleSetCurrentProjectImages,
   handleCardClick
  }) => {
-
    
   const { 
     isLoading, 
@@ -139,7 +142,9 @@ const Project = ({
 
          <img 
             className={`project__image ${projectIsLoaded ? "isReady" : ""}`} 
-            src={projectPhotos[0].photo_url} 
+            // concatatenate string for url with aws s3 bucket url
+            src={`${AWS_SS3_BUCKET_URL}/${projectPhotos[0].photo_url}`} 
+            // src={projectPhotos[0].photo_url} 
             alt={`Main image for project ${projectTitle}`} 
             onClick={() => handleImageClick()}
             onLoad={handleOnLoad}

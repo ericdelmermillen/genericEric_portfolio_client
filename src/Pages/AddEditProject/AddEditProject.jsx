@@ -1,7 +1,7 @@
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import { useAppContext } from "../../contexts/AppContext";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
-import { scrollToTop, isValidURL } from "../../../utils/utils";
+import { scrollToTop, isValidURL, checkTokenIsValid, getFormattedDate } from "../../../utils/utils.js";
 import Compressor from "compressorjs";
 import ProjectDatePicker from "../../components/ProjectDatePicker/ProjectDatePicker";
 import toast from "react-hot-toast";
@@ -9,6 +9,8 @@ import PhotoInput from "../../components/PhotoInput/PhotoInput";
 import "./AddEditProject.scss"
 
 const BASE_URL = import.meta.env.VITE_API_BASE_URL;
+const AWS_SIGNED_URL_ROUTE = import.meta.env.VITE_AWS_SIGNED_URL_ROUTE;
+const AWS_DIRNAME = import.meta.env.VITE_AWS_DIRNAME;
 
 const numberOfPhotoUploads = 4;
 
@@ -16,12 +18,12 @@ const AddEditProject = ({ children }) => {
 
   const { 
     setIsLoading,
-    MIN_LOADING_INTERVAL 
+    MIN_LOADING_INTERVAL ,
+    logoutUser
   } = useAppContext();
   
-  const [ projectDate, setProjectDate ] = useState(new Date());
-  const [ rawDate, setRawDate ] = useState('');
-
+  const [ projectDate, setProjectDate ] = useState("");
+  
   const [ activeDragInput, setActiveDragInput ] = useState({id: - 1}); 
 
   const { projectID } = useParams();
@@ -61,7 +63,7 @@ const AddEditProject = ({ children }) => {
   const githubClientURLRef = useRef(null);
   const githubServerURLRef = useRef(null);
 
-  const navigate = useNavigate();
+  const navigate = useNavigate();  
   
   const handleImageChange = useCallback(async (e, inputNo) => {
     const file = e.target.files[0];
@@ -184,7 +186,7 @@ const AddEditProject = ({ children }) => {
 
       const data = await response.json();
 
-      setRawDate(data.project_date);
+      setProjectDate(data.project_date);
 
       setPhotos(prevPhotos => 
         prevPhotos.map((photo, idx) => ({
@@ -286,12 +288,27 @@ const AddEditProject = ({ children }) => {
 
   
   // ***
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setInitialFormCheck(true);
     setIsLoading(true);
 
+    const token = localStorage.getItem("token");
+    const refreshToken = localStorage.getItem('refreshToken');
+
+    if(!token || !checkTokenIsValid(navigate)) {
+      toast.error("Unable to verify token");
+      return navigate("/")
+    };
+
+
     let errors = 0;
+    const hasPhotos = photos.some(photo => photo.photoPreview !== null);
+
+    if(!hasPhotos) {
+      toast.error("Minimum one photo required");
+      errors++;
+    }
 
     if(!handleTitleChange()) {
       toast.error("Title is too short");
@@ -323,7 +340,6 @@ const AddEditProject = ({ children }) => {
       errors++;
     };
 
-
     if(errors) {
       setTimeout(() => {
         setIsLoading(false);
@@ -331,11 +347,122 @@ const AddEditProject = ({ children }) => {
       return;
     };
 
-    // need validation for at least one photo present
+    const project = {};
+    project.project_date = projectDate;
+    project.project_title = title;
+    project.project_description = desc;
+    project.project_urls = [];
+    project.project_photos = [];
+
+    project.project_urls.push({"Deployed Url": deployedURL}); 
+    youtubeVideoURL && project.project_urls?.push({"Youtube Video": youtubeVideoURL}); 
+    githubClientURL && project.project_urls?.push({"Github (Client)": githubClientURL}); 
+    githubServerURL && project.project_urls?.push({"Github (Server)": githubServerURL}); 
+    
+    const headers = {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${token}`,
+      "x-refresh-token": refreshToken
+    };
 
 
-    console.log(`Submitting ${isAddProject ? "new project" : "updated project"}`)
-    setIsLoading(false);
+    let awsURL;
+
+    for(const photo of photos) {
+
+      // if photoPreview without photoData then the image shown in thrumbnail is already in the S3 bucket
+      if(photo.photoPreview && !photo.photoData) {
+
+        // split on dirName when using photos from my bucket
+        // const objectName = photo.photoPreview.split(`/${AWS_DIRNAME}/`)[1];
+        const objectName = photo.photoPreview.split("/")[4];
+
+        const projectPhoto = {display_order: photo.displayOrder, photo_url: objectName};
+
+        project.project_photos.push(projectPhoto);
+
+      } else if(photo.photoData) {
+
+        // get signed url for posting to aws
+        try {
+          const response = await fetch(`${AWS_SIGNED_URL_ROUTE}?dirname=${AWS_DIRNAME}`, {
+            method: "POST",
+            headers: headers,
+          });
+
+          if(!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+
+          // Wait for the JSON response
+          const { url } = await response.json();
+
+          // Assign the URL to awsURL
+          awsURL = url;
+          
+        } catch(error) {
+          if(error.message.includes("401")) {
+            toast.error("Unauthorized. Logging you out...");
+            navigate("/");
+          }
+          console.log(error.message);
+        }
+
+        // post image to aws s3 bucket
+        try {
+          await fetch(awsURL, {
+            method: "PUT",
+            body: photo.photoData
+          });
+
+          const imageUrl = `${awsURL.split('?')[0]}`;
+          const objectName = imageUrl.split(`/${AWS_DIRNAME}/`)[1];
+
+          const projectPhoto = {display_order: photo.displayOrder, photo_url: objectName };
+
+          project.project_photos.push(projectPhoto);
+        } catch(error) {
+          console.log(error);
+          toast.error("Error creating project");
+        }
+      }
+    }
+
+    
+    
+    
+    // conditional request for add vs edit project
+
+    try {
+      const method = isAddProject ? "POST" : "PUT";
+      const endpoint = isAddProject ? "projects/project/add" : `projects/project/edit/${projectID}`;
+
+      const response = await fetch(`${BASE_URL}/${endpoint}`, {
+        method: method,
+        headers: headers,
+        body: JSON.stringify(project)
+        },
+      );
+
+      if(!response.ok) {
+        throw new Error(`Failed to send message: status ${response.status}`);
+      };
+
+      const data = await response.json();
+      console.log(data);
+
+      console.log(`Submitting ${isAddProject ? "new project" : "updated project"}`)
+      setIsLoading(false);
+
+
+    } catch(error) {
+      console.log(error)
+    }
+    
+    
+    
+    console.log(project)
+    
     return
   };
 
@@ -352,11 +479,16 @@ const AddEditProject = ({ children }) => {
     if(isEditProject) { 
       fetchProjectDetails(projectID);
     };
-    scrollToTop();
-
+    
+    if(isAddProject) {
+      setProjectDate(getFormattedDate(new Date()))
+    };
+    
     if(titleRef.current) {
       titleRef.current.focus();
-    }
+    };
+
+    scrollToTop();
   }, []);
 
   return (
@@ -382,7 +514,6 @@ const AddEditProject = ({ children }) => {
               projectDate={projectDate}
               setProjectDate={setProjectDate}
               iconClassName={"addEditProject__calendar-icon"}
-              rawDate={rawDate}
               aria-label="Project Date Picker"
             />
 

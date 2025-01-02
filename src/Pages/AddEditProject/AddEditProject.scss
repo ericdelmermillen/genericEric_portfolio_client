@@ -34,11 +34,11 @@
 
 	&__buttons {
 		display: flex;
+		flex-direction: column-reverse;
 		justify-content: center;
 		gap: 1rem;
 		margin-top: auto;
 		margin-bottom: 2rem;
-		flex-direction: column-reverse;
 		width: 100%;
 
 		@media (min-width: $smallTablet) {

@@ -1,3 +1,4 @@
+import { getFormattedDate } from '../../../utils/utils.js';
 import DatePicker from 'react-datepicker';
 import CalendarIcon from "../../assets/svgs/CalendarIcon.jsx";
 import 'react-datepicker/dist/react-datepicker.css';
@@ -6,13 +7,12 @@ import "./ProjectDatePicker.scss";
 const ProjectDatePicker = ({ 
   projectDate, 
   setProjectDate,
-  iconClassName,
-  rawDate
+  iconClassName
 }) => {
 
+
   const handleChange = (date) => {
-    setProjectDate(date);
-    console.log(date)
+    setProjectDate(getFormattedDate(date));
   };
 
 
@@ -20,9 +20,7 @@ const ProjectDatePicker = ({
     <div className='projectDatePicker'>
       <div className="projectDatePicker__inner">
         <DatePicker
-          selected={rawDate
-            ? rawDate
-            : projectDate}
+          selected={projectDate}
           onChange={handleChange}
           className='projectDatePicker__selector'
           dateFormat="MM/dd/yyyy"

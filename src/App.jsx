@@ -42,7 +42,7 @@ const App = () => {
       <div className="app" data-color-mode={colorMode}>
         <div className="app__backgroundDiv"></div>
 
-        <div className={`loading ${isLoading ? "isLoading" : ""}`}></div>
+          <div className={`loading ${isLoading ? "isLoading" : ""}`}></div>
         
         <div className="app__inner">
 

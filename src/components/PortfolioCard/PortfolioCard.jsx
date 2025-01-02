@@ -4,6 +4,8 @@ import { checkIfIsFirefox } from "../../../utils/utils";
 import PortfolioCardPlaceholder from "../PortfolioCardPlaceholder/PortfolioCardPlaceholder";
 import "./PortfolioCard.scss";
 
+const AWS_SS3_BUCKET_URL = import.meta.env.VITE_AWS_S3_BUCKET_URL;
+
 const isFirefox = checkIfIsFirefox();
 
 const PortfolioCard = ({ 
@@ -50,7 +52,6 @@ const PortfolioCard = ({
     e.preventDefault();
     e.stopPropagation();
     handleEditProjectClick(projectID);
-    console.log(`projectID: ${projectID}`);
   };
 
   if(isInitialPlaceholder) {
@@ -121,7 +122,7 @@ const PortfolioCard = ({
 				<div className="portfolioCard__inner">
           <img 
             className="portfolioCard__img"
-            src={imgSrc}
+            src={`${AWS_SS3_BUCKET_URL}/${imgSrc}`} 
             alt={`Card Image for ${projectTitle} Project`}
             onLoad={idx === maxIdx
               ? handleOnLoad

@@ -104,9 +104,10 @@ const BlogPost = ({
             className="blogPost__iframe"
             src={embedUrl}
             title={title}
-            allow="clipboard-write; encrypted-media; picture-in-picture"
+            // allow="clipboard-write; encrypted-media; picture-in-picture"
+            allow="clipboard-write; encrypted-media; picture-in-picture; allow-popups; fullscreen"
+
             allowFullScreen
-            sandbox="allow-scripts allow-same-origin allow-presentation"
             onLoad={handleOnLoad}
           ></iframe>
 

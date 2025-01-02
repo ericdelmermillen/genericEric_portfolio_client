@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
+import { useAppContext } from "../../contexts/AppContext.jsx";
 import { useLightBoxContext } from "../../contexts/LightBoxContext.jsx";
 import { scrollToTop } from "../../../utils/utils.js";
 import LightBox from "../../components/LightBox/LightBox.jsx";
 import Project from "../Project/Project";
 import toast from "react-hot-toast";
 import "./ProjectsFeed.scss";
-import { useAppContext } from "../../contexts/AppContext.jsx";
 
 const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 // const PROJECTS_PER_PAGE = 1;
