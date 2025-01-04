@@ -6,8 +6,6 @@ import "./Project.scss";
 
 const AWS_SS3_BUCKET_URL = import.meta.env.VITE_AWS_S3_BUCKET_URL;
 
-// console.log(AWS_SS3_BUCKET_URL)
-
 const Project = ({ 
   idx,
   maxIdx,
@@ -30,9 +28,6 @@ const Project = ({
     setIsLoading, 
     MIN_LOADING_INTERVAL 
   } = useAppContext();
-
-
-  console.log(getMonthYear(projectDate))
   
   const startIdx = (page - 1) * PROJECTS_PER_PAGE;
   const endIdx = Math.min(startIdx + PROJECTS_PER_PAGE - 1, maxIdx);

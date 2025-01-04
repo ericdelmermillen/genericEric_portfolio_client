@@ -124,20 +124,25 @@ const removeClassFromDiv = (divID, className) => {
 
 
 const getMonthYear = (dateString) => {
-  const [month, day, year] = dateString.split("-"); // Split by '-'
+  console.log(dateString); // 25-12-2024
+  const [day, month, year] = dateString.split("-"); // Split by '-'
 
+  // Create a new Date object using the correct month and year
   const date = new Date(year, parseInt(month, 10) - 1, day);
   const monthName = date.toLocaleString('en-US', { month: 'short' });
+
+  console.log(`${monthName} ${year}`); // Dec 2024
 
   return `${monthName} ${year}`;
 };
 
-const getFormattedDate = (date) => {
-  const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are 0-based
-  const day = String(date.getDate()).padStart(2, '0');
-  const year = date.getFullYear();
 
-  return `${month}-${day}-${year}`;
+const getFormattedDate = (date) => {
+  const month = String(date.getMonth() + 1).padStart(2, '0'); // Use local time zone
+  const day = String(date.getDate()).padStart(2, '0');
+  const year = date.getFullYear(); // Use local time zone
+
+  return `${day}-${month}-${year}`; // Return in "DD-MM-YYYY" format
 };
 
 

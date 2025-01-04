@@ -372,16 +372,13 @@ const AddEditProject = ({ children }) => {
 
     for(const photo of photos) {
 
-      // if photoPreview without photoData then the image shown in thrumbnail is already in the S3 bucket
       if(photo.photoPreview && !photo.photoData) {
 
-        // split on dirName when using photos from my bucket
-        // split at dirName for edit
-        const objectName = photo.photoPreview.split("/")[4];
-
-        const projectPhoto = {display_order: photo.displayOrder, photo_url: objectName};
-
-        project.project_photos.push(projectPhoto);
+        if(photo.photoPreview) {
+          const objectName = photo.photoPreview.split("/")[4];
+          const projectPhoto = {display_order: photo.displayOrder, photo_url: objectName};
+          project.project_photos.push(projectPhoto);
+        }
 
       } else if(photo.photoData) {
 
@@ -446,18 +443,23 @@ const AddEditProject = ({ children }) => {
         throw new Error(`Failed to send message: status ${response.status}`);
       };
 
-      const data = await response.json();
+      // console.log(project)
 
-      toast.success("Project created!");
+      isAddProject 
+        ? toast.success("Project created!") 
+        : toast.success("Project updated!");
+
       navigate("/");
       
     } catch(error) {
       if(error.message.includes("401")) {
         toast.error("Unauthorized. Logging you out...");
         navigate("/");
+      } else {
+        toast.error("Error posting project");
+        console.log(error.message);
       };
       
-      console.log(error.message);
       return;
     } finally {
       setIsLoading(false);
@@ -511,6 +513,7 @@ const AddEditProject = ({ children }) => {
             <ProjectDatePicker 
               projectDate={projectDate}
               setProjectDate={setProjectDate}
+              isAddProject={isAddProject}
               iconClassName={"addEditProject__calendar-icon"}
               aria-label="Project Date Picker"
             />
