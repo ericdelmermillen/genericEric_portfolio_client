@@ -122,11 +122,11 @@ const removeClassFromDiv = (divID, className) => {
   document.getElementById(divID).classList.remove(className);
 };
 
+
 const getMonthYear = (dateString) => {
-  const [ day, month, year ] = dateString.split("-");
+  const [month, day, year] = dateString.split("-"); // Split by '-'
 
-  const date = new Date(`${year}-${month}-${day}`);
-
+  const date = new Date(year, parseInt(month, 10) - 1, day);
   const monthName = date.toLocaleString('en-US', { month: 'short' });
 
   return `${monthName} ${year}`;

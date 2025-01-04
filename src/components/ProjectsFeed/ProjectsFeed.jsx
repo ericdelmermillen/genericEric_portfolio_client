@@ -9,8 +9,8 @@ import "./ProjectsFeed.scss";
 
 const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 // const PROJECTS_PER_PAGE = 1;
-// const PROJECTS_PER_PAGE = 2;
-const PROJECTS_PER_PAGE = 3;
+const PROJECTS_PER_PAGE = 2;
+// const PROJECTS_PER_PAGE = 3;
 // const PROJECTS_PER_PAGE = 8;
 // const PROJECTS_PER_PAGE = 10;
 
@@ -85,15 +85,21 @@ const ProjectsFeed = () => {
           throw new Error(data.message);
         };
 
-        if(isInitialFetch) {
-          setProjectsData(projects);
-        } else if(!isInitialFetch) {
-          setProjectsData(c => [...c, ...projects])
+        if(!projects.length && isInitialFetch) {
+          setIsInitialFetch(false);
+          setIsFinalPageFetched(true);
+          setIsFinalPageLoaded(true);
+          scrollToTop();
+          setIsLoading(false);
+          toast("No projects available");
         };
 
         if(isInitialFetch) {
-          scrollToTop();
           setIsInitialFetch(false);
+          setProjectsData(projects);
+          scrollToTop();
+        } else if(!isInitialFetch) {
+          setProjectsData(c => [...c, ...projects])
         };
 
         if(isPaginationComplete) {

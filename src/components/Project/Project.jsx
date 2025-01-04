@@ -27,12 +27,13 @@ const Project = ({
  }) => {
    
   const { 
-    isLoading, 
     setIsLoading, 
     MIN_LOADING_INTERVAL 
   } = useAppContext();
 
 
+  console.log(getMonthYear(projectDate))
+  
   const startIdx = (page - 1) * PROJECTS_PER_PAGE;
   const endIdx = Math.min(startIdx + PROJECTS_PER_PAGE - 1, maxIdx);
   const isCurrentPage = idx >= startIdx && idx <= endIdx;

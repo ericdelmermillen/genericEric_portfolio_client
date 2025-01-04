@@ -11,6 +11,7 @@ import "./AddEditProject.scss"
 const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 const AWS_SIGNED_URL_ROUTE = import.meta.env.VITE_AWS_SIGNED_URL_ROUTE;
 const AWS_DIRNAME = import.meta.env.VITE_AWS_DIRNAME;
+const AWS_SS3_BUCKET_URL = import.meta.env.VITE_AWS_S3_BUCKET_URL;
 
 const numberOfPhotoUploads = 4;
 
@@ -191,7 +192,7 @@ const AddEditProject = ({ children }) => {
       setPhotos(prevPhotos => 
         prevPhotos.map((photo, idx) => ({
           ...photo,
-          photoPreview: data.project_photos[idx]?.photo_url || photo.photoPreview
+          photoPreview: `${AWS_SS3_BUCKET_URL}/${data.project_photos[idx]?.photo_url}` || photo.photoPreview
         }))
       );
       
@@ -247,7 +248,7 @@ const AddEditProject = ({ children }) => {
     const deployedURLValue = e ? e.target.value : deployedURLRef.current.value;
     const validURL = isValidURL(deployedURLValue);
 
-    setDeployedURL(deployedURLValue)
+    setDeployedURL(deployedURLValue);
     setDeployedURLIsValid(validURL);
   
     return validURL;
@@ -308,7 +309,7 @@ const AddEditProject = ({ children }) => {
     if(!hasPhotos) {
       toast.error("Minimum one photo required");
       errors++;
-    }
+    };
 
     if(!handleTitleChange()) {
       toast.error("Title is too short");
@@ -347,17 +348,18 @@ const AddEditProject = ({ children }) => {
       return;
     };
 
-    const project = {};
-    project.project_date = projectDate;
-    project.project_title = title;
-    project.project_description = desc;
-    project.project_urls = [];
-    project.project_photos = [];
-
-    project.project_urls.push({"Deployed Url": deployedURL}); 
-    youtubeVideoURL && project.project_urls?.push({"Youtube Video": youtubeVideoURL}); 
-    githubClientURL && project.project_urls?.push({"Github (Client)": githubClientURL}); 
-    githubServerURL && project.project_urls?.push({"Github (Server)": githubServerURL}); 
+    const project = {
+      project_date: projectDate,
+      project_title: title,
+      project_description: desc,
+      project_urls: [
+        { "Deployed Url": deployedURL },
+        ...(youtubeVideoURL ? [{ "YouTube Video": youtubeVideoURL }] : []),
+        ...(githubClientURL ? [{ "GitHub (Client)": githubClientURL }] : []),
+        ...(githubServerURL ? [{ "GitHub (Server)": githubServerURL }] : []),
+      ],
+      project_photos: []
+    };
     
     const headers = {
       "Content-Type": "application/json",
@@ -374,7 +376,7 @@ const AddEditProject = ({ children }) => {
       if(photo.photoPreview && !photo.photoData) {
 
         // split on dirName when using photos from my bucket
-        // const objectName = photo.photoPreview.split(`/${AWS_DIRNAME}/`)[1];
+        // split at dirName for edit
         const objectName = photo.photoPreview.split("/")[4];
 
         const projectPhoto = {display_order: photo.displayOrder, photo_url: objectName};
@@ -384,29 +386,28 @@ const AddEditProject = ({ children }) => {
       } else if(photo.photoData) {
 
         // get signed url for posting to aws
-        try {
+        try { 
           const response = await fetch(`${AWS_SIGNED_URL_ROUTE}?dirname=${AWS_DIRNAME}`, {
             method: "POST",
             headers: headers,
           });
 
           if(!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-          }
+            throw new Error(`HTTP error status: ${response.status}`);
+          };
 
-          // Wait for the JSON response
           const { url } = await response.json();
-
-          // Assign the URL to awsURL
           awsURL = url;
           
         } catch(error) {
           if(error.message.includes("401")) {
             toast.error("Unauthorized. Logging you out...");
             navigate("/");
-          }
+          };
+          
           console.log(error.message);
-        }
+          return;
+        };
 
         // post image to aws s3 bucket
         try {
@@ -424,14 +425,11 @@ const AddEditProject = ({ children }) => {
         } catch(error) {
           console.log(error);
           toast.error("Error creating project");
-        }
-      }
-    }
-
-    
-    
-    
-    // conditional request for add vs edit project
+          setIsLoading(false);
+          return;
+        };
+      };
+    };
 
     try {
       const method = isAddProject ? "POST" : "PUT";
@@ -449,21 +447,21 @@ const AddEditProject = ({ children }) => {
       };
 
       const data = await response.json();
-      console.log(data);
 
-      console.log(`Submitting ${isAddProject ? "new project" : "updated project"}`)
-      setIsLoading(false);
-
-
+      toast.success("Project created!");
+      navigate("/");
+      
     } catch(error) {
-      console.log(error)
-    }
-    
-    
-    
-    console.log(project)
-    
-    return
+      if(error.message.includes("401")) {
+        toast.error("Unauthorized. Logging you out...");
+        navigate("/");
+      };
+      
+      console.log(error.message);
+      return;
+    } finally {
+      setIsLoading(false);
+    };
   };
 
 

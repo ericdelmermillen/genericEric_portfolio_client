@@ -5,6 +5,7 @@ import { addClassToDiv, removeClassFromDiv } from "../../../utils/utils";
 import "./LightBox.scss";
 
 const TIMEOUT_DELAY = 400;
+const AWS_SS3_BUCKET_URL = import.meta.env.VITE_AWS_S3_BUCKET_URL;
 
 const LightBoxImage = ({ 
   idx, 
@@ -109,7 +110,7 @@ const LightBoxImage = ({
     <>
       <div id={imageID} className={`lightBoxImage`}>
         <img 
-          src={imgSrc}
+          src={`${AWS_SS3_BUCKET_URL}/${imgSrc}`} 
           alt={imgAlt} 
           className="lightBoxImage__img" 
         />
