@@ -92,7 +92,7 @@
 	}
 
 	&__introduction {
-		font-size: 2.5rem;
+		font-size: var(--headline-large);
 		font-weight: 500;
 		height: 3rem;
 		letter-spacing: var(--letter-spacing-medium);
@@ -101,26 +101,26 @@
 		text-shadow: var(--text-shadow-bright);
 
 		@media (min-width: $smallTablet) {
-			font-size: 2.75rem;
+			font-size: var(--headline-xl);
 			height: 3.25rem;
 			margin-bottom: 1.5rem;
 		}
 
 		@media (min-width: $tablet) {
-			font-size: 4rem;
+			font-size: var(--headline-xxl);
 			height: 4.25rem;
-			margin-bottom: 2.5rem;
+			margin-bottom: 2.25rem;
 		}
 
 		@media (min-width: $largeTablet) {
-			font-size: 4.5rem;
+			font-size: var(--headline-xxxl);
 			height: 4.5rem;
-			margin-bottom: 3rem;
+			margin-bottom: 2.5rem;
 		}
 	}
 
 	&__description {
-		font-size: 1.5rem;
+		font-size: var(--headline-small);
 		font-weight: 300;
 		letter-spacing: var(--letter-spacing-large);
 		margin-bottom: 1.75rem;
@@ -129,15 +129,16 @@
 
 		@media (min-width: $smallTablet) {
 			margin-bottom: 1.5rem;
+			font-size: 1.75rem;
 		}
 
 		@media (min-width: $tablet) {
-			font-size: 1.8rem;
+			font-size: var(--headline-medium);
 			margin-bottom: 2rem;
 		}
 
 		@media (min-width: $largeTablet) {
-			font-size: 2rem;
+			font-size: 2.25rem;
 			margin-bottom: 2rem;
 		}
 	}
@@ -156,10 +157,12 @@
 
 	&__button-text {
 		letter-spacing: var(--letter-spacing-medium);
+		letter-spacing: var(--letter-spacing-large);
 		text-shadow: var(--text-shadow-bright);
+		font-size: var(--button-text-small);
 
 		@media (min-width: $tablet) {
-			font-size: 1.5rem;
+			font-size: var(--button-text-medium);
 		}
 	}
 
