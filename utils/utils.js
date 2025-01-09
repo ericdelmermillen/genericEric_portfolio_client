@@ -14,6 +14,8 @@ const scrollToTop = () => {
     top: 0,
     behavior: 'smooth'
   });
+  
+  document.getElementById("nav").classList.remove("hide");
 };
 
 const isValidEmail = (email) => {
@@ -124,14 +126,14 @@ const removeClassFromDiv = (divID, className) => {
 
 
 const getMonthYear = (dateString) => {
-  console.log(dateString); // 25-12-2024
+  // console.log(dateString); // 25-12-2024
   const [day, month, year] = dateString.split("-"); // Split by '-'
 
   // Create a new Date object using the correct month and year
   const date = new Date(year, parseInt(month, 10) - 1, day);
   const monthName = date.toLocaleString('en-US', { month: 'short' });
 
-  console.log(`${monthName} ${year}`); // Dec 2024
+  // console.log(`${monthName} ${year}`); // Dec 2024
 
   return `${monthName} ${year}`;
 };

@@ -3,7 +3,7 @@ import { useAppContext } from '../../contexts/AppContext.jsx';
 import { useLightBoxContext } from '../../contexts/LightBoxContext.jsx';
 import { Link, useNavigate } from 'react-router-dom';
 import { MdModeEdit } from 'react-icons/md';
-import { removeTokens } from '../../../utils/utils.js';
+import { removeTokens, setTokens } from '../../../utils/utils.js';
 import AddEditDeleteProjectModal from '../AddEditDeleteProjectModal/AddEditDeleteProjectModal.jsx';
 import LightBox from '../LightBox/LightBox.jsx';
 import PortfolioCard from '../PortfolioCard/PortfolioCard.jsx';
@@ -60,9 +60,7 @@ const Portfolio = () => {
 
   // for mapping the projects into lightBoxImage objects
   const updateLightBoxImages = (data) => {
-
     setLightBoxImages(data.map(project => (
-
       {
         img_id: project.project_id,
         img_alt: project.project_title,
@@ -70,7 +68,6 @@ const Portfolio = () => {
       }
     )));
   };
-
 
   const handleAddNewProject = () => {
     navigate("/projects/add")
@@ -293,10 +290,12 @@ const Portfolio = () => {
         body: JSON.stringify({ new_project_order: newProjectOrder })
       });
 
-      const data = await response.json();
+      const { message, newToken, newRefreshToken } = await response.json();
+
+      setTokens(newToken, newRefreshToken);
 
       if(!response.ok) {
-        throw new Error(data.message);
+        throw new Error(message);
       };
       
     } catch(error) {

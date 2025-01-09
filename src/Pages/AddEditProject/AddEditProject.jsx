@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import { useAppContext } from "../../contexts/AppContext";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
-import { scrollToTop, isValidURL, checkTokenIsValid, getFormattedDate } from "../../../utils/utils.js";
+import { scrollToTop, isValidURL, checkTokenIsValid, getFormattedDate, setTokens } from "../../../utils/utils.js";
 import Compressor from "compressorjs";
 import ProjectDatePicker from "../../components/ProjectDatePicker/ProjectDatePicker";
 import toast from "react-hot-toast";
@@ -185,21 +185,31 @@ const AddEditProject = ({ children }) => {
         throw new Error(errorResponse.message || `Failed to fetch project details for project ${projectID}`);
       };
 
-      const data = await response.json();
+      const { 
+        project_date, 
+        project_title, 
+        project_description, 
+        project_photos, 
+        project_urls, 
+        newToken, 
+        newRefreshToken 
+      } = await response.json();
+      
+      setTokens(newToken, newRefreshToken);
 
-      setProjectDate(data.project_date);
+      setProjectDate(project_date);
 
       setPhotos(prevPhotos => 
         prevPhotos.map((photo, idx) => ({
           ...photo,
-          photoPreview: `${AWS_SS3_BUCKET_URL}/${data.project_photos[idx]?.photo_url}` || photo.photoPreview
+          photoPreview: `${AWS_SS3_BUCKET_URL}/${project_photos[idx]?.photo_url}` || photo.photoPreview
         }))
       );
       
-      setTitle(data.project_title);
-      setDesc(data.project_description.replace(/\n/g, "\n\n"));
+      setTitle(project_title);
+      setDesc(project_description.replace(/\n/g, "\n\n"));
 
-      data.project_urls.forEach(url => {
+      project_urls.forEach(url => {
         if(url["Deployed Url"]) {
           setDeployedURL(Object.entries(url)[0][1]);
         } else if(url["Youtube Video"]) {
@@ -210,6 +220,7 @@ const AddEditProject = ({ children }) => {
           setGithubServerURL(Object.entries(url)[0][1]);
         };
       });
+
       
     } catch(error) {
       console.log(error);
@@ -354,9 +365,9 @@ const AddEditProject = ({ children }) => {
       project_description: desc,
       project_urls: [
         { "Deployed Url": deployedURL },
-        ...(youtubeVideoURL ? [{ "YouTube Video": youtubeVideoURL }] : []),
-        ...(githubClientURL ? [{ "GitHub (Client)": githubClientURL }] : []),
-        ...(githubServerURL ? [{ "GitHub (Server)": githubServerURL }] : []),
+        ...(youtubeVideoURL ? [{ "Youtube Video": youtubeVideoURL }] : []),
+        ...(githubClientURL ? [{ "Github (Client)": githubClientURL }] : []),
+        ...(githubServerURL ? [{ "Github (Server)": githubServerURL }] : []),
       ],
       project_photos: []
     };
@@ -443,7 +454,9 @@ const AddEditProject = ({ children }) => {
         throw new Error(`Failed to send message: status ${response.status}`);
       };
 
-      // console.log(project)
+      const { newToken, newRefreshToken } = await response.json();
+      
+      setTokens(newToken, newRefreshToken);
 
       isAddProject 
         ? toast.success("Project created!") 
