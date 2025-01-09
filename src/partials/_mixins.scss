@@ -18,6 +18,11 @@
 	--lightBox-transition-interval: 450ms;
 	--placeholder-transition: all 0.75s ease-in-out;
 
+	// Text SizingVariables
+	--headline-small: 1.5rem;
+	--headline-medium: 2rem;
+	--headline-large: 2.5rem;
+
 	// Light Mode Custom Variables
 	&[data-color-mode="light"] {
 		// Colors
