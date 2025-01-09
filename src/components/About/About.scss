@@ -25,7 +25,7 @@
 	&__heading {
 		@include headingGeneral;
 		display: inline-block;
-		font-size: 1.5rem;
+		font-size: var(--heading-text-small);
 		margin-inline: auto;
 		position: relative;
 
@@ -34,10 +34,16 @@
 		}
 	}
 
-	&__introduction {
-		letter-spacing: var(--letter-spacing-general);
-		margin-inline: auto;
-		max-width: 85%;
+	&__sub-heading {
+		display: none;
+
+		@media (min-width: $smallTablet) {
+			display: block;
+			font-size: var(--sub-heading-text-small);
+			letter-spacing: var(--letter-spacing-relaxed);
+			margin-inline: auto;
+			max-width: 85%;
+		}
 	}
 
 	&__summary {
@@ -67,6 +73,16 @@
 		}
 	}
 
+	&__name {
+		font-size: var(--heading-text-small);
+		letter-spacing: var(--letter-spacing-relaxed);
+		text-align: center;
+
+		@media (min-width: $smallTablet) {
+			display: none;
+		}
+	}
+
 	&__content {
 		margin-inline: auto;
 		max-width: $tablet;
@@ -78,7 +94,7 @@
 	}
 
 	&__blurb {
-		font-size: 1.5rem;
+		font-size: var(--font-size-general);
 		letter-spacing: var(--letter-spacing-general);
 		line-height: var(--line-height-general);
 	}

@@ -10,7 +10,7 @@ const About = () => {
             <h4 className="about__heading">
               ABOUT ME
             </h4>
-            <h2 className="about__introduction">
+            <h2 className="about__sub-heading">
               Let me introduce myself
             </h2>
           </header>
@@ -21,6 +21,9 @@ const About = () => {
               alt="Avatar image of me, Eric Millen"
               className="about__img"
             />
+            <div className="about__name">
+              Eric Millen
+            </div>
             <div className="about__content">
 
             <p className="about__blurb">

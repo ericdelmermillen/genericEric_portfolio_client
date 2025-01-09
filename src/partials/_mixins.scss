@@ -6,6 +6,7 @@
 	--heading-font: "Tahoma";
 
 	--letter-spacing-general: 0.6px;
+	--letter-spacing-relaxed: 1px;
 	// --letter-spacing-general: 0.75px;
 	--letter-spacing-headline: 3.5px;
 	--letter-spacing-large: 1.75px;
@@ -19,6 +20,7 @@
 	--placeholder-transition: all 0.75s ease-in-out;
 
 	// Text SizingVariables
+	--font-size-general: 1.5rem;
 	--headline-small: 1.5rem;
 	--headline-medium: 2rem;
 	--headline-large: 2.5rem;
@@ -27,6 +29,8 @@
 	--headline-xxxl: 4.25rem;
 	--button-text-small: 1.25rem;
 	--button-text-medium: 1.5rem;
+	--heading-text-small: 1.5rem;
+	--sub-heading-text-small: 1.9rem;
 
 	// Light Mode Custom Variables
 	&[data-color-mode="light"] {
