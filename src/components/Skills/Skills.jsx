@@ -60,7 +60,7 @@ const Skills = () => {
           </h3>
 
           <p className="skills__lead">
-            These are the tools and languages I leverage to turn ideas into scalable, efficient solutions.
+            These are the tools I leverage to turn ideas into scalable, efficient solutions.
           </p>
   
         </div>

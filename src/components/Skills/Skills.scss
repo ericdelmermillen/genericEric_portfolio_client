@@ -12,21 +12,52 @@
 
 	&__heading {
 		@include headingGeneral;
-		font-size: 1.5rem;
-		margin-bottom: 1rem;
+		font-size: var(--headline-small);
 		text-align: center;
 
 		@media (min-width: $largeTablet) {
 			padding-inline-start: 2rem;
 			text-align: start;
 		}
+
+		@media (min-width: $largeTablet) {
+			padding-inline-start: 3rem;
+			text-align: start;
+		}
 	}
 
 	&__lead {
-		font-size: 1.15rem;
-		letter-spacing: var(--letter-spacing-general);
-		line-height: var(--line-height-general);
-		padding-inline: 2rem;
+		// font-size: var(--font-size-general);
+		// letter-spacing: var(--letter-spacing-general);
+		// line-height: var(--line-height-general);
+		// padding-inline: 2rem;
+		@include lead;
+		margin-inline: auto;
+		max-width: 90%;
+
+		@media (min-width: 400px) {
+			max-width: 85%;
+		}
+
+		@media (min-width: $smallTablet) {
+			max-width: 90%;
+		}
+
+		@media (min-width: 600px) {
+			max-width: 85%;
+		}
+
+		@media (min-width: 700px) {
+			max-width: 80%;
+		}
+
+		@media (min-width: $tablet) {
+			max-width: 75%;
+		}
+
+		@media (min-width: $largeTablet) {
+			max-width: 85%;
+		}
 	}
 
 	&__content {

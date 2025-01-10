@@ -21,6 +21,9 @@
 
 	// Text SizingVariables
 	--font-size-general: 1.5rem;
+	--font-size-fine: 1rem;
+	--font-size-xs: 1.25rem;
+	--font-size-small: 1.5rem;
 	--headline-small: 1.5rem;
 	--headline-medium: 2rem;
 	--headline-large: 2.5rem;
@@ -258,6 +261,14 @@
 	font-size: 1.25rem;
 	font-weight: 600;
 	letter-spacing: var(--letter-spacing-large);
+	margin-bottom: 1rem;
+}
+
+@mixin lead {
+	font-size: var(--font-size-general);
+	letter-spacing: var(--letter-spacing-general);
+	line-height: var(--line-height-general);
+	padding-inline: 2rem;
 }
 
 @mixin generalOpacityTransition {
@@ -546,9 +557,8 @@
 	color: var(--text-color);
 	cursor: pointer;
 	display: inline-flex;
-	font-size: 1.25rem;
 	font-family: var(--body-font);
-	font-size: 1.125rem;
+	font-size: var(--button-text-small);
 	font-weight: bold;
 	gap: 0.75rem;
 	font-weight: 200;
@@ -556,14 +566,6 @@
 	letter-spacing: 3px;
 	padding: 1rem 1.25rem;
 	transition: all 250 ease-in-out;
-
-	@media (min-width: $smallTablet) {
-		font-size: 1.25rem;
-	}
-
-	@media (min-width: $tablet) {
-		font-size: 1.5rem;
-	}
 
 	&:hover,
 	&:focus {
