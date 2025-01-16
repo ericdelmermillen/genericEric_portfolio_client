@@ -38,10 +38,9 @@ const ProjectsFeed = () => {
     handleDecrementCurrentIdx
   } = useLightBoxContext();
   
-  const [ projectsData, setProjectsData ] = useState([]);
+  const [ projectsData, setProjectsData ] = useState(initialPosts);
   const [ isFinalPageFetched, setIsFinalPageFetched ] = useState(false);
   const [ isFinalPageLoaded, setIsFinalPageLoaded ] = useState(false);
-  
   
   const [ isInitialFetch, setIsInitialFetch ] = useState(true);
   const [ page, setPage ] = useState(1);
@@ -161,7 +160,7 @@ const ProjectsFeed = () => {
           {projectsData.map((project, idx) => 
             
             <Project 
-              key={project.project_id}
+              key={project.project_id || idx}
               idx={idx}
               maxIdx={projectsData.length - 1}
               page={page}
@@ -178,6 +177,7 @@ const ProjectsFeed = () => {
               setShowLightBox={setShowLightBox}
               handleCardClick={handleCardClick}
               handleSetCurrentProjectImages={handleSetCurrentProjectImages}
+              isInitialFetch={isInitialFetch}
             />
 
           )}

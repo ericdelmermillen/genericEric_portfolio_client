@@ -43,8 +43,8 @@
 	}
 
 	&__lead {
-		font-size: 1.25rem;
-		line-height: 1.5;
+		font-size: var(--font-size-xs);
+		line-height: var(--line-height-medium);
 		margin-bottom: 1.5rem;
 	}
 
@@ -62,7 +62,8 @@
 
 		&::placeholder {
 			color: var(--text-color);
-			font-size: 1rem;
+			font-size: var(--font-size-fine);
+			letter-spacing: var(--letter-spacing-general);
 		}
 
 		&--message {

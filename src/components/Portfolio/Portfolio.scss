@@ -30,6 +30,7 @@
 
 	&__header {
 		margin-bottom: 1rem;
+		// border: 2px solid red;
 	}
 
 	&__heading {
@@ -37,7 +38,7 @@
 		align-items: center;
 		display: inline-block;
 		justify-content: center;
-		font-size: 1.5rem;
+		font-size: var(--headline-small);
 		margin-bottom: 3rem;
 		margin-top: 2rem;
 		position: relative;
@@ -94,14 +95,17 @@
 	}
 
 	&__sub-heading {
-		font-size: 1.5rem;
+		font-size: var(--headline-small);
 		margin-bottom: 2rem;
 	}
 
 	&__lead {
-		font-size: 1.25rem;
-		letter-spacing: var(--letter-spacing-general);
-		margin-bottom: 0.5rem;
+		@include lead;
+		font-size: var(--font-size-xs);
+
+		@media (min-width: $smallTablet) {
+			font-size: var(--font-size-general);
+		}
 	}
 
 	&__addOrEditProjectOrder {
@@ -172,7 +176,12 @@
 		}
 
 		&--moreProjects {
-			width: 18rem;
+			font-size: var(--button-text-small);
+			width: 16rem;
+
+			@media (min-width: $smallTablet) {
+				width: 18rem;
+			}
 		}
 	}
 }

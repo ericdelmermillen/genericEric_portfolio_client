@@ -11,8 +11,7 @@ const BlogPost = ({
   description, 
   videoID, 
   isOnHome, 
-  handleIncrementBlogPostLoadedCount,
-  isLoading })=> {
+  handleIncrementBlogPostLoadedCount })=> {
   
   const embedUrl = `https://www.youtube.com/embed/${videoID}?rel=0`;
   

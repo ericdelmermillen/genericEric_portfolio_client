@@ -47,8 +47,7 @@ const Project = ({
 
   const desc = showFullInfo 
   ? projectDescription 
-  : projectDescription.split("\n")[0];
-  
+  : projectDescription?.split("\n")[0] || "";
   
   const handleImageClick = () => {
     handleSetCurrentProjectImages(projectID);
@@ -80,7 +79,6 @@ const Project = ({
     checkHasLongDesc();
   };
 
-
   const handleOnLoad = () => {
     if(idx === maxIdx) {
       setTimeout(() => {
@@ -108,12 +106,6 @@ const Project = ({
     };
   }, []);
 
-  if(isInitialLoad) {
-    return (
-      <ProjectPlaceholder />
-    );
-  };
-
   
   return (
     <>
@@ -134,19 +126,26 @@ const Project = ({
 
         <div className="project__inner ">
 
-          <h4 className="project__date" dateTime={projectDate}>
-            {getMonthYear(projectDate)}
-          </h4>
+          {!isInitialLoad
+            ? (              
+                <>
+                  <h4 className="project__date" dateTime={projectDate}>
+                    {getMonthYear(projectDate)}
+                  </h4>
 
-         <img 
-            className={`project__image ${projectIsLoaded ? "isReady" : ""}`} 
-            // concatatenate string for url with aws s3 bucket url
-            src={`${AWS_SS3_BUCKET_URL}/${projectPhotos[0].photo_url}`} 
-            // src={projectPhotos[0].photo_url} 
-            alt={`Main image for project ${projectTitle}`} 
-            onClick={() => handleImageClick()}
-            onLoad={handleOnLoad}
-          /> 
+                  <img 
+                  className={`project__image ${projectIsLoaded ? "isReady" : ""}`} 
+                  // concatatenate string for url with aws s3 bucket url
+                  src={`${AWS_SS3_BUCKET_URL}/${projectPhotos[0].photo_url}`} 
+                  alt={`Main image for project ${projectTitle}`} 
+                  onClick={() => handleImageClick()}
+                  onLoad={handleOnLoad}
+                  />
+                </>
+              )
+            : null
+          }
+
 
           <div className="project__text">
 
@@ -198,7 +197,7 @@ const Project = ({
           </div>
 
 
-          {projectURLs.length 
+          {projectURLs?.length 
 
             ? 
               (

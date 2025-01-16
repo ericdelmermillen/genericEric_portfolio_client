@@ -54,10 +54,6 @@
 	}
 
 	&__lead {
-		// font-size: var(--font-size-general);
-		// letter-spacing: var(--letter-spacing-general);
-		// line-height: var(--line-height-general);
-		// padding-inline: 1rem;
 		@include lead;
 	}
 

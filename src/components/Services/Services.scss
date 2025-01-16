@@ -54,8 +54,8 @@
 
 	&__heading {
 		@include headingGeneral;
-		font-size: 2rem;
-		letter-spacing: 1.5px;
+		font-size: var(--headline-medium);
+		letter-spacing: var(--letter-spacing-medium);
 		margin-bottom: 3rem;
 		position: relative;
 		text-shadow: var(--text-shadow-bright);
@@ -68,7 +68,7 @@
 	}
 
 	&__sub-heading {
-		font-size: 2rem;
+		font-size: var(--headline-medium);
 		margin-bottom: 2rem;
 		text-align: center;
 		text-shadow: var(--text-shadow-bright);
@@ -79,7 +79,7 @@
 	}
 
 	&__lead {
-		font-size: 1.75rem;
+		font-size: var(--headline-medium-small);
 		font-weight: bold;
 		letter-spacing: var(--letter-spacing-general);
 		line-height: 1.25;
@@ -122,7 +122,7 @@
 
 	&__service-name {
 		display: inline-block;
-		font-size: 1.5rem;
+		font-size: var(--font-size-small);
 		letter-spacing: var(--letter-spacing-general);
 		margin-bottom: 3rem;
 		position: relative;
@@ -135,7 +135,7 @@
 	}
 
 	&__service-description {
-		font-size: 1.25rem;
+		font-size: var(--font-size-xs);
 		letter-spacing: var(--letter-spacing-general);
 		line-height: var(--line-height-medium);
 		text-shadow: var(--text-shadow-bright);

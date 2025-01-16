@@ -5,6 +5,7 @@
 	& {
 		height: 100%;
 		position: absolute;
+		max-width: 100%;
 		width: 100%;
 	}
 
@@ -12,7 +13,7 @@
 		@include placeholderContent;
 		box-shadow: var(--box-shadow);
 		height: 1.125rem;
-		margin-bottom: 0.4rem;
+		margin-bottom: 1rem;
 		margin-inline-end: 0.2rem;
 		margin-inline-start: auto;
 		width: 6rem;
@@ -28,14 +29,23 @@
 	&__title {
 		@include placeholderContent;
 		box-shadow: var(--box-shadow);
-		height: 1.5rem;
+		height: 2rem;
 		margin-bottom: 1rem;
 		width: 95%;
+
+		@media (min-width: $smallTablet) {
+			height: 2.25rem;
+			margin-bottom: 1.5rem;
+		}
 	}
 
 	&__desc {
 		@include placeholderContent;
-		height: 20rem;
+		height: 22rem;
 		margin-bottom: 1rem;
+
+		@media (min-width: $smallTablet) {
+			height: 23rem;
+		}
 	}
 }

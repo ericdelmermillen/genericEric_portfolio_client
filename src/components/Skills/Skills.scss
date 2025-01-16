@@ -27,13 +27,9 @@
 	}
 
 	&__lead {
-		// font-size: var(--font-size-general);
-		// letter-spacing: var(--letter-spacing-general);
-		// line-height: var(--line-height-general);
-		// padding-inline: 2rem;
 		@include lead;
 		margin-inline: auto;
-		max-width: 90%;
+		max-width: 95%;
 
 		@media (min-width: 400px) {
 			max-width: 85%;

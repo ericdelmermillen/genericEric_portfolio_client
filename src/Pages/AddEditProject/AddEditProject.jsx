@@ -199,12 +199,15 @@ const AddEditProject = ({ children }) => {
 
       setProjectDate(project_date);
 
-      setPhotos(prevPhotos => 
+      setPhotos(prevPhotos =>
         prevPhotos.map((photo, idx) => ({
           ...photo,
-          photoPreview: `${AWS_SS3_BUCKET_URL}/${project_photos[idx]?.photo_url}` || photo.photoPreview
+          photoPreview: project_photos[idx]?.photo_url
+            ? `${AWS_SS3_BUCKET_URL}/${project_photos[idx].photo_url}`
+            : photo.photoPreview,
         }))
       );
+      
       
       setTitle(project_title);
       setDesc(project_description.replace(/\n/g, "\n\n"));
@@ -220,8 +223,7 @@ const AddEditProject = ({ children }) => {
           setGithubServerURL(Object.entries(url)[0][1]);
         };
       });
-
-      
+  
     } catch(error) {
       console.log(error);
       toast.error(error.message);
@@ -231,7 +233,6 @@ const AddEditProject = ({ children }) => {
       }, MIN_LOADING_INTERVAL);
     };
   };
-
 
   const handleTitleChange = (e) => {
     const titleValue = e ? e.target.value : titleRef.current.value;
@@ -378,18 +379,17 @@ const AddEditProject = ({ children }) => {
       "x-refresh-token": refreshToken
     };
 
-
     let awsURL;
 
     for(const photo of photos) {
-
+      
       if(photo.photoPreview && !photo.photoData) {
-
+        
         if(photo.photoPreview) {
           const objectName = photo.photoPreview.split("/")[4];
           const projectPhoto = {display_order: photo.displayOrder, photo_url: objectName};
           project.project_photos.push(projectPhoto);
-        }
+        };
 
       } else if(photo.photoData) {
 

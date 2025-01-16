@@ -161,7 +161,7 @@ const BlogFeed = () => {
                       MY BLOG
                     </h4>
                     <h2 className="blogFeed__sub-heading">
-                      Check out my most recent post
+                      Check out my <span className="blogFeed__most-recent">most recent post</span>
                     </h2>
                   </div>
                 )
