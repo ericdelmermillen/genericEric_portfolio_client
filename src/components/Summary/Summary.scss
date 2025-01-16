@@ -1,5 +1,5 @@
-@import "../../partials/mixins";
-@import "../../partials/variables";
+@use "../../partials/variables" as vars;
+@use "../../partials/mixins" as mx;
 
 .summary {
 	& {
@@ -8,14 +8,14 @@
 
 	&__inner {
 		margin-inline: auto;
-		max-width: $largeTablet;
+		max-width: vars.$largeTablet;
 		padding-block: 4em;
 
-		@media (min-width: $tablet) {
+		@media (min-width: vars.$tablet) {
 			padding-inline: 2rem;
 		}
 
-		@media (min-width: $largeTablet) {
+		@media (min-width: vars.$largeTablet) {
 			padding-inline: 1rem;
 		}
 	}
@@ -24,7 +24,7 @@
 		display: flex;
 		flex-direction: column;
 
-		@media (min-width: $largeTablet) {
+		@media (min-width: vars.$largeTablet) {
 			flex-direction: row;
 			gap: 0;
 		}
@@ -43,12 +43,12 @@
 		margin-inline: auto;
 		padding-block: 2rem;
 
-		@media (min-width: $tablet) {
+		@media (min-width: vars.$tablet) {
 			flex-direction: row;
 		}
 	}
 
 	&__button {
-		@include button;
+		@include mx.button;
 	}
 }

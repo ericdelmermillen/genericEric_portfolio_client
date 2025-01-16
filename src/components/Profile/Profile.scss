@@ -1,5 +1,5 @@
-@import "../../partials/mixins";
-@import "../../partials/variables";
+@use "../../partials/variables" as vars;
+@use "../../partials/mixins" as mx;
 
 .profile {
 	& {
@@ -23,12 +23,12 @@
 			padding-inline: 4rem;
 		}
 
-		@media (min-width: $largeTablet) {
+		@media (min-width: vars.$largeTablet) {
 			padding-inline-end: 0;
 			padding-inline-start: 2rem;
 		}
 
-		@media (min-width: $desktop) {
+		@media (min-width: vars.$desktop) {
 			padding-inline: 0;
 		}
 	}
@@ -37,24 +37,24 @@
 		margin-bottom: 0.5rem;
 		min-height: 8rem;
 
-		@media (min-width: $largeTablet) {
+		@media (min-width: vars.$largeTablet) {
 			margin-bottom: 1rem;
 		}
 	}
 
 	&__heading {
-		@include headingGeneral;
 		font-size: var(--headline-small);
 		text-align: center;
+		@include mx.headingGeneral;
 
-		@media (min-width: $largeTablet) {
+		@media (min-width: vars.$largeTablet) {
 			text-align: start;
 			padding-inline-start: 1rem;
 		}
 	}
 
 	&__lead {
-		@include lead;
+		@include mx.lead;
 	}
 
 	&__items {
@@ -69,7 +69,7 @@
 		position: relative;
 
 		&::after {
-			@include afterAccent;
+			@include mx.afterAccent;
 		}
 
 		&:last-child::after {
@@ -83,7 +83,7 @@
 		gap: 0.75rem;
 		margin-bottom: 0.5rem;
 
-		@media (min-width: $smallTablet) {
+		@media (min-width: vars.$smallTablet) {
 			margin-bottom: 0.6rem;
 		}
 	}
@@ -92,7 +92,7 @@
 		height: var(--font-size-xs);
 		width: var(--font-size-xs);
 
-		@media (min-width: $smallTablet) {
+		@media (min-width: vars.$smallTablet) {
 			height: var(--font-size-small);
 			width: var(--font-size-small);
 		}
@@ -107,7 +107,7 @@
 		font-size: var(--font-size-xs);
 		line-height: var(--line-height-general);
 
-		@media (min-width: $smallTablet) {
+		@media (min-width: vars.$smallTablet) {
 			font-size: var(--font-size-general);
 		}
 	}

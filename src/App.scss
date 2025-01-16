@@ -1,5 +1,5 @@
-@import "./partials/mixins.scss";
-@import "./partials/variables.scss";
+@use "./partials/variables.scss" as vars;
+@use "./partials/mixins.scss" as mx;
 
 *,
 *::before,
@@ -46,7 +46,7 @@ img {
 
 .app {
 	& {
-		@include appLayout;
+		@include mx.appLayout;
 	}
 
 	&__backgroundDiv {
@@ -59,8 +59,8 @@ img {
 	}
 
 	&__inner {
-		@include inner;
 		box-shadow: var(--box-shadow);
+		@include mx.inner;
 	}
 
 	&__sideNav-children {
@@ -77,16 +77,16 @@ img {
 	&__logout--nav {
 		display: none;
 
-		@media (min-width: $tablet) {
-			@include adminButton;
+		@media (min-width: vars.$tablet) {
+			@include mx.adminButton;
 			border: 1px solid var(--text-color-bright);
 			color: var(--text-color-bright);
 		}
 	}
 
 	&__logout--sideNav {
-		@include adminButton;
 		margin-inline: auto;
+		@include mx.adminButton;
 	}
 }
 

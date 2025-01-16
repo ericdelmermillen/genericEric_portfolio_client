@@ -1,5 +1,5 @@
-@import "../../partials/mixins";
-@import "../../partials/variables";
+@use "../../partials/variables" as vars;
+@use "../../partials/mixins" as mx;
 
 .nav {
 	& {
@@ -7,7 +7,7 @@
 		background: var(--background-nav-footer);
 		box-shadow: var(--navFooter-box-shadow);
 		display: flex;
-		height: $navHeight;
+		height: vars.$navHeight;
 		position: fixed;
 		transition: all 500ms ease-in-out;
 		top: 0;
@@ -24,7 +24,7 @@
 		display: flex;
 		height: 100%;
 		margin-inline: auto;
-		max-width: $ultraWide;
+		max-width: vars.$ultraWide;
 		padding-inline: 2rem;
 		width: 100%;
 	}
@@ -37,7 +37,7 @@
 			color: var(--text-color-bright);
 		}
 
-		@media (min-width: $tablet) {
+		@media (min-width: vars.$tablet) {
 			margin-inline-end: auto;
 			margin-inline-start: 0;
 			text-align: center;
@@ -48,7 +48,7 @@
 	&__links {
 		display: none;
 
-		@media (min-width: $tablet) {
+		@media (min-width: vars.$tablet) {
 			align-items: center;
 			display: flex;
 			gap: 2rem;
@@ -58,11 +58,11 @@
 	}
 
 	&__link {
-		@include navLink;
+		@include mx.navLink;
 
 		&:hover {
 			&::after {
-				@include navLinkActive;
+				@include mx.navLinkActive;
 			}
 		}
 	}
@@ -71,14 +71,14 @@
 		position: relative;
 
 		&::after {
-			@include afterAccent;
+			@include mx.afterAccent;
 		}
 	}
 
 	&__colorModeToggle {
 		display: none;
 
-		@media (min-width: $tablet) {
+		@media (min-width: vars.$tablet) {
 			display: block;
 			margin-inline-start: 1rem;
 		}
@@ -87,7 +87,7 @@
 	&__logout {
 		display: none;
 
-		@media (min-width: $tablet) {
+		@media (min-width: vars.$tablet) {
 			display: block;
 		}
 	}
@@ -104,7 +104,7 @@
 		top: 0.9rem;
 		width: 2rem;
 
-		@media (min-width: $tablet) {
+		@media (min-width: vars.$tablet) {
 			display: none;
 		}
 	}

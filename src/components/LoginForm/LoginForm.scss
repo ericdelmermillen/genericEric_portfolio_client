@@ -1,25 +1,25 @@
-@import "../../partials/mixins";
-@import "../../partials/variables";
+@use "../../partials/variables" as vars;
+@use "../../partials/mixins" as mx;
 
 .loginForm {
 	& {
-		@include formFullWidth;
+		@include mx.formFullWidth;
 	}
 
 	&__inner {
-		@include formFullWidthInner;
+		@include mx.formFullWidthInner;
 	}
 
 	&__heading {
-		@include formHeading;
+		@include mx.formHeading;
 
 		&::after {
-			@include afterAccent;
+			@include mx.afterAccent;
 		}
 	}
 
 	&__form {
-		@include form;
+		@include mx.form;
 	}
 
 	&__field {
@@ -27,11 +27,11 @@
 	}
 
 	&__label {
-		@include hiddenLabel;
+		@include mx.hiddenLabel;
 	}
 
 	&__input {
-		@include formFullWidthInput;
+		@include mx.formFullWidthInput;
 
 		&:focus {
 			box-shadow: var(--box-shadow-input);
@@ -45,7 +45,7 @@
 	}
 
 	&__error {
-		@include formErrorMessage;
+		@include mx.formErrorMessage;
 	}
 
 	&__submit {
@@ -54,10 +54,10 @@
 	}
 
 	&__button {
-		@include button;
 		background: var(--accent-color);
 		border: none;
 		width: 100%;
+		@include mx.button;
 	}
 }
 

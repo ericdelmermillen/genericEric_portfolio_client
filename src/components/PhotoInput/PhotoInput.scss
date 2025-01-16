@@ -1,5 +1,5 @@
-@import "../../partials/mixins";
-@import "../../partials/variables";
+@use "../../partials/variables" as vars;
+@use "../../partials/mixins" as mx;
 
 .photoInput {
 	&__box {
@@ -29,7 +29,7 @@
 			width: 13.5rem;
 		}
 
-		@media (min-width: $tablet) {
+		@media (min-width: vars.$tablet) {
 			height: 14rem;
 			width: 14rem;
 		}
@@ -39,7 +39,7 @@
 			width: 15rem;
 		}
 
-		@media (min-width: $largeTablet) {
+		@media (min-width: vars.$largeTablet) {
 			height: 10rem;
 			width: 10rem;
 		}
@@ -72,12 +72,12 @@
 			width: 13.5rem;
 		}
 
-		@media (min-width: $tablet) {
+		@media (min-width: vars.$tablet) {
 			height: 15rem;
 			width: 15rem;
 		}
 
-		@media (min-width: $largeTablet) {
+		@media (min-width: vars.$largeTablet) {
 			height: 10rem;
 			width: 10rem;
 		}
@@ -111,12 +111,12 @@
 			width: 13.5rem;
 		}
 
-		@media (min-width: $tablet) {
+		@media (min-width: vars.$tablet) {
 			height: 15rem;
 			width: 15rem;
 		}
 
-		@media (min-width: $largeTablet) {
+		@media (min-width: vars.$largeTablet) {
 			height: 10rem;
 			width: 10rem;
 		}

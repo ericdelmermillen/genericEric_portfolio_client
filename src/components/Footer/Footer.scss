@@ -1,5 +1,5 @@
-@import "../../partials/mixins";
-@import "../../partials/variables";
+@use "../../partials/variables" as vars;
+@use "../../partials/mixins" as mx;
 
 .footer {
 	& {
@@ -16,10 +16,10 @@
 		display: flex;
 		flex-direction: column-reverse;
 		margin-inline: auto;
-		max-width: $ultraWide;
+		max-width: vars.$ultraWide;
 		padding-bottom: 1rem;
 
-		@media (min-width: $tablet) {
+		@media (min-width: vars.$tablet) {
 			flex-direction: row;
 			padding-bottom: 0;
 		}
@@ -42,13 +42,13 @@
 		height: 1.75rem;
 		width: 1.75rem;
 
-		@media (min-width: $smallTablet) {
+		@media (min-width: vars.$smallTablet) {
 			height: 2.5rem;
 			width: 2.5rem;
 		}
 
 		&:hover {
-			@include hoverClickGrowIcon;
+			@include mx.hoverClickGrowIcon;
 		}
 	}
 
@@ -66,12 +66,12 @@
 		letter-spacing: 01px;
 		text-align: center;
 
-		@media (min-width: $smallTablet) {
+		@media (min-width: vars.$smallTablet) {
 			font-size: var(--font-size-small);
 			width: 100%;
 		}
 
-		@media (min-width: $tablet) {
+		@media (min-width: vars.$tablet) {
 			width: 100%;
 		}
 	}

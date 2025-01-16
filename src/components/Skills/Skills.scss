@@ -1,5 +1,5 @@
-@import "../../partials/mixins";
-@import "../../partials/variables";
+@use "../../partials/variables" as vars;
+@use "../../partials/mixins" as mx;
 
 .skills {
 	& {
@@ -11,31 +11,31 @@
 	}
 
 	&__heading {
-		@include headingGeneral;
 		font-size: var(--headline-small);
 		text-align: center;
+		@include mx.headingGeneral;
 
-		@media (min-width: $largeTablet) {
+		@media (min-width: vars.$largeTablet) {
 			padding-inline-start: 2rem;
 			text-align: start;
 		}
 
-		@media (min-width: $largeTablet) {
+		@media (min-width: vars.$largeTablet) {
 			padding-inline-start: 3rem;
 			text-align: start;
 		}
 	}
 
 	&__lead {
-		@include lead;
 		margin-inline: auto;
 		max-width: 95%;
+		@include mx.lead;
 
 		@media (min-width: 400px) {
 			max-width: 85%;
 		}
 
-		@media (min-width: $smallTablet) {
+		@media (min-width: vars.$smallTablet) {
 			max-width: 90%;
 		}
 
@@ -47,11 +47,11 @@
 			max-width: 80%;
 		}
 
-		@media (min-width: $tablet) {
+		@media (min-width: vars.$tablet) {
 			max-width: 75%;
 		}
 
-		@media (min-width: $largeTablet) {
+		@media (min-width: vars.$largeTablet) {
 			max-width: 85%;
 		}
 	}
@@ -84,7 +84,7 @@
 			gap: 1rem;
 		}
 
-		@media (min-width: $smallTablet) {
+		@media (min-width: vars.$smallTablet) {
 			gap: 0.75rem;
 			grid-template-columns: repeat(4, 1fr);
 		}
@@ -93,7 +93,7 @@
 			gap: 1rem;
 		}
 
-		@media (min-width: $tablet) {
+		@media (min-width: vars.$tablet) {
 			gap: 1.5rem;
 		}
 	}
@@ -102,17 +102,17 @@
 		height: 2.75rem;
 		width: 2.75rem;
 
-		@media (min-width: $smallTablet) {
+		@media (min-width: vars.$smallTablet) {
 			height: 3rem;
 			width: 3rem;
 		}
 
-		@media (min-width: $tablet) {
+		@media (min-width: vars.$tablet) {
 			height: 3.5rem;
 			width: 3.5rem;
 		}
 
-		@media (min-width: $largeTablet) {
+		@media (min-width: vars.$largeTablet) {
 			height: 2.75rem;
 			width: 2.75rem;
 		}
@@ -121,17 +121,17 @@
 			height: 4rem;
 			width: 4rem;
 
-			@media (min-width: $smallTablet) {
+			@media (min-width: vars.$smallTablet) {
 				height: 4.5rem;
 				width: 4.5rem;
 			}
 
-			@media (min-width: $tablet) {
+			@media (min-width: vars.$tablet) {
 				height: 5rem;
 				width: 5rem;
 			}
 
-			@media (min-width: $largeTablet) {
+			@media (min-width: vars.$largeTablet) {
 				height: 4rem;
 				width: 4rem;
 			}

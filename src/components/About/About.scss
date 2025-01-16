@@ -1,5 +1,5 @@
-@import "../../partials/mixins";
-@import "../../partials/variables";
+@use "../../partials/variables" as vars;
+@use "../../partials/mixins" as mx;
 
 .about {
 	& {
@@ -23,21 +23,21 @@
 	}
 
 	&__heading {
-		@include headingGeneral;
 		display: inline-block;
 		font-size: var(--heading-text-small);
 		margin-inline: auto;
 		position: relative;
+		@include mx.headingGeneral;
 
 		&::after {
-			@include afterAccent;
+			@include mx.afterAccent;
 		}
 	}
 
 	&__sub-heading {
 		display: none;
 
-		@media (min-width: $smallTablet) {
+		@media (min-width: vars.$smallTablet) {
 			display: block;
 			font-size: var(--sub-heading-text-small);
 			letter-spacing: var(--letter-spacing-relaxed);
@@ -51,9 +51,9 @@
 		flex-direction: column;
 		gap: 2rem;
 		margin-inline: auto;
-		max-width: $largeTablet;
+		max-width: vars.$largeTablet;
 
-		@media (min-width: $tablet) {
+		@media (min-width: vars.$tablet) {
 			align-items: center;
 			flex-direction: row;
 			gap: 1rem;
@@ -67,7 +67,7 @@
 		margin-inline: auto;
 		width: 15rem;
 
-		@media (min-width: $tablet) {
+		@media (min-width: vars.$tablet) {
 			margin-inline-end: 0;
 			margin-inline-start: auto;
 		}
@@ -78,17 +78,17 @@
 		letter-spacing: var(--letter-spacing-relaxed);
 		text-align: center;
 
-		@media (min-width: $smallTablet) {
+		@media (min-width: vars.$smallTablet) {
 			display: none;
 		}
 	}
 
 	&__content {
 		margin-inline: auto;
-		max-width: $tablet;
+		max-width: vars.$tablet;
 		padding-inline: 2rem;
 
-		@media (min-width: $tablet) {
+		@media (min-width: vars.$tablet) {
 			margin-inline-start: 0;
 		}
 	}

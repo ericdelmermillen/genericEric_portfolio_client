@@ -1,13 +1,13 @@
-@import "../../partials/mixins";
-@import "../../partials/variables";
+@use "../../partials/variables" as vars;
+@use "../../partials/mixins" as mx;
 
 .portfolioCard {
 	& {
-		@include projectCard;
 		box-shadow: var(--box-shadow);
 		cursor: pointer;
 		overflow: hidden;
 		position: relative;
+		@include mx.projectCard;
 
 		&.draggable {
 			animation: shake 0.45s infinite;
@@ -15,8 +15,8 @@
 		}
 
 		&:hover {
-			@include hoverClickGrow;
 			opacity: 0.8;
+			@include mx.hoverClickGrow;
 		}
 	}
 
@@ -26,8 +26,8 @@
 		z-index: 2;
 
 		&.fade {
-			@include smoothClosingTransition;
 			opacity: 0;
+			@include mx.smoothClosingTransition;
 		}
 
 		&.hide {
@@ -36,7 +36,6 @@
 	}
 
 	&__button {
-		@include generalOpacityTransition;
 		background-color: var(--background-color);
 		color: var(--text-color);
 		border: none;
@@ -49,20 +48,21 @@
 		position: absolute;
 		top: 0.75rem;
 		width: 2.25rem;
+		@include mx.generalOpacityTransition;
 
-		@media (min-width: $smallTablet) {
+		@media (min-width: vars.$smallTablet) {
 			height: 2.75rem;
 			top: 1rem;
 			width: 2.75rem;
 		}
 
-		@media (min-width: $tablet) {
+		@media (min-width: vars.$tablet) {
 			height: 2.5rem;
 			top: 0.75rem;
 			width: 2.5rem;
 		}
 
-		@media (min-width: $desktop) {
+		@media (min-width: vars.$desktop) {
 			height: 3rem;
 			top: 1rem;
 			width: 3rem;
@@ -71,11 +71,11 @@
 		&--delete {
 			left: 1rem;
 
-			@media (min-width: $tablet) {
+			@media (min-width: vars.$tablet) {
 				left: 0.75rem;
 			}
 
-			@media (min-width: $desktop) {
+			@media (min-width: vars.$desktop) {
 				left: 1rem;
 			}
 		}
@@ -83,21 +83,21 @@
 		&--edit {
 			right: 1rem;
 
-			@media (min-width: $tablet) {
+			@media (min-width: vars.$tablet) {
 				right: 0.75rem;
 			}
 
-			@media (min-width: $desktop) {
+			@media (min-width: vars.$desktop) {
 				right: 1rem;
 			}
 		}
 
 		&.show {
-			@include generalOpacityTransition;
 			align-items: center;
 			display: flex;
 			justify-content: center;
 			opacity: 1;
+			@include mx.generalOpacityTransition;
 		}
 	}
 
@@ -105,24 +105,24 @@
 		height: 1.5rem;
 		width: 1.5rem;
 
-		@media (min-width: $smallTablet) {
+		@media (min-width: vars.$smallTablet) {
 			height: 1.75rem;
 			width: 1.75rem;
 		}
 
-		@media (min-width: $tablet) {
+		@media (min-width: vars.$tablet) {
 			height: 1.5rem;
 			width: 1.5rem;
 		}
 
-		@media (min-width: $desktop) {
+		@media (min-width: vars.$desktop) {
 			height: 1.75rem;
 			width: 1.75rem;
 		}
 	}
 
 	&__img {
-		@include projectImg;
+		@include mx.projectImg;
 	}
 }
 

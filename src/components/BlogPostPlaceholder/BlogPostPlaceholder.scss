@@ -1,31 +1,31 @@
-@import "../../partials/mixins";
-@import "../../partials/variables";
+@use "../../partials/variables" as vars;
+@use "../../partials/mixins" as mx;
 
 .blogPostPlaceholder {
 	& {
-		@include blogPost;
 		max-width: 100%;
 		padding-inline: 1rem;
+		@include mx.blogPost;
 
-		@media (min-width: $smallTablet) {
-			max-width: $tablet;
+		@media (min-width: vars.$smallTablet) {
+			max-width: vars.$tablet;
 			padding-inline: 0;
 		}
 
-		@media (min-width: $tablet) {
-			max-width: $tablet;
+		@media (min-width: vars.$tablet) {
+			max-width: vars.$tablet;
 		}
 	}
 
 	&__video {
-		@include blogPostVideo;
 		aspect-ratio: 16/9;
 		background: var(--placeholder-color);
 		border-radius: var(--border-radius);
 		box-shadow: var(--box-shadow);
 		margin-bottom: 1rem;
+		@include mx.blogPostVideo;
 
-		@media (min-width: $smallTablet) {
+		@media (min-width: vars.$smallTablet) {
 			margin-bottom: 1.5rem;
 		}
 
@@ -37,7 +37,7 @@
 			margin-bottom: 1rem;
 		}
 
-		@media (min-width: $tablet) {
+		@media (min-width: vars.$tablet) {
 			margin-bottom: 0.75rem;
 		}
 
@@ -63,11 +63,11 @@
 			margin-bottom: 1.25rem;
 		}
 
-		@media (min-width: $smallTablet) {
+		@media (min-width: vars.$smallTablet) {
 			margin-bottom: 1rem;
 		}
 
-		@media (min-width: $tablet) {
+		@media (min-width: vars.$tablet) {
 			height: 2rem;
 			margin-bottom: 1.25rem;
 		}
@@ -82,11 +82,11 @@
 		margin-inline: auto;
 		width: 90%;
 
-		@media (min-width: $smallTablet) {
+		@media (min-width: vars.$smallTablet) {
 			height: 6rem;
 		}
 
-		@media (min-width: $tablet) {
+		@media (min-width: vars.$tablet) {
 			height: 7.5rem;
 		}
 	}

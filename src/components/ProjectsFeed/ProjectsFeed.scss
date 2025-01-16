@@ -1,5 +1,5 @@
-@import "../../partials//mixins";
-@import "../../partials/variables";
+@use "../../partials/variables" as vars;
+@use "../../partials//mixins" as mx;
 
 .projectsFeed {
 	& {
@@ -15,27 +15,27 @@
 		margin-bottom: 4rem;
 		margin-inline: auto;
 		max-width: 90%;
-		min-height: calc(100vh - $navHeight);
+		min-height: calc(100vh - vars.$navHeight);
 		min-width: 90%;
 
-		@media (min-width: $largeTablet) {
+		@media (min-width: vars.$largeTablet) {
 			gap: 4rem;
-			max-width: $tablet;
-			min-width: $tablet;
+			max-width: vars.$tablet;
+			min-width: vars.$tablet;
 			width: 100%;
 		}
 	}
 
 	&__button {
-		@include button;
 		background: var(--neutralBG);
 		margin-bottom: 2rem;
 		margin-inline: auto;
 		position: relative;
 		z-index: 1;
+		@include mx.button;
 
 		&.disabled {
-			@include buttonDisabled;
+			@include mx.buttonDisabled;
 		}
 
 		&.isOnHome {

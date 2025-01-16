@@ -1,5 +1,5 @@
-@import "../../partials/mixins";
-@import "../../partials/variables";
+@use "../../partials/variables" as vars;
+@use "../../partials/mixins" as mx;
 
 .portfolio {
 	& {
@@ -23,18 +23,16 @@
 		text-align: center;
 		width: 100%;
 
-		@media (min-width: $tablet) {
+		@media (min-width: vars.$tablet) {
 			padding-inline: 2rem;
 		}
 	}
 
 	&__header {
 		margin-bottom: 1rem;
-		// border: 2px solid red;
 	}
 
 	&__heading {
-		@include headingGeneral;
 		align-items: center;
 		display: inline-block;
 		justify-content: center;
@@ -42,9 +40,10 @@
 		margin-bottom: 3rem;
 		margin-top: 2rem;
 		position: relative;
+		@include mx.headingGeneral;
 
 		&::after {
-			@include afterAccent;
+			@include mx.afterAccent;
 		}
 	}
 
@@ -63,21 +62,21 @@
 		outline: none;
 		width: 1.75rem;
 
-		@media (min-width: $smallTablet) {
+		@media (min-width: vars.$smallTablet) {
 			height: 1.9rem;
 			right: -2.5rem;
 			width: 1.9rem;
 		}
 
-		@media (min-width: $smallTablet) {
+		@media (min-width: vars.$smallTablet) {
 			right: -2.5rem;
 		}
 
-		@media (min-width: $tablet) {
+		@media (min-width: vars.$tablet) {
 			right: -2.7rem;
 		}
 
-		@media (min-width: $desktop) {
+		@media (min-width: vars.$desktop) {
 			right: -3rem;
 			top: -0.25rem;
 			height: 2.25rem;
@@ -100,27 +99,27 @@
 	}
 
 	&__lead {
-		@include lead;
 		font-size: var(--font-size-xs);
+		@include mx.lead;
 
-		@media (min-width: $smallTablet) {
+		@media (min-width: vars.$smallTablet) {
 			font-size: var(--font-size-general);
 		}
 	}
 
 	&__addOrEditProjectOrder {
-		@include linkButton;
 		height: 2rem;
 		opacity: 1;
+		@include mx.linkButton;
 
 		&.disabled {
-			@include buttonDisabled;
+			@include mx.buttonDisabled;
 		}
 	}
 
 	&__addProjectOrder {
-		@include linkButton;
 		height: 2rem;
+		@include mx.linkButton;
 	}
 
 	&__projects {
@@ -129,9 +128,9 @@
 	}
 
 	&__projects-inner {
-		@include portfolioContainer;
 		margin-inline: auto;
 		opacity: 1;
+		@include mx.portfolioContainer;
 	}
 
 	&__buttons {
@@ -143,7 +142,7 @@
 		margin-top: 2rem;
 		width: 100%;
 
-		@media (min-width: $tablet) {
+		@media (min-width: vars.$tablet) {
 			gap: 2rem;
 			flex-direction: row;
 			margin-top: 3rem;
@@ -151,26 +150,26 @@
 	}
 
 	&__button {
-		@include button;
 		width: 100%;
 		margin-top: 2rem;
+		@include mx.button;
 
 		&:nth-last-of-type(2) {
 			margin-top: 0;
 
-			@media (min-width: $tablet) {
+			@media (min-width: vars.$tablet) {
 				margin-top: 3rem;
 			}
 		}
 
-		@media (min-width: $tablet) {
+		@media (min-width: vars.$tablet) {
 			margin-top: 3rem;
 		}
 
 		&--cancel,
 		&--edit,
 		&--save {
-			@media (min-width: $smallTablet) {
+			@media (min-width: vars.$smallTablet) {
 				width: 12rem;
 			}
 		}
@@ -179,7 +178,7 @@
 			font-size: var(--button-text-small);
 			width: 16rem;
 
-			@media (min-width: $smallTablet) {
+			@media (min-width: vars.$smallTablet) {
 				width: 18rem;
 			}
 		}

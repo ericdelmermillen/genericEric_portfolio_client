@@ -1,5 +1,5 @@
-@import "../../partials/mixins";
-@import "../../partials/variables";
+@use "../../partials/variables" as vars;
+@use "../../partials/mixins" as mx;
 
 .blogPost {
 	& {
@@ -80,7 +80,7 @@
 			min-height: 575px;
 		}
 
-		@media (min-width: $tablet) {
+		@media (min-width: vars.$tablet) {
 			max-height: 615px;
 			min-height: 615px;
 		}
@@ -126,8 +126,8 @@
 		z-index: 2;
 
 		&.fade {
-			@include smoothClosingTransition;
 			opacity: 0;
+			@include mx.smoothClosingTransition;
 		}
 
 		&.hide {
@@ -136,20 +136,20 @@
 	}
 
 	&__inner {
-		@include blogPost;
 		opacity: 0;
 		transition: var(--placeholder-transition);
+		@include mx.blogPost;
 
 		&.show {
-			@include generalOpacityTransition;
 			opacity: 1;
+			@include mx.generalOpacityTransition;
 		}
 	}
 
 	&__video {
-		@include blogPostVideo;
 		margin-inline: auto;
 		max-width: 85vw;
+		@include mx.blogPostVideo;
 	}
 
 	&__iframe {
@@ -178,7 +178,7 @@
 		padding-inline: 0.5rem;
 		word-break: break-word;
 
-		@media (min-width: $tablet) {
+		@media (min-width: vars.$tablet) {
 			font-size: var(--font-size-small);
 			gap: 0.75rem;
 		}
@@ -192,7 +192,7 @@
 			font-weight: normal;
 
 			&.ellipsis {
-				@include ellipsisOneLine;
+				@include mx.ellipsisOneLine;
 			}
 		}
 	}
@@ -202,9 +202,9 @@
 		line-height: var(--line-height-general);
 
 		&.ellipsis {
-			@include ellipsisMultiLine;
 			-webkit-line-clamp: 3;
 			line-clamp: 3;
+			@include mx.ellipsisMultiLine;
 		}
 
 		&--label {
@@ -213,7 +213,7 @@
 	}
 
 	&__show-full-info {
-		@include linkButton;
 		font-size: var(--font-size-fine);
+		@include mx.linkButton;
 	}
 }

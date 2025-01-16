@@ -1,13 +1,13 @@
-@import "../../partials/mixins";
-@import "../../partials/variables";
+@use "../../partials/variables" as vars;
+@use "../../partials/mixins" as mx;
 
 .contactForm {
 	& {
-		@include formFullWidth;
+		@include mx.formFullWidth;
 	}
 
 	&__inner {
-		@include formFullWidthInner;
+		@include mx.formFullWidthInner;
 	}
 
 	&__header {
@@ -17,26 +17,26 @@
 	}
 
 	&__heading {
-		@include formHeading;
+		@include mx.formHeading;
 
 		&::after {
-			@include afterAccent;
+			@include mx.afterAccent;
 		}
 	}
 
 	&__sub-heading {
-		@include subHeadingGeneral;
 		display: none;
 		margin-bottom: 2rem;
+		@include mx.subHeadingGeneral;
 
-		@media (min-width: $smallTablet) {
+		@media (min-width: vars.$smallTablet) {
 			display: block;
 		}
 	}
 
 	&__form {
-		@include formTall;
 		overflow-y: hidden !important;
+		@include mx.formTall;
 
 		@media (min-height: 750px) {
 		}
@@ -49,11 +49,11 @@
 	}
 
 	&__label {
-		@include hiddenLabel;
+		@include mx.hiddenLabel;
 	}
 
 	&__input {
-		@include formFullWidthInput;
+		@include mx.formFullWidthInput;
 
 		&:focus {
 			box-shadow: var(--box-shadow-input);
@@ -73,7 +73,7 @@
 	}
 
 	&__error {
-		@include formErrorMessage;
+		@include mx.formErrorMessage;
 	}
 
 	&__submit {
@@ -86,9 +86,9 @@
 	}
 
 	&__button {
-		@include button;
 		background: var(--accent-color);
 		border: none;
 		width: 100%;
+		@include mx.button;
 	}
 }

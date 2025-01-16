@@ -1,10 +1,10 @@
-@import "../../partials/mixins";
-@import "../../partials/variables";
+@use "../../partials/variables" as vars;
+@use "../../partials/mixins" as mx;
 
 .portfolioCardPlaceholder {
 	& {
-		@include projectCard;
 		background: var(--placeholder-color);
 		border-radius: var(--border-radius);
+		@include mx.projectCard;
 	}
 }

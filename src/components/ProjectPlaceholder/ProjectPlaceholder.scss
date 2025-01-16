@@ -1,5 +1,5 @@
-@import "../../partials/mixins";
-@import "../../partials/variables";
+@use "../../partials/variables" as vars;
+@use "../../partials/mixins" as mx;
 
 .projectPlaceholder {
 	& {
@@ -10,41 +10,41 @@
 	}
 
 	&__date {
-		@include placeholderContent;
 		box-shadow: var(--box-shadow);
 		height: 1.125rem;
 		margin-bottom: 1rem;
 		margin-inline-end: 0.2rem;
 		margin-inline-start: auto;
 		width: 6rem;
+		@include mx.placeholderContent;
 	}
 
 	&__image {
-		@include placeholderContent;
-		@include projectImg;
 		box-shadow: var(--box-shadow);
 		margin-bottom: 1rem;
+		@include mx.placeholderContent;
+		@include mx.projectImg;
 	}
 
 	&__title {
-		@include placeholderContent;
 		box-shadow: var(--box-shadow);
 		height: 2rem;
 		margin-bottom: 1rem;
 		width: 95%;
+		@include mx.placeholderContent;
 
-		@media (min-width: $smallTablet) {
+		@media (min-width: vars.$smallTablet) {
 			height: 2.25rem;
 			margin-bottom: 1.5rem;
 		}
 	}
 
 	&__desc {
-		@include placeholderContent;
 		height: 22rem;
 		margin-bottom: 1rem;
+		@include mx.placeholderContent;
 
-		@media (min-width: $smallTablet) {
+		@media (min-width: vars.$smallTablet) {
 			height: 23rem;
 		}
 	}

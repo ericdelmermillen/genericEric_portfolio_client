@@ -1,11 +1,11 @@
-@import "../../partials/mixins";
-@import "../../partials/variables";
+@use "../../partials/variables" as vars;
+@use "../../partials/mixins" as mx;
 
 .services {
 	& {
 		color: var(--text-color-bright);
 		margin-inline: auto;
-		max-width: $ultraWide;
+		max-width: vars.$ultraWide;
 		text-align: center;
 	}
 
@@ -17,17 +17,17 @@
 	}
 
 	&__bg--light.show {
-		@include servicesBg;
 		background: url("../../assets/images/day-bottom.webp") no-repeat center
 			center;
 		background-size: cover;
+		@include mx.servicesBg;
 	}
 
 	&__bg--dark.show {
-		@include servicesBg;
 		background: url("../../assets/images/night-bottom.webp") no-repeat center
 			center;
 		background-size: cover;
+		@include mx.servicesBg;
 	}
 
 	&__overlay {
@@ -45,7 +45,7 @@
 		height: 100%;
 		justify-content: center;
 		margin-inline: auto;
-		max-width: $largeTablet;
+		max-width: vars.$largeTablet;
 		padding-block: 3rem;
 		padding-inline: 1rem;
 		position: relative;
@@ -53,17 +53,17 @@
 	}
 
 	&__heading {
-		@include headingGeneral;
 		font-size: var(--headline-medium);
 		letter-spacing: var(--letter-spacing-medium);
 		margin-bottom: 3rem;
 		position: relative;
 		text-shadow: var(--text-shadow-bright);
+		@include mx.headingGeneral;
 
 		&::after {
-			@include afterAccent;
 			background: var(--text-color-bright);
 			bottom: -1rem;
+			@include mx.afterAccent;
 		}
 	}
 
@@ -73,7 +73,7 @@
 		text-align: center;
 		text-shadow: var(--text-shadow-bright);
 
-		@media (min-width: $tablet) {
+		@media (min-width: vars.$tablet) {
 			text-align: start;
 		}
 	}
@@ -95,7 +95,7 @@
 		margin-bottom: 1rem;
 		text-shadow: var(--text-shadow-bright);
 
-		@media (min-width: $tablet) {
+		@media (min-width: vars.$tablet) {
 			display: grid;
 			gap: 1.25rem;
 			grid-template-columns: repeat(3, 1fr);
@@ -128,9 +128,9 @@
 		position: relative;
 
 		&::after {
-			@include afterAccent;
 			background: var(--text-color-bright);
 			bottom: -1rem;
+			@include mx.afterAccent;
 		}
 	}
 

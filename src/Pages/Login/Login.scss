@@ -1,16 +1,16 @@
-@import "../../partials/mixins";
-@import "../../partials/variables";
+@use "../../partials/variables" as vars;
+@use "../../partials/mixins" as mx;
 
 .login {
 	& {
-		@include page;
+		@include mx.page;
 	}
 
 	&__inner {
-		@include wallpaperContainer;
+		@include mx.wallpaperContainer;
 	}
 
 	&__content {
-		@include formContent;
+		@include mx.formContent;
 	}
 }

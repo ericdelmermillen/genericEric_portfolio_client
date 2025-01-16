@@ -1,4 +1,4 @@
-@import "./_variables.scss";
+@use "./variables" as vars;
 
 .app {
 	--body-font: "Arial";
@@ -39,6 +39,9 @@
 	--button-link-medium: 1rem;
 	--heading-text-small: 1.5rem;
 	--sub-heading-text-small: 1.9rem;
+
+	// other
+	--text-box-text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 
 	// Light Mode Custom Variables
 	&[data-color-mode="light"] {
@@ -135,8 +138,8 @@
 }
 
 @mixin page {
-	max-width: $ultraWide;
-	min-height: calc(100vh - $navHeight);
+	max-width: vars.$ultraWide;
+	min-height: calc(100vh - vars.$navHeight);
 	width: 100%;
 }
 
@@ -146,8 +149,8 @@
 	display: flex;
 	flex-direction: column;
 	margin-inline: auto;
-	max-width: $ultraWide;
-	min-height: calc((100vh - $navHeight) + 1px);
+	max-width: vars.$ultraWide;
+	min-height: calc((100vh - vars.$navHeight) + 1px);
 	width: 100%;
 }
 
@@ -216,24 +219,24 @@
 	text-align: center;
 	z-index: 1;
 
-	@media (min-width: $smallTablet) {
+	@media (min-width: vars.$smallTablet) {
 		font-size: var(--headline-medium-small);
 		height: 1.75rem;
 		margin-bottom: 1.5rem;
 
-		@media (min-width: $tablet) {
+		@media (min-width: vars.$tablet) {
 			font-size: var(--headline-medium);
 			height: 2rem;
 			margin-bottom: 2rem;
 		}
 
-		@media (min-width: $largeTablet) {
+		@media (min-width: vars.$largeTablet) {
 			font-size: var(--headline-medium-large);
 			height: 2.25rem;
 			margin-bottom: 2rem;
 		}
 
-		@media (min-width: $desktop) {
+		@media (min-width: vars.$desktop) {
 			font-size: var(--headline-large);
 			height: 2.5rem;
 			margin-bottom: 2.5rem;
@@ -297,11 +300,11 @@
 	display: flex;
 	flex-direction: column;
 	height: 100%;
-	max-width: $tablet;
+	max-width: vars.$tablet;
 	min-width: 100%;
 	padding-block: 3rem;
 
-	@media (min-width: $smallTablet) {
+	@media (min-width: vars.$smallTablet) {
 		padding-inline: 2rem;
 	}
 }
@@ -351,11 +354,11 @@
 }
 
 @mixin adminInput {
-	@include formFullWidthInput;
 	background: var(--neutralBG);
 	border-radius: var(--border-radius);
 	border: none;
 	letter-spacing: var(--letter-spacing-general);
+	@include formFullWidthInput;
 }
 
 @mixin form {
@@ -363,7 +366,7 @@
 	flex: 1;
 	flex-direction: column;
 	margin-inline: auto;
-	max-width: $largeTablet;
+	max-width: vars.$largeTablet;
 	overflow-x: hidden;
 	overflow-y: scroll;
 	width: 100%;
@@ -387,8 +390,8 @@
 }
 
 @mixin formTall {
-	@include form;
 	overflow-y: scroll !important;
+	@include form;
 
 	@media (min-height: 750px) {
 		overflow-y: hidden;
@@ -401,17 +404,17 @@
 }
 
 @mixin formHeading {
-	@include headingGeneral;
 	display: inline-block;
 	font-size: var(--font-size-smaller);
 	margin-bottom: 3rem;
 	position: relative;
+	@include headingGeneral;
 
-	@media (min-width: $smallTablet) {
+	@media (min-width: vars.$smallTablet) {
 		font-size: var(--font-size-small);
 	}
 
-	@media (min-width: $tablet) {
+	@media (min-width: vars.$tablet) {
 		font-size: var(--headline-medium);
 	}
 }
@@ -425,21 +428,21 @@
 	font-size: var(--font-size-small);
 	letter-spacing: var(--letter-spacing-general);
 
-	@media (min-width: $smallTablet) {
+	@media (min-width: vars.$smallTablet) {
 		font-size: var(--font-size-small);
 	}
 
-	@media (min-width: $tablet) {
+	@media (min-width: vars.$tablet) {
 		font-size: var(--headline-medium);
 	}
 }
 
 @mixin formContent {
 	box-shadow: var(--box-shadow);
-	max-width: $largeTablet;
+	max-width: vars.$largeTablet;
 	width: 90%;
 
-	@media (min-width: $desktop) {
+	@media (min-width: vars.$desktop) {
 		width: 100%;
 	}
 }
@@ -459,7 +462,7 @@
 	max-width: 100%;
 	text-decoration: underline;
 
-	@media (min-width: $smallTablet) {
+	@media (min-width: vars.$smallTablet) {
 		font-size: var(--button-link-medium);
 	}
 }
@@ -470,8 +473,8 @@
 }
 
 @mixin hoverClickGrowIcon {
-	@include hoverClickGrow;
 	transform: scale(1.15);
+	@include hoverClickGrow;
 }
 
 @mixin hoverClickShrink {
@@ -483,9 +486,9 @@
 	background: var(--neutral-gray-2);
 	display: flex;
 	justify-content: center;
-	min-height: calc(100vh - $navHeight);
+	min-height: calc(100vh - vars.$navHeight);
 	padding-bottom: 2rem;
-	padding-top: calc($navHeight + 2rem);
+	padding-top: calc(vars.$navHeight + 2rem);
 	position: relative;
 	width: 100%;
 }
@@ -494,14 +497,14 @@
 	height: 100%;
 	margin-bottom: 1.5rem;
 	margin-inline: auto;
-	max-width: $tablet;
+	max-width: vars.$tablet;
 	width: 100%;
 
-	@media (min-width: $smallTablet) {
+	@media (min-width: vars.$smallTablet) {
 		margin-bottom: 2rem;
 	}
 
-	@media (min-width: $tablet) {
+	@media (min-width: vars.$tablet) {
 		margin-bottom: 2.5rem;
 		margin-bottom: 3rem;
 	}
@@ -511,10 +514,10 @@
 	display: grid;
 	gap: 1rem;
 	grid-template-columns: 1fr;
-	max-width: $largeTablet;
+	max-width: vars.$largeTablet;
 	width: 100%;
 
-	@media (min-width: $tablet) {
+	@media (min-width: vars.$tablet) {
 		grid-template-columns: 1fr 1fr;
 	}
 }
@@ -535,7 +538,7 @@
 @mixin blogPostVideo {
 	display: flex;
 	flex-direction: column;
-	max-width: $largeTablet;
+	max-width: vars.$largeTablet;
 	width: 100%;
 }
 
@@ -574,9 +577,9 @@
 
 	&:hover,
 	&:focus {
-		@include hoverClickGrow;
 		font-weight: 500;
 		outline: none;
+		@include hoverClickGrow;
 	}
 
 	&:active {
@@ -621,8 +624,8 @@
 
 	&:hover,
 	&:focus {
-		@include hoverClickGrow;
 		outline: none;
+		@include hoverClickGrow;
 	}
 
 	&:active {

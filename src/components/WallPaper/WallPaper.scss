@@ -1,5 +1,5 @@
-@import "../../partials/mixins";
-@import "../../partials/variables";
+@use "../../partials/variables" as vars;
+@use "../../partials/mixins" as mx;
 
 .wallpaper {
 	& {
@@ -8,13 +8,13 @@
 		position: fixed;
 		text-align: center;
 		top: 0;
-		width: min(120vw, $ultraWide);
+		width: min(120vw, vars.$ultraWide);
 		z-index: 1;
 	}
 
 	&__inner {
 		margin-inline: auto;
-		max-width: $ultraWide;
+		max-width: vars.$ultraWide;
 		min-height: 100%;
 		overflow-x: hidden;
 	}
@@ -168,7 +168,7 @@
 			padding: 3.5rem;
 		}
 
-		@media (min-width: $desktop) {
+		@media (min-width: vars.$desktop) {
 			padding: 3.5rem;
 			min-width: 10rem;
 		}

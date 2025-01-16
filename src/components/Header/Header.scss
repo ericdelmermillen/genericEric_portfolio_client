@@ -1,11 +1,11 @@
-@import "../../partials/mixins";
-@import "../../partials/variables";
+@use "../../partials/variables" as vars;
+@use "../../partials/mixins" as mx;
 
 .header {
 	& {
 		color: var(--text-color-bright);
 		height: 100vh;
-		max-width: $ultraWide;
+		max-width: vars.$ultraWide;
 		position: fixed;
 		top: 0;
 		width: 100vw;
@@ -22,24 +22,24 @@
 	}
 
 	&__dayImg {
-		@include heroImg;
 		background: url("../../assets/images/bg-day-top.webp") center top;
 		background-repeat: no-repeat;
 		background-size: cover;
+		@include mx.heroImg;
 
 		&.top {
-			@include heroImgTop;
+			@include mx.heroImgTop;
 		}
 	}
 
 	&__nightImg {
-		@include heroImg;
 		background: url("../../assets/images/bg-night-top.webp") center top;
 		background-repeat: no-repeat;
 		background-size: cover;
+		@include mx.heroImg;
 
 		&.top {
-			@include heroImgTop;
+			@include mx.heroImgTop;
 		}
 	}
 
@@ -77,16 +77,16 @@
 		text-align: center;
 		text-shadow: var(--text-shadow-bright);
 
-		@media (min-width: $smallTablet) {
+		@media (min-width: vars.$smallTablet) {
 			font-size: var(--headline-medium);
 			margin-bottom: 1.75rem;
 		}
 
-		@media (min-width: $tablet) {
+		@media (min-width: vars.$tablet) {
 			margin-bottom: 2rem;
 		}
 
-		@media (min-width: $largeTablet) {
+		@media (min-width: vars.$largeTablet) {
 			font-size: var(--headline-large);
 		}
 	}
@@ -100,19 +100,19 @@
 		text-align: center;
 		text-shadow: var(--text-shadow-bright);
 
-		@media (min-width: $smallTablet) {
+		@media (min-width: vars.$smallTablet) {
 			font-size: var(--headline-xl);
 			height: 3.25rem;
 			margin-bottom: 1.5rem;
 		}
 
-		@media (min-width: $tablet) {
+		@media (min-width: vars.$tablet) {
 			font-size: var(--headline-xxl);
 			height: 4.25rem;
 			margin-bottom: 2.25rem;
 		}
 
-		@media (min-width: $largeTablet) {
+		@media (min-width: vars.$largeTablet) {
 			font-size: var(--headline-xxxl);
 			height: 4.5rem;
 			margin-bottom: 2.5rem;
@@ -127,30 +127,30 @@
 		text-align: center;
 		text-shadow: var(--text-shadow-bright);
 
-		@media (min-width: $smallTablet) {
+		@media (min-width: vars.$smallTablet) {
 			margin-bottom: 1.5rem;
 			font-size: 1.75rem;
 		}
 
-		@media (min-width: $tablet) {
+		@media (min-width: vars.$tablet) {
 			font-size: var(--headline-medium);
 			margin-bottom: 2rem;
 		}
 
-		@media (min-width: $largeTablet) {
+		@media (min-width: vars.$largeTablet) {
 			font-size: 2.25rem;
 			margin-bottom: 2rem;
 		}
 	}
 
 	&__button {
-		@include button;
 		border: 2px solid var(--text-color-bright);
 		box-shadow: var(--box-shadow);
 		color: var(--text-color-bright);
 		margin-inline: auto;
+		@include mx.button;
 
-		@media (min-width: $smallTablet) {
+		@media (min-width: vars.$smallTablet) {
 			margin-bottom: 1.5rem;
 		}
 	}
@@ -161,7 +161,7 @@
 		text-shadow: var(--text-shadow-bright);
 		font-size: var(--button-text-small);
 
-		@media (min-width: $tablet) {
+		@media (min-width: vars.$tablet) {
 			font-size: var(--button-text-medium);
 		}
 	}
@@ -183,7 +183,7 @@
 		position: absolute;
 		z-index: 2;
 
-		@media (min-width: $smallTablet) {
+		@media (min-width: vars.$smallTablet) {
 			font-size: 1.5rem;
 			gap: 1.5rem;
 		}
@@ -192,7 +192,7 @@
 	&__social {
 		&:hover,
 		&:focus {
-			@include hoverClickGrowIcon;
+			@include mx.hoverClickGrowIcon;
 		}
 	}
 
@@ -201,16 +201,16 @@
 		filter: var(--filter-box-shadow);
 		width: 1.85rem;
 
-		@media (min-width: $smallTablet) {
+		@media (min-width: vars.$smallTablet) {
 			width: 2.25rem;
 		}
 
-		@media (min-width: $tablet) {
+		@media (min-width: vars.$tablet) {
 			font-size: 1.5rem;
 			width: 2.5rem;
 		}
 
-		@media (min-width: $largeTablet) {
+		@media (min-width: vars.$largeTablet) {
 			font-size: 1.5rem;
 			width: 2.75rem;
 		}

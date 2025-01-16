@@ -1,5 +1,5 @@
-@import "../../partials/mixins";
-@import "../../partials/variables";
+@use "../../partials/variables" as vars;
+@use "../../partials/mixins" as mx;
 
 .sideNav {
 	& {
@@ -63,13 +63,13 @@
 	}
 
 	&__link {
-		@include navLink;
 		color: var(--text-color);
+		@include mx.navLink;
 
 		&.active {
 			&:after {
-				@include afterAccent;
 				bottom: -2rem;
+				@include mx.afterAccent;
 			}
 		}
 	}

@@ -1,93 +1,92 @@
-@import '../../partials/mixins';
-@import '../../partials/variables';
+@use "../../partials/variables" as vars;
+@use "../../partials/mixins" as mx;
 
 .skill {
+	&__item {
+		align-items: center;
+		border: 3px solid var(--accent-color);
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
+		height: 5.5rem;
+		justify-content: center;
+		margin-inline: auto;
+		padding-bottom: 0.25rem;
+		padding-top: 1rem;
+		width: 5.5rem;
 
-  &__item {
-    align-items: center;
-    border: 3px solid var(--accent-color);
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    height: 5.5rem;
-    justify-content: center;
-    margin-inline: auto;
-    padding-bottom: 0.25rem;
-    padding-top: 1rem;
-    width: 5.5rem;
+		@media (min-width: 350px) {
+			height: 5.75rem;
+			width: 5.75rem;
+		}
 
-    @media(min-width: 350px) {
-      height: 5.75rem;
-      width: 5.75rem;
-    }
+		@media (min-width: 400px) {
+			height: 6rem;
+			width: 6rem;
+		}
 
-    @media(min-width: 400px) {
-      height: 6rem;
-      width: 6rem;
-    }
+		@media (min-width: 425px) {
+			height: 6.5rem;
+			width: 6.5rem;
+		}
 
-    @media(min-width: 425px) {
-      height: 6.5rem;
-      width: 6.5rem;
-    }
-   
-    @media(min-width: 450px) {
-      height: 6.75rem;
-      width: 6.75rem;
-    }
-    
-    @media(min-width: $smallTablet) {
-      height: 6.5rem;
-      width: 6.5rem;
-    }
-    
-    @media(min-width: 600px) {
-      height: 6.75rem;
-      width: 6.75rem;
-    }
-    
-    @media(min-width: 650px) {
-      height: 7.25rem;
-      width: 7.25rem;
-    }
-    
-    @media(min-width: 700px) {
-      height: 7.5rem;
-      width: 7.5rem;
-    }
+		@media (min-width: 450px) {
+			height: 6.75rem;
+			width: 6.75rem;
+		}
 
-    @media(min-width: $tablet) {
-      height: 7.75rem;
-      width: 7.75rem;
-    }
+		@media (min-width: vars.$smallTablet) {
+			height: 6.5rem;
+			width: 6.5rem;
+		}
 
-    @media(min-width: 800px) {
-      height: 8rem;
-      width: 8rem;
-    }
+		@media (min-width: 600px) {
+			height: 6.75rem;
+			width: 6.75rem;
+		}
 
-    @media(min-width: 900px) {
-      height: 8.5rem;
-      width: 8.5rem;
-    }
+		@media (min-width: 650px) {
+			height: 7.25rem;
+			width: 7.25rem;
+		}
 
-    @media(min-width: 950px) {
-      height: 9rem;
-      width: 9rem;
-    }
+		@media (min-width: 700px) {
+			height: 7.5rem;
+			width: 7.5rem;
+		}
 
-    @media(min-width: 1000px) {
-      height: 10rem;
-      width: 10rem;
-    }
+		@media (min-width: vars.$tablet) {
+			height: 7.75rem;
+			width: 7.75rem;
+		}
 
-    @media(min-width: $largeTablet) {
-      height: 5.5rem;
-      width: 5.5rem;
-    }
+		@media (min-width: 800px) {
+			height: 8rem;
+			width: 8rem;
+		}
 
-    &--small {
-      gap: 0;
-    }
-  }
+		@media (min-width: 900px) {
+			height: 8.5rem;
+			width: 8.5rem;
+		}
+
+		@media (min-width: 950px) {
+			height: 9rem;
+			width: 9rem;
+		}
+
+		@media (min-width: 1000px) {
+			height: 10rem;
+			width: 10rem;
+		}
+
+		@media (min-width: vars.$largeTablet) {
+			height: 5.5rem;
+			width: 5.5rem;
+		}
+
+		&--small {
+			gap: 0;
+		}
+	}
 }

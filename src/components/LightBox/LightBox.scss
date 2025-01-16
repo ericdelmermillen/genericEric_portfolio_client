@@ -1,5 +1,5 @@
-@import "../../partials/mixins";
-@import "../../partials/variables";
+@use "../../partials/variables" as vars;
+@use "../../partials/mixins" as mx;
 
 .lightBoxImage {
 	& {
@@ -9,7 +9,7 @@
 		z-index: -1;
 
 		&.transition {
-			@include lightBoxTransition;
+			@include mx.lightBoxTransition;
 		}
 
 		&.current {
@@ -22,7 +22,7 @@
 			z-index: -1;
 
 			&.transition {
-				@include lightBoxTransition;
+				@include mx.lightBoxTransition;
 			}
 		}
 
@@ -31,26 +31,26 @@
 			z-index: -1;
 
 			&.transition {
-				@include lightBoxTransition;
+				@include mx.lightBoxTransition;
 			}
 		}
 	}
 
 	&__img {
-		@include projectImg;
 		width: 100%;
+		@include mx.projectImg;
 	}
 }
 
 .lightBox {
 	& {
-		@include modalInitialStyles;
-		@include smoothClosingTransition;
 		z-index: 3;
+		@include mx.modalInitialStyles;
+		@include mx.smoothClosingTransition;
 
 		&.show {
-			@include modalOpenStyles;
-			@include smoothOpeningTransition;
+			@include mx.modalOpenStyles;
+			@include mx.smoothOpeningTransition;
 		}
 	}
 
@@ -76,7 +76,7 @@
 	&__images {
 		aspect-ratio: 16/9;
 		background: var(--background-color);
-		max-width: $largeTablet;
+		max-width: vars.$largeTablet;
 		overflow: hidden;
 		position: relative;
 		width: 90%;
@@ -106,7 +106,7 @@
 		&--prev {
 			left: 0.25rem;
 
-			@media (min-width: $tablet) {
+			@media (min-width: vars.$tablet) {
 				left: 0.5rem;
 			}
 		}
@@ -114,7 +114,7 @@
 		&--next {
 			right: 0.25rem;
 
-			@media (min-width: $tablet) {
+			@media (min-width: vars.$tablet) {
 				right: 0.5rem;
 			}
 		}
@@ -127,22 +127,22 @@
 		height: 2rem;
 		width: 2rem;
 
-		@media (min-width: $smallTablet) {
+		@media (min-width: vars.$smallTablet) {
 			height: 2.25rem;
 			width: 2.25rem;
 		}
 
-		@media (min-width: $tablet) {
+		@media (min-width: vars.$tablet) {
 			height: 3.5rem;
 			width: 3.5rem;
 		}
 
-		@media (min-width: $largeTablet) {
+		@media (min-width: vars.$largeTablet) {
 			height: 4rem;
 			width: 4rem;
 		}
 
-		@media (min-width: $desktop) {
+		@media (min-width: vars.$desktop) {
 			height: 4.5rem;
 			width: 4.5rem;
 		}
@@ -158,11 +158,11 @@
 		transform: translateX(-50%);
 		z-index: 5;
 
-		@media (min-width: $largeTablet) {
+		@media (min-width: vars.$largeTablet) {
 			gap: 1rem;
 		}
 
-		@media (min-width: $desktop) {
+		@media (min-width: vars.$desktop) {
 			gap: 1.5rem;
 		}
 	}
@@ -174,22 +174,22 @@
 		opacity: 0.75;
 		width: 1.75rem;
 
-		@media (min-width: $smallTablet) {
+		@media (min-width: vars.$smallTablet) {
 			height: 0.25rem;
 			width: 2.5rem;
 		}
 
-		@media (min-width: $tablet) {
+		@media (min-width: vars.$tablet) {
 			height: 0.35rem;
 			width: 3.5rem;
 		}
 
-		@media (min-width: $largeTablet) {
+		@media (min-width: vars.$largeTablet) {
 			height: 0.35rem;
 			width: 4rem;
 		}
 
-		@media (min-width: $desktop) {
+		@media (min-width: vars.$desktop) {
 			height: 0.35rem;
 			width: 4.5rem;
 		}
@@ -207,7 +207,7 @@
 		top: 0.5rem;
 		z-index: 4;
 
-		@media (min-width: $smallTablet) {
+		@media (min-width: vars.$smallTablet) {
 			right: 0.75rem;
 			top: 0.75rem;
 		}
@@ -219,20 +219,20 @@
 		font-weight: 200;
 		text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.25);
 
-		@media (min-width: $smallTablet) {
+		@media (min-width: vars.$smallTablet) {
 			font-size: 1.75rem;
 			right: 0.75rem;
 			top: 0.75rem;
 		}
 
-		@media (min-width: $tablet) {
+		@media (min-width: vars.$tablet) {
 			font-size: 2rem;
 			right: 1rem;
-			text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+			text-shadow: var(--text-box-text-shadow);
 			top: 1rem;
 		}
 
-		@media (min-width: $desktop) {
+		@media (min-width: vars.$desktop) {
 			font-size: 2.25rem;
 			right: 1rem;
 			top: 1rem;

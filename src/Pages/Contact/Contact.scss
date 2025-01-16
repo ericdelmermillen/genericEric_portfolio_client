@@ -1,27 +1,27 @@
-@import "../../partials/mixins";
-@import "../../partials/variables";
+@use "../../partials/variables" as vars;
+@use "../../partials/mixins" as mx;
 
 .contact {
 	& {
-		@include page;
+		@include mx.page;
 	}
 
 	&__inner {
-		@include wallpaperContainer;
+		@include mx.wallpaperContainer;
 	}
 
 	&__content {
-		@include formContent;
+		@include mx.formContent;
 	}
 
 	&__heading {
-		@include formHeading;
 		display: inline-block;
 		margin-bottom: 3rem;
 		position: relative;
+		@include mx.formHeading;
 
 		&::after {
-			@include afterAccent;
+			@include mx.afterAccent;
 		}
 	}
 }

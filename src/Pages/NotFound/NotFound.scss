@@ -1,16 +1,12 @@
-@import "../../partials/mixins";
-@import "../../partials/variables";
+@use "../../partials/variables" as vars;
+@use "../../partials/mixins" as mx;
 
 .notFound {
 	& {
-		@include page;
+		@include mx.page;
 	}
 
 	&__inner {
-		@include wallpaperContainer;
+		@include mx.wallpaperContainer;
 	}
-
-	// &__heading {
-	//   color: purple;
-	// }
 }

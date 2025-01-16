@@ -1,5 +1,5 @@
-@import "../../partials//mixins";
-@import "../../partials/variables";
+@use "../../partials/variables" as vars;
+@use "../../partials//mixins" as mx;
 
 .project {
 	& {
@@ -34,7 +34,7 @@
 			min-height: 720px;
 		}
 
-		@media (min-width: $smallTablet) {
+		@media (min-width: vars.$smallTablet) {
 			max-height: 775px;
 			min-height: 775px;
 		}
@@ -144,7 +144,7 @@
 			min-height: 1065px;
 		}
 
-		@media (min-width: $largeTablet) {
+		@media (min-width: vars.$largeTablet) {
 			max-height: 960px;
 			min-height: 960px;
 		}
@@ -167,8 +167,8 @@
 		z-index: 2;
 
 		&.fade {
-			@include smoothClosingTransition;
 			opacity: 0;
+			@include mx.smoothClosingTransition;
 		}
 
 		&.hide {
@@ -192,11 +192,11 @@
 	}
 
 	&__image {
-		@include projectImg;
 		border-radius: var(--border-radius);
 		cursor: pointer;
 		margin-bottom: 1.5rem;
 		max-width: 100%;
+		@include mx.projectImg;
 
 		&.isReady {
 			border-radius: 0;
@@ -212,10 +212,10 @@
 		max-width: 80vw;
 
 		&.ellipsis {
-			@include ellipsisOneLine;
+			@include mx.ellipsisOneLine;
 		}
 
-		@media (min-width: $smallTablet) {
+		@media (min-width: vars.$smallTablet) {
 			font-size: var(--font-size-small);
 		}
 	}
@@ -228,12 +228,12 @@
 		margin-top: 1.5rem;
 
 		&.ellipsis {
-			@include ellipsisMultiLine;
 			-webkit-line-clamp: 3;
 			line-clamp: 3;
+			@include mx.ellipsisMultiLine;
 		}
 
-		@media (min-width: $smallTablet) {
+		@media (min-width: vars.$smallTablet) {
 			font-size: var(--font-size-small);
 		}
 	}
@@ -243,7 +243,7 @@
 		font-weight: 400;
 		margin-top: 1rem;
 
-		@media (min-width: $smallTablet) {
+		@media (min-width: vars.$smallTablet) {
 			font-size: var(--font-size-small);
 		}
 	}
@@ -267,8 +267,8 @@
 	}
 
 	&__url-link {
-		@include ellipsisOneLine;
 		max-width: 90vw;
+		@include mx.ellipsisOneLine;
 
 		&:hover {
 			color: var(--accent-color);
@@ -276,11 +276,11 @@
 	}
 
 	&__show-full-info {
-		@include linkButton;
 		font-size: var(--font-size-xs);
 		margin-top: 1rem;
+		@include mx.linkButton;
 
-		@media (min-width: $smallTablet) {
+		@media (min-width: vars.$smallTablet) {
 			font-size: var(--font-size-small);
 		}
 	}
