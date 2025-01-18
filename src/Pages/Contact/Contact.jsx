@@ -9,6 +9,11 @@ const Contact = ({ children }) => {
   useEffect(() => {
     scrollToTop();
   }, []);
+
+  // update title of page
+  useEffect(() => {
+    document.title = "Get in Touch with Eric";
+  }, []);
   
   return (
     <>

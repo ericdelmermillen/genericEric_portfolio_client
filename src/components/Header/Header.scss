@@ -144,10 +144,10 @@
 	}
 
 	&__button {
-		border: 2px solid var(--text-color-bright);
+		border: 2px solid var(--text-color-bright) !important;
 		box-shadow: var(--box-shadow);
-		color: var(--text-color-bright);
 		margin-inline: auto;
+		color: var(--text-color-bright);
 		@include mx.button;
 
 		@media (min-width: vars.$smallTablet) {
@@ -159,7 +159,7 @@
 		letter-spacing: var(--letter-spacing-medium);
 		letter-spacing: var(--letter-spacing-large);
 		text-shadow: var(--text-shadow-bright);
-		font-size: var(--button-text-small);
+		color: var(--text-color-bright);
 
 		@media (min-width: vars.$tablet) {
 			font-size: var(--button-text-medium);

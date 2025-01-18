@@ -50,7 +50,10 @@
 
 	&__submit {
 		display: flex;
+		margin-inline: auto;
 		margin-top: auto;
+		max-width: 95%;
+		width: 95%;
 	}
 
 	&__button {

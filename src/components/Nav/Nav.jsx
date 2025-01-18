@@ -1,6 +1,10 @@
 import { useAppContext } from "../../contexts/AppContext.jsx";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { scrollToTop } from "../../../utils/utils.js";
+// import Logo from "../../assets/svgs/LogoOne.jsx";
+// import LogoTwo from "../../assets/svgs/LogoTwo.jsx";
+// import LogoThree from "../../assets/svgs/LogoThree.jsx";
+import LogoFour from "../../assets/svgs/LogoFour.jsx";
 import ColorModeToggle from "../ColorModeToggle/ColorModeToggle";
 import "./Nav.scss";
 
@@ -32,16 +36,16 @@ const Nav = ({ children }) => {
     <nav id="nav" className={`nav ${prevScrollYPos < scrollYPos && scrollYPos > 50 ? "hide" : ""}`}>
       <div className="nav__content">
 
-        <div 
-          className="nav__logo"
-          onClick={isOnHome 
-            ? handleScrollToTop
-            : null}
-        >
-          <Link to={"/"}>
-            Logo
-          </Link>
-        </div>
+        <Link to={"/"}>
+          <div 
+            className="nav__logo-box"
+            onClick={isOnHome 
+              ? handleScrollToTop
+              : null}
+          >
+            <LogoFour className={"nav__logo"}/>
+          </div>
+        </Link>
       
         <ul className="nav__links">
           <li 

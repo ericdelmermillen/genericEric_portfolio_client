@@ -1,8 +1,14 @@
+import { useEffect } from "react";
 import BlogFeed from "../../components/BlogFeed/BlogFeed.jsx";
 import TypingText from "../../components/TypingText/TypingText.jsx";
 import "./Blog.scss";
 
 const Blog = ({ children }) => {
+
+  // update title of page
+  useEffect(() => {
+    document.title = "Eric Millen's Dev Blog";
+  }, []);
 
   return (
     <>

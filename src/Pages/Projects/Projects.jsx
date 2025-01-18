@@ -1,8 +1,14 @@
+import { useEffect } from "react";
 import TypingText from "../../components/TypingText/TypingText.jsx";
 import ProjectsFeed from "../../components/ProjectsFeed/ProjectsFeed.jsx";
 import "./Projects.scss";
 
 const Projects = ({ children }) => {
+
+  // update title of page
+    useEffect(() => {
+      document.title = "Eric Millen's Software Portfolio";
+    }, []);
   
   return (
     <>

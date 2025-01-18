@@ -16,6 +16,12 @@ const Home = () => {
     scrollToTop();
   }, []);
 
+  // update title of page
+  useEffect(() => {
+    document.title = "Eric Millen | Portfolio Website";
+  }, []);
+  
+  
   return (
     <>
       <div className="home">

@@ -1,7 +1,13 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import { useAppContext } from "../../contexts/AppContext";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
-import { scrollToTop, isValidURL, checkTokenIsValid, getFormattedDate, setTokens } from "../../../utils/utils.js";
+import { 
+  scrollToTop, 
+  isValidURL, 
+  checkTokenIsValid, 
+  getFormattedDate, 
+  setTokens 
+} from "../../../utils/utils.js";
 import Compressor from "compressorjs";
 import ProjectDatePicker from "../../components/ProjectDatePicker/ProjectDatePicker";
 import toast from "react-hot-toast";
@@ -300,7 +306,6 @@ const AddEditProject = ({ children }) => {
   };
 
   
-  // ***
   const handleSubmit = async (e) => {
     e.preventDefault();
     setInitialFormCheck(true);
@@ -502,6 +507,18 @@ const AddEditProject = ({ children }) => {
     };
 
     scrollToTop();
+  }, []);
+
+
+  // update title of page
+  useEffect(() => {
+    if(isAddProject) {
+      document.title = "Generic Eric's New Project Page";
+    };
+    
+    if(isEditProject) {
+      document.title = "Generic Eric's Edit Project Page";
+    };
   }, []);
 
   return (

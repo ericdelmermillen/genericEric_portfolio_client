@@ -35,7 +35,6 @@
 	}
 
 	&__form {
-		overflow-y: hidden !important;
 		@include mx.formTall;
 
 		@media (min-height: 750px) {
@@ -78,7 +77,10 @@
 
 	&__submit {
 		display: flex;
+		margin-inline: auto;
 		margin-top: 1rem;
+		max-width: 95%;
+		width: 95%;
 
 		@media (min-height: 800px) {
 			margin-top: auto;

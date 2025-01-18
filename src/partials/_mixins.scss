@@ -203,7 +203,6 @@
 }
 
 @mixin navLink {
-	color: var(--text-color-bright);
 	font-family: var(--heading-font);
 	font-weight: 500;
 	letter-spacing: 4px;
@@ -390,7 +389,6 @@
 }
 
 @mixin formTall {
-	overflow-y: scroll !important;
 	@include form;
 
 	@media (min-height: 750px) {

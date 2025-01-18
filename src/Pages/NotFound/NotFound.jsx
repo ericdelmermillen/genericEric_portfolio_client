@@ -9,6 +9,11 @@ const NotFound = ({ children }) => {
   useEffect(() => {
     scrollToTop();
   }, []);
+
+  // update title of page
+  useEffect(() => {
+      document.title = "Eric Millen's Not Found Page";
+  }, []);
   
   return (
     <>
