@@ -49,6 +49,10 @@
 		}
 	}
 
+	&__fileLabel {
+		display: none;
+	}
+
 	&__image {
 		cursor: grab;
 		height: 15rem;

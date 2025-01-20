@@ -16,6 +16,11 @@
 	&__inner {
 		margin-inline: auto;
 		max-width: vars.$largeTablet;
+		padding-inline: 1rem;
+
+		@media (min-width: vars.$smallTablet) {
+			padding-inline: 0;
+		}
 	}
 
 	&__content {

@@ -455,7 +455,11 @@ const AddEditProject = ({ children }) => {
         },
       );
 
+      
       if(!response.ok) {
+        const { errors } = await response.json();
+        errors.forEach(error => toast.error(error));
+
         throw new Error(`Failed to send message: status ${response.status}`);
       };
 
@@ -474,7 +478,7 @@ const AddEditProject = ({ children }) => {
         toast.error("Unauthorized. Logging you out...");
         navigate("/");
       } else {
-        toast.error("Error posting project");
+        // toast.error("Error posting project");
         console.log(error.message);
       };
       

@@ -33,36 +33,6 @@ const Profile = () => {
 
             {profileItems.map((item, idx) => (
 
-              // <li key={idx} className="profile__item">
-
-              //   <div className="profile__item-header">
-              //     <item.itemIcon className="profile__item-icon"/>
-              //     <label className="profile__item-label">
-              //       {item.itemLabel}</label>
-              //   </div>
-
-              //   {item.itemHref && item.itemHref.includes("@")
-
-              //     ? <p>Includes and @</p> 
-
-              //     : item.itemHref
-                  
-              //     ?  (
-              //         <a href={item.itemHref} className="profile__email-link">
-              //           <p className="profile__item-value">{item.itemValue}</p>
-              //         </a>
-              //       )
-                  
-              //     : item.itemValue.includes("@") 
-
-              //     ? <p>Has an at</p>
-                  
-              //     : <p className="profile__item-value">{item.itemValue}</p>
-                
-              //   }
-              // </li>
-
-
               <li key={idx} className="profile__item">
                 <div className="profile__item-header">
                   <item.itemIcon className="profile__item-icon" />

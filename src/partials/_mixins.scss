@@ -35,7 +35,7 @@
 	--headline-xxxl: 4.25rem;
 	--button-text-small: 1.25rem;
 	--button-text-medium: 1.5rem;
-	--button-link-small: 0.75rem;
+	--button-link-small: 1rem;
 	--button-link-medium: 1rem;
 	--heading-text-small: 1.5rem;
 	--sub-heading-text-small: 1.9rem;
@@ -451,8 +451,8 @@
 	color: var(--link-button-color);
 	cursor: pointer;
 	font-family: inherit;
-	font-size: var(--button-link-small);
 	font-size: 5rem;
+	font-size: var(--button-link-small);
 	letter-spacing: var(--letter-spacing-general);
 	line-height: var(--line-height-general);
 	outline: none;

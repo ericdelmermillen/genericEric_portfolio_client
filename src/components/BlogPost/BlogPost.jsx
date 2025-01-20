@@ -3,8 +3,6 @@ import { useAppContext } from "../../contexts/AppContext";
 import BlogPostPlaceholder from "../BlogPostPlaceholder/blogPostPlaceholder";
 import "./BlogPost.scss";
 
-// ***crazy issue with resizing on calling for next page on narrow screen: current fix is maxWidth on &__video at 75vw
-
 const BlogPost = ({ 
   isInitialPlaceholder,
   title, 
@@ -103,10 +101,7 @@ const BlogPost = ({
             className="blogPost__iframe"
             src={embedUrl}
             title={title}
-            // allow="clipboard-write; encrypted-media; picture-in-picture"
-            allow="clipboard-write; encrypted-media; picture-in-picture; allow-popups; fullscreen"
-
-            allowFullScreen
+            allowFullScreen={true}
             onLoad={handleOnLoad}
           ></iframe>
 

@@ -39,7 +39,6 @@ const Header = () => {
 
           <div className="header__overlay"></div>
           
-          {/* {scrollYPos > (windowHeight * 0.9) */}
           {scrollYPos > (windowHeight * 3)
             ? <div className="header__bg-layer"></div>
             : null

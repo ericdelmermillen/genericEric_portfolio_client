@@ -27,7 +27,6 @@
 		max-width: vars.$ultraWide;
 		padding-inline: 2rem;
 		width: 100%;
-		// border: 2px dashed #fff;
 	}
 
 	&__logo-box {
@@ -35,7 +34,6 @@
 		align-items: center;
 		justify-content: center;
 		height: vars.$navHeight;
-		// border: 1px solid red;
 		width: 4rem;
 
 		@media (min-width: vars.$tablet) {
@@ -45,20 +43,20 @@
 	&__logo {
 		fill: var(--text-color-bright);
 		// fill: red;
-		height: 1.5rem;
-		height: 1.25rem;
+		// height: 1.5rem;
+		// height: 1.25rem;
 		height: 1.2rem;
 		height: 1.125rem;
 		height: 1.1rem;
-		height: 1.05rem;
-		height: 1rem;
+		// height: 1.05rem;
+		// height: 1rem;
 		margin-top: 4px;
 		// height: 0.9rem;
 		// height: 0.95rem;
 		// border: 1px solid red;
 
 		@media (min-width: vars.$largeTablet) {
-			height: 1rem;
+			// height: 1rem;
 			// height: 2rem;
 			// height: 1.25rem;
 		}

@@ -7,7 +7,6 @@ import "./Project.scss";
 
 const AWS_SS3_BUCKET_URL = import.meta.env.VITE_AWS_S3_BUCKET_URL;
 
-
 const Project = ({ 
   idx,
   maxIdx,

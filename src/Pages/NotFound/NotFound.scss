@@ -9,4 +9,17 @@
 	&__inner {
 		@include mx.wallpaperContainer;
 	}
+
+	&__text {
+		text-align: center;
+		display: flex;
+		flex-direction: column;
+		font-size: var(--heading-small);
+		gap: 2rem;
+		justify-content: center;
+	}
+
+	&__sub-heading {
+		font-size: var(--font-size-small);
+	}
 }

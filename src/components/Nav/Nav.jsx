@@ -4,7 +4,13 @@ import { scrollToTop } from "../../../utils/utils.js";
 // import Logo from "../../assets/svgs/LogoOne.jsx";
 // import LogoTwo from "../../assets/svgs/LogoTwo.jsx";
 // import LogoThree from "../../assets/svgs/LogoThree.jsx";
-import LogoFour from "../../assets/svgs/LogoFour.jsx";
+// import LogoFour from "../../assets/svgs/LogoFour.jsx";
+// import LogoFive from "../../assets/svgs/LogoFive.jsx";
+// import LogoSix from "../../assets/svgs/LogoSix.jsx";
+// import LogoSeven from "../../assets/svgs/LogoSeven.jsx";
+import LogoEight from "../../assets/svgs/LogoEight.jsx";
+import LogoNine from "../../assets/svgs/LogoNine.jsx";
+import LogoTen from "../../assets/svgs/LogoTen.jsx";
 import ColorModeToggle from "../ColorModeToggle/ColorModeToggle";
 import "./Nav.scss";
 
@@ -43,7 +49,12 @@ const Nav = ({ children }) => {
               ? handleScrollToTop
               : null}
           >
-            <LogoFour className={"nav__logo"}/>
+            {/* <LogoFive className={"nav__logo"}/> */}
+            {/* <LogoSix className={"nav__logo"}/> */}
+            {/* <LogoSeven className={"nav__logo"}/> */}
+            {/* <LogoEight className={"nav__logo"}/> */}
+            {/* <LogoNine className={"nav__logo"}/> */}
+            <LogoTen className={"nav__logo"}/>
           </div>
         </Link>
       

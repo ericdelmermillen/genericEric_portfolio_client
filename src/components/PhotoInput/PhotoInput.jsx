@@ -105,13 +105,19 @@ const PhotoInput = ({
           </div>
         </div>
 
+        <label 
+          htmlFor={`fileInput_${photo.photoNo}`} 
+          className="photoInput__fileLabel"
+        >
+          Choose a photo
+        </label>
         <input
           ref={fileInputRef}
           type="file"
           id={`fileInput_${photo.photoNo}`}
           accept="image/jpeg, image/png"
           className="photoInput__fileInput"
-          onChange={(e) => handleFileChange(e)}
+          onChange={handleFileChange}
         />
       </div>
     </>

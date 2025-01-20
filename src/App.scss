@@ -85,7 +85,7 @@ img {
 	}
 
 	&__logout--sideNav {
-		margin-inline: auto;
+		margin-inline: auto !important;
 		@include mx.adminButton;
 	}
 }
