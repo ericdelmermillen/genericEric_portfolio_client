@@ -415,10 +415,12 @@ const AddEditProject = ({ children }) => {
         } catch(error) {
           if(error.message.includes("401")) {
             toast.error("Unauthorized. Logging you out...");
-            navigate("/");
+            console.log(error.message);
+            return navigate("/");
           };
           
           console.log(error.message);
+          toast.error("Error uploading picture(s)");
           return;
         };
 
@@ -454,7 +456,6 @@ const AddEditProject = ({ children }) => {
         body: JSON.stringify(project)
         },
       );
-
       
       if(!response.ok) {
         const { errors } = await response.json();

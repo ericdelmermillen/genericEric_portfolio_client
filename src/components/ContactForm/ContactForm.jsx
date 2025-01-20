@@ -114,6 +114,8 @@ const ContactForm = ({ children }) => {
       });
 
       if(!response.ok) {
+        const { errors } = await response.json();
+        errors.forEach(error => toast.error(error))
         throw new Error("Failed to send message");
       };
 

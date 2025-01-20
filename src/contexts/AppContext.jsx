@@ -94,45 +94,87 @@ const AppContextProvider = ({ children }) => {
       console.error("Error checking token expiration", error);
     };
   };
-  
+
   const loginUser = async (email, password) => {
     setIsLoading(true);
-
+  
     try {
       const response = await fetch(`${BASE_URL}/auth/loginuser`, {
         method: "POST",
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({ email, password }),
       });
-
-      if(!response.ok) {
-
-        if(response.status === 401) {
-          return toast.error("Incorrect email or password");
-        } else {
-          throw new Error("Error logging you in");
-        }
+  
+      let responseData;
+  
+      try {
+        responseData = await response.json();
+      } catch(jsonError) {
+        throw new Error("Failed to parse server response. Please try again later.");
       };
-
-      const { message, token, refreshToken } = await response.json();
-
+  
+      const { message, token, refreshToken } = responseData;
+  
+      if(!response.ok) {
+        throw new Error(message || "Failed to log in. Please check your credentials.");
+      };
+  
       setTokens(token, refreshToken);
   
-      toast.success(message);
-      
+      toast.success(message || "Login successful!");
       dispatch({ type: "user/login" });
-
-      return navigate("/");
-          
-      } catch(error) {
-        console.log(error);
-        return toast.error(error.message);
-      } finally {
+  
+      navigate("/");
+  
+    } catch (error) {
+      console.error("Login error:", error);
+      toast.error(error.message || "An unexpected error occurred. Please try again.");
+    } finally {
       setIsLoading(false);
-    }
+    };
   };
+  
+  // const logoutUser = async () => {
+  //   setIsLoading(true);
+  
+  //   const token = localStorage.getItem("token");
+  //   const refreshToken = localStorage.getItem("refreshToken");
+  
+  //   try {
+  //     const response = await fetch(`${BASE_URL}/auth/logoutuser`, {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //         "Authorization": `Bearer ${token}`,
+  //         "x-refresh-token": refreshToken, 
+  //       }
+  //     });
+  
+  //     if(!response.ok) {
+  //       throw new Error("Error logging you out");
+  //     } else {
+  //       const { message } = await response.json();
+  //       toast.success(message);
+  //     };
+  
+  //   } catch (error) {
+  //     console.log(error.message);
+  //   } finally {
+  //     removeTokens();
+  //     dispatch({ type: "user/logout" });
+  //     setIsProjectOrderEditable(false);
+  //     setIsEditMode(false);
+  //     navigate("/");
+  //     setRerenderTrigger(c => c + 1);
+  //     scrollToTop();
+  //     setTimeout(() => {
+  //       setIsLoading(false);
+  //     }, MIN_LOADING_INTERVAL);
+  //   };
+  // };
+
 
   const logoutUser = async () => {
     setIsLoading(true);
@@ -151,14 +193,16 @@ const AppContextProvider = ({ children }) => {
       });
   
       if(!response.ok) {
+        const { errors } = await response.json();
+        errors.forEach(error => console.log(error))
         throw new Error("Error logging you out");
-      } else {
-        const { message } = await response.json();
-        toast.success(message);
-      }
+      };
+
+      const { message } = await response.json();
+      toast.success(message);
   
-    } catch (error) {
-      console.log(error.message);
+    } catch(error) {
+      toast.error(error.message)
     } finally {
       removeTokens();
       dispatch({ type: "user/logout" });

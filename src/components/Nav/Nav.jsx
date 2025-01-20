@@ -8,9 +8,10 @@ import { scrollToTop } from "../../../utils/utils.js";
 // import LogoFive from "../../assets/svgs/LogoFive.jsx";
 // import LogoSix from "../../assets/svgs/LogoSix.jsx";
 // import LogoSeven from "../../assets/svgs/LogoSeven.jsx";
-import LogoEight from "../../assets/svgs/LogoEight.jsx";
-import LogoNine from "../../assets/svgs/LogoNine.jsx";
-import LogoTen from "../../assets/svgs/LogoTen.jsx";
+// import LogoEight from "../../assets/svgs/LogoEight.jsx";
+// import LogoNine from "../../assets/svgs/LogoNine.jsx";
+// import LogoTen from "../../assets/svgs/LogoTen.jsx";
+import LogoEleven from "../../assets/svgs/LogoEleven.jsx";
 import ColorModeToggle from "../ColorModeToggle/ColorModeToggle";
 import "./Nav.scss";
 
@@ -54,7 +55,8 @@ const Nav = ({ children }) => {
             {/* <LogoSeven className={"nav__logo"}/> */}
             {/* <LogoEight className={"nav__logo"}/> */}
             {/* <LogoNine className={"nav__logo"}/> */}
-            <LogoTen className={"nav__logo"}/>
+            {/* <LogoTen className={"nav__logo"}/> */}
+            <LogoEleven className={"nav__logo"}/>
           </div>
         </Link>
       

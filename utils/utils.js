@@ -59,60 +59,60 @@ const removeTokens = () => {
   return true; 
 };
 
-
 // returns true or false
 const checkTokenIsValid = async (navigate) => {
   const token = localStorage.getItem('token');
 
-  if(token) {
-    try {
-      const decodedToken = jwtDecode(token);
-      const currentTime = Math.floor(Date.now() / 1000);
+  if(!token) {
+    removeTokens();
+    return false;
+  };
 
-      if(decodedToken.exp > currentTime) {
-        return true;
-      } else if(decodedToken.exp < currentTime) {
-        const refreshToken = localStorage.getItem('refreshToken');
-        
-        if(refreshToken) {
+  try {
+    const decodedToken = jwtDecode(token);
+    const currentTime = Math.floor(Date.now() / 1000);
 
-          const refreshResponse = await fetch(`${BASE_URL}/auth/refreshtoken`, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              'x-refresh-token': refreshToken
-            }
-          });
+    if(decodedToken.exp > currentTime) {
+      // Token is valid
+      return true;
+    };
 
-          console.log("Token expired: attempting refresh");
+    // Token expired
+    console.log("Token expired: attempting refresh");
 
-          if(refreshResponse.ok) {
-            const { newToken, newRefreshToken } = await refreshResponse.json();
-            setTokens(newToken, newRefreshToken);
-            return true;
-          } else {
-            toast.error("Token expired. Logging you out...");
-            removeTokens();
-            navigate("/");
-            return false;
-          };
-        } else {
-          removeTokens();
-          toast.error('Unable to verify token. Logging you out...');
-          navigate("/");
-          return false;
-        };
-      };
-    } catch(error) {
-      console.log('Error decoding token:', error);
+    const refreshToken = localStorage.getItem('refreshToken');
+    if(!refreshToken) {
+      toast.error("Refresh token missing. Logging you out...");
       removeTokens();
-      navigate('/');
-      toast.error(error.message);
+      navigate("/");
       return false;
     };
-  } else {
+
+    const refreshResponse = await fetch(`${BASE_URL}/auth/refreshtoken`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-refresh-token': refreshToken,
+      },
+    });
+
+    if(!refreshResponse.ok) {
+      toast.error("Token refresh failed. Logging you out...");
+      removeTokens();
+      navigate("/");
+      return false;
+    };
+
+    const { newToken, newRefreshToken } = await refreshResponse.json();
+    setTokens(newToken, newRefreshToken);
+    return true;
+
+  } catch (error) {
+    console.error('Error during token validation:', error);
+    toast.error('An error occurred. Logging you out...');
     removeTokens();
-    return false; 
+    navigate("/");
+    return false;
   };
 };
 
