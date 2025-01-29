@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react";
 import { useAppContext } from "../../contexts/AppContext.jsx";
 import DownIcon from "../../assets/svgs/DownIcon.jsx";
 import Facebook from "../../assets/svgs/Facebook.jsx";
@@ -21,16 +20,10 @@ const headerSocials = [
 
 const Header = () => {
   const { colorMode, scrollYPos, hideNav } = useAppContext();
-  const [ windowHeight, setwindowHeight ] = useState(Infinity);
 
   const handleHideNav = () => {
     hideNav();
   };
-
-  // useEffect to set the window height
-  useEffect(() => {
-    setwindowHeight(window.innerHeight);
-  }, [windowHeight]);
 
   return (
     <>
@@ -38,12 +31,7 @@ const Header = () => {
         <div className="header__hero">
 
           <div className="header__overlay"></div>
-          
-          {scrollYPos > (windowHeight * 3)
-            ? <div className="header__bg-layer"></div>
-            : null
-          }
-          
+
           <div 
             className={`header__dayImg ${colorMode === 'light' ? "top" : ""}`}
             aria-label="Daytime background showing the sun in the sky above the ocean."
@@ -80,24 +68,17 @@ const Header = () => {
 
           </div>
 
-          {scrollYPos < (windowHeight * 0.9)
+          <ul className="header__socials">
+            {headerSocials.map((social, idx) => (
 
-            ? <ul className="header__socials">
+                <li key={idx} className="header__social">
+                  <a href={social.socialLink} target="_blank">
+                    <social.socialIcon className="header__social-icon" />
+                  </a>
+                </li>
+            ))}
 
-                {headerSocials.map((social, idx) => (
-
-                    <li key={idx} className="header__social">
-                      <a href={social.socialLink} target="_blank">
-                        <social.socialIcon className="header__social-icon" />
-                      </a>
-                    </li>
-                ))}
-
-              </ul>
-
-            : null
-          }
-
+          </ul>
         </div>
       </header>
     </>
