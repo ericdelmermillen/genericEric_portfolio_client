@@ -14,6 +14,7 @@ import toast from "react-hot-toast";
 import PhotoInput from "../../components/PhotoInput/PhotoInput";
 import "./AddEditProject.scss"
 
+const MIN_LOADING_INTERVAL = import.meta.env.VITE_MIN_LOADING_INTERVAL;
 const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 const AWS_SIGNED_URL_ROUTE = import.meta.env.VITE_AWS_SIGNED_URL_ROUTE;
 const AWS_DIRNAME = import.meta.env.VITE_AWS_DIRNAME;
@@ -25,7 +26,6 @@ const AddEditProject = ({ children }) => {
 
   const { 
     setIsLoading,
-    MIN_LOADING_INTERVAL ,
     logoutUser
   } = useAppContext();
   

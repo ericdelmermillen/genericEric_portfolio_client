@@ -5,13 +5,13 @@ import { isValidEmail, scrollToTop } from "../../../utils/utils.js";
 import toast from "react-hot-toast";
 import "./ContactForm.scss";
 
+const MIN_LOADING_INTERVAL = import.meta.env.VITE_MIN_LOADING_INTERVAL;
 const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 const ContactForm = ({ children }) => {
   const { 
     isLoading, 
     setIsLoading, 
-    MIN_LOADING_INTERVAL,
     contactSectionRef,
     contactNameRef
   } = useAppContext();

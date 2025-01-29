@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import Facebook from "../../assets/svgs/Facebook.jsx";
 import Github from "../../assets/svgs/Github.jsx";
 import Instagram from "../../assets/svgs/Instagram.jsx";
-import LinkedIn from "../../assets/svgs/LInkedIn.jsx";
+import LinkedIn from "../../assets/svgs/LinkedIn.jsx";
 import Twitter from "../../assets/svgs/Twitter.jsx";
 import Youtube from "../../assets/svgs/Youtube.jsx";
 import "./Footer.scss";

@@ -14,9 +14,10 @@ import './Portfolio.scss';
 const PROJECT_COUNT = 4;
 // const PROJECT_COUNT = 2;
 
+const MIN_LOADING_INTERVAL = import.meta.env.VITE_MIN_LOADING_INTERVAL;
 const BASE_URL = import.meta.env.VITE_API_BASE_URL;
-const initialImages = Array.from({length: PROJECT_COUNT}, () => ({isInitialPlaceholder: true}));
 
+const initialImages = Array.from({length: PROJECT_COUNT}, () => ({isInitialPlaceholder: true}));
 
 const Portfolio = () => {  
   const portfolioLink = document.getElementById("portfolio-link")
@@ -29,7 +30,6 @@ const Portfolio = () => {
     setIsProjectOrderEditable,
     isEditMode, 
     setIsEditMode,
-    MIN_LOADING_INTERVAL,
     rerenderTrigger,
     hideNav,
   } = useAppContext();

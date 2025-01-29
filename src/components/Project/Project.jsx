@@ -4,7 +4,7 @@ import { getMonthYear } from "../../../utils/utils";
 import ProjectPlaceholder from "../ProjectPlaceholder/ProjectPlaceholder";
 import "./Project.scss";
 
-
+const MIN_LOADING_INTERVAL = import.meta.env.VITE_MIN_LOADING_INTERVAL;
 const AWS_SS3_BUCKET_URL = import.meta.env.VITE_AWS_S3_BUCKET_URL;
 
 const Project = ({ 
@@ -25,10 +25,7 @@ const Project = ({
   handleCardClick
  }) => {
    
-  const { 
-    setIsLoading, 
-    MIN_LOADING_INTERVAL 
-  } = useAppContext();
+  const { setIsLoading} = useAppContext();
   
   const startIdx = (page - 1) * PROJECTS_PER_PAGE;
   const endIdx = Math.min(startIdx + PROJECTS_PER_PAGE - 1, maxIdx);

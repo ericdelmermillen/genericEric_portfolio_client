@@ -5,13 +5,14 @@ import LogoFour from "../../assets/svgs/LogoFour.jsx";
 import ColorModeToggle from "../ColorModeToggle/ColorModeToggle";
 import "./Nav.scss";
 
+const MIN_LOADING_INTERVAL = import.meta.env.VITE_MIN_LOADING_INTERVAL;
+
 const Nav = ({ children }) => {
   const { 
     setIsLoading,
     scrollYPos,
     prevScrollYPos,
     toggleSideNav,
-    MIN_LOADING_INTERVAL,
     handleBlogClick,
     handleContactClick,
     handleProjectsClick

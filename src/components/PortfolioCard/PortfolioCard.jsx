@@ -1,9 +1,9 @@
-import { useAppContext } from "../../contexts/AppContext";
 import { MdModeEdit, MdDelete } from "react-icons/md";
 import { checkIfIsFirefox } from "../../../utils/utils";
 import PortfolioCardPlaceholder from "../PortfolioCardPlaceholder/PortfolioCardPlaceholder";
 import "./PortfolioCard.scss";
 
+const MIN_LOADING_INTERVAL = import.meta.env.VITE_MIN_LOADING_INTERVAL;
 const AWS_SS3_BUCKET_URL = import.meta.env.VITE_AWS_S3_BUCKET_URL;
 
 const isFirefox = checkIfIsFirefox();
@@ -29,8 +29,6 @@ const PortfolioCard = ({
   handleDragStart,
   handleDropTarget
 }) => {
-  
-  const { MIN_LOADING_INTERVAL } = useAppContext();
 
   const handleOnLoad = () => {
     setTimeout(() => {

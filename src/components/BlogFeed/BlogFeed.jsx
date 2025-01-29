@@ -6,7 +6,7 @@ import BlogPost from '../BlogPost/BlogPost.jsx';
 import toast from 'react-hot-toast';
 import "./BlogFeed.scss";
 
-
+const MIN_LOADING_INTERVAL = import.meta.env.VITE_MIN_LOADING_INTERVAL;
 const YOUTUBE_API_KEY = import.meta.env.VITE_YOUTUBE_API_KEY;
 const YOUTUBE_BASE_URL = import.meta.env.VITE_YOUTUBE_BASE_URL;
 
@@ -42,11 +42,7 @@ const BlogFeed = () => {
   const [ page, setPage ] = useState(1);
   const [ blogPostLoadedCount, setBlogPostLoadedCount ] = useState(0);
 
-  const { 
-    isLoading,
-    setIsLoading,
-    MIN_LOADING_INTERVAL
-   } = useAppContext();
+  const { isLoading, setIsLoading} = useAppContext();
 
    
    const handleFetchBlogPosts = async () => {

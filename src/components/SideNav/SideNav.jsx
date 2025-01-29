@@ -2,14 +2,15 @@ import { useAppContext } from "../../contexts/AppContext.jsx";
 import { NavLink, useLocation } from 'react-router-dom';
 import './SideNav.scss';
 
+const MIN_LOADING_INTERVAL = import.meta.env.VITE_MIN_LOADING_INTERVAL;
+
 const SideNav = ({ children }) => {
   const { 
     showSideNav,
     toggleSideNav,
     handleBlogClick,
     handleContactClick,
-    handleProjectsClick,
-    MIN_LOADING_INTERVAL
+    handleProjectsClick
    } = useAppContext();
 
   const location = useLocation();

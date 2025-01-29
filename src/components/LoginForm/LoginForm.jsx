@@ -58,8 +58,6 @@ const LoginForm = ({ children }) => {
     e.preventDefault();
     setInitialFormCheck(true);
 
-    let errors = 0;
-
     if(!handleEmailChange()) {
       toast.error("Invalid email");
       return;
@@ -67,13 +65,6 @@ const LoginForm = ({ children }) => {
 
     if(!handlePasswordChange()) {
       toast.error("Invalid password");
-      return;
-    };
-
-    if(errors) {
-      setTimeout(() => {
-        setIsLoading(false);
-      }, MIN_LOADING_INTERVAL);
       return;
     };
 

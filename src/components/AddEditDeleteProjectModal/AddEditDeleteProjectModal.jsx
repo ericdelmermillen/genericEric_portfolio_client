@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import "./AddEditDeleteProjectModal.scss";
 
+const MIN_LOADING_INTERVAL = import.meta.env.VITE_MIN_LOADING_INTERVAL;
 const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 const AddEditDeleteProjectModal = ({ 
@@ -25,7 +26,6 @@ const AddEditDeleteProjectModal = ({
     setIsLoading,
     scrollYPos, 
     prevScrollYPos,
-    MIN_LOADING_INTERVAL,
     logoutUser,
     MODAL_TRANSITION_INTERVAL
   } = useAppContext();

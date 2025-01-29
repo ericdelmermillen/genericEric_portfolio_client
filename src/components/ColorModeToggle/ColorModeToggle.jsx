@@ -7,7 +7,6 @@ const ColorModeToggle = ({ inputId }) => {
   const { colorMode, toggleColorMode } = useAppContext();
   const isDarkMode = colorMode === "dark";
 
-
   return (
     <>
       <div className='colorModeToggle'>

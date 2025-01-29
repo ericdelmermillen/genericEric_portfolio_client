@@ -3,8 +3,10 @@ import Profile from "../Profile/Profile";
 import Skills from "../Skills/Skills";
 import "./Summary.scss";
 
+const MIN_LOADING_INTERVAL = import.meta.env.VITE_MIN_LOADING_INTERVAL;
+
 const Summary = () => {
-  const { focusContactNameInput, MIN_LOADING_INTERVAL, hideNav } = useAppContext();
+  const { focusContactNameInput, hideNav } = useAppContext();
 
   const handleFocusContactNameInput = () => {
     setTimeout(() => {

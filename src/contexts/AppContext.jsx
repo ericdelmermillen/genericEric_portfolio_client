@@ -1,9 +1,8 @@
 import { 
   createContext, 
   useContext, 
-  useReducer, 
-  useEffect, 
   useState,
+  useEffect, 
   useRef
 } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
@@ -11,44 +10,22 @@ import { checkTokenIsValid, removeTokens, scrollToTop } from "../../utils/utils"
 import { toast } from 'react-hot-toast'; 
 import { setTokens } from "../../utils/utils.js"
 
+const BASE_URL = import.meta.env.VITE_API_BASE_URL;
+const MIN_LOADING_INTERVAL = import.meta.env.VITE_MIN_LOADING_INTERVAL;
+const MODAL_TRANSITION_INTERVAL = import.meta.env.VITE_MODAL_TRANSITION_INTERVAL;
+
 const AppContext = createContext();
 
-const initialState = {
-  scrollYPos: window.scrollY,
-  prevScrollYPos: window.scrollY,
-};
-
-const reducer = (state, action) => {
-  switch(action.type) {
-
-    case "app/scrollY":
-      return {
-        ...state, 
-        prevScrollYPos: state.scrollYPos,
-        scrollYPos: action.payload
-      };
-
-    default: 
-      throw new Error("Unknown action type")
-  };
-};
-
-const BASE_URL = import.meta.env.VITE_API_BASE_URL;
-
 const AppContextProvider = ({ children }) => {
-  const [ state, dispatch ] = useReducer(reducer, initialState);
-  const { 
-    scrollYPos, 
-    prevScrollYPos
-  } = state;
-  
   const navigate = useNavigate();
   const location = useLocation();
   
   const [ colorMode, setcolorMode ] = useState(localStorage.getItem('colorMode') || "light");
   const [ isLoggedIn, setisLoggedIn ] = useState(false);
   const [ isLoading, setIsLoading ] = useState(false);
-  const [ showSideNav, setshowSideNav ] = useState(false);
+  const [ showSideNav, setShowSideNav ] = useState(false);
+  const [ scrollYPos, setScrollYPos ] = useState(window.scrollY);
+  const [ prevScrollYPos, setPrevScrollYPos ] = useState(window.scrollY);
   const [ isProjectOrderEditable, setIsProjectOrderEditable ] = useState(false);
   const [ isEditMode, setIsEditMode ] = useState(false);
   const [ rerenderTrigger, setRerenderTrigger ] = useState(1);
@@ -57,18 +34,17 @@ const AppContextProvider = ({ children }) => {
   const contactSectionRef = useRef(null); 
   const contactNameRef = useRef(null); 
 
-  const MIN_LOADING_INTERVAL = 250;
-  const MODAL_TRANSITION_INTERVAL = 200;
-
-  const toggleSideNav = () => setshowSideNav(c => !c);
+  const toggleSideNav = () => setShowSideNav(c => !c);
 
   const toggleColorMode = () => {
-    const newColorMode = colorMode === "light"
-      ? "dark" 
-      : "light";
+    const newColorMode = colorMode === "light" ? "dark" : "light";
+    setcolorMode(newColorMode);
+    localStorage.setItem('colorMode', newColorMode);
+  };
 
-      setcolorMode(newColorMode);
-      localStorage.setItem('colorMode', newColorMode);
+  const handleUpdateScollYPos = () => {
+    setPrevScrollYPos(scrollYPos);
+    setScrollYPos(window.scrollY);
   };
   
   const checkLoginStatus = async () => {
@@ -115,7 +91,6 @@ const AppContextProvider = ({ children }) => {
       setTokens(token, refreshToken);
   
       toast.success(message || "Login successful!");
-      // dispatch({ type: "user/login" });
       setisLoggedIn(true);
   
       navigate("/");
@@ -161,7 +136,6 @@ const AppContextProvider = ({ children }) => {
       setIsProjectOrderEditable(false);
       setIsEditMode(false);
       navigate("/");
-      setRerenderTrigger(c => c + 1);
       scrollToTop();
       setTimeout(() => {
         setIsLoading(false);
@@ -172,14 +146,12 @@ const AppContextProvider = ({ children }) => {
   const focusContactNameInput = () => {
     if(contactNameRef.current) {
       contactNameRef.current.focus();
-    }
+    };
   };
-
 
   const hideNav = () => {
     document.getElementById("nav").classList.add("hide");
   };
-
 
   const handleBlogClick = () => {
     if(location.pathname === "/blog" || location.pathname === "/blog/") {
@@ -220,16 +192,15 @@ const AppContextProvider = ({ children }) => {
     localStorage.setItem('colorMode', colorMode);
   }, [colorMode]);
 
-
   // useEffect for updating of scrollYPos
   useEffect(() => {
     const handleScrollY = () => {
       const newScrollYPos = window.scrollY;
       
       if(scrollYPos !== undefined && newScrollYPos !== scrollYPos) {
-        dispatch({ type: "app/scrollY", payload: newScrollYPos});
+        handleUpdateScollYPos();
+        setShowSideNav(false);
       };
-
     };
 
     handleScrollY();
@@ -241,8 +212,7 @@ const AppContextProvider = ({ children }) => {
     };
   }, [scrollYPos]);
 
-
-  // useEffect to turn off isLoading if it is set true on one page but the user goes to another before it is set to false
+  // useEffect to turn off isLoading if it is set true on one page but the user goes to another before it is set to false: blog page loads slowly from youtube embed
   useEffect(() => {
     const currentPathname = location.pathname;
 
@@ -250,11 +220,10 @@ const AppContextProvider = ({ children }) => {
       setIsLoading(false);
       checkLoginStatus();
       setPrevPathname(currentPathname)
-    }
+    };
 
     setIsProjectOrderEditable(false);
     setIsEditMode(false);
-
   }, [location.pathname]);
 
     // useEffect to check for token for isLoggedIn status on initial mount
@@ -276,7 +245,7 @@ const AppContextProvider = ({ children }) => {
     toggleSideNav,
     isProjectOrderEditable, 
     setIsProjectOrderEditable,
-    MIN_LOADING_INTERVAL,
+    // MIN_LOADING_INTERVAL,
     MODAL_TRANSITION_INTERVAL,
     isEditMode, 
     setIsEditMode,
