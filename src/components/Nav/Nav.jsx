@@ -1,17 +1,7 @@
 import { useAppContext } from "../../contexts/AppContext.jsx";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { scrollToTop } from "../../../utils/utils.js";
-// import Logo from "../../assets/svgs/LogoOne.jsx";
-// import LogoTwo from "../../assets/svgs/LogoTwo.jsx";
-// import LogoThree from "../../assets/svgs/LogoThree.jsx";
-// import LogoFour from "../../assets/svgs/LogoFour.jsx";
-// import LogoFive from "../../assets/svgs/LogoFive.jsx";
-// import LogoSix from "../../assets/svgs/LogoSix.jsx";
-// import LogoSeven from "../../assets/svgs/LogoSeven.jsx";
-// import LogoEight from "../../assets/svgs/LogoEight.jsx";
-// import LogoNine from "../../assets/svgs/LogoNine.jsx";
-// import LogoTen from "../../assets/svgs/LogoTen.jsx";
-import LogoEleven from "../../assets/svgs/LogoEleven.jsx";
+import LogoFour from "../../assets/svgs/LogoFour.jsx";
 import ColorModeToggle from "../ColorModeToggle/ColorModeToggle";
 import "./Nav.scss";
 
@@ -50,13 +40,7 @@ const Nav = ({ children }) => {
               ? handleScrollToTop
               : null}
           >
-            {/* <LogoFive className={"nav__logo"}/> */}
-            {/* <LogoSix className={"nav__logo"}/> */}
-            {/* <LogoSeven className={"nav__logo"}/> */}
-            {/* <LogoEight className={"nav__logo"}/> */}
-            {/* <LogoNine className={"nav__logo"}/> */}
-            {/* <LogoTen className={"nav__logo"}/> */}
-            <LogoEleven className={"nav__logo"}/>
+            <LogoFour className={"nav__logo"}/>
           </div>
         </Link>
       

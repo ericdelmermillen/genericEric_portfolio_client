@@ -13,9 +13,7 @@ import { setTokens } from "../../utils/utils.js"
 
 const AppContext = createContext();
 
-// move new global state to initial state where appropriate and make functions to dispatch updates
 const initialState = {
-  isLoggedIn: false,
   colorMode: localStorage.getItem('colorMode') || "light",
   scrollYPos: window.scrollY,
   prevScrollYPos: window.scrollY,
@@ -35,12 +33,6 @@ const reducer = (state, action) => {
     case "app/toggleSideNav":
       return {...state, showSideNav: !state.showSideNav}
 
-    case "user/login":
-      return {...state, isLoggedIn: true};
-      
-    case "user/logout":
-      return {...state, isLoggedIn: false};
-
     case "colorMode/toggle":
       const newColorMode = state.colorMode === "light"
         ? "dark"
@@ -59,11 +51,17 @@ const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 const AppContextProvider = ({ children }) => {
   const [ state, dispatch ] = useReducer(reducer, initialState);
-  const { isLoggedIn, colorMode, scrollYPos, prevScrollYPos, showSideNav } = state;
+  const { 
+    colorMode, 
+    scrollYPos, 
+    prevScrollYPos, 
+    showSideNav 
+  } = state;
   
   const navigate = useNavigate();
   const location = useLocation();
   
+  const [ isLoggedIn, setisLoggedIn ] = useState(false);
   const [ isLoading, setIsLoading ] = useState(false);
   const [ isProjectOrderEditable, setIsProjectOrderEditable ] = useState(false);
   const [ isEditMode, setIsEditMode ] = useState(false);
@@ -85,10 +83,10 @@ const AppContextProvider = ({ children }) => {
       const isLoggedIn = await checkTokenIsValid(navigate);
       
       if(isLoggedIn) {
-        dispatch({ type: "user/login" });
+        setisLoggedIn(true);
       } else {
+        setisLoggedIn(false);
         removeTokens();
-        dispatch({ type: "user/logout" });
       }
     } catch(error) {
       console.error("Error checking token expiration", error);
@@ -124,7 +122,8 @@ const AppContextProvider = ({ children }) => {
       setTokens(token, refreshToken);
   
       toast.success(message || "Login successful!");
-      dispatch({ type: "user/login" });
+      // dispatch({ type: "user/login" });
+      setisLoggedIn(true);
   
       navigate("/");
   
@@ -135,46 +134,6 @@ const AppContextProvider = ({ children }) => {
       setIsLoading(false);
     };
   };
-  
-  // const logoutUser = async () => {
-  //   setIsLoading(true);
-  
-  //   const token = localStorage.getItem("token");
-  //   const refreshToken = localStorage.getItem("refreshToken");
-  
-  //   try {
-  //     const response = await fetch(`${BASE_URL}/auth/logoutuser`, {
-  //       method: "POST",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //         "Authorization": `Bearer ${token}`,
-  //         "x-refresh-token": refreshToken, 
-  //       }
-  //     });
-  
-  //     if(!response.ok) {
-  //       throw new Error("Error logging you out");
-  //     } else {
-  //       const { message } = await response.json();
-  //       toast.success(message);
-  //     };
-  
-  //   } catch (error) {
-  //     console.log(error.message);
-  //   } finally {
-  //     removeTokens();
-  //     dispatch({ type: "user/logout" });
-  //     setIsProjectOrderEditable(false);
-  //     setIsEditMode(false);
-  //     navigate("/");
-  //     setRerenderTrigger(c => c + 1);
-  //     scrollToTop();
-  //     setTimeout(() => {
-  //       setIsLoading(false);
-  //     }, MIN_LOADING_INTERVAL);
-  //   };
-  // };
-
 
   const logoutUser = async () => {
     setIsLoading(true);
@@ -194,8 +153,8 @@ const AppContextProvider = ({ children }) => {
   
       if(!response.ok) {
         const { errors } = await response.json();
-        errors.forEach(error => console.log(error))
-        throw new Error("Error logging you out");
+        errors?.forEach(error => console.log(error))
+        throw new Error("Error, logging you out");
       };
 
       const { message } = await response.json();
@@ -205,7 +164,7 @@ const AppContextProvider = ({ children }) => {
       toast.error(error.message)
     } finally {
       removeTokens();
-      dispatch({ type: "user/logout" });
+      setisLoggedIn(false);
       setIsProjectOrderEditable(false);
       setIsEditMode(false);
       navigate("/");

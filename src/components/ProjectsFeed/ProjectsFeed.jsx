@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import { useAppContext } from "../../contexts/AppContext.jsx";
 import { useLightBoxContext } from "../../contexts/LightBoxContext.jsx";
 import { scrollToTop } from "../../../utils/utils.js";
@@ -78,10 +78,10 @@ const ProjectsFeed = () => {
       try {
         const response = await fetch(`${BASE_URL}/projects/all?limit=${PROJECTS_PER_PAGE}&offset=${offset}`);
 
-        const { projects, isPaginationComplete } = await response.json();
+        const { projects, isPaginationComplete, error } = await response.json();
 
         if(!response.ok) {
-          throw new Error(data.message);
+          throw new Error(error);
         };
 
         if(!projects.length && isInitialFetch) {
@@ -89,7 +89,6 @@ const ProjectsFeed = () => {
           setIsFinalPageFetched(true);
           setIsFinalPageLoaded(true);
           scrollToTop();
-          setIsLoading(false);
           toast("No projects available");
         };
 
@@ -111,8 +110,9 @@ const ProjectsFeed = () => {
       } finally {
         if(isInitialLoad) {
           setIsInitialLoad(false);
-        }
-      }
+        };
+        setIsLoading(false);
+      };
     };
   };
 

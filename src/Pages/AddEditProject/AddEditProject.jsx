@@ -182,15 +182,6 @@ const AddEditProject = ({ children }) => {
         }
       });
 
-      if(!response.ok && response.status === 401) {
-        removeTokens();
-        logoutUser();
-        throw new Error("Not authorized. Logging you out...");
-      } else if(!response.ok) {
-        const errorResponse = await response.json();
-        throw new Error(errorResponse.message || `Failed to fetch project details for project ${projectID}`);
-      };
-
       const { 
         project_date, 
         project_title, 
@@ -198,8 +189,17 @@ const AddEditProject = ({ children }) => {
         project_photos, 
         project_urls, 
         newToken, 
-        newRefreshToken 
+        newRefreshToken,
+        error
       } = await response.json();
+
+      if(!response.ok && response.status === 401) {
+        removeTokens();
+        logoutUser();
+        throw new Error("Not authorized. Logging you out...");
+      } else if(!response.ok) {
+        throw new Error(error || `Failed to fetch project details for project ${projectID}`);
+      };
       
       setTokens(newToken, newRefreshToken);
 
@@ -458,8 +458,10 @@ const AddEditProject = ({ children }) => {
       );
       
       if(!response.ok) {
-        const { errors } = await response.json();
-        errors.forEach(error => toast.error(error));
+        const { errors, message } = await response.json();
+        errors?.forEach(error => toast.error(error));
+
+        toast.error(message);
 
         throw new Error(`Failed to send message: status ${response.status}`);
       };

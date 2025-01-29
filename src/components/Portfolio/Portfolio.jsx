@@ -198,6 +198,7 @@ const Portfolio = () => {
       const data = await response.json();
   
       if(!response.ok) {
+        toast.error(data.message);
         throw new Error("Error fetching portfolio project summaries");
       };
   
@@ -208,7 +209,6 @@ const Portfolio = () => {
 
     } catch (error) {
       console.error('Error fetching portfolio summaries:', error);
-      toast.error(error.message);
       return false;
     };
   };
@@ -292,14 +292,15 @@ const Portfolio = () => {
 
       const { message, newToken, newRefreshToken } = await response.json();
 
-      setTokens(newToken, newRefreshToken);
-
       if(!response.ok) {
         throw new Error(message);
       };
       
+      toast("Saving new order...");
+      setTokens(newToken, newRefreshToken);
     } catch(error) {
       console.log(error.message);
+      toast.error(error.message);
       removeTokens();
       logoutUser();
     } finally {
@@ -313,7 +314,6 @@ const Portfolio = () => {
   const handleSave = () => {
     saveNewOrder();
     handlePortfolioLinkClick();
-    toast("Saving new order...");
     setIsEditMode(false);
         
     setTimeout(() => {

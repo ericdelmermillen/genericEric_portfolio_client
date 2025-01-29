@@ -73,11 +73,9 @@ const checkTokenIsValid = async (navigate) => {
     const currentTime = Math.floor(Date.now() / 1000);
 
     if(decodedToken.exp > currentTime) {
-      // Token is valid
       return true;
     };
 
-    // Token expired
     console.log("Token expired: attempting refresh");
 
     const refreshToken = localStorage.getItem('refreshToken');
@@ -121,13 +119,13 @@ const addClassToDiv = (divID, className) => {
 };
 
 const removeClassFromDiv = (divID, className) => {
-  document.getElementById(divID).classList.remove(className);
+  document.getElementById(divID)?.classList.remove(className);
 };
 
 
 const getMonthYear = (dateString) => {
   // console.log(dateString); // 25-12-2024
-  const [day, month, year] = dateString.split("-"); // Split by '-'
+  const [ day, month, year ] = dateString?.split("-"); // Split by '-'
 
   // Create a new Date object using the correct month and year
   const date = new Date(year, parseInt(month, 10) - 1, day);

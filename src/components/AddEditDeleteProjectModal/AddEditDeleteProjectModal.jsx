@@ -34,6 +34,7 @@ const AddEditDeleteProjectModal = ({
 
   const handleActionClearing = () => {
     removeClassFromDiv("addEditDeleteProjectModal", "show")
+
     setTimeout(() => {
       setShowActionModal(false);
       handleClearActionState();
@@ -97,7 +98,7 @@ const AddEditDeleteProjectModal = ({
     } catch(error) {
       console.error('Error deleting project:', error);
       toast.error(error.message);
-      logoutUser()
+      logoutUser();
     } finally {
       setTimeout(() => {
         setIsLoading(false);
@@ -108,7 +109,6 @@ const AddEditDeleteProjectModal = ({
 
   const handleEditProject = (projectID) => {
     navigate(`/projects/edit/${projectID}`);
-
   };
 
 

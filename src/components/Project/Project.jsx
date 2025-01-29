@@ -125,7 +125,7 @@ const Project = ({
 
         <div className="project__inner ">
 
-          {!isInitialLoad
+          {!isInitialLoad && projectDate
             ? (              
                 <>
                   <h4 className="project__date" dateTime={projectDate}>
