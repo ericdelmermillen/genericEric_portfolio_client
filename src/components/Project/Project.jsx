@@ -101,7 +101,6 @@ const Project = ({
       window.removeEventListener("resize", handleResize);
     };
   }, []);
-
   
   return (
     <>

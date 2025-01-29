@@ -196,7 +196,6 @@ const AppContextProvider = ({ children }) => {
       clearTimeout(timeout);
       timeout = setTimeout(() => {
         handleUpdateScollYPos();
-        console.log("updated scrollYPos");
         setShowSideNav(false);
       }, 100);
     };

@@ -28,7 +28,6 @@ const ProjectsFeed = () => {
   const {
     showLightBox, 
     setShowLightBox,
-    handleSetShowLightBoxTrue,
     lightBoxImages, 
     setLightBoxImages,
     currentIdx, 
@@ -146,7 +145,6 @@ const ProjectsFeed = () => {
                 setCurrentIdx={setCurrentIdx}
                 showLightBox={showLightBox}
                 setShowLightBox={setShowLightBox}
-                handleSetShowLightBoxTrue={handleSetShowLightBoxTrue}
                 handleSetShowLightBoxFalse={handleSetShowLightBoxFalse}
                 handleIncrementCurrentIdx={handleIncrementCurrentIdx}
                 handleDecrementCurrentIdx={handleDecrementCurrentIdx}
