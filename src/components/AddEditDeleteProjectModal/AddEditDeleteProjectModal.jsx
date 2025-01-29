@@ -7,6 +7,7 @@ import toast from "react-hot-toast";
 import "./AddEditDeleteProjectModal.scss";
 
 const MIN_LOADING_INTERVAL = import.meta.env.VITE_MIN_LOADING_INTERVAL;
+const MODAL_TRANSITION_INTERVAL = import.meta.env.VITE_MODAL_TRANSITION_INTERVAL;
 const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 const AddEditDeleteProjectModal = ({ 
@@ -26,8 +27,7 @@ const AddEditDeleteProjectModal = ({
     setIsLoading,
     scrollYPos, 
     prevScrollYPos,
-    logoutUser,
-    MODAL_TRANSITION_INTERVAL
+    logoutUser
   } = useAppContext();
 
   const navigate = useNavigate();

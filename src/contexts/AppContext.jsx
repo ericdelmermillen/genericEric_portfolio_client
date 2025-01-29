@@ -12,7 +12,6 @@ import { setTokens } from "../../utils/utils.js"
 
 const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 const MIN_LOADING_INTERVAL = import.meta.env.VITE_MIN_LOADING_INTERVAL;
-const MODAL_TRANSITION_INTERVAL = import.meta.env.VITE_MODAL_TRANSITION_INTERVAL;
 
 const AppContext = createContext();
 
@@ -245,8 +244,6 @@ const AppContextProvider = ({ children }) => {
     toggleSideNav,
     isProjectOrderEditable, 
     setIsProjectOrderEditable,
-    // MIN_LOADING_INTERVAL,
-    MODAL_TRANSITION_INTERVAL,
     isEditMode, 
     setIsEditMode,
     rerenderTrigger, 
