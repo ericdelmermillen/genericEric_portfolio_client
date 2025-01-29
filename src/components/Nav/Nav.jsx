@@ -12,7 +12,7 @@ const Nav = ({ children }) => {
     setIsLoading,
     scrollYPos,
     prevScrollYPos,
-    toggleSideNav,
+    setShowSideNav,
     handleBlogClick,
     handleContactClick,
     handleProjectsClick
@@ -28,6 +28,8 @@ const Nav = ({ children }) => {
       setIsLoading(false);
     }, MIN_LOADING_INTERVAL);
   };
+
+  const handleSetShowSideNavTrue = () => setShowSideNav(true);
 
 
   return (
@@ -98,7 +100,7 @@ const Nav = ({ children }) => {
         <div 
           className="nav__toggle-button" 
           aria-label="Toggle Menu"
-          onClick={toggleSideNav}
+          onClick={handleSetShowSideNavTrue}
         >
         <div className="nav__toggle-icon"></div>
         <div className="nav__toggle-icon"></div>

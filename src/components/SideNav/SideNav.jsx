@@ -7,7 +7,7 @@ const MIN_LOADING_INTERVAL = import.meta.env.VITE_MIN_LOADING_INTERVAL;
 const SideNav = ({ children }) => {
   const { 
     showSideNav,
-    toggleSideNav,
+    setShowSideNav,
     handleBlogClick,
     handleContactClick,
     handleProjectsClick
@@ -23,9 +23,12 @@ const SideNav = ({ children }) => {
     handleProjectsClick();
 
     setTimeout(() => {
-      toggleSideNav();
+      handleSetShowSideNavFalse()
     }, MIN_LOADING_INTERVAL);
   };
+
+  const handleSetShowSideNavFalse = () => setShowSideNav(false);
+
 
   return (
     <>
@@ -35,7 +38,7 @@ const SideNav = ({ children }) => {
           (
             <div 
               className="sideNav__clickOffDiv"
-              onClick={toggleSideNav}
+              onClick={handleSetShowSideNavFalse}
             ></div>
           )
 
@@ -46,7 +49,7 @@ const SideNav = ({ children }) => {
         <div className="sideNav__inner">
           <div 
             className="sideNav__close-button"
-            onClick={toggleSideNav}
+            onClick={handleSetShowSideNavFalse}
           >
             <div className="sideNav__close-icon"></div>
             <div className="sideNav__close-icon"></div>

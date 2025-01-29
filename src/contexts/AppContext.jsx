@@ -33,8 +33,6 @@ const AppContextProvider = ({ children }) => {
   const contactSectionRef = useRef(null); 
   const contactNameRef = useRef(null); 
 
-  const toggleSideNav = () => setShowSideNav(c => !c);
-
   const toggleColorMode = () => {
     const newColorMode = colorMode === "light" ? "dark" : "light";
     setcolorMode(newColorMode);
@@ -193,23 +191,20 @@ const AppContextProvider = ({ children }) => {
 
   // useEffect for updating of scrollYPos
   useEffect(() => {
-    const handleScrollY = () => {
-      const newScrollYPos = window.scrollY;
-      
-      if(scrollYPos !== undefined && newScrollYPos !== scrollYPos) {
+    let timeout;
+    const handleScroll = () => {
+      clearTimeout(timeout);
+      timeout = setTimeout(() => {
         handleUpdateScollYPos();
+        console.log("updated scrollYPos");
         setShowSideNav(false);
-      };
+      }, 100);
     };
-
-    handleScrollY();
-
-    window.addEventListener("scroll", handleScrollY);
-
-    return () => {
-      window.removeEventListener("scroll", handleScrollY);
-    };
+  
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, [scrollYPos]);
+  
 
   // useEffect to turn off isLoading if it is set true on one page but the user goes to another before it is set to false: blog page loads slowly from youtube embed
   useEffect(() => {
@@ -241,7 +236,7 @@ const AppContextProvider = ({ children }) => {
     scrollYPos,
     prevScrollYPos,
     showSideNav,
-    toggleSideNav,
+    setShowSideNav,
     isProjectOrderEditable, 
     setIsProjectOrderEditable,
     isEditMode, 
