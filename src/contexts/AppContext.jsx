@@ -14,10 +14,8 @@ import { setTokens } from "../../utils/utils.js"
 const AppContext = createContext();
 
 const initialState = {
-  colorMode: localStorage.getItem('colorMode') || "light",
   scrollYPos: window.scrollY,
   prevScrollYPos: window.scrollY,
-  showSideNav: false
 };
 
 const reducer = (state, action) => {
@@ -30,18 +28,6 @@ const reducer = (state, action) => {
         scrollYPos: action.payload
       };
 
-    case "app/toggleSideNav":
-      return {...state, showSideNav: !state.showSideNav}
-
-    case "colorMode/toggle":
-      const newColorMode = state.colorMode === "light"
-        ? "dark"
-        : "light"
-      
-      localStorage.setItem('colorMode', newColorMode);
-
-      return {...state, colorMode: newColorMode};
-
     default: 
       throw new Error("Unknown action type")
   };
@@ -52,17 +38,17 @@ const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 const AppContextProvider = ({ children }) => {
   const [ state, dispatch ] = useReducer(reducer, initialState);
   const { 
-    colorMode, 
     scrollYPos, 
-    prevScrollYPos, 
-    showSideNav 
+    prevScrollYPos
   } = state;
   
   const navigate = useNavigate();
   const location = useLocation();
   
+  const [ colorMode, setcolorMode ] = useState(localStorage.getItem('colorMode') || "light");
   const [ isLoggedIn, setisLoggedIn ] = useState(false);
   const [ isLoading, setIsLoading ] = useState(false);
+  const [ showSideNav, setshowSideNav ] = useState(false);
   const [ isProjectOrderEditable, setIsProjectOrderEditable ] = useState(false);
   const [ isEditMode, setIsEditMode ] = useState(false);
   const [ rerenderTrigger, setRerenderTrigger ] = useState(1);
@@ -74,10 +60,17 @@ const AppContextProvider = ({ children }) => {
   const MIN_LOADING_INTERVAL = 250;
   const MODAL_TRANSITION_INTERVAL = 200;
 
-  const toggleColorMode = () => {
-    dispatch({ type: "colorMode/toggle"});
-  };
+  const toggleSideNav = () => setshowSideNav(c => !c);
 
+  const toggleColorMode = () => {
+    const newColorMode = colorMode === "light"
+      ? "dark" 
+      : "light";
+
+      setcolorMode(newColorMode);
+      localStorage.setItem('colorMode', newColorMode);
+  };
+  
   const checkLoginStatus = async () => {
     try {
       const isLoggedIn = await checkTokenIsValid(navigate);
@@ -175,12 +168,6 @@ const AppContextProvider = ({ children }) => {
       }, MIN_LOADING_INTERVAL);
     };
   };
-
-
-  const toggleSideNav = () => {
-    dispatch({ type: "app/toggleSideNav"});
-  };
-
   
   const focusContactNameInput = () => {
     if(contactNameRef.current) {
