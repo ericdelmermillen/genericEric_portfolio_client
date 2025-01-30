@@ -1,38 +1,46 @@
 @use "./variables" as vars;
 
 .app {
+	// fonts
 	--body-font: "Arial";
-	--border-radius: 4px;
 	--heading-font: "Tahoma";
 
+	// letter spacing
 	--letter-spacing-general: 0.6px;
 	--letter-spacing-relaxed: 1px;
-	// --letter-spacing-general: 0.75px;
 	--letter-spacing-headline: 3.5px;
-	--letter-spacing-large: 1.75px;
 	--letter-spacing-medium: 1.5px;
+	--letter-spacing-large: 1.75px;
 
+	// line height
 	--line-height-general: 1.45;
 	--line-height-medium: 1.75;
+
+	// border & box shadow
+	--border-radius: 4px;
+	--text-box-text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+	--text-shadow-bright: 5px 5px 6px rgba(0, 0, 0, 0.7);
 
 	// Timing Variables
 	--lightBox-transition-interval: 450ms;
 	--placeholder-transition: all 0.75s ease-in-out;
 
-	// Text SizingVariables
-	--font-size-general: 1.5rem;
+	// font sizes
 	--font-size-fine: 1rem;
 	--font-size-xs: 1.25rem;
-	--font-size-small: 1.5rem;
 	--font-size-smaller: 1.125rem;
+	--font-size-small: 1.5rem;
+	--font-size-general: 1.5rem;
+	--headline-medium: 2rem;
 	--headline-small: 1.5rem;
 	--headline-medium-small: 1.75rem;
-	--headline-medium: 2rem;
 	--headline-medium-large: 2.25rem;
 	--headline-large: 2.5rem;
 	--headline-xl: 2.75rem;
 	--headline-xxl: 4rem;
 	--headline-xxxl: 4.25rem;
+
+	// button & heading sizes
 	--button-text-small: 1.25rem;
 	--button-text-medium: 1.5rem;
 	--button-link-small: 1rem;
@@ -40,8 +48,13 @@
 	--heading-text-small: 1.5rem;
 	--sub-heading-text-small: 1.9rem;
 
-	// other
-	--text-box-text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+	// error styling
+	--error-color: #ff0000;
+
+	// overlay colors
+	--modalOverlayBg: rgba(0, 0, 0, 0.5);
+	--overlay: rgba(0, 0, 0, 0.125);
+	--overlay-dark: rgba(0, 0, 0, 0.5) 0;
 
 	// Light Mode Custom Variables
 	&[data-color-mode="light"] {
@@ -51,15 +64,13 @@
 		--box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
 		--box-shadow-input: inset 0 1px 3px rgba(0, 0, 0, 0.1);
 		--navFooter-box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-		--error-color: #ff0000;
-		--neutral-gray-1: #e6eae7;
-		--neutral-gray-2: #eaedeb;
+		--neutral-bg-1: #e6eae7;
+		--neutral-bg-2: #eaedeb;
 		--placeholder-color: #c7c7c7;
 
 		// Text Colors
 		--text-color: #21343c;
 		--text-color-bright: #f8f8f8;
-		--text-shadow-bright: 5px 5px 6px rgba(0, 0, 0, 0.7);
 
 		// Overlay Colors
 		--gradient-overlay: linear-gradient(
@@ -67,17 +78,11 @@
 			rgba(0, 0, 0, 0.28),
 			rgba(255, 255, 255, 0.2)
 		);
-		--modalOverlayBg: rgba(0, 0, 0, 0.5);
-		--overlay: rgba(0, 0, 0, 0.125);
-		--overlay-dark: rgba(0, 0, 0, 0.5) 0;
 		--filter-box-shadow: drop-shadow(6px 6px 6px rgba(0, 0, 0, 0.8));
 
 		// UI
 		--background-nav-footer: #152f39;
-		--button-link: #1a7697;
-		--button-color: #1a7697;
 		--link-button-color: blue;
-		--link: #1a7697;
 
 		// colorModeToggler
 		--toggle-ball: #f2f2f2;
@@ -92,16 +97,14 @@
 		--box-shadow: 0 4px 8px rgba(50, 50, 50, 0.2);
 		--box-shadow-input: inset 0 2px 4px rgba(100, 100, 100, 0.2);
 		--navFooter-box-shadow: 0 4px 8px rgba(50, 50, 50, 0.125);
-		--error-color: #ff0000;
-		--neutral-gray-1: #242534;
-		--neutral-gray-2: #28293a;
+		--neutral-bg-1: #242534;
+		--neutral-bg-2: #28293a;
+		--neutral-bg-2: #28293a;
 		--placeholder-color: #919191;
-		--overlay-dark: rgba(0, 0, 0, 0.5) 0;
 
 		// Text Colors
 		--text-color: #e0e0e0;
 		--text-color-bright: #f0f0f0;
-		--text-shadow-bright: 5px 5px 6px rgba(0, 0, 0, 0.7);
 
 		// Overlay Colors
 		--gradient-overlay: linear-gradient(
@@ -109,17 +112,11 @@
 			rgba(0, 0, 0, 0.28),
 			rgba(110, 110, 110, 0.275)
 		);
-		--modalOverlayBg: rgba(0, 0, 0, 0.5);
-		--overlay: rgba(0, 0, 0, 0.125);
-		--overlay-dark: rgba(0, 0, 0, 0.5) 0;
 		--filter-box-shadow: drop-shadow(0 4px 8px rgba(50, 50, 50, 0.4));
 
 		// UI
 		--background-nav-footer: #05071d;
-		--button-link: #1a7697;
-		--button-color: #1a7697;
 		--link-button-color: #f8f8f8;
-		--link: #1a7697;
 
 		// colorModeToggler
 		--toggle-ball: #f2f2f2;
@@ -284,7 +281,7 @@
 
 @mixin formFullWidth {
 	align-items: center;
-	background: var(--neutral-gray-1);
+	background: var(--neutral-bg-1);
 	display: flex;
 	flex-direction: column;
 	height: 100%;
@@ -481,7 +478,7 @@
 }
 
 @mixin wallpaperContainer {
-	background: var(--neutral-gray-2);
+	background: var(--neutral-bg-2);
 	display: flex;
 	justify-content: center;
 	min-height: calc(100vh - vars.$navHeight);
