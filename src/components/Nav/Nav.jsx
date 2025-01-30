@@ -1,7 +1,7 @@
 import { useAppContext } from "../../contexts/AppContext.jsx";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { scrollToTop } from "../../../utils/utils.js";
-import LogoFour from "../../assets/svgs/LogoFour.jsx";
+import Logo from "../../assets/svgs/Logo.jsx";
 import ColorModeToggle from "../ColorModeToggle/ColorModeToggle";
 import "./Nav.scss";
 
@@ -43,7 +43,7 @@ const Nav = ({ children }) => {
               ? handleScrollToTop
               : null}
           >
-            <LogoFour className={"nav__logo"}/>
+            <Logo className={"nav__logo"}/>
           </div>
         </Link>
       
