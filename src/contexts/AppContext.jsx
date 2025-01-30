@@ -2,8 +2,8 @@ import {
   createContext, 
   useContext, 
   useState,
-  useEffect, 
-  useRef
+  useRef,
+  useEffect
 } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { checkTokenIsValid, removeTokens, scrollToTop } from "../../utils/utils";
@@ -19,8 +19,8 @@ const AppContextProvider = ({ children }) => {
   const navigate = useNavigate();
   const location = useLocation();
   
-  const [ colorMode, setcolorMode ] = useState(localStorage.getItem('colorMode') || "light");
-  const [ isLoggedIn, setisLoggedIn ] = useState(false);
+  const [ colorMode, setColorMode ] = useState(localStorage.getItem('colorMode') || "light");
+  const [ isLoggedIn, setIsLoggedIn ] = useState(false);
   const [ isLoading, setIsLoading ] = useState(false);
   const [ showSideNav, setShowSideNav ] = useState(false);
   const [ scrollYPos, setScrollYPos ] = useState(window.scrollY);
@@ -35,11 +35,11 @@ const AppContextProvider = ({ children }) => {
 
   const toggleColorMode = () => {
     const newColorMode = colorMode === "light" ? "dark" : "light";
-    setcolorMode(newColorMode);
+    setColorMode(newColorMode);
     localStorage.setItem('colorMode', newColorMode);
   };
 
-  const handleUpdateScollYPos = () => {
+  const handleUpdateScrollYPos = () => {
     setPrevScrollYPos(scrollYPos);
     setScrollYPos(window.scrollY);
   };
@@ -49,9 +49,9 @@ const AppContextProvider = ({ children }) => {
       const isLoggedIn = await checkTokenIsValid(navigate);
       
       if(isLoggedIn) {
-        setisLoggedIn(true);
+        setIsLoggedIn(true);
       } else {
-        setisLoggedIn(false);
+        setIsLoggedIn(false);
         removeTokens();
       }
     } catch(error) {
@@ -70,28 +70,20 @@ const AppContextProvider = ({ children }) => {
         },
         body: JSON.stringify({ email, password }),
       });
-  
-      let responseData;
-  
-      try {
-        responseData = await response.json();
-      } catch(jsonError) {
-        throw new Error("Failed to parse server response. Please try again later.");
-      };
-  
-      const { message, token, refreshToken } = responseData;
-  
+
+      const data = await response.json();
+
       if(!response.ok) {
-        throw new Error(message || "Failed to log in. Please check your credentials.");
+        throw new Error(data.message || "Failed to log in. Please check your credentials.");
       };
   
+      const { message, token, refreshToken } = data;
       setTokens(token, refreshToken);
   
       toast.success(message || "Login successful!");
-      setisLoggedIn(true);
+      setIsLoggedIn(true);
   
       navigate("/");
-  
     } catch (error) {
       console.error("Login error:", error);
       toast.error(error.message || "An unexpected error occurred. Please try again.");
@@ -129,7 +121,7 @@ const AppContextProvider = ({ children }) => {
       toast.error(error.message)
     } finally {
       removeTokens();
-      setisLoggedIn(false);
+      setIsLoggedIn(false);
       setIsProjectOrderEditable(false);
       setIsEditMode(false);
       navigate("/");
@@ -151,7 +143,7 @@ const AppContextProvider = ({ children }) => {
   };
 
   const handleBlogClick = () => {
-    if(location.pathname === "/blog" || location.pathname === "/blog/") {
+    if(location.pathname.includes("blog")) {
       scrollToTop();
       setIsLoading(true);
       
@@ -162,7 +154,7 @@ const AppContextProvider = ({ children }) => {
   };
 
   const handleContactClick = () => {
-    if(location.pathname === "/contact" || location.pathname === "/contact/") {
+    if(location.pathname.includes("contact")) {
       scrollToTop();
       setIsLoading(true);
       
@@ -173,7 +165,7 @@ const AppContextProvider = ({ children }) => {
   };
 
   const handleProjectsClick = () => {
-    if(location.pathname === "/projects" || location.pathname === "/projects/") {
+    if(location.pathname.includes("projects")) {
       scrollToTop();
       setIsLoading(true);
       
@@ -184,26 +176,28 @@ const AppContextProvider = ({ children }) => {
   };
 
 
-  // Update local storage when color mode state changes
+  // update local storage when color mode state changes
   useEffect(() => {
     localStorage.setItem('colorMode', colorMode);
   }, [colorMode]);
 
   // useEffect for updating of scrollYPos
   useEffect(() => {
-    let timeout;
+    let ticking = false;
     const handleScroll = () => {
-      clearTimeout(timeout);
-      timeout = setTimeout(() => {
-        handleUpdateScollYPos();
-        setShowSideNav(false);
-      }, 100);
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          handleUpdateScrollYPos();
+          setShowSideNav(false);
+          ticking = false;
+        });
+        ticking = true;
+      }
     };
   
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, [scrollYPos]);
-  
 
   // useEffect to turn off isLoading if it is set true on one page but the user goes to another before it is set to false: blog page loads slowly from youtube embed
   useEffect(() => {
@@ -212,7 +206,7 @@ const AppContextProvider = ({ children }) => {
     if(prevPathname !== currentPathname && isLoading) {
       setIsLoading(false);
       checkLoginStatus();
-      setPrevPathname(currentPathname)
+      setPrevPathname(currentPathname);
     };
 
     setIsProjectOrderEditable(false);
