@@ -16,9 +16,13 @@
 
 	&__heading {
 		display: inline-block;
-		margin-bottom: 3rem;
+		margin-bottom: 2rem !important;
 		position: relative;
 		@include mx.formHeading;
+
+		@media (min-width: vars.$tablet) {
+			margin-bottom: 3rem !important;
+		}
 
 		&::after {
 			@include mx.afterAccent;
