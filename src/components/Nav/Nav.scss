@@ -12,7 +12,8 @@
 		transition: all 500ms ease-in-out;
 		top: 0;
 		width: 100%;
-		z-index: 2;
+		// z-index: 2;
+		z-index: 3;
 
 		&.hide {
 			margin-top: -5rem;

@@ -35,6 +35,7 @@ const setTokens = (token, refreshToken) => {
   if(refreshToken) {
     localStorage.setItem('refreshToken', refreshToken);
   };
+  
   return true;
 };
 
@@ -79,6 +80,7 @@ const checkTokenIsValid = async (navigate) => {
     console.log("Token expired: attempting refresh");
 
     const refreshToken = localStorage.getItem('refreshToken');
+
     if(!refreshToken) {
       toast.error("Refresh token missing. Logging you out...");
       removeTokens();
@@ -91,7 +93,7 @@ const checkTokenIsValid = async (navigate) => {
       headers: {
         'Content-Type': 'application/json',
         'x-refresh-token': refreshToken,
-      },
+      }
     });
 
     if(!refreshResponse.ok) {
@@ -122,7 +124,6 @@ const removeClassFromDiv = (divID, className) => {
   document.getElementById(divID)?.classList.remove(className);
 };
 
-
 const getMonthYear = (dateString) => {
   // console.log(dateString); // 25-12-2024
   const [ day, month, year ] = dateString?.split("-"); // Split by '-'
@@ -132,14 +133,13 @@ const getMonthYear = (dateString) => {
   const monthName = date.toLocaleString('en-US', { month: 'short' });
 
   // console.log(`${monthName} ${year}`); // Dec 2024
-
   return `${monthName} ${year}`;
 };
 
 
 const getFormattedDate = (date) => {
-  const month = String(date.getMonth() + 1).padStart(2, '0'); // Use local time zone
   const day = String(date.getDate()).padStart(2, '0');
+  const month = String(date.getMonth() + 1).padStart(2, '0'); // Use local time zone
   const year = date.getFullYear(); // Use local time zone
 
   return `${day}-${month}-${year}`; // Return in "DD-MM-YYYY" format
