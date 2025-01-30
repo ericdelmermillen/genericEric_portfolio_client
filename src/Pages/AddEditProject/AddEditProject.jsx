@@ -50,14 +50,17 @@ const AddEditProject = ({ children }) => {
 
   const [ title, setTitle ] = useState('');
   const [ desc, setDesc ] = useState('');
+
   const [ deployedURL, setDeployedURL ] = useState('');
   const [ youtubeVideoURL, setYoutubeVideoURL ] = useState('');
   const [ githubClientURL, setGithubClientURL ] = useState('');
   const [ githubServerURL, setGithubServerURL ] = useState('');
   
   const [ initialFormCheck , setInitialFormCheck ] = useState(false);
+
   const [ titleIsValid, setTitleIsValid ] = useState(true);
   const [ descIsValid, setDescIsValid ] = useState(true);
+
   const [ deployedURLIsValid, setDeployedURLIsValid ] = useState(true);
   const [ youtubeURLIsValid, setYoutubeURLIsValid ] = useState(true);
   const [ githubClientURLIsValid, setGithubClientURLIsValid ] = useState(true);
@@ -128,25 +131,25 @@ const AddEditProject = ({ children }) => {
           if(dropTargetInputDisplayOrder === highestDisplayOrder) {
             if(photo.photoNo === dropTargetInputNo) {
               photo.displayOrder = dropTargetInputDisplayOrder - 1;
-            } else if (photo.photoNo === activeDraggedInputNo) {
+            } else if(photo.photoNo === activeDraggedInputNo) {
               photo.displayOrder = dropTargetInputDisplayOrder;
-            } else if (photo.displayOrder < dropTargetInputDisplayOrder && photo.displayOrder >= activeDraggedInputOldDisplayOrder) {
+            } else if(photo.displayOrder < dropTargetInputDisplayOrder && photo.displayOrder >= activeDraggedInputOldDisplayOrder) {
               photo.displayOrder--;
-            }
-          } else if (activeDraggedInputOldDisplayOrder > dropTargetInputDisplayOrder) {
+            };
+          } else if(activeDraggedInputOldDisplayOrder > dropTargetInputDisplayOrder) {
             if(photo.photoNo === dropTargetInputNo) {
               photo.displayOrder = dropTargetInputDisplayOrder + 1;
-            } else if (photo.photoNo === activeDraggedInputNo) {
+            } else if(photo.photoNo === activeDraggedInputNo) {
               photo.displayOrder = dropTargetInputDisplayOrder;
-            } else if (photo.displayOrder > dropTargetInputDisplayOrder && photo.displayOrder <= activeDraggedInputOldDisplayOrder) {
+            } else if(photo.displayOrder > dropTargetInputDisplayOrder && photo.displayOrder <= activeDraggedInputOldDisplayOrder) {
               photo.displayOrder++;
-            }
-          } else if (dropTargetInputDisplayOrder > activeDraggedInputOldDisplayOrder) {
+            };
+          } else if(dropTargetInputDisplayOrder > activeDraggedInputOldDisplayOrder) {
             if(photo.photoNo === dropTargetInputNo) {
               photo.displayOrder = dropTargetInputDisplayOrder - 1;
-            } else if (photo.photoNo === activeDraggedInputNo) {
+            } else if(photo.photoNo === activeDraggedInputNo) {
               photo.displayOrder = dropTargetInputDisplayOrder;
-            } else if (photo.displayOrder <= dropTargetInputDisplayOrder && photo.displayOrder > activeDraggedInputOldDisplayOrder) {
+            } else if(photo.displayOrder <= dropTargetInputDisplayOrder && photo.displayOrder > activeDraggedInputOldDisplayOrder) {
               photo.displayOrder--;
             };
           };
@@ -160,7 +163,6 @@ const AddEditProject = ({ children }) => {
   
     setActiveDragInput({id: -1});
   }, [activeDragInput.id]);
-
 
   const fetchProjectDetails = async (projectID) => {
     setIsLoading(true);
@@ -214,7 +216,6 @@ const AddEditProject = ({ children }) => {
         }))
       );
       
-      
       setTitle(project_title);
       setDesc(project_description.replace(/\n/g, "\n\n"));
 
@@ -250,7 +251,6 @@ const AddEditProject = ({ children }) => {
     return isValidLength;
   };
 
-
   const handleDescChange = (e) => {
     const descValue = e ? e.target.value : descRef.current.value;
     const isValidLength = descValue.trim().length >= 25;
@@ -260,7 +260,6 @@ const AddEditProject = ({ children }) => {
   
     return isValidLength;
   };
-
 
   const handleDeployedURLChange = (e) => {
     const deployedURLValue = e ? e.target.value : deployedURLRef.current.value;
@@ -272,7 +271,6 @@ const AddEditProject = ({ children }) => {
     return validURL;
   };
 
-  
   const handleYoutubeVideoURLChange = (e) => {
     const youtubeURLValue = e ? e.target.value : youtubeURLRef.current.value;
     const validURL = isValidURL(youtubeURLValue);
@@ -283,7 +281,6 @@ const AddEditProject = ({ children }) => {
     return validURL || youtubeURLValue.length === 0;
   };
   
-
   const handleGithubClientURLChange = (e) => {
     const githubClientURLValue = e ? e.target.value : githubClientURLRef.current.value;
     const validURL = isValidURL(githubClientURLValue);
@@ -294,7 +291,6 @@ const AddEditProject = ({ children }) => {
     return validURL || githubClientURLValue.length === 0;
   };
   
-
   const handleGithubServerURLChange = (e) => {
     const githubServerURLValue = e ? e.target.value : githubServerURLRef.current.value;
     const validURL = isValidURL(githubServerURLValue);
@@ -318,7 +314,6 @@ const AddEditProject = ({ children }) => {
       toast.error("Unable to verify token");
       return navigate("/")
     };
-
 
     let errors = 0;
     const hasPhotos = photos.some(photo => photo.photoPreview !== null);
@@ -454,13 +449,12 @@ const AddEditProject = ({ children }) => {
         method: method,
         headers: headers,
         body: JSON.stringify(project)
-        },
+        }
       );
       
       if(!response.ok) {
         const { errors, message } = await response.json();
         errors?.forEach(error => toast.error(error));
-
         toast.error(message);
 
         throw new Error(`Failed to send message: status ${response.status}`);
@@ -475,13 +469,11 @@ const AddEditProject = ({ children }) => {
         : toast.success("Project updated!");
 
       navigate("/");
-      
     } catch(error) {
       if(error.message.includes("401")) {
         toast.error("Unauthorized. Logging you out...");
         navigate("/");
       } else {
-        // toast.error("Error posting project");
         console.log(error.message);
       };
       
@@ -491,9 +483,7 @@ const AddEditProject = ({ children }) => {
     };
   };
 
-
   const handleCancel = () => {
-    console.log("Cancel");
     navigate("/");
   };
 
