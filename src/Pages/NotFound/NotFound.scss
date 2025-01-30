@@ -11,12 +11,12 @@
 	}
 
 	&__text {
-		text-align: center;
 		display: flex;
 		flex-direction: column;
 		font-size: var(--heading-small);
 		gap: 2rem;
 		justify-content: center;
+		text-align: center;
 	}
 
 	&__sub-heading {
