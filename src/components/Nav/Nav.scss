@@ -80,7 +80,7 @@
 
 		&:hover {
 			&::after {
-				@include mx.navLinkActive;
+				@include mx.afterAccent;
 			}
 		}
 	}
