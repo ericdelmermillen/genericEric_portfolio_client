@@ -16,10 +16,12 @@ import SideNav from './components/SideNav/SideNav.jsx';
 import WallPaper from './components/WallPaper/WallPaper.jsx';
 import "./App.scss";
 
+const MIN_LOADING_INTERVAL = import.meta.env.VITE_MIN_LOADING_INTERVAL;
+
 const App = () => {
   const { 
     colorMode,
-    toggleSideNav,
+    setShowSideNav,
     isLoading,
     isLoggedIn,
     logoutUser
@@ -30,11 +32,9 @@ const App = () => {
    const handleLogoutNav = () => {
     logoutUser();
     navigate("/");
-   };
-   
-   const handleLogoutSideNav = () => {
-    handleLogoutNav();
-    toggleSideNav();
+    setTimeout(() => {
+      setShowSideNav(false);
+    }, MIN_LOADING_INTERVAL);
    };
 
   return (
@@ -42,7 +42,7 @@ const App = () => {
       <div className="app" data-color-mode={colorMode}>
         <div className="app__backgroundDiv"></div>
 
-          <div className={`loading ${isLoading ? "isLoading" : ""}`}></div>
+        <div className={`loading ${isLoading ? "isLoading" : ""}`}></div>
         
         <div className="app__inner">
 
@@ -53,6 +53,7 @@ const App = () => {
                   <button
                     className="app__logout--nav"
                     onClick={handleLogoutNav}
+                    aria-label="Logout"
                   >
                     Logout
                   </button>
@@ -69,7 +70,7 @@ const App = () => {
                   (
                     <button
                       className="app__logout--sideNav"
-                      onClick={handleLogoutSideNav}
+                      onClick={handleLogoutNav}
                     >
                       Logout
                     </button>
@@ -94,15 +95,6 @@ const App = () => {
 
             <Route 
               path="/home" 
-              element={
-                <LightBoxContextProvider>
-                  <Home />
-                </LightBoxContextProvider>
-              } 
-            />
-
-            <Route 
-              path="/home/" 
               element={
                 <LightBoxContextProvider>
                   <Home />
