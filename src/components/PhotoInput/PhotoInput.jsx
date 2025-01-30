@@ -3,6 +3,7 @@ import { checkIfIsFirefox } from '../../../utils/utils.js';
 import PhotoPlaceholder from "../../assets/svgs/PhotoPlaceholder.jsx";
 import './PhotoInput.scss';
 
+const MIN_LOADING_INTERVAL = import.meta.env.VITE_MIN_LOADING_INTERVAL;
 const isFirefox = checkIfIsFirefox();
 
 const PhotoInput = ({ 
@@ -26,8 +27,12 @@ const PhotoInput = ({
 
   const handleFileChange = async (e) => {
     const file = e.target.files[0];
-    setShowImage(true);
-    file && handleImageChange(e, photo.photoNo);
+    if(file) {
+      handleImageChange(e, photo.photoNo);
+      setTimeout(() => {
+        setShowImage(true);
+      }, MIN_LOADING_INTERVAL);
+    };
   };
 
   const handleClearInput = (e) => {
@@ -43,7 +48,6 @@ const PhotoInput = ({
       });
     });
   };
-  
 
   const handleDragOver = (e) => {
     e.preventDefault();
