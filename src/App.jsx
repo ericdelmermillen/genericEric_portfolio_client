@@ -29,7 +29,7 @@ const App = () => {
 
    const navigate = useNavigate();
    
-   const handleLogoutNav = () => {
+   const handleLogout = () => {
     logoutUser();
     navigate("/");
     setTimeout(() => {
@@ -52,7 +52,7 @@ const App = () => {
                 (
                   <button
                     className="app__logout--nav"
-                    onClick={handleLogoutNav}
+                    onClick={handleLogout}
                     aria-label="Logout"
                   >
                     Logout
@@ -70,7 +70,7 @@ const App = () => {
                   (
                     <button
                       className="app__logout--sideNav"
-                      onClick={handleLogoutNav}
+                      onClick={handleLogout}
                     >
                       Logout
                     </button>
