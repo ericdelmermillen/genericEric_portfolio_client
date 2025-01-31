@@ -19,7 +19,7 @@ const headerSocials = [
 ];
 
 const Header = () => {
-  const { colorMode, scrollYPos, hideNav } = useAppContext();
+  const { colorMode, hideNav } = useAppContext();
 
   const handleHideNav = () => {
     hideNav();
@@ -59,6 +59,7 @@ const Header = () => {
               className="header__button"
               href="#about"
               onClick={handleHideNav}
+              aria-label="Scroll to the About section"
             >
               <DownIcon className={"header__button-down"}/>
               <span className="header__button-text">
@@ -71,11 +72,12 @@ const Header = () => {
           <ul className="header__socials">
             {headerSocials.map((social, idx) => (
 
-                <li key={idx} className="header__social">
-                  <a href={social.socialLink} target="_blank">
-                    <social.socialIcon className="header__social-icon" />
-                  </a>
-                </li>
+              <li key={idx} className="header__social">
+                <a href={social.socialLink} target="_blank" rel="noopener noreferrer">
+                  <social.socialIcon className="header__social-icon" />
+                </a>
+              </li>
+
             ))}
 
           </ul>
