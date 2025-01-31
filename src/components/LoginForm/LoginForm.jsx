@@ -20,17 +20,11 @@ const LoginForm = ({ children }) => {
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
 
-  const { 
-    isLoading, 
-    setIsLoading, 
-    loginUser 
-  } = useAppContext();
-
+  const { isLoading, loginUser } = useAppContext();
 
   const handleTogglePasswordVisibility = () => {
     setShowPassword(c => !c);
   };
-
 
   const handleEmailChange = (e) => {
     const emailValue = e ? e.target.value : emailRef.current.value;
@@ -41,7 +35,6 @@ const LoginForm = ({ children }) => {
 
     return emailIsValid;
   };
-
 
   const handlePasswordChange = (e) => {
     const passwordValue = e ? e.target.value : passwordRef.current.value;
@@ -71,14 +64,12 @@ const LoginForm = ({ children }) => {
     return loginUser(email, password);
   };
 
-
   // useEffect to auto focus the email input
   useEffect(() => {
     if(emailRef.current) {
       emailRef.current.focus();
     };
   }, []);
-
 
   return (
     <>
