@@ -40,7 +40,11 @@ const Profile = () => {
                 </div>
 
                 {item.itemHref && item.itemHref.includes("@") ? (
-                  <a href={item.itemHref} className="profile__email-link">
+                  <a 
+                    href={item.itemHref} 
+                    className="profile__email-link" 
+                    aria-label={`Email: ${itemValue}`}
+                  >
                     <p className="profile__item-value">
                       {item.itemValue.split("@").map((part, idx) => (
                         <React.Fragment key={idx}>

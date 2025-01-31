@@ -5,6 +5,6 @@ const PortfolioCardPlaceholder = () => {
     <>
       <div className='portfolioCardPlaceholder'></div>
     </>
-  );};
+  )};
 
 export default PortfolioCardPlaceholder;
