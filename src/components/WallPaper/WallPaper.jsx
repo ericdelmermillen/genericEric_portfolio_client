@@ -11,7 +11,6 @@ import { PiNetworkFill } from "react-icons/pi";
 import { VscGitMerge } from "react-icons/vsc";
 import "./WallPaper.scss";
 
-
 const iconOptions = [
   FaCode,
   PiNetworkFill,
@@ -27,14 +26,12 @@ const iconOptions = [
   LiaMicrochipSolid,
 ];
 
-
 const getRandomIconsForRow = (itemsPerRow) => {
   return Array.from({ length: itemsPerRow }, () => {
     const randomIdx = Math.floor(Math.random() * iconOptions.length);
     return iconOptions[randomIdx];
   });
 };
-
 
 const WallPaperRow = ({ className, colorMode, rowIcons }) => {
 
@@ -57,7 +54,6 @@ const WallPaperRow = ({ className, colorMode, rowIcons }) => {
       ))}
     </div>
   )};
-
 
 const WallPaper = memo(() => {
   const [ iconsMatrix, setIconsMatrix ] = useState([]);
@@ -92,7 +88,6 @@ const WallPaper = memo(() => {
       getRandomIconsForRow(itemsPerRow)
     );
 
-
   // useEffect to generate icons matrix
   useEffect(() => {
     setIconsMatrix(generateIconsMatrix());
@@ -103,7 +98,6 @@ const WallPaper = memo(() => {
 
     return () => clearInterval(interval);
   }, [itemsPerRow]);
-
 
   return (
     <div className="wallpaper">
