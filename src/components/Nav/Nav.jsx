@@ -4,6 +4,7 @@ import { scrollToTop } from "../../../utils/utils.js";
 import Logo from "../../assets/svgs/Logo.jsx";
 import ColorModeToggle from "../ColorModeToggle/ColorModeToggle";
 import "./Nav.scss";
+import { useMemo } from "react";
 
 const MIN_LOADING_INTERVAL = import.meta.env.VITE_MIN_LOADING_INTERVAL;
 
@@ -19,7 +20,9 @@ const Nav = ({ children }) => {
    } = useAppContext();
    
   const { pathname } = useLocation();
-  const isOnHome = pathname === "/" || pathname === "/home" || pathname === "/home/";
+  const isOnHome = useMemo(() => pathname === "/" || pathname === "/home" || pathname === "/home/");
+
+  console.log(isOnHome)
 
   const handleScrollToTop = () => {
     setIsLoading(true);
@@ -30,7 +33,6 @@ const Nav = ({ children }) => {
   };
 
   const handleSetShowSideNavTrue = () => setShowSideNav(true);
-
 
   return (
     <nav id="nav" className={`nav ${prevScrollYPos < scrollYPos && scrollYPos > 50 ? "hide" : ""}`}>
