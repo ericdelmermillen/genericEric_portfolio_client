@@ -43,7 +43,6 @@ const BlogFeed = () => {
   const [ blogPostLoadedCount, setBlogPostLoadedCount ] = useState(0);
 
   const { isLoading, setIsLoading} = useAppContext();
-
    
    const handleFetchBlogPosts = async () => {
     if(allResultsFetched && !isPaginationComplete) {
@@ -91,7 +90,6 @@ const BlogFeed = () => {
           if(page === 1) {
             setBlogPosts(posts);
             scrollToTop();
-            
           } else {
             const updatedBlogPosts = [...new Set([...blogPosts, ...posts])];
             setBlogPosts(updatedBlogPosts);
@@ -129,7 +127,7 @@ const BlogFeed = () => {
   useEffect(() => {
     if(blogPostLoadedCount === blogPosts.length && !isInitialLoad) {
       setIsLoading(false);
-    }
+    };
 
   }, [blogPosts.length, blogPostLoadedCount]);
 
