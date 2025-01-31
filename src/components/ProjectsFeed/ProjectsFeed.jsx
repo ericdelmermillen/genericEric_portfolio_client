@@ -67,7 +67,6 @@ const ProjectsFeed = () => {
     }, LIGHTBOX_TIMING_INTERVAL);
   };
 
-
   const fetchProjects = async () => {
     if(!isFinalPageFetched) {
       setIsLoading(true);
@@ -77,11 +76,11 @@ const ProjectsFeed = () => {
       try {
         const response = await fetch(`${BASE_URL}/projects/all?limit=${PROJECTS_PER_PAGE}&offset=${offset}`);
 
-        const { projects, isPaginationComplete, error } = await response.json();
-
         if(!response.ok) {
           throw new Error(error);
         };
+        
+        const { projects, isPaginationComplete, error } = await response.json();
 
         if(!projects.length && isInitialFetch) {
           setIsInitialFetch(false);
@@ -124,7 +123,7 @@ const ProjectsFeed = () => {
     };
   };
 
-  // initial fetch useEffect
+  // fetch nest page useEffect
   useEffect(() => {
     if(!isFinalPageFetched) {
       fetchProjects();
@@ -189,6 +188,7 @@ const ProjectsFeed = () => {
             ? handleFetchNextPage
             : null
           }
+          aria-label="Load more projects"
         >
           Load More Posts
         </button>
