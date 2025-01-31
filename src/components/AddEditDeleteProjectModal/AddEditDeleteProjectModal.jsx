@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { useAppContext } from "../../contexts/AppContext";
 import { addClassToDiv, removeClassFromDiv } from "../../../utils/utils";
 import { removeTokens, setTokens } from '../../../utils/utils.js';
-import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import "./AddEditDeleteProjectModal.scss";
 
@@ -17,7 +17,6 @@ const AddEditDeleteProjectModal = ({
   projectID,
   handleClearActionState,
   setProjectsData,
-  lightBoxImages,
   setLightBoxImages
 }) => {
 
@@ -83,16 +82,15 @@ const AddEditDeleteProjectModal = ({
   
       setTokens(newToken, newRefreshToken);
 
-      setProjectsData(c => c.filter(summary => summary.project_id !== projectID));
+      setProjectsData(c => c.filter((summary) => summary.project_id !== projectID));
 
-      setLightBoxImages(lightBoxImages.filter(image => image.img_id !== projectID).map(image => (
-
-        {
-          img_id: image.img_id,
-          img_alt: image.img_alt,
-          img_src: image.img_src
-        }
-      )));
+      setLightBoxImages(c => 
+        c.filter((image) => image.img_id !== projectID).map(({ img_id, img_alt, img_src }) => ({
+          img_id,
+          img_alt,
+          img_src
+        }))
+      );
 
       toast.success(message);  
     } catch(error) {
@@ -119,7 +117,7 @@ const AddEditDeleteProjectModal = ({
       setTimeout(() => {
         if(showActionModal) {
           setShowActionModal(false);
-        }
+        };
       }, MODAL_TRANSITION_INTERVAL);
     };
   }, [scrollYPos, prevScrollYPos]);
@@ -131,13 +129,12 @@ const AddEditDeleteProjectModal = ({
       addClassToDiv("addEditDeleteProjectModal", "show");
       setModalIsOpen(true);
     }, MODAL_TRANSITION_INTERVAL);
-  }, []);
+  }, [MODAL_TRANSITION_INTERVAL]);
 
 
   return (
     <>
       <div id="addEditDeleteProjectModal" className="addEditDeleteProjectModal">
-
         <div className="addEditDeleteProjectModal__overlay" onClick={handleOverlayClick}></div>
 
         <div className="addEditDeleteProjectModal__inner">
