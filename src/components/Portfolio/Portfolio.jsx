@@ -155,27 +155,27 @@ const Portfolio = () => {
               project.display_order = dropTargetDisplayOrder - 1;
             } else if(project.project_id === activeDraggedID) {
               project.display_order = dropTargetDisplayOrder;
-            } else if (project.display_order < dropTargetDisplayOrder && project.display_order >= activeDraggedProjectOldDisplayOrder) {
+            } else if(project.display_order < dropTargetDisplayOrder && project.display_order >= activeDraggedProjectOldDisplayOrder) {
               project.display_order--;
             };
 
-          } else if (activeDraggedProjectOldDisplayOrder > dropTargetDisplayOrder) {
+          } else if(activeDraggedProjectOldDisplayOrder > dropTargetDisplayOrder) {
 
             if(project.project_id === dropTargetID) {
               project.display_order = dropTargetDisplayOrder + 1;
-            } else if (project.project_id === activeDraggedID) {
+            } else if(project.project_id === activeDraggedID) {
               project.display_order = dropTargetDisplayOrder;
-            } else if (project.display_order > dropTargetDisplayOrder && project.display_order <= activeDraggedProjectOldDisplayOrder) {
+            } else if(project.display_order > dropTargetDisplayOrder && project.display_order <= activeDraggedProjectOldDisplayOrder) {
               project.display_order++;
             };
 
-          } else if (dropTargetDisplayOrder > activeDraggedProjectOldDisplayOrder) {
+          } else if(dropTargetDisplayOrder > activeDraggedProjectOldDisplayOrder) {
 
             if(project.project_id === dropTargetID) {
               project.display_order = dropTargetDisplayOrder - 1;
-            } else if (project.project_id === activeDraggedID) {
+            } else if(project.project_id === activeDraggedID) {
               project.display_order = dropTargetDisplayOrder;
-            } else if (project.display_order <= dropTargetDisplayOrder && project.display_order > activeDraggedProjectOldDisplayOrder) {
+            } else if(project.display_order <= dropTargetDisplayOrder && project.display_order > activeDraggedProjectOldDisplayOrder) {
               project.display_order--;
             };
 
@@ -321,11 +321,9 @@ const Portfolio = () => {
       setIsLoading(false);
     }, MIN_LOADING_INTERVAL);
   };
-  
 
   // useEffect to get portfolio summaries for ProjectCards
   useEffect(() => {
-
     if(isInitialMount) {
       setLightBoxImages(initialImages);
       getPortfolioProjects(PROJECT_COUNT);
@@ -343,7 +341,6 @@ const Portfolio = () => {
       }, MIN_LOADING_INTERVAL);
     };
   }, [rerenderTrigger, isInitialMount]);
-
 
   return (
     <>
@@ -393,6 +390,7 @@ const Portfolio = () => {
               <button 
                 className={`portfolio__editModeButton ${isLoggedIn && !isEditMode ? "" : "hide"}`}
                 onClick={handleSetIsEditModeTrue}
+                aria-label="Enter edit mode"
               >
                 <MdModeEdit className="portfolio__editMode-icon"/>
               </button>
