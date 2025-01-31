@@ -1,5 +1,14 @@
 import { useState, useEffect } from "react";
-import { SiJavascript, SiTypescript, SiExpress, SiAdobe, SiMysql, SiRedux, SiPostman, SiNextdotjs } from "react-icons/si";
+import { 
+  SiJavascript, 
+  SiTypescript, 
+  SiExpress, 
+  SiAdobe, 
+  SiMysql, 
+  SiRedux, 
+  SiPostman, 
+  SiNextdotjs 
+} from "react-icons/si";
 import { FaHtml5, FaReact, FaAws } from "react-icons/fa";
 import { FaGithub, FaSass } from "react-icons/fa6";
 import { IoLogoCss3 } from "react-icons/io5";
@@ -26,7 +35,6 @@ const skills = [
   { skillName: "Adobe", skillIcon: SiAdobe },
   { skillName: "Figma", skillIcon: PiFigmaLogoFill },
 ];
-
 
 const Skills = () => {
   const [ isNarrowWindow, setIsNarrowWindow ] = useState(false);

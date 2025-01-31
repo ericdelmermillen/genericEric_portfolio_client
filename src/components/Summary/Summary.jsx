@@ -16,7 +16,6 @@ const Summary = () => {
     setTimeout(() => {
       hideNav()
     }, MIN_LOADING_INTERVAL * 3);
-
   };
 
   return (
