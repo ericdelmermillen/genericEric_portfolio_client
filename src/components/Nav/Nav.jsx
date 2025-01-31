@@ -22,8 +22,6 @@ const Nav = ({ children }) => {
   const { pathname } = useLocation();
   const isOnHome = useMemo(() => pathname === "/" || pathname === "/home" || pathname === "/home/");
 
-  console.log(isOnHome)
-
   const handleScrollToTop = () => {
     setIsLoading(true);
     scrollToTop();
