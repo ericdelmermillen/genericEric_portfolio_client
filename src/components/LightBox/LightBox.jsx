@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import { useAppContext } from "../../contexts/AppContext";
 import { IoChevronBackOutline, IoChevronForwardOutline } from "react-icons/io5";
 import { addClassToDiv, removeClassFromDiv } from "../../../utils/utils";
@@ -114,6 +114,7 @@ const LightBoxImage = ({
           src={`${AWS_SS3_BUCKET_URL}/${imgSrc}`} 
           alt={imgAlt} 
           className="lightBoxImage__img" 
+          loading="lazy"
         />
       </div>
     </>
@@ -259,6 +260,7 @@ const LightBox = ({
                       className="lightBox__button lightBox__button--prev"
                       onClick={handlePrevClick}
                       disabled={isTransitioning}
+                      aria-label="Previous image"
                     >
                       <IoChevronBackOutline className="lightBox__prev-icon"/>
                     </button>
@@ -266,6 +268,7 @@ const LightBox = ({
                       className="lightBox__button lightBox__button--next"
                       onClick={handleNextClick}
                       disabled={isTransitioning}
+                      aria-label="Next image"
                     >
                       <IoChevronForwardOutline className="lightBox__next-icon"/>
                     </button>
