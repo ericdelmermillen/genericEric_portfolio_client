@@ -35,26 +35,27 @@ const Services = () => {
     <>  
       <section className="services">
         <div className="services__inner">
-        <div className={`services__bg--light ${colorMode === "light" ? "show" : ""}`}></div>
-        <div className={`services__bg--dark ${colorMode === "dark" ? "show" : ""}`}></div>
+        <div className={`services__bg--light${colorMode === "light" ? " show" : ""}`}></div>
+        <div className={`services__bg--dark${colorMode === "dark" ? " show" : ""}`}></div>
+
         <div className="services__overlay"></div>
 
           <div className="services__content">
-            <h4 className="services__heading">
+            <h2 className="services__heading">
               Services
-            </h4>
-            <h2 className="services__sub-heading">
-              What Can I Do For You?
             </h2>
+            <h3 className="services__sub-heading">
+              What Can I Do For You?
+            </h3>
             <p className="services__lead">
               Here are some of the services that I offer:
             </p>
 
             <ul className="services__services-list">
 
-              {services.map((service, index) => (
+              {services.map((service, idx) => (
 
-                <li key={index} className="services__service">
+                <li key={idx} className="services__service">
                   <div className="services__item">
                     <service.icon className={service.iconClass} />
                     <h3 className="services__service-name">{service.name}</h3>
@@ -68,7 +69,6 @@ const Services = () => {
           </div>
         </div>
       </section>
-      
     </>
   )};
 
