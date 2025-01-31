@@ -90,7 +90,6 @@ const Project = ({
       }, MIN_LOADING_INTERVAL * 2);
     };
   };
-  
 
   //add event listener for resize of window and call handleResize for initial calculation
   useEffect(() => {
@@ -140,7 +139,6 @@ const Project = ({
               )
             : null
           }
-
 
           <div className="project__text">
 
@@ -227,7 +225,7 @@ const Project = ({
               <button 
                 className="project__show-full-info"  
                 onClick={handleToggleShowFullInfo}>
-                  {showFullInfo ? "Show Less" : "Show Full Info"}
+                {showFullInfo ? "Show Less" : "Show Full Info"}
                 </button>
             : null
           }
