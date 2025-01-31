@@ -140,6 +140,7 @@ const Project = ({
             : null
           }
 
+
           <div className="project__text">
 
             <h3 
@@ -224,9 +225,11 @@ const Project = ({
             ?
               <button 
                 className="project__show-full-info"  
-                onClick={handleToggleShowFullInfo}>
+                onClick={handleToggleShowFullInfo}
+                aria-label={showFullInfo ? "Show less information" : "Show full information"}
+              >
                 {showFullInfo ? "Show Less" : "Show Full Info"}
-                </button>
+              </button>
             : null
           }
      
