@@ -7,12 +7,12 @@ const About = () => {
       <section className="about">
         <div id="about" className="about__inner">
           <header className="about__header">
-            <h4 className="about__heading">
+            <h2 className="about__heading">
               ABOUT ME
-            </h4>
-            <h2 className="about__sub-heading">
-              Let me introduce myself
             </h2>
+            <h3 className="about__sub-heading">
+              Let me introduce myself
+            </h3>
           </header>
 
           <div className="about__summary">
