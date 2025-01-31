@@ -29,7 +29,6 @@ const SideNav = ({ children }) => {
 
   const handleSetShowSideNavFalse = () => setShowSideNav(false);
 
-
   return (
     <>
       {showSideNav 
