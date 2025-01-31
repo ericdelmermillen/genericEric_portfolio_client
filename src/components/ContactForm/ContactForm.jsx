@@ -33,7 +33,6 @@ const ContactForm = ({ children }) => {
   const navigate = useNavigate();
   const isOnContact = location.pathname === "/contact" || location.pathname === "/contact/";
 
-
   const handleNameChange = (e) => {
     const nameValue = e ? e.target.value : contactNameRef.current.value;
     const isValidLength = nameValue.trim().length >= 2;
@@ -43,7 +42,6 @@ const ContactForm = ({ children }) => {
   
     return isValidLength;
   };
-  
 
   const handleEmailChange = (e) => {
     const emailValue = e ? e.target.value : emailRef.current.value;
@@ -55,7 +53,6 @@ const ContactForm = ({ children }) => {
     return emailIsValid;
   };
 
-
   const handleMessageChange = (e) => {
     const messageValue = e ? e.target.value : messageRef.current.value;
     const isValidLength = messageValue.trim().length >= 25;
@@ -65,7 +62,6 @@ const ContactForm = ({ children }) => {
   
     return isValidLength;
   };
-  
 
   const clearForm = () => {
     setName("");
@@ -74,7 +70,6 @@ const ContactForm = ({ children }) => {
     setMessage("");
   };
 
-  
   const handleSubmit = async (e) => {
     e.preventDefault();
     setInitialFormCheck(true);
@@ -135,8 +130,7 @@ const ContactForm = ({ children }) => {
     };
   };
   
-
-  // useEffect for initial laoding spinner
+  // useEffect for initial loading spinner
   useEffect(() => {
     if(isOnContact) {
       setIsLoading(true);
@@ -144,8 +138,8 @@ const ContactForm = ({ children }) => {
       setTimeout(() => {
         setIsLoading(false);
       }, MIN_LOADING_INTERVAL);
-    }
-  }, [])
+    };
+  }, [isOnContact]);
 
   return (
     <>

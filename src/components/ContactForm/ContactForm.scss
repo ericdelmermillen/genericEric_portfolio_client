@@ -17,6 +17,7 @@
 	}
 
 	&__heading {
+		margin-bottom: 2rem !important;
 		@include mx.formHeading;
 
 		&::after {
