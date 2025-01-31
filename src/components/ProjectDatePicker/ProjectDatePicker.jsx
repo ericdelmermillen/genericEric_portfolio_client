@@ -29,7 +29,6 @@ const ProjectDatePicker = ({
     setProjectDate(getFormattedDate(date));
   };
 
-
   // useEffect to set initial date for date picker to today's date if addProject
   useEffect(() => {
     if(isAddProject) {
@@ -46,6 +45,7 @@ const ProjectDatePicker = ({
           className='projectDatePicker__selector'
           dateFormat="MM/dd/yyyy"
           placeholderText={projectDate ? "Select a date" : projectDate}
+          aria-label="Select project date"
         />
         <div className="projectDatePicker__icon-container">
           <CalendarIcon 
