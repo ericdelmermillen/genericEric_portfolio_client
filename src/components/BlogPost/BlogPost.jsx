@@ -1,7 +1,8 @@
-import { useState, useRef, useEffect } from "react";
-import { useAppContext } from "../../contexts/AppContext";
+import { useState, useRef, useEffect, useCallback } from "react";
 import BlogPostPlaceholder from "../BlogPostPlaceholder/blogPostPlaceholder";
 import "./BlogPost.scss";
+
+const MIN_LOADING_INTERVAL = import.meta.env.VITE_MIN_LOADING_INTERVAL;
 
 const BlogPost = ({ 
   isInitialPlaceholder,
@@ -12,8 +13,6 @@ const BlogPost = ({
   handleIncrementBlogPostLoadedCount })=> {
   
   const embedUrl = `https://www.youtube.com/embed/${videoID}?rel=0`;
-  
-  const { LIGHTBOX_TIMING_INTERVAL } = useAppContext();
   
   const [ showFullInfo, setShowFullInfo ] = useState(false);
   const [ hasLongTitle, setHasLongTitle ] = useState(false);
@@ -37,29 +36,29 @@ const BlogPost = ({
     handleIncrementBlogPostLoadedCount();
     setTimeout(() => {
       setShowPlaceholder(false);
-    }, LIGHTBOX_TIMING_INTERVAL);
+    }, MIN_LOADING_INTERVAL);
 
     setTimeout(() => {
       setDisplayNonePlaceholder(true);
       setPostIsReady(true);
-    }, 500);
+    }, MIN_LOADING_INTERVAL * 2);
   };  
 
-  const checkHasLongTitle = () => {
+  const checkHasLongTitle = useCallback(() => {
     if(titleRef.current) {
       const lineHeight = parseFloat(getComputedStyle(titleRef.current).lineHeight);
       const height = titleRef.current.getBoundingClientRect().height;
       setHasLongTitle(height > lineHeight); 
     };
-  };
+  });
 
-  const checkHasLongDesc = () => {
+  const checkHasLongDesc = useCallback(() => {
     if(descRef.current) {
       const lineHeight = parseFloat(getComputedStyle(descRef.current).lineHeight);
       const height = descRef.current.getBoundingClientRect().height;
       setHasLongDesc(description.split("\n").length > 1 || height > (lineHeight * 3)); 
     };
-  };
+  });
 
   const handleResize = () => {
     checkHasLongTitle();
@@ -103,6 +102,7 @@ const BlogPost = ({
             title={title}
             allowFullScreen={true}
             onLoad={handleOnLoad}
+            aria-label={`YouTube video player for ${title}`}
           ></iframe>
 
           <div className="blogPost__video-text">

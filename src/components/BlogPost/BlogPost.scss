@@ -3,8 +3,6 @@
 
 .blogPost {
 	& {
-		// to offset border around placeholder
-		height: 240px;
 		max-height: 375px;
 		min-height: 375px;
 		opacity: 1;
@@ -190,6 +188,7 @@
 		&--title {
 			font-size: inherit;
 			font-weight: normal;
+			line-height: var(--line-height-general);
 
 			&.ellipsis {
 				@include mx.ellipsisOneLine;
