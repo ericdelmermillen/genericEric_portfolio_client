@@ -5,7 +5,9 @@ const Skill = ({ children, skillName}) => {
     <>
       <li className='skill__item'>
         {children}
-        <span className='skill__skill-name'>{skillName}</span>
+        <span className='skill__skill-name'>
+          {skillName}
+        </span>
       </li>
     </>
   )};
