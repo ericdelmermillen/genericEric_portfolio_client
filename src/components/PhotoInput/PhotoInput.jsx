@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useState, useRef } from 'react';
 import { checkIfIsFirefox } from '../../../utils/utils.js';
 import PhotoPlaceholder from "../../assets/svgs/PhotoPlaceholder.jsx";
 import './PhotoInput.scss';
@@ -89,6 +89,7 @@ const PhotoInput = ({
             src={photo.photoPreview}
             onLoad={handleImageLoad} 
             draggable={true}
+            loading="lazy"
           />
           <PhotoPlaceholder
             className={`photoInput__placeholder ${showImage 
@@ -112,6 +113,7 @@ const PhotoInput = ({
         <label 
           htmlFor={`fileInput_${photo.photoNo}`} 
           className="photoInput__fileLabel"
+          aria-label={`Choose a photo for position ${photo.photoNo}`}
         >
           Choose a photo
         </label>
@@ -122,6 +124,7 @@ const PhotoInput = ({
           accept="image/jpeg, image/png"
           className="photoInput__fileInput"
           onChange={handleFileChange}
+          aria-label={`File input for position ${photo.photoNo}`}
         />
       </div>
     </>
