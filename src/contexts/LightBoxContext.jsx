@@ -14,7 +14,7 @@ const LightBoxContextProvider = ( { children }) => {
 
   const handleCardClick = useCallback((idx = 0) => {
     if(lightBoxImages.length === 0) {
-      return
+      return;
     }; 
     
     setShowLightBox(true);
@@ -29,7 +29,6 @@ const LightBoxContextProvider = ( { children }) => {
     setCurrentIdx((prevIdx) => (prevIdx - 1 + lightBoxImages.length) % lightBoxImages.length);
   }, [lightBoxImages.length]);
   
-
   const contextValues = {
     showLightBox, 
     setShowLightBox,

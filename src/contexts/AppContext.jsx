@@ -175,6 +175,24 @@ const AppContextProvider = ({ children }) => {
     };
   };
 
+  // useEffect to disable scroll to to on esc press
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      e.stopPropagation();
+
+      if(e.key === "Escape") {
+        e.preventDefault();
+      };
+    };
+  
+    document.addEventListener("keydown", handleKeyDown, true); // Capture phase
+  
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown, true);
+    };
+  }, []);
+  
+
 
   // update local storage when color mode state changes
   useEffect(() => {

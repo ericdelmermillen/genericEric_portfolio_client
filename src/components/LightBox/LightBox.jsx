@@ -39,7 +39,6 @@ const LightBoxImage = ({
     setIsTransitioning(false);
   }, []);
 
-
   // useEffect to handle transitions when moving forward and backward and not when isInitialView
   useEffect(() => {
     
@@ -103,7 +102,7 @@ const LightBoxImage = ({
       setTimeout(() => {
         setIsTransitioning(false);
       }, TIMEOUT_DELAY + 400);
-    }
+    };
 
   }, [idx, currentIdx]);
   
@@ -158,7 +157,6 @@ const LightBox = ({
         image.classList = `lightBoxImage ${side}`;
       };
     });
-    
   };
 
   const handlePrevClick = () => {
@@ -199,14 +197,12 @@ const LightBox = ({
     };
   };
   
-
   // useEffect to add show class to lightbox after initial render to allow for transitions
   useEffect(() => {
     setTimeout(() => {
       addClassToDiv("lightBox", "show");
     }, MODAL_TRANSITION_INTERVAL);
   }, []);
-
 
   // useEffect to close overlay on scroll
   useEffect(() => {
@@ -222,6 +218,19 @@ const LightBox = ({
     };
   }, [scrollYPos, prevScrollYPos]);
 
+  // useEffect to close LightBox on esc click
+  useEffect(() => {
+  const handleKeyDown = (e) => {
+
+    if(e.key === "Escape") {
+      handleOverlayClick();
+    };
+  };
+
+  document.addEventListener("keydown", handleKeyDown, true); // Capture phase
+
+  return () => document.removeEventListener("keydown", handleKeyDown, true);
+}, []);
 
   return (
     <>
