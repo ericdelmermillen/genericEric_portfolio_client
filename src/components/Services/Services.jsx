@@ -23,7 +23,7 @@ const services = [
       "Drive traffic and boost your online visibility with targeted ad campaigns and optimized content.",
     icon: FaCartShopping,
     iconClass: "services__service-icon services__service-icon--small"
-  },
+  }
 ];
 
 const Services = () => {

@@ -130,7 +130,6 @@ const ProjectsFeed = () => {
     };
   }, [page]);
 
-
   return (
     <>
       <div className="projectsFeed">
