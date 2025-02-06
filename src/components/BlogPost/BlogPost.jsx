@@ -75,7 +75,6 @@ const BlogPost = ({
     };
   }, []);
 
-
   if(isInitialPlaceholder) {
     return (
       <BlogPostPlaceholder />
