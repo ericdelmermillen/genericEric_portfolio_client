@@ -4,13 +4,12 @@ const TypingText = ({
   textToType = 'text to type', 
   typingDelayInterval = 200, 
   classNames, 
-  elementType = 'h1', 
+  elementType = 'h1'
 }) => {
   
   const [ typingText, setTypingText ] = useState('');
   const typingTextRef = useRef('');
   const intervalRef = useRef(null);
-
 
   // Clear previous interval if any
   // intervals not automatically cleared by unmounting
@@ -41,13 +40,13 @@ const TypingText = ({
   }, [textToType, typingDelayInterval]);
 
   return (
-    <div>
+    <>
       {createElement(
         elementType, 
         { className: classNames }, 
         typingText
       )}
-    </div>
+    </>
   )};
 
 export default TypingText;
