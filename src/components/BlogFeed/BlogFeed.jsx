@@ -122,7 +122,6 @@ const BlogFeed = () => {
     setBlogPostLoadedCount(c => c + 1);
   };
 
-
   // useEffect to handle setting isLoading false after loaded and fetched post increment count reaches equality
   useEffect(() => {
     if(blogPostLoadedCount === blogPosts.length && !isInitialLoad) {
@@ -131,7 +130,6 @@ const BlogFeed = () => {
 
   }, [blogPosts.length, blogPostLoadedCount]);
 
-  
   // initial blogPost fetch on mount
   useEffect(() => {
     if(isInitialLoad) {
@@ -139,7 +137,6 @@ const BlogFeed = () => {
       handleFetchBlogPosts();
     };
   }, []);
-
 
   return (
     <>
