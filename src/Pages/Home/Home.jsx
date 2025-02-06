@@ -21,7 +21,6 @@ const Home = () => {
     document.title = "Eric Millen | Portfolio Website";
   }, []);
   
-  
   return (
     <>
       <div className="home">
