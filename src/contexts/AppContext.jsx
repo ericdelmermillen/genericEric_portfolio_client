@@ -3,15 +3,18 @@ import {
   useContext, 
   useState,
   useRef,
-  useEffect
+  useEffect,
+  useMemo
 } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
+import { throttle } from "lodash";
 import { checkTokenIsValid, removeTokens, scrollToTop } from "../../utils/utils";
 import { toast } from 'react-hot-toast'; 
 import { setTokens } from "../../utils/utils.js"
 
 const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 const MIN_LOADING_INTERVAL = import.meta.env.VITE_MIN_LOADING_INTERVAL;
+const LONG_THROTTLE_VALUE = import.meta.env.VITE_LONG_THROTTLE_VALUE;
 
 const AppContext = createContext();
 
@@ -142,38 +145,45 @@ const AppContextProvider = ({ children }) => {
     document.getElementById("nav").classList.add("hide");
   };
 
-  const handleBlogClick = () => {
-    if(location.pathname.includes("blog")) {
-      scrollToTop();
-      setIsLoading(true);
-      
-      setTimeout(() => {
-        setIsLoading(false);
-      }, MIN_LOADING_INTERVAL);
-    };
-  };
+  const handleBlogClick = useMemo(() => 
+    throttle(() => {
+      if (location.pathname.includes("blog")) {
+        scrollToTop();
+        setIsLoading(true);
+        
+        setTimeout(() => {
+          setIsLoading(false);
+        }, MIN_LOADING_INTERVAL);
+      }
+    }, LONG_THROTTLE_VALUE),
+  [location.pathname]);
 
-  const handleContactClick = () => {
-    if(location.pathname.includes("contact")) {
-      scrollToTop();
-      setIsLoading(true);
-      
-      setTimeout(() => {
-        setIsLoading(false);
-      }, MIN_LOADING_INTERVAL);
-    };
-  };
+  const handleContactClick = useMemo(() => 
+    throttle(() => {
+      if(location.pathname.includes("contact")) {
+        console.log("contact click")
+        scrollToTop();
+        setIsLoading(true);
+  
+        setTimeout(() => {
+          setIsLoading(false);
+        }, MIN_LOADING_INTERVAL);
+      }
+    }, LONG_THROTTLE_VALUE), 
+  [location.pathname]);
 
-  const handleProjectsClick = () => {
-    if(location.pathname.includes("projects")) {
-      scrollToTop();
-      setIsLoading(true);
-      
-      setTimeout(() => {
-        setIsLoading(false);
-      }, MIN_LOADING_INTERVAL);
-    };
-  };
+  const handleProjectsClick = useMemo(() => 
+    throttle(() => {
+      if(location.pathname.includes("projects")) {
+        setIsLoading(true);
+        scrollToTop();
+        
+        setTimeout(() => {
+          setIsLoading(false);
+        }, MIN_LOADING_INTERVAL);
+      };
+    }, LONG_THROTTLE_VALUE),
+  [location.pathname]);
 
   // useEffect to disable scroll to to on esc press
   useEffect(() => {
@@ -193,7 +203,6 @@ const AppContextProvider = ({ children }) => {
   }, []);
   
 
-
   // update local storage when color mode state changes
   useEffect(() => {
     localStorage.setItem('colorMode', colorMode);
@@ -203,7 +212,7 @@ const AppContextProvider = ({ children }) => {
   useEffect(() => {
     let ticking = false;
     const handleScroll = () => {
-      if (!ticking) {
+      if(!ticking) {
         requestAnimationFrame(() => {
           handleUpdateScrollYPos();
           setShowSideNav(false);
