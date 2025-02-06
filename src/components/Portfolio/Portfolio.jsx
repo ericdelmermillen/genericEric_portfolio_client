@@ -4,7 +4,7 @@ import { useLightBoxContext } from '../../contexts/LightBoxContext.jsx';
 import { Link, useNavigate } from 'react-router-dom';
 import { MdModeEdit } from 'react-icons/md';
 import { removeTokens, setTokens } from '../../../utils/utils.js';
-import AddEditDeleteProjectModal from '../AddEditDeleteProjectModal/AddEditDeleteProjectModal.jsx';
+import EditDeleteProjectModal from '../EditDeleteProjectModal/EditDeleteProjectModal.jsx';
 import LightBox from '../LightBox/LightBox.jsx';
 import PortfolioCard from '../PortfolioCard/PortfolioCard.jsx';
 import toast from 'react-hot-toast';
@@ -351,7 +351,7 @@ const Portfolio = () => {
         {isLoggedIn && showActionModal && isEditMode
           ? 
             (
-              <AddEditDeleteProjectModal 
+              <EditDeleteProjectModal 
                 showActionModal={showActionModal}
                 setShowActionModal={setShowActionModal}
                 projectID={selectedProject.project_id}
