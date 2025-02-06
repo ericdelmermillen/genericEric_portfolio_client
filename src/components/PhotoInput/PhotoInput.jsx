@@ -43,7 +43,7 @@ const PhotoInput = ({
       return prevPhotos.map(photo => {
         if(photo.photoNo === inputNo) {
           return { ...photo, photoPreview: null, photoData: null };
-        }
+        };
         return photo;
       });
     });

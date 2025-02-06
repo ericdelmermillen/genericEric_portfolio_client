@@ -4,6 +4,7 @@ import PortfolioCardPlaceholder from "../PortfolioCardPlaceholder/PortfolioCardP
 import "./PortfolioCard.scss";
 
 const MIN_LOADING_INTERVAL = import.meta.env.VITE_MIN_LOADING_INTERVAL;
+const VITE_DISPLAY_NONE_TIMEOUT = import.meta.env.VITE_VITE_DISPLAY_NONE_TIMEOUT;
 const AWS_SS3_BUCKET_URL = import.meta.env.VITE_AWS_S3_BUCKET_URL;
 
 const isFirefox = checkIfIsFirefox();
@@ -37,7 +38,7 @@ const PortfolioCard = ({
 
     setTimeout(() => {
       setDisplayNonePlaceholders(true);
-    }, 500);
+    }, VITE_DISPLAY_NONE_TIMEOUT);
   };  
   
   const handleDeleteClick = (e) => {

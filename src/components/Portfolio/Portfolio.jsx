@@ -135,7 +135,6 @@ const Portfolio = () => {
   }, [projectsData]);  
 
   const handleDropTarget = useCallback((dropTargetID, dropTargetDisplayOrder) => {
-
     setProjectsData(prevProjects => {
       const activeDraggedID = activeDragProject.project_id;
       const activeDraggedProjectOldDisplayOrder = activeDragProject.display_order;
@@ -189,7 +188,6 @@ const Portfolio = () => {
   
     setActiveDragProject({id: -1});
   }, [activeDragProject.project_id]);
-
 
   const getPortfolioProjects = async (limit) => {
     try {
