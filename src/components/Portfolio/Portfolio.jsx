@@ -321,24 +321,24 @@ const Portfolio = () => {
   };
 
   // useEffect to get portfolio summaries for ProjectCards
-  useEffect(() => {
-    if(isInitialMount) {
-      setLightBoxImages(initialImages);
-      getPortfolioProjects(PROJECT_COUNT);
-      setIsInitialMount(false);
-    };
+  // useEffect(() => {
+  //   if(isInitialMount) {
+  //     setLightBoxImages(initialImages);
+  //     getPortfolioProjects(PROJECT_COUNT);
+  //     setIsInitialMount(false);
+  //   };
     
-    if(!isInitialMount) {
-      setProjectsData(initialImages);
-      setShowPlaceholders(true);
-      setDisplayNonePlaceholders(false);
-      setActiveDragProject({project_id: -1}); 
+  //   if(!isInitialMount) {
+  //     setProjectsData(initialImages);
+  //     setShowPlaceholders(true);
+  //     setDisplayNonePlaceholders(false);
+  //     setActiveDragProject({project_id: -1}); 
 
-      setTimeout(() => {
-        getPortfolioProjects(PROJECT_COUNT);
-      }, MIN_LOADING_INTERVAL);
-    };
-  }, [rerenderTrigger, isInitialMount]);
+  //     setTimeout(() => {
+  //       getPortfolioProjects(PROJECT_COUNT);
+  //     }, MIN_LOADING_INTERVAL);
+  //   };
+  // }, [rerenderTrigger, isInitialMount]);
 
   return (
     <>

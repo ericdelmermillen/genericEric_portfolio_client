@@ -6,9 +6,9 @@ import "./Projects.scss";
 const Projects = ({ children }) => {
 
   // update title of page
-    // useEffect(() => {
-    //   document.title = "Eric Millen's Software Portfolio";
-    // }, []);
+    useEffect(() => {
+      document.title = "Eric Millen's Software Portfolio";
+    }, []);
   
   return (
     <>
