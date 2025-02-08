@@ -123,12 +123,12 @@ const ProjectsFeed = () => {
     };
   };
 
-  // fetch nest page useEffect
-  useEffect(() => {
-    if(!isFinalPageFetched) {
-      fetchProjects();
-    };
-  }, [page]);
+  // // fetch nest page useEffect
+  // useEffect(() => {
+  //   if(!isFinalPageFetched) {
+  //     fetchProjects();
+  //   };
+  // }, [page]);
 
   return (
     <>
