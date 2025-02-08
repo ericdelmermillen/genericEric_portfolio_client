@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect, useCallback } from "react";
-import BlogPostPlaceholder from "../BlogPostPlaceholder/blogPostPlaceholder";
+import BlogPostPlaceholder from "../BlogPostPlaceholder/BlogPostPlaceholder";
 import "./BlogPost.scss";
 
 const MIN_LOADING_INTERVAL = import.meta.env.VITE_MIN_LOADING_INTERVAL;
