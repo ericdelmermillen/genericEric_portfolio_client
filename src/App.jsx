@@ -83,7 +83,7 @@ const App = () => {
             </div>
           </SideNav>
       
-          {/* <Routes>
+          <Routes>
 
             <Route 
               path="/" 
@@ -180,7 +180,7 @@ const App = () => {
               } 
             />
 
-          </Routes> */}
+          </Routes>
 
           <Footer /> 
 
