@@ -3,6 +3,8 @@ import { LightBoxContextProvider } from './contexts/LightBoxContext.jsx';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 
+import TestComponent from './pages/TestComponent/TestComponent.jsx';
+
 // removed this component from project then manually recreated it
 // import AddEditProject from './pages/AddEditProject/AddEditProject.jsx';
 
