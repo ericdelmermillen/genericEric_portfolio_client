@@ -99,7 +99,6 @@
 		--navFooter-box-shadow: 0 4px 8px rgba(50, 50, 50, 0.125);
 		--neutral-bg-1: #242534;
 		--neutral-bg-2: #28293a;
-		--neutral-bg-2: #28293a;
 		--placeholder-color: #919191;
 
 		// Text Colors
@@ -469,6 +468,7 @@
 @mixin button {
 	align-items: center;
 	background: none;
+	background: var(--neutral-bg-1);
 	border: 2px solid var(--text-color);
 	color: var(--text-color);
 	cursor: pointer;
