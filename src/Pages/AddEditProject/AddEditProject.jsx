@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect, useCallback } from "react";
-import { useAppContext } from "../../contexts/AppContext";
+import { useAppContext } from "../../contexts/AppContext.jsx";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { 
   scrollToTop, 
@@ -9,9 +9,9 @@ import {
   setTokens 
 } from "../../../utils/utils.js";
 import Compressor from "compressorjs";
-import ProjectDatePicker from "../../components/ProjectDatePicker/ProjectDatePicker";
+import ProjectDatePicker from "../../components/ProjectDatePicker/ProjectDatePicker.jsx";
 import toast from "react-hot-toast";
-import PhotoInput from "../../components/PhotoInput/PhotoInput";
+import PhotoInput from "../../components/PhotoInput/PhotoInput.jsx";
 import "./AddEditProject.scss"
 
 const MIN_LOADING_INTERVAL = import.meta.env.VITE_MIN_LOADING_INTERVAL;

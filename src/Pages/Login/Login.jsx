@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { scrollToTop } from "../../../utils/utils";
+import { scrollToTop } from "../../../utils/utils.js";
 import LoginForm from "../../components/LoginForm/LoginForm.jsx";
 import "./Login.scss";
 
