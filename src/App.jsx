@@ -2,7 +2,10 @@ import { useAppContext } from './contexts/AppContext.jsx';
 import { LightBoxContextProvider } from './contexts/LightBoxContext.jsx';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
-// import AddEditProject from './pages/AddEditProject/AddEditProject.jsx';
+
+// removed this component from project then manually recreated it
+import AddEditProject from './pages/AddEditProject/AddEditProject.jsx';
+
 import Blog from './pages/Blog/Blog.jsx';
 import ColorModeToggle from './components/ColorModeToggle/ColorModeToggle.jsx';
 import Contact from "./pages/Contact/Contact.jsx";
