@@ -28,4 +28,4 @@ const Projects = ({ children }) => {
     </>
   )};
 
-export default Projects;
+export default Projects; 
