@@ -145,6 +145,7 @@
 
 	&__button {
 		border: 2px solid var(--text-color-bright) !important;
+		background: none !important;
 		box-shadow: var(--box-shadow);
 		margin-inline: auto;
 		color: var(--text-color-bright);
