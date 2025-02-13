@@ -1,0 +1,22 @@
+@use "../../partials/variables" as vars;
+@use "../../partials/mixins" as mx;
+
+.projects {
+	& {
+		@include mx.page;
+	}
+
+	&__inner {
+		@include mx.wallpaperContainer;
+	}
+
+	&__content {
+		max-width: vars.$ultraWide;
+		width: 100%;
+		z-index: 1;
+	}
+
+	&__heading {
+		@include mx.secondaryPageHeading;
+	}
+}
