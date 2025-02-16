@@ -144,6 +144,7 @@
 	}
 
 	&__button {
+		background: none !important;
 		border: 2px solid var(--text-color-bright) !important;
 		box-shadow: var(--box-shadow);
 		margin-inline: auto;
