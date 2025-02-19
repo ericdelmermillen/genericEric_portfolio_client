@@ -129,7 +129,7 @@ const ProjectsFeed = () => {
       fetchProjects();
     };
   }, [page]);
-
+ 
   return (
     <>
       <div className="projectsFeed">
