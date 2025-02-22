@@ -17,14 +17,17 @@
 	}
 
 	&__bg--light.show {
-		background: url("../../assets/images/day-bottom.webp") no-repeat center
-			center;
+		background: url("../../assets/images/day-bottom.webp");
+		background-repeat: no-repeat;
+		background-position: center center;
 		background-size: cover;
 		@include mx.servicesBg;
 	}
 
 	&__bg--dark.show {
-		background: url("../../assets/images/night-bottom.webp");
+		background-image: url("../../assets/images/night-bottom.webp");
+		background-repeat: no-repeat;
+		background-position: center center;
 		background-size: cover;
 		@include mx.servicesBg;
 	}
