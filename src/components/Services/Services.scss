@@ -25,9 +25,8 @@
 
 	&__bg--dark.show {
 		border: 2px solid red;
-		// background: url("../../assets/images/night-bottom.webp") no-repeat center
-		// 	center;
 		background: green;
+		background: url("../../assets/images/night-bottom.webp");
 		background-size: cover;
 		@include mx.servicesBg;
 	}
