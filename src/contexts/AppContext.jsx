@@ -16,8 +16,6 @@ const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 const MIN_LOADING_INTERVAL = import.meta.env.VITE_MIN_LOADING_INTERVAL;
 const LONG_THROTTLE_VALUE = import.meta.env.VITE_LONG_THROTTLE_VALUE;
 
-console.log(BASE_URL)
-
 const AppContext = createContext();
 
 const AppContextProvider = ({ children }) => {
