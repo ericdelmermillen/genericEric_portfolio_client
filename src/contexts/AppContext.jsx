@@ -161,7 +161,6 @@ const AppContextProvider = ({ children }) => {
   const handleContactClick = useMemo(() => 
     throttle(() => {
       if(location.pathname.includes("contact")) {
-        console.log("contact click")
         scrollToTop();
         setIsLoading(true);
   
