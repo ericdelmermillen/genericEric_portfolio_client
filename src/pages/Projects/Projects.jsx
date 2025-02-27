@@ -2,7 +2,6 @@ import { useEffect } from "react";
 import TypingText from "../../components/TypingText/TypingText.jsx";
 import ProjectsFeed from "../../components/ProjectsFeed/ProjectsFeed.jsx";
 import "./Projects.scss";
-// reinitialized git repo to deal with renaming path issue
 
 const Projects = ({ children }) => {
 

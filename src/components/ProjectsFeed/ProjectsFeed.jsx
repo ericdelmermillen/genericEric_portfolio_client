@@ -11,6 +11,7 @@ const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 // const PROJECTS_PER_PAGE = 1;
 const PROJECTS_PER_PAGE = 2;
 // const PROJECTS_PER_PAGE = 3;
+// const PROJECTS_PER_PAGE = 4;
 // const PROJECTS_PER_PAGE = 8;
 // const PROJECTS_PER_PAGE = 10;
 
@@ -125,6 +126,7 @@ const ProjectsFeed = () => {
 
   // // fetch next page useEffect
   useEffect(() => {
+    console.log("Initial projects fetch")
     if(!isFinalPageFetched) {
       fetchProjects();
     };
