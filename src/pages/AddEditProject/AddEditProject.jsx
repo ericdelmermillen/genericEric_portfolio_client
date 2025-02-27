@@ -395,7 +395,7 @@ const AddEditProject = ({ children }) => {
 
       } else if(photo.photoData) {
 
-        console.log(AWS_SIGNED_URL_ROUTE)
+        console.log(`AWS_SIGNED_URL_ROUTE: ${AWS_SIGNED_URL_ROUTE}`)
 
         // get signed url for posting to aws
         try { 
