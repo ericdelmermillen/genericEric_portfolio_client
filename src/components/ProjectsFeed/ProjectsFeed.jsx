@@ -126,7 +126,6 @@ const ProjectsFeed = () => {
 
   // // fetch next page useEffect
   useEffect(() => {
-    console.log("Initial projects fetch")
     if(!isFinalPageFetched) {
       fetchProjects();
     };
