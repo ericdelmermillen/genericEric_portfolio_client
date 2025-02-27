@@ -20,6 +20,8 @@ const AWS_SIGNED_URL_ROUTE = import.meta.env.VITE_AWS_SIGNED_URL_ROUTE;
 const AWS_DIRNAME = import.meta.env.VITE_AWS_DIRNAME;
 const AWS_SS3_BUCKET_URL = import.meta.env.VITE_AWS_S3_BUCKET_URL;
 
+console.log(BASE_URL)
+
 const numberOfPhotoUploads = 4;
 
 const AddEditProject = ({ children }) => {
