@@ -89,7 +89,7 @@ const BlogFeed = () => {
 
           if(page === 1) {
             setBlogPosts(posts);
-            scrollToTop();
+            // scrollToTop();
           } else {
             const updatedBlogPosts = [...new Set([...blogPosts, ...posts])];
             setBlogPosts(updatedBlogPosts);
@@ -124,6 +124,7 @@ const BlogFeed = () => {
   // useEffect to handle setting isLoading false after loaded and fetched post increment count reaches equality
   useEffect(() => {
     if(blogPostLoadedCount === blogPosts.length && !isInitialLoad) {
+      scrollToTop()
       setIsLoading(false);
     };
 
