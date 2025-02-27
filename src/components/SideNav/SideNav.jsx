@@ -18,12 +18,19 @@ const SideNav = ({ children }) => {
   const isOnHome = location.pathname === "/" || location.pathname === "/home" || location.pathname === "/home/";
 
   const handleSideNavClick = () => {
-    handleBlogClick();
-    handleContactClick();
-    handleProjectsClick();
+    // handleBlogClick();
+    // handleContactClick();
+    // handleProjectsClick();
 
+    // setTimeout(() => {
+    //   handleSetShowSideNavFalse()
+    // }, MIN_LOADING_INTERVAL);
+    handleSetShowSideNavFalse()
+    
     setTimeout(() => {
-      handleSetShowSideNavFalse()
+      handleBlogClick();
+      handleContactClick();
+      handleProjectsClick();
     }, MIN_LOADING_INTERVAL);
   };
 
