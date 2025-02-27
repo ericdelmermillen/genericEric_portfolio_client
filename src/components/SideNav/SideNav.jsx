@@ -24,14 +24,7 @@ const SideNav = ({ children }) => {
 
     setTimeout(() => {
       handleSetShowSideNavFalse()
-    }, MIN_LOADING_INTERVAL * 2);
-    // handleSetShowSideNavFalse()
-    
-    // setTimeout(() => {
-    //   handleBlogClick();
-    //   handleContactClick();
-    //   handleProjectsClick();
-    // }, MIN_LOADING_INTERVAL);
+    }, MIN_LOADING_INTERVAL * 1.5);
   };
 
   const handleSetShowSideNavFalse = () => setShowSideNav(false);
