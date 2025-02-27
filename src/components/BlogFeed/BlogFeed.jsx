@@ -96,7 +96,6 @@ const BlogFeed = () => {
           };
 
         } else if(environment === "production") {
-          console.log(`In ${environment} mode`);
 
           if(page === 1) {
             setBlogPosts(posts);
