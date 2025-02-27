@@ -395,6 +395,8 @@ const AddEditProject = ({ children }) => {
 
       } else if(photo.photoData) {
 
+        console.log(AWS_SIGNED_URL_ROUTE)
+
         // get signed url for posting to aws
         try { 
           const response = await fetch(`${AWS_SIGNED_URL_ROUTE}?dirname=${AWS_DIRNAME}`, {
@@ -402,8 +404,6 @@ const AddEditProject = ({ children }) => {
             headers: headers,
           });
 
-          console.log(response)
-          
           if(!response.ok) {
             throw new Error(`HTTP error status: ${response.status}`);
           };
