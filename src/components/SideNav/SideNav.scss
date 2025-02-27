@@ -6,8 +6,8 @@
 		background: var(--background-color);
 		bottom: 0;
 		box-shadow: var(--box-shadow);
-		// height: 100vh;
-		height: 100dvh;
+		height: 100vh;
+		// height: 100dvh;
 		left: 200vw;
 		position: fixed;
 		top: 0;
@@ -35,7 +35,8 @@
 		flex-direction: column;
 		height: 100%;
 		overflow-y: scroll;
-		padding-bottom: min(4rem, 10%);
+		// padding-bottom: min(4rem, 10%);
+		padding-bottom: 3rem;
 		position: relative;
 	}
 
