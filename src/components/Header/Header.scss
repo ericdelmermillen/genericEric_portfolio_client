@@ -165,7 +165,9 @@
 		letter-spacing: var(--letter-spacing-medium);
 		letter-spacing: var(--letter-spacing-large);
 		text-shadow: var(--text-shadow-bright);
+		// text-shadow: var(--text-shadow-brightest);
 		color: var(--text-color-bright);
+		font-weight: 550;
 
 		@media (min-width: vars.$tablet) {
 			font-size: var(--button-text-medium);
