@@ -126,7 +126,7 @@
 
 	&__description {
 		font-size: var(--headline-small);
-		font-weight: 300;
+		font-weight: 550;
 		letter-spacing: var(--letter-spacing-large);
 		margin-bottom: 1.75rem;
 		text-align: center;
@@ -150,7 +150,7 @@
 
 	&__button {
 		background: none !important;
-		border: 2px solid var(--text-color-bright) !important;
+		border: 2.5px solid var(--text-color-bright) !important;
 		box-shadow: var(--box-shadow);
 		margin-inline: auto;
 		color: var(--text-color-bright);
@@ -165,7 +165,6 @@
 		letter-spacing: var(--letter-spacing-medium);
 		letter-spacing: var(--letter-spacing-large);
 		text-shadow: var(--text-shadow-bright);
-		// text-shadow: var(--text-shadow-brightest);
 		color: var(--text-color-bright);
 		font-weight: 550;
 
