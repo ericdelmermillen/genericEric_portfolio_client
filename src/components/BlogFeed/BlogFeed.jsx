@@ -131,9 +131,9 @@ const BlogFeed = () => {
   // initial blogPost fetch on mount
   useEffect(() => {
     if(isInitialLoad) {
-      scrollToTop();
       setIsLoading(true);
       handleFetchBlogPosts();
+      scrollToTop();
     };
   }, []);
 
