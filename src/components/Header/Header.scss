@@ -4,7 +4,8 @@
 .header {
 	& {
 		color: var(--text-color-bright);
-		height: 100dvh;
+		// height: 100dvh;
+		height: 100vh;
 		max-width: vars.$ultraWide;
 		position: fixed;
 		top: 0;
@@ -176,7 +177,7 @@
 
 	&__socials {
 		align-items: center;
-		bottom: 2rem;
+		bottom: 3rem;
 		display: flex;
 		gap: 1.125rem;
 		height: 4rem;
@@ -185,6 +186,7 @@
 		z-index: 2;
 
 		@media (min-width: vars.$smallTablet) {
+			bottom: 2rem;
 			font-size: 1.5rem;
 			gap: 1.5rem;
 		}
