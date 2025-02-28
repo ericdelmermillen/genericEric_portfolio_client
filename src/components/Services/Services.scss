@@ -16,22 +16,6 @@
 		width: 100%;
 	}
 
-	&__bg--light.show {
-		background: url("../../assets/images/day-bottom.webp");
-		background-repeat: no-repeat;
-		background-position: center center;
-		background-size: cover;
-		@include mx.servicesBg;
-	}
-
-	&__bg--dark.show {
-		background-image: url("../../assets/images/night-bottom.webp");
-		background-repeat: no-repeat;
-		background-position: center center;
-		background-size: cover;
-		@include mx.servicesBg;
-	}
-
 	&__overlay {
 		background: var(--gradient-overlay);
 		height: 100%;

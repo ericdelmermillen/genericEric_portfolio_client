@@ -35,8 +35,8 @@ const Services = () => {
     <>  
       <section className="services">
         <div className="services__inner">
-        <div className={`services__bg--light${colorMode === "light" ? " show" : ""}`}></div>
-        <div className={`services__bg--dark${colorMode === "dark" ? " show" : ""}`}></div>
+        {/* <div className={`services__bg--light${colorMode === "light" ? " show" : ""}`}></div>
+        <div className={`services__bg--dark${colorMode === "dark" ? " show" : ""}`}></div> */}
 
         <div className="services__overlay"></div>
 

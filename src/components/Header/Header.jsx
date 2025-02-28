@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useAppContext } from "../../contexts/AppContext.jsx";
 import DownIcon from "../../assets/svgs/DownIcon.jsx";
 import Facebook from "../../assets/svgs/Facebook.jsx";
@@ -19,11 +20,16 @@ const headerSocials = [
 ];
 
 const Header = () => {
-  const { colorMode, hideNav } = useAppContext();
+  const { colorMode, hideNav, scrollYPos } = useAppContext();
+  const [ viewportHeight, setViewportHeight ] = useState(window.innerHeight);
 
   const handleHideNav = () => {
     hideNav();
   };
+
+  console.log(`viewport height: ${viewportHeight}`)
+  console.log(`scrollYPos: ${scrollYPos}`)
+  console.log(`scrollYPos > (viewportHeight * 2): ${scrollYPos > (viewportHeight * 2)}`)
 
   return (
     <>
@@ -31,6 +37,18 @@ const Header = () => {
         <div className="header__hero">
 
           <div className="header__overlay"></div>
+
+          <div className={`header__servicesBG
+            ${scrollYPos > (viewportHeight * 2) && colorMode === "light"
+              ? "header__servicesBG--day show" 
+              : ""}`
+          }></div>
+          
+          <div className={`header__servicesBG
+            ${scrollYPos > (viewportHeight * 2) && colorMode === "dark"
+              ? "header__servicesBG--night show" 
+              : ""}`
+          }></div>
 
           <div 
             className={`header__dayImg ${colorMode === 'light' ? "top" : ""}`}
