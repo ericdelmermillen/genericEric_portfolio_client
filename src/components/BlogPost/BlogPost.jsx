@@ -60,40 +60,23 @@ const BlogPost = ({
     };
   });
 
-  // const handleResize = () => {
-  //   checkHasLongTitle();
-  //   checkHasLongDesc();
-  // };
-
-  // //add event listener for resize of window and call handleResize for initial calculation
-  // useEffect(() => {
-  //   handleResize();
-  //   window.addEventListener("resize", handleResize);
-    
-  //   return () => {
-  //     window.removeEventListener("resize", handleResize);
-  //   };
-  // }, []);
-
-
+  // useEffectfor to add eventListener on resize of window and call handleResize for initial calculation
   useEffect(() => {
-    let lastWidth = window.innerWidth; // Store initial width
+    let lastWidth = window.innerWidth;
   
     const handleResize = () => {
-      if(window.innerWidth !== lastWidth) { // Only run if width changes
+      if(window.innerWidth !== lastWidth) {
         lastWidth = window.innerWidth;
         checkHasLongTitle();
         checkHasLongDesc();
       }
     };
   
-    handleResize(); // Run initially
+    handleResize();
     window.addEventListener("resize", handleResize);
   
     return () => window.removeEventListener("resize", handleResize);
   }, []);
-  
-  
   
   if(isInitialPlaceholder) {
     return (
