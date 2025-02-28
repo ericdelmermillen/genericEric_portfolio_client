@@ -70,11 +70,6 @@ const Project = ({
     };
   };
 
-  const handleResize = () => {
-    checkHasLongTitle();
-    checkHasLongDesc();
-  };
-
   const handleOnLoad = () => {
     if(idx === maxIdx) {
       setTimeout(() => {
@@ -91,15 +86,23 @@ const Project = ({
     };
   };
 
-  //add event listener for resize of window and call handleResize for initial calculation
-  useEffect(() => {
-    handleResize();
-    window.addEventListener("resize", handleResize);
+    // useEffectfor to add eventListener on resize of window and call handleResize for initial calculation
+    useEffect(() => {
+      let lastWidth = window.innerWidth;
     
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
+      const handleResize = () => {
+        if(window.innerWidth !== lastWidth) {
+          lastWidth = window.innerWidth;
+          checkHasLongTitle();
+          checkHasLongDesc();
+        }
+      };
+    
+      handleResize();
+      window.addEventListener("resize", handleResize);
+    
+      return () => window.removeEventListener("resize", handleResize);
+    }, []);
   
   return (
     <>
