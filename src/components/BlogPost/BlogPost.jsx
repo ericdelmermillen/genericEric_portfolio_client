@@ -60,21 +60,41 @@ const BlogPost = ({
     };
   });
 
-  const handleResize = () => {
-    checkHasLongTitle();
-    checkHasLongDesc();
-  };
+  // const handleResize = () => {
+  //   checkHasLongTitle();
+  //   checkHasLongDesc();
+  // };
 
-  //add event listener for resize of window and call handleResize for initial calculation
-  useEffect(() => {
-    handleResize();
-    window.addEventListener("resize", handleResize);
+  // //add event listener for resize of window and call handleResize for initial calculation
+  // useEffect(() => {
+  //   handleResize();
+  //   window.addEventListener("resize", handleResize);
     
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
+  //   return () => {
+  //     window.removeEventListener("resize", handleResize);
+  //   };
+  // }, []);
 
+
+  useEffect(() => {
+    let lastWidth = window.innerWidth; // Store initial width
+  
+    const handleResize = () => {
+      if(window.innerWidth !== lastWidth) { // Only run if width changes
+        lastWidth = window.innerWidth;
+        checkHasLongTitle();
+        checkHasLongDesc();
+      }
+    };
+  
+    handleResize(); // Run initially
+    window.addEventListener("resize", handleResize);
+  
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+  
+  
+  
   if(isInitialPlaceholder) {
     return (
       <BlogPostPlaceholder />
