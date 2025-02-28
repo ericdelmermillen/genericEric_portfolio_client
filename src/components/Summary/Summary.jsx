@@ -1,5 +1,6 @@
 import { useAppContext } from "../../contexts/AppContext";
 import Profile from "../Profile/Profile";
+import resume from "../../assets/resume/Ericsume.pdf";
 import Skills from "../Skills/Skills";
 import "./Summary.scss";
 
@@ -41,7 +42,7 @@ const Summary = () => {
               </a>
               <a 
                 className="summary__button"
-                href={`${window.location.origin}/Ericsume.pdf`}
+                href={resume}
                 target="_blank"
                 rel="noopener noreferrer"
                 download="Eric_Millen_Resume.pdf" 
