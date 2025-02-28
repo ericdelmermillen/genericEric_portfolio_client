@@ -27,10 +27,6 @@ const Header = () => {
     hideNav();
   };
 
-  console.log(`viewport height: ${viewportHeight}`)
-  console.log(`scrollYPos: ${scrollYPos}`)
-  console.log(`scrollYPos > (viewportHeight * 2): ${scrollYPos > (viewportHeight * 2)}`)
-
   return (
     <>
       <header id="header" className="header">
@@ -43,7 +39,7 @@ const Header = () => {
               ? "header__servicesBG--day show" 
               : ""}`
           }></div>
-          
+
           <div className={`header__servicesBG
             ${scrollYPos > (viewportHeight * 2) && colorMode === "dark"
               ? "header__servicesBG--night show" 
