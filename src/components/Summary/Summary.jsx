@@ -41,7 +41,9 @@ const Summary = () => {
               </a>
               <a 
                 className="summary__button"
-                href="/Ericsume.pdf"
+                href={`${window.location.origin}/Ericsume.pdf`}
+                target="_blank"
+                rel="noopener noreferrer"
                 download="Eric_Millen_Resume.pdf" 
               >
                 Download CV
