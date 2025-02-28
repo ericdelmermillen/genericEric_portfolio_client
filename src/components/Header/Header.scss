@@ -21,6 +21,22 @@
 		width: 100%;
 	}
 
+	&__servicesBG {
+		@include mx.servicesBg;
+
+		&--day {
+			background: url("../../assets/images/day-bottom.webp");
+		}
+
+		&--night {
+			background-image: url("../../assets/images/night-bottom.webp");
+		}
+
+		&.show {
+			z-index: 3;
+		}
+	}
+
 	&__dayImg {
 		background: url("../../assets/images/bg-day-top.webp") center top;
 		background-repeat: no-repeat;
