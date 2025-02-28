@@ -3,7 +3,8 @@
 .app {
 	// fonts
 	--body-font: "Arial";
-	--heading-font: "Tahoma";
+	// --heading-font: "Tahoma";
+	--heading-font: Tahoma, Verdana, Geneva, sans-serif;
 
 	// letter spacing
 	--letter-spacing-general: 0.6px;
