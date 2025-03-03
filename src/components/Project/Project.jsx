@@ -91,18 +91,21 @@ const Project = ({
       let lastWidth = window.innerWidth;
     
       const handleResize = () => {
-        if(window.innerWidth !== lastWidth) {
-          lastWidth = window.innerWidth;
-          checkHasLongTitle();
-          checkHasLongDesc();
-        }
+        if(window.innerWidth !== lastWidth || !projectIsLoaded) {
+          requestAnimationFrame(() => {
+            lastWidth = window.innerWidth;
+            checkHasLongTitle();
+            checkHasLongDesc();
+            }
+          );
+        };
       };
     
       handleResize();
       window.addEventListener("resize", handleResize);
     
       return () => window.removeEventListener("resize", handleResize);
-    }, []);
+    }, [projectIsLoaded]);
   
   return (
     <>

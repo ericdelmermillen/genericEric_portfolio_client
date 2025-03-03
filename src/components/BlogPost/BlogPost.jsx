@@ -51,7 +51,7 @@ const BlogPost = ({
       setHasLongTitle(height > lineHeight); 
     };
   });
-
+  
   const checkHasLongDesc = useCallback(() => {
     if(descRef.current) {
       const lineHeight = parseFloat(getComputedStyle(descRef.current).lineHeight);
@@ -60,23 +60,27 @@ const BlogPost = ({
     };
   });
 
-  // useEffectfor to add eventListener on resize of window and call handleResize for initial calculation
+  // useEffect for to add eventListener on resize of window and call handleResize for initial calculation
   useEffect(() => {
     let lastWidth = window.innerWidth;
   
     const handleResize = () => {
-      if(window.innerWidth !== lastWidth) {
-        lastWidth = window.innerWidth;
-        checkHasLongTitle();
-        checkHasLongDesc();
-      }
+      if(window.innerWidth !== lastWidth || !postIsReady) {
+          requestAnimationFrame(() => {
+            lastWidth = window.innerWidth;
+            checkHasLongTitle();
+            checkHasLongDesc();
+          }
+        );
+      };
     };
-  
+
     handleResize();
     window.addEventListener("resize", handleResize);
   
     return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  }, [postIsReady]);
+  
   
   if(isInitialPlaceholder) {
     return (
