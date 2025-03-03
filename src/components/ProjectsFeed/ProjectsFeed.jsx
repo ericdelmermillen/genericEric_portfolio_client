@@ -2,12 +2,22 @@ import { useState, useEffect } from "react";
 import { useAppContext } from "../../contexts/AppContext.jsx";
 import { useLightBoxContext } from "../../contexts/LightBoxContext.jsx";
 import { scrollToTop } from "../../../utils/utils.js";
-import LightBox from "../../components/LightBox/LightBox.jsx";
+// import LightBox from "../../components/LightBox/LightBox.jsx";
+
+// YARL imports
+import Lightbox from "yet-another-react-lightbox";
+import "yet-another-react-lightbox/styles.css";
+import Thumbnails from "yet-another-react-lightbox/plugins/thumbnails";
+import Zoom from "yet-another-react-lightbox/plugins/zoom";
+import Fullscreen from "yet-another-react-lightbox/plugins/fullscreen";
+
+
 import Project from "../Project/Project";
 import toast from "react-hot-toast";
 import "./ProjectsFeed.scss";
 
 const BASE_URL = import.meta.env.VITE_API_BASE_URL;
+const AWS_SS3_BUCKET_URL = import.meta.env.VITE_AWS_S3_BUCKET_URL;
 // const PROJECTS_PER_PAGE = 1;
 const PROJECTS_PER_PAGE = 2;
 // const PROJECTS_PER_PAGE = 3;
@@ -47,19 +57,40 @@ const ProjectsFeed = () => {
   const [ isInitialLoad, setIsInitialLoad ] = useState(true);
   const [ showPlaceholders, setShowPlaceholders ] = useState(true);
 
+
+  // YARL state
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [lightboxIndex, setLightboxIndex] = useState(0);
+  const [slides, setSlides] = useState([]);
+  
+  
+
+  // const handleSetCurrentProjectImages = (projectID) => {
+  //   setShowLightBox(true);
+
+  //   const selectedProject = projectsData.find(project => project.project_id === projectID);
+  //   const projectTitle = selectedProject.project_title;
+
+  //   setLightBoxImages(selectedProject.project_photos.map((photo, idx) => (
+  //     {
+  //       img_id: photo.photo_id,
+  //       img_src: photo.photo_url,
+  //       img_alt: `Photo number ${idx + 1} from ${projectTitle}`
+  //     }
+  //   )));    
+  // };
+  
   const handleSetCurrentProjectImages = (projectID) => {
-    setShowLightBox(true);
-
     const selectedProject = projectsData.find(project => project.project_id === projectID);
-    const projectTitle = selectedProject.project_title;
 
-    setLightBoxImages(selectedProject.project_photos.map((photo, idx) => (
-      {
-        img_id: photo.photo_id,
-        img_src: photo.photo_url,
-        img_alt: `Photo number ${idx + 1} from ${projectTitle}`
-      }
-    )));    
+    const images = selectedProject.project_photos.map((photo, idx) => ({
+      src: `${AWS_SS3_BUCKET_URL}/${photo.photo_url}`,
+      alt: `Photo number ${idx + 1} from ${photo.projectTitle}`,
+    }));
+
+    setSlides(images);
+    setLightboxOpen(true);
+    setLightboxIndex(0);
   };
 
   const handleSetShowLightBoxFalse = () => {
@@ -130,27 +161,24 @@ const ProjectsFeed = () => {
       fetchProjects();
     };
   }, [page]);
+
+  console.log(slides.length)
  
   return (
     <>
       <div className="projectsFeed">
 
-        {showLightBox
-          ? 
-            (
-              <LightBox 
-                lightBoxImages={lightBoxImages}
-                currentIdx={currentIdx}
-                setCurrentIdx={setCurrentIdx}
-                showLightBox={showLightBox}
-                setShowLightBox={setShowLightBox}
-                handleSetShowLightBoxFalse={handleSetShowLightBoxFalse}
-                handleIncrementCurrentIdx={handleIncrementCurrentIdx}
-                handleDecrementCurrentIdx={handleDecrementCurrentIdx}
-              />
-            )
-          : null
-        }
+        <Lightbox
+          open={lightboxOpen}
+          close={() => setLightboxOpen(false)}
+          index={lightboxIndex}
+          slides={slides}
+          carousel={{ finite: slides.length === 1 }} 
+          className={`yarl-lightbox ${slides.length === 1 ? "hide-arrows" : ""}`}
+          plugins={[Fullscreen]}
+          on={{click: ({ index }) => setLightboxIndex(index)}}
+        />
+
         
         <div className="projectsFeed__inner">
 

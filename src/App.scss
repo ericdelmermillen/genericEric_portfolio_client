@@ -133,3 +133,13 @@ img {
 		transform: rotate(360deg);
 	}
 }
+
+// YARL classes for customization
+.hide-arrows .yarl__button_prev,
+.hide-arrows .yarl__button_next {
+	display: none !important;
+}
+
+.yarl__button:disabled {
+	display: none !important;
+}
