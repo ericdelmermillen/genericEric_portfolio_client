@@ -24,7 +24,7 @@ const Project = ({
   handleSetCurrentProjectImages,
  }) => {
    
-  const { setIsLoading} = useAppContext();
+  const { setIsLoading, hideNav } = useAppContext();
   
   const startIdx = (page - 1) * PROJECTS_PER_PAGE;
   const endIdx = Math.min(startIdx + PROJECTS_PER_PAGE - 1, maxIdx);
@@ -46,6 +46,7 @@ const Project = ({
   
   const handleImageClick = () => {
     handleSetCurrentProjectImages(projectID);
+    hideNav();
   };
 
   const handleToggleShowFullInfo = () => {
@@ -132,12 +133,12 @@ const Project = ({
                   </h4>
 
                   <img 
-                  className={`project__image ${projectIsLoaded ? "isReady" : ""}`} 
-                  // concatatenate string for url with aws s3 bucket url
-                  src={`${AWS_SS3_BUCKET_URL}/${projectPhotos[0].photo_url}`} 
-                  alt={`Main image for project ${projectTitle}`} 
-                  onClick={() => handleImageClick()}
-                  onLoad={handleOnLoad}
+                    className={`project__image ${projectIsLoaded ? "isReady" : ""}`} 
+                    // concatatenate string for url with aws s3 bucket url
+                    src={`${AWS_SS3_BUCKET_URL}/${projectPhotos[0].photo_url}`} 
+                    alt={`Main image for project ${projectTitle}`} 
+                    onClick={() => handleImageClick()}
+                    onLoad={handleOnLoad}
                   />
                 </>
               )
