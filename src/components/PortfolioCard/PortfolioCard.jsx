@@ -24,8 +24,6 @@ const PortfolioCard = ({
   isProjectOrderEditable,
   isLoggedIn,
   isEditMode,
-  handleCardClick,
-  // YARL click handler
   handlePortfolioCardClick,
   handleDeleteProjectClick,
   handleEditProjectClick,
@@ -82,9 +80,6 @@ const PortfolioCard = ({
         onDrop={isProjectOrderEditable
           ? () => handleDropTarget(projectID, displayOrder)
           : null}
-        // onClick={!isProjectOrderEditable
-        //   ? () => handleCardClick(idx)
-        //   : null}
         onClick={!isProjectOrderEditable
           ? () => handlePortfolioCardClick(idx)
           : null}
