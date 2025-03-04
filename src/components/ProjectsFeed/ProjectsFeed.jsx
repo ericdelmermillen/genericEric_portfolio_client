@@ -24,9 +24,7 @@ const ProjectsFeed = () => {
     setIsLoading, 
     showNav,
     lightboxOpen, 
-    setLightboxOpen,
-    setLightboxIndex,
-    setSlides
+    handleSetLightBoxState
    } = useAppContext();
 
   const [ isFinalPageFetched, setIsFinalPageFetched ] = useState(false);
@@ -45,9 +43,7 @@ const ProjectsFeed = () => {
       alt: `Photo number ${idx + 1} from ${photo.projectTitle}`,
     }));
 
-    setSlides(images);
-    setLightboxOpen(true);
-    setLightboxIndex(0);
+    handleSetLightBoxState(images);
   };
 
   const fetchProjects = async () => {

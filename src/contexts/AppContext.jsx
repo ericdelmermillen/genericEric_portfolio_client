@@ -32,12 +32,15 @@ const AppContextProvider = ({ children }) => {
   const [ isEditMode, setIsEditMode ] = useState(false);
   const [ rerenderTrigger, setRerenderTrigger ] = useState(1);
   const [ prevPathname, setPrevPathname ] = useState(location.pathname);
-
-  // YARL state
   const [ lightboxOpen, setLightboxOpen ] = useState(false);
   const [ lightboxIndex, setLightboxIndex ] = useState(0);
   const [ slides, setSlides ] = useState([]);
-  
+
+  const handleSetLightBoxState = (images, idx = 0) => {
+    setSlides(images);
+    setLightboxIndex(idx);
+    setLightboxOpen(true);
+  };
 
   const contactSectionRef = useRef(null); 
   const contactNameRef = useRef(null); 
@@ -210,7 +213,6 @@ const AppContextProvider = ({ children }) => {
       document.removeEventListener("keydown", handleKeyDown, true);
     };
   }, []);
-  
 
   // update local storage when color mode state changes
   useEffect(() => {
@@ -285,7 +287,8 @@ const AppContextProvider = ({ children }) => {
     lightboxIndex, 
     setLightboxIndex,
     slides, 
-    setSlides
+    setSlides,
+    handleSetLightBoxState
   };
 
   return (

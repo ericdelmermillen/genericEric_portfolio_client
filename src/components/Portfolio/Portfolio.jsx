@@ -1,11 +1,9 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useAppContext } from '../../contexts/AppContext.jsx';
-import { useLightBoxContext } from '../../contexts/LightBoxContext.jsx';
 import { Link, useNavigate } from 'react-router-dom';
 import { MdModeEdit } from 'react-icons/md';
 import { removeTokens, setTokens } from '../../../utils/utils.js';
 import EditDeleteProjectModal from '../EditDeleteProjectModal/EditDeleteProjectModal.jsx';
-import LightBox from '../LightBox/LightBox.jsx';
 import PortfolioCard from '../PortfolioCard/PortfolioCard.jsx';
 import toast from 'react-hot-toast';
 import './Portfolio.scss';
@@ -14,8 +12,9 @@ import './Portfolio.scss';
 const PROJECT_COUNT = 4;
 // const PROJECT_COUNT = 2;
 
-const MIN_LOADING_INTERVAL = import.meta.env.VITE_MIN_LOADING_INTERVAL;
+const AWS_SS3_BUCKET_URL = import.meta.env.VITE_AWS_S3_BUCKET_URL;
 const BASE_URL = import.meta.env.VITE_API_BASE_URL;
+const MIN_LOADING_INTERVAL = import.meta.env.VITE_MIN_LOADING_INTERVAL;
 
 const initialImages = Array.from({length: PROJECT_COUNT}, () => ({isInitialPlaceholder: true}));
 
@@ -31,21 +30,11 @@ const Portfolio = () => {
     isEditMode, 
     setIsEditMode,
     rerenderTrigger,
+    showNav,
     hideNav,
+    lightboxOpen,
+    handleSetLightBoxState
   } = useAppContext();
-
-  const {
-    showLightBox, 
-    setShowLightBox,
-    handleSetShowLightBoxTrue,
-    lightBoxImages, 
-    setLightBoxImages,
-    currentIdx, 
-    setCurrentIdx,
-    handleCardClick,
-    handleIncrementCurrentIdx,
-    handleDecrementCurrentIdx
-  } = useLightBoxContext();
 
   const navigate = useNavigate();
 
@@ -58,15 +47,14 @@ const Portfolio = () => {
   const [ showActionModal, setShowActionModal ] = useState(false);
   const [ showPlaceholders, setShowPlaceholders ] = useState(true);
 
-  // for mapping the projects into lightBoxImage objects
-  const updateLightBoxImages = (data) => {
-    setLightBoxImages(data.map(project => (
-      {
-        img_id: project.project_id,
-        img_alt: project.project_title,
-        img_src: project.img_src
-      }
-    )));
+  const handlePortfolioCardClick = (idx) => {
+    const images = projectsData.map((photo, idx) => ({
+      src: `${AWS_SS3_BUCKET_URL}/${photo.img_src}`,
+      alt: `Photo number ${idx + 1} from ${photo.project_title}`,
+    }));
+    
+    hideNav();
+    handleSetLightBoxState(images, idx);
   };
 
   const handleAddNewProject = () => {
@@ -80,7 +68,6 @@ const Portfolio = () => {
   const handleSetIsEditModeTrue = async () => {
     setIsLoading(true);
     setProjectsData(initialImages);
-    setLightBoxImages(initialImages);
 
     setShowPlaceholders(true);
     toast("Fetching all Project Summaries...");
@@ -201,8 +188,6 @@ const Portfolio = () => {
       };
   
       setProjectsData(data);
-      updateLightBoxImages(data);
-
       return true;
 
     } catch (error) {
@@ -213,8 +198,6 @@ const Portfolio = () => {
 
   const handleDeleteOrEditClick = (projectID) => {
     setShowActionModal(true);
-    // do I need error handling here if the projectID is not a number or doesn't exist?
-    // const project = portfolioSummaries.find(summary => summary.project_id === projectID);
     const project = projectsData.find(summary => summary.project_id === projectID);
     setSelectedProject(project);
   };
@@ -323,7 +306,6 @@ const Portfolio = () => {
   // useEffect to get portfolio summaries for ProjectCards
   useEffect(() => {
     if(isInitialMount) {
-      setLightBoxImages(initialImages);
       getPortfolioProjects(PROJECT_COUNT);
       setIsInitialMount(false);
     };
@@ -339,6 +321,13 @@ const Portfolio = () => {
       }, MIN_LOADING_INTERVAL);
     };
   }, [rerenderTrigger, isInitialMount]);
+
+    // useEffect to show Nav after user closes Lightbox to deal with lightbox Nav content shift
+    useEffect(()=> {
+      if(!lightboxOpen)  {
+        showNav();
+      };
+    }, [lightboxOpen]);
 
   return (
     <>
@@ -356,24 +345,6 @@ const Portfolio = () => {
                 modalAction={modalAction}
                 handleClearActionState={handleClearActionState}
                 setProjectsData={setProjectsData}
-                lightBoxImages={lightBoxImages}
-                setLightBoxImages={setLightBoxImages}
-              />
-            )
-          : null
-        }
-
-        {showLightBox
-          ? 
-            (
-              <LightBox 
-                lightBoxImages={lightBoxImages}
-                currentIdx={currentIdx}
-                setCurrentIdx={setCurrentIdx}
-                showLightBox={showLightBox}
-                setShowLightBox={setShowLightBox}
-                handleIncrementCurrentIdx={handleIncrementCurrentIdx}
-                handleDecrementCurrentIdx={handleDecrementCurrentIdx}
               />
             )
           : null
@@ -433,7 +404,6 @@ const Portfolio = () => {
                   <PortfolioCard 
                     key={project.project_id || idx}
                     idx={idx}
-
                     maxIdx={projectsData.length - 1}
                     imgSrc={project.img_src}
                     projectTitle={project.project_title}
@@ -447,13 +417,12 @@ const Portfolio = () => {
                     isLoggedIn={isLoggedIn}
                     isEditMode={isEditMode}
                     isProjectOrderEditable={isProjectOrderEditable}
-                    handleSetShowLightBoxTrue={handleSetShowLightBoxTrue}
-                    handleCardClick={handleCardClick}
                     handleDeleteProjectClick={handleDeleteProjectClick}
                     handleEditProjectClick={handleEditProjectClick}
                     modalAction={modalAction}
                     handleDragStart={handleDragStart}
                     handleDropTarget={handleDropTarget}
+                    handlePortfolioCardClick={handlePortfolioCardClick}
                   />
                 )
               }
