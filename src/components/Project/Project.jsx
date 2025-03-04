@@ -22,7 +22,6 @@ const Project = ({
   projectURLs,
   projectDescription,
   handleSetCurrentProjectImages,
-  handleCardClick
  }) => {
    
   const { setIsLoading} = useAppContext();
@@ -47,7 +46,6 @@ const Project = ({
   
   const handleImageClick = () => {
     handleSetCurrentProjectImages(projectID);
-    handleCardClick();
   };
 
   const handleToggleShowFullInfo = () => {
