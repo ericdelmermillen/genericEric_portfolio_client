@@ -145,7 +145,6 @@ const Project = ({
             : null
           }
 
-
           <div className="project__text">
 
             <h3 

@@ -84,13 +84,13 @@ const EditDeleteProjectModal = ({
 
       setProjectsData(c => c.filter((summary) => summary.project_id !== projectID));
 
-      setLightBoxImages(c => 
-        c.filter((image) => image.img_id !== projectID).map(({ img_id, img_alt, img_src }) => ({
-          img_id,
-          img_alt,
-          img_src
-        }))
-      );
+      // setLightBoxImages(c => 
+      //   c.filter((image) => image.img_id !== projectID).map(({ img_id, img_alt, img_src }) => ({
+      //     img_id,
+      //     img_alt,
+      //     img_src
+      //   }))
+      // );
 
       toast.success(message);  
     } catch(error) {

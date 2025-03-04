@@ -2,12 +2,14 @@ import { useAppContext } from './contexts/AppContext.jsx';
 import { LightBoxContextProvider } from './contexts/LightBoxContext.jsx';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
+import { Zoom } from "yet-another-react-lightbox/plugins"; 
 import AddEditProject from './pages/AddEditProject/AddEditProject.jsx';
 import Blog from './pages/Blog/Blog.jsx';
 import ColorModeToggle from './components/ColorModeToggle/ColorModeToggle.jsx';
 import Contact from "./pages/Contact/Contact.jsx";
 import Footer from "./components/Footer/Footer.jsx";
 import Home from "./pages/Home/Home.jsx";
+import Lightbox from "yet-another-react-lightbox";
 import Login from "./pages/Login/Login.jsx";
 import Nav from './components/Nav/Nav.jsx';
 import NotFound from "./pages/NotFound/NotFound.jsx";
@@ -15,11 +17,7 @@ import Projects from "./pages/Projects/Projects.jsx";
 import SideNav from './components/SideNav/SideNav.jsx';
 import WallPaper from './components/WallPaper/WallPaper.jsx';
 import "./App.scss";
-
-// YARL imports
-import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
-import { Zoom } from "yet-another-react-lightbox/plugins"; 
 
 const MIN_LOADING_INTERVAL = import.meta.env.VITE_MIN_LOADING_INTERVAL;
 
@@ -34,8 +32,7 @@ const App = () => {
     setLightboxOpen,
     lightboxIndex, 
     setLightboxIndex,
-    slides, 
-    setSlides
+    slides
    } = useAppContext();
 
    const navigate = useNavigate();
