@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useAppContext } from "../../contexts/AppContext.jsx";
 import { scrollToTop } from "../../../utils/utils.js";
-import { Zoom, Fullscreen } from "yet-another-react-lightbox/plugins"; 
+import { Zoom } from "yet-another-react-lightbox/plugins"; 
 import Lightbox from "yet-another-react-lightbox";
 import Project from "../Project/Project";
 import toast from "react-hot-toast";
@@ -132,7 +132,7 @@ const ProjectsFeed = () => {
           close={() => setLightboxOpen(false)}
           index={lightboxIndex}
           slides={slides}
-          plugins={[Fullscreen, Zoom]}
+          plugins={[, Zoom]}
           carousel={{ finite: slides.length === 1 }} 
           className={`yarl-lightbox ${slides.length === 1 ? "hide-arrows" : ""}`}
           on={{click: ({ index }) => setLightboxIndex(index)}}
