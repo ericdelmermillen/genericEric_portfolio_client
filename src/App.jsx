@@ -1,5 +1,4 @@
 import { useAppContext } from './contexts/AppContext.jsx';
-import { LightBoxContextProvider } from './contexts/LightBoxContext.jsx';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 import { Zoom } from "yet-another-react-lightbox/plugins"; 
@@ -92,32 +91,16 @@ const App = () => {
       
           <Routes>
 
-            <Route 
-              path="/" 
-              element={
-                <LightBoxContextProvider>
-                  <Home />
-                </LightBoxContextProvider>
-              } 
-              />
+            <Route path="/" element={<Home />} />
 
-            <Route 
-              path="/home" 
-              element={
-                <LightBoxContextProvider>
-                  <Home />
-                </LightBoxContextProvider>
-              } 
-            />
+            <Route path="/home" element={<Home />} />
           
             <Route 
               path="/projects" 
               element={
-                <LightBoxContextProvider>
                   <Projects>
                     <WallPaper />
                   </Projects>
-                </LightBoxContextProvider>
               } 
             />
             
