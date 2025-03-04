@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { useAppContext } from "../../contexts/AppContext.jsx";
-import { useLightBoxContext } from "../../contexts/LightBoxContext.jsx";
 import { scrollToTop } from "../../../utils/utils.js";
 import { Zoom, Fullscreen } from "yet-another-react-lightbox/plugins"; 
 import Lightbox from "yet-another-react-lightbox";
@@ -24,30 +23,20 @@ const PROJECTS_PER_PAGE = 2;
   ));
 
 const ProjectsFeed = () => {
-  const { setIsLoading } = useAppContext();
-  
-  const {
-    showLightBox, 
-    setShowLightBox,
-    currentIdx, 
-    setCurrentIdx,
-    // handleCardClick,
-  } = useLightBoxContext();
-  
-  const [ projectsData, setProjectsData ] = useState(initialPosts);
+  const { setIsLoading, showNav } = useAppContext();
+
   const [ isFinalPageFetched, setIsFinalPageFetched ] = useState(false);
   const [ isFinalPageLoaded, setIsFinalPageLoaded ] = useState(false);
-  
   const [ isInitialFetch, setIsInitialFetch ] = useState(true);
-  const [ page, setPage ] = useState(1);
   const [ isInitialLoad, setIsInitialLoad ] = useState(true);
+  const [ page, setPage ] = useState(1);
+  const [ projectsData, setProjectsData ] = useState(initialPosts);
   const [ showPlaceholders, setShowPlaceholders ] = useState(true);
 
-
   // YARL state
-  const [lightboxOpen, setLightboxOpen] = useState(false);
-  const [lightboxIndex, setLightboxIndex] = useState(0);
-  const [slides, setSlides] = useState([]);
+  const [ lightboxOpen, setLightboxOpen ] = useState(false);
+  const [ lightboxIndex, setLightboxIndex ] = useState(0);
+  const [ slides, setSlides ] = useState([]);
   
   const handleSetCurrentProjectImages = (projectID) => {
     const selectedProject = projectsData.find(project => project.project_id === projectID);
@@ -60,12 +49,6 @@ const ProjectsFeed = () => {
     setSlides(images);
     setLightboxOpen(true);
     setLightboxIndex(0);
-  };
-
-  const handleSetShowLightBoxFalse = () => {
-    setTimeout(() => {
-      setShowLightBox(false);
-    }, LIGHTBOX_TIMING_INTERVAL);
   };
 
   const fetchProjects = async () => {
@@ -124,12 +107,21 @@ const ProjectsFeed = () => {
     };
   };
 
+  // useEffect to show Nav after user closes Lightbox to deal with lightbox Nav content shift
+  useEffect(()=> {
+    if(!lightboxOpen)  {
+      showNav();
+    };
+  }, [lightboxOpen]);
+
   // // fetch next page useEffect
   useEffect(() => {
     if(!isFinalPageFetched) {
       fetchProjects();
     };
   }, [page]);
+
+  console.log(lightboxOpen)
  
   return (
     <>
@@ -166,7 +158,6 @@ const ProjectsFeed = () => {
               projectPhotos={project.project_photos}
               projectURLs={project.project_urls}
               projectDescription={project.project_description}
-              setShowLightBox={setShowLightBox}
               handleSetCurrentProjectImages={handleSetCurrentProjectImages}
               isInitialFetch={isInitialFetch}
             />

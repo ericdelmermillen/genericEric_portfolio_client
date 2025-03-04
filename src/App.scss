@@ -135,10 +135,16 @@ img {
 }
 
 // YARL classes for customization
-.yarl__button:disabled {
-	display: none !important;
-}
+.yarl__button {
+	&:disabled {
+		display: none !important;
+	}
 
-.yarl__button[aria-label="Zoom in"] {
-	display: none;
+	&[aria-label="Zoom in"] {
+		display: none;
+	}
+
+	&[aria-label="Zoom out"] {
+		display: none;
+	}
 }
