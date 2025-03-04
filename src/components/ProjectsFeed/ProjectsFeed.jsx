@@ -1,12 +1,9 @@
 import { useState, useEffect } from "react";
 import { useAppContext } from "../../contexts/AppContext.jsx";
 import { scrollToTop } from "../../../utils/utils.js";
-import { Zoom } from "yet-another-react-lightbox/plugins"; 
-import Lightbox from "yet-another-react-lightbox";
 import Project from "../Project/Project";
 import toast from "react-hot-toast";
 import "./ProjectsFeed.scss";
-import "yet-another-react-lightbox/styles.css";
 
 const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 const AWS_SS3_BUCKET_URL = import.meta.env.VITE_AWS_S3_BUCKET_URL;
@@ -23,7 +20,14 @@ const PROJECTS_PER_PAGE = 2;
   ));
 
 const ProjectsFeed = () => {
-  const { setIsLoading, showNav } = useAppContext();
+  const { 
+    setIsLoading, 
+    showNav,
+    lightboxOpen, 
+    setLightboxOpen,
+    setLightboxIndex,
+    setSlides
+   } = useAppContext();
 
   const [ isFinalPageFetched, setIsFinalPageFetched ] = useState(false);
   const [ isFinalPageLoaded, setIsFinalPageLoaded ] = useState(false);
@@ -32,11 +36,6 @@ const ProjectsFeed = () => {
   const [ page, setPage ] = useState(1);
   const [ projectsData, setProjectsData ] = useState(initialPosts);
   const [ showPlaceholders, setShowPlaceholders ] = useState(true);
-
-  // YARL state
-  const [ lightboxOpen, setLightboxOpen ] = useState(false);
-  const [ lightboxIndex, setLightboxIndex ] = useState(0);
-  const [ slides, setSlides ] = useState([]);
   
   const handleSetCurrentProjectImages = (projectID) => {
     const selectedProject = projectsData.find(project => project.project_id === projectID);
@@ -120,24 +119,10 @@ const ProjectsFeed = () => {
       fetchProjects();
     };
   }, [page]);
-
-  console.log(lightboxOpen)
  
   return (
     <>
       <div className="projectsFeed">
-
-        <Lightbox
-          open={lightboxOpen}
-          close={() => setLightboxOpen(false)}
-          index={lightboxIndex}
-          slides={slides}
-          plugins={[, Zoom]}
-          carousel={{ finite: slides.length === 1 }} 
-          className={`yarl-lightbox ${slides.length === 1 ? "hide-arrows" : ""}`}
-          on={{click: ({ index }) => setLightboxIndex(index)}}
-          zoom={{ enabled: slides.length > 0 }}
-        />
         
         <div className="projectsFeed__inner">
 

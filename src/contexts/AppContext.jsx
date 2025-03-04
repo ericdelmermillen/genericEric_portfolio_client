@@ -33,6 +33,12 @@ const AppContextProvider = ({ children }) => {
   const [ rerenderTrigger, setRerenderTrigger ] = useState(1);
   const [ prevPathname, setPrevPathname ] = useState(location.pathname);
 
+  // YARL state
+  const [ lightboxOpen, setLightboxOpen ] = useState(false);
+  const [ lightboxIndex, setLightboxIndex ] = useState(0);
+  const [ slides, setSlides ] = useState([]);
+  
+
   const contactSectionRef = useRef(null); 
   const contactNameRef = useRef(null); 
 
@@ -273,7 +279,13 @@ const AppContextProvider = ({ children }) => {
     hideNav,
     handleBlogClick,
     handleContactClick,
-    handleProjectsClick
+    handleProjectsClick,
+    lightboxOpen, 
+    setLightboxOpen,
+    lightboxIndex, 
+    setLightboxIndex,
+    slides, 
+    setSlides
   };
 
   return (
