@@ -2,19 +2,12 @@ import { useState, useEffect } from "react";
 import { useAppContext } from "../../contexts/AppContext.jsx";
 import { useLightBoxContext } from "../../contexts/LightBoxContext.jsx";
 import { scrollToTop } from "../../../utils/utils.js";
-// import LightBox from "../../components/LightBox/LightBox.jsx";
-
-// YARL imports
+import { Zoom, Fullscreen } from "yet-another-react-lightbox/plugins"; 
 import Lightbox from "yet-another-react-lightbox";
-import "yet-another-react-lightbox/styles.css";
-import Thumbnails from "yet-another-react-lightbox/plugins/thumbnails";
-import Zoom from "yet-another-react-lightbox/plugins/zoom";
-import Fullscreen from "yet-another-react-lightbox/plugins/fullscreen";
-
-
 import Project from "../Project/Project";
 import toast from "react-hot-toast";
 import "./ProjectsFeed.scss";
+import "yet-another-react-lightbox/styles.css";
 
 const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 const AWS_SS3_BUCKET_URL = import.meta.env.VITE_AWS_S3_BUCKET_URL;
@@ -27,10 +20,7 @@ const PROJECTS_PER_PAGE = 2;
 
 // *** use for placeholders
   const initialPosts = Array.from({length: PROJECTS_PER_PAGE}, () => (
-    {
-      isInitialPlaceholder: true,
-      description: ""
-    }
+    { isInitialPlaceholder: true, description: "" }
   ));
 
 const ProjectsFeed = () => {
@@ -39,13 +29,9 @@ const ProjectsFeed = () => {
   const {
     showLightBox, 
     setShowLightBox,
-    lightBoxImages, 
-    setLightBoxImages,
     currentIdx, 
     setCurrentIdx,
-    handleCardClick,
-    handleIncrementCurrentIdx,
-    handleDecrementCurrentIdx
+    // handleCardClick,
   } = useLightBoxContext();
   
   const [ projectsData, setProjectsData ] = useState(initialPosts);
@@ -62,23 +48,6 @@ const ProjectsFeed = () => {
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(0);
   const [slides, setSlides] = useState([]);
-  
-  
-
-  // const handleSetCurrentProjectImages = (projectID) => {
-  //   setShowLightBox(true);
-
-  //   const selectedProject = projectsData.find(project => project.project_id === projectID);
-  //   const projectTitle = selectedProject.project_title;
-
-  //   setLightBoxImages(selectedProject.project_photos.map((photo, idx) => (
-  //     {
-  //       img_id: photo.photo_id,
-  //       img_src: photo.photo_url,
-  //       img_alt: `Photo number ${idx + 1} from ${projectTitle}`
-  //     }
-  //   )));    
-  // };
   
   const handleSetCurrentProjectImages = (projectID) => {
     const selectedProject = projectsData.find(project => project.project_id === projectID);
@@ -161,8 +130,6 @@ const ProjectsFeed = () => {
       fetchProjects();
     };
   }, [page]);
-
-  console.log(slides.length)
  
   return (
     <>
@@ -173,12 +140,12 @@ const ProjectsFeed = () => {
           close={() => setLightboxOpen(false)}
           index={lightboxIndex}
           slides={slides}
+          plugins={[Fullscreen, Zoom]}
           carousel={{ finite: slides.length === 1 }} 
           className={`yarl-lightbox ${slides.length === 1 ? "hide-arrows" : ""}`}
-          plugins={[Fullscreen]}
           on={{click: ({ index }) => setLightboxIndex(index)}}
+          zoom={{ enabled: slides.length > 0 }}
         />
-
         
         <div className="projectsFeed__inner">
 
@@ -200,7 +167,6 @@ const ProjectsFeed = () => {
               projectURLs={project.project_urls}
               projectDescription={project.project_description}
               setShowLightBox={setShowLightBox}
-              handleCardClick={handleCardClick}
               handleSetCurrentProjectImages={handleSetCurrentProjectImages}
               isInitialFetch={isInitialFetch}
             />
