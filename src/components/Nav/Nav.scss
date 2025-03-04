@@ -30,14 +30,11 @@
 	}
 
 	&__logo-box {
-		display: flex;
 		align-items: center;
+		display: flex;
 		justify-content: center;
 		height: vars.$navHeight;
 		width: 4rem;
-
-		@media (min-width: vars.$tablet) {
-		}
 	}
 
 	&__logo {

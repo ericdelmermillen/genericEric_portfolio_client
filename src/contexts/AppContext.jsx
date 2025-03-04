@@ -141,6 +141,10 @@ const AppContextProvider = ({ children }) => {
     };
   };
 
+  const showNav = () => {
+    document.getElementById("nav").classList.remove("hide");
+  };
+
   const hideNav = () => {
     document.getElementById("nav").classList.add("hide");
   };
@@ -265,6 +269,7 @@ const AppContextProvider = ({ children }) => {
     contactSectionRef,
     contactNameRef,
     focusContactNameInput,
+    showNav,
     hideNav,
     handleBlogClick,
     handleContactClick,
