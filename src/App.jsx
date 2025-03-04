@@ -2,7 +2,6 @@ import { useAppContext } from './contexts/AppContext.jsx';
 import { LightBoxContextProvider } from './contexts/LightBoxContext.jsx';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
-
 import AddEditProject from './pages/AddEditProject/AddEditProject.jsx';
 import Blog from './pages/Blog/Blog.jsx';
 import ColorModeToggle from './components/ColorModeToggle/ColorModeToggle.jsx';
@@ -17,6 +16,11 @@ import SideNav from './components/SideNav/SideNav.jsx';
 import WallPaper from './components/WallPaper/WallPaper.jsx';
 import "./App.scss";
 
+// YARL imports
+import Lightbox from "yet-another-react-lightbox";
+import "yet-another-react-lightbox/styles.css";
+import { Zoom } from "yet-another-react-lightbox/plugins"; 
+
 const MIN_LOADING_INTERVAL = import.meta.env.VITE_MIN_LOADING_INTERVAL;
 
 const App = () => {
@@ -25,7 +29,13 @@ const App = () => {
     setShowSideNav,
     isLoading,
     isLoggedIn,
-    logoutUser
+    logoutUser,
+    lightboxOpen, 
+    setLightboxOpen,
+    lightboxIndex, 
+    setLightboxIndex,
+    slides, 
+    setSlides
    } = useAppContext();
 
    const navigate = useNavigate();
@@ -184,55 +194,67 @@ const App = () => {
 
           <Footer /> 
 
-          <Toaster
-            position="bottom-center"  
-            reverseOrder={false} // Newest toast at the bottom
-            gutter={8} // Space between toasts
-            containerStyle={{ top: 20, right: 20 }}
-            toastOptions={{
-              duration: 3000, // Default duration
-              ariaProps: {
-                role: 'status',
-                'aria-live': 'polite',
+          <Lightbox
+            open={lightboxOpen}
+            close={() => setLightboxOpen(false)}
+            index={lightboxIndex}
+            slides={slides}
+            plugins={[, Zoom]}
+            carousel={{ finite: slides.length === 1 }} 
+            className={`yarl-lightbox ${slides.length === 1 ? "hide-arrows" : ""}`}
+            on={{click: ({ index }) => setLightboxIndex(index)}}
+            zoom={{ enabled: slides.length > 0 }}
+        />
+
+        <Toaster
+          position="bottom-center"  
+          reverseOrder={false} // Newest toast at the bottom
+          gutter={8} // Space between toasts
+          containerStyle={{ top: 20, right: 20 }}
+          toastOptions={{
+            duration: 3000, // Default duration
+            ariaProps: {
+              role: 'status',
+              'aria-live': 'polite',
+            },
+            style: {
+              background: '#333',
+              color: '#fff',
+              padding: '16px',
+            },
+            success: {
+              duration: 3000,
+              theme: {
+                primary: 'green',
+                secondary: 'black',
+              },
+              iconTheme: {
+                primary: 'white',
+                secondary: 'green',
               },
               style: {
-                background: '#333',
+                background: 'green',
                 color: '#fff',
-                padding: '16px',
               },
-              success: {
-                duration: 3000,
-                theme: {
-                  primary: 'green',
-                  secondary: 'black',
-                },
-                iconTheme: {
-                  primary: 'white',
-                  secondary: 'green',
-                },
-                style: {
-                  background: 'green',
-                  color: '#fff',
-                },
+            },
+            error: {
+              duration: 3000,
+              icon: '🔥',
+              style: {
+                background: 'red',
+                color: '#fff',
               },
-              error: {
-                duration: 3000,
-                icon: '🔥',
-                style: {
-                  background: 'red',
-                  color: '#fff',
-                },
+            },
+            loading: {
+              duration: Infinity,
+              icon: '⏳',
+              style: {
+                background: '#007bff',
+                color: '#fff',
               },
-              loading: {
-                duration: Infinity,
-                icon: '⏳',
-                style: {
-                  background: '#007bff',
-                  color: '#fff',
-                },
-              },
-            }}
-          />
+            },
+          }}
+        />
         
         </div> 
      </div>
