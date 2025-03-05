@@ -301,7 +301,6 @@ const AddEditProject = ({ children }) => {
     return validURL || githubServerURLValue.length === 0;
   };
 
-  
   const handleSubmit = async (e) => {
     e.preventDefault();
     setInitialFormCheck(true);
@@ -316,8 +315,10 @@ const AddEditProject = ({ children }) => {
     };
 
     let errors = 0;
-    const hasPhotos = photos.some(photo => photo.photoPreview !== null);
 
+    const validPhotos = photos.filter(photo => photo.photoData || photo.photoPreview);
+    const hasPhotos = validPhotos.length > 0;
+    
     if(!hasPhotos) {
       toast.error("Minimum one photo required");
       errors++;
@@ -381,7 +382,7 @@ const AddEditProject = ({ children }) => {
 
     let awsURL;
 
-    for(const photo of photos) {
+    for(const photo of validPhotos) {
       
       if(photo.photoPreview && !photo.photoData) {
         
@@ -445,6 +446,8 @@ const AddEditProject = ({ children }) => {
       const method = isAddProject ? "POST" : "PUT";
       const endpoint = isAddProject ? "projects/project/add" : `projects/project/edit/${projectID}`;
 
+      project.project_photos.forEach((photo, idx) => photo.display_order = idx + 1);
+      
       const response = await fetch(`${BASE_URL}/${endpoint}`, {
         method: method,
         headers: headers,
@@ -486,7 +489,6 @@ const AddEditProject = ({ children }) => {
   const handleCancel = () => {
     navigate("/");
   };
-
 
   // fetch existing project on mount useEffect
   useEffect(() => {
