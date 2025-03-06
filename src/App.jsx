@@ -174,17 +174,6 @@ const App = () => {
 
           <Footer /> 
 
-          <Lightbox
-            open={lightboxOpen}
-            close={() => setLightboxOpen(false)}
-            index={lightboxIndex}
-            slides={slides}
-            plugins={[, Zoom]}
-            carousel={{ finite: slides.length === 1 }} 
-            className={`yarl-lightbox ${slides.length === 1 ? "hide-arrows" : ""}`}
-            on={{click: ({ index }) => setLightboxIndex(index)}}
-            zoom={{ enabled: slides.length > 0 }}
-        />
 
         <Toaster
           position="bottom-center"  
@@ -237,7 +226,20 @@ const App = () => {
         />
         
         </div> 
+
      </div>
+
+     <Lightbox
+        open={lightboxOpen}
+        close={() => setLightboxOpen(false)}
+        index={lightboxIndex}
+        slides={slides}
+        plugins={[, Zoom]}
+        carousel={{ finite: slides.length === 1 }} 
+        className={`yarl-lightbox ${slides.length === 1 ? "hide-arrows" : ""}`}
+        on={{click: ({ index }) => setLightboxIndex(index)}}
+        zoom={{ enabled: slides.length > 0 }}
+        />
     </>
   )};
 

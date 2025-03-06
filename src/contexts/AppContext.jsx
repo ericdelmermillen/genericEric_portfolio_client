@@ -251,6 +251,7 @@ const AppContextProvider = ({ children }) => {
     setIsEditMode(false);
   }, [location.pathname]);
 
+
     // useEffect to check for token for isLoggedIn status on initial mount
     useEffect(() => {
       checkLoginStatus();
