@@ -23,8 +23,8 @@ const Project = ({
   projectDescription,
   handleSetCurrentProjectImages,
  }) => {
+   const { setIsLoading, hideNav } = useAppContext();
    
-  const { setIsLoading, hideNav } = useAppContext();
   
   const startIdx = (page - 1) * PROJECTS_PER_PAGE;
   const endIdx = Math.min(startIdx + PROJECTS_PER_PAGE - 1, maxIdx);
@@ -45,8 +45,8 @@ const Project = ({
   : projectDescription?.split("\n")[0] || "";
   
   const handleImageClick = () => {
-    handleSetCurrentProjectImages(projectID);
     hideNav();
+    handleSetCurrentProjectImages(projectID);
   };
 
   const handleToggleShowFullInfo = () => {
@@ -144,6 +144,7 @@ const Project = ({
               )
             : null
           }
+
 
           <div className="project__text">
 

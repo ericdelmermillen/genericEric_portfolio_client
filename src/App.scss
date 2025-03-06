@@ -18,11 +18,13 @@ html {
 }
 
 body {
-	background: var(--neutralBG);
-	color: var(--text-color);
-	text-rendering: optimizeLegibility;
-	-moz-osx-font-smoothing: grayscale;
-	-webkit-font-smoothing: antialiased;
+	& {
+		background: var(--neutralBG);
+		color: var(--text-color);
+		text-rendering: optimizeLegibility;
+		-moz-osx-font-smoothing: grayscale;
+		-webkit-font-smoothing: antialiased;
+	}
 }
 
 a {
