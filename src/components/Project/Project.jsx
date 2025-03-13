@@ -47,6 +47,8 @@ const Project = ({
   const handleImageClick = () => {
     hideNav();
     handleSetCurrentProjectImages(projectID);
+
+    hideNav();
   };
 
   const handleToggleShowFullInfo = () => {

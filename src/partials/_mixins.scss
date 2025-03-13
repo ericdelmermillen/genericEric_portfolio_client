@@ -556,7 +556,7 @@
 	color: var(--link-button-color);
 	cursor: pointer;
 	font-family: inherit;
-	font-size: var(--button-link-small);
+	font-size: var(--font-size-xs);
 	letter-spacing: var(--letter-spacing-general);
 	line-height: var(--line-height-general);
 	outline: none;
@@ -565,7 +565,7 @@
 	text-decoration: underline;
 
 	@media (min-width: vars.$smallTablet) {
-		font-size: var(--button-link-medium);
+		font-size: var(--font-size-small);
 	}
 }
 
