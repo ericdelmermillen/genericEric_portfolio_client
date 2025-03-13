@@ -280,12 +280,7 @@
 	}
 
 	&__show-full-info {
-		font-size: var(--font-size-xs);
 		margin-top: 1rem;
 		@include mx.linkButton;
-
-		@media (min-width: vars.$smallTablet) {
-			font-size: var(--font-size-small);
-		}
 	}
 }
