@@ -11,10 +11,10 @@ const YOUTUBE_API_KEY = import.meta.env.VITE_YOUTUBE_API_KEY;
 const YOUTUBE_BASE_URL = import.meta.env.VITE_YOUTUBE_BASE_URL;
 
 // SMW's playlist
-// const PLAYLIST_ID = "UU6aTLuI_j4-0wiDSzmaPctQ"; 
+const PLAYLIST_ID = "UU6aTLuI_j4-0wiDSzmaPctQ"; 
 
 // GE's playlist
-const PLAYLIST_ID = "UUxF40kFyhKJ9JGuvNtfypyQ"; 
+// const PLAYLIST_ID = "UUxF40kFyhKJ9JGuvNtfypyQ"; 
 
 const environment = import.meta.env.VITE_NODE_ENV;
 

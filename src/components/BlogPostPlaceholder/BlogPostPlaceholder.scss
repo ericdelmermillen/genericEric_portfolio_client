@@ -4,7 +4,6 @@
 .blogPostPlaceholder {
 	& {
 		max-width: 100%;
-		padding-inline: 1rem;
 		@include mx.blogPost;
 
 		@media (min-width: vars.$smallTablet) {
@@ -22,31 +21,11 @@
 		background: var(--placeholder-color);
 		border-radius: var(--border-radius);
 		box-shadow: var(--box-shadow);
-		margin-bottom: 1rem;
+		margin-bottom: 1.25rem;
 		@include mx.blogPostVideo;
 
 		@media (min-width: vars.$smallTablet) {
-			margin-bottom: 1.5rem;
-		}
-
-		@media (min-width: 600px) {
-			margin-bottom: 1.25rem;
-		}
-
-		@media (min-width: 650px) {
-			margin-bottom: 1rem;
-		}
-
-		@media (min-width: vars.$tablet) {
-			margin-bottom: 0.75rem;
-		}
-
-		@media (min-width: 875px) {
-			margin-bottom: 1rem;
-		}
-
-		@media (min-width: 900px) {
-			margin-bottom: 1.25rem;
+			margin-bottom: 1.75rem;
 		}
 	}
 
@@ -54,22 +33,20 @@
 		background: var(--placeholder-color);
 		border-radius: var(--border-radius);
 		box-shadow: var(--box-shadow);
-		height: 1.75rem;
+		height: 1.5rem;
 		margin-bottom: 1rem;
 		margin-inline: auto;
-		width: 80%;
-
-		@media (min-width: 500px) {
-			margin-bottom: 1.25rem;
-		}
+		width: 85%;
 
 		@media (min-width: vars.$smallTablet) {
-			margin-bottom: 1rem;
+			height: 1.75rem;
+			margin-bottom: 1.5rem;
 		}
 
 		@media (min-width: vars.$tablet) {
 			height: 2rem;
 			margin-bottom: 1.25rem;
+			width: 80%;
 		}
 	}
 
@@ -77,13 +54,13 @@
 		background: var(--placeholder-color);
 		border-radius: var(--border-radius);
 		box-shadow: var(--box-shadow);
-		height: 5.75rem;
+		height: 6.75rem;
 		margin-bottom: 2.5rem;
 		margin-inline: auto;
-		width: 90%;
+		width: 95%;
 
 		@media (min-width: vars.$smallTablet) {
-			height: 6rem;
+			height: 7.5rem;
 		}
 
 		@media (min-width: vars.$tablet) {
