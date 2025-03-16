@@ -186,10 +186,7 @@
 		}
 
 		&--title {
-			font-size: inherit;
-			font-weight: normal;
-			font-weight: 500;
-			line-height: var(--line-height-general);
+			@include mx.blogPostOrProjectTitle;
 
 			&.ellipsis {
 				@include mx.ellipsisOneLine;
@@ -198,9 +195,8 @@
 	}
 
 	&__description {
-		font-size: inherit;
-		line-height: var(--line-height-general);
 		margin-bottom: 0.5rem;
+		@include mx.blogPostOrProjectDesc;
 
 		&.ellipsis {
 			-webkit-line-clamp: 3;
