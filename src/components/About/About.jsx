@@ -1,7 +1,7 @@
 import { useAppContext } from '../../contexts/AppContext.jsx';
+import { useEffect } from 'react';
 import me from "../../assets/images/me.jpeg"
 import './About.scss';
-import { useEffect } from 'react';
 
 const About = () => {
   const {
