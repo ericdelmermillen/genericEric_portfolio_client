@@ -160,7 +160,7 @@ const AppContextProvider = ({ children }) => {
 
   const handleBlogClick = useMemo(() => 
     throttle(() => {
-      if (location.pathname.includes("blog")) {
+      if(location.pathname.includes("blog")) {
         scrollToTop();
         setIsLoading(true);
         
@@ -197,7 +197,7 @@ const AppContextProvider = ({ children }) => {
     }, LONG_THROTTLE_VALUE),
   [location.pathname]);
 
-  // useEffect to disable scroll to to on esc press
+  // useEffect to disable scroll to on esc press
   useEffect(() => {
     const handleKeyDown = (e) => {
       e.stopPropagation();
