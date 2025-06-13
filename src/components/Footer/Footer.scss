@@ -33,7 +33,7 @@
 		padding-block: 1.25rem;
 		width: 100%;
 
-		@media (min-width: 768px) {
+		@media (min-width: vars.$tablet) {
 			margin-inline-start: auto;
 		}
 	}
