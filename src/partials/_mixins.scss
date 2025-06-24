@@ -626,9 +626,10 @@
 }
 
 @mixin servicesBg {
-	background-size: cover;
+	// background repeat and size not being applied from mixin: important used as a fix
+	background-size: cover !important;
 	background-position: center center;
-	background-repeat: no-repeat;
+	background-repeat: no-repeat !important;
 	height: 100%;
 	position: absolute;
 	width: 100%;
