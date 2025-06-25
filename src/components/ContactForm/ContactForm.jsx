@@ -70,9 +70,8 @@ const ContactForm = ({ children }) => {
     setMessage("");
   };
 
-  // const handleSubmit = async (e) => {
-  const handleSubmit = async () => {
-    // e.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     setInitialFormCheck(true);
     setIsLoading(true);
 
@@ -162,7 +161,7 @@ const ContactForm = ({ children }) => {
           <form 
             name="contactForm"
             className="contactForm__form"
-            onSubmit={(e) => {e.preventDefault()}}
+            onSubmit={(e) => handleSubmit(e)}
             aria-labelledby="contact-heading"
           >
 
@@ -264,7 +263,6 @@ const ContactForm = ({ children }) => {
                 className="contactForm__button"
                 disabled={isLoading}
                 aria-busy={isLoading}
-                onSubmit={handleSubmit}
               >
                 SUBMIT
               </button>
