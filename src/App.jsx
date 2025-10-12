@@ -174,7 +174,6 @@ const App = () => {
 
           <Footer /> 
 
-
         <Toaster
           position="bottom-center"  
           reverseOrder={false} // Newest toast at the bottom
