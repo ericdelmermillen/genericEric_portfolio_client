@@ -1,4 +1,3 @@
-import { useAppContext } from "../../contexts/AppContext.jsx";
 import { FaGlobe, FaCode, FaCartShopping } from "react-icons/fa6";
 import "./Services.scss";
 
@@ -27,9 +26,6 @@ const services = [
 ];
 
 const Services = () => {
-  const { 
-    colorMode
-   } = useAppContext();
   
   return (
     <>  
