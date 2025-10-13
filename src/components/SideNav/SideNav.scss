@@ -1,3 +1,215 @@
+// // @use "../../partials/variables" as vars;
+// // @use "../../partials/mixins" as mx;
+
+// // .sideNav {
+// // 	& {
+// // 		background: var(--background-color);
+// // 		bottom: 0;
+// // 		box-shadow: var(--box-shadow);
+// // 		height: 100vh;
+// // 		left: 200vw;
+// // 		position: fixed;
+// // 		top: 0;
+// // 		transition: all 0.5s ease-in-out;
+// // 		width: 80vw;
+// // 		will-change: transform; // 🆕 hint for GPU optimization
+// // 		z-index: 3;
+
+// // 		@media (min-width: 525px) {
+// // 			width: 50vw;
+// // 		}
+
+// // 		&.show {
+// // 			left: 20vw;
+// // 			transition: all 0.5s ease-out;
+
+// // 			@media (min-width: 525px) {
+// // 				left: 50vw;
+// // 			}
+// // 		}
+// // 	}
+
+// // 	&__inner {
+// // 		align-items: center;
+// // 		display: flex;
+// // 		flex-direction: column;
+// // 		height: 100%;
+// // 		overflow-y: scroll;
+// // 		padding-bottom: 6rem;
+// // 		position: relative;
+// // 	}
+
+// // 	&__clickOffDiv {
+// // 		height: 100%;
+// // 		position: fixed;
+// // 		top: 0;
+// // 		width: 100%;
+// // 		z-index: 3;
+// // 	}
+
+// // 	&__close-button {
+// // 		cursor: pointer;
+// // 		height: 1.85rem;
+// // 		padding-top: 0.8rem;
+// // 		position: fixed;
+// // 		top: 1.5rem;
+// // 		width: 1.85rem;
+// // 	}
+
+// // 	&__links {
+// // 		display: flex;
+// // 		flex-direction: column;
+// // 		gap: 4rem;
+// // 		margin-top: 8rem;
+// // 	}
+
+// // 	&__link {
+// // 		color: var(--text-color);
+// // 		@include mx.navLink;
+
+// // 		&.active {
+// // 			&:after {
+// // 				bottom: -2rem;
+// // 				@include mx.afterAccent;
+// // 			}
+// // 		}
+// // 	}
+
+// // 	&__close-icon {
+// // 		background-color: var(--text-color);
+// // 		border-radius: 2px;
+// // 		height: 2.5px;
+// // 		position: absolute;
+// // 		transform-origin: center;
+// // 		width: 100%;
+// // 	}
+
+// // 	&__close-icon:first-child {
+// // 		transform: rotate(45deg);
+// // 	}
+
+// // 	&__close-icon:last-child {
+// // 		transform: rotate(-45deg);
+// // 	}
+
+// // 	&__logout {
+// // 		margin-inline: auto;
+// // 	}
+
+// // 	&__colorModeToggler {
+// // 		align-items: center;
+// // 		display: flex;
+// // 		justify-content: center;
+// // 		left: 50%;
+// // 		margin-inline: auto;
+// // 		margin-top: auto;
+// // 	}
+// // }
+
+// @use "../../partials/variables" as vars;
+// @use "../../partials/mixins" as mx;
+
+// .sideNav {
+// 	& {
+// 		background: var(--background-color);
+// 		bottom: 0;
+// 		box-shadow: var(--box-shadow);
+// 		height: 100vh;
+// 		position: fixed;
+// 		right: -80vw; // start fully offscreen
+// 		top: 0;
+// 		transition: right 0.33s ease-in-out; // animate only the right property
+// 		width: 80vw;
+// 		z-index: 3;
+
+// 		@media (min-width: 525px) {
+// 			width: 50vw;
+// 			right: -50vw;
+// 		}
+
+// 		&.show {
+// 			right: 0; // slide in fully visible
+// 			transition: right 0.33s ease-out;
+// 		}
+// 	}
+
+// 	&__clickOffDiv {
+// 		height: 100%;
+// 		position: fixed;
+// 		top: 0;
+// 		width: 100%;
+// 		z-index: 3;
+// 	}
+
+// 	&__close-button {
+// 		cursor: pointer;
+// 		height: 1.85rem;
+// 		padding-top: 0.8rem;
+// 		position: fixed;
+// 		top: 1.5rem;
+// 		width: 1.85rem;
+// 	}
+
+// 	&__close-icon {
+// 		background-color: var(--text-color);
+// 		border-radius: 2px;
+// 		height: 2.5px;
+// 		position: absolute;
+// 		transform-origin: center;
+// 		width: 100%;
+
+// 		&:first-child {
+// 			transform: rotate(45deg);
+// 		}
+
+// 		&:last-child {
+// 			transform: rotate(-45deg);
+// 		}
+// 	}
+
+// 	&__colorModeToggler {
+// 		align-items: center;
+// 		display: flex;
+// 		justify-content: center;
+// 		left: 50%;
+// 		margin-inline: auto;
+// 		margin-top: auto;
+// 	}
+
+// 	&__inner {
+// 		align-items: center;
+// 		display: flex;
+// 		flex-direction: column;
+// 		height: 100%;
+// 		overflow-y: scroll;
+// 		padding-bottom: 6rem;
+// 		position: relative;
+// 	}
+
+// 	&__links {
+// 		display: flex;
+// 		flex-direction: column;
+// 		gap: 4rem;
+// 		margin-top: 8rem;
+// 	}
+
+// 	&__link {
+// 		color: var(--text-color);
+// 		@include mx.navLink;
+
+// 		&.active {
+// 			&:after {
+// 				bottom: -2rem;
+// 				@include mx.afterAccent;
+// 			}
+// 		}
+// 	}
+
+// 	&__logout {
+// 		margin-inline: auto;
+// 	}
+// }
+
 @use "../../partials/variables" as vars;
 @use "../../partials/mixins" as mx;
 
@@ -7,35 +219,27 @@
 		bottom: 0;
 		box-shadow: var(--box-shadow);
 		height: 100vh;
-		left: 200vw;
 		position: fixed;
+		right: 0; /* anchor to right edge */
 		top: 0;
-		transition: all 0.5s ease-in-out;
+		transform: translateX(100%); /* start offscreen right */
+		transition: transform 0.33s ease-in-out; /* only transform for performance */
 		width: 80vw;
+		will-change: transform;
 		z-index: 3;
 
 		@media (min-width: 525px) {
 			width: 50vw;
 		}
-
-		&.show {
-			left: 20vw;
-			transition: all 0.5s ease-out;
-
-			@media (min-width: 525px) {
-				left: 50vw;
-			}
-		}
 	}
 
-	&__inner {
-		align-items: center;
-		display: flex;
-		flex-direction: column;
-		height: 100%;
-		overflow-y: scroll;
-		padding-bottom: 6rem;
-		position: relative;
+	&.show {
+		transform: translateX(0); /* slide in */
+		transition: transform 0.33s ease-out;
+
+		@media (min-width: 525px) {
+			width: 50vw;
+		}
 	}
 
 	&__clickOffDiv {
@@ -53,6 +257,44 @@
 		position: fixed;
 		top: 1.5rem;
 		width: 1.85rem;
+	}
+
+	&__close-icon {
+		background-color: var(--text-color);
+		border-radius: 2px;
+		height: 2.5px;
+		position: absolute;
+		transform-origin: center;
+		width: 100%;
+	}
+
+	&__close-icon:first-child {
+		transform: rotate(45deg);
+	}
+
+	&__close-icon:last-child {
+		transform: rotate(-45deg);
+	}
+
+	&__colorModeToggler {
+		align-items: center;
+		display: flex;
+		justify-content: center;
+		left: 50%;
+		margin-inline: auto;
+		margin-top: auto;
+	}
+
+	&__inner {
+		align-items: center;
+		display: flex;
+		flex-direction: column;
+		height: 100%;
+		// overflow-y: auto; /* auto instead of scroll */
+		padding-bottom: 6rem;
+		position: relative;
+		// min-width: 0; /* prevent flex overflow from creating gaps */
+		// background-clip: border-box; /* ensure background fills entire element */
 	}
 
 	&__links {
@@ -74,33 +316,7 @@
 		}
 	}
 
-	&__close-icon {
-		background-color: var(--text-color);
-		border-radius: 2px;
-		height: 2.5px;
-		position: absolute;
-		transform-origin: center;
-		width: 100%;
-	}
-
-	&__close-icon:first-child {
-		transform: rotate(45deg);
-	}
-
-	&__close-icon:last-child {
-		transform: rotate(-45deg);
-	}
-
 	&__logout {
 		margin-inline: auto;
-	}
-
-	&__colorModeToggler {
-		align-items: center;
-		display: flex;
-		justify-content: center;
-		left: 50%;
-		margin-inline: auto;
-		margin-top: auto;
 	}
 }
