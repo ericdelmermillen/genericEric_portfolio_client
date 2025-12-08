@@ -40,10 +40,7 @@ const WallPaperRow = ({ className, colorMode, rowIcons }) => {
       {rowIcons.map((IconComponent, idx) => (
         <div
           key={idx}
-          className={`wallpaper__item ${
-            idx + 1 === 8 
-              ? "x" 
-              : ""} 
+          className={`wallpaper__item 
             ${colorMode === "light" 
                 ? "light" 
                 : "dark"}`
