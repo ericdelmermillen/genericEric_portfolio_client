@@ -1,4 +1,3 @@
-
 const Hide = ({ className }) => {
   return (
     <svg 
