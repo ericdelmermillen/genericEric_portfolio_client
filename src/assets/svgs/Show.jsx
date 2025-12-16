@@ -1,5 +1,3 @@
-import React from 'react';
-
 const Show = ({ className }) => {
   return (
     <svg 
