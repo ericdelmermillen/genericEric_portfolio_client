@@ -51,13 +51,19 @@ const LoginForm = ({ children }) => {
     e.preventDefault();
     setInitialFormCheck(true);
 
+    let invalidInputs = 0;
+
     if(!handleEmailChange()) {
       toast.error("Invalid email");
-      return;
+      invalidInputs += 1;
     };
 
     if(!handlePasswordChange()) {
       toast.error("Invalid password");
+      invalidInputs += 1;
+    };
+
+    if(invalidInputs){
       return;
     };
 
