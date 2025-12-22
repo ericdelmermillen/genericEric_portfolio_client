@@ -19,13 +19,21 @@ const scrollToTop = () => {
 };
 
 const isValidEmail = (email) => {
-  const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@(([[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  if(typeof email !== "string"){ 
+    return false;
+  };
+  
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return emailRegex.test(email);
 };
 
-const isValidPassword = (password) =>{
+const isValidPassword = (password) => {
+  if(typeof password !== "string"){ 
+    return false;
+  };
   return password.trim().length >= 8;
 };
+
 
 const setTokens = (token, refreshToken) => {
   if(token) {

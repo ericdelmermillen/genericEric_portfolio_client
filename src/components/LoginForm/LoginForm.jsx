@@ -6,6 +6,8 @@ import Hide from "../../assets/svgs/Hide.jsx";
 import Show from "../../assets/svgs/Show.jsx";
 import "./LoginForm.scss";
 
+// needs to update input validty on change after initial form check
+
 const isSafari = navigator.userAgent.toLowerCase().includes("safari") &&
   (!navigator.userAgent.toLowerCase().includes("chrome") || !navigator.userAgent.toLowerCase().includes("mozilla"));
 
@@ -37,7 +39,9 @@ const LoginForm = ({ children }) => {
   };
 
   const handlePasswordChange = (e) => {
-    const passwordValue = e ? e.target.value : passwordRef.current.value;
+    const passwordValue =
+      e?.target.value ?? passwordRef.current?.value ?? "";
+      
     const passwordIsValid = isValidPassword(passwordValue);
     
     setPassword(passwordValue);
@@ -112,7 +116,6 @@ const LoginForm = ({ children }) => {
                 ref={emailRef}
                 onChange={handleEmailChange}
                 aria-describedby="emailError"
-                onBlur={handleEmailChange}
                 aria-invalid={!emailIsValid && initialFormCheck ? "true" : "false"}
               />
 
@@ -147,7 +150,6 @@ const LoginForm = ({ children }) => {
                 value={password}
                 ref={passwordRef}
                 onChange={handlePasswordChange}
-                onBlur={handlePasswordChange}
                 aria-describedby="passwordError"
                 aria-invalid={!passwordIsValid && initialFormCheck ? "true" : "false"}
               />
@@ -164,20 +166,15 @@ const LoginForm = ({ children }) => {
                 }
               </button>
               
-              {!passwordIsValid && initialFormCheck 
-
-                ? ( 
-                    <div 
-                      id="passwordError"
-                      className="loginForm__error"
-                      role="alert"
-                    >
-                      Invalid Password
-                    </div>
-                  )
-
-                : null
-              }
+              {!passwordIsValid && initialFormCheck && (
+              <div
+                id="passwordError"
+                className="loginForm__error"
+                role="alert"
+              >
+                Invalid Password
+              </div>
+            )}
               
             </div>
 
