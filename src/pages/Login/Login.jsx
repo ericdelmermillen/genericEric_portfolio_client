@@ -10,9 +10,9 @@ const Login = ({ children }) => {
     scrollToTop();
   }, []);
 
-    // update title of page
-    useEffect(() => {
-      document.title = "Generic Eric's Admin Login Page";
+  // update title of page
+  useEffect(() => {
+    document.title = "Generic Eric's Admin Login Page";
   }, []);
   
   return (
