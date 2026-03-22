@@ -166,7 +166,7 @@ img {
 
 	&__toast {
 		// give appropriate background color relative to color mode
-		@include mx.cardBoxShadow;
+		@include mx.toastBoxShadow;
 		& {
 			border-radius: var(--border-radius-toast);
 			max-width: 16rem;

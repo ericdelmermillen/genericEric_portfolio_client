@@ -671,6 +671,6 @@
 	position: relative;
 }
 
-@mixin cardBoxShadow {
+@mixin toastBoxShadow {
 	box-shadow: var(--toast-box-shadow);
 }
