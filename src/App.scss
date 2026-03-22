@@ -150,3 +150,44 @@ img {
 		display: none;
 	}
 }
+
+.Toastify {
+	&__toast-container {
+		gap: 8px;
+		left: 50%;
+		margin-bottom: 16px;
+		transform: translateX(-50%);
+		width: calc(100vw - 32px);
+
+		@media (min-width: vars.$smallTablet) {
+			margin-bottom: 0;
+		}
+	}
+
+	&__toast {
+		// give appropriate background color relative to color mode
+		@include mx.cardBoxShadow;
+		& {
+			border-radius: var(--border-radius-toast);
+			max-width: 16rem;
+			padding-inline-end: 1.75rem;
+			padding-inline-start: 1.25rem;
+			background: var(--background-color);
+		}
+
+		@media (min-width: vars.$smallPhone) {
+			margin-block: 0;
+			max-width: 18rem;
+		}
+	}
+
+	&__close-button {
+		top: 0.5rem;
+		right: 0.5rem;
+
+		& svg {
+			height: 18px;
+			width: 18px;
+		}
+	}
+}

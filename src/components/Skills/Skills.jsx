@@ -3,7 +3,7 @@ import {
   SiJavascript, 
   SiTypescript, 
   SiExpress, 
-  SiAdobe, 
+  // SiAdobe, 
   SiMysql, 
   SiRedux, 
   // SiPostman, 
@@ -13,6 +13,7 @@ import { FaHtml5, FaReact, FaAws } from "react-icons/fa";
 import { FaGithub, FaSass } from "react-icons/fa6";
 import { IoLogoCss3 } from "react-icons/io5";
 import { DiNodejs, DiPostgresql } from "react-icons/di";
+import { LiaAdobe } from "react-icons/lia";
 import { PiFigmaLogoFill } from "react-icons/pi";
 import Skill from "../Skill/Skill.jsx";
 import "./Skills.scss";
@@ -31,9 +32,8 @@ const skills = [
   { skillName: "MySQL", skillIcon: SiMysql },
   { skillName: "Postgres", skillIcon: DiPostgresql },
   { skillName: "AWS", skillIcon: FaAws },
-  // { skillName: "Postman", skillIcon: SiPostman },
   { skillName: "Sass", skillIcon: FaSass },
-  { skillName: "Adobe", skillIcon: SiAdobe },
+  { skillName: "Adobe", skillIcon: LiaAdobe },
   { skillName: "Figma", skillIcon: PiFigmaLogoFill },
 ];
 

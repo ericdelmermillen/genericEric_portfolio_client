@@ -1,7 +1,8 @@
 import { jwtDecode } from "jwt-decode";
-import toast from "react-hot-toast";
+import { toast } from "react-toastify";
 
 const BASE_URL = import.meta.env.VITE_API_BASE_URL;
+const MIN_LOADING_INTERVAL = import.meta.env.VITE_MIN_LOADING_INTERVAL;
 
 // use for setting up drag and drop functionality since firefox has issues with on drag (use onTouchStart)
 const checkIfIsFirefox = () => {
@@ -152,6 +153,16 @@ const getFormattedDate = (date) => {
   return `${day}-${month}-${year}`; // Return in "DD-MM-YYYY" format
 };
 
+const staggerToastsByN = (message, toastType, staggerOffset) => {
+  setTimeout(() => {
+    if (toastType === "default") {
+      toast(message);
+    } else {
+      toast[toastType](message);
+    }
+  }, MIN_LOADING_INTERVAL * staggerOffset);
+};
+
 
 export {
   checkIfIsFirefox,
@@ -165,5 +176,6 @@ export {
   addClassToDiv,
   removeClassFromDiv,
   getMonthYear,
-  getFormattedDate
+  getFormattedDate,
+  staggerToastsByN
 };

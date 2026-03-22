@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useAppContext } from "../../contexts/AppContext.jsx";
 import { addClassToDiv, removeClassFromDiv } from "../../../utils/utils.js";
 import { removeTokens, setTokens } from '../../../utils/utils.js';
-import toast from "react-hot-toast";
+import { toast } from "react-toastify";
 import "./EditDeleteProjectModal.scss";
 
 const MIN_LOADING_INTERVAL = import.meta.env.VITE_MIN_LOADING_INTERVAL;

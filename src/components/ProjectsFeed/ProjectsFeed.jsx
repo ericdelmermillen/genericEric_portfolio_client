@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useAppContext } from "../../contexts/AppContext.jsx";
 import { scrollToTop } from "../../../utils/utils.js";
 import Project from "../Project/Project";
-import toast from "react-hot-toast";
+import { toast } from "react-toastify";
 import "./ProjectsFeed.scss";
 
 const BASE_URL = import.meta.env.VITE_API_BASE_URL;

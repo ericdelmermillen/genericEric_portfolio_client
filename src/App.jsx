@@ -1,6 +1,6 @@
 import { useAppContext } from './contexts/AppContext.jsx';
 import { Routes, Route, useNavigate } from 'react-router-dom';
-import { Toaster } from 'react-hot-toast';
+import { ToastContainer } from 'react-toastify';
 import { Zoom } from "yet-another-react-lightbox/plugins"; 
 import AddEditProject from './pages/AddEditProject/AddEditProject.jsx';
 import Blog from './pages/Blog/Blog.jsx';
@@ -174,55 +174,16 @@ const App = () => {
 
           <Footer /> 
 
-        <Toaster
-          position="bottom-center"  
-          reverseOrder={false} // Newest toast at the bottom
-          gutter={8} // Space between toasts
-          containerStyle={{ top: 20, right: 20 }}
-          toastOptions={{
-            duration: 3000, // Default duration
-            ariaProps: {
-              role: 'status',
-              'aria-live': 'polite',
-            },
-            style: {
-              background: '#333',
-              color: '#fff',
-              padding: '16px',
-            },
-            success: {
-              duration: 3000,
-              theme: {
-                primary: 'green',
-                secondary: 'black',
-              },
-              iconTheme: {
-                primary: 'white',
-                secondary: 'green',
-              },
-              style: {
-                background: 'green',
-                color: '#fff',
-              },
-            },
-            error: {
-              duration: 3000,
-              icon: '🔥',
-              style: {
-                background: 'red',
-                color: '#fff',
-              },
-            },
-            loading: {
-              duration: Infinity,
-              icon: '⏳',
-              style: {
-                background: '#007bff',
-                color: '#fff',
-              },
-            },
-          }}
-        />
+          <ToastContainer
+            position="bottom-center"
+            autoClose={2000}
+            hideProgressBar={true}
+            newestOnTop={false}
+            closeOnClick
+            draggable
+            pauseOnHover
+            theme={colorMode === "dark" ? "dark" : "light" } 
+          />
         
         </div> 
 

@@ -9,7 +9,7 @@ import {
 import { useNavigate, useLocation } from "react-router-dom";
 import { throttle } from "lodash";
 import { checkTokenIsValid, removeTokens, scrollToTop } from "../../utils/utils";
-import { toast } from 'react-hot-toast'; 
+import { toast } from "react-toastify"; 
 import { setTokens } from "../../utils/utils.js"
 
 const BASE_URL = import.meta.env.VITE_API_BASE_URL;

@@ -5,7 +5,7 @@ import { MdModeEdit } from 'react-icons/md';
 import { removeTokens, setTokens } from '../../../utils/utils.js';
 import EditDeleteProjectModal from '../EditDeleteProjectModal/EditDeleteProjectModal.jsx';
 import PortfolioCard from '../PortfolioCard/PortfolioCard.jsx';
-import toast from 'react-hot-toast';
+import { toast } from 'react-toastify';
 import './Portfolio.scss';
 
 // const PROJECT_COUNT = 6;
