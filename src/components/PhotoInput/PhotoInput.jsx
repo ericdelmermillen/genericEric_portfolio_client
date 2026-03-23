@@ -27,7 +27,7 @@ const PhotoInput = ({
 
   const handleFileChange = async (e) => {
     const file = e.target.files[0];
-    if(file) {
+    if (file) {
       handleImageChange(e, photo.photoNo);
       setTimeout(() => {
         setShowImage(true);
@@ -41,7 +41,7 @@ const PhotoInput = ({
   
     setPhotos(prevPhotos => {
       return prevPhotos.map(photo => {
-        if(photo.photoNo === inputNo) {
+        if (photo.photoNo === inputNo) {
           return { ...photo, photoPreview: null, photoData: null };
         };
         return photo;

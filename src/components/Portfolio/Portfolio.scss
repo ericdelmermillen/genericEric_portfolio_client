@@ -33,14 +33,16 @@
 	}
 
 	&__heading {
-		align-items: center;
-		display: inline-block;
-		justify-content: center;
-		font-size: var(--headline-small);
-		margin-bottom: 3rem;
-		margin-top: 2rem;
-		position: relative;
 		@include mx.headingGeneral;
+		& {
+			align-items: center;
+			display: inline-block;
+			justify-content: center;
+			font-size: var(--headline-small);
+			margin-bottom: 3rem;
+			margin-top: 2rem;
+			position: relative;
+		}
 
 		&::after {
 			@include mx.afterAccent;
@@ -99,27 +101,25 @@
 	}
 
 	&__lead {
-		font-size: var(--font-size-xs);
 		@include mx.lead;
+		& {
+			font-size: var(--font-size-xs);
 
-		@media (min-width: vars.$smallTablet) {
-			font-size: var(--font-size-general);
+			@media (min-width: vars.$smallTablet) {
+				font-size: var(--font-size-general);
+			}
 		}
 	}
 
 	&__addOrEditProjectOrder {
-		height: 2rem;
-		opacity: 1;
 		@include mx.linkButton;
+		& {
+			height: 2rem;
+		}
 
 		&.disabled {
 			@include mx.buttonDisabled;
 		}
-	}
-
-	&__addProjectOrder {
-		height: 2rem;
-		@include mx.linkButton;
 	}
 
 	&__projects {
@@ -128,9 +128,10 @@
 	}
 
 	&__projects-inner {
-		margin-inline: auto;
-		opacity: 1;
 		@include mx.portfolioContainer;
+		& {
+			margin-inline: auto;
+		}
 	}
 
 	&__buttons {
@@ -150,9 +151,11 @@
 	}
 
 	&__button {
-		width: 100%;
-		margin-top: 2rem;
 		@include mx.button;
+		& {
+			margin-top: 2rem;
+			width: 100%;
+		}
 
 		&:nth-last-of-type(2) {
 			margin-top: 0;

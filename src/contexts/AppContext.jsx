@@ -60,7 +60,7 @@ const AppContextProvider = ({ children }) => {
     try {
       const isLoggedIn = await checkTokenIsValid(navigate);
       
-      if(isLoggedIn) {
+      if (isLoggedIn) {
         setIsLoggedIn(true);
       } else {
         setIsLoggedIn(false);
@@ -80,7 +80,7 @@ const AppContextProvider = ({ children }) => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ email, password })
       });
 
       const data = await response.json();
@@ -120,7 +120,7 @@ const AppContextProvider = ({ children }) => {
         }
       });
   
-      if(!response.ok) {
+      if (!response.ok) {
         const { errors } = await response.json();
         errors?.forEach(error => console.log(error))
         throw new Error("Error, logging you out");
@@ -145,7 +145,7 @@ const AppContextProvider = ({ children }) => {
   };
   
   const focusContactNameInput = () => {
-    if(contactNameRef.current) {
+    if (contactNameRef.current) {
       contactNameRef.current.focus();
     };
   };
@@ -160,7 +160,7 @@ const AppContextProvider = ({ children }) => {
 
   const handleBlogClick = useMemo(() => 
     throttle(() => {
-      if(location.pathname.includes("blog")) {
+      if (location.pathname.includes("blog")) {
         scrollToTop();
         setIsLoading(true);
         
@@ -173,7 +173,7 @@ const AppContextProvider = ({ children }) => {
 
   const handleContactClick = useMemo(() => 
     throttle(() => {
-      if(location.pathname.includes("contact")) {
+      if (location.pathname.includes("contact")) {
         scrollToTop();
         setIsLoading(true);
   
@@ -186,7 +186,7 @@ const AppContextProvider = ({ children }) => {
 
   const handleProjectsClick = useMemo(() => 
     throttle(() => {
-      if(location.pathname.includes("projects")) {
+      if (location.pathname.includes("projects")) {
         setIsLoading(true);
         scrollToTop();
         
@@ -202,7 +202,7 @@ const AppContextProvider = ({ children }) => {
     const handleKeyDown = (e) => {
       e.stopPropagation();
 
-      if(e.key === "Escape") {
+      if (e.key === "Escape") {
         e.preventDefault();
       };
     };
@@ -223,7 +223,7 @@ const AppContextProvider = ({ children }) => {
   useEffect(() => {
     let ticking = false;
     const handleScroll = () => {
-      if(!ticking) {
+      if (!ticking) {
         requestAnimationFrame(() => {
           handleUpdateScrollYPos();
           setShowSideNav(false);
@@ -241,7 +241,7 @@ const AppContextProvider = ({ children }) => {
   useEffect(() => {
     const currentPathname = location.pathname;
 
-    if(prevPathname !== currentPathname && isLoading) {
+    if (prevPathname !== currentPathname && isLoading) {
       setIsLoading(false);
       checkLoginStatus();
       setPrevPathname(currentPathname);

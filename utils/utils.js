@@ -2,7 +2,7 @@ import { jwtDecode } from "jwt-decode";
 import { toast } from "react-toastify";
 
 const BASE_URL = import.meta.env.VITE_API_BASE_URL;
-const MIN_LOADING_INTERVAL = import.meta.env.VITE_MIN_LOADING_INTERVAL;
+const MIN_LOADING_INTERVAL = Number(import.meta.env.VITE_MIN_LOADING_INTERVAL);
 
 // use for setting up drag and drop functionality since firefox has issues with on drag (use onTouchStart)
 const checkIfIsFirefox = () => {
@@ -16,7 +16,7 @@ const scrollToTop = () => {
     behavior: 'smooth'
   });
   
-  document.getElementById("nav").classList.remove("hide");
+  document.getElementById("nav")?.classList.remove("hide");
 };
 
 const isValidEmail = (email) => {
@@ -135,7 +135,7 @@ const removeClassFromDiv = (divID, className) => {
 
 const getMonthYear = (dateString) => {
   // console.log(dateString); // 25-12-2024
-  const [ day, month, year ] = dateString?.split("-"); // Split by '-'
+  const [ day, month, year ] = dateString?.split("-") ?? []; // Split by '-'
 
   // Create a new Date object using the correct month and year
   const date = new Date(year, parseInt(month, 10) - 1, day);

@@ -3,8 +3,10 @@
 
 .portfolioCardPlaceholder {
 	& {
-		background: var(--placeholder-color);
-		border-radius: var(--border-radius);
 		@include mx.projectCard;
+		& {
+			background: var(--placeholder-color);
+			border-radius: var(--border-radius);
+		}
 	}
 }

@@ -31,7 +31,7 @@ const ProjectDatePicker = ({
 
   // useEffect to set initial date for date picker to today's date if addProject
   useEffect(() => {
-    if(isAddProject) {
+    if (isAddProject) {
       parsedDate = new Date();
     };
   }, []);

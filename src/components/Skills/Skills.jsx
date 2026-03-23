@@ -3,10 +3,8 @@ import {
   SiJavascript, 
   SiTypescript, 
   SiExpress, 
-  // SiAdobe, 
   SiMysql, 
   SiRedux, 
-  // SiPostman, 
   SiNextdotjs 
 } from "react-icons/si";
 import { FaHtml5, FaReact, FaAws } from "react-icons/fa";

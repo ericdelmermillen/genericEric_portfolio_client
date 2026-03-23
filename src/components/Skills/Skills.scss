@@ -11,48 +11,47 @@
 	}
 
 	&__heading {
-		font-size: var(--headline-small);
-		text-align: center;
 		@include mx.headingGeneral;
+		& {
+			font-size: var(--headline-small);
+			text-align: center;
 
-		@media (min-width: vars.$largeTablet) {
-			padding-inline-start: 2rem;
-			text-align: start;
-		}
-
-		@media (min-width: vars.$largeTablet) {
-			padding-inline-start: 3rem;
-			text-align: start;
+			@media (min-width: vars.$largeTablet) {
+				padding-inline-start: 3rem;
+				text-align: start;
+			}
 		}
 	}
 
 	&__lead {
-		margin-inline: auto;
-		max-width: 95%;
 		@include mx.lead;
+		& {
+			margin-inline: auto;
+			max-width: 95%;
 
-		@media (min-width: 400px) {
-			max-width: 85%;
-		}
+			@media (min-width: 400px) {
+				max-width: 85%;
+			}
 
-		@media (min-width: vars.$smallTablet) {
-			max-width: 90%;
-		}
+			@media (min-width: vars.$smallTablet) {
+				max-width: 90%;
+			}
 
-		@media (min-width: 600px) {
-			max-width: 85%;
-		}
+			@media (min-width: 600px) {
+				max-width: 85%;
+			}
 
-		@media (min-width: 700px) {
-			max-width: 80%;
-		}
+			@media (min-width: 700px) {
+				max-width: 80%;
+			}
 
-		@media (min-width: vars.$tablet) {
-			max-width: 75%;
-		}
+			@media (min-width: vars.$tablet) {
+				max-width: 75%;
+			}
 
-		@media (min-width: vars.$largeTablet) {
-			max-width: 85%;
+			@media (min-width: vars.$largeTablet) {
+				max-width: 85%;
+			}
 		}
 	}
 

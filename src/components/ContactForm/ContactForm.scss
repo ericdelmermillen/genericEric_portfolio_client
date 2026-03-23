@@ -17,8 +17,10 @@
 	}
 
 	&__heading {
-		margin-bottom: 2rem !important;
 		@include mx.formHeading;
+		& {
+			margin-bottom: 2rem;
+		}
 
 		&::after {
 			@include mx.afterAccent;
@@ -26,20 +28,19 @@
 	}
 
 	&__sub-heading {
-		display: none;
-		margin-bottom: 2rem;
 		@include mx.subHeadingGeneral;
+		& {
+			display: none;
+			margin-bottom: 2rem;
 
-		@media (min-width: vars.$smallTablet) {
-			display: block;
+			@media (min-width: vars.$smallTablet) {
+				display: block;
+			}
 		}
 	}
 
 	&__form {
 		@include mx.formTall;
-
-		@media (min-height: 750px) {
-		}
 	}
 
 	&__lead {
@@ -89,9 +90,11 @@
 	}
 
 	&__button {
-		background: var(--accent-color);
-		border: none;
-		width: 100%;
 		@include mx.button;
+		& {
+			background: var(--accent-color);
+			border: none;
+			width: 100%;
+		}
 	}
 }

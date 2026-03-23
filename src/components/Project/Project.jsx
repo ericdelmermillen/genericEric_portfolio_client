@@ -56,7 +56,7 @@ const Project = ({
   };
 
   const checkHasLongTitle = () => {
-    if(titleRef.current) {
+    if (titleRef.current) {
       const lineHeight = parseFloat(getComputedStyle(titleRef.current).lineHeight);
       const height = titleRef.current.getBoundingClientRect().height;
       setHasLongTitle(height > lineHeight); 
@@ -64,7 +64,7 @@ const Project = ({
   };
 
   const checkHasLongDesc = () => {
-    if(descRef.current) {
+    if (descRef.current) {
       const lineHeight = parseFloat(getComputedStyle(descRef.current).lineHeight);
       const height = descRef.current.getBoundingClientRect().height;
       setHasLongDesc(projectDescription.split("\n").length > 1 || height > (lineHeight * 2.25)); 
@@ -72,14 +72,14 @@ const Project = ({
   };
 
   const handleOnLoad = () => {
-    if(idx === maxIdx) {
+    if (idx === maxIdx) {
       setTimeout(() => {
         setShowPlaceholders(false);
         setIsLoading(false);
       }, MIN_LOADING_INTERVAL);
     }
     
-    if(isCurrentPage) {
+    if (isCurrentPage) {
       setTimeout(() => {
         setDisplayNonePlaceholder(true);
         setProjectIsLoaded(true);
@@ -92,7 +92,7 @@ const Project = ({
       let lastWidth = window.innerWidth;
     
       const handleResize = () => {
-        if(window.innerWidth !== lastWidth || !projectIsLoaded) {
+        if (window.innerWidth !== lastWidth || !projectIsLoaded) {
           requestAnimationFrame(() => {
             lastWidth = window.innerWidth;
             checkHasLongTitle();

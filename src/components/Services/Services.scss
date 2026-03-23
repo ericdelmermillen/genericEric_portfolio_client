@@ -10,9 +10,7 @@
 	}
 
 	&__inner {
-		left: 0;
 		position: relative;
-		top: 0;
 		width: 100%;
 	}
 
@@ -39,17 +37,21 @@
 	}
 
 	&__heading {
-		font-size: var(--headline-medium-small) !important;
-		letter-spacing: var(--letter-spacing-medium);
-		margin-bottom: 2rem !important;
-		position: relative;
-		text-shadow: var(--text-shadow-bright);
 		@include mx.headingGeneral;
+		& {
+			font-size: var(--headline-medium-small);
+			letter-spacing: var(--letter-spacing-medium);
+			margin-bottom: 2rem;
+			position: relative;
+			text-shadow: var(--text-shadow-bright);
+		}
 
 		&::after {
-			background: var(--text-color-bright);
-			bottom: -1rem;
 			@include mx.afterAccent;
+			& {
+				background: var(--text-color-bright);
+				bottom: -1rem;
+			}
 		}
 	}
 
@@ -114,9 +116,11 @@
 		position: relative;
 
 		&::after {
-			background: var(--text-color-bright);
-			bottom: -1rem;
 			@include mx.afterAccent;
+			& {
+				background: var(--text-color-bright);
+				bottom: -1rem;
+			}
 		}
 	}
 

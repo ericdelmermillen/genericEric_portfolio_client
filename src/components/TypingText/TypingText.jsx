@@ -14,7 +14,7 @@ const TypingText = ({
   // Clear previous interval if any
   // intervals not automatically cleared by unmounting
   useEffect(() => {
-    if(intervalRef.current) {
+    if (intervalRef.current) {
       clearInterval(intervalRef.current);
     };
 
@@ -26,7 +26,7 @@ const TypingText = ({
       const nextLetterIdx = typingTextRef.current.length;
       const nextLetter = textToType[nextLetterIdx];
 
-      if(nextLetter) {
+      if (nextLetter) {
         typingTextRef.current += nextLetter;
         setTypingText(typingTextRef.current);
       } else {

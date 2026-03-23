@@ -56,17 +56,17 @@ const LoginForm = ({ children }) => {
 
     let errors = 0;
 
-    if(!handleEmailChange()) {
+    if (!handleEmailChange()) {
       staggerToastsByN("Invalid email.", "error", errors);
       errors += 1;
     };
 
-    if(!handlePasswordChange()) {
+    if (!handlePasswordChange()) {
       staggerToastsByN("Invalid password.", "error", errors);
       errors += 1;
     };
 
-    if(errors){
+    if (errors){
       return;
     };
 
@@ -75,7 +75,7 @@ const LoginForm = ({ children }) => {
 
   // useEffect to auto focus the email input
   useEffect(() => {
-    if(emailRef.current) {
+    if (emailRef.current) {
       emailRef.current.focus();
     };
   }, []);

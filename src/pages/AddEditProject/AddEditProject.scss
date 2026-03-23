@@ -11,21 +11,25 @@
 	}
 
 	&__form {
-		box-shadow: var(--box-shadow);
-		max-width: vars.$largeTablet;
-		width: 90%;
 		@include mx.formFullWidth;
+		& {
+			box-shadow: var(--box-shadow);
+			max-width: vars.$largeTablet;
+			width: 90%;
 
-		@media (min-width: vars.$desktop) {
-			width: 100%;
+			@media (min-width: vars.$desktop) {
+				width: 100%;
+			}
 		}
 	}
 
 	&__heading {
-		display: inline-block;
-		margin-top: 2rem;
-		position: relative;
 		@include mx.formHeading;
+		& {
+			display: inline-block;
+			margin-top: 2rem;
+			position: relative;
+		}
 
 		&::after {
 			@include mx.afterAccent;
@@ -139,6 +143,9 @@
 
 	&__desc {
 		@include mx.adminInput;
+		& {
+			height: 100%;
+		}
 
 		&:focus {
 			box-shadow: var(--box-shadow-input);
@@ -148,9 +155,5 @@
 		&.error {
 			outline: 2px solid var(--error-color);
 		}
-	}
-
-	&__desc {
-		height: 100%;
 	}
 }

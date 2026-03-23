@@ -19,14 +19,10 @@
 		@media (min-width: 525px) {
 			width: 50vw;
 		}
-	}
 
-	&.show {
-		transform: translateX(0); /* slide in */
-		transition: transform 0.33s ease-out;
-
-		@media (min-width: 525px) {
-			width: 50vw;
+		&.show {
+			transform: translateX(0); /* slide in */
+			transition: transform 0.33s ease-out;
 		}
 	}
 
@@ -68,7 +64,6 @@
 		align-items: center;
 		display: flex;
 		justify-content: center;
-		left: 50%;
 		margin-inline: auto;
 		margin-top: auto;
 	}
@@ -90,13 +85,17 @@
 	}
 
 	&__link {
-		color: var(--text-color);
 		@include mx.navLink;
+		& {
+			color: var(--text-color);
+		}
 
 		&.active {
-			&:after {
-				bottom: -2rem;
+			&::after {
 				@include mx.afterAccent;
+				& {
+					bottom: -2rem;
+				}
 			}
 		}
 	}

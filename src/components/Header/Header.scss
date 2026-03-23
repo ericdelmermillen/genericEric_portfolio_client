@@ -38,10 +38,12 @@
 	}
 
 	&__dayImg {
-		background: url("../../assets/images/bg-day-top.webp") center top;
-		background-repeat: no-repeat;
-		background-size: cover;
 		@include mx.heroImg;
+		& {
+			background: url("../../assets/images/bg-day-top.webp") center top;
+			background-repeat: no-repeat;
+			background-size: cover;
+		}
 
 		&.top {
 			@include mx.heroImgTop;
@@ -49,10 +51,12 @@
 	}
 
 	&__nightImg {
-		background: url("../../assets/images/bg-night-top.webp") center top;
-		background-repeat: no-repeat;
-		background-size: cover;
 		@include mx.heroImg;
+		& {
+			background: url("../../assets/images/bg-night-top.webp") center top;
+			background-repeat: no-repeat;
+			background-size: cover;
+		}
 
 		&.top {
 			@include mx.heroImgTop;
@@ -165,20 +169,21 @@
 	}
 
 	&__button {
-		background: none !important;
-		border: 2.5px solid var(--text-color-bright) !important;
-		box-shadow: var(--box-shadow);
-		margin-inline: auto;
-		color: var(--text-color-bright);
 		@include mx.button;
+		& {
+			background: none;
+			border: 2.5px solid var(--text-color-bright);
+			box-shadow: var(--box-shadow);
+			margin-inline: auto;
+			color: var(--text-color-bright);
 
-		@media (min-width: vars.$smallTablet) {
-			margin-bottom: 1.5rem;
+			@media (min-width: vars.$smallTablet) {
+				margin-bottom: 1.5rem;
+			}
 		}
 	}
 
 	&__button-text {
-		letter-spacing: var(--letter-spacing-medium);
 		letter-spacing: var(--letter-spacing-large);
 		text-shadow: var(--text-shadow-bright);
 		color: var(--text-color-bright);
@@ -230,12 +235,10 @@
 		}
 
 		@media (min-width: vars.$tablet) {
-			font-size: 1.5rem;
 			width: 2.5rem;
 		}
 
 		@media (min-width: vars.$largeTablet) {
-			font-size: 1.5rem;
 			width: 2.75rem;
 		}
 	}

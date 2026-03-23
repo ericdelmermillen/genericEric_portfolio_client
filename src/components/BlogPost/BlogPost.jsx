@@ -45,7 +45,7 @@ const BlogPost = ({
   };  
 
   const checkHasLongTitle = useCallback(() => {
-    if(titleRef.current) {
+    if (titleRef.current) {
       const lineHeight = parseFloat(getComputedStyle(titleRef.current).lineHeight);
       const height = titleRef.current.getBoundingClientRect().height;
       setHasLongTitle(height > lineHeight); 
@@ -53,7 +53,7 @@ const BlogPost = ({
   });
   
   const checkHasLongDesc = useCallback(() => {
-    if(descRef.current) {
+    if (descRef.current) {
       const lineHeight = parseFloat(getComputedStyle(descRef.current).lineHeight);
       const height = descRef.current.getBoundingClientRect().height;
       setHasLongDesc(description.split("\n").length > 1 || height > (lineHeight * 3)); 
@@ -65,7 +65,7 @@ const BlogPost = ({
     let lastWidth = window.innerWidth;
   
     const handleResize = () => {
-      if(window.innerWidth !== lastWidth || !postIsReady) {
+      if (window.innerWidth !== lastWidth || !postIsReady) {
           requestAnimationFrame(() => {
             lastWidth = window.innerWidth;
             checkHasLongTitle();
@@ -82,7 +82,7 @@ const BlogPost = ({
   }, [postIsReady]);
   
   
-  if(isInitialPlaceholder) {
+  if (isInitialPlaceholder) {
     return (
       <BlogPostPlaceholder />
     );

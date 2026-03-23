@@ -12,7 +12,7 @@ import './Portfolio.scss';
 const PROJECT_COUNT = 4;
 // const PROJECT_COUNT = 2;
 
-const AWS_SS3_BUCKET_URL = import.meta.env.VITE_AWS_S3_BUCKET_URL;
+const AWS_S3_BUCKET_URL = import.meta.env.VITE_AWS_S3_BUCKET_URL;
 const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 const MIN_LOADING_INTERVAL = import.meta.env.VITE_MIN_LOADING_INTERVAL;
 
@@ -49,7 +49,7 @@ const Portfolio = () => {
 
   const handlePortfolioCardClick = (idx) => {
     const images = projectsData.map((photo, idx) => ({
-      src: `${AWS_SS3_BUCKET_URL}/${photo.img_src}`,
+      src: `${AWS_S3_BUCKET_URL}/${photo.img_src}`,
       alt: `Photo number ${idx + 1} from ${photo.project_title}`,
     }));
     
@@ -75,7 +75,7 @@ const Portfolio = () => {
     try {
       const isSuccess = await getPortfolioProjects();
       
-      if(isSuccess) {
+      if (isSuccess) {
         setIsEditMode(true);
         toast("Fetch successful. Ready to edit.");
       } else {
@@ -133,19 +133,19 @@ const Portfolio = () => {
 
       for(const project of updatedProjects) {
         
-        if(dropTargetID !== activeDraggedID) {
+        if (dropTargetID !== activeDraggedID) {
           
-          if(dropTargetDisplayOrder === highestDisplayOrder) {
+          if (dropTargetDisplayOrder === highestDisplayOrder) {
 
-            if(project.project_id === dropTargetID) {
+            if (project.project_id === dropTargetID) {
               project.display_order = dropTargetDisplayOrder - 1;
-            } else if(project.project_id === activeDraggedID) {
+            } else if (project.project_id === activeDraggedID) {
               project.display_order = dropTargetDisplayOrder;
-            } else if(project.display_order < dropTargetDisplayOrder && project.display_order >= activeDraggedProjectOldDisplayOrder) {
+            } else if (project.display_order < dropTargetDisplayOrder && project.display_order >= activeDraggedProjectOldDisplayOrder) {
               project.display_order--;
             };
 
-          } else if(activeDraggedProjectOldDisplayOrder > dropTargetDisplayOrder) {
+          } else if (activeDraggedProjectOldDisplayOrder > dropTargetDisplayOrder) {
 
             if(project.project_id === dropTargetID) {
               project.display_order = dropTargetDisplayOrder + 1;
@@ -157,11 +157,11 @@ const Portfolio = () => {
 
           } else if(dropTargetDisplayOrder > activeDraggedProjectOldDisplayOrder) {
 
-            if(project.project_id === dropTargetID) {
+            if (project.project_id === dropTargetID) {
               project.display_order = dropTargetDisplayOrder - 1;
-            } else if(project.project_id === activeDraggedID) {
+            } else if (project.project_id === activeDraggedID) {
               project.display_order = dropTargetDisplayOrder;
-            } else if(project.display_order <= dropTargetDisplayOrder && project.display_order > activeDraggedProjectOldDisplayOrder) {
+            } else if (project.display_order <= dropTargetDisplayOrder && project.display_order > activeDraggedProjectOldDisplayOrder) {
               project.display_order--;
             };
 
@@ -182,7 +182,7 @@ const Portfolio = () => {
       const response = await fetch(url);
       const data = await response.json();
   
-      if(!response.ok) {
+      if (!response.ok) {
         toast.error(data.message);
         throw new Error("Error fetching portfolio project summaries");
       };
@@ -251,7 +251,7 @@ const Portfolio = () => {
     const token = localStorage.getItem('token');
     const refreshToken = localStorage.getItem('refreshToken');
   
-    if(!token || !refreshToken) {
+    if (!token || !refreshToken) {
       toast.error('Authorization or refresh token missing.');
       logoutUser();
       return;
@@ -273,7 +273,7 @@ const Portfolio = () => {
 
       const { message, newToken, newRefreshToken } = await response.json();
 
-      if(!response.ok) {
+      if (!response.ok) {
         throw new Error(message);
       };
       
@@ -305,12 +305,12 @@ const Portfolio = () => {
 
   // useEffect to get portfolio summaries for ProjectCards
   useEffect(() => {
-    if(isInitialMount) {
+    if (isInitialMount) {
       getPortfolioProjects(PROJECT_COUNT);
       setIsInitialMount(false);
     };
     
-    if(!isInitialMount) {
+    if (!isInitialMount) {
       setProjectsData(initialImages);
       setShowPlaceholders(true);
       setDisplayNonePlaceholders(false);
@@ -324,7 +324,7 @@ const Portfolio = () => {
 
     // useEffect to show Nav after user closes Lightbox to deal with lightbox Nav content shift
     useEffect(()=> {
-      if(!lightboxOpen)  {
+      if (!lightboxOpen)  {
         showNav();
       };
     }, [lightboxOpen]);

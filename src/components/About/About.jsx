@@ -13,7 +13,6 @@ const About = () => {
 
   const handleImageClick = () => {
     const image= [{ src: me, alt: "Image of Eric Millen" }];
-
     hideNav();
     handleSetLightBoxState(image);
   };
