@@ -15,13 +15,15 @@
 	}
 
 	&__heading {
-		display: inline-block;
-		margin-bottom: 2rem !important;
-		position: relative;
 		@include mx.formHeading;
+		& {
+			display: inline-block;
+			margin-bottom: 2rem;
+			position: relative;
+		}
 
 		@media (min-width: vars.$tablet) {
-			margin-bottom: 3rem !important;
+			margin-bottom: 3rem;
 		}
 
 		&::after {

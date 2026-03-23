@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useAppContext } from "../../contexts/AppContext.jsx";
 import { addClassToDiv, removeClassFromDiv } from "../../../utils/utils.js";
 import { removeTokens, setTokens } from '../../../utils/utils.js';
-import toast from "react-hot-toast";
+import { toast } from "react-toastify";
 import "./EditDeleteProjectModal.scss";
 
 const MIN_LOADING_INTERVAL = import.meta.env.VITE_MIN_LOADING_INTERVAL;
@@ -53,7 +53,7 @@ const EditDeleteProjectModal = ({
     const token = localStorage.getItem('token');
     const refreshToken = localStorage.getItem('refreshToken');
   
-    if(!token || !refreshToken) {
+    if (!token || !refreshToken) {
       toast.error('Authorization or refresh token missing.');
       logoutUser();
       return;
@@ -69,11 +69,11 @@ const EditDeleteProjectModal = ({
         }
       });
   
-      if(!response.ok && response.status === 401) {
+      if (!response.ok && response.status === 401) {
         removeTokens();
         logoutUser();
         throw new Error("Not authorized. Logging you out...");
-      } else if(!response.ok) {
+      } else if (!response.ok) {
         const errorResponse = await response.json();
         throw new Error(errorResponse.message || 'Failed to delete project');
       };
@@ -103,10 +103,10 @@ const EditDeleteProjectModal = ({
 
   // useEffect to close overlay on scroll
   useEffect(() => {
-    if(scrollYPos !== prevScrollYPos && modalIsOpen) {
+    if (scrollYPos !== prevScrollYPos && modalIsOpen) {
       removeClassFromDiv("editDeleteProjectModal", "show");
       setTimeout(() => {
-        if(showActionModal) {
+        if (showActionModal) {
           setShowActionModal(false);
         };
       }, MODAL_TRANSITION_INTERVAL);

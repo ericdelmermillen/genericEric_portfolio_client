@@ -3,9 +3,11 @@
 
 .editDeleteProjectModal {
 	& {
-		z-index: 3;
-		@include mx.modalInitialStyles;
 		@include mx.smoothClosingTransition;
+		@include mx.modalInitialStyles;
+		& {
+			z-index: 3;
+		}
 
 		&.show {
 			@include mx.modalOpenStyles;
@@ -53,9 +55,11 @@
 	}
 
 	&__heading {
-		display: block;
-		margin-bottom: 3rem;
 		@include mx.formHeading;
+		& {
+			display: block;
+			margin-bottom: 3rem;
+		}
 
 		&::after {
 			@include mx.afterAccent;
@@ -76,7 +80,9 @@
 	}
 
 	&__button {
-		width: 10rem;
 		@include mx.button;
+		& {
+			width: 10rem;
+		}
 	}
 }

@@ -30,9 +30,9 @@ const LightBoxImage = ({
   useEffect(() => {
     const lightBoxImage = document.getElementById(`${imageID}`);
 
-    if(isCurrentImage && isInitialView) {
+    if (isCurrentImage && isInitialView) {
       lightBoxImage.classList.add("current");
-    } else if(!isCurrentImage && isInitialView) {
+    } else if (!isCurrentImage && isInitialView) {
       lightBoxImage.classList.add("left");
     };
     
@@ -42,19 +42,19 @@ const LightBoxImage = ({
   // useEffect to handle transitions when moving forward and backward and not when isInitialView
   useEffect(() => {
     
-    if(!isInitialView) {
+    if (!isInitialView) {
       const lightBoxImage = document.getElementById(`${imageID}`);
 
-      if(isMovingForward) {
+      if (isMovingForward) {
         
         lightBoxImage.classList.add("transition");
 
-        if(isCurrentImage) { 
+        if (isCurrentImage) { 
           lightBoxImage.classList.remove("left");
           lightBoxImage.classList.add("current");
           
           return;
-        } else if(beforeCurrentIdx) { 
+        } else if (beforeCurrentIdx) { 
           lightBoxImage.classList.remove("current");
           lightBoxImage.classList.add("right");
 
@@ -63,7 +63,7 @@ const LightBoxImage = ({
             lightBoxImage.classList.add("left");
           }, TIMEOUT_DELAY);
 
-        } else if(isLastImage && currentIdx === 0) { 
+        } else if (isLastImage && currentIdx === 0) { 
           lightBoxImage.classList.add("right");
           lightBoxImage.classList.remove("current");
 
@@ -72,15 +72,15 @@ const LightBoxImage = ({
             lightBoxImage.classList.add("left");
           }, TIMEOUT_DELAY);
         };
-      } else if(!isMovingForward) {
+      } else if (!isMovingForward) {
         lightBoxImage.classList.add("transition");
           
-        if(isCurrentImage) { 
+        if (isCurrentImage) { 
           lightBoxImage.classList.remove("right");
           lightBoxImage.classList.add("current");
 
           return;
-        } else if(afterCurrentIdx) { 
+        } else if (afterCurrentIdx) { 
           lightBoxImage.classList.remove("current");
           lightBoxImage.classList.add("left");
 
@@ -89,7 +89,7 @@ const LightBoxImage = ({
             lightBoxImage.classList.add("right");
           }, TIMEOUT_DELAY);
 
-        } else if(isFirstImage && currentIdx === maxIdx) { 
+        } else if (isFirstImage && currentIdx === maxIdx) { 
           lightBoxImage.classList.add("left");
           lightBoxImage.classList.remove("current");
           setTimeout(() => {
@@ -153,7 +153,7 @@ const LightBox = ({
     const lightBoxImages = document.querySelectorAll(".lightBoxImage");
     
     lightBoxImages.forEach((image, idx) => {
-      if(idx !== currentIdx) {
+      if (idx !== currentIdx) {
         image.classList = `lightBoxImage ${side}`;
       };
     });
@@ -162,11 +162,11 @@ const LightBox = ({
   const handlePrevClick = () => {
     setIsTransitioning(true);
   
-    if(isInitialView) {
+    if (isInitialView) {
       setIsInitialView(false);
     };
   
-    if(isMovingForward) {
+    if (isMovingForward) {
       changeLightBoxDirection("right");
       setIsMovingForward(false);
   
@@ -181,11 +181,11 @@ const LightBox = ({
   const handleNextClick = () => {
     setIsTransitioning(true);
   
-    if(isInitialView) {
+    if (isInitialView) {
       setIsInitialView(false);
     };
   
-    if(!isMovingForward) {
+    if (!isMovingForward) {
       changeLightBoxDirection("left");
       setIsMovingForward(true);
   
@@ -206,9 +206,9 @@ const LightBox = ({
 
   // useEffect to close overlay on scroll
   useEffect(() => {
-    if(!isTransitioning) {
+    if (!isTransitioning) {
 
-      if(scrollYPos !== prevScrollYPos) {
+      if (scrollYPos !== prevScrollYPos) {
         removeClassFromDiv("lightBox", "show")
         setTimeout(() => {
           setShowLightBox(false);
@@ -222,7 +222,7 @@ const LightBox = ({
   useEffect(() => {
   const handleKeyDown = (e) => {
 
-    if(e.key === "Escape") {
+    if (e.key === "Escape") {
       handleOverlayClick();
     };
   };
@@ -295,7 +295,7 @@ const LightBox = ({
                     {lightBoxImages.map((img, idx) => (
                       <div 
                         key={img.img_id} 
-                        className={`lightBox__count-indicatior ${idx === currentIdx ? "current" : ""}`}>
+                        className={`lightBox__count-indicator ${idx === currentIdx ? "current" : ""}`}>
                       </div>
                     ))}
 

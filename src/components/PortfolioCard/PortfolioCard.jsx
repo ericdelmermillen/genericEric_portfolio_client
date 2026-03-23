@@ -53,7 +53,7 @@ const PortfolioCard = ({
     handleEditProjectClick(projectID);
   };
 
-  if(isInitialPlaceholder) {
+  if (isInitialPlaceholder) {
     return (
       <PortfolioCardPlaceholder />
     );

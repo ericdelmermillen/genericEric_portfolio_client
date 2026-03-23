@@ -2,8 +2,8 @@ import { useState, useEffect } from 'react';
 import { useAppContext } from '../../contexts/AppContext.jsx';
 import { Link, useLocation } from 'react-router-dom';
 import { scrollToTop } from '../../../utils/utils.js';
+import { toast } from 'react-toastify';
 import BlogPost from '../BlogPost/BlogPost.jsx';
-import toast from 'react-hot-toast';
 import "./BlogFeed.scss";
 
 const MIN_LOADING_INTERVAL = import.meta.env.VITE_MIN_LOADING_INTERVAL;
@@ -45,7 +45,7 @@ const BlogFeed = () => {
   const { isLoading, setIsLoading} = useAppContext();
    
    const handleFetchBlogPosts = async () => {
-    if(allResultsFetched && !isPaginationComplete) {
+    if (allResultsFetched && !isPaginationComplete) {
       setIsLoading(true);
       setIsPaginationComplete(true);
       toast("No more posts to show");
@@ -55,7 +55,7 @@ const BlogFeed = () => {
       }, MIN_LOADING_INTERVAL);
     };
     
-    if(!allResultsFetched) {
+    if (!allResultsFetched) {
       setIsLoading(true);
 
       try {
@@ -67,14 +67,14 @@ const BlogFeed = () => {
 
         const hasMorePages = data.nextPageToken;
 
-        if(data.error) {
+        if (data.error) {
           console.error('Error fetching blog posts:', data.error);
           return;
         };
         
-        if(!hasMorePages) {
+        if (!hasMorePages) {
           setAllResultsFetched(true);
-        } else if(hasMorePages) {
+        } else if (hasMorePages) {
           setNextPageToken(hasMorePages);
         };
         
@@ -85,18 +85,18 @@ const BlogFeed = () => {
         }));
 
         // using set to deal with doubling in dev: may refactor to use conditional logic with functional state updating in prod
-        if(environment === "development") {
+        if (environment === "development") {
 
-          if(page === 1) {
+          if (page === 1) {
             setBlogPosts(posts);
           } else {
             const updatedBlogPosts = [...new Set([...blogPosts, ...posts])];
             setBlogPosts(updatedBlogPosts);
           };
 
-        } else if(environment === "production") {
+        } else if (environment === "production") {
 
-          if(page === 1) {
+          if (page === 1) {
             setBlogPosts(posts);
           } else {
             setBlogPosts(prevPosts => [...prevPosts, ...posts]);
@@ -109,7 +109,7 @@ const BlogFeed = () => {
         console.log(error);
         toast.error("Error connecting to youtube");
       } finally {
-        if(isInitialLoad) {
+        if (isInitialLoad) {
           setIsInitialLoad(false);
         };
       };
@@ -122,7 +122,7 @@ const BlogFeed = () => {
 
   // useEffect to handle setting isLoading false after loaded and fetched post increment count reaches equality
   useEffect(() => {
-    if(blogPostLoadedCount === blogPosts.length && !isInitialLoad) {
+    if (blogPostLoadedCount === blogPosts.length && !isInitialLoad) {
       setIsLoading(false);
     };
 
@@ -130,7 +130,7 @@ const BlogFeed = () => {
 
   // initial blogPost fetch on mount
   useEffect(() => {
-    if(isInitialLoad) {
+    if (isInitialLoad) {
       setIsLoading(true);
       handleFetchBlogPosts();
       scrollToTop();

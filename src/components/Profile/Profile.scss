@@ -43,13 +43,15 @@
 	}
 
 	&__heading {
-		font-size: var(--headline-small);
-		text-align: center;
 		@include mx.headingGeneral;
+		& {
+			font-size: var(--headline-small);
+			text-align: center;
 
-		@media (min-width: vars.$largeTablet) {
-			text-align: start;
-			padding-inline-start: 1rem;
+			@media (min-width: vars.$largeTablet) {
+				text-align: start;
+				padding-inline-start: 1rem;
+			}
 		}
 	}
 

@@ -11,10 +11,10 @@
 }
 
 html {
-	scroll-behavior: smooth;
-	-webkit-text-size-adjust: 100%; /* Prevents automatic text resizing */
-	text-size-adjust: 100%;
 	font-size: 16px; /* Ensures consistent base font size */
+	scroll-behavior: smooth;
+	text-size-adjust: 100%;
+	-webkit-text-size-adjust: 100%; /* Prevents automatic text resizing */
 }
 
 body {
@@ -67,8 +67,10 @@ img {
 	}
 
 	&__inner {
-		box-shadow: var(--box-shadow);
 		@include mx.inner;
+		& {
+			box-shadow: var(--box-shadow);
+		}
 	}
 
 	&__sideNav-children {
@@ -86,15 +88,19 @@ img {
 		display: none;
 
 		@media (min-width: vars.$tablet) {
-			border: 1px solid var(--text-color-bright) !important;
-			color: var(--text-color-bright) !important;
 			@include mx.adminButton;
+			& {
+				border: 1px solid var(--text-color-bright) !important;
+				color: var(--text-color-bright) !important;
+			}
 		}
 	}
 
 	&__logout--sideNav {
-		margin-inline: auto !important;
 		@include mx.adminButton;
+		& {
+			margin-inline: auto !important;
+		}
 	}
 }
 
@@ -148,5 +154,46 @@ img {
 
 	&[aria-label="Zoom out"] {
 		display: none;
+	}
+}
+
+// react-toastify classes for customization
+.Toastify {
+	&__toast-container {
+		gap: 8px;
+		left: 50%;
+		margin-bottom: 16px;
+		transform: translateX(-50%);
+		width: calc(100vw - 32px);
+
+		@media (min-width: vars.$smallTablet) {
+			margin-bottom: 0;
+		}
+	}
+
+	&__toast {
+		@include mx.toastBoxShadow;
+		& {
+			background: var(--background-color);
+			border-radius: var(--border-radius-toast);
+			max-width: 16rem;
+			padding-inline-end: 1.75rem;
+			padding-inline-start: 1.25rem;
+		}
+
+		@media (min-width: vars.$smallPhone) {
+			margin-block: 0;
+			max-width: 18rem;
+		}
+	}
+
+	&__close-button {
+		right: 0.5rem;
+		top: 0.5rem;
+
+		& svg {
+			height: 18px;
+			width: 18px;
+		}
 	}
 }

@@ -1,7 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { useAppContext } from "../../contexts/AppContext.jsx";
-import { isValidEmail, isValidPassword } from "../../../utils/utils.js";
-import { toast } from 'react-hot-toast'; 
+import { isValidEmail, isValidPassword, staggerToastsByN } from "../../../utils/utils.js";
 import Hide from "../../assets/svgs/Hide.jsx";
 import Show from "../../assets/svgs/Show.jsx";
 import "./LoginForm.scss";
@@ -55,19 +54,19 @@ const LoginForm = ({ children }) => {
     e.preventDefault();
     setInitialFormCheck(true);
 
-    let invalidInputs = 0;
+    let errors = 0;
 
-    if(!handleEmailChange()) {
-      toast.error("Invalid email");
-      invalidInputs += 1;
+    if (!handleEmailChange()) {
+      staggerToastsByN("Invalid email.", "error", errors);
+      errors += 1;
     };
 
-    if(!handlePasswordChange()) {
-      toast.error("Invalid password");
-      invalidInputs += 1;
+    if (!handlePasswordChange()) {
+      staggerToastsByN("Invalid password.", "error", errors);
+      errors += 1;
     };
 
-    if(invalidInputs){
+    if (errors){
       return;
     };
 
@@ -76,7 +75,7 @@ const LoginForm = ({ children }) => {
 
   // useEffect to auto focus the email input
   useEffect(() => {
-    if(emailRef.current) {
+    if (emailRef.current) {
       emailRef.current.focus();
     };
   }, []);

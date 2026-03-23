@@ -19,6 +19,8 @@
 
 	// border & box shadow
 	--border-radius: 4px;
+	--border-radius-toast: 8px;
+	--text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.25);
 	--text-box-text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 	--text-shadow-bright: 5px 5px 6px rgba(0, 0, 0, 0.7);
 
@@ -55,7 +57,7 @@
 	// overlay colors
 	--modalOverlayBg: rgba(0, 0, 0, 0.5);
 	--overlay: rgba(0, 0, 0, 0.125);
-	--overlay-dark: rgba(0, 0, 0, 0.5) 0;
+	--overlay-dark: rgba(0, 0, 0, 0.5);
 
 	// Light Mode Custom Variables
 	&[data-color-mode="light"] {
@@ -63,6 +65,10 @@
 		--accent-color: #bcb066;
 		--background-color: #f8f8f8;
 		--box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
+		--toast-box-shadow:
+			0 4px 12px rgba(0, 0, 0, 0.25), 0 8px 24px rgba(0, 0, 0, 0.15);
+		--card-box-shadow:
+			0 4px 12px rgba(0, 0, 0, 0.25), 0 8px 24px rgba(0, 0, 0, 0.15);
 		--box-shadow-input: inset 0 1px 3px rgba(0, 0, 0, 0.1);
 		--navFooter-box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 		--neutral-bg-1: #e6eae7;
@@ -96,6 +102,10 @@
 		--accent-color: #7e818d;
 		--background-color: #05071d;
 		--box-shadow: 0 4px 8px rgba(50, 50, 50, 0.2);
+		--toast-box-shadow:
+			0 0 6px rgba(150, 150, 200, 0.2), 0 0 10px rgba(150, 150, 200, 0.1);
+		--card-box-shadow:
+			0 4px 12px rgba(30, 30, 50, 0.4), 0 8px 24px rgba(30, 30, 50, 0.25);
 		--box-shadow-input: inset 0 2px 4px rgba(100, 100, 100, 0.2);
 		--navFooter-box-shadow: 0 4px 8px rgba(50, 50, 50, 0.125);
 		--neutral-bg-1: #242534;
@@ -229,13 +239,19 @@
 }
 
 @mixin smoothOpeningTransition {
-	transition: border-radius 1000ms ease-in-out, height 300ms ease-in-out,
-		opacity 300ms ease-in-out, width 300ms ease-in-out;
+	transition:
+		border-radius 1000ms ease-in-out,
+		height 300ms ease-in-out,
+		opacity 300ms ease-in-out,
+		width 300ms ease-in-out;
 }
 
 @mixin smoothClosingTransition {
-	transition: border-radius 250ms ease-in-out, height 300ms ease-in-out,
-		opacity 200ms ease-in-out, width 300ms ease-in-out;
+	transition:
+		border-radius 250ms ease-in-out,
+		height 300ms ease-in-out,
+		opacity 200ms ease-in-out,
+		width 300ms ease-in-out;
 }
 
 @mixin lightBoxTransition {
@@ -480,7 +496,7 @@
 	justify-content: center;
 	letter-spacing: 3px;
 	padding: 1rem 1.25rem;
-	transition: all 250 ease-in-out;
+	transition: all 250ms ease-in-out;
 
 	&:hover,
 	&:focus {
@@ -570,7 +586,6 @@
 }
 
 @mixin hoverClickGrow {
-	transform: scale(1.025);
 	transform: scale(1.01);
 	transition: all 0.25s ease-in-out;
 }
@@ -656,4 +671,8 @@
 	font-weight: 500;
 	letter-spacing: 4px;
 	position: relative;
+}
+
+@mixin toastBoxShadow {
+	box-shadow: var(--toast-box-shadow);
 }

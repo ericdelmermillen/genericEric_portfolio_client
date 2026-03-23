@@ -57,10 +57,12 @@
 	}
 
 	&__button {
-		background: var(--accent-color);
-		border: none;
-		width: 100%;
 		@include mx.button;
+		& {
+			background: var(--accent-color);
+			border: none;
+			width: 100%;
+		}
 	}
 }
 

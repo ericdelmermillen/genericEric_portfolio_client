@@ -13,10 +13,10 @@
 	}
 
 	&__checkbox-label {
-		border: 1px solid rgba(255, 255, 255, 0.25);
-		box-shadow: inset 2px 2px 2px rgba(250, 250, 250, 0.65);
 		align-items: center;
 		background-color: var(--toggle-sky);
+		border: 1px solid rgba(255, 255, 255, 0.25);
+		box-shadow: inset 2px 2px 2px rgba(250, 250, 250, 0.65);
 		border-radius: 50px;
 		cursor: pointer;
 		display: flex;
@@ -39,13 +39,13 @@
 	}
 
 	&__sun-icon {
-		position: fixed;
+		position: absolute;
 		transform: translateX(10%);
 		width: 1.1rem;
 	}
 
 	&__moon-icon {
-		position: fixed;
+		position: absolute;
 		transform: translateX(260%);
 		width: 0.6rem;
 	}

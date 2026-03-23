@@ -37,16 +37,20 @@
 	}
 
 	&__img {
-		width: 100%;
 		@include mx.projectImg;
+		& {
+			width: 100%;
+		}
 	}
 }
 
 .lightBox {
 	& {
-		z-index: 3;
 		@include mx.modalInitialStyles;
 		@include mx.smoothClosingTransition;
+		& {
+			z-index: 3;
+		}
 
 		&.show {
 			@include mx.modalOpenStyles;
@@ -167,7 +171,7 @@
 		}
 	}
 
-	&__count-indicatior {
+	&__count-indicator {
 		background: var(--text-color);
 		border-radius: var(--border-radius);
 		height: 0.15rem;
@@ -217,7 +221,7 @@
 		font-family: var(--heading-font);
 		font-size: 1.5rem;
 		font-weight: 200;
-		text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.25);
+		text-shadow: var(--text-shadow);
 
 		@media (min-width: vars.$smallTablet) {
 			font-size: 1.75rem;

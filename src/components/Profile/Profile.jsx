@@ -1,4 +1,4 @@
-import React from 'react';
+import { Fragment } from 'react';
 import { FaUser } from "react-icons/fa";
 import { FaBuilding, FaHouse } from "react-icons/fa6";
 import { MdEmail } from "react-icons/md";
@@ -43,11 +43,11 @@ const Profile = () => {
                   <a href={item.itemHref} className="profile__email-link">
                     <p className="profile__item-value">
                       {item.itemValue.split("@").map((part, idx) => (
-                        <React.Fragment key={idx}>
+                        <Fragment key={idx}>
                           {idx > 0 && "@"}
                           {part}
                           {idx < item.itemHref.split("@").length - 1 && <wbr />}
-                        </React.Fragment>
+                        </Fragment>
                       ))}
                     </p>
                   </a>

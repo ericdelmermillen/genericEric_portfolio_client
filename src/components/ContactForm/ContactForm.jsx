@@ -1,8 +1,8 @@
 import { useState, useRef, useEffect } from "react";
 import { useAppContext } from "../../contexts/AppContext.jsx";
 import { useLocation, useNavigate } from "react-router-dom";
-import { isValidEmail, scrollToTop } from "../../../utils/utils.js";
-import toast from "react-hot-toast";
+import { isValidEmail, scrollToTop, staggerToastsByN } from "../../../utils/utils.js";
+import { toast } from "react-toastify";
 import "./ContactForm.scss";
 
 const MIN_LOADING_INTERVAL = import.meta.env.VITE_MIN_LOADING_INTERVAL;
@@ -77,22 +77,22 @@ const ContactForm = ({ children }) => {
 
     let errors = 0;
 
-    if(!handleNameChange()) {
-      toast.error("Name is too short");
+    if (!handleNameChange()) {
+      staggerToastsByN("Name is too short.", "error", errors);
       errors++;
     };
 
-    if(!handleEmailChange()) {
-      toast.error("Email is invalid");
+    if (!handleEmailChange()) {
+      staggerToastsByN("Email is invalid.", "error", errors);
+      errors++;
+    };
+    
+    if (!handleMessageChange()) {
+      staggerToastsByN("Message too short.", "error", errors);
       errors++;
     };
 
-    if(!handleMessageChange()) {
-      toast.error("Message too short");
-      errors++;
-    };
-
-    if(errors) {
+    if (errors) {
       setTimeout(() => {
         setIsLoading(false);
       }, MIN_LOADING_INTERVAL);
@@ -108,15 +108,15 @@ const ContactForm = ({ children }) => {
         body: JSON.stringify({ name, email, message }),
       });
 
-      if(!response.ok) {
+      if (!response.ok) {
         const { errors } = await response.json();
-        errors?.forEach(error => toast.error(error))
+        errors?.forEach((error, index) => staggerToastsByN(error, "error", index));
         throw new Error("Failed to send message");
       };
 
       toast.success("Message sent!");
       
-      if(location.pathname === "/contact" || location.pathname === "/contact/") {
+      if (location.pathname === "/contact" || location.pathname === "/contact/") {
         navigate("/home");
       };
 
@@ -132,7 +132,7 @@ const ContactForm = ({ children }) => {
   
   // useEffect for initial loading spinner
   useEffect(() => {
-    if(isOnContact) {
+    if (isOnContact) {
       setIsLoading(true);
 
       setTimeout(() => {

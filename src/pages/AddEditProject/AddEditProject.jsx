@@ -6,11 +6,12 @@ import {
   isValidURL, 
   checkTokenIsValid, 
   getFormattedDate, 
-  setTokens 
+  setTokens, 
+  staggerToastsByN
 } from "../../../utils/utils.js";
 import Compressor from "compressorjs";
 import ProjectDatePicker from "../../components/ProjectDatePicker/ProjectDatePicker.jsx";
-import toast from "react-hot-toast";
+import { toast } from "react-toastify";
 import PhotoInput from "../../components/PhotoInput/PhotoInput.jsx";
 import "./AddEditProject.scss"
 
@@ -320,37 +321,37 @@ const AddEditProject = ({ children }) => {
     const hasPhotos = validPhotos.length > 0;
     
     if(!hasPhotos) {
-      toast.error("Minimum one photo required");
+      staggerToastsByN("Minimum one photo required.", "error", errors);
       errors++;
     };
 
     if(!handleTitleChange()) {
-      toast.error("Title is too short");
+      staggerToastsByN("Title is too short.", "error", errors);
       errors++;
     };
     
     if(!handleDescChange()){
-      toast.error("Description is too short");
+      staggerToastsByN("Description is too short.", "error", errors);
       errors++;
     };
     
     if(!handleDeployedURLChange()){
-      toast.error("Valid deployment url required");
+      staggerToastsByN("Valid deployment url required.", "error", errors);
       errors++;
     };
     
     if(youtubeVideoURL.length && !handleYoutubeVideoURLChange()) {
-      toast.error("Youtube video url invalid");
+      staggerToastsByN("Youtube video url invalid.", "error", errors);
       errors++;
     };
     
     if(githubClientURL.length && !handleGithubClientURLChange()) {
-      toast.error("Github Client url invalid");
+      staggerToastsByN("Github Client url invalid.", "error", errors);
       errors++;
     };
     
     if(githubServerURL.length && !handleGithubServerURLChange()) {
-      toast.error("Github server url invalid");
+      staggerToastsByN("Github server url invalid.", "error", errors);
       errors++;
     };
 
@@ -456,9 +457,9 @@ const AddEditProject = ({ children }) => {
       );
       
       if(!response.ok) {
-        const { errors, message } = await response.json();
-        errors?.forEach(error => toast.error(error));
-        toast.error(message);
+        // *** ?
+        const { errors } = await response.json();
+        errors?.forEach((error, index) => staggerToastsByN(error, "error", index));
 
         throw new Error(`Failed to send message: status ${response.status}`);
       };

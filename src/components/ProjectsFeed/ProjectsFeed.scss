@@ -1,5 +1,5 @@
 @use "../../partials/variables" as vars;
-@use "../../partials//mixins" as mx;
+@use "../../partials/mixins" as mx;
 
 .projectsFeed {
 	& {
@@ -27,11 +27,13 @@
 	}
 
 	&__button {
-		margin-bottom: 2rem;
-		margin-inline: auto;
-		position: relative;
-		z-index: 1;
 		@include mx.button;
+		& {
+			margin-bottom: 2rem;
+			margin-inline: auto;
+			position: relative;
+			z-index: 1;
+		}
 
 		&.disabled {
 			@include mx.buttonDisabled;

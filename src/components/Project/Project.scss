@@ -1,5 +1,5 @@
 @use "../../partials/variables" as vars;
-@use "../../partials//mixins" as mx;
+@use "../../partials/mixins" as mx;
 
 .project {
 	& {
@@ -154,7 +154,7 @@
 			max-height: 100%;
 			min-height: 100%;
 			outline: none;
-			overflow: none;
+			overflow: hidden;
 		}
 	}
 
@@ -167,8 +167,10 @@
 		z-index: 2;
 
 		&.fade {
-			opacity: 0;
 			@include mx.smoothClosingTransition;
+			& {
+				opacity: 0;
+			}
 		}
 
 		&.hide {
@@ -192,11 +194,13 @@
 	}
 
 	&__image {
-		border-radius: var(--border-radius);
-		cursor: pointer;
-		margin-bottom: 1.5rem;
-		max-width: 100%;
 		@include mx.projectImg;
+		& {
+			border-radius: var(--border-radius);
+			cursor: pointer;
+			margin-bottom: 1.5rem;
+			max-width: 100%;
+		}
 
 		&.isReady {
 			border-radius: 0;
@@ -204,9 +208,11 @@
 	}
 
 	&__title {
-		margin-top: 0.5rem;
-		max-width: 80vw;
 		@include mx.blogPostOrProjectTitle;
+		& {
+			margin-top: 0.5rem;
+			max-width: 80vw;
+		}
 
 		&.ellipsis {
 			@include mx.ellipsisOneLine;
@@ -214,13 +220,17 @@
 	}
 
 	&__description {
-		margin-top: 1.5rem;
 		@include mx.blogPostOrProjectDesc;
+		& {
+			margin-top: 1.5rem;
+		}
 
 		&.ellipsis {
-			-webkit-line-clamp: 3;
-			line-clamp: 3;
 			@include mx.ellipsisMultiLine;
+			& {
+				-webkit-line-clamp: 3;
+				line-clamp: 3;
+			}
 		}
 	}
 
@@ -257,8 +267,10 @@
 	}
 
 	&__url-link {
-		max-width: 90vw;
 		@include mx.ellipsisOneLine;
+		& {
+			max-width: 90vw;
+		}
 
 		&:hover {
 			color: var(--accent-color);
@@ -266,7 +278,9 @@
 	}
 
 	&__show-full-info {
-		margin-top: 1rem;
 		@include mx.linkButton;
+		& {
+			margin-top: 1rem;
+		}
 	}
 }

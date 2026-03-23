@@ -10,40 +10,48 @@
 	}
 
 	&__date {
-		box-shadow: var(--box-shadow);
-		height: 1.25rem;
-		margin-bottom: 1rem;
-		margin-bottom: 0.9rem;
-		margin-inline-end: 0.2rem;
-		margin-inline-start: auto;
-		width: 6rem;
 		@include mx.placeholderContent;
+		& {
+			box-shadow: var(--box-shadow);
+			height: 1.25rem;
+			margin-bottom: 1rem;
+			margin-bottom: 0.9rem;
+			margin-inline-end: 0.2rem;
+			margin-inline-start: auto;
+			width: 6rem;
+		}
 	}
 
 	&__image {
-		box-shadow: var(--box-shadow);
-		margin-bottom: 1rem;
 		@include mx.placeholderContent;
 		@include mx.projectImg;
+		& {
+			box-shadow: var(--box-shadow);
+			margin-bottom: 1rem;
+		}
 	}
 
 	&__title {
-		box-shadow: var(--box-shadow);
-		height: 2rem;
-		margin-bottom: 1rem;
-		width: 95%;
 		@include mx.placeholderContent;
+		& {
+			box-shadow: var(--box-shadow);
+			height: 2rem;
+			margin-bottom: 1rem;
+			width: 95%;
 
-		@media (min-width: vars.$smallTablet) {
-			height: 2.25rem;
-			margin-bottom: 1.5rem;
+			@media (min-width: vars.$smallTablet) {
+				height: 2.25rem;
+				margin-bottom: 1.5rem;
+			}
 		}
 	}
 
 	&__desc {
-		height: 22rem;
-		margin-bottom: 1rem;
 		@include mx.placeholderContent;
+		& {
+			height: 22rem;
+			margin-bottom: 1rem;
+		}
 
 		@media (min-width: vars.$smallTablet) {
 			height: 23rem;

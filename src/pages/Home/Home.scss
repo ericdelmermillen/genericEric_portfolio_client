@@ -3,8 +3,10 @@
 
 .home {
 	& {
-		background: var(--background-color);
 		@include mx.page;
+		& {
+			background: var(--background-color);
+		}
 	}
 
 	&__main {

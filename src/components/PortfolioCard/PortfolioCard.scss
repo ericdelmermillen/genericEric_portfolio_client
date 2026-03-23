@@ -3,11 +3,13 @@
 
 .portfolioCard {
 	& {
-		box-shadow: var(--box-shadow);
-		cursor: pointer;
-		overflow: hidden;
-		position: relative;
 		@include mx.projectCard;
+		& {
+			box-shadow: var(--box-shadow);
+			cursor: pointer;
+			overflow: hidden;
+			position: relative;
+		}
 
 		&.draggable {
 			animation: shake 0.45s infinite;
@@ -15,8 +17,10 @@
 		}
 
 		&:hover {
-			opacity: 0.8;
 			@include mx.hoverClickGrow;
+			& {
+				opacity: 0.8;
+			}
 		}
 	}
 
@@ -26,8 +30,10 @@
 		z-index: 2;
 
 		&.fade {
-			opacity: 0;
 			@include mx.smoothClosingTransition;
+			& {
+				opacity: 0;
+			}
 		}
 
 		&.hide {
@@ -36,36 +42,38 @@
 	}
 
 	&__button {
-		background-color: var(--background-color);
-		color: var(--text-color);
-		border: none;
-		border-radius: 50%;
-		box-shadow: var(--box-shadow);
-		cursor: pointer;
-		height: 2.25rem;
-		opacity: 0;
-		outline: none;
-		position: absolute;
-		top: 0.75rem;
-		width: 2.25rem;
 		@include mx.generalOpacityTransition;
-
-		@media (min-width: vars.$smallTablet) {
-			height: 2.75rem;
-			top: 1rem;
-			width: 2.75rem;
-		}
-
-		@media (min-width: vars.$tablet) {
-			height: 2.5rem;
+		& {
+			background-color: var(--background-color);
+			border: none;
+			border-radius: 50%;
+			box-shadow: var(--box-shadow);
+			color: var(--text-color);
+			cursor: pointer;
+			height: 2.25rem;
+			opacity: 0;
+			outline: none;
+			position: absolute;
 			top: 0.75rem;
-			width: 2.5rem;
-		}
+			width: 2.25rem;
 
-		@media (min-width: vars.$desktop) {
-			height: 3rem;
-			top: 1rem;
-			width: 3rem;
+			@media (min-width: vars.$smallTablet) {
+				height: 2.75rem;
+				top: 1rem;
+				width: 2.75rem;
+			}
+
+			@media (min-width: vars.$tablet) {
+				height: 2.5rem;
+				top: 0.75rem;
+				width: 2.5rem;
+			}
+
+			@media (min-width: vars.$desktop) {
+				height: 3rem;
+				top: 1rem;
+				width: 3rem;
+			}
 		}
 
 		&--delete {
@@ -93,11 +101,12 @@
 		}
 
 		&.show {
-			align-items: center;
-			display: flex;
-			justify-content: center;
-			opacity: 1;
-			@include mx.generalOpacityTransition;
+			& {
+				align-items: center;
+				display: flex;
+				justify-content: center;
+				opacity: 1;
+			}
 		}
 	}
 

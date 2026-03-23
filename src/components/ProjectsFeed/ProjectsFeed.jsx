@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useAppContext } from "../../contexts/AppContext.jsx";
 import { scrollToTop } from "../../../utils/utils.js";
 import Project from "../Project/Project";
-import toast from "react-hot-toast";
+import { toast } from "react-toastify";
 import "./ProjectsFeed.scss";
 
 const BASE_URL = import.meta.env.VITE_API_BASE_URL;
@@ -47,7 +47,7 @@ const ProjectsFeed = () => {
   };
 
   const fetchProjects = async () => {
-    if(!isFinalPageFetched) {
+    if (!isFinalPageFetched) {
       setIsLoading(true);
       setShowPlaceholders(true)
       const offset = PROJECTS_PER_PAGE * (page - 1);
@@ -55,13 +55,13 @@ const ProjectsFeed = () => {
       try {
         const response = await fetch(`${BASE_URL}/projects/all?limit=${PROJECTS_PER_PAGE}&offset=${offset}`);
 
-        if(!response.ok) {
+        if (!response.ok) {
           throw new Error(error);
         };
         
         const { projects, isPaginationComplete, error } = await response.json();
 
-        if(!projects.length && isInitialFetch) {
+        if (!projects.length && isInitialFetch) {
           setIsInitialFetch(false);
           setIsFinalPageFetched(true);
           setIsFinalPageLoaded(true);
@@ -69,15 +69,15 @@ const ProjectsFeed = () => {
           toast("No projects available");
         };
 
-        if(isInitialFetch) {
+        if (isInitialFetch) {
           setIsInitialFetch(false);
           setProjectsData(projects);
           scrollToTop();
-        } else if(!isInitialFetch) {
+        } else if (!isInitialFetch) {
           setProjectsData(c => [...c, ...projects])
         };
 
-        if(isPaginationComplete) {
+        if (isPaginationComplete) {
           setIsFinalPageFetched(true);
         };
         
@@ -85,7 +85,7 @@ const ProjectsFeed = () => {
         console.log(error);
         toast.error(error.message);
       } finally {
-        if(isInitialLoad) {
+        if (isInitialLoad) {
           setIsInitialLoad(false);
         };
         setIsLoading(false);
@@ -94,9 +94,9 @@ const ProjectsFeed = () => {
   };
 
   const handleFetchNextPage = () => {
-    if(!isFinalPageFetched) {
+    if (!isFinalPageFetched) {
       setPage(c => c + 1);
-    } else if(isFinalPageFetched) {
+    } else if (isFinalPageFetched) {
       setIsFinalPageLoaded(true);
       toast("No more projects to show");
     };
@@ -104,14 +104,14 @@ const ProjectsFeed = () => {
 
   // useEffect to show Nav after user closes Lightbox to deal with lightbox Nav content shift
   useEffect(()=> {
-    if(!lightboxOpen)  {
+    if (!lightboxOpen) {
       showNav();
     };
   }, [lightboxOpen]);
 
   // // fetch next page useEffect
   useEffect(() => {
-    if(!isFinalPageFetched) {
+    if (!isFinalPageFetched) {
       fetchProjects();
     };
   }, [page]);

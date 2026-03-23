@@ -9,7 +9,7 @@
 	&__inner {
 		margin-inline: auto;
 		max-width: vars.$largeTablet;
-		padding-block: 4em;
+		padding-block: 4rem;
 
 		@media (min-width: vars.$tablet) {
 			padding-inline: 2rem;

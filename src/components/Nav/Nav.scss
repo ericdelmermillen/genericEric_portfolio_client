@@ -15,7 +15,7 @@
 		z-index: 3;
 
 		&.hide {
-			margin-top: -5rem;
+			margin-top: calc(-1 * (vars.$navHeight + 1rem));
 		}
 	}
 
@@ -56,21 +56,22 @@
 	}
 
 	&__link {
-		color: var(--text-color-bright);
 		@include mx.navLink;
+		& {
+			color: var(--text-color-bright);
+		}
 
-		&:hover {
-			&::after {
-				@include mx.afterAccent;
-			}
+		&:hover::after {
+			@include mx.afterAccent;
 		}
 	}
 
-	&__link.active {
-		position: relative;
-
-		&::after {
-			@include mx.afterAccent;
+	&__link {
+		&.active {
+			position: relative;
+			&::after {
+				@include mx.afterAccent;
+			}
 		}
 	}
 

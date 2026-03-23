@@ -23,11 +23,13 @@
 	}
 
 	&__heading {
-		display: inline-block;
-		font-size: var(--heading-text-small);
-		margin-inline: auto;
-		position: relative;
 		@include mx.headingGeneral;
+		& {
+			display: inline-block;
+			font-size: var(--heading-text-small);
+			margin-inline: auto;
+			position: relative;
+		}
 
 		&::after {
 			@include mx.afterAccent;

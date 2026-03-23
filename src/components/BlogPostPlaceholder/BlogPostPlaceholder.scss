@@ -3,8 +3,10 @@
 
 .blogPostPlaceholder {
 	& {
-		max-width: 100%;
 		@include mx.blogPost;
+		& {
+			max-width: 100%;
+		}
 
 		@media (min-width: vars.$smallTablet) {
 			max-width: vars.$tablet;
@@ -17,12 +19,14 @@
 	}
 
 	&__video {
-		aspect-ratio: 16/9;
-		background: var(--placeholder-color);
-		border-radius: var(--border-radius);
-		box-shadow: var(--box-shadow);
-		margin-bottom: 1.25rem;
 		@include mx.blogPostVideo;
+		& {
+			aspect-ratio: 16/9;
+			background: var(--placeholder-color);
+			border-radius: var(--border-radius);
+			box-shadow: var(--box-shadow);
+			margin-bottom: 1.25rem;
+		}
 
 		@media (min-width: vars.$smallTablet) {
 			margin-bottom: 1.75rem;
@@ -60,10 +64,6 @@
 		width: 95%;
 
 		@media (min-width: vars.$smallTablet) {
-			height: 7.5rem;
-		}
-
-		@media (min-width: vars.$tablet) {
 			height: 7.5rem;
 		}
 	}

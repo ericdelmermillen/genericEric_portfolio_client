@@ -28,11 +28,11 @@
 		}
 
 		&:-webkit-autofill {
-			-webkit-box-shadow: none !important;
 			background-color: none !important;
 			box-shadow: none !important;
 			color: inherit;
 			transition: background-color 5000s ease-in-out 0s;
+			-webkit-box-shadow: none !important;
 		}
 
 		&:-webkit-autofill::first-line {
