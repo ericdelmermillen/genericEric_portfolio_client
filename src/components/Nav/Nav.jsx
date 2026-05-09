@@ -12,7 +12,7 @@ const Nav = ({ children }) => {
   const { 
     setIsLoading,
     scrollYPos,
-    prevScrollYPos,
+    getPrevScrollYPosValue,
     setShowSideNav,
     handleBlogClick,
     handleContactClick,
@@ -33,7 +33,12 @@ const Nav = ({ children }) => {
   const handleSetShowSideNavTrue = () => setShowSideNav(true);
 
   return (
-    <nav id="nav" className={`nav ${prevScrollYPos < scrollYPos && scrollYPos > 50 ? "hide" : ""}`}>
+    <nav 
+      id="nav" className={`nav ${getPrevScrollYPosValue() < scrollYPos && scrollYPos > 50 
+        ? "hide" 
+        : ""}`
+      }
+    >
       <div className="nav__content">
 
         <Link to={"/"}>
