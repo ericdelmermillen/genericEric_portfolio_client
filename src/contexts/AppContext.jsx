@@ -27,7 +27,6 @@ const AppContextProvider = ({ children }) => {
   const [ isLoading, setIsLoading ] = useState(false);
   const [ showSideNav, setShowSideNav ] = useState(false);
   const [ scrollYPos, setScrollYPos ] = useState(window.scrollY);
-  const [ prevScrollYPos, setPrevScrollYPos ] = useState(window.scrollY);
   const [ isProjectOrderEditable, setIsProjectOrderEditable ] = useState(false);
   const [ isEditMode, setIsEditMode ] = useState(false);
   const [ rerenderTrigger, setRerenderTrigger ] = useState(1);
@@ -42,18 +41,16 @@ const AppContextProvider = ({ children }) => {
     setLightboxOpen(true);
   };
 
+  const prevScrollYPosRef = useRef(null); 
   const contactSectionRef = useRef(null); 
   const contactNameRef = useRef(null); 
+
+  const getPrevScrollYPosValue = () => prevScrollYPosRef.current ?? 0;
 
   const toggleColorMode = () => {
     const newColorMode = colorMode === "light" ? "dark" : "light";
     setColorMode(newColorMode);
     localStorage.setItem('colorMode', newColorMode);
-  };
-
-  const handleUpdateScrollYPos = () => {
-    setPrevScrollYPos(scrollYPos);
-    setScrollYPos(window.scrollY);
   };
   
   const checkLoginStatus = async () => {
@@ -222,10 +219,15 @@ const AppContextProvider = ({ children }) => {
   // useEffect for updating of scrollYPos
   useEffect(() => {
     let ticking = false;
+
     const handleScroll = () => {
       if (!ticking) {
         requestAnimationFrame(() => {
-          handleUpdateScrollYPos();
+          setScrollYPos((prev) => {
+            prevScrollYPosRef.current = prev;
+            return window.scrollY;
+          });
+
           setShowSideNav(false);
           ticking = false;
         });
@@ -265,7 +267,7 @@ const AppContextProvider = ({ children }) => {
     colorMode,
     toggleColorMode,
     scrollYPos,
-    prevScrollYPos,
+    getPrevScrollYPosValue,
     showSideNav,
     setShowSideNav,
     isProjectOrderEditable, 
@@ -302,4 +304,7 @@ const useAppContext = () => {
   return useContext(AppContext);
 };
 
-export { AppContextProvider, useAppContext };
+export { 
+  AppContextProvider, 
+  useAppContext 
+};
